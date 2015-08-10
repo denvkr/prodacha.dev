@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.1</version>
+    <name>Facebookpage</name>
+    <description>Модуль генерации шаблона для facebook.</description>
+    <icon>icon.png</icon>
+    <category>template,soc</category>
+    <adminmenu>
+        <title>Facebook</title>
+        <podmenu>
+            <podmenu_name>Настройка Facebook</podmenu_name>
+            <podmenu_icon>icon.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/facebookpage/admpanel/adm_module.php',510,450);</podmenu_action>
+        </podmenu>
+    </adminmenu>
+</module>

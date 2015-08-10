@@ -1,0 +1,346 @@
+body{
+	SCROLLBAR-FACE-COLOR: #ececec;
+	SCROLLBAR-HIGHLIGHT-COLOR: #c2c2c2;
+	SCROLLBAR-SHADOW-COLOR: #c2c2c2;
+	SCROLLBAR-3DLIGHT-COLOR: #ececec;
+	SCROLLBAR-ARROW-COLOR: #3A87A3;
+	SCROLLBAR-TRACK-COLOR: #ffffff;
+	SCROLLBAR-DARKSHADOW-COLOR: #ececec;
+	SCROLLBAR-BASE-COLOR: #ffffff;
+    padding: 0px;
+	margin: 0px;
+	background-color: #FFFFFF;
+	font-family: Tahoma;
+	font-size: 10px;
+	line-height: 10px;
+	color: #696969;
+	background: url('n.gif') no-repeat;
+    background-attachment: fixed;
+}
+
+div.comment_list{/*отзывы*/
+	margin-top: 10px;
+	background-color:#EDF5F8;
+	margin-bottom: 10px;
+	BORDER: #35A0C4 1px dashed; 
+   PADDING: 5px; 
+}
+
+div.comment_user{
+	padding: 3px;
+	background: #35A0C4;
+	color: white;
+}
+
+div.comment_user a{
+	color: white;
+}
+
+div.opros{
+    float: left;
+    background: #BD9FA9;
+    height: 10px;
+    background-repeat: no-repeat;
+}
+
+a.activ_catalog{
+	background: #35A0C4;
+	color: white;
+	padding-left: 5px;
+	padding-right: 5px;
+	text-decoration: none;
+}
+
+
+td{
+	font-size: 10px;
+}
+
+.bgprice {
+	color: #FFFFFF;
+	font-size: 11px;
+	background: #35A0C4;
+}
+
+a{
+	color: #35A0C4;
+}
+
+a.standart{
+	color: #AC8695;
+}
+div.page_catalog{/*Каталог страниц*/
+	margin-top: 20px;
+}
+
+div.page_catalog a{/*Каталог страниц*/
+	color: #35A0C4;
+   font-weight: bolder;
+	font-size: 10px;
+}
+
+div.product_odnotip td,div.product_odnotip td a  {
+	font-size: 10px;
+	color: #35A0C4;
+}
+
+table.standart td{
+	font-size: 11px;
+	color: #696969;
+}
+
+
+div.pod_cart{/*Ссылки в корзину подробное описание*/
+
+	margin-top: 5px;
+	margin-bottom: 10px;
+	BORDER: #AED3DC 1px dashed; 
+    PADDING: 5px; 
+}
+
+
+
+img.big{
+   border:			1px solid #5B98AF;
+}
+
+div.price{/*Цена подробное описание*/
+	color: #AC8695;
+	font-size: 15px;
+	font-weight: bolder;
+	width: 150px;
+	line-height: 18px;
+	margin-bottom: 20px;
+}
+div.price strong{
+	font-size: 18px;
+}
+
+div.product_cart a{
+	color: AC8694;
+	line-height: 25px;
+	height: 30px;
+}
+
+
+
+div.line{
+	/*Разделитель новостей*/
+	background-image: url(images/line_bg.jpg);
+	background-repeat: repeat-x;
+	width: 100%;
+	height: 4px;
+	margin-top:5px;
+}
+
+
+ul{
+	list-style-type: square;
+	color: #AB8594;
+}
+
+ul.catalog{
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+
+
+li.podcatalog{
+	/*Бег каталога*/
+	background-image: url(images/podcatalog_bg.jpg);
+	background-repeat: no-repeat;
+}
+
+li.podcatalog a{
+	padding-left: 30px;
+}
+li.catalog{
+	/*Бег каталога*/
+	background-image: url(images/catalog_bg.jpg);
+	background-repeat: no-repeat;
+	width: 238px;
+	cursor: pointer;
+	margin-top:1px;
+	background-color: F9FCFC;
+}
+
+li.catalog strong{
+	color: #597C97;
+	font-weight: bolder;
+	line-height: 25px;
+	text-decoration: none;
+	padding-left: 30px;
+}
+
+li.catalog a{
+	color: #597C97;
+	font-weight: bolder;
+	line-height: 25px;
+	text-decoration: none;
+	padding-left: 30px;
+}
+
+li.catalog a:hover{
+	color: #2E9BC2;
+	text-decoration: none;
+}
+
+li.podcatalog a{
+	color: #2E9BC2;
+	font-weight: bolder;
+	line-height: 25px;
+	text-decoration: none;
+	padding-left: 30px;
+	
+}
+
+input.search{
+	font-size: 10px;
+	width: 140px;
+}
+
+input.user{
+	font-size: 10px;
+}
+
+a.small{
+	color: FFFFFF;
+	font-size: 10px;
+	font-weight: normal;
+}
+
+
+#main{
+	margin:3px;
+	width: 490px;
+}
+#center_block{
+    width: 490px;
+	float: left;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+div.page_nava{
+	background-color: #EDF5F8;
+	padding: 0px;
+    height: 25px;
+	color: #317C97;
+	BORDER-BOTTOM: #AED3DC 1px solid;
+	BORDER-TOP: #FFFFFF 3px solid;
+	clear:both;
+}
+
+div.page_nava div{
+	padding: 5px;
+}
+
+
+
+div.page_nava a{
+	color: #317C97;
+}
+
+td.setka{
+    
+	 
+}
+
+
+#allspec{
+   background-color: #EDF5F8;
+	padding: 10px;
+	BORDER-BOTTOM: #AED3DC 1px solid;
+	BORDER-TOP: #AED3DC 1px solid;
+}
+
+
+#allspec div {
+	color: #317C97;
+	margin-bottom: 5px;
+}
+
+a.link{
+	color: #008CCC;
+}
+
+#allspec a{
+	color: #317C97;
+}
+
+#allspec input, #allspec td select {
+	font-size: 10px;
+}
+
+
+#allspecwhite{
+	margin-top: 10px;
+	background-color: #F6FAFD;
+	margin-bottom: 10px;
+	BORDER: #AED3DC 1px dashed; 
+   PADDING: 5px; 
+}
+
+.sortActiv{
+    font-weight: bold;
+}
+
+
+form
+{
+    margin:0px;
+}
+
+
+H1{
+    font-size: 12px;
+    text-transform: none;
+    color: #2E9BC2;
+	line-height: 15px;
+}
+H2{
+    font-size: 15px;
+    text-transform: none;
+    color: #2E9BC2;
+   
+}
+input.ok{
+	background-color: #35A0C4;
+	border-width: 1px;
+	border-color: #1D8BB0;
+	border-style: solid;
+	font-size: 11px;
+	color: FFFFFF;
+	margin-left: 5px;
+}
+
+input, select{
+	font-size: 10px;
+}
+
+input.but{
+   font-size: 11px;
+   height: 22px;
+   border-style: solid;
+   border-color: #395200;
+   border-width: 1px;
+   background-color: white;
+   color:#4b4b4b;
+}
+.sort_name_bg{
+   background-color: #3A87A3;
+   color: white;
+}
+.sort_table{
+   font-size: 11px;
+   margin-top: 10px;
+   background-color: White;
+   color: #35A0C4;
+}
+.sort_table b{
+	color: #696969;
+}
+
+

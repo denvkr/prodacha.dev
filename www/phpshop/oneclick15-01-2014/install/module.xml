@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.2</version>
+    <name>Заказ в один клик</name>
+    <description>Модуль заказа в один клик</description>
+    <icon>basket.png</icon>
+    <category>order,form</category>
+    <adminmenu>
+        <title>Заказ в один клик</title>
+        <podmenu>
+            <podmenu_name>Настройка</podmenu_name>
+            <podmenu_icon>basket.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/oneclick/admpanel/adm_module.php',510,450);</podmenu_action>
+        </podmenu>
+         <podmenu>
+            <podmenu_name>Обзор заявок</podmenu_name>
+            <podmenu_icon>basket_go.png</podmenu_icon>
+            <podmenu_action>javascript:window.location.replace('?plugin=oneclick')</podmenu_action>
+        </podmenu>
+    </adminmenu>
+</module>

@@ -1,0 +1,1 @@
+<div class="buttonsblock">@button_forms@</div>

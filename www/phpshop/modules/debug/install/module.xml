@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.2</version>
+    <name>Debug</name>
+    <description>Отладочный модуль для разработчиков.</description>
+    <icon>icon.png</icon>
+    <category>develop</category>
+    <adminmenu>
+        <title>Debug</title>
+        <podmenu>
+            <podmenu_name>Настройка Debug</podmenu_name>
+            <podmenu_icon>icon.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/debug/admpanel/adm_module.php',510,450);</podmenu_action>
+        </podmenu>
+    </adminmenu>
+</module>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.0</version>
+    <name>Yandex Map</name>
+    <description>Модуль Яндекс.Карты</description>
+    <icon>icon.png</icon>
+    <category>yandex</category>
+    <adminmenu>
+        <title>Yandex Map</title>
+        <podmenu>
+            <podmenu_name>Настройка Yandex Map</podmenu_name>
+            <podmenu_icon>icon.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/yandexmap/admpanel/adm_module.php',510,450);</podmenu_action>
+        </podmenu>
+    </adminmenu>
+</module>

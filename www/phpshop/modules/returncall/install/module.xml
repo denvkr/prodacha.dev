@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.2</version>
+    <name>Обратный звонок</name>
+    <description>Модуль обратного звонка</description>
+    <icon>telephone.png</icon>
+    <category>order,soc,form</category>
+    <adminmenu>
+        <title>Обратный звонок</title>
+        <podmenu>
+            <podmenu_name>Настройка</podmenu_name>
+            <podmenu_icon>telephone.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/returncall/admpanel/adm_module.php',510,450);</podmenu_action>
+        </podmenu>
+         <podmenu>
+            <podmenu_name>Обзор заявок</podmenu_name>
+            <podmenu_icon>telephone_go.png</podmenu_icon>
+            <podmenu_action>javascript:window.location.replace('?plugin=returncall')</podmenu_action>
+        </podmenu>
+    </adminmenu>
+</module>

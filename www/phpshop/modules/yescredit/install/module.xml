@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.2</version>
+    <name>Yes Credit</name>
+    <description>Модуль приема кредитных заявок.</description>
+    <icon>icon.png</icon>
+    <trial>true</trial>
+    <category>pay</category>
+    <adminmenu>
+        <title>Yes Credit</title>
+        <podmenu>
+            <podmenu_name>Настройка</podmenu_name>
+            <podmenu_icon>icon.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/yescredit/admpanel/adm_module.php',510,450);</podmenu_action>
+        </podmenu>
+    </adminmenu>
+</module>

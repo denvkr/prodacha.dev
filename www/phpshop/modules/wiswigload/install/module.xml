@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.0</version>
+    <name>WISWIG Load</name>
+    <description>Загрузчик визульных редакторов</description>
+    <icon>icon.png</icon>
+    <category>wiswig</category>
+    <adminmenu>
+        <title>WISWIG Load</title>
+        <podmenu>
+            <podmenu_name>Настройка WISWIG Load</podmenu_name>
+            <podmenu_icon>about.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/wiswigload/admpanel/adm_module.php',510,450);</podmenu_action>
+        </podmenu>
+        <podmenu>
+            <podmenu_name>База редакторов</podmenu_name>
+            <podmenu_icon>picture_save.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/wiswigload/admpanel/adm_load.php',510,450);</podmenu_action>
+        </podmenu>
+    </adminmenu>
+</module>

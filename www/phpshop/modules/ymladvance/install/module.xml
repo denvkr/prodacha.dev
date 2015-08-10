@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.1</version>
+    <name>Яндекс.Маркет</name>
+    <description>Модуль расширенной выгрузки в Яндекс.Маркет</description>
+    <icon>icon.png</icon>
+    <category>yandex</category>
+    <adminmenu>
+        <title>Яндекс.Маркет</title>
+        <podmenu>
+            <podmenu_name>Настройка</podmenu_name>
+            <podmenu_icon>icon.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/ymladvance/admpanel/adm_module.php',600,450);</podmenu_action>
+        </podmenu>
+    </adminmenu>
+</module>

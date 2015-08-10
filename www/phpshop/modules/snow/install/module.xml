@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.0</version>
+    <name>Snow</name>
+    <description>Модуль падающего снега</description>
+    <icon>palette.png</icon>
+    <category>decorate</category>
+</module>

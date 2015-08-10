@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.5</version>
+    <name>Message Board</name>
+    <description>Модуль доски объявлений.</description>
+    <icon>icon.png</icon>
+    <category>soc</category>
+    <adminmenu>
+        <title>Объявления</title>
+        <podmenu>
+            <podmenu_name>Настройка</podmenu_name>
+            <podmenu_icon>option.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/messageboard/admpanel/adm_module.php',510,450);</podmenu_action>
+        </podmenu>
+        <podmenu>
+            <podmenu_name>Объявления</podmenu_name>
+            <podmenu_icon>icon.png</podmenu_icon>
+            <podmenu_action>javascript:window.location.replace('?plugin=messageboard')</podmenu_action>
+        </podmenu>
+        <menu>
+            <menu_name>Объявления</menu_name>
+            <menu_icon>icon.png</menu_icon>
+            <menu_action>window.location.replace('?plugin=messageboard')</menu_action>
+        </menu>
+    </adminmenu>
+</module>

@@ -1,0 +1,340 @@
+html, body {
+    border:0;
+    height:100%;
+    margin:0px;
+    padding:0px
+}
+
+body
+{
+    background: ButtonFace;
+    font:		MessageBox;
+    font:		Message-Box;
+    height:100%;
+    margin:0px;
+    padding:0px
+}
+
+.login{
+    background: -moz-linear-gradient(ButtonFace, #FFF);
+    background: -ms-linear-gradient(ButtonFace, #FFF);
+    background: -o-linear-gradient(ButtonFace, #FFF);
+    background: -webkit-linear-gradient(ButtonFace, #FFF);
+    border: 1px;
+    border-style:outset; 
+    border-color:ButtonFace;
+    width: 330px;
+}
+
+.gradient {
+    background: -moz-linear-gradient(#FFF, ButtonFace);
+    background: -ms-linear-gradient(#FFF, ButtonFace);
+    background: -o-linear-gradient(#FFF, ButtonFace);
+    background: -webkit-linear-gradient(#FFF, ButtonFace);
+}
+
+table.iconpane{
+    border:1px;
+    border-style:outset;
+    border-color:ButtonFace;
+    border-top-width:0px;
+    height:27px;
+    width:100%;
+    background: -moz-linear-gradient(#FFF, ButtonFace);
+    background: -ms-linear-gradient(#FFF, ButtonFace);
+    background: -o-linear-gradient(#FFF, ButtonFace);
+    background: -webkit-linear-gradient(#FFF, ButtonFace);
+}
+
+.cMenu{
+    display:none;
+}
+
+.row_show_on td{
+    background: #C0D2EC;
+    cursor: help;
+    padding:3px;
+}
+
+.row_show_off td{
+    background: #ffffff;
+    cursor: help;
+    padding:3px;
+}
+
+#loader{
+    background: ButtonFace;
+    DISPLAY: none;
+    position: absolute;
+    visibility: hidden;
+    Z-INDEX: 2; 
+    width: 100%;
+    height: 100%;
+    FILTER: alpha(opacity=80);
+}
+
+#lock{
+    background: ButtonFace;
+    DISPLAY: none;
+    position: absolute;
+    visibility: hidden;
+    Z-INDEX: 2; 
+    width: 100%;
+    height: 100%;
+    FILTER: alpha(opacity=50);
+
+}
+
+#loadmes{
+    width:400px;
+    height:100px;
+    BACKGROUND: #C0D2EC;
+    Z-INDEX: 3; 
+    padding:10px;
+    border: solid;
+    color: 000000;
+    border-width: 1px; 
+    border-color:#4D88C8;
+    FILTER: alpha(opacity=80);
+}
+
+#loadimg{
+    background-image: url(../img/loader.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    width:40px;
+    height:32px;
+
+}
+
+a.phpshop{
+    text-decoration:none;
+    padding-right:5px;
+    color:#0A246A;
+    font-size:15px;
+}
+
+
+a.none{
+    text-decoration: none;
+}
+a.none:hover{
+    text-decoration: underline;
+}
+table.sortable a.sortheader {
+    text-decoration: none;
+    display: block;
+}
+table.sortable span.sortarrow {
+    color: black;
+    text-decoration: none;
+}
+#title{
+    border-bottom: outset;
+    border-bottom-width: 1px;
+}
+
+#tups{
+    height: 20px;
+    border-top: outset;
+    border-top-width: 0px;
+    border-left: outset;
+    border-left-width: 1px;
+    border-right: outset;
+    border-right-width: 1px;
+    font-family: MS Shell Dlg;
+    padding: 5px;
+    border-bottom: outset;
+    border-bottom-width: 1px;
+}
+.butoff{
+    text-align: center;
+    width:17px;
+    height:17px;
+    border: solid;
+    border-color: ButtonFace;
+    border-width: 1px;
+    cursor: pointer;
+    padding: 2px;
+}
+.butclick{
+    border: solid;
+    border-color: #4D88C8;
+    background-color: #8893B1;
+    border-width: 1px;
+    cursor: pointer;
+    padding: 2px;
+}
+.buton{
+    width:17px;
+    height:17px;
+    border: solid;
+    border-color: #4D88C8;
+    background-color: #C0D2EC;
+    border-width: 1px;
+    cursor: pointer;
+    padding: 2px;
+}
+#tips{
+    height: 20px;
+    border-top: outset;
+    border-top-width: 1px;
+    border-left: outset;
+    border-left-width: 1px;
+    border-right: outset;
+    border-right-width: 1px;
+    font-family: MS Shell Dlg;
+    padding: 3px;
+    padding-left: 5px;
+}
+
+#taps{
+    padding: 3px;
+    border-bottom: inset;
+    border-bottom-width: 1px;
+}
+#tabs{
+    padding: 3px;
+    border: outset;
+    border-width: 1px;
+    background: ButtonFace;
+    height: 20px;
+}
+#pane{
+    border: 1px;
+    border-style: outset;
+    text-align: center;
+    padding: 5px;
+    background: -moz-linear-gradient(#FFF, ButtonFace);
+    background: -ms-linear-gradient(#FFF, ButtonFace);
+    background: -o-linear-gradient(#FFF, ButtonFace);
+    background: -webkit-linear-gradient(#FFF, ButtonFace);
+}
+.menu_line {
+    background: #808080;
+}
+button.pane{
+    width:100%;
+}
+
+
+
+tr.row td {
+    padding: 3px;
+    cursor: help;
+}
+
+tr.padding td:first-child{
+    padding-left:10px;
+}
+
+#rol td{
+    padding: 3px;
+    /*cursor: pointer;*/
+    background: White;
+}
+tr.row {
+    padding: 3px;
+    background: White;
+    cursor: help;
+}
+
+tr.line2 {
+    background: #F5F5F5;
+}
+
+
+tr.row3 {
+    background: White;
+    cursor: help;
+}
+.full{
+    width: 100%;
+}
+td.forma{
+    padding-left: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 3px;
+}
+a.blue{
+    color:#0A246A;
+}
+a{
+    color: #000; 
+}
+a:hover{
+    color: #4D88C8;
+}
+div, input, button, select, fieldset, textarea, td, th{ 
+    font-family: MS Shell Dlg; 
+    font-size: 8pt; 
+}
+.logo{
+    color: #000; 
+    font-size: 7pt;
+}
+.title { 
+    background: #DDDDFF; 
+    color: 000; 
+    font-weight: bold; 
+    font-size: 120%; 
+    padding: 3px 20px; 
+    margin-bottom: 10px;
+    border-bottom: 1px solid black; 
+    letter-spacing: 2px;}
+
+
+input.but{
+    width: 7em; 
+    height: 2.2em;
+    font-family: MS Shell Dlg; 
+    font-size: 8pt;
+    margin-top:5;
+}
+button{
+    width: 8em; 
+    height: 2.2em;
+    font-size: 8pt;
+    margin-top:0;
+}
+
+button.option{
+    background-image: url(../icon/page_edit.gif);
+    background-repeat: no-repeat;
+    width: 8em; 
+    height: 2.2em;
+    font-size: 8pt;
+    margin-top:0;
+    padding-left:15px;
+    cursor: pointer;
+}
+button.help{
+    background-image: url(../icon/btn_help[1].gif);
+    background-repeat: no-repeat;
+    padding-left:15px;
+    margin-top:5;
+    border-color:ButtonFace;
+    cursor: pointer;
+}
+.tip1{
+    filter:alpha(opacity=50);
+}
+.buttonSh{
+    height:17px;
+    border: solid;
+    border-color: #4D88C8;
+    background-color: #C0D2EC;
+    border-width: 1px;
+    cursor: hand;
+}
+form{
+    margin:0; 
+    padding:0;
+}
+
+sup{
+    color:#FFFFFF;
+    background-color: #2CAE00;
+    padding: 1px;
+}

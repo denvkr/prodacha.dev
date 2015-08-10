@@ -1,0 +1,58 @@
+#php_flag register_globals off
+#php_value error_reporting 0
+php_value session.gc_maxlifetime 10800
+
+DirectoryIndex index0.php
+Options -Indexes 
+
+AddDefaultCharset windows-1251
+AddType text/csv csv
+RewriteEngine On
+
+RewriteCond %{HTTP_HOST} ^www\.(.*) [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+#Options FollowSymLinks
+#Options SymLinksIfOwnerMatch
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
+RewriteRule ^index\.html$ http://prodacha.dev/ [R=301,L]
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /page/index\.html\ HTTP/
+RewriteRule ^page/index\.html$ http://prodacha.dev/ [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/shop/phpshop/templates/prodacha/javascript/edost_example/edost\.php$
+RewriteRule (.*) /phpshop/templates/prodacha/javascript/edost_example/edost\.php [R=307,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteCond %{REQUEST_URI} !^((/UserFiles/Image/)|(/phpshop/templates/(.*)/images/(.*).gif)|(/phpshop/templates/(.*)/images/(.*).png)|(/phpshop/templates/(.*)/images/(.*).jpg))
+RewriteRule ^(.*)$ index0.php
+
+RewriteCond %{THE_REQUEST} ^(.*)set_region\.php\?reg=(.*)&url=/(.*)/CID(.*)\.html
+RewriteRule ^(.*)$  -  [G,L]
+
+<files *.lic>
+
+Order Deny,Allow
+
+Deny From All
+
+</files>
+
+<files *.ini>
+
+Order Deny,Allow
+
+Deny From All
+
+</files>
+
+<files *.tpl>
+
+Order Deny,Allow
+
+Deny From All
+
+</files>

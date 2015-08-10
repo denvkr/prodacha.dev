@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<link rel="stylesheet" href="style_popup.css" type="text/css">
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript" src="interface.js"></script>
+</head>
+
+<body>
+<a href="" id="windowOpen">Открыть всплывающее окно</a>
+
+  <div id="window">
+
+<div id="windowTop">
+
+<div id="windowTopContent">PROДАЧА на Минском ш.</div>
+
+<img src="images/window_min.jpg" id="windowMin" />
+
+<img src="images/window_max.jpg" id="windowMax" />
+
+<img src="images/window_close.jpg" id="windowClose" />
+
+</div>
+
+<div id="windowBottom"><div id="windowBottomContent">&nbsp;</div></div>
+
+<div id="windowContent"><p>Пн-Пт: 10.00 - 20.00<br />Сб: 10.00 - 18.00<br />Вс: выходной<br /></p></div>
+
+  <img src="images/window_resize.gif" id="windowResize" /></div>
+  
+    <script type="text/javascript">
+
+  $(document).ready(
+
+function()
+
+{
+
+$('#windowOpen').bind(
+
+'click',
+
+function() {
+
+if($('#window').css('display') == 'none') {
+
+$(this).TransferTo(
+
+{
+
+to:'window',
+
+className:'transferer2', 
+
+duration: 400,
+
+complete: function()
+
+{
+
+$('#window').show();
+
+}
+
+}
+
+);
+
+}
+
+this.blur();
+
+return false;
+
+}
+
+);
+
+$('#windowClose').bind(
+
+'click',
+
+function()
+
+{
+
+$('#window').TransferTo(
+
+{
+
+to:'windowOpen',
+
+className:'transferer2', 
+
+duration: 400
+
+}
+
+).hide();
+
+}
+
+);
+
+$('#windowMin').bind(
+
+'click',
+
+function()
+
+{
+
+$('#windowContent').SlideToggleUp(300);
+
+$('#windowBottom, #windowBottomContent').animate({height: 10}, 300);
+
+$('#window').animate({height:40},300).get(0).isMinimized = true;
+
+$(this).hide();
+
+$('#windowResize').hide();
+
+$('#windowMax').show();
+
+}
+
+);
+
+$('#windowMax').bind(
+
+'click',
+
+function()
+
+{
+
+var windowSize = $.iUtil.getSize(document.getElementById('windowContent'));
+
+$('#windowContent').SlideToggleUp(300);
+
+$('#windowBottom, #windowBottomContent').animate({height: windowSize.hb + 13}, 300);
+
+$('#window').animate({height:windowSize.hb+43}, 300).get(0).isMinimized = false;
+
+$(this).hide();
+
+$('#windowMin, #windowResize').show();
+
+}
+
+);
+
+$('#window').Resizable(
+
+{
+
+minWidth: 200,
+
+minHeight: 60,
+
+maxWidth: 700,
+
+maxHeight: 400,
+
+dragHandle: '#windowTop',
+
+handlers: {
+
+se: '#windowResize'
+
+},
+
+onResize : function(size, position) {
+
+$('#windowBottom, #windowBottomContent').css('height', size.height-33 + 'px');
+
+var windowContentEl = $('#windowContent').css('width', size.width - 25 + 'px');
+
+if (!document.getElementById('window').isMinimized) {
+
+windowContentEl.css('height', size.height - 48 + 'px');
+
+}
+
+}
+
+}
+
+);
+
+}
+
+);
+
+</script>
+
+</body>
+</html>

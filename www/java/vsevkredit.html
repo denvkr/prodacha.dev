@@ -1,0 +1,59 @@
+<html>
+<head>
+<script>
+	var VVC_SETTINGS = {
+	        // shop_id - целое число. Идентификатор магазина в системе "Всё в кредит".
+	        shop_id : @php
+	        		$SysValue = parse_ini_file('phpshop/inc/config.ini', 1);
+					//выводим id
+					echo $SysValue['lang']['vsevkredit_id'];
+	        php@,
+	
+	        // Номер заказа на стороне магазина; может быть строкой.
+	        order_id : "@orderNum@",
+	
+	        // Фамилия и имя клиента (поле необязательно).
+	        // Данные нужно указывать в порядке: ФАМИЛИЯ ИМЯ, а не наоборот.
+	        name: "@UserName@",
+	
+	        // Номер сотового телефона клиента  (поле необязательно).
+	        // Телефон указывает без 8 или +7, (принимаются только номера сотовых в коде страны «+7»).
+	        // Телефон указывается в формате «1231234567».
+	        phone:"@UserTel@",
+	
+	        // css - оформление кнопок
+	        css: "green",
+			// Обработчик событий виджета (поле необязательно).
+	        onStateChange :
+	            function (state) {
+	                switch(state) {
+	                    case 'opened':
+	                        function v_opened(){
+	                        	console.log('opened');
+	                        }
+	                    break;
+	                    case 'order':
+	                        function v_opened(){
+	                        	console.log('order');
+	                        }
+	                    break;
+	                    case 'closed':
+	                        function v_opened(){
+	                        	console.log('closed');
+	                        }
+	                    break;
+	                }
+	            },
+	        // По желанию вы можете добавить дополнительную кнопку внутри виджета для перехода
+	        // (например на вашу страничку Вконтакте, или Личный кабинет покупателя на вашем сайте).
+	        // (Поле необязательно.)
+	        final_link: {
+	            // название кнопки
+	            text:'Личный кабинет',
+	            // ссылка для перехода
+	            uri:'http://prodacha.ru/'
+	        }
+	}
+</script>
+</head>
+</html>
