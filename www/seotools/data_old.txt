@@ -1,0 +1,44 @@
+/shop/CID_37.html		мотоблоки					
+/shop/CID_14.html		Магазин мотоблоков PROДАЧА					
+/shop/CID_13.html		Продажа мотокультиваторов					
+/shop/CID_46.html		Мотокультиваторы Нева					
+/shop/CID_28.html		Тележка-адаптер для мотоблока					
+/shop/CID_27.html		Тележки для мотоблока					
+/shop/CID_56.html		Колёса для мотоблоков и мотокультиваторов					
+/shop/CID_39.html		Мотоблоки Салют					
+/shop/CID_40.html		Мотоблоки Ока МБ-1					
+/shop/CID_30.html		Косилки для мотоблоков					
+/shop/CID_19.html		Фрезы для мотоблока					
+/shop/UID_265.html		Роторная косилка «Заря»					
+/shop/CID_17.html		Окучники для мотоблоков					
+/shop/CID_15.html		Плуг для мотоблока					
+/shop/CID_22.html		Картофелевыкапыватели					
+/shop/CID_96.html		Бензопилы Husqvarna					
+/shop/CID_97.html		Бензопилы Partner					
+/shop/CID_102.html		Газонокосилки Husqvarna					
+/shop/CID_112.html		Триммеры, кусторезы и бензокосы Husqvarna					
+/shop/CID_101.html		Бензиновые газонокосилки MTD					
+/shop/CID_100.html		Газонокосилки Craftsman					
+/shop/CID_124.html		Триммеры Stihl					
+/shop/CID_121.html		Бензопилы Stihl					
+/shop/CID_122.html		Бензопилы ECHO					
+/shop/CID_123.html		Бензопилы Oleo Mac					
+/shop/CID_120.html		Мотоблок Мобил К G85					
+/shop/CID_130.html		Снегоуборщики Wolf Garten					
+/shop/CID_128.html		Снегоуборщики Craftsman					
+/shop/CID_127.html		Снегоуборщики MTD					
+/shop/CID_129.html		Снегоуборщики Сub Сadet					
+/shop/CID_49.html		Двигатели Honda GX					
+/shop/UID_193.html		Двигатель Robin Subaru EX21					
+/shop/UID_192.html		Двигатель Subaru Robin EX17					
+/shop/CID_52.html		Мотор Briggs & Stratton					
+/shop/CID_138.html		Триммеры MTD					
+/shop/CID_145.html		Бензиновый земляной мотобур					
+/shop/CID_142.html		Бензиновые буры для земляных работ и бурения льда					
+/shop/CID_144.html		Мотобуры Husqvarna					
+/shop/CID_146.html		Бензиновый ледобур					
+/shop/CID_148.html		Мотобуры Hitachi					
+/shop/UID_1336.html		Мотобур Hitachi DA300E					
+/shop/CID_147.html		Расходные материалы для мотобура: шнеки и удлинители					
+/shop/CID_131.html		Снегоуборщики Husqvarna					
+/shop/CID_140.html		Снегоуборщик Efco — превратите работу в приятное занятие!					

@@ -1,0 +1,20 @@
+DirectoryIndex pda.php
+Options -Indexes 
+
+AddDefaultCharset windows-1251
+RewriteEngine On
+#Options FollowSymLinks
+#Options SymLinksIfOwnerMatch
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ pda.php
+
+<files *.ini>
+Order Deny,Allow
+Deny From All
+</files>
+<files *.tpl>
+Order Deny,Allow
+Deny From All
+</files>

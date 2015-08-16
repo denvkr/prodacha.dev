@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.0</version>
+    <name>Yandex Money</name>
+    <description>Прием оплат через Яндекс.Деньги</description>
+    <icon>icon.png</icon>
+    <category>yandex</category>
+    <hidden>true</hidden>
+    <adminmenu>
+        <title>Прием оплат через Яндекс.Деньги</title>
+        <podmenu>
+            <podmenu_name>Настройка</podmenu_name>
+            <podmenu_icon>icon.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/yandexmoney/admpanel/adm_module.php',510,450);</podmenu_action>
+        </podmenu>
+    </adminmenu>
+</module>

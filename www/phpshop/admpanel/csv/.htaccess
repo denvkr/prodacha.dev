@@ -1,0 +1,3 @@
+AddDefaultCharset windows-1251
+AddType text/csv csv
+

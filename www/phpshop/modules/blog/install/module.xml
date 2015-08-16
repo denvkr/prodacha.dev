@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.0</version>
+    <name>Blog</name>
+    <description>Модуль блога.</description>
+    <icon>blog.png</icon>
+    <category>soc</category>
+    <adminmenu>
+        <title>Blog</title>
+        <podmenu>
+            <podmenu_name>Настройка</podmenu_name>
+            <podmenu_icon>option.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/blog/admpanel/adm_module.php',510,450);</podmenu_action>
+        </podmenu>
+        <podmenu>
+            <podmenu_name>Blog</podmenu_name>
+            <podmenu_icon>blog.png</podmenu_icon>
+            <podmenu_action>javascript:window.location.replace('?plugin=blog')</podmenu_action>
+        </podmenu>
+        <menu>
+            <menu_name>Blog</menu_name>
+            <menu_icon>blog.png</menu_icon>
+            <menu_action>window.location.replace('?plugin=blog')</menu_action>
+        </menu>
+    </adminmenu>
+</module>

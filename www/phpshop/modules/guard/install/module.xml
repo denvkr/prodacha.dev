@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.4</version>
+    <name>Guard</name>
+    <description>Модуль антивируса.</description>
+    <icon>bug_delete.png</icon>
+    <category>system,stat</category>
+    <adminmenu>
+        <title>Антивирус</title>
+        <podmenu>
+            <podmenu_name>Настройка</podmenu_name>
+            <podmenu_icon>bug_edit.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/guard/admpanel/adm_guard.php',630,530);</podmenu_action>
+        </podmenu>
+		<podmenu>
+            <podmenu_name>Журнал проверок</podmenu_name>
+            <podmenu_icon>bug_delete.png</podmenu_icon>
+            <podmenu_action>javascript:DoReload('modules','guard')</podmenu_action>
+        </podmenu>
+    </adminmenu>
+</module>

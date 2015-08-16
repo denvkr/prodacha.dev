@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.2</version>
+    <name>Яндекс Быстрый Заказ</name>
+    <description>Модуль быстрой вставки информации о клиенте из Яндекса. Учет рефералов.</description>
+    <icon>icon.png</icon>
+    <category>yandex,order,soc,form</category>
+    <adminmenu>
+        <title>Быстрый Заказ</title>
+        <podmenu>
+            <podmenu_name>Настройка Заказа</podmenu_name>
+            <podmenu_icon>icon.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/yandexorder/admpanel/adm_module.php',510,450);</podmenu_action>
+        </podmenu>
+    </adminmenu>
+</module>

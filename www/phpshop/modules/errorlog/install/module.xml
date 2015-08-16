@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.2</version>
+    <name>Error Log</name>
+    <description>Модуль записи ошибок и отладок.</description>
+    <icon>icon.png</icon>
+    <category>develop,system</category>
+    <adminmenu>
+        <title>Отладка</title>
+        <podmenu>
+            <podmenu_name>Настройка Error Log</podmenu_name>
+            <podmenu_icon>about.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/errorlog/admpanel/adm_module.php',510,450);</podmenu_action>
+        </podmenu>
+        <podmenu>
+            <podmenu_name>Журнал сообщений</podmenu_name>
+            <podmenu_icon>icon.png</podmenu_icon>
+            <podmenu_action>javascript:window.location.replace('?plugin=errorlog')</podmenu_action>
+        </podmenu>
+    </adminmenu>
+</module>

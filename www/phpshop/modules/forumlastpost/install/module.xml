@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.2</version>
+    <name>Forum LastPost</name>
+    <description>Модуль вывода последних сообщений с форумов.</description>
+    <icon>icon.gif</icon>
+    <category>soc</category>
+    <base>5</base>
+    <adminmenu>
+        <title>Форум</title>
+        <podmenu>
+            <podmenu_name>Forum LastPost</podmenu_name>
+            <podmenu_icon>icon.gif</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/forumlastpost/admpanel/adm_module.php',510,450);</podmenu_action>
+        </podmenu>
+    </adminmenu>
+</module>

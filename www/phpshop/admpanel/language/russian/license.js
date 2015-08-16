@@ -1,0 +1,3 @@
+function License(){
+return true;
+}

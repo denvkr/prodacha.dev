@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.1</version>
+    <name>Sape</name>
+    <description>Модуль вывода платных ссылок Sape.</description>
+    <icon>icon.png</icon>
+    <category>links</category>
+    <adminmenu>
+        <title>Sape</title>
+        <podmenu>
+            <podmenu_name>Настройка Sape</podmenu_name>
+            <podmenu_icon>icon.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/sape/admpanel/adm_module.php',510,450);</podmenu_action>
+        </podmenu>
+    </adminmenu>
+</module>

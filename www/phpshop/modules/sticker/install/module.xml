@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.0</version>
+    <name>Sticker</name>
+    <description>Модуль стикеров</description>
+    <icon>icon.png</icon>
+    <category>form,text</category>
+    <adminmenu>
+        <title>Стикеры</title>
+        <podmenu>
+            <podmenu_name>Настройка</podmenu_name>
+            <podmenu_icon>option.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/sticker/admpanel/adm_module.php',510,450);</podmenu_action>
+        </podmenu>
+        <podmenu>
+            <podmenu_name>Обзор стикеров</podmenu_name>
+            <podmenu_icon>icon.png</podmenu_icon>
+            <podmenu_action>javascript:window.location.replace('?plugin=sticker')</podmenu_action>
+        </podmenu>
+         <podmenu>
+            <podmenu_name>Новый стикер</podmenu_name>
+            <podmenu_icon>add.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/sticker/admpanel/adm_sticker_new.php',630,530);</podmenu_action>
+        </podmenu>
+        <menu>
+            <menu_name>Стикеры</menu_name>
+            <menu_icon>icon.png</menu_icon>
+            <menu_action>window.location.replace('?plugin=sticker')</menu_action>
+        </menu>
+    </adminmenu>
+</module>

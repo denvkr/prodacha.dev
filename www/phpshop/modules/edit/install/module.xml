@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.1</version>
+    <name>Template Edit</name>
+    <description>Модуль редактора шаблонов.</description>
+    <icon>icon.png</icon>
+    <category>template</category>
+    <adminmenu>
+        <title>Редактор</title>
+        <podmenu>
+            <podmenu_name>Настройка Edit</podmenu_name>
+            <podmenu_icon>about.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/edit/admpanel/adm_module.php',510,450);</podmenu_action>
+        </podmenu>
+        <podmenu>
+            <podmenu_name>Редактор шаблонов</podmenu_name>
+            <podmenu_icon>icon.png</podmenu_icon>
+            <podmenu_action>javascript:window.location.replace('?plugin=edit')</podmenu_action>
+        </podmenu>
+        <podmenu>
+            <podmenu_name>База шаблонов</podmenu_name>
+            <podmenu_icon>picture_save.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/edit/admpanel/adm_load.php',510,450);</podmenu_action>
+        </podmenu>
+    </adminmenu>
+</module>

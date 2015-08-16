@@ -1,0 +1,74 @@
+#helpdiv{
+	position:absolute;
+	overflow:hidden; 
+	width:15px; 
+	height:100px; 
+	left:0px; 
+	top:0px;
+}
+
+#inhelpbutdiv {
+	position:relative; 
+	width:15px;
+	background:none; 
+	background:none; 
+	float:right; 
+	border-left:1px solid #656466;
+}
+
+#slidebutt {
+	position:absolute; 
+	background: ButtonFace;
+	width: 8px; 
+	border-left:0px outset #656466;
+	vertical-align: middle;    
+	FILTER: alpha(opacity=100); 
+	background-image: url(../icon/panel2.gif);
+	background-repeat: repeat-y;
+	cursor: pointer;  
+	height:100%; 
+
+	
+}
+
+#helptext {
+	position:relative; 
+	top:40%; 
+	left:2px; 
+	font-weight:bold;
+}
+
+#inhelpdiv {
+	position:relative; 
+	width:239px;
+	background:#ffffff; 
+	float:left; 
+	overflow:auto;
+}
+
+#helpcontent {
+	position:relative;
+	width:230px;
+	background:#ffffff; 
+	float:left;
+	padding-left: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+h2{
+background: #DDDDFF; 
+color: 000; 
+font-weight: bold; 
+font-size: 100%; 
+padding: 3px 20px; 
+margin-bottom: 10px;
+border-bottom: 1px solid black; 
+letter-spacing: 2px;
+}
+
+#helpcontent ul{
+	margin: 5px;
+	padding: 10px;
+	list-style: circle;
+}

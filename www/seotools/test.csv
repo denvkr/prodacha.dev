@@ -1,0 +1,14 @@
+URL;Title;H1
+http://astramg.ru/;Главная 1;Заголовок 1
+/;Главная 2;
+http://astramg.ru/portfolio/;Порт 1;
+portfolio/;Порт 2;
+portfolio/#asd;Порт 3;
+http://astramg.ru/portfolio/corp;"Порт ""корп""";
+https://astramg.ru/portfolio/?a=1;Порт А;
+http://astramg.ru/portfolio/?b=1#asd;Порт Б;
+?module=main;"Главная; модуль";
+http://astramg.ru/contacts/;Контакты;
+ftp://128.12.2.2.0;;
+некорретный урл;русский урл;
+/urlo;не ошибка;

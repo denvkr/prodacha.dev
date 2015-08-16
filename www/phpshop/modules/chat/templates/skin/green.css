@@ -1,0 +1,54 @@
+body, td, th {
+	font-family: Tahoma, Helvetica, sans-serif;
+	font-size: 13px;
+	color: White;
+	background-color: #3CB371;
+}
+#chat_mod_content{
+    border: 1px;
+    border-width: 1px;
+    border-style: inset;
+    width: 97%;
+    height: 350px;
+    overflow: scroll;
+    background-color: White;
+    border-color: Silver;
+    padding:3px;
+    font-size: 12px;
+    color: Black;
+}
+textarea#chat_mod_user_text{
+    width:97%;
+    font-size: 12px;
+    color: Black;
+    height: 100px;
+    padding:3px;
+}
+
+div.text_user{
+    color: #424242;
+    padding: 3px;
+}
+div.text_admin{
+    color: Black;
+    padding:3px;
+}
+div#exit{
+    float:left;
+}
+div#post{
+    float:right;
+}
+div#help{
+	clear: both;
+	color: ButtonFace;
+	font-size: 10px;
+	height: 30px;
+}
+
+button{
+    width:150px;
+    height: 30px;
+
+}
+

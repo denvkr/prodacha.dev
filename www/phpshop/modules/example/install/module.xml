@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.2</version>
+    <name>Example</name>
+    <description>Тестовый модуль для разработчиков.</description>
+    <icon>icon.png</icon>
+    <category>develop</category>
+    <adminmenu>
+        <title>Example</title>
+        <podmenu>
+            <podmenu_name>Настройка Example</podmenu_name>
+            <podmenu_icon>icon.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/example/admpanel/adm_module.php',510,450);</podmenu_action>
+        </podmenu>
+         <menu>
+            <menu_name>Системная информация</menu_name>
+            <menu_icon>icon.png</menu_icon>
+            <menu_action>javascript:miniWin('../modules/example/admpanel/adm_module.php',510,450);</menu_action>
+        </menu>
+    </adminmenu>
+</module>
