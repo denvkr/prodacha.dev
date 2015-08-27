@@ -239,7 +239,50 @@ class PHPShopDone extends PHPShopCore {
         // Перехват модуля
         if ($this->setHook(__CLASS__, __FUNCTION__, $_POST, 'START'))
             return true;
+		$dop_info='';
+		$tk='';
+        if (isset($_POST['firstname']) &&
+            isset($_POST['middlename']) &&
+            isset($_POST['lastname']) &&
+            isset($_POST['pass_no1']) &&
+            isset($_POST['pass_no2']) &&
+            isset($_POST['pass_police'])) {
+            if($_POST['tk_other']!=''){
+                $tk=@str_replace("_", "",$_POST['tk_other']);
+            } else {
+                $tk=@str_replace("_", "",$_POST['tk_list_item']);		
+            }
+            if($_POST['delivery_address']!=''){
+                $da=@str_replace("_", "",$_POST['delivery_address']);
+            } else {
+                $da=@str_replace("_", "",$_POST['tk_delivery_item']);		
+            }            
+            $dop_info="Транспортная компания:".$tk.
+               " Имя:".@str_replace("_", "",$_POST['firstname']).
+               " Отчество:".@str_replace("_", "",$_POST['middlename']).
+               " Фамилия:".@str_replace("_", "",$_POST['lastname']).
+               " Серия:".@str_replace("_", "",$_POST['pass_no1'].
+               " Номер:".$_POST['pass_no2']).
+               " Дата выдачи:".@str_replace("_", "",$_POST['pass_police']).
+               " Телефон грузополучателя:".@str_replace($this->tel_num_repl, "",$_POST['tel2']).
+               " Город доставки:".@str_replace("_", "",$_POST['delivery_city']).
+               " Адрес доставки:".$da;
+		}
+        if (isset($_POST['firstname']) &&
+            isset($_POST['middlename']) &&
+            isset($_POST['lastname']) &&
+            isset($_POST['postal_index']) &&
+            isset($_POST['delivery_address'])) {
 
+            $dop_info="Транспортная компания: Почта России".
+               " Имя:".@str_replace("_", "",$_POST['firstname']).
+               " Отчество:".@str_replace("_", "",$_POST['middlename']).
+               " Фамилия:".@str_replace("_", "",$_POST['lastname']).
+               " Телефон грузополучателя:".@str_replace($this->tel_num_repl, "",$_POST['tel2']).
+               " Город доставки:".@str_replace("_", "",$_POST['delivery_city']).
+               " Индекс:".@str_replace("_", "",$_POST['postal_index']).
+               " Адрес доставки:".@str_replace("_", "",$_POST['delivery_address']);
+		}		
         $this->set('cart', $this->PHPShopCart->display('mailcartforma', array('currency' => $this->currency)));
         $this->set('sum', $this->sum);
         $this->set('currency', $this->currency);
@@ -251,7 +294,7 @@ class PHPShopDone extends PHPShopCore {
         $this->set('date', date("d-m-y"));
         $this->set('name_person', $_POST['name_person']);
         $this->set('tel', @$_POST['tel_code'] . "-" . @str_replace($this->tel_num_repl, "", $_POST['tel_name']));
-        $this->set('adr_name', PHPShopSecurity::CleanStr(@$_POST['adr_name']));
+        $this->set('adr_name', PHPShopSecurity::CleanStr(@$_POST['adr_name']).$dop_info);
         $this->set('dos_ot', @$_POST['dos_ot']);
         $this->set('dos_do', @$_POST['dos_do']);
         $this->set('deliveryCity', $this->PHPShopDelivery->getCity());
@@ -334,6 +377,10 @@ class PHPShopDone extends PHPShopCore {
             "org_name" => PHPShopSecurity::CleanStr(@$_POST['org_name']),
             "org_inn" => PHPShopSecurity::CleanStr(@$_POST['org_inn']),
             "org_kpp" => PHPShopSecurity::CleanStr(@$_POST['org_kpp']),
+            "annual_number" => PHPShopSecurity::CleanStr(@$_POST['annual_number']),
+            "bic_bank_number" => PHPShopSecurity::CleanStr(@$_POST['bic_bank_number']),
+            "bank_name" => PHPShopSecurity::CleanStr(@$_POST['bank_name']),
+            "gen_manager_initial" => PHPShopSecurity::CleanStr(@$_POST['gen_manager_initial']),
             "tel_code" => PHPShopSecurity::CleanStr(@$_POST['tel_code']),
             "tel_name" => PHPShopSecurity::CleanStr(@str_replace($this->tel_num_repl, "", $_POST['tel_name'])),
             "adr_name" => PHPShopSecurity::CleanStr(@$_POST['adr_name']),
@@ -362,9 +409,39 @@ class PHPShopDone extends PHPShopCore {
             } else {
                 $tk=@str_replace("_", "",$_POST['tk_list_item']);
             }
+            if($_POST['delivery_address']!=''){
+                $da=@str_replace("_", "",$_POST['delivery_address']);
+            } else {
+                $da=@str_replace("_", "",$_POST['tk_delivery_item']);		
+            }             
             // Статус заказа
            $this->status = array(
-               "maneger" => "Транспортная компания:".$tk." Имя:".@str_replace("_", "",$_POST['firstname'])." Отчество:".@str_replace("_", "",$_POST['middlename'])." Фамилия:".@str_replace("_", "",$_POST['lastname'])." Серия:".@str_replace("_", "",$_POST['pass_no1']." Номер:".$_POST['pass_no2'])." Дата выдачи:".@str_replace("_", "",$_POST['pass_police'])." Телефон грузополучателя:".@str_replace($this->tel_num_repl, "",$_POST['tel2']),
+               "maneger" => "Транспортная компания:".$tk.
+               " Имя:".@str_replace("_", "",$_POST['firstname']).
+               " Отчество:".@str_replace("_", "",$_POST['middlename']).
+               " Фамилия:".@str_replace("_", "",$_POST['lastname']).
+               " Серия:".@str_replace("_", "",$_POST['pass_no1'].
+               " Номер:".$_POST['pass_no2']).
+               " Дата выдачи:".@str_replace("_", "",$_POST['pass_police']).
+               " Телефон грузополучателя:".@str_replace($this->tel_num_repl, "",$_POST['tel2']).
+               " Город доставки:".@str_replace("_", "",$_POST['delivery_city']).
+               " Адрес доставки:".$da,
+               "time" => "");  
+        } else if (isset($_POST['firstname']) &&
+            isset($_POST['middlename']) &&
+            isset($_POST['lastname']) &&
+            isset($_POST['postal_index']) &&
+            isset($_POST['delivery_address'])) {
+            // Статус заказа
+           $this->status = array(
+               "maneger" => "Транспортная компания: Почта России".
+               " Имя:".@str_replace("_", "",$_POST['firstname']).
+               " Отчество:".@str_replace("_", "",$_POST['middlename']).
+               " Фамилия:".@str_replace("_", "",$_POST['lastname']).
+               " Телефон грузополучателя:".@str_replace($this->tel_num_repl, "",$_POST['tel2']).
+               " Город доставки:".@str_replace("_", "",$_POST['delivery_city']).
+               " Индекс:".@str_replace("_", "",$_POST['postal_index']).			   
+               " Адрес доставки:".@str_replace("_", "",$_POST['delivery_address']),
                "time" => "");  
         } else {
         // Статус заказа
