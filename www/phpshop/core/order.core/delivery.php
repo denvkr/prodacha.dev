@@ -204,15 +204,10 @@ function delivery($obj,$deliveryID,$totalsumma=0) {
             if($row['flag']==1) { //Ќа случай доставки по умолчанию
                 $chk="selected";
                 $chkdone=$row['id']; //≈сли выводитс€ умолчательна€ доставка, то пометить что выбор завершен
-                /*
-                if ($_COOKIE['sincity']=="sp" && $row['id']==14) {
-                	$obj->set('deliveryId',$row['id']);
-                }
-                */
-                if ($_COOKIE['sincity']=="chb" && $row['id']==43) {
-                	$obj->set('deliveryId',$row['id']);
-                }
-                if ( (($_COOKIE['sincity']=="m" || $_COOKIE['sincity']=="other") && $row['id']==10) || ($_COOKIE['sincity']=="sp" && $row['id']==69) ) {
+
+                if ( (($_COOKIE['sincity']=="m" || $_COOKIE['sincity']=="other") && $row['id']==10) || 
+                        ($_COOKIE['sincity']=="sp" && $row['id']==69) ||
+                        ($_COOKIE['sincity']=="chb" && $row['id']==43)) {
                 	$obj->set('deliveryId',$row['id']);
                 }
                 
@@ -248,12 +243,12 @@ function delivery($obj,$deliveryID,$totalsumma=0) {
 			if ($_COOKIE['sincity']=="m" || $_COOKIE['sincity']=="other" || $_COOKIE['sincity']=="sp")
 			{
 				if (intval($totalsumma)>=1000 && (($row['id']==11) OR ($row['id']==10) OR ($row['id']==13) OR ($row['id']==1) OR ($row['id']==3) OR ($row['id']==22) OR ($row['id']==23) OR ($row['id']==24) OR ($row['id']==25) OR ($row['id']==27) OR ($row['id']==28) OR ($row['id']==29) OR ($row['id']==30) OR ($row['id']==31) OR ($row['id']==32) OR ($row['id']==33) OR ($row['id']==34) OR ($row['id']==35) OR ($row['id']==36) OR ($row['id']==37) OR ($row['id']==38) OR ($row['id']==40) OR ($row['id']==41) OR ($row['id']==42) OR ($row['id']==66) OR ($row['id']==67) OR ($row['id']==68) OR ($row['id']==69))) {
-					if (($row['id']==69 || $row['id']==1) && $_COOKIE['sincity']=="sp") {
+					if (($row['id']==69 || $row['id']==1 || $row['id']==22 || $row['id']==23 || $row['id']==24 || $row['id']==25 || $row['id']==27 || $row['id']==28 || $row['id']==29 || $row['id']==30 || $row['id']==31 || $row['id']==32 || $row['id']==33 || $row['id']==35 || $row['id']==36 || $row['id']==37 || $row['id']==38 || $row['id']==40 || $row['id']==41 || $row['id']==42 || $row['id']==66 || $row['id']==67 || $row['id']==68) && $_COOKIE['sincity']=="sp") {
 						@$disp.='<span id="spanvar_'.$row['id'].'" ><OPTION id="var_'.$row['id'].'" value='.$row['id'].' '.$chk.'>'.$predok.$city.'</OPTION></span>';
 					} else if ($row['id']!=69 && $_COOKIE['sincity']!="sp")
 						@$disp.='<span id="spanvar_'.$row['id'].'" ><OPTION id="var_'.$row['id'].'" value='.$row['id'].' '.$chk.'>'.$predok.$city.'</OPTION></span>';
 				} else if (intval($totalsumma)<1000 && (($row['id']==10) OR ($row['id']==13) OR ($row['id']==69)))	{
-                                        if (($row['id']==69 || $row['id']==1) && $_COOKIE['sincity']=="sp") {
+                                        if (($row['id']==69) && $_COOKIE['sincity']=="sp") {
 						@$disp.='<span id="spanvar_'.$row['id'].'" ><OPTION id="var_'.$row['id'].'" value='.$row['id'].' '.$chk.'>'.$predok.$city.'</OPTION></span>';
 					} else if ($row['id']!=69 && $_COOKIE['sincity']!="sp") 
 						@$disp.='<span id="spanvar_'.$row['id'].'" ><OPTION id="var_'.$row['id'].'" value='.$row['id'].' '.$chk.'>'.$predok.$city.'</OPTION></span>';                                    
