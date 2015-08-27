@@ -226,7 +226,7 @@ $(document).ready(function() {
 			// $('div.bic_box').show();
 		}
 	});
-	//в кредит	из карточки
+	//в кредит из карточки
 	$("input.creditinputcart").click(function(e){
 			
 		var id = $(this).attr('rel');		
@@ -253,7 +253,6 @@ $(document).ready(function() {
 	});
 
 	// Отметить все
-	
 	// собираем информацию о существующих классах товаров
 	var manufacturers_products = [];
 	$('#manufacturers_products div[class^="tool_"]').each(function(){
@@ -691,7 +690,7 @@ $(document).ready(function() {
 
 		//'Благоустройство участка'
 		if ($(this).attr("id-info")==292){
-			console.log($($(this).nextAll('li').get(12)).attr("id-info"));
+			//console.log($($(this).nextAll('li').get(12)).attr("id-info"));
 			//"Мотобуры"
 			if ($($(this).nextAll('li').get(12)).attr("id-info")==142) {			
 				if ($($(this).nextAll('li').get(12)).css("display")=="block") {
@@ -710,7 +709,7 @@ $(document).ready(function() {
 				}
 				//console.log('293 clicked');
 			}
-			console.log($($(this).nextAll('li').get(14)).attr("id-info"));
+			//console.log($($(this).nextAll('li').get(14)).attr("id-info"));
 			//Водяные насосы
 			if ($($(this).nextAll('li').get(14)).attr("id-info")==503) {			
 				if ($($(this).nextAll('li').get(14)).css("display")=="block") {
@@ -996,7 +995,7 @@ $(document).ready(function() {
  
 	});	
 
-	$('.menu').mouseleave( function() {
+    $('.menu').mouseleave( function() {
 		$(document).find(".submenuhead").fadeOut('fast');
 		$("#fade").css("display", "none");
     });
@@ -1077,7 +1076,14 @@ $(document).ready(function() {
 	if ($('#mail').length || 
                 $("#name_person").length || 
                 $("#tel_name").length || 
-                $("#edost_to_city").length || 
+                $("#edost_to_city").length ||
+                $("input[name='org_name']").length ||
+                $("input[name='org_inn']").length ||
+                $("input[name='org_kpp']").length ||
+                $("input[name='annual_number']").length ||
+                $("input[name='bic_bank_number']").length ||
+                $("input[name='bank_name']").length ||
+                $("input[name='gen_manager_initial']").length ||
                 $("input[name='dos_ot']").length || 
                 $("input[name='dos_do']").length) {
 		//всплывающие подсказки в доставке при заполнении полей
@@ -1095,14 +1101,14 @@ $(document).ready(function() {
 			} else if (regExpr.test($(this).val())===false && $(this).val()!=='') {				
 				$(this).css('border-color','#ff5555');
 			}
-		  });
+		});
 		$( "#mail" ).mouseover(function() {
 			$(this).popover({placement : 'right'});
 			$(this).css('border-color','#abadb3');
-		  });
+		});
 		$( "#name_person" ).mouseout(function() {
 			$(this).popover('hide');
-			var regExpr = new RegExp('^[\-A-Za-z\u0410-\u044F]+$','ig');
+			var regExpr = new RegExp('^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5* -_]{3,40}$','ig');
 			//console.log($(this).val());
 			//console.log(regExpr.test($(this).val()));
 			if (regExpr.test($(this).val())===true && $(this).val()!=='') {
@@ -1110,11 +1116,11 @@ $(document).ready(function() {
 			} else if (regExpr.test($(this).val())===false && $(this).val()!=='') {				
 				$(this).css('border-color','#ff5555');
 			}			
-		  });
+		});
 		$( "#name_person" ).mouseover(function() {
 			$(this).popover({placement : 'right'});
 			$(this).css('border-color','#abadb3');			
-		  });
+		});
 		//console.log($(this).inputmask("getmetadata")["name_en"]);
 		//console.log($.browser);
 		if (typeof($.browser.android)==='undefined') 
@@ -1137,20 +1143,20 @@ $(document).ready(function() {
 			} else if (regExpr.test($(this).val())===false && $(this).val()!=='') {				
 				$(this).css('border-color','#ff5555');
 			}
-		  });
+		});
 		$( "#tel_name" ).mouseover(function() {
 			$(this).popover({placement : 'right'});
 			$(this).css('border-color','#abadb3');
-		  });
+		});
                 $( "#tel_name" ).keyup(function(){
                    $( "#tel2" ).val($(this).val()); 
-                })  
+                })
 		$( "#edost_to_city" ).mouseout(function() {
 			$(this).popover('hide');
-		  });
+		});
 		$( "#edost_to_city" ).mouseover(function() {
 			$(this).popover({placement : 'right'});
-		  });
+		});
                 $("input[name='dos_ot'],input[name='dos_do']").each(function() {
                     $(this).inputmask("mask",{mask: "99"});
                     $(this).mouseout(function() {
@@ -1170,6 +1176,49 @@ $(document).ready(function() {
                         }
                     });       
                 });
+                $("input[name='org_name']").inputmask("mask",{mask: "*", 
+                    "repeat": 100, 
+                    "greedy": false,
+                    "showMaskOnFocus": true,
+                    definitions: {
+                '*': {
+                    validator: ".",
+                    cardinality: 1
+                }
+                },
+                    onKeyValidation: function (result) {
+                                //console.log(result);
+                                }});     
+                $("input[name='org_inn']").inputmask("mask",{mask: "9", "repeat": 12, "greedy": true});
+                $("input[name='org_kpp']").inputmask("mask",{mask: "9", "repeat": 9, "greedy": true});
+                $("input[name='annual_number']").inputmask("mask",{mask: "9", "repeat": 20, "greedy": true});
+                $("input[name='bic_bank_number']").inputmask("mask",{mask: "9", "repeat": 9, "greedy": true});
+                $("input[name='bank_name']").inputmask("mask",{mask: "*", 
+                    "repeat": 100, 
+                    "greedy": false,
+                    "showMaskOnFocus": true,
+                    definitions: {
+                '*': {
+                    validator: ".",
+                    cardinality: 1
+                }
+                },
+                    onKeyValidation: function (result) {
+                                //console.log(result);
+                }});
+                $("input[name='gen_manager_initial']").inputmask("mask",{mask: "*", 
+                    "repeat": 100, 
+                    "greedy": false,
+                    "showMaskOnFocus": true,
+                    definitions: {
+                '*': {
+                    validator: ".",
+                    cardinality: 1
+                }
+                },
+                    onKeyValidation: function (result) {
+                                //console.log(result);
+                }});
 	}
         fillTKtablePart();
 	/*
@@ -1333,11 +1382,13 @@ $(document).ready(function() {
            $("#pass_no1").length ||
            $("#pass_no2").length ||
            $("#pass_police").length ||
-           $("#delivery_city").length){
+           $("#delivery_city").length ||
+           $("#delivery_address").length ||
+           $("#postal_index").length){
            $("#tk_other").inputmask("k{50}");
-           $("#firstname").inputmask("l{30}");
-           $("#middlename").inputmask("l{30}");
-           $("#lastname").inputmask("l{30}");
+           $("#firstname").inputmask("l{28}");
+           $("#middlename").inputmask("l{28}");
+           $("#lastname").inputmask("l{28}");
                 if (typeof($.browser.android)==='undefined') 
 			$("#tel2").inputmask("mask",{mask: "+7(999)999-99-99"});//{mask: "+7(9##)###-##-##"}
 		if (typeof($.browser.android)!=='undefined' && $.browser.android===true){
@@ -1356,8 +1407,10 @@ $(document).ready(function() {
                 $("#pass_no2").inputmask("mask",{mask: "999999"}); 
                 $("#pass_no1").inputmask("mask",{mask: "9999"});
                 $("#pass_no2").inputmask("mask",{mask: "999999"});
+				$("#postal_index").inputmask("mask",{mask: "999999"});
                 $("#pass_police").inputmask("dd.mm.yyyy");
                 $("#delivery_city").inputmask("p{55}");
+                $("#delivery_address").inputmask("b{150}");
                 $("#tk_other").focusout(function(){
                     //console.log($("input[type=radio][name='tk_list_item']:eq(0):checked").length);
                     
@@ -1374,12 +1427,15 @@ $(document).ready(function() {
                     }      
                 })
 		$("#tk_other").mouseover(function() {
-			$(this).popover({placement : 'right'});
-		  });
+			$(this).popover({placement : 'top'});
+		});
+		$("#tk_other").mouseout(function() {
+			$(this).popover('hide');
+		});
                 $("#firstname").focusout(function(){
                     //console.log($(this).attr('disabled'));
                     //if (typeof($(this).attr('disabled'))=== 'undefined') {
-                       var regExpr = new RegExp('^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5 -_]{2,30}$','ig');
+                       var regExpr = new RegExp('^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5 -_]{2,26}$','ig');
                        //console.log(regExpr.test($(this).val()));
                         if (regExpr.test($(this).val())===true) {
                                 $(this).css('border-color','#abadb3');
@@ -1387,11 +1443,11 @@ $(document).ready(function() {
                                 $(this).css('border-color','#ff5555');
                         }
                     //}      
-                })
+                });
                 $("#middlename").focusout(function(){
                     //console.log($(this).attr('disabled'));
                     //if (typeof($(this).attr('disabled'))=== 'undefined') {
-                       var regExpr = new RegExp('^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5 -_]{2,30}$','ig');
+                       var regExpr = new RegExp('^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5 -_]{2,26}$','ig');
                        //console.log(regExpr.test($(this).val()));
                         if (regExpr.test($(this).val())===true) {
                                 $(this).css('border-color','#abadb3');
@@ -1399,11 +1455,11 @@ $(document).ready(function() {
                                 $(this).css('border-color','#ff5555');
                         }
                     //}      
-                }) 
+                }); 
                 $("#lastname").focusout(function(){
                     //console.log($(this).attr('disabled'));
                     //if (typeof($(this).attr('disabled'))=== 'undefined') {
-                       var regExpr = new RegExp('^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5 -_]{2,30}$','ig');
+                       var regExpr = new RegExp('^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5 -_]{2,26}$','ig');
                        //console.log(regExpr.test($(this).val()));
                         if (regExpr.test($(this).val())===true) {
                                 $(this).css('border-color','#abadb3');
@@ -1411,19 +1467,7 @@ $(document).ready(function() {
                                 $(this).css('border-color','#ff5555');
                         }
                     //}      
-                })
-                $("#lastname").focusout(function(){
-                    //console.log($(this).attr('disabled'));
-                    //if (typeof($(this).attr('disabled'))=== 'undefined') {
-                       var regExpr = new RegExp('^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5 -_]{2,30}$','ig');
-                       //console.log(regExpr.test($(this).val()));
-                        if (regExpr.test($(this).val())===true) {
-                                $(this).css('border-color','#abadb3');
-                        } else if (regExpr.test($(this).val())===false) {				
-                                $(this).css('border-color','#ff5555');
-                        }
-                    //}      
-                })
+                });
                 $("#pass_police").focusout(function(){
                     //console.log($(this).attr('disabled'));
                     //if (typeof($(this).attr('disabled'))=== 'undefined') {
@@ -1435,7 +1479,7 @@ $(document).ready(function() {
                                 $(this).css('border-color','#ff5555');
                         }
                     //}      
-                })        
+                });       
                 $("#pass_no1").focusout(function(){
                     //console.log($(this).attr('disabled'));
                     //if (typeof($(this).attr('disabled'))=== 'undefined') {
@@ -1447,7 +1491,7 @@ $(document).ready(function() {
                                 $(this).css('border-color','#ff5555');
                         }
                     //}      
-                })
+                });
                 $("#pass_no2").focusout(function(){
                     //console.log($(this).attr('disabled'));
                     //if (typeof($(this).attr('disabled'))=== 'undefined') {
@@ -1459,7 +1503,13 @@ $(document).ready(function() {
                                 $(this).css('border-color','#ff5555');
                         }
                     //}      
-                })
+                });
+                $("#delivery_city").mouseover(function() {
+                    $(this).popover({placement : 'right'});
+				});
+                $( "#delivery_city" ).mouseout(function() {
+                    $(this).popover('hide');			
+				});					
                 $("#delivery_city").focusout(function(){
                     //console.log($(this).attr('disabled'));
                     //if (typeof($(this).attr('disabled'))=== 'undefined') {
@@ -1471,7 +1521,43 @@ $(document).ready(function() {
                                 $(this).css('border-color','#ff5555');
                         }
                     //}      
-                })
+                });
+                $("#postal_index").mouseover(function() {
+                    $(this).popover({placement : 'right'});
+				});
+                $( "#postal_index" ).mouseout(function() {
+                    $(this).popover('hide');			
+				});				
+                $("#postal_index").focusout(function(){
+                    //console.log($(this).attr('disabled'));
+                    //if (typeof($(this).attr('disabled'))=== 'undefined') {
+                       var regExpr = new RegExp('^[0-9]{6}$','ig');
+                       //console.log(regExpr.test($(this).val()));
+                        if (regExpr.test($(this).val())===true) {
+                                $(this).css('border-color','#abadb3');
+                        } else if (regExpr.test($(this).val())===false) {				
+                                $(this).css('border-color','#ff5555');
+                        }
+                    //}      
+                });				
+                $("#delivery_address").mouseover(function() {
+                    $(this).popover({placement : 'top'});
+				});
+                $( "#delivery_address" ).mouseout(function() {
+                    $(this).popover('hide');			
+				});
+                $("#delivery_address").focusout(function(){
+                    //console.log($(this).attr('disabled'));
+                    //if (typeof($(this).attr('disabled'))=== 'undefined') {
+                       var regExpr = new RegExp('^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5/,. -_]{5,150}$','ig');
+                       //console.log(regExpr.test($(this).val()));
+                        if (regExpr.test($(this).val())===true) {
+                                $(this).css('border-color','#abadb3');
+                        } else if (regExpr.test($(this).val())===false) {				
+                                $(this).css('border-color','#ff5555');
+                        }
+                    //}      
+                }); 
                 $("input[type=radio][name='tk_list_item']").on('change', function(){
                     //$('#attr_val2').text($(this).val());
                     $(this).each(function(indx){
@@ -1485,7 +1571,21 @@ $(document).ready(function() {
                         $('#tk_other').removeAttr('disabled');
                       }
                     });
-                })
+                });
+                $("input[type=radio][name='tk_delivery_item']").on('change', function(){
+                    //$('#attr_val2').text($(this).val());
+                    $(this).each(function(indx){
+                      if (($(this).val()==='до пункта выдачи ТК') && typeof ($('#delivery_address').attr('disabled'))=== 'undefined') {
+                         // $('#attr_val2').text(indx);
+                        $('#delivery_address').attr('disabled','disabled');
+                        $('#delivery_address').css('border-color','#abadb3');
+                        $('#delivery_address').val('');
+                      } else if($(this).val()==='по адресу' && typeof ($('#delivery_address').attr('disabled'))==='string'){
+                          //$('#attr_val2').text(indx);
+                        $('#delivery_address').removeAttr('disabled');
+                      }
+                    });
+                });              
         }
     }   
 
