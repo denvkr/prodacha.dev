@@ -297,9 +297,9 @@ function UpdateDelivery(xid) {
             }
             if (typeof(delivery_options)!=='undefined' && delivery_options.selected===true && Number(xid)===69) {
                 if (!$('#spb_map_area').length){
-                    $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").html('Выберите пункт выдачи заказов');
+                    $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").html('<div style="position:relative;top:-245px;">Выберите пункт<br>выдачи заказов</div>');
                     $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").prop('align','right');
-                    $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(1)").html('<div id="spb_map_area"><select id="tk_delivery_points_list"></select><div style="height:18px;display:block;"></div><p id="map" style="width:550px; height:400px;"></p></div');
+                    $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(1)").html('<div id="spb_map_area" style="position:relative;top:-40px;"><select id="tk_delivery_points_list"></select><div style="height:18px;display:block;"></div><p id="map" style="width:660px; height:400px;"></p></div');
                     var script   = document.createElement("script");
                     script.type  = "text/javascript";
                     script.text  = "ymaps.ready(init);";
