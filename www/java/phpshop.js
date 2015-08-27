@@ -234,518 +234,469 @@ function UpdateDelivery(xid) {
     var req = new Subsys_JsHttpRequest_Js();
     var sum = document.getElementById('OrderSumma').value;
     var wsum = document.getElementById('WeightSumma').innerHTML;
-	var adr_name_img=getNextElement(document.getElementsByName('adr_name')[0]);
-	var adr_name_info=document.getElementsByName('adr_name')[0];
-	var deliver_time_info=document.getElementsByName('delivery_time_info');
-	var order_metod=document.getElementById('order_metod_div');
-	//модифицируем поле "Адрес и дополнительная информация:"
+    var adr_name_img=getNextElement(document.getElementsByName('adr_name')[0]);
+    var adr_name_info=document.getElementsByName('adr_name')[0];
+    var deliver_time_info=document.getElementsByName('delivery_time_info');
+    var order_metod=document.getElementById('order_metod_div');
+    //модифицируем поле "Адрес и дополнительная информация:"
 
-	//if (Number(document.getElementById('TotalSumma').innerHTML)<3000 && xid==1) {
-		//console.log(document.getElementById('TotalSumma').innerHTML);//('var_'+xid);
-		//return true;
+    //if (Number(document.getElementById('TotalSumma').innerHTML)<3000 && xid==1) {
+            //console.log(document.getElementById('TotalSumma').innerHTML);//('var_'+xid);
+            //return true;
 
-	//}
+    //}
 
-	if (Number(xid)===10 || Number(xid)===13 || Number(xid)===14 || Number(xid)===43) {
-		var delivery_options=document.getElementById('var_'+xid);
-			//alert('var_'+xid);
-		if ( typeof(delivery_options)!=='undefined' && delivery_options.selected===true && (Number(xid)===10 || Number(xid)===13 || Number(xid)===14 || Number(xid)===43) ) {
-			//alert('var_'+xid);
-			document.getElementById('address_and_info').innerHTML='Дополнительная<br>информация:';
-			if (typeof(adr_name_img) !== 'undefined' && adr_name_img !== null) {
-				adr_name_img.parentNode.removeChild(adr_name_img);				
-			}
-			//alert(xid);			
-			deliver_time_info[0].style.display='none';
-			deliver_time_info[1].style.display='none';
-			if ( typeof(delivery_options)!=='undefined' && delivery_options.selected===true && (Number(xid)===10 || Number(xid)===13) ) {
-				order_metod.style.display='table-cell';
-			}
-		}
-                /*
-                if (document.getElementById('tk_info')){
-                    document.getElementById('tk_info').style.display='none';
-                    //console.log(document.getElementsByName('forma_order')[0].childNodes);
-                    //document.getElementsByName('forma_order')[0].removeChild(document.getElementById('tk_info'));
-                    $('#tk_info').remove();
-                }
-                if (document.getElementById('tk_list')){
-                    document.getElementById('tk_list').style.display='none';
-                    $('#tk_list').remove();
-                }
-                if (document.getElementById('firstname_info')){
-                    document.getElementById('firstname_info').style.display='none';
-                    $('#firstname_info').remove();
-                }
-                if (document.getElementById('firstname')){
-                    document.getElementById('firstname').style.display='none';
-                    console.log($('#firstname').next());
-                    $('#firstname').next().remove();
-                    $('#firstname').remove();
-                    //$('#firstname').next.remove();
-                }
-                if (document.getElementById('middlename_info')){
-                    document.getElementById('middlename_info').style.display='none';
-                    $('#middlename_info').remove();
-                }
-                if (document.getElementById('middlename')){
-                    document.getElementById('middlename').style.display='none';
-                    $('#middlename').next().remove();
-                    $('#middlename').remove();
-                    //$('#middlename').next.remove();
-                }
-                if (document.getElementById('lastname_info')){
-                    document.getElementById('lastname_info').style.display='none';
-                    $('#lastname_info').remove();
-                }
-                if(document.getElementById('lastname')){
-                    document.getElementById('lastname').style.display='none';
-                    $('#lastname').next().remove();
-                    $('#lastname').remove();
-                    //$('#lastname').next.remove();
-                }
-                if (document.getElementById('tel2_info')){
-                    document.getElementById('tel2_info').style.display='none';
-                    $('#tel2_info').remove();
-                }
-                if (document.getElementById('tel2')){
-                    document.getElementById('tel2').style.display='none';
-                    $('#tel2').remove();
-                }
-                if (document.getElementById('pass_no_info')){
-                    document.getElementById('pass_no_info').style.display='none';
-                     $('#pass_no_info').remove();
-                }
-                if (document.getElementById('pass_no1')){
-                    document.getElementById('pass_no1').style.display='none';
-                    $('#pass_no1').next().remove();
-                    $('#pass_no1').remove();
-                    //$('#pass_no1').next.remove();
-                }
-                if (document.getElementById('pass_no2')){
-                    document.getElementById('pass_no2').style.display='none';
-                    $('#pass_no2').next().remove();
-                    $('#pass_no2').remove();
-                    //$('#pass_no2').next.remove();
-                }
-                if (document.getElementById('pass_police_info')){
-                    document.getElementById('pass_police_info').style.display='none';
-                    $('#pass_police_info').remove();
-                }
-                if (document.getElementById('pass_police')){
-                    document.getElementById('pass_police').style.display='none';
-                    $('#pass_police').next().remove();
-                    $('#pass_police').remove();
-                    //$('#pass_police').next.remove();
-                }
-                if (document.getElementById('cart_tk_delivery_pass_msg_info')){
-                    document.getElementById('cart_tk_delivery_pass_msg_info').style.display='none';
-                    $('#cart_tk_delivery_pass_msg_info').remove();
-                }
-                if (document.getElementById('cart_tk_delivery_pass_msg')){
-                    document.getElementById('cart_tk_delivery_pass_msg').style.display='none';
-                    $('#cart_tk_delivery_pass_msg').remove();
-                }
-                */
-                if ((document.getElementsByName('forma_order')[0]) && 
-                        document.getElementById('tk_info') &&
-                        document.getElementById('tk_list') &&
-                        document.getElementById('firstname_info') &&
-                        document.getElementById('firstname') &&
-                        document.getElementById('middlename_info') &&
-                        document.getElementById('middlename') &&
-                        document.getElementById('lastname_info') &&
-                        document.getElementById('lastname') &&
-                        document.getElementById('tel2_info') &&
-                        document.getElementById('tel2') &&
-                        document.getElementById('pass_no_info') &&
-                        document.getElementById('pass_no1') &&
-                        document.getElementById('pass_no2') &&
-                        document.getElementById('pass_police_info') &&
-                        document.getElementById('pass_police') &&
-                        document.getElementById('cart_tk_delivery_pass_msg_info') &&
-                        document.getElementById('cart_tk_delivery_pass_msg') &&
-                        document.getElementById('delivery_city_info') &&
-                        document.getElementById('delivery_city')
-                        ){
-                    //console.log($("input[name='forma_order']:eq(0) tr:eq(8)"));
-                    for(i=0;i<=8;i++){
-                        $("form[name='forma_order']:eq(0)>table:eq(0) tr:eq(8)").remove();
+    if (Number(xid)===10 || Number(xid)===13 || Number(xid)===14 || Number(xid)===43 || Number(xid)===69) {
+            var delivery_options=document.getElementById('var_'+xid);
+            //alert('var_'+xid);
+            if ( typeof(delivery_options)!=='undefined' && delivery_options.selected===true && (Number(xid)===10 || Number(xid)===13 || Number(xid)===14 || Number(xid)===43) ) {
+                    //alert('var_'+xid);
+                    document.getElementById('address_and_info').innerHTML='Дополнительная<br>информация:';
+                    if (typeof(adr_name_img) !== 'undefined' && adr_name_img !== null) {
+                            adr_name_img.parentNode.removeChild(adr_name_img);				
                     }
-
-                    //$("input[name='forma_order']:eq(0) tr:eq(8)").remove();
-                    //$("input[name='forma_order']:eq(0) tr:eq(8)").remove();
-                    //$("input[name='forma_order']:eq(0) tr:eq(8)").remove();
-                    //$("input[name='forma_order']:eq(0) tr:eq(8)").remove();
-                    //$("input[name='forma_order']:eq(0) tr:eq(8)").remove();
-                    //$("input[name='forma_order']:eq(0) tr:eq(8)").remove();
-                    //$("input[name='forma_order']:eq(0) tr:eq(8)").remove();
-                    //$("input[name='forma_order']:eq(0) tr:eq(8)").remove();
-                    //$("input[name='forma_order']:eq(0) tr:eq(8)").remove();
-                }
-
-                //('#tk_delivery_block').remove();
-	}  else if (Number(xid)!==10 && Number(xid)!==11 && Number(xid)!==13 && Number(xid)!==14 && xid!==43) {
-		document.getElementById('address_and_info').innerHTML='Адрес и <br> дополнительная<br>информация:';
-                document.getElementById('address_and_info').style.display='table-cell';
-		document.getElementById('adr_name').style.display='table-cell';
-		var oImg=document.createElement('img');
-		oImg.setAttribute('src', '/phpshop/templates/prodacha/images/shop/flag_green.gif');
-		oImg.setAttribute('alt', '');
-		oImg.setAttribute('height', '16');
-		oImg.setAttribute('width', '16');
-		oImg.setAttribute('border', '0');
-		oImg.setAttribute('hspace','5');
-		oImg.setAttribute('align','middle');
-		//var adr_name_img_new=adr_name_info.nextSibling;	
-		if ( adr_name_img ) {
-			//var img_src_path=adr_name_img_new.getAttribute('src');
-			//if ( img_src_path.search('/phpshop/templates/prodacha/images/shop/flag_green.gif')>0 ) {
-				//alert(adr_name_img.nodeType);
-			//}
-		} else {
-			adr_name_info.parentNode.insertBefore(oImg, adr_name_info.nextSibling);
-		}
-		deliver_time_info[0].style.display='table-cell';
-		deliver_time_info[1].style.display='table-cell';
-		order_metod.style.display='none';
-                /*
-                if (document.getElementById('tk_info')){
-                    document.getElementById('tk_info').style.display='none';
-                    //console.log(document.getElementsByName('forma_order')[0].childNodes);
-                    //document.getElementsByName('forma_order')[0].removeChild(document.getElementById('tk_info'));
-                    $('#tk_info').remove();
-                }
-                if (document.getElementById('tk_list')){
-                    document.getElementById('tk_list').style.display='none';
-                    $('#tk_list').remove();
-                }
-                if (document.getElementById('firstname_info')){
-                    document.getElementById('firstname_info').style.display='none';
-                    $('#firstname_info').remove();
-                }
-                if (document.getElementById('firstname')){
-                    document.getElementById('firstname').style.display='none';
-                    console.log($('#firstname').next());
-                    $('#firstname').next().remove();
-                    $('#firstname').remove();
-                    //$('#firstname').next.remove();
-                }
-                if (document.getElementById('middlename_info')){
-                    document.getElementById('middlename_info').style.display='none';
-                    $('#middlename_info').remove();
-                }
-                if (document.getElementById('middlename')){
-                    document.getElementById('middlename').style.display='none';
-                    $('#middlename').next().remove();
-                    $('#middlename').remove();
-                    //$('#middlename').next.remove();
-                }
-                if (document.getElementById('lastname_info')){
-                    document.getElementById('lastname_info').style.display='none';
-                    $('#lastname_info').remove();
-                }
-                if(document.getElementById('lastname')){
-                    document.getElementById('lastname').style.display='none';
-                    $('#lastname').next().remove();
-                    $('#lastname').remove();
-                    //$('#lastname').next.remove();
-                }
-                if (document.getElementById('tel2_info')){
-                    document.getElementById('tel2_info').style.display='none';
-                    $('#tel2_info').remove();
-                }
-                if (document.getElementById('tel2')){
-                    document.getElementById('tel2').style.display='none';
-                    $('#tel2').remove();
-                }
-                if (document.getElementById('pass_no_info')){
-                    document.getElementById('pass_no_info').style.display='none';
-                     $('#pass_no_info').remove();
-                }
-                if (document.getElementById('pass_no1')){
-                    document.getElementById('pass_no1').style.display='none';
-                    $('#pass_no1').next().remove();
-                    $('#pass_no1').remove();
-                    //$('#pass_no1').next.remove();
-                }
-                if (document.getElementById('pass_no2')){
-                    document.getElementById('pass_no2').style.display='none';
-                    $('#pass_no2').next().remove();
-                    $('#pass_no2').remove();
-                    //$('#pass_no2').next.remove();
-                }
-                if (document.getElementById('pass_police_info')){
-                    document.getElementById('pass_police_info').style.display='none';
-                    $('#pass_police_info').remove();
-                }
-                if (document.getElementById('pass_police')){
-                    document.getElementById('pass_police').style.display='none';
-                    $('#pass_police').next().remove();
-                    $('#pass_police').remove();
-                    //$('#pass_police').next.remove();
-                }
-                if (document.getElementById('cart_tk_delivery_pass_msg_info')){
-                    document.getElementById('cart_tk_delivery_pass_msg_info').style.display='none';
-                    $('#cart_tk_delivery_pass_msg_info').remove();
-                }
-                if (document.getElementById('cart_tk_delivery_pass_msg')){
-                    document.getElementById('cart_tk_delivery_pass_msg').style.display='none';
-                    $('#cart_tk_delivery_pass_msg').remove();
-                }
-        */
-                if ((document.getElementsByName('forma_order')[0]) && 
-                        document.getElementById('tk_info') &&
-                        document.getElementById('tk_list') &&
-                        document.getElementById('firstname_info') &&
-                        document.getElementById('firstname') &&
-                        document.getElementById('middlename_info') &&
-                        document.getElementById('middlename') &&
-                        document.getElementById('lastname_info') &&
-                        document.getElementById('lastname') &&
-                        document.getElementById('tel2_info') &&
-                        document.getElementById('tel2') &&
-                        document.getElementById('pass_no_info') &&
-                        document.getElementById('pass_no1') &&
-                        document.getElementById('pass_no2') &&
-                        document.getElementById('pass_police_info') &&
-                        document.getElementById('pass_police') &&
-                        document.getElementById('cart_tk_delivery_pass_msg_info') &&
-                        document.getElementById('cart_tk_delivery_pass_msg') &&
-                        document.getElementById('delivery_city_info') &&
-                        document.getElementById('delivery_city')
-                        ){
-                    //console.log($("input[name='forma_order']:eq(0) tr:eq(8)"));
-                    for(i=0;i<=8;i++){
-                        $("form[name='forma_order']:eq(0)>table:eq(0) tr:eq(8)").remove();
+                    //alert(xid);			
+                    deliver_time_info[0].style.display='none';
+                    deliver_time_info[1].style.display='none';
+                    if ( $('#var_'+xid).length && $('#order_metod_div').length && delivery_options.selected===true && (Number(xid)===10 || Number(xid)===13) ) {
+                            order_metod.style.display='table-cell';
                     }
-                    //$("input[name='forma_order']:eq(0) tr:eq(8)").remove();
-                    //$("input[name='forma_order']:eq(0) tr:eq(8)").remove();
-                    //$("input[name='forma_order']:eq(0) tr:eq(8)").remove();
-                    //$("input[name='forma_order']:eq(0) tr:eq(8)").remove();
-                    //$("input[name='forma_order']:eq(0) tr:eq(8)").remove();
-                    //$("input[name='forma_order']:eq(0) tr:eq(8)").remove();
-                    //$("input[name='forma_order']:eq(0) tr:eq(8)").remove();
-                    //$("input[name='forma_order']:eq(0) tr:eq(8)").remove();
-                    //$("input[name='forma_order']:eq(0) tr:eq(8)").remove();
+            }
+			
+            if ($('#postal_index').length){
+                    delete_order_elements(1);				
+            }
+
+            if ($('#pass_no_info').length){
+                    delete_order_elements(2);				
+            }
+			
+            if ($("td input[name='order_metod']:eq(0)").length && $("td input[name='order_metod']:eq(0)+:eq(0)").html()==='Счет (квитанция) для оплаты через банк'){
+                            $("td input[name='order_metod']:eq(0)+:eq(0)").next().remove();
+                            $("td input[name='order_metod']:eq(0)+:eq(0)").remove();
+                            $("td input[name='order_metod']:eq(0)").remove();
+            }
+            if (!$("td input[name='order_metod']:eq(0)").length && 
+                    $("td input[name='order_metod']:eq(0)+:eq(0)").html()!=='Наличная оплата' &&
+                    !$("td input[name='order_metod']:eq(1)").length && 
+                    $("td input[name='order_metod']:eq(1)+:eq(0)").html()!=='Оформить кредит'
+                    ){
+                            $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"3\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Наличная оплата</label><br>"+
+                              "<input type=\"radio\" @creditdisabled@  name=\"order_metod\" value=\"25\" onClick=\"document.getElementById('bic').style.display='block';document.getElementById('bin').style.display='none';\"><label>Оформить кредит</label><br>"+
+                              "<div id=\"order_metod_div\" style=\"display:@order_metod_div_display@;\"><input type=\"radio\" name=\"order_metod\" value=\"26\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Оплата в магазине картой VISA, Mastercard</label><br></div>");
+            }
+            if ($("td input[name='order_metod']:eq(0)").length && 
+                    $("td input[name='order_metod']:eq(0)+:eq(0)").html()==='Наличная оплата' &&
+                    $("td input[name='order_metod']:eq(1)").length && 
+                    $("td input[name='order_metod']:eq(1)+:eq(0)").html()==='Оформить кредит' &&
+                    !$("td input[name='order_metod']:eq(2)").length && 
+                    $("td input[name='order_metod']:eq(2)+:eq(0)").html()!=='Оплата в магазине картой VISA, Mastercard') {
+                            $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"3\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Наличная оплата</label><br>"+
+                              "<input type=\"radio\" @creditdisabled@  name=\"order_metod\" value=\"25\" onClick=\"document.getElementById('bic').style.display='block';document.getElementById('bin').style.display='none';\"><label>Оформить кредит</label><br>"+
+                              "<div id=\"order_metod_div\" style=\"display:@order_metod_div_display@;\"><input type=\"radio\" name=\"order_metod\" value=\"26\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Оплата в магазине картой VISA, Mastercard</label><br></div>");
+            }
+            if (typeof(delivery_options)!=='undefined' && delivery_options.selected===true && Number(xid)===69) {
+                if (!$('#spb_map_area').length){
+                    $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").html('Выберите пункт выдачи заказов');
+                    $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").prop('align','right');
+                    $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(1)").html('<div id="spb_map_area"><select id="tk_delivery_points_list"></select><div style="height:18px;display:block;"></div><p id="map" style="width:550px; height:400px;"></p></div');
+                    var script   = document.createElement("script");
+                    script.type  = "text/javascript";
+                    script.text  = "ymaps.ready(init);";
+                    script.text  += 'function init () {';
+                    script.text  += 'var myGeoObjects;';
+                    script.text  += 'var myMap = new ymaps.Map("map", {';
+                    script.text  += 'center: [59.9281401,30.3626595],';
+                    script.text  += 'zoom: 11';
+                    script.text  += '});';
+                    script.text  += 'myGeoObjects=initgeoobjects();';
+                    script.text  += 'for (gobj_cnt=0;gobj_cnt<myGeoObjects.length;gobj_cnt++){';
+                    script.text  += 'myMap.geoObjects.add(myGeoObjects[gobj_cnt]);';
+                    script.text  += '$(\'<option value="\'+myGeoObjects[gobj_cnt].properties.get("iconContent")+\'">\'+myGeoObjects[gobj_cnt].properties.get("iconContent")+\'</option>\').appendTo(\'#tk_delivery_points_list\');';
+                    script.text  += 'myGeoObjects[gobj_cnt].events.add(\'click\', function (e) {';
+                    script.text  += 'var eMap = e.get(\'target\');';
+                    script.text  += '$(\'#tk_delivery_points_list\').val(eMap.properties.get("iconContent")).prop(\'selected\',true);';
+                    script.text  += '});};}';
+                    document.body.appendChild(script);
+                    // remove from the dom
+                    //document.body.removeChild(document.body.lastChild);
                 }
-                //('#tk_delivery_block').remove();
-		//adr_name_img.src='/phpshop/templates/prodacha/images/shopflag_green.gif';
-	} else if (Number(xid)===11) {
-                if (document.getElementById('address_and_info')){
-                    document.getElementById('address_and_info').style.display='none';               
-                }
-                if (document.getElementById('adr_name')){
-                    document.getElementById('adr_name').style.display='none';    
-                }
-                if (adr_name_info.nextSibling){
-                    adr_name_info.nextSibling.remove();
-                }
-                if (document.getElementsByName("delivery_time_info")[0]){
-                    document.getElementsByName("delivery_time_info")[0].style.display='none';           
-                }
-                if (document.getElementsByName("delivery_time_info")[1]){
-                    document.getElementsByName("delivery_time_info")[1].style.display='none';                
-                }
-                $('<tr>'+
-        '<td align="right"><div id="tk_info" name="tk_info"> Транспортная компания: </div></td>'+
-        '<td>'+
-      	'  <div id="tk_list" name="tk_list">'+		  
-                  '<input type="radio" name="tk_list_item" checked="checked" value="Деловые Линии">Деловые Линии&nbsp;&nbsp;'+
-		  '<input type="radio" name="tk_list_item" value="ПЭК">ПЭК&nbsp;&nbsp;'+
-                  '<input type="radio" name="tk_list_item" value="ЖелДор">ЖелДор&nbsp;&nbsp;'+
-                  '<input type="radio" name="tk_list_item" value="Прочая">Прочая&nbsp;'+
-                  '<input type="text" id="tk_other" disabled="disabled" name="tk_other" maxlength="40" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="введите название ТК">'+
-          '</div>'+
-        '</td>'+
-    '</tr>'+
-    '<tr>'+    
-        '<td align="right"><div id="cart_tk_delivery_pass_msg_info" name="cart_tk_delivery_pass_msg_info"></div></td>'+
-        '<td>'+
-            '<div id="cart_tk_delivery_pass_msg" name="cart_tk_delivery_pass_msg"></div>'+
-        '</td>'+
-    '</tr>'+   
-    '<tr>'+   
-        '<td align="right"><div id="firstname_info" name="firstname_info"> Имя: </div></td>'+
-        '<td>'+
-            '<input type="text" id="firstname" name="firstname" maxlength="30" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое имя." placeholder="Иван">'+
-            '<img/>'+
-        '</td>'+
-    '</tr>'+  
-    '<tr>'+     
-        '<td align="right"><div id="middlename_info" name="middlename_info"> Отчество: </div></td>'+
-        '<td>'+
-            '<input type="text" id="middlename" name="middlename" maxlength="30" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое отчество." placeholder="Иванович">'+
-            '<img/> '+
-        '</td>'+
-    '</tr>'+ 
-     '<tr>'+    
-        '<td align="right"><div id="lastname_info" name="lastname_info"> Фамилия: </div></td>'+
-        '<td>'+
-            '<input type="text" id="lastname" name="lastname" maxlength="30" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свою фамилию." placeholder="Иванов">'+
-            '<img/>'+
-        '</td>'+         
-    '</tr>'+
-     '<tr>'+
-        '<td align="right"><div id="pass_no_info" name="pass_no_info"> Серия/Номер: </div></td>'+
-        '<td>'+
-            '<input type="text" id="pass_no1" name="pass_no1" maxlength="4" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите серию паспорта." placeholder="1111">&nbsp;'+
-            '<img/>&nbsp;'+
-            '<input type="text" id="pass_no2" name="pass_no2" maxlength="6" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите серию паспорта." placeholder="111111">'+
-            '<img/> '+
-        '</td>'+         
-    '</tr>'+
-     '<tr>    '+
-        '<td align="right"><div id="pass_police_info" name="pass_police_info"> Когда выдан: </div></td>'+
-        '<td>'+
-            '<input type="text" id="pass_police" name="pass_police" maxlength="10" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите дату выдачи паспорта." placeholder="11.11.2011">'+
-            '<img/>'+
-        '</td>'+         
-    '</tr>    '+
-     '<tr>    '+
-        '<td align="right"><div id="tel2_info" name="tel2_info"> Телефон: </div></td>'+
-        '<td>'+
-            '<input type="tel" id="tel2" name="tel2" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите моб. телефон без восьмерки в формате: [+7(901)123-45-67]" placeholder="+7(901)123-45-67" maxlength="16">'+
-        '</td>'+         
-    '</tr>'+
-     '<tr>    '+
-        '<td align="right"><div id="delivery_city_info" name="delivery_city_info"> Город доставки: </div></td>'+
-        '<td>'+
-            '<input type="text" id="delivery_city" name="delivery_city" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Транспортная компания осуществит доставку до терминала в выбранном городе" placeholder="г. Москва" maxlength="55">'+
-        '</td>'+         
-    '</tr>').insertBefore("form[name='forma_order']>table:eq(0) tr:eq(8)");
-    fillTKtablePart();
-    $('#tk_info').css("display","table-cell");
-    $('#tk_list').css("display","table-cell");
-    $('#tk_other').css({"width":"240px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
-    $('#cart_tk_delivery_pass_msg_info').css("display","table-cell");
-    $('#cart_tk_delivery_pass_msg').css({"width":"500px", "height":"36px", "font-family":"tahoma", "font-size":"14px", "color":"#4F4F4F","display":"table-cell"});
-    $('#cart_tk_delivery_pass_msg').text("При получении заказа в терминале транспортной компании вас попросят предъявить паспорт. Необходимо указать паспортные данные получателя.");
-    $('#firstname_info').css("display","table-cell");
-    $('#firstname').css({"width":"180px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
-    //$('#firstname').next().css("display","table-cell");
-    $('#firstname').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-    $('#firstname').next().attr('alt', '');
-    $('#firstname').next().attr('height', '16');
-    $('#firstname').next().attr('width', '16');
-    $('#firstname').next().attr('border', '0');
-    $('#firstname').next().attr('hspace','5');
-    $('#firstname').next().attr('align','middle');
-    $('middlename_info').css("display","table-cell");
-    $('#middlename').css({"width":"180px", "height":"18px","font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
-    //$('#middlename').next().css("display","table-cell");
-    $('#middlename').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-    $('#middlename').next().attr('alt', '');
-    $('#middlename').next().attr('height', '16');
-    $('#middlename').next().attr('width', '16');
-    $('#middlename').next().attr('border', '0');
-    $('#middlename').next().attr('hspace','5');
-    $('#middlename').next().attr('align','middle');    
-    $('lastname_info').css("display","table-cell");
-    $('#lastname').css({"width":"180px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
-    //$('#lastname').next().css("display","table-cell");
-    $('#lastname').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-    $('#lastname').next().attr('alt', '');
-    $('#lastname').next().attr('height', '16');
-    $('#lastname').next().attr('width', '16');
-    $('#lastname').next().attr('border', '0');
-    $('#lastname').next().attr('hspace','5');
-    $('#lastname').next().attr('align','middle');
-    //$('#pass_no_info').css("display","table-cell");
-    $('#pass_no1').css({"width":"30px", "height":"18px", "font-family":"tahoma", "font-size":"11p", "color":"#4F4F4F"});
-    //$('#pass_no1').next().css("display","table-cell");
-    $('#pass_no1').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-    $('#pass_no1').next().attr('alt', '');
-    $('#pass_no1').next().attr('height', '16');
-    $('#pass_no1').next().attr('width', '16');
-    $('#pass_no1').next().attr('border', '0');
-    $('#pass_no1').next().attr('hspace','5');
-    $('#pass_no1').next().attr('align','middle');    
-    $('#pass_no2').css({"width":"40px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
-    //$('#pass_no2').next().css("display","table-cell");
-    $('#pass_no2').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-    $('#pass_no2').next().attr('alt', '');
-    $('#pass_no2').next().attr('height', '16');
-    $('#pass_no2').next().attr('width', '16');
-    $('#pass_no2').next().attr('border', '0');
-    $('#pass_no2').next().attr('hspace','5');
-    $('#pass_no2').next().attr('align','middle');    
-    $('#pass_police_info').css("display","table-cell");
-    $('#pass_police').css({"width":"60px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
-    //$('#pass_police').next().css("display","table-cell");
-    $('#pass_police').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-    $('#pass_police').next().attr('alt', '');
-    $('#pass_police').next().attr('height', '16');
-    $('#pass_police').next().attr('width', '16');
-    $('#pass_police').next().attr('border', '0');
-    $('#pass_police').next().attr('hspace','5');
-    $('#pass_police').next().attr('align','middle');
-    $('#tel2_info').css("display","table-cell");
-    $('#tel2').css({"width":"150px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
-    $('#delivery_city_info').css("display","table-cell");
-    $('#delivery_city').css({"width":"330px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
-    
-    /*
-                if (document.getElementById('tk_info')){
-                    document.getElementById('tk_info').style.display='table-cell';                
-                }
-                if (document.getElementById('tk_list')){
-                    document.getElementById('tk_list').style.display='table-cell';                
-                }
-                if (document.getElementById('firstname_info')){
-                    document.getElementById('firstname_info').style.display='table-cell';                
-                }
-                if (document.getElementById('firstname')){
-                    document.getElementById('firstname').style.display='table-cell';                
-                }
-                getNextElement(document.getElementById('firstname')).style.display='table-cell';
-                if (document.getElementById('middlename_info')){
-                    document.getElementById('middlename_info').style.display='table-cell';                
-                }
-                if (document.getElementById('middlename')){
-                    document.getElementById('middlename').style.display='table-cell';                  
-                }
-                getNextElement(document.getElementById('middlename')).style.display='table-cell';
-                if (document.getElementById('lastname_info')){
-                    document.getElementById('lastname_info').style.display='table-cell';                
-                }
-                if(document.getElementById('lastname')){
-                    document.getElementById('lastname').style.display='table-cell';                
-                }
-                getNextElement(document.getElementById('lastname')).style.display='table-cell';                
-                if (document.getElementById('tel2_info')){
-                    document.getElementById('tel2_info').style.display='table-cell';                
-                }
-                if (document.getElementById('tel2')){
-                    document.getElementById('tel2').style.display='table-cell';                                
-                }
-                if (document.getElementById('pass_no_info')){
-                    document.getElementById('pass_no_info').style.display='table-cell';                
-                }               
-                if (document.getElementById('pass_no1')){
-                    document.getElementById('pass_no1').style.display='table-cell';
-                }
-                getNextElement(document.getElementById('pass_no1')).style.display='table-cell';                
-                if (document.getElementById('pass_no2')){
-                    document.getElementById('pass_no2').style.display='table-cell';
-                }
-                getNextElement(document.getElementById('pass_no2')).style.display='table-cell';                
-                if (document.getElementById('pass_police_info')){
-                    document.getElementById('pass_police_info').style.display='table-cell';
-                }
-                if (document.getElementById('pass_police')){
-                    document.getElementById('pass_police').style.display='table-cell';
-                }
-                getNextElement(document.getElementById('pass_police')).style.display='table-cell';
-                if (document.getElementById('cart_tk_delivery_pass_msg_info')){
-                    document.getElementById('cart_tk_delivery_pass_msg_info').style.display='table-cell';
-                }
-                if (document.getElementById('cart_tk_delivery_pass_msg')){
-                    document.getElementById('cart_tk_delivery_pass_msg').style.display='table-cell';
-                }
-        */
+            }
+
+    //('#tk_delivery_block').remove();
+    }  else if (Number(xid)!==10 && Number(xid)!==11 && Number(xid)!==67 && Number(xid)!==41 && Number(xid)!==13 && Number(xid)!==14 && Number(xid)!==43 && Number(xid)!==68 && Number(xid)!==69) {
+            //var delivery_options=document.getElementById('var_'+xid);
+            document.getElementById('address_and_info').innerHTML='Адрес и <br> дополнительная<br>информация:';
+            document.getElementById('address_and_info').style.display='table-cell';
+            document.getElementById('adr_name').style.display='table-cell';
+            var oImg=document.createElement('img');
+            oImg.setAttribute('src', '/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            oImg.setAttribute('alt', '');
+            oImg.setAttribute('height', '16');
+            oImg.setAttribute('width', '16');
+            oImg.setAttribute('border', '0');
+            oImg.setAttribute('hspace','5');
+            oImg.setAttribute('align','middle');
+            //var adr_name_img_new=adr_name_info.nextSibling;	
+            if ( adr_name_img ) {
+                    //var img_src_path=adr_name_img_new.getAttribute('src');
+                    //if ( img_src_path.search('/phpshop/templates/prodacha/images/shop/flag_green.gif')>0 ) {
+                            //alert(adr_name_img.nodeType);
+                    //}
+            } else {
+                    adr_name_info.parentNode.insertBefore(oImg, adr_name_info.nextSibling);
+            }
+			
+            deliver_time_info[0].style.display='table-cell';
+            deliver_time_info[1].style.display='table-cell';
+            if ( $('#order_metod_div').length) {
+                order_metod.style.display='none';			
+            }
+			
+            if ($('#postal_index').length){
+                    delete_order_elements(1);				
+            }
+
+            if ($('#pass_no_info').length){
+                    delete_order_elements(2);				
+            }
+            if ($('#spb_map_area').length){
+                $('#spb_map_area').remove();
+                $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").html('');
+                // remove from the dom
+                document.body.removeChild(document.body.lastChild);
+            }			
+            if ($("td input[name='order_metod']:eq(0)").length && $("td input[name='order_metod']:eq(0)+:eq(0)").html()==='Счет (квитанция) для оплаты через банк'){
+                            $("td input[name='order_metod']:eq(0)+:eq(0)").next().remove();
+                            $("td input[name='order_metod']:eq(0)+:eq(0)").remove();
+                            $("td input[name='order_metod']:eq(0)").remove();
+            }            
+            if (!$("td input[name='order_metod']:eq(0)").length && 
+                    $("td input[name='order_metod']:eq(0)+:eq(0)").html()!=='Наличная оплата' &&
+                    !$("td input[name='order_metod']:eq(1)").length && 
+                    $("td input[name='order_metod']:eq(1)+:eq(0)").html()!=='Оформить кредит'){
+                            $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"3\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Наличная оплата</label><br>"+
+                              "<input type=\"radio\" @creditdisabled@  name=\"order_metod\" value=\"25\" onClick=\"document.getElementById('bic').style.display='block';document.getElementById('bin').style.display='none';\"><label>Оформить кредит</label><br>");
+            }
+		
+            //('#tk_delivery_block').remove();
+            //adr_name_img.src='/phpshop/templates/prodacha/images/shopflag_green.gif';
+	} else if (Number(xid)===11 || Number(xid)===67 || Number(xid)===41) {
+            if (document.getElementById('address_and_info')){
+                document.getElementById('address_and_info').style.display='none';               
+            }
+            if (document.getElementById('adr_name')){
+                document.getElementById('adr_name').style.display='none';    
+            }
+            if (adr_name_info.nextSibling){
+                adr_name_info.nextSibling.remove();
+            }
+            if (document.getElementsByName("delivery_time_info")[0]){
+                document.getElementsByName("delivery_time_info")[0].style.display='none';           
+            }
+            if (document.getElementsByName("delivery_time_info")[1]){
+                document.getElementsByName("delivery_time_info")[1].style.display='none';                
+            }
+			
+            delete_order_payments_elements();
+			
+            delete_order_elements(1);
+            
+            if ($('#spb_map_area').length){
+                $('#spb_map_area').remove();
+                $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").html('');
+                // remove from the dom
+                document.body.removeChild(document.body.lastChild);
+            }            
+
+            $('<tr>'+
+                '<td align="right"><div id="tk_info" name="tk_info"> Транспортная компания: </div></td>'+
+                '<td>'+
+                '<div id="tk_list" name="tk_list">'+		  
+                '<input type="radio" name="tk_list_item" checked="checked" value="Деловые Линии">Деловые Линии&nbsp;&nbsp;'+
+		'<input type="radio" name="tk_list_item" value="ПЭК">ПЭК&nbsp;&nbsp;'+
+                '<input type="radio" name="tk_list_item" value="ЖелДор">ЖелДор&nbsp;&nbsp;'+
+                '<input type="radio" name="tk_list_item" value="Прочая">Прочая&nbsp;'+
+                '<input type="text" id="tk_other" disabled="disabled" name="tk_other" maxlength="40" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="введите название ТК">'+
+                '</div>'+
+                '</td>'+
+                '</tr>'+
+                '<tr>'+    
+                '<td align="right"><div id="cart_tk_delivery_pass_msg_info" name="cart_tk_delivery_pass_msg_info"></div></td>'+
+                '<td>'+
+                '<div id="cart_tk_delivery_pass_msg" name="cart_tk_delivery_pass_msg"></div>'+
+                '</td>'+
+                '</tr>'+   
+                '<tr>'+   
+                '<td align="right"><div id="firstname_info" name="firstname_info"> ФИО получателя: </div></td>'+
+                '<td>'+
+                '<input type="text" id="lastname" name="lastname" maxlength="26" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свою фамилию." placeholder="Иванов">'+
+                '<img/>'+
+                '<input type="text" id="firstname" name="firstname" maxlength="26" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое имя." placeholder="Иван">'+
+                '<img/>'+            
+                '<input type="text" id="middlename" name="middlename" maxlength="26" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое отчество." placeholder="Иванович">'+
+                '<img/> '+            
+                '</td>'+
+                '</tr>'+  
+                '<tr>'+
+                '<td align="right"><div id="pass_no_info" name="pass_no_info"> Паспорт серия: </div></td>'+
+                '<td>'+
+                '<input type="text" id="pass_no1" name="pass_no1" maxlength="4" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите серию паспорта." placeholder="1111">&nbsp;'+
+                '<img/>&nbsp;номер:&nbsp;'+
+                '<input type="text" id="pass_no2" name="pass_no2" maxlength="6" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите номер паспорта." placeholder="111111">'+
+                '<img/>&nbsp;<div id="pass_police_info" name="pass_police_info"> дата выдачи: </div>&nbsp;'+
+                '<input type="text" id="pass_police" name="pass_police" maxlength="10" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите дату выдачи паспорта." placeholder="11.11.2011">'+
+                '<img/>'+
+                '</td>'+         
+                '</tr>'+
+                '<tr>'+
+                '<td align="right"><div id="tel2_info" name="tel2_info"> Телефон получателя: </div></td>'+
+                '<td>'+
+                '<input type="tel" id="tel2" name="tel2" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите моб. телефон без восьмерки в формате: [+7(901)123-45-67]" placeholder="+7(901)123-45-67" maxlength="16">'+
+                '<img/>'+            
+                '</td>'+         
+                '</tr>'+
+                '<tr>'+
+                '<td align="right"><div id="delivery_city_info" name="delivery_city_info"> Город доставки: </div></td>'+
+                '<td>'+
+                '<input type="text" id="delivery_city" name="delivery_city" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Транспортная компания осуществит доставку до терминала в выбранном городе" placeholder="Москва" maxlength="55">'+
+                '<img/>'+			
+                '</td>'+         
+                '</tr>'+
+                '<tr>'+
+                '<td align="right"><div id="delivery_address_info" name="delivery_address_info"> Доставка: </div></td>'+
+                '<td>'+
+                '<input type="radio" name="tk_delivery_item" checked="checked" value="до пункта выдачи ТК">до пункта выдачи ТК&nbsp;&nbsp;'+
+		'<input type="radio" name="tk_delivery_item" value="по адресу">по адресу&nbsp;&nbsp;'+                
+                '<input type="text" id="delivery_address" name="delivery_address" disabled="disabled" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="По вашему желанию, транспортная компания может произвести доставку по адресу, за дополнительную плату" placeholder="улица Ленина, 1" maxlength="85">'+
+                '</td>'+         
+                '</tr>').insertBefore("form[name='forma_order']>table:eq(0) tr:eq(9)");
+            fillTKtablePart();
+            $('#tk_info').css("display","table-cell");
+            $('#tk_list').css("display","table-cell");
+            $('#tk_other').css({"width":"240px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#cart_tk_delivery_pass_msg_info').css("display","table-cell");
+            $('#cart_tk_delivery_pass_msg').css({"width":"500px", "height":"36px", "font": "normal 12px/1.4 Arial, Helvetica, sans-serif", "color":"#4F4F4F","display":"table-cell"});
+            $('#cart_tk_delivery_pass_msg').text("При получении заказа в терминале транспортной компании (ТК) вас попросят предъявить паспорт. Необходимо указать паспортные данные получателя.");
+            $('#firstname_info').css("display","table-cell");
+            $('#firstname').css({"width":"160px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            //$('#firstname').next().css("display","table-cell");
+            $('#firstname').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#firstname').next().attr('alt', '');
+            $('#firstname').next().attr('height', '16');
+            $('#firstname').next().attr('width', '16');
+            $('#firstname').next().attr('border', '0');
+            $('#firstname').next().attr('hspace','5');
+            $('#firstname').next().attr('align','middle');
+            $('middlename_info').css("display","table-cell");
+            $('#middlename').css({"width":"160px", "height":"18px","font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            //$('#middlename').next().css("display","table-cell");
+            $('#middlename').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#middlename').next().attr('alt', '');
+            $('#middlename').next().attr('height', '16');
+            $('#middlename').next().attr('width', '16');
+            $('#middlename').next().attr('border', '0');
+            $('#middlename').next().attr('hspace','5');
+            $('#middlename').next().attr('align','middle');    
+            //$('lastname_info').css("display","table-cell");
+            $('#lastname').css({"width":"160px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            //$('#lastname').next().css("display","table-cell");
+            $('#lastname').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#lastname').next().attr('alt', '');
+            $('#lastname').next().attr('height', '16');
+            $('#lastname').next().attr('width', '16');
+            $('#lastname').next().attr('border', '0');
+            $('#lastname').next().attr('hspace','5');
+            $('#lastname').next().attr('align','middle');
+            //$('#pass_no_info').css("display","table-cell");
+            $('#pass_no1').css({"width":"30px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            //$('#pass_no1').next().css("display","table-cell");
+            $('#pass_no1').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#pass_no1').next().attr('alt', '');
+            $('#pass_no1').next().attr('height', '16');
+            $('#pass_no1').next().attr('width', '16');
+            $('#pass_no1').next().attr('border', '0');
+            $('#pass_no1').next().attr('hspace','5');
+            $('#pass_no1').next().attr('align','middle');    
+            $('#pass_no2').css({"width":"40px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            //$('#pass_no2').next().css("display","table-cell");
+            $('#pass_no2').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#pass_no2').next().attr('alt', '');
+            $('#pass_no2').next().attr('height', '16');
+            $('#pass_no2').next().attr('width', '16');
+            $('#pass_no2').next().attr('border', '0');
+            $('#pass_no2').next().attr('hspace','5');
+            $('#pass_no2').next().attr('align','middle');    
+            $('#pass_police_info').css("display","inline");
+            $('#pass_police').css({"width":"60px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            //$('#pass_police').next().css("display","table-cell");
+            $('#pass_police').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#pass_police').next().attr('alt', '');
+            $('#pass_police').next().attr('height', '16');
+            $('#pass_police').next().attr('width', '16');
+            $('#pass_police').next().attr('border', '0');
+            $('#pass_police').next().attr('hspace','5');
+            $('#pass_police').next().attr('align','middle');
+            $('#tel2_info').css("display","table-cell");
+            $('#tel2').css({"width":"150px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#tel2').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#tel2').next().attr('alt', '');
+            $('#tel2').next().attr('height', '16');
+            $('#tel2').next().attr('width', '16');
+            $('#tel2').next().attr('border', '0');
+            $('#tel2').next().attr('hspace','5');
+            $('#tel2').next().attr('align','middle');
+            $('#delivery_city_info').css("display","table-cell");
+            //$('#delivery_city').css({"width":"330px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#delivery_city').css({"width":"160px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#delivery_city').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#delivery_city').next().attr('alt', '');
+            $('#delivery_city').next().attr('height', '16');
+            $('#delivery_city').next().attr('width', '16');
+            $('#delivery_city').next().attr('border', '0');
+            $('#delivery_city').next().attr('hspace','5');
+            $('#delivery_city').next().attr('align','middle');	
+            $('#delivery_address_info').css("display","table-cell");
+            $('#delivery_address').css({"width":"400px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+	} else if (Number(xid)===68) {
+            if (document.getElementById('address_and_info')){
+                document.getElementById('address_and_info').style.display='none';               
+            }
+            if (document.getElementById('adr_name')){
+                document.getElementById('adr_name').style.display='none';    
+            }
+            if (adr_name_info.nextSibling){
+                adr_name_info.nextSibling.remove();
+            }
+            if (document.getElementsByName("delivery_time_info")[0]){
+                document.getElementsByName("delivery_time_info")[0].style.display='none';           
+            }
+            if (document.getElementsByName("delivery_time_info")[1]){
+                document.getElementsByName("delivery_time_info")[1].style.display='none';                
+            }
+            if ($('#spb_map_area').length){
+                $('#spb_map_area').remove();
+                $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").html('');
+                // remove from the dom
+                document.body.removeChild(document.body.lastChild);
+            }            
+            delete_order_payments_elements();
+			
+            delete_order_elements(2);
+			
+            $(  '<tr>'+    
+                '<td align="right"><div id="cart_tk_delivery_pass_msg_info" name="cart_tk_delivery_pass_msg_info"></div></td>'+
+                '<td>'+
+                '<div id="cart_tk_delivery_pass_msg" name="cart_tk_delivery_pass_msg"></div>'+
+                '</td>'+
+                '</tr>'+   
+                '<tr>'+   
+                '<td align="right"><div id="firstname_info" name="firstname_info"> ФИО получателя: </div></td>'+
+                '<td>'+
+                '<input type="text" id="lastname" name="lastname" maxlength="26" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свою фамилию." placeholder="Иванов">'+
+                '<img/>'+
+                '<input type="text" id="firstname" name="firstname" maxlength="26" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое имя." placeholder="Иван">'+
+                '<img/>'+            
+                '<input type="text" id="middlename" name="middlename" maxlength="26" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое отчество." placeholder="Иванович">'+
+                '<img/> '+            
+                '</td>'+
+                '</tr>'+  
+                '<tr>'+
+                '<td align="right"><div id="tel2_info" name="tel2_info"> Телефон получателя: </div></td>'+
+                '<td>'+
+                '<input type="tel" id="tel2" name="tel2" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите моб. телефон без восьмерки в формате: [+7(901)123-45-67]" placeholder="+7(901)123-45-67" maxlength="16">'+
+                '<img/>'+            
+                '</td>'+         
+                '</tr>'+
+                '<tr>'+
+                '<td align="right"><div id="delivery_city_info" name="delivery_city_info"> Город доставки: </div></td>'+
+                '<td>'+
+                '<input type="text" id="delivery_city" name="delivery_city" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Транспортная компания осуществит доставку до терминала в выбранном городе" placeholder="Москва" maxlength="55">'+
+                '<img/>&nbsp;Индекс:&nbsp;'+			
+                '<input type="text" id="postal_index" name="postal_index" maxlength="6" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите почтовый индекс." placeholder="111111">'+				
+                '<img/>'+ 
+                '</td>'+         
+                '</tr>'+
+                '<tr>'+
+                '<td align="right"><div id="delivery_address_info" name="delivery_address_info"> Адрес доставки: </div></td>'+
+                '<td>'+
+                '<input type="text" id="delivery_address" name="delivery_address" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="По вашему желанию, транспортная компания может произвести доставку по адресу, за дополнительную плату" placeholder="ул. Ленина, д.1, к.1, кв.123" maxlength="85">'+
+	        '<img/>'+ 			
+                '</td>'+         
+            '</tr>').insertBefore("form[name='forma_order']>table:eq(0) tr:eq(9)");
+            fillTKtablePart();
+            $('#cart_tk_delivery_pass_msg_info').css("display","table-cell");
+            $('#cart_tk_delivery_pass_msg').css({"width":"630px", "height":"36px", "font": "normal 12px/1.4 Arial, Helvetica, sans-serif", "color":"#4F4F4F","display":"table-cell"});
+            $('#cart_tk_delivery_pass_msg').text("Доставка Почтой России осуществляется для заказов массой менее 3 кг и габаритами менее 40х25х35 см. Более габаритные заказы доставляются транспортными компаниями (Деловые Линии, ПЭК, ЖелДорЭкспедиция и т.д.)");
+            $('#firstname_info').css("display","table-cell");
+            $('#firstname').css({"width":"160px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            //$('#firstname').next().css("display","table-cell");
+            $('#firstname').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#firstname').next().attr('alt', '');
+            $('#firstname').next().attr('height', '16');
+            $('#firstname').next().attr('width', '16');
+            $('#firstname').next().attr('border', '0');
+            $('#firstname').next().attr('hspace','5');
+            $('#firstname').next().attr('align','middle');
+            $('middlename_info').css("display","table-cell");
+            $('#middlename').css({"width":"160px", "height":"18px","font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            //$('#middlename').next().css("display","table-cell");
+            $('#middlename').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#middlename').next().attr('alt', '');
+            $('#middlename').next().attr('height', '16');
+            $('#middlename').next().attr('width', '16');
+            $('#middlename').next().attr('border', '0');
+            $('#middlename').next().attr('hspace','5');
+            $('#middlename').next().attr('align','middle');    
+            //$('lastname_info').css("display","table-cell");
+            $('#lastname').css({"width":"160px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            //$('#lastname').next().css("display","table-cell");
+            $('#lastname').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#lastname').next().attr('alt', '');
+            $('#lastname').next().attr('height', '16');
+            $('#lastname').next().attr('width', '16');
+            $('#lastname').next().attr('border', '0');
+            $('#lastname').next().attr('hspace','5');
+            $('#lastname').next().attr('align','middle');
+            $('#tel2_info').css("display","table-cell");
+            $('#tel2').css({"width":"150px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#tel2').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#tel2').next().attr('alt', '');
+            $('#tel2').next().attr('height', '16');
+            $('#tel2').next().attr('width', '16');
+            $('#tel2').next().attr('border', '0');
+            $('#tel2').next().attr('hspace','5');
+            $('#tel2').next().attr('align','middle');
+            $('#delivery_city_info').css("display","table-cell");
+            //$('#delivery_city').css({"width":"330px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#delivery_city').css({"width":"160px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#delivery_city').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#delivery_city').next().attr('alt', '');
+            $('#delivery_city').next().attr('height', '16');
+            $('#delivery_city').next().attr('width', '16');
+            $('#delivery_city').next().attr('border', '0');
+            $('#delivery_city').next().attr('hspace','5');
+            $('#delivery_city').next().attr('align','middle');
+            $('#postal_index').css({"width":"40px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#postal_index').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#postal_index').next().attr('alt', '');
+            $('#postal_index').next().attr('height', '16');
+            $('#postal_index').next().attr('width', '16');
+            $('#postal_index').next().attr('border', '0');
+            $('#postal_index').next().attr('hspace','5');
+            $('#postal_index').next().attr('align','middle');	
+            $('#delivery_address_info').css("display","table-cell");
+            $('#delivery_address').css({"width":"510px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#delivery_address').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#delivery_address').next().attr('alt', '');
+            $('#delivery_address').next().attr('height', '16');
+            $('#delivery_address').next().attr('width', '16');
+            $('#delivery_address').next().attr('border', '0');
+            $('#delivery_address').next().attr('hspace','5');
+            $('#delivery_address').next().attr('align','middle');	
 	}
-	console.log(xid);
+	
+	//console.log(xid);
 
     req.onreadystatechange = function() {
         if (req.readyState === 4) {
@@ -793,6 +744,104 @@ function UpdateDelivery(xid) {
     });
 }
 
+function delete_order_payments_elements(){
+            if ($("td input[name='order_metod']:eq(0)").length && $("td input[name='order_metod']:eq(0)+:eq(0)").html()==='Счет (квитанция) для оплаты через банк'){
+				return true;
+            }            
+            if ($("td input[name='order_metod']:eq(0)").length && 
+                    $("td input[name='order_metod']:eq(0)+:eq(0)").html()==='Наличная оплата' &&
+                    $("td input[name='order_metod']:eq(1)").length && 
+                    $("td input[name='order_metod']:eq(1)+:eq(0)").html()==='Оформить кредит'){
+				$("#order_metod_div").remove();
+				$("td input[name='order_metod']:eq(1)+:eq(0)").next().remove();
+				$("td input[name='order_metod']:eq(1)+:eq(0)").remove();
+				$("td input[name='order_metod']:eq(1)").remove();
+				$("td input[name='order_metod']:eq(0)+:eq(0)").next().remove();
+				$("td input[name='order_metod']:eq(0)+:eq(0)").remove();
+				$("td input[name='order_metod']:eq(0)").remove();				
+				if (!$("input[name='order_metod']:eq(0)").length){
+						$("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" value=\"1\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Счет (квитанция) для оплаты через банк</label><br>");
+						//$("td input[name='order_metod']:eq(0)+:eq(0)").fadeOut();
+						//$("td input[name='order_metod']:eq(0)").fadeOut();
+						document.getElementsByName("order_metod")[0].checked=true;
+				}
+				//document.getElementsByName("order_metod")[0].checked=true;
+				//document.getElementsByName("order_metod")[1].checked=false;					
+				//$("td input[name='order_metod']:eq(2)").remove();
+				//$("td input[name='order_metod']:eq(2)+:eq(0)").remove();
+				//$("td input[name='order_metod']:eq(2)+:eq(0)").next().remove();					
+				//$("td input[name='order_metod']:eq(1)+:eq(0)").fadeOut();
+				//$("td input[name='order_metod']:eq(2)+:eq(0)").fadeOut();
+				//console.log($("#order_metod_div>input[name='order_metod']:eq(0)").next());
+				//$("#order_metod_div :input[name='order_metod']:eq(0)").next.fadeOut();
+            }
+
+		//удаляем лишние варианты оплаты,оставляем только квитанцию банка
+		//
+		if (document.getElementsByName("order_metod")[0] && 
+				document.getElementsByName("order_metod")[1]){					
+		}
+		return true;
+}
+
+function delete_order_elements(param){
+	//доставка транспортной компанией
+	if (param===2){
+		if ((document.getElementsByName('forma_order')[0]) && 
+					document.getElementById('tk_info') &&
+					document.getElementById('tk_list') &&
+					document.getElementById('firstname_info') &&
+					document.getElementById('firstname') &&
+					document.getElementById('middlename') &&
+					document.getElementById('lastname') &&
+					document.getElementById('tel2_info') &&
+					document.getElementById('tel2') &&
+					document.getElementById('pass_no_info') &&
+					document.getElementById('pass_no1') &&
+					document.getElementById('pass_no2') &&
+					document.getElementById('pass_police_info') &&
+					document.getElementById('pass_police') &&
+					document.getElementById('cart_tk_delivery_pass_msg_info') &&
+					document.getElementById('cart_tk_delivery_pass_msg') &&
+					document.getElementById('delivery_city_info') &&
+					document.getElementById('delivery_city') &&
+					document.getElementById('delivery_address_info') &&
+					document.getElementById('delivery_address')
+					){
+			//console.log($("input[name='forma_order']:eq(0) tr:eq(9)"));
+			for(i=0;i<=6;i++){
+					$("form[name='forma_order']:eq(0)>table:eq(0) tr:eq(9)").remove();
+			}
+		}
+		return true;		
+	}
+	//доставка почтой россии
+	if (param===1){
+		if ((document.getElementsByName('forma_order')[0]) && 
+					document.getElementById('firstname_info') &&
+					document.getElementById('firstname') &&
+					document.getElementById('middlename') &&
+					document.getElementById('lastname') &&
+					document.getElementById('tel2_info') &&
+					document.getElementById('tel2') &&
+					document.getElementById('cart_tk_delivery_pass_msg_info') &&
+					document.getElementById('cart_tk_delivery_pass_msg') &&
+					document.getElementById('delivery_city_info') &&
+					document.getElementById('delivery_city') &&
+					document.getElementById('postal_index') &&					
+					document.getElementById('delivery_address_info') &&
+					document.getElementById('delivery_address')
+					){
+			//console.log($("input[name='forma_order']:eq(0) tr:eq(9)"));
+			for(i=0;i<=4;i++){
+					$("form[name='forma_order']:eq(0)>table:eq(0) tr:eq(9)").remove();
+			}
+		}
+		return true;		
+	}
+	
+}
+
 function set_legal_form() {
 	var legal_form_elm=document.getElementsByName('legal_form');
 	var org_name_info = document.getElementById('org_name_info');
@@ -801,7 +850,16 @@ function set_legal_form() {
 	var org_inn_value = document.getElementById('org_inn_value');
 	var org_kpp_info = document.getElementById('org_kpp_info');
 	var org_kpp_value = document.getElementById('org_kpp_value');
-	
+	var annual_number_info = document.getElementById('annual_number_info');
+	var annual_number_value = document.getElementById('annual_number_value');
+	var bic_bank_number_info = document.getElementById('bic_bank_number_info');
+	var bic_bank_number_value = document.getElementById('bic_bank_number_value');
+	var bic_bank_number_info = document.getElementById('bic_bank_number_info');
+	var bic_bank_number_value = document.getElementById('bic_bank_number_value');
+	var bank_name_info = document.getElementById('bank_name_info');
+	var bank_name_value = document.getElementById('bank_name_value');
+	var gen_manager_initial_info = document.getElementById('gen_manager_initial_info');
+	var gen_manager_initial_value = document.getElementById('gen_manager_initial_value'); 
 	//alert(legal_form_elm[0].select);
 	if ( legal_form_elm[0].checked==true ) {
 		org_name_info.style.display='none';
@@ -809,15 +867,30 @@ function set_legal_form() {
 		org_inn_info.style.display='none';
 		org_inn_value.style.display='none';
 		org_kpp_info.style.display='none';
-		org_kpp_value.style.display='none';		
+		org_kpp_value.style.display='none';
+                annual_number_info.style.display='none';
+                annual_number_value.style.display='none';
+                bic_bank_number_info.style.display='none';
+                bic_bank_number_value.style.display='none';
+                bank_name_info.style.display='none';
+                bank_name_value.style.display='none';
+                gen_manager_initial_info.style.display='none';
+                gen_manager_initial_value.style.display='none';
 	} else if ( legal_form_elm[1].checked==true ) {
 		org_name_info.style.display='table-cell';
 		org_name_value.style.display='table-cell';
 		org_inn_info.style.display='table-cell';
-		org_inn_value.style.display='table-cell';
-		org_kpp_info.style.display='table-cell';
-		org_kpp_value.style.display='table-cell';		
-		
+		org_inn_value.style.display='inline';
+		org_kpp_info.style.display='inline';
+		org_kpp_value.style.display='inline';		
+                annual_number_info.style.display='table-cell';
+                annual_number_value.style.display='inline';
+                bic_bank_number_info.style.display='inline';
+                bic_bank_number_value.style.display='inline';
+                bank_name_info.style.display='table-cell';
+                bank_name_value.style.display='inline';
+                gen_manager_initial_info.style.display='inline';
+                gen_manager_initial_value.style.display='inline';
 		
 	}
 }
@@ -974,7 +1047,8 @@ function ChekUserForma(){
 }
 
 
-function do_err(){
+function do_err(err){
+	console.log(err);
     return true
 }
 
@@ -1436,7 +1510,7 @@ function OrderChek()
     var s2=window.document.forms.forma_order.name_person.value;
     var s3=window.document.forms.forma_order.tel_name.value;
     var s4=window.document.forms.forma_order.adr_name.value;
-    if (typeof ($('#tk_other').attr('disabled'))==='undefined'){
+    if (document.getElementById('#tk_other') && typeof ($('#tk_other').attr('disabled'))==='undefined'){
         var s5_1=$('#tk_other').val();
     }
     if (document.getElementById('tk_list') && typeof ($('#tk_other').attr('disabled'))==='string'){
@@ -1460,26 +1534,13 @@ function OrderChek()
     if (document.getElementById('pass_police')){
         var s5_7=window.document.forms.forma_order.pass_police.value;
     }
-    /*
-    document.getElementById('tk_info') &&
-                        document.getElementById('tk_list') &&
-                        document.getElementById('firstname_info') &&
-                        document.getElementById('firstname') &&
-                        document.getElementById('middlename_info') &&
-                        document.getElementById('middlename') &&
-                        document.getElementById('lastname_info') &&
-                        document.getElementById('lastname') &&
-                        document.getElementById('tel2_info') &&
-                        document.getElementById('tel2') &&
-                        document.getElementById('pass_no_info') &&
-                        document.getElementById('pass_no1') &&
-                        document.getElementById('pass_no2') &&
-                        document.getElementById('pass_police_info') &&
-                        document.getElementById('pass_police') &&
-                        document.getElementById('cart_tk_delivery_pass_msg_info') &&
-                        document.getElementById('cart_tk_delivery_pass_msg')
-
-    */
+    if (document.getElementById('delivery_city')){
+        var s5_8=window.document.forms.forma_order.delivery_city.value;
+    }
+	if (document.getElementById('postal_index')){
+        var s5_9=window.document.forms.forma_order.postal_index.value;
+        var s5_10=window.document.forms.forma_order.delivery_address.value;		
+	}
    var adr_name_img=getNextElement(document.getElementsByName('adr_name')[0]);
     //console.log(document.getElementById("makeyourchoise"));
     if (document.getElementById("makeyourchoise").value==="DONE") {
@@ -1496,7 +1557,7 @@ function OrderChek()
 			alert("Ошибка заполнения формы заказа.\nДанные отмеченные флажками заполнять обязательно! ");
 		} else if (bad===1) {
 			alert("Ошибка заполнения формы заказа.\nВыберите доставку!");
-		} else if (document.getElementById('mail').value.search(/^[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/) === -1) {
+		} else if (document.getElementById('mail').value.toLowerCase().search(/^[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/) === -1) {
 			//^[a-zA-Z0-9\_\.\+\-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9\-\.]+$
 			alert("Ошибка заполнения формы заказа.\nПоле 'E-mail' заполнено неправильно! ");
 		} else {
@@ -1520,67 +1581,68 @@ function OrderChek()
 		}
 	} else {
 		if (s1==="" || 
-                    s2==="" || 
-                    s3==="" || 
-                    s5_1==="" ||
-                    s5_2==="" ||
-                    s5_3==="" ||
-                    s5_4==="" ||
-                    s5_5==="" ||
-                    s5_6==="" ||
-                    s5_7==="") {
+            s2==="" || 
+            s3==="" || 
+            s5_1==="" ||
+            s5_2==="" ||
+            s5_3==="" ||
+            s5_4==="" ||
+            s5_5==="" ||
+            s5_6==="" ||
+            s5_7==="" ||
+			s5_8==="" ||
+			s5_9==="" ||
+			s5_10==="") {
 			alert("Ошибка заполнения формы заказа.\nДанные отмеченные флажками заполнять обязательно! ");
 		} else if (bad===1) {
 			alert("Ошибка заполнения формы заказа.\nВыберите доставку!");
-		} else if (document.getElementById('mail').value.search(/^[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/) === -1) {
-			//^[a-zA-Z0-9\_\.\+\-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9\-\.]+$
+		} else if (document.getElementById('mail').value.toLowerCase().search(/^[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/) === -1) {
 			alert("Ошибка заполнения формы заказа.\nПоле 'E-mail' заполнено неправильно! ");
-		} else if (s5_1.search(/^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5* -_]{3,50}$/) === -1) {
-			//^[a-zA-Z0-9\_\.\+\-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9\-\.]+$
+		} else if (typeof (s5_1)!=='undefined' && s5_1.search(/^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5* -_]{3,40}$/) === -1) {
 			alert("Ошибка заполнения формы заказа.\nПоле 'Транспортная компания' заполнено неправильно! ");
-		} else if (s5_2.search(/^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5 -_]{2,30}$/) === -1) {
-			//^[a-zA-Z0-9\_\.\+\-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9\-\.]+$
+		} else if (typeof (s5_2)!=='undefined' && s5_2.search(/^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5 -_]{2,28}$/) === -1) {
 			alert("Ошибка заполнения формы заказа.\nПоле 'Имя' заполнено неправильно! ");
-		} else if (s5_3.search(/^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5 -_]{2,30}$/) === -1) {
-			//^[a-zA-Z0-9\_\.\+\-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9\-\.]+$
+		} else if (typeof (s5_3)!=='undefined' && s5_3.search(/^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5 -_]{2,28}$/) === -1) {
 			alert("Ошибка заполнения формы заказа.\nПоле 'Отчество' заполнено неправильно! ");
-		} else if (s5_4.search(/^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5 -_]{2,30}$/) === -1) {
-			//^[a-zA-Z0-9\_\.\+\-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9\-\.]+$
+		} else if (typeof (s5_4)!=='undefined' && s5_4.search(/^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5 -_]{2,28}$/) === -1) {
 			alert("Ошибка заполнения формы заказа.\nПоле 'Фамилия' заполнено неправильно! ");
-		} else if (s5_5.search(/^[0-9]{4}$/) === -1) {
-			//^[a-zA-Z0-9\_\.\+\-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9\-\.]+$
+		} else if (typeof (s5_5)!=='undefined' && s5_5.search(/^[0-9]{4}$/) === -1) {
 			alert("Ошибка заполнения формы заказа.\nПоле 'Серия' заполнено неправильно! ");
-		} else if (s5_6.search(/^[0-9]{6}$/) === -1) {
-			//^[a-zA-Z0-9\_\.\+\-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9\-\.]+$
+		} else if (typeof (s5_6)!=='undefined' && s5_6.search(/^[0-9]{6}$/) === -1) {
 			alert("Ошибка заполнения формы заказа.\nПоле 'Номер' заполнено неправильно! ");
-		} else if (s5_7.search(/^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/) === -1) {
-			//^[a-zA-Z0-9\_\.\+\-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9\-\.]+$
-			alert("Ошибка заполнения формы заказа.\nПоле 'Когда выдан' заполнено неправильно! ");                                                                                                                             
+		} else if (typeof (s5_7)!=='undefined' && s5_7.search(/^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$/) === -1) {
+			alert("Ошибка заполнения формы заказа.\nПоле 'дата выдачи' заполнено неправильно! ");
+		} else if (typeof (s5_8)!=='undefined' && s5_8.search(/^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5. -_]{2,55}/) === -1) {
+			alert("Ошибка заполнения формы заказа.\nПоле 'Город доставки' заполнено неправильно! ");
+		} else if (typeof (s5_9)!=='undefined' && s5_9.search(/^[0-9]{6}$/) === -1) {
+			alert("Ошибка заполнения формы заказа.\nПоле 'Индекс' заполнено неправильно! ");
+		} else if (typeof (s5_10)!=='undefined' && s5_10.search(/^[0-9A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5/,. -_]{10,150}$/) === -1) {
+			alert("Ошибка заполнения формы заказа.\nПоле 'Адрес доставки' заполнено неправильно! ");
 		} else {
 			if (typeof($.browser.android)==='undefined') {
 				if (document.getElementById('tel_name').value.search(/^\+7\([0-9]{3}\)[0-9]{3}\-[0-9]{2}\-[0-9]{2}$/) === -1) {
 					//^[0-9]{10}$/
 					//([0-9]{5,11}) ^[0-9]{3,4}\ [0-9]{5,7}$
-					alert("Ошибка заполнения формы заказа.\nПоле 'телефон' заполнено неправильно! ");
+					alert("Ошибка заполнения формы заказа.\nПоле 'Телефон (моб.)' заполнено неправильно! ");
 					return false;
 				}
-				if (document.getElementById('tel2').value.search(/^\+7\([0-9]{3}\)[0-9]{3}\-[0-9]{2}\-[0-9]{2}$/) === -1) {
+				if (document.getElementById('tel2') && document.getElementById('tel2').value.search(/^\+7\([0-9]{3}\)[0-9]{3}\-[0-9]{2}\-[0-9]{2}$/) === -1) {
 					//^[0-9]{10}$/
 					//([0-9]{5,11}) ^[0-9]{3,4}\ [0-9]{5,7}$
-					alert("Ошибка заполнения формы заказа.\nПоле 'телефон' заполнено неправильно! ");
+					alert("Ошибка заполнения формы заказа.\nПоле 'Телефон получателя' заполнено неправильно! ");
 					return false;
 				} 
 			} else if (typeof($.browser.android)!=='undefined' && $.browser.android===true) {
 				if (document.getElementById('tel_name').value.search(/^[0-9]{10}$/) === -1) {
 					//^[0-9]{10}$/
 					//([0-9]{5,11}) ^[0-9]{3,4}\ [0-9]{5,7}$
-					alert("Ошибка заполнения формы заказа.\nПоле 'телефон' заполнено неправильно! ");
+					alert("Ошибка заполнения формы заказа.\nПоле 'Телефон (моб.)' заполнено неправильно! ");
 					return false;
 				}
 				if (document.getElementById('tel2').value.search(/^[0-9]{10}$/) === -1) {
 					//^[0-9]{10}$/
 					//([0-9]{5,11}) ^[0-9]{3,4}\ [0-9]{5,7}$
-					alert("Ошибка заполнения формы заказа.\nПоле 'телефон' заполнено неправильно! ");
+					alert("Ошибка заполнения формы заказа.\nПоле 'Телефон получателя' заполнено неправильно! ");
 					return false;
 				}
 			}
@@ -1716,5 +1778,3 @@ function staticit_ff2(){
     // XHTML
     //comparewindow.style.top=(document.documentElement.scrollTop+document.documentElement.clientHeight-comboheight) + "px";
 }
-
-
