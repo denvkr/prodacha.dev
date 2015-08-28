@@ -11,6 +11,13 @@
       </td>
     </tr>
     <tr>
+		<td align="right">Покупатель</td><!--style="color: gray;"-->
+		<td>
+			<input type="radio" name="legal_form" checked value="legal_form_phys" onclick="javascript:set_legal_form();" >Физ. лицо<br />
+			<input type="radio" name="legal_form" value="legal_form_jur" onclick="javascript:set_legal_form();"  >Юр. лицо<br />
+	    </td>
+    </tr>    
+    <tr>
       <td align="right">Доставка</td>
       <td> @orderDelivery@ </td>
     </tr>
@@ -59,115 +66,44 @@
           </div>
         </td>
     </tr>
-    <tr>
-        <td align="right"><div id="tk_info" name="tk_info" style="display:none;"> Транспортная компания: </div></td>
-        <td>
-      	  <div id="tk_list" name="tk_list" style="display:none;" >		  
-                  <input type="radio" name="tk_list_item" checked value="Деловые Линии">Деловые Линии&nbsp;&nbsp;
-		  <input type="radio" name="tk_list_item" value="ПЭК">ПЭК&nbsp;&nbsp;
-                  <input type="radio" name="tk_list_item" value="ЖелДор">ЖелДор&nbsp;&nbsp;
-                  <input type="radio" name="tk_list_item" value="Прочая">Прочая&nbsp;
-                  <input type="text" id="tk_other" disabled="disabled" name="tk_other" style="width:200px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="введите название ТК" maxlength="50">
-          </div>
-        </td>
-    </tr>
-    <tr>    
-        <td align="right"><div id="cart_tk_delivery_pass_msg_info" name="cart_tk_delivery_pass_msg_info" style="display:none;"></div></td>
-        <td>
-            <div id="cart_tk_delivery_pass_msg" name="cart_tk_delivery_pass_msg" style="width:230px; height:18px; font-family:tahoma; font-size:14px; color:#4F4F4F;display:none;">@cart_tk_delivery_pass_msg@</div>
-        </td>
-    </tr>    
-    <tr>    
-        <td align="right"><div id="firstname_info" name="firstname_info" style="display:none;"> Имя: </div></td>
-        <td>
-            <input type="text" id="firstname" name="firstname" style="width:170px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;display:none;" maxlength="20">
-            <img src="images/shop/flag_green.gif" style="display:none;" alt="" width="16" height="16" border="0" hspace="5" align="middle"/> 
-        </td>
-    </tr>  
-    <tr>     
-        <td align="right"><div id="middlename_info" name="middlename_info" style="display:none;"> Отчество: </div></td>
-        <td>
-            <input type="text" id="middlename" name="middlename" style="width:170px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;display:none;" maxlength="20">
-            <img src="images/shop/flag_green.gif" style="display:none;" alt="" width="16" height="16" border="0" hspace="5" align="middle"/> 
-        </td>
-    </tr> 
-     <tr>    
-        <td align="right"><div id="lastname_info" name="lastname_info" style="display:none;"> Фамилия: </div></td>
-        <td>
-            <input type="text" id="lastname" name="lastname" style="width:170px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;display:none;" maxlength="20">
-            <img src="images/shop/flag_green.gif" style="display:none;" alt="" width="16" height="16" border="0" hspace="5" align="middle"/>
-        </td>         
-    </tr>
-     <tr>    
-        <td align="right"><div id="pass_no_info" name="pass_no_info" style="display:none;"> Серия/Номер: </div></td>
-        <td>
-            <input type="text" id="pass_no1" name="pass_no1" style="width:40px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;display:none;" maxlength="4">&nbsp;
-            <img src="images/shop/flag_green.gif" style="display:none;" alt="" width="16" height="16" border="0" hspace="5" align="middle"/>&nbsp; 
-            <input type="text" id="pass_no2" name="pass_no2" style="width:40px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;display:none;" maxlength="6">
-            <img src="images/shop/flag_green.gif" style="display:none;" alt="" width="16" height="16" border="0" hspace="5" align="middle"/> 
-        </td>         
-    </tr>
-     <tr>    
-        <td align="right"><div id="pass_police_info" name="pass_police_info" style="display:none;"> Когда выдан: </div></td>
-        <td>
-            <input type="text" id="pass_police" name="pass_police" style="width:40px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;display:none;" maxlength="10">
-            <img src="images/shop/flag_green.gif" style="display:none;" alt="" width="16" height="16" border="0" hspace="5" align="middle"/>
-        </td>         
-    </tr>    
-     <tr>    
-        <td align="right"><div id="tel2_info" name="tel2_info" style="display:none;"> Телефон: </div></td>
-        <td>
-            <input type="tel" id="tel2" name="tel2" style="width:170px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;display:none;" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите моб. телефон без восьмерки в формате: [+7(901)123-45-67]" placeholder="+7(901)123-45-67" maxlength="16">
-        </td>         
-    </tr>
-<td align="right"><div id="delivery_city_info" name="delivery_city_info" style="display:none;"> Город доставки: </div></td>
-<td>
-            <input type="text" id="delivery_city" name="delivery_city" style="width:330px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;display:none;" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Транспортная компания осуществит доставку до терминала в выбранном городе" placeholder="г. Москва" maxlength="55">
-        </td>       
-    </tr>    
     <tr>        
       <td align="right">Способ оплаты</td>
-      <!-- <td> @orderOplata@ </td> -->
 	  <td>
-		  <input type="radio" name="order_metod" checked value="3" onClick="document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';" >Наличная оплата<br />
-		  <input type="radio" @creditdisabled@  name="order_metod" value="25" onClick="document.getElementById('bic').style.display='block';document.getElementById('bin').style.display='none';"  >Оформить кредит<br />
-		  <div id="order_metod_div" style="display:@order_metod_div_display@;"><input type="radio" name="order_metod" value="26" onClick="document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';" >Оплата в магазине картой VISA, Mastercard<br /></div>
+		  <input type="radio" name="order_metod" checked value="3" onClick="document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';"><label>Наличная оплата</label><br>
+		  <input type="radio" @creditdisabled@  name="order_metod" value="25" onClick="document.getElementById('bic').style.display='block';document.getElementById('bin').style.display='none';"><label>Оформить кредит</label><br>
+		  <div id="order_metod_div" style="display:@order_metod_div_display@;"><input type="radio" name="order_metod" value="26" onClick="document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';"><label>Оплата в магазине картой VISA, Mastercard</label><br></div>
 	  </td>
     </tr>
     <tr>
-      <td align="left" colspan="2" style="font-size: 10px; padding-left: 170px; text-decoration: underline;"><a href="http://prodacha.ru/page/credit.html" target="_blank">Ответы на часто задаваемые вопросы о покупке в кредит</a></td>
-    </tr>
-    <tr>
-		<td align="right" style="color: gray;" ></td>
-		<td>
-			<input type="radio" name="legal_form" checked value="legal_form_phys" onclick="javascript:set_legal_form();" >Физ. лицо<br />
-			<input type="radio" name="legal_form" value="legal_form_jur" onclick="javascript:set_legal_form();"  >Юр. лицо<br />
-	    </td>
-    </tr>
-    <tr>
-       <td align="right" style="color: gray;" >
+       <td align="right"><!--style="color: gray;" -->
        		<div id="org_name_info" style="display:none;">Компания: </div>
        </td>
        <td>
-           <div id="org_name_value" style="display:none;"><input type="text" name="org_name" style="width:300px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;" maxlength="100" value="@UserComp@" @formaLock@></div>
+           <div id="org_name_value" style="display:none;"><input type="text" name="org_name" style="width:405px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;" maxlength="100" value="@UserComp@" @formaLock@></div>
        </td>
     </tr>
     <tr>
-      <td align="right" style="color: gray;" ><div id="org_inn_info" style="display:none;">ИНН: </div></td>
+      <td align="right"><div id="org_inn_info" style="display:none;">ИНН: </div></td><!--style="color: gray;" -->
       <td>
-          <div id="org_inn_value" style="display:none;"><input type="text" name="org_inn" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;" maxlength="50" value="@UserInn@" @formaLock@></div>
+        <div id="org_inn_value" style="display:none;"><input type="text" name="org_inn" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;" maxlength="12" value="@UserInn@" @formaLock@></div>&nbsp;<div id="org_kpp_info" style="display:none;">КПП:</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div id="org_kpp_value" style="display:none;"><input type="text" name="org_kpp" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F " maxlength="9" value="@UserKpp@" @formaLock@></div>
       </td>
     </tr>
     <tr>
-        <td align="right" style="color: gray;" ><div id="org_kpp_info" style="display:none;">КПП: </div></td>
+        <td align="right"><div id="annual_number_info" style="display:none;">Расчетный счет: </div></td><!--style="color: gray;" -->
         <td>
-            <div id="org_kpp_value" style="display:none;"><input type="text" name="org_kpp" style="width:150px; height:18px; font-family:tahoma; font-size:11px ; color:#4F4F4F " maxlength="50" value="@UserKpp@" @formaLock@></div>
+        <div id="annual_number_value" style="display:none;"><input type="text" name="annual_number" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F " maxlength="20" value="@AnnualNumber@" @formaLock@></div>&nbsp;<div id="bic_bank_number_info" style="display:none;">БИК банка:</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div id="bic_bank_number_value" style="display:none;"><input type="text" name="bic_bank_number" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F " maxlength="9" value="@BicBankNumber@" @formaLock@></div>
+        </td>
+    </tr>
+    <tr>
+        <td align="right"><div id="bank_name_info" style="display:none;">Название банка: </div></td><!--style="color: gray;" -->
+        <td>
+        <div id="bank_name_value" style="display:none;"><input type="text" name="bank_name" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F " maxlength="100" value="@BankName@" @formaLock@></div>&nbsp;<div id="gen_manager_initial_info" style="display:none;">ФИО директора:</div>&nbsp;<div id="gen_manager_initial_value" style="display:none;"><input type="text" name="gen_manager_initial" style="width:150px; height:18px; font-family:tahoma; font-size:11px ; color:#4F4F4F " maxlength="100" value="@GenManagerInitial@" @formaLock@></div>
         </td>
     </tr>
     <tr>
 		<td></td>
-    	<td><br />
-    		<div style="width: 400px;">
+    	<td>
+    		<div style="width: 400px;display:none;">
 				<span style="color: red; font-weight: bold;">Внимание!</span> При заказе через корзину указывается <span style="font-weight: bold;">предварительная стоимость</span> для выбранного вами типа доставки. Окончательную стоимость доставки Вам сообщит менеджер при подтверждении заказа (она зависит от расстояния и суммы Вашего заказа). Точную стоимость доставки можно узнать <a target="_blank" href="http://prodacha.ru/page/delivery.html" style="text-decoration: underline;">по ссылке</a>.
     		</div>
     	</td>
@@ -175,8 +111,6 @@
 	<tr>
 	    <td></td>
     	<td> 
-	    	<p><br />
-	        </p>
 	 		<span id="bin" class="need2hide" ><a href="javascript:OrderChek();" class=link style="font-size: 18px; font-weight: bold;"><img src="images/makeorder.png"></a></span>
 			<!-- <span id="bic" class="need2hide" style="display:none;" ><a href="javascript:;" onclick='yescreditmodul([@credititems@],367328,"@orderNum@");'  class=link style="font-size: 18px; font-weight: bold;"><img src="images/buyincredit.png"></a></span>  -->
 	        <!--<span id="bic_credit" class="need2hide" style="display:none;" >@credititems@</span>	-->
