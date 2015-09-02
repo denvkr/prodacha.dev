@@ -27,22 +27,22 @@
     <tr valign="top">
       <td align="right"> E-mail: </td>
       <td>
-		<input type="email" id="mail" name="mail" style="width:300px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;" maxlength="40" data-html="true" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите email в формате: [my@mail.ru]" placeholder="ivan@prodacha.ru" value="@UserMail@" @formaLock@>
+		<input type="email" id="mail" name="mail" style="width:300px; height:18px; font-family:tahoma; font-size:11px;" maxlength="40" data-html="true" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите email в формате: [my@mail.ru]" placeholder="ivan@prodacha.ru" value="@UserMail@" @formaLock@>
         <img src="images/shop/flag_green.gif" alt="" width="16" height="16" border="0" hspace="5" align="middle"/>
       </td>
     </tr>
     <tr>
       <td align="right">Контактное лицо: </td>
       <td>
-          <input type="text" id="name_person" name="name_person" style="width:300px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;" maxlength="40" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свою фамилию и имя в формате: [ФАМИЛИЯ ИМЯ]" placeholder="Иванов Иван" value="@UserName@" @formaLock@>
+          <input type="text" id="name_person" name="name_person" style="width:300px; height:18px; font-family:tahoma; font-size:11px;" maxlength="40" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свою фамилию и имя в формате: [ФАМИЛИЯ ИМЯ]" placeholder="Иванов Иван" value="@UserName@" @formaLock@>
           <img src="images/shop/flag_green.gif" alt="" width="16" height="16" border="0" hspace="5" align="middle"/> 
       </td>
     </tr>
     <tr>
       <td align="right">Телефон (моб.): </td>
       <td>
-      	  <input type="hidden" name="tel_code" style="width:50px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;" value="@php require($_SERVER['DOCUMENT_ROOT'].'/net_pather.php');php@">
- 	      <input type="tel" id="tel_name" name="tel_name" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите моб. телефон без восьмерки в формате: [+7(901)123-45-67]" placeholder="+7(901)123-45-67" maxlength="16" value="@UserTel@">
+      	  <input type="hidden" name="tel_code" style="width:50px; height:18px; font-family:tahoma; font-size:11px;" value="@php require($_SERVER['DOCUMENT_ROOT'].'/net_pather.php');php@">
+ 	      <input type="tel" id="tel_name" name="tel_name" style="width:150px; height:18px; font-family:tahoma; font-size:11px;" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите моб. телефон без восьмерки в формате: [+7(901)123-45-67]" placeholder="+7(901)123-45-67" maxlength="16" value="@UserTel@">
  	      <!--pattern="^\+[0-9\(\)]{17}$"-->
           <img src="images/shop/flag_green.gif" alt="" width="16" height="16" border="0" hspace="5" align="middle"/>
       </td>
@@ -50,7 +50,7 @@
     <tr>
       <td align="right" id="address_and_info">@address_and_info_text@</td>
       <td>
-      	  <textarea id="adr_name" style="width:300px; height:100px; font-family:tahoma; font-size:11px ; color:#4F4F4F;" name="adr_name" >@UserAdres@</textarea>
+      	  <textarea id="adr_name" style="width:300px; height:100px; font-family:tahoma; font-size:11px;" name="adr_name" >@UserAdres@</textarea>
           <!--<img id="address_and_info_flag" src="images/shop/flag_green.gif" alt="" width="16" height="16" border="0" hspace="5" align="middle"/>-->
       </td>
     </tr>
@@ -58,10 +58,10 @@
         <td align="right"><div name="delivery_time_info" style="display:none;"> Время доставки: </div></td>
         <td>
       	  <div name="delivery_time_info" style="display:none;">от
-          	<input type="text" name="dos_ot" style="width:50px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;" maxlength="2">
+          	<input type="text" name="dos_ot" style="width:50px; height:18px; font-family:tahoma; font-size:11px; color:black;" maxlength="2">
 	        ч.&nbsp;&nbsp;&nbsp;
     	    до
-			<input type="text" name="dos_do" style="width:50px; height:18px; font-family:tahoma; font-size:11px ; color:#4F4F4F;" maxlength="2">
+			<input type="text" name="dos_do" style="width:50px; height:18px; font-family:tahoma; font-size:11px ; color:black;" maxlength="2">
         	ч.&nbsp;
           </div>
         </td>
@@ -79,25 +79,25 @@
        		<div id="org_name_info" style="display:none;">Компания: </div>
        </td>
        <td>
-           <div id="org_name_value" style="display:none;"><input type="text" name="org_name" style="width:405px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;" maxlength="100" value="@UserComp@" @formaLock@></div>
+           <div id="org_name_value" style="display:none;"><input type="text" name="org_name" style="width:405px; height:18px; font-family:tahoma; font-size:11px; color:black;" maxlength="100" value="@UserComp@" @formaLock@></div>
        </td>
     </tr>
     <tr>
       <td align="right"><div id="org_inn_info" style="display:none;">ИНН: </div></td><!--style="color: gray;" -->
       <td>
-        <div id="org_inn_value" style="display:none;"><input type="text" name="org_inn" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F;" maxlength="12" value="@UserInn@" @formaLock@></div>&nbsp;<div id="org_kpp_info" style="display:none;">КПП:</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div id="org_kpp_value" style="display:none;"><input type="text" name="org_kpp" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F " maxlength="9" value="@UserKpp@" @formaLock@></div>
+        <div id="org_inn_value" style="display:none;"><input type="text" name="org_inn" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:black;" maxlength="12" value="@UserInn@" @formaLock@></div>&nbsp;<div id="org_kpp_info" style="display:none;">КПП:</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div id="org_kpp_value" style="display:none;"><input type="text" name="org_kpp" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F " maxlength="9" value="@UserKpp@" @formaLock@></div>
       </td>
     </tr>
     <tr>
         <td align="right"><div id="annual_number_info" style="display:none;">Расчетный счет: </div></td><!--style="color: gray;" -->
         <td>
-        <div id="annual_number_value" style="display:none;"><input type="text" name="annual_number" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F " maxlength="20" value="@AnnualNumber@" @formaLock@></div>&nbsp;<div id="bic_bank_number_info" style="display:none;">БИК банка:</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div id="bic_bank_number_value" style="display:none;"><input type="text" name="bic_bank_number" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F " maxlength="9" value="@BicBankNumber@" @formaLock@></div>
+        <div id="annual_number_value" style="display:none;"><input type="text" name="annual_number" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:black;" maxlength="20" value="@AnnualNumber@" @formaLock@></div>&nbsp;<div id="bic_bank_number_info" style="display:none;">БИК банка:</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div id="bic_bank_number_value" style="display:none;"><input type="text" name="bic_bank_number" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F " maxlength="9" value="@BicBankNumber@" @formaLock@></div>
         </td>
     </tr>
     <tr>
         <td align="right"><div id="bank_name_info" style="display:none;">Название банка: </div></td><!--style="color: gray;" -->
         <td>
-        <div id="bank_name_value" style="display:none;"><input type="text" name="bank_name" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F " maxlength="100" value="@BankName@" @formaLock@></div>&nbsp;<div id="gen_manager_initial_info" style="display:none;">ФИО директора:</div>&nbsp;<div id="gen_manager_initial_value" style="display:none;"><input type="text" name="gen_manager_initial" style="width:150px; height:18px; font-family:tahoma; font-size:11px ; color:#4F4F4F " maxlength="100" value="@GenManagerInitial@" @formaLock@></div>
+        <div id="bank_name_value" style="display:none;"><input type="text" name="bank_name" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:black;" maxlength="100" value="@BankName@" @formaLock@></div>&nbsp;<div id="gen_manager_initial_info" style="display:none;">ФИО директора:</div>&nbsp;<div id="gen_manager_initial_value" style="display:none;"><input type="text" name="gen_manager_initial" style="width:150px; height:18px; font-family:tahoma; font-size:11px ; color:#4F4F4F " maxlength="100" value="@GenManagerInitial@" @formaLock@></div>
         </td>
     </tr>
     <tr>
