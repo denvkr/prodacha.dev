@@ -3110,7 +3110,30 @@ left: 640px;
 }
 #mail,#name_person,#tel_name {
 	border-color:#abadb3;
+        color:black;    
 }
-#adr_name,#dostavka_metod,#firstname,#middlename,#lastname,#tel2,#pass_no1,#pass_no2,#pass_police,#delivery_city,input[name="dos_ot"],input[name="dos_do"],input[name="tk_other"] {
+#adr_name,
+#dostavka_metod,
+#firstname,
+#middlename,
+#lastname,
+#tel2,
+#pass_no1,
+#pass_no2,
+#pass_police,
+#delivery_city,
+#postal_index,
+#delivery_address,
+input[name="dos_ot"],
+input[name="dos_do"],
+input[name="tk_other"],
+input[name="org_name"],
+input[name="org_inn"],
+input[name="org_kpp"],
+input[name="annual_number"],
+input[name="bic_bank_number"],
+input[name="bank_name"],
+input[name="gen_manager_initial"]
+{
 	border:2px solid #abadb3;
 }
