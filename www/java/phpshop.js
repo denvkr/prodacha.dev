@@ -285,21 +285,24 @@ function UpdateDelivery(xid) {
                               "<input type=\"radio\" @creditdisabled@  name=\"order_metod\" value=\"25\" onClick=\"document.getElementById('bic').style.display='block';document.getElementById('bin').style.display='none';\"><label>Оформить кредит</label><br>"+
                               "<div id=\"order_metod_div\" style=\"display:@order_metod_div_display@;\"><input type=\"radio\" name=\"order_metod\" value=\"26\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Оплата в магазине картой VISA, Mastercard</label><br></div>");
             }
+
             if ($("td input[name='order_metod']:eq(0)").length && 
                     $("td input[name='order_metod']:eq(0)+:eq(0)").html()==='Наличная оплата' &&
                     $("td input[name='order_metod']:eq(1)").length && 
                     $("td input[name='order_metod']:eq(1)+:eq(0)").html()==='Оформить кредит' &&
                     !$("td input[name='order_metod']:eq(2)").length && 
                     $("td input[name='order_metod']:eq(2)+:eq(0)").html()!=='Оплата в магазине картой VISA, Mastercard') {
-                            $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"3\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Наличная оплата</label><br>"+
-                              "<input type=\"radio\" @creditdisabled@  name=\"order_metod\" value=\"25\" onClick=\"document.getElementById('bic').style.display='block';document.getElementById('bin').style.display='none';\"><label>Оформить кредит</label><br>"+
-                              "<div id=\"order_metod_div\" style=\"display:@order_metod_div_display@;\"><input type=\"radio\" name=\"order_metod\" value=\"26\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Оплата в магазине картой VISA, Mastercard</label><br></div>");
+                    $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"3\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Наличная оплата</label><br>"+
+                      "<input type=\"radio\" @creditdisabled@  name=\"order_metod\" value=\"25\" onClick=\"document.getElementById('bic').style.display='block';document.getElementById('bin').style.display='none';\"><label>Оформить кредит</label><br>"+
+                      "<div id=\"order_metod_div\" style=\"display:@order_metod_div_display@;\"><input type=\"radio\" name=\"order_metod\" value=\"26\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Оплата в магазине картой VISA, Mastercard</label><br></div>");
+
             }
             if (typeof(delivery_options)!=='undefined' && delivery_options.selected===true && Number(xid)===69) {
                 if (!$('#spb_map_area').length){
-                    $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").html('<div style="position:relative;top:-245px;">Выберите пункт<br>выдачи заказов</div>');
+                    $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").html('<div id="spb_map_delivery_office_info" style="position:relative;top:-245px;">Выберите пункт<br>выдачи заказов</div>');
                     $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").prop('align','right');
-                    $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(1)").html('<div id="spb_map_area" style="position:relative;top:-40px;"><select id="tk_delivery_points_list"></select><div style="height:18px;display:block;"></div><p id="map" style="width:660px; height:400px;"></p></div');
+                    $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(1)").html('<div id="spb_map_area" style="position:relative;top:-40px;"><select id="tk_delivery_points_list"></select><div style="height:18px;display:block;"></div><div id="map" style="width:600px; height:400px;"></div></div>');
+                    $('#order_metod_div').css('display','none');
                     var script   = document.createElement("script");
                     script.type  = "text/javascript";
                     script.text  = "ymaps.ready(init);";
@@ -307,16 +310,38 @@ function UpdateDelivery(xid) {
                     script.text  += 'var myGeoObjects;';
                     script.text  += 'var myMap = new ymaps.Map("map", {';
                     script.text  += 'center: [59.9281401,30.3626595],';
-                    script.text  += 'zoom: 11';
+                    script.text  += 'zoom: 11,';
+                    script.text  += 'controls: ["zoomControl","rulerControl","routeEditor","searchControl","geolocationControl"]';
                     script.text  += '});';
                     script.text  += 'myGeoObjects=initgeoobjects();';
                     script.text  += 'for (gobj_cnt=0;gobj_cnt<myGeoObjects.length;gobj_cnt++){';
                     script.text  += 'myMap.geoObjects.add(myGeoObjects[gobj_cnt]);';
-                    script.text  += '$(\'<option value="\'+myGeoObjects[gobj_cnt].properties.get("iconContent")+\'">\'+myGeoObjects[gobj_cnt].properties.get("iconContent")+\'</option>\').appendTo(\'#tk_delivery_points_list\');';
-                    script.text  += 'myGeoObjects[gobj_cnt].events.add(\'click\', function (e) {';
-                    script.text  += 'var eMap = e.get(\'target\');';
-                    script.text  += '$(\'#tk_delivery_points_list\').val(eMap.properties.get("iconContent")).prop(\'selected\',true);';
-                    script.text  += '});};}';
+                    script.text  += '$(\'<option value="\'+myGeoObjects[gobj_cnt].properties.get("hintContent")+\'">\'+myGeoObjects[gobj_cnt].properties.get("iconContent")+\'</option>\').appendTo(\'#tk_delivery_points_list\');';
+                    script.text  += 'myGeoObjects[gobj_cnt].events.add(\'mouseup\', function (e) {';
+                    script.text  += 'var eMap = e.get(\'target\');';            
+                    script.text  += '$("#tk_delivery_points_list").val(eMap.properties.get("hintContent")).prop("selected",true);';
+                    script.text  += 'eMap.options.set("preset","islands#greenStretchyIcon");';
+                    script.text  += '});';               
+                    script.text  += '};';
+                    script.text  += 'myMap.geoObjects.events.add("mousedown", function () {';
+                    script.text  += '    this.each(function (geoObject, i) {';
+                    script.text  += '   if (geoObject.options.get("preset") == "islands#greenStretchyIcon") {';
+                    script.text  += '       geoObject.options.set("preset","islands#blackStretchyIcon");';
+                    script.text  += '   }';
+                    script.text  += '    })}, myMap.geoObjects);';
+                    script.text  += '$("#tk_delivery_points_list").bind("change", function(){';                
+                    script.text  += 'var tk_office_adress=$(this).find("option:selected").text();';
+                    script.text  += 'myMap.geoObjects.each(function (geoObject) {';
+                    script.text  += 'if (geoObject.properties.get("iconContent")!==tk_office_adress){';
+                    script.text  += 'geoObject.options.set("preset","islands#blackStretchyIcon");';                   
+                    script.text  += '} else {';
+                    script.text  += 'geoObject.options.set("preset", "islands#greenStretchyIcon");';                    
+                    script.text  += '}';
+                    script.text  += '});';  
+                    script.text  += '});';
+                    script.text  += '$("#tk_delivery_points_list").change();';
+                    script.text  += '}';                   
+                    
                     document.body.appendChild(script);
                     // remove from the dom
                     //document.body.removeChild(document.body.lastChild);
@@ -328,7 +353,7 @@ function UpdateDelivery(xid) {
             //var delivery_options=document.getElementById('var_'+xid);
             document.getElementById('address_and_info').innerHTML='Адрес и <br> дополнительная<br>информация:';
             document.getElementById('address_and_info').style.display='table-cell';
-            document.getElementById('adr_name').style.display='table-cell';
+            document.getElementById('adr_name').style.display='inline';
             var oImg=document.createElement('img');
             oImg.setAttribute('src', '/phpshop/templates/prodacha/images/shop/flag_green.gif');
             oImg.setAttribute('alt', '');
@@ -388,8 +413,8 @@ function UpdateDelivery(xid) {
             if (document.getElementById('adr_name')){
                 document.getElementById('adr_name').style.display='none';    
             }
-            if (adr_name_info.nextSibling){
-                adr_name_info.nextSibling.remove();
+            if ($('#adr_name~img:eq(0)').length){
+                $('#adr_name~img:eq(0)').remove();
             }
             if (document.getElementsByName("delivery_time_info")[0]){
                 document.getElementsByName("delivery_time_info")[0].style.display='none';           
@@ -430,11 +455,11 @@ function UpdateDelivery(xid) {
                 '<tr>'+   
                 '<td align="right"><div id="firstname_info" name="firstname_info"> ФИО получателя: </div></td>'+
                 '<td>'+
-                '<input type="text" id="lastname" name="lastname" maxlength="26" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свою фамилию." placeholder="Иванов">'+
+                '<input type="text" id="lastname" name="lastname" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свою фамилию." placeholder="Иванов" maxlength="28">'+
                 '<img/>'+
-                '<input type="text" id="firstname" name="firstname" maxlength="26" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое имя." placeholder="Иван">'+
+                '<input type="text" id="firstname" name="firstname" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое имя." placeholder="Иван" maxlength="28">'+
                 '<img/>'+            
-                '<input type="text" id="middlename" name="middlename" maxlength="26" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое отчество." placeholder="Иванович">'+
+                '<input type="text" id="middlename" name="middlename" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое отчество." placeholder="Иванович" maxlength="28">'+
                 '<img/> '+            
                 '</td>'+
                 '</tr>'+  
@@ -471,93 +496,93 @@ function UpdateDelivery(xid) {
                 '<input type="text" id="delivery_address" name="delivery_address" disabled="disabled" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="По вашему желанию, транспортная компания может произвести доставку по адресу, за дополнительную плату" placeholder="улица Ленина, 1" maxlength="85">'+
                 '</td>'+         
                 '</tr>').insertBefore("form[name='forma_order']>table:eq(0) tr:eq(9)");
-            fillTKtablePart();
             $('#tk_info').css("display","table-cell");
             $('#tk_list').css("display","table-cell");
-            $('#tk_other').css({"width":"240px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#tk_other').css({"width":"240px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
             $('#cart_tk_delivery_pass_msg_info').css("display","table-cell");
-            $('#cart_tk_delivery_pass_msg').css({"width":"500px", "height":"36px", "font": "normal 12px/1.4 Arial, Helvetica, sans-serif", "color":"#4F4F4F","display":"table-cell"});
+            $('#cart_tk_delivery_pass_msg').css({"width":"500px", "height":"36px", "font": "normal 12px/1.4 Arial, Helvetica, sans-serif", "color":"black","display":"table-cell"});
             $('#cart_tk_delivery_pass_msg').text("При получении заказа в терминале транспортной компании (ТК) вас попросят предъявить паспорт. Необходимо указать паспортные данные получателя.");
             $('#firstname_info').css("display","table-cell");
-            $('#firstname').css({"width":"160px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#firstname').css({"width":"160px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});//, "color":"#4F4F4F"
             //$('#firstname').next().css("display","table-cell");
-            $('#firstname').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-            $('#firstname').next().attr('alt', '');
-            $('#firstname').next().attr('height', '16');
-            $('#firstname').next().attr('width', '16');
-            $('#firstname').next().attr('border', '0');
-            $('#firstname').next().attr('hspace','5');
-            $('#firstname').next().attr('align','middle');
+            $('#firstname').next().prop('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#firstname').next().prop('alt', '');
+            $('#firstname').next().prop('height', '16');
+            $('#firstname').next().prop('width', '16');
+            $('#firstname').next().prop('border', '0');
+            $('#firstname').next().prop('hspace','5');
+            $('#firstname').next().prop('align','middle');
             $('middlename_info').css("display","table-cell");
-            $('#middlename').css({"width":"160px", "height":"18px","font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#middlename').css({"width":"160px", "height":"18px","font-family":"tahoma", "font-size":"11px", "color":"black"});
             //$('#middlename').next().css("display","table-cell");
-            $('#middlename').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-            $('#middlename').next().attr('alt', '');
-            $('#middlename').next().attr('height', '16');
-            $('#middlename').next().attr('width', '16');
-            $('#middlename').next().attr('border', '0');
-            $('#middlename').next().attr('hspace','5');
-            $('#middlename').next().attr('align','middle');    
+            $('#middlename').next().prop('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#middlename').next().prop('alt', '');
+            $('#middlename').next().prop('height', '16');
+            $('#middlename').next().prop('width', '16');
+            $('#middlename').next().prop('border', '0');
+            $('#middlename').next().prop('hspace','5');
+            $('#middlename').next().prop('align','middle');    
             //$('lastname_info').css("display","table-cell");
-            $('#lastname').css({"width":"160px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#lastname').css({"width":"160px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
             //$('#lastname').next().css("display","table-cell");
-            $('#lastname').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-            $('#lastname').next().attr('alt', '');
-            $('#lastname').next().attr('height', '16');
-            $('#lastname').next().attr('width', '16');
-            $('#lastname').next().attr('border', '0');
-            $('#lastname').next().attr('hspace','5');
-            $('#lastname').next().attr('align','middle');
+            $('#lastname').next().prop('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#lastname').next().prop('alt', '');
+            $('#lastname').next().prop('height', '16');
+            $('#lastname').next().prop('width', '16');
+            $('#lastname').next().prop('border', '0');
+            $('#lastname').next().prop('hspace','5');
+            $('#lastname').next().prop('align','middle');
             //$('#pass_no_info').css("display","table-cell");
-            $('#pass_no1').css({"width":"30px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#pass_no1').css({"width":"30px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
             //$('#pass_no1').next().css("display","table-cell");
-            $('#pass_no1').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-            $('#pass_no1').next().attr('alt', '');
-            $('#pass_no1').next().attr('height', '16');
-            $('#pass_no1').next().attr('width', '16');
-            $('#pass_no1').next().attr('border', '0');
-            $('#pass_no1').next().attr('hspace','5');
-            $('#pass_no1').next().attr('align','middle');    
-            $('#pass_no2').css({"width":"40px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#pass_no1').next().prop('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#pass_no1').next().prop('alt', '');
+            $('#pass_no1').next().prop('height', '16');
+            $('#pass_no1').next().prop('width', '16');
+            $('#pass_no1').next().prop('border', '0');
+            $('#pass_no1').next().prop('hspace','5');
+            $('#pass_no1').next().prop('align','middle');    
+            $('#pass_no2').css({"width":"40px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
             //$('#pass_no2').next().css("display","table-cell");
-            $('#pass_no2').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-            $('#pass_no2').next().attr('alt', '');
-            $('#pass_no2').next().attr('height', '16');
-            $('#pass_no2').next().attr('width', '16');
-            $('#pass_no2').next().attr('border', '0');
-            $('#pass_no2').next().attr('hspace','5');
-            $('#pass_no2').next().attr('align','middle');    
+            $('#pass_no2').next().prop('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#pass_no2').next().prop('alt', '');
+            $('#pass_no2').next().prop('height', '16');
+            $('#pass_no2').next().prop('width', '16');
+            $('#pass_no2').next().prop('border', '0');
+            $('#pass_no2').next().prop('hspace','5');
+            $('#pass_no2').next().prop('align','middle');    
             $('#pass_police_info').css("display","inline");
-            $('#pass_police').css({"width":"60px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#pass_police').css({"width":"60px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
             //$('#pass_police').next().css("display","table-cell");
-            $('#pass_police').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-            $('#pass_police').next().attr('alt', '');
-            $('#pass_police').next().attr('height', '16');
-            $('#pass_police').next().attr('width', '16');
-            $('#pass_police').next().attr('border', '0');
-            $('#pass_police').next().attr('hspace','5');
-            $('#pass_police').next().attr('align','middle');
+            $('#pass_police').next().prop('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#pass_police').next().prop('alt', '');
+            $('#pass_police').next().prop('height', '16');
+            $('#pass_police').next().prop('width', '16');
+            $('#pass_police').next().prop('border', '0');
+            $('#pass_police').next().prop('hspace','5');
+            $('#pass_police').next().prop('align','middle');
             $('#tel2_info').css("display","table-cell");
-            $('#tel2').css({"width":"150px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
-            $('#tel2').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-            $('#tel2').next().attr('alt', '');
-            $('#tel2').next().attr('height', '16');
-            $('#tel2').next().attr('width', '16');
-            $('#tel2').next().attr('border', '0');
-            $('#tel2').next().attr('hspace','5');
-            $('#tel2').next().attr('align','middle');
+            $('#tel2').css({"width":"150px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
+            $('#tel2').next().prop('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#tel2').next().prop('alt', '');
+            $('#tel2').next().prop('height', '16');
+            $('#tel2').next().prop('width', '16');
+            $('#tel2').next().prop('border', '0');
+            $('#tel2').next().prop('hspace','5');
+            $('#tel2').next().prop('align','middle');
             $('#delivery_city_info').css("display","table-cell");
             //$('#delivery_city').css({"width":"330px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
-            $('#delivery_city').css({"width":"160px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
-            $('#delivery_city').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-            $('#delivery_city').next().attr('alt', '');
-            $('#delivery_city').next().attr('height', '16');
-            $('#delivery_city').next().attr('width', '16');
-            $('#delivery_city').next().attr('border', '0');
-            $('#delivery_city').next().attr('hspace','5');
-            $('#delivery_city').next().attr('align','middle');	
+            $('#delivery_city').css({"width":"160px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
+            $('#delivery_city').next().prop('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#delivery_city').next().prop('alt', '');
+            $('#delivery_city').next().prop('height', '16');
+            $('#delivery_city').next().prop('width', '16');
+            $('#delivery_city').next().prop('border', '0');
+            $('#delivery_city').next().prop('hspace','5');
+            $('#delivery_city').next().prop('align','middle');	
             $('#delivery_address_info').css("display","table-cell");
-            $('#delivery_address').css({"width":"400px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#delivery_address').css({"width":"400px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
+			fillTKtablePart();
 	} else if (Number(xid)===68) {
             if (document.getElementById('address_and_info')){
                 document.getElementById('address_and_info').style.display='none';               
@@ -565,8 +590,8 @@ function UpdateDelivery(xid) {
             if (document.getElementById('adr_name')){
                 document.getElementById('adr_name').style.display='none';    
             }
-            if (adr_name_info.nextSibling){
-                adr_name_info.nextSibling.remove();
+            if ($('#adr_name~img:eq(0)').length){
+                $('#adr_name~img:eq(0)').remove();
             }
             if (document.getElementsByName("delivery_time_info")[0]){
                 document.getElementsByName("delivery_time_info")[0].style.display='none';           
@@ -593,11 +618,11 @@ function UpdateDelivery(xid) {
                 '<tr>'+   
                 '<td align="right"><div id="firstname_info" name="firstname_info"> ФИО получателя: </div></td>'+
                 '<td>'+
-                '<input type="text" id="lastname" name="lastname" maxlength="26" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свою фамилию." placeholder="Иванов">'+
+                '<input type="text" id="lastname" name="lastname" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свою фамилию." placeholder="Иванов" maxlength="28">'+
                 '<img/>'+
-                '<input type="text" id="firstname" name="firstname" maxlength="26" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое имя." placeholder="Иван">'+
+                '<input type="text" id="firstname" name="firstname" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое имя." placeholder="Иван" maxlength="28">'+
                 '<img/>'+            
-                '<input type="text" id="middlename" name="middlename" maxlength="26" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое отчество." placeholder="Иванович">'+
+                '<input type="text" id="middlename" name="middlename" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое отчество." placeholder="Иванович" maxlength="28">'+
                 '<img/> '+            
                 '</td>'+
                 '</tr>'+  
@@ -624,76 +649,76 @@ function UpdateDelivery(xid) {
 	        '<img/>'+ 			
                 '</td>'+         
             '</tr>').insertBefore("form[name='forma_order']>table:eq(0) tr:eq(9)");
-            fillTKtablePart();
             $('#cart_tk_delivery_pass_msg_info').css("display","table-cell");
-            $('#cart_tk_delivery_pass_msg').css({"width":"630px", "height":"36px", "font": "normal 12px/1.4 Arial, Helvetica, sans-serif", "color":"#4F4F4F","display":"table-cell"});
+            $('#cart_tk_delivery_pass_msg').css({"width":"630px", "height":"36px", "font": "normal 12px/1.4 Arial, Helvetica, sans-serif", "color":"black","display":"table-cell"});//#4F4F4F
             $('#cart_tk_delivery_pass_msg').text("Доставка Почтой России осуществляется для заказов массой менее 3 кг и габаритами менее 40х25х35 см. Более габаритные заказы доставляются транспортными компаниями (Деловые Линии, ПЭК, ЖелДорЭкспедиция и т.д.)");
             $('#firstname_info').css("display","table-cell");
-            $('#firstname').css({"width":"160px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#firstname').css({"width":"160px", "height":"18px", "font-family":"tahoma", "font-size":"11px"});//, "color":"#4F4F4F"
             //$('#firstname').next().css("display","table-cell");
-            $('#firstname').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-            $('#firstname').next().attr('alt', '');
-            $('#firstname').next().attr('height', '16');
-            $('#firstname').next().attr('width', '16');
-            $('#firstname').next().attr('border', '0');
-            $('#firstname').next().attr('hspace','5');
-            $('#firstname').next().attr('align','middle');
+            $('#firstname').next().prop('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#firstname').next().prop('alt', '');
+            $('#firstname').next().prop('height', '16');
+            $('#firstname').next().prop('width', '16');
+            $('#firstname').next().prop('border', '0');
+            $('#firstname').next().prop('hspace','5');
+            $('#firstname').next().prop('align','middle');
             $('middlename_info').css("display","table-cell");
-            $('#middlename').css({"width":"160px", "height":"18px","font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#middlename').css({"width":"160px", "height":"18px","font-family":"tahoma", "font-size":"11px", "color":"black"});
             //$('#middlename').next().css("display","table-cell");
-            $('#middlename').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-            $('#middlename').next().attr('alt', '');
-            $('#middlename').next().attr('height', '16');
-            $('#middlename').next().attr('width', '16');
-            $('#middlename').next().attr('border', '0');
-            $('#middlename').next().attr('hspace','5');
-            $('#middlename').next().attr('align','middle');    
+            $('#middlename').next().prop('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#middlename').next().prop('alt', '');
+            $('#middlename').next().prop('height', '16');
+            $('#middlename').next().prop('width', '16');
+            $('#middlename').next().prop('border', '0');
+            $('#middlename').next().prop('hspace','5');
+            $('#middlename').next().prop('align','middle');    
             //$('lastname_info').css("display","table-cell");
-            $('#lastname').css({"width":"160px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
+            $('#lastname').css({"width":"160px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
             //$('#lastname').next().css("display","table-cell");
-            $('#lastname').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-            $('#lastname').next().attr('alt', '');
-            $('#lastname').next().attr('height', '16');
-            $('#lastname').next().attr('width', '16');
-            $('#lastname').next().attr('border', '0');
-            $('#lastname').next().attr('hspace','5');
-            $('#lastname').next().attr('align','middle');
+            $('#lastname').next().prop('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#lastname').next().prop('alt', '');
+            $('#lastname').next().prop('height', '16');
+            $('#lastname').next().prop('width', '16');
+            $('#lastname').next().prop('border', '0');
+            $('#lastname').next().prop('hspace','5');
+            $('#lastname').next().prop('align','middle');
             $('#tel2_info').css("display","table-cell");
-            $('#tel2').css({"width":"150px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
-            $('#tel2').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-            $('#tel2').next().attr('alt', '');
-            $('#tel2').next().attr('height', '16');
-            $('#tel2').next().attr('width', '16');
-            $('#tel2').next().attr('border', '0');
-            $('#tel2').next().attr('hspace','5');
-            $('#tel2').next().attr('align','middle');
+            $('#tel2').css({"width":"150px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
+            $('#tel2').next().prop('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#tel2').next().prop('alt', '');
+            $('#tel2').next().prop('height', '16');
+            $('#tel2').next().prop('width', '16');
+            $('#tel2').next().prop('border', '0');
+            $('#tel2').next().prop('hspace','5');
+            $('#tel2').next().prop('align','middle');
             $('#delivery_city_info').css("display","table-cell");
             //$('#delivery_city').css({"width":"330px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
-            $('#delivery_city').css({"width":"160px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
-            $('#delivery_city').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-            $('#delivery_city').next().attr('alt', '');
-            $('#delivery_city').next().attr('height', '16');
-            $('#delivery_city').next().attr('width', '16');
-            $('#delivery_city').next().attr('border', '0');
-            $('#delivery_city').next().attr('hspace','5');
-            $('#delivery_city').next().attr('align','middle');
-            $('#postal_index').css({"width":"40px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
-            $('#postal_index').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-            $('#postal_index').next().attr('alt', '');
-            $('#postal_index').next().attr('height', '16');
-            $('#postal_index').next().attr('width', '16');
-            $('#postal_index').next().attr('border', '0');
-            $('#postal_index').next().attr('hspace','5');
-            $('#postal_index').next().attr('align','middle');	
+            $('#delivery_city').css({"width":"160px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
+            $('#delivery_city').next().prop('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#delivery_city').next().prop('alt', '');
+            $('#delivery_city').next().prop('height', '16');
+            $('#delivery_city').next().prop('width', '16');
+            $('#delivery_city').next().prop('border', '0');
+            $('#delivery_city').next().prop('hspace','5');
+            $('#delivery_city').next().prop('align','middle');
+            $('#postal_index').css({"width":"40px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
+            $('#postal_index').next().prop('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#postal_index').next().prop('alt', '');
+            $('#postal_index').next().prop('height', '16');
+            $('#postal_index').next().prop('width', '16');
+            $('#postal_index').next().prop('border', '0');
+            $('#postal_index').next().prop('hspace','5');
+            $('#postal_index').next().prop('align','middle');	
             $('#delivery_address_info').css("display","table-cell");
-            $('#delivery_address').css({"width":"510px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"#4F4F4F"});
-            $('#delivery_address').next().attr('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
-            $('#delivery_address').next().attr('alt', '');
-            $('#delivery_address').next().attr('height', '16');
-            $('#delivery_address').next().attr('width', '16');
-            $('#delivery_address').next().attr('border', '0');
-            $('#delivery_address').next().attr('hspace','5');
-            $('#delivery_address').next().attr('align','middle');	
+            $('#delivery_address').css({"width":"510px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
+            $('#delivery_address').next().prop('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
+            $('#delivery_address').next().prop('alt', '');
+            $('#delivery_address').next().prop('height', '16');
+            $('#delivery_address').next().prop('width', '16');
+            $('#delivery_address').next().prop('border', '0');
+            $('#delivery_address').next().prop('hspace','5');
+            $('#delivery_address').next().prop('align','middle');
+			fillTKtablePart();
 	}
 	
 	//console.log(xid);
@@ -712,7 +737,7 @@ function UpdateDelivery(xid) {
 					{
 					   document.getElementById('delivery_warning').style.display="table-cell";
 					/*
-						$("#var_1").attr("disabled", true);
+						$("#var_1").prop("disabled", true);
 						$("#var_1").hide();
 							
 						var firstVal = $('#dostavka_metod option:visible:first').val();
@@ -861,7 +886,7 @@ function set_legal_form() {
 	var gen_manager_initial_info = document.getElementById('gen_manager_initial_info');
 	var gen_manager_initial_value = document.getElementById('gen_manager_initial_value'); 
 	//alert(legal_form_elm[0].select);
-	if ( legal_form_elm[0].checked==true ) {
+	if ( legal_form_elm[0].checked===true ) {
 		org_name_info.style.display='none';
 		org_name_value.style.display='none';
 		org_inn_info.style.display='none';
@@ -876,7 +901,11 @@ function set_legal_form() {
                 bank_name_value.style.display='none';
                 gen_manager_initial_info.style.display='none';
                 gen_manager_initial_value.style.display='none';
-	} else if ( legal_form_elm[1].checked==true ) {
+                if ($('#spb_map_delivery_office_info').length && $('#spb_map_area').length){
+                    $('#spb_map_delivery_office_info').css("top","-40px;");
+                    $('#spb_map_area').css("top","-245px;");
+                }                
+	} else if ( legal_form_elm[1].checked===true ) {
 		org_name_info.style.display='table-cell';
 		org_name_value.style.display='table-cell';
 		org_inn_info.style.display='table-cell';
@@ -891,6 +920,10 @@ function set_legal_form() {
                 bank_name_value.style.display='inline';
                 gen_manager_initial_info.style.display='inline';
                 gen_manager_initial_value.style.display='inline';
+                if ($('#spb_map_delivery_office_info').length && $('#spb_map_area').length){
+                    $('#spb_map_delivery_office_info').css("top","-20px;");
+                    $('#spb_map_area').css("top","-225px;");
+                }
 		
 	}
 }
@@ -1049,7 +1082,7 @@ function ChekUserForma(){
 
 function do_err(err){
 	console.log(err);
-    return true
+    return true;
 }
 
 onerror=do_err;
@@ -1423,15 +1456,19 @@ function pressbutt_load(subm,dir,copyrigh,protect,psubm){
         // Каталог товаров
         if(!dir) dir='';
         if(subm!=''){
-            var SUBMENU = document.getElementById("m"+subm).style;
-            SUBMENU.visibility = 'visible';
-            SUBMENU.position = 'relative';
+			if (typeof($("m"+psubm).css('style'))!=='undefined'){
+				var SUBMENU = $("m"+psubm).css('style');//document.getElementById("m"+subm).style;
+				SUBMENU.visibility = 'visible';
+				SUBMENU.position = 'relative';
+			}
         }
         // Каталог статей
         if(psubm!=''){
-            var PSUBMENU = document.getElementById("m"+psubm).style;
-            PSUBMENU.visibility = 'visible';
-            PSUBMENU.position = 'relative';
+			if (typeof($("m"+psubm).css('style'))!=='undefined'){
+				var PSUBMENU = $("m"+psubm).css('style');//document.getElementById("m"+psubm).style;
+				PSUBMENU.visibility = 'visible';
+				PSUBMENU.position = 'relative';				
+			}
         }
     }
 }
@@ -1510,10 +1547,10 @@ function OrderChek()
     var s2=window.document.forms.forma_order.name_person.value;
     var s3=window.document.forms.forma_order.tel_name.value;
     var s4=window.document.forms.forma_order.adr_name.value;
-    if (document.getElementById('#tk_other') && typeof ($('#tk_other').attr('disabled'))==='undefined'){
+    if (document.getElementById('#tk_other') && typeof ($('#tk_other').prop('disabled'))==='undefined'){
         var s5_1=$('#tk_other').val();
     }
-    if (document.getElementById('tk_list') && typeof ($('#tk_other').attr('disabled'))==='string'){
+    if (document.getElementById('tk_list') && typeof ($('#tk_other').prop('disabled'))==='string'){
         var s5_1=$("input[type=radio][name='tk_list_item']:checked").val();
     }
     if (document.getElementById('firstname')){
@@ -1576,24 +1613,25 @@ function OrderChek()
 					return false;
 				}
 			}
-			//alert('100');
+
 			document.forma_order.submit();
 		}
 	} else {
 		if (s1==="" || 
-            s2==="" || 
-            s3==="" || 
-            s5_1==="" ||
-            s5_2==="" ||
-            s5_3==="" ||
-            s5_4==="" ||
-            s5_5==="" ||
-            s5_6==="" ||
-            s5_7==="" ||
-			s5_8==="" ||
-			s5_9==="" ||
-			s5_10==="") {
-			alert("Ошибка заполнения формы заказа.\nДанные отмеченные флажками заполнять обязательно! ");
+                    s2==="" || 
+                    s3==="" || 
+                    s5_1==="" ||
+                    s5_2==="" ||
+                    s5_3==="" ||
+                    s5_4==="" ||
+                    s5_5==="" ||
+                    s5_6==="" ||
+                    s5_7==="" ||
+                    s5_8==="" ||
+                    s5_9==="" ||
+                    s5_10==="") 
+                {
+                    alert("Ошибка заполнения формы заказа.\nДанные отмеченные флажками заполнять обязательно! ");
 		} else if (bad===1) {
 			alert("Ошибка заполнения формы заказа.\nВыберите доставку!");
 		} else if (document.getElementById('mail').value.toLowerCase().search(/^[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/) === -1) {
@@ -1646,7 +1684,9 @@ function OrderChek()
 					return false;
 				}
 			}
-			//alert('200');
+			if ($('#tk_delivery_points_list').length && $('#adr_name').length) {
+                            $('#adr_name').val($('#adr_name').val()+'Самовывоз в Санкт-Петербурге - ТК Возовоз - '+$('#tk_delivery_points_list').val().replace("Адрес:", ""));
+                        }
 			document.forma_order.submit();
 		}	
 	}
