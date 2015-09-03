@@ -1276,25 +1276,40 @@ fillTKtablePart();
                 });
                 } else $("#search1").popover('hide');
                 });
-                        if ($('#delivery_warning').length) {
+                if ($('#delivery_warning').length) {
                 //console.log(typeof(document.getElementById('delivery_warning'))); 
                 var req = new Subsys_JsHttpRequest_Js();
                         var xid = document.getElementById('seldelivery').value;
                         var sum = document.getElementById('OrderSumma').value;
                         var wsum = document.getElementById('WeightSumma').innerHTML;
                         req.onreadystatechange = function() {
-                        if (req.readyState == 4) {
-                        if (req.responseJS) {
-                        var z = req.responseJS.total;
-                                if (Number(z) < 5000)
-                        {
-                        document.getElementById('delivery_warning').style.display = "table-cell";
-                        } else if (Number(z) >= 5000) {
-                        document.getElementById('delivery_warning').style.display = "none";
-                        }
-                        }
-                        }
-                        }
+                            if (req.readyState == 4) {
+                                if (req.responseJS) {
+                                    var z=(req.responseJS.total||'');	
+                                    var city=(req.responseJS.city||'');
+
+                                    if (Number(z)<5000 && Number(xid)!==69 && city!=='sp'){
+                                       document.getElementById('delivery_warning').style.display="table-cell";
+                                    } else if (Number(z)>=5000) {
+                                      document.getElementById('delivery_warning').style.display="none";
+                                    }
+                                    //для питера модифицируем корзину удаляя все поля для цены < 1000
+                                    if (((Number(xid)===69 || Number(xid)===0 || isNaN(Number(xid))) && city==='sp') && Number(z)<1000){
+                                        $('#delivery_warning').html('Минимальная сумма заказа в интернет-магазине PROДАЧА в Санкт-Петербурге составляет 1000 руб. Пожалуйста, дополните ваш заказ до минимальной суммы.');
+                                        $('#delivery_warning').css({'display':'table-cell','font-family':'tahoma', 'font-size':'12px'});
+                                        $("form[name='forma_order']>table:eq(0) tr:eq(0)").css('display','none');
+                                        $("form[name='forma_order']>table:eq(0) tr:eq(1)").css('display','none');
+                                        $("form[name='forma_order']>table:eq(0) tr:eq(2)").css('display','none');
+                                        $("form[name='forma_order']>table:eq(0) tr:eq(4)").css('display','none');
+                                        $("form[name='forma_order']>table:eq(0) tr:eq(5)").css('display','none');
+                                        $("form[name='forma_order']>table:eq(0) tr:eq(6)").css('display','none');
+                                        $("form[name='forma_order']>table:eq(0) tr:eq(7)").css('display','none');
+                                        $("form[name='forma_order']>table:eq(0) tr:eq(9)").css('display','none');
+                                        $('#bin').css('display','none');
+                                    }
+                                }
+                            }
+                        };
                 req.caching = false;
                         // Подготваливаем объект.
                         // Реальное размещение
