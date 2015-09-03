@@ -125,7 +125,15 @@ function delivery($obj,$deliveryID,$totalsumma=0) {
         $isfolder=1; //Если не прислали ID, значит прислали 0 идентификатор, который является папкой корневых
         $PID=false;
         $deliveryID=0; //Присваиваем нулевой идентификатор, если ничего не прислали
-        $sqlvariants="select * from ".$table." where (enabled='1' and PID='0') order by city";
+        if ($_COOKIE['sincity']=="sp") {
+            if ($totalsumma>=1000 && $totalsumma<=4999) {
+            $sqlvariants="select id,city,300 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$table." where (enabled='1' and PID='0') order by city";                
+            }
+            if ($totalsumma>=5000) {
+            $sqlvariants="select id,city,price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$table." where (enabled='1' and PID='0') order by city";                
+            }            
+        } else
+            $sqlvariants="select id,city,price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$table." where (enabled='1' and PID='0') order by city";
         //echo $sqlvariants;
     }
     $resultvariants=mysql_query($sqlvariants);// Принимаем варианты
