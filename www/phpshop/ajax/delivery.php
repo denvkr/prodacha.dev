@@ -31,7 +31,16 @@ function GetDeliveryPrice($deliveryID,$sum,$weight=0) {
 	
 	
     if(!empty($deliveryID)) {
-        $sql="select * from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";
+        if ($_COOKIE['sincity']=="sp" && $deliveryID==69) {
+            if ($sum>=1000 && $sum<=4999) {
+                $sql="select id,city,300 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";
+            }
+            if ($sum>=5000){
+                $sql="select id,city,price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";                            
+            }
+        } else {
+                $sql="select * from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";            
+        }
         $result=mysql_query($sql);
         $num=mysql_numrows($result);
         $row = mysql_fetch_array($result);
@@ -77,7 +86,8 @@ $dellist=delivery(false,$_REQUEST['xid'],$totalsumma-$GetDeliveryPrice);
 $_RESULT = array(
         'delivery' => $GetDeliveryPrice,
         'dellist'=> $dellist,
-        'total' => $totalsumma
+        'total' => $totalsumma,
+        'city' => $_COOKIE['sincity']
 ); 
 
 // Перехват модуля в начале функции
