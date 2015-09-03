@@ -72,8 +72,8 @@
 	<link rel="stylesheet" href="@php echo $GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin']; php@/style.css" type="text/css">	
 	<script type="text/javascript" src="@php echo $GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].chr(47); php@javascript/jquery.pajinate.min.js"></script>
 	<!-- Подключаем иконки -->
-	<link rel="shortcut icon" href="http://www.prodacha.ru/UserFiles/Image/favicon.ico" type="image/x-icon">
-	<link rel="icon" href="http://www.prodacha.ru/UserFiles/Image/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="http://www.prodacha.ru/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="http://www.prodacha.ru/favicon.ico" type="image/x-icon">
 	<!-- Подключаем javascript библиотеку CMS -->
 	<script type="text/javascript" src="java/phpshop.js"></script>
 	<!-- Подключаем совместимость с браузерами -->
@@ -202,11 +202,24 @@
 	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 	
 	  ga('create', 'UA-29201270-1', 'auto');
-	  ga('require', 'displayfeatures');     
+	  ga('require', 'displayfeatures'); 
+	  @php	
+			if( isset( $_COOKIE['prodacha_testers'] ) ) {
+				$htmloutput="ga('set', 'dimension1', 'prodacha_testers');";
+				echo $htmloutput;
+			}
+	  php@ 	  
 	  ga('send', 'pageview');
 	
 	</script>
-		
+    <script src="https://api-maps.yandex.ru/2.1-dev/?lang=ru_RU&load=package.full&mode=debug&onerror=mymaperror(err)" type="text/javascript"></script>
+	<script src="/geopointsgroup.js" type="text/javascript"></script>
+    <!--<script src="placemark.js" type="text/javascript"></script>-->
+    <style>
+        html, body, #map {
+            width: 100%; height: 100%; padding: 0; margin: 0;
+        }
+    </style> 		
 </head>
 
 <body onload="pressbutt_load('@thisCat@','@pathTemplate@','false','false');NavActive('@NavActive@');LoadPath('@ShopDir@');">
@@ -314,7 +327,7 @@
 			<span class="charttitle">Корзина</span>
 			<span class="prods">Товаров:</span><span class="red"><span id="num">@num@</span>&nbsp;шт.</span>
 			<span class="summ">Сумма:</span><span class="red"><span id="sum">@sum@</span>&nbsp;@productValutaName@</span>
-            <span class="charttitle2" id="order" style="display:@orderEnabled@; "><a href="/order/" >Оформить заказ</a></span>
+            <span class="charttitle2" id="order" style="display:@orderEnabled@;"><a href="/order/" >Оформить заказ</a></span>
 		</div>
 	</div>
 	<div id="main">
@@ -450,6 +463,7 @@
 	<!-- RedHelper -->
 	<script id="rhlpscrtg" type="text/javascript" charset="utf-8" src="https://web.redhelper.ru/service/main.js?c=prodacha"></script>
 	<!--/Redhelper -->
+
 </body>
 
 </html>
