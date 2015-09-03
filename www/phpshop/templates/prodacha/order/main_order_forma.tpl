@@ -22,7 +22,7 @@
       <td> @orderDelivery@ </td>
     </tr>
     <tr>
-      <td id="delivery_warning" align="left" colspan="2" style="font-size: 10px; padding-left: 170px; display:none">* Доставка по Москве производится для заказов от 5000 руб. Заказ стоимостью<br /> менее 5000 руб. Вы можете забрать самовывозом из наших магазинов.</td>
+      <td id="delivery_warning" align="left" colspan="2" style="font-size: 10px; padding-left: 170px; display:none;">* Доставка по Москве производится для заказов от 5000 руб. Заказ стоимостью<br /> менее 5000 руб. Вы можете забрать самовывозом из наших магазинов.</td>
     </tr>
     <tr valign="top">
       <td align="right"> E-mail: </td>
