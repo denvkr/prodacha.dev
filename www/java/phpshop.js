@@ -731,31 +731,31 @@ function UpdateDelivery(xid) {
                 document.getElementById('TotalSumma').innerHTML = (req.responseJS.total||'');
                 document.getElementById('seldelivery').innerHTML = (req.responseJS.dellist||'');
             	//console.log(req.responseJS.dellist);			
-					var z=req.responseJS.total;	
-					
-					if (Number(z)<5000)
-					{
-					   document.getElementById('delivery_warning').style.display="table-cell";
-					/*
-						$("#var_1").prop("disabled", true);
-						$("#var_1").hide();
-							
-						var firstVal = $('#dostavka_metod option:visible:first').val();
-							
-						if (flag==false)
-						{	
-							$('#dostavka_metod').val(firstVal);
-								flag = true;
-						}
-					*/
-					} else if (Number(z)>=5000) {
-					  document.getElementById('delivery_warning').style.display="none";
-					}
-					
+                var z=(req.responseJS.total||'');	
+                var city=(req.responseJS.city||'');
 
+                if (Number(z)<5000 && Number(xid)!==69 && city!=='sp'){
+                   document.getElementById('delivery_warning').style.display="table-cell";
+                } else if (Number(z)>=5000) {
+                  document.getElementById('delivery_warning').style.display="none";
+                }
+                //для питера модифицируем корзину удаляя все поля для цены < 1000
+                if (((Number(xid)===69 || Number(xid)===0) && city==='sp') && Number(z)<1000){
+                    $('#delivery_warning').html('Минимальная сумма заказа в интернет-магазине PROДАЧА в Санкт-Петербурге составляет 1000 руб. Пожалуйста, дополните ваш заказ до минимальной суммы.');
+                    $('#delivery_warning').css({'display':'table-cell','font-family':'tahoma', 'font-size':'12px'});
+                    $("form[name='forma_order']>table:eq(0) tr:eq(0)").css('display','none');
+                    $("form[name='forma_order']>table:eq(0) tr:eq(1)").css('display','none');
+                    $("form[name='forma_order']>table:eq(0) tr:eq(2)").css('display','none');
+                    $("form[name='forma_order']>table:eq(0) tr:eq(4)").css('display','none');
+                    $("form[name='forma_order']>table:eq(0) tr:eq(5)").css('display','none');
+                    $("form[name='forma_order']>table:eq(0) tr:eq(6)").css('display','none');
+                    $("form[name='forma_order']>table:eq(0) tr:eq(7)").css('display','none');
+                    $("form[name='forma_order']>table:eq(0) tr:eq(9)").css('display','none');
+                    $('bin').css('display','none');
+                }
             }
         }
-    }
+    };
     req.caching = false;
     // Подготваливаем объект.
     // Реальное размещение
@@ -1003,6 +1003,10 @@ function NavActive(nav){
     if(document.getElementById(nav)){
         var IdStyle = document.getElementById(nav);
         IdStyle.className='menu_bg';
+        //возвращаем сласс charttitle2 в элемент span class=menu_bg id=order
+        if ($('.menu_bg').length && $('.menu_bg').prop('id')==='order'){
+           $('.menu_bg').prop('class','charttitle2');
+        }
     }
 }
 
