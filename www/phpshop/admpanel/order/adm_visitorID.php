@@ -199,10 +199,10 @@ function actionStart() {
     $Tab1 = $PHPShopGUI->setField(__("Компания"), $PHPShopGUI->setTextarea('person[org_name]', PHPShopSecurity::TotalClean($order['Person']['org_name']), 'none', 200), 'left');
 
     // Дополнительная информация по заказу
-    $Tab1.=$PHPShopGUI->setField(__("Дополнительная информация"), $PHPShopGUI->setTextarea('status[maneger]', PHPShopSecurity::TotalClean($status['maneger']), 'none', '370px'), 'left') . $PHPShopGUI->setLine();
+    $Tab1.=$PHPShopGUI->setField(__("Дополнительная информация"), $PHPShopGUI->setTextarea('status[maneger]', $status['maneger'], 'none', '370px'), 'left') . $PHPShopGUI->setLine();//PHPShopSecurity::TotalClean()
 
     // Адрес доставки
-    $Tab1.=$PHPShopGUI->setField(__("Адрес доставки"), $PHPShopGUI->setTextarea('person[adr_name]', PHPShopSecurity::TotalClean($order['Person']['adr_name']), 'none', 200, 60), 'left');
+    $Tab1.=$PHPShopGUI->setField(__("Адрес доставки"), $PHPShopGUI->setTextarea('person[adr_name]', $order['Person']['adr_name'], 'none', 200, 60), 'left'); //PHPShopSecurity::TotalClean()
 
     // ФИО покупателя
     $Tab1.=$PHPShopGUI->setField(__("Покупатель"), $PHPShopGUI->setTextarea('person[name_person]', PHPShopSecurity::TotalClean($order['Person']['name_person']), 'none', '370px', '30px') . $PHPShopGUI->setLine() .
