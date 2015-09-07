@@ -1,51 +1,5 @@
 function initgeoobjects() {
 		// Создаем геообъект
-        myGeoObject1 = new ymaps.GeoObject({
-            // Описание геометрии.
-            geometry: {
-                type: "Point",
-                coordinates: [59.9073771,30.4030378]
-            },
-            // Свойства.
-            properties: {
-                // Контент метки.
-                iconContent: 'ул. Хрустальная',
-                hintContent: 'Адрес:Санкт-Петербург,ул. Хрустальная, д. 27, лит. Б. ‚Въезд со стороны ул. 2-ой Луч д. 8',
-				// Чтобы балун и хинт открывались на метке, необходимо задать ей определенные свойства.
-				//balloonContentHeader: "Адрес:",
-				//balloonContentBody: "Санкт-Петербург,ул. Хрустальная, д. 27, лит. Б. ‚Въезд со стороны ул. 2-ой Луч д. 8",
-				//balloonContentFooter: ""               
-            }
-        }, {
-				// Опции.
-				// Иконка метки будет растягиваться под размер ее содержимого.
-				preset: 'islands#blackStretchyIcon',
-				// Метку можно перемещать.
-				draggable: false
-        });
-		
-		// Создаем геообъект
-        myGeoObject2 = new ymaps.GeoObject({
-            // Описание геометрии.
-            geometry: {
-                type: "Point",
-                coordinates: [59.8941675,30.456874]
-            },
-            // Свойства.
-            properties: {
-                // Контент метки.
-				iconContent: 'ул. Крыленко',
-				hintContent: 'Адрес:Санкт-Петербург,ул. Крыленко, д. 8. Въезд со стороны пр. Дальневосточный д. 15',              
-            }
-        }, {
-				// Опции.
-				// Иконка метки будет растягиваться под размер ее содержимого.
-				preset: 'islands#blackStretchyIcon',
-				// Метку можно перемещать.
-				draggable: false
-        });
-		
-		// Создаем геообъект
         myGeoObject3 = new ymaps.GeoObject({
             // Описание геометрии.
             geometry: {
@@ -56,7 +10,11 @@ function initgeoobjects() {
             properties: {
                 // Контент метки.
 				iconContent: 'ул. Латышских стрелков',
-				hintContent: 'Адрес:Санкт-Петербург,ул. Латышских стрелков, д. 29, корп. 3, лит. Б',              
+				hintContent: 'ул. Латышских стрелков, д. 29, корп. 3, лит. Б.<br>Пн — Пт: с 9:00 до 21:00. Сб: с 10:00 до 19:00',              
+				// Чтобы балун и хинт открывались на метке, необходимо задать ей определенные свойства.
+				//balloonContentHeader: "Адрес:",
+				//balloonContentBody: "ул. Латышских стрелков, д. 29, корп. 3, лит. Б",
+				//balloonContentFooter: ""               
             }
         }, {
 				// Опции.
@@ -71,13 +29,13 @@ function initgeoobjects() {
             // Описание геометрии.
             geometry: {
                 type: "Point",
-                coordinates: [59.929369,30.325702]
+                coordinates: [59.907844,30.403256]
             },
             // Свойства.
             properties: {
                 // Контент метки.
-				iconContent: 'ул. Садовая',
-				hintContent: 'Адрес:Санкт-Петербург,ул. Садовая, д. 28, корп. 5',              
+				iconContent: 'ул. Хрустальная',
+				hintContent: 'ул. Хрустальная, д. 27, лит. А. Въезд со стороны ул. 2-ой Луч д. 8.<br>Пн — Пт: с 9:00 до 19:00.',              
             }
         }, {
 				// Опции.
@@ -97,7 +55,7 @@ function initgeoobjects() {
             properties: {
                 // Контент метки.
 				iconContent: 'ул. Домостроительная',
-				hintContent: 'Адрес:Санкт-Петербург,ул. Домостроительная, д. 3, лит. В',              
+				hintContent: 'ул. Домостроительная, д. 3, лит. В.<br>Пн — Пт: с 9:00 до 19:00',              
             }
         }, {
 				// Опции.
@@ -117,7 +75,7 @@ function initgeoobjects() {
             properties: {
                 // Контент метки.
 				iconContent: 'пр. Девятого января',
-				hintContent: 'Адрес:Санкт-Петербург, пр. Девятого января, д. 3, корп. 1',              
+				hintContent: 'пр. Девятого января, д. 3, корп. 1.<br>Пн — Пт: с 9:00 до 19:00',              
             }
         }, {
 				// Опции.
@@ -137,7 +95,7 @@ function initgeoobjects() {
             properties: {
                 // Контент метки.
 				iconContent: 'наб. р. Карповки',
-				hintContent: 'Адрес:Санкт-Петербург, наб. р. Карповки, д. 5, лит. М',              
+				hintContent: 'наб. р. Карповки, д. 5, лит. М.<br>Въезд со стороны ул. Профессора Попова д. 4.<br>Въезд на территорию платный - 100 руб/час.<br>Пн — Пт: с 9:00 до 19:00.',              
             }
         }, {
 				// Опции.
@@ -157,7 +115,7 @@ function initgeoobjects() {
             properties: {
                 // Контент метки.
 				iconContent: 'ул. Кубинская 75',
-				hintContent: 'Адрес:Санкт-Петербург,ул. Кубинская, д. 75, стр. 2, лит. А',              
+				hintContent: 'ул. Кубинская, д. 75, стр. 2, лит. А.<br>Пн — Пт: с 9:00 до 19:00',              
             }
         }, {
 				// Опции.
@@ -177,7 +135,7 @@ function initgeoobjects() {
             properties: {
                 // Контент метки.
 				iconContent: 'ул. Кубинская 80',
-				hintContent: 'Адрес:Санкт-Петербург,ул. Кубинская, д.80, лит. К',              
+				hintContent: 'ул. Кубинская, д.80, лит. К.<br>Пн — Пт: с 9:00 до 19:00. Сб: с 10:00 до 19:00',              
             }
         }, {
 				// Опции.
@@ -197,7 +155,7 @@ function initgeoobjects() {
             properties: {
                 // Контент метки.
 				iconContent: 'ул. Мебельная',
-				hintContent: 'Адрес:Санкт-Петербург,ул. Мебельная, д. 2, лит. В',              
+				hintContent: 'ул. Мебельная, д. 2, лит. В.<br>Пн — Пт: с 9:00 до 19:00. Сб: с 10:00 до 19:00',              
             }
         }, {
 				// Опции.
@@ -216,8 +174,8 @@ function initgeoobjects() {
             // Свойства.
             properties: {
                 // Контент метки.
-				iconContent: 'Московское шоссе, д.25',
-				hintContent: 'Адрес:Санкт-Петербург, Московское шоссе, д.25, корп. 1, лит. Ж',              
+				iconContent: 'Московское шоссе',
+				hintContent: 'Московское шоссе, д.25, корп. 1, лит. Ж.<br>Пн — Пт: с 9:00 до 19:00',              
             }
         }, {
 				// Опции.
@@ -237,7 +195,7 @@ function initgeoobjects() {
             properties: {
                 // Контент метки.
 				iconContent: 'ул. Политехническая',
-				hintContent: 'Адрес:Санкт-Петербург,ул. Политехническая, д. 7, корп. 5, лит. Л',              
+				hintContent: 'ул. Политехническая, д. 7, корп. 5, лит. Л.<br>Пн — Пт: с 9:00 до 19:00',              
             }
         }, {
 				// Опции.
@@ -246,8 +204,7 @@ function initgeoobjects() {
 				// Метку можно перемещать.
 				draggable: false
         });
-	return [myGeoObject1,myGeoObject2,
-            myGeoObject3,myGeoObject4,
+	return [myGeoObject3,myGeoObject4,
             myGeoObject5,myGeoObject6,
             myGeoObject7,myGeoObject8,
             myGeoObject9,myGeoObject10,
