@@ -38,10 +38,22 @@ class PHPShopDelivery extends PHPShopObj {
                     $addweight=0;
                 }
                 $addweight=ceil($addweight/500)*$row['taxa'];
-                $endprice=$row['price']+$addweight;
+                if ($this->objID==69 && $sum>=1000 && $sum<5000) {
+                   $endprice=300+$addweight; 
+                } else if ($this->objID==69 && $sum>=5000) {
+                   $endprice=0+$addweight;                     
+                } else {
+                    $endprice=$row['price']+$addweight;                    
+                }
                 return $endprice;
             } else {
-                return $row['price'];
+                if ($this->objID==69 && $sum>=1000 && $sum<5000) {
+                    return 300;
+                } else if ($this->objID==69 && $sum>=5000) {
+                    return 0;                    
+                }    else {
+                    return $row['price'];
+                }
             }
         }
     }
