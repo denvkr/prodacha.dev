@@ -6,7 +6,7 @@
 /**
  * Поддержка JavaScript функций
  * @package PHPShopJavaScript
- * @author PHPShop Software
+ * @author PHPShop Software,Denis Krasavin
  * @version 2.1
  */
 
@@ -249,7 +249,7 @@ function UpdateDelivery(xid) {
     if (Number(xid)===10 || Number(xid)===13 || Number(xid)===14 || Number(xid)===43 || Number(xid)===69) {
             var delivery_options=document.getElementById('var_'+xid);
             //alert('var_'+xid);
-            if ( typeof(delivery_options)!=='undefined' && delivery_options.selected===true && (Number(xid)===10 || Number(xid)===13 || Number(xid)===14 || Number(xid)===43) ) {
+            if ( typeof(delivery_options)!=='undefined' && delivery_options.selected===true && (Number(xid)===10 || Number(xid)===13 || Number(xid)===14 || Number(xid)===43 || Number(xid)===69) ) {
                     //alert('var_'+xid);
                     document.getElementById('address_and_info').innerHTML='Дополнительная<br>информация:';
                     if (typeof(adr_name_img) !== 'undefined' && adr_name_img !== null) {
@@ -298,10 +298,12 @@ function UpdateDelivery(xid) {
 
             }
             if (typeof(delivery_options)!=='undefined' && delivery_options.selected===true && Number(xid)===69) {
+                delete_order_payments_elements();
+                
                 if (!$('#spb_map_area').length){
                     $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").html('<div id="spb_map_delivery_office_info" style="position:relative;top:-245px;">Выберите пункт<br>выдачи заказов</div>');
                     $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").prop('align','right');
-                    $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(1)").html('<div id="spb_map_area" style="position:relative;top:-40px;"><select id="tk_delivery_points_list"></select><div style="height:18px;display:block;"></div><div id="map" style="width:600px; height:400px;"></div></div>');
+                    $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(1)").html('<div id="spb_map_area" style="position:relative;top:-40px;"><select id="tk_delivery_points_list"></select><div style="height:18px;display:block;"></div><div id="map" style="width:630px; height:450px;"></div></div>');
                     $('#order_metod_div').css('display','none');
                     var script   = document.createElement("script");
                     script.type  = "text/javascript";
@@ -310,7 +312,7 @@ function UpdateDelivery(xid) {
                     script.text  += 'var myGeoObjects;';
                     script.text  += 'var myMap = new ymaps.Map("map", {';
                     script.text  += 'center: [59.9281401,30.3626595],';
-                    script.text  += 'zoom: 11,';
+                    script.text  += 'zoom: 10,';
                     script.text  += 'controls: ["zoomControl","rulerControl","routeEditor","searchControl","geolocationControl"]';
                     script.text  += '});';
                     script.text  += 'myGeoObjects=initgeoobjects();';
@@ -335,10 +337,12 @@ function UpdateDelivery(xid) {
                     script.text  += 'if (geoObject.properties.get("iconContent")!==tk_office_adress){';
                     script.text  += 'geoObject.options.set("preset","islands#blackStretchyIcon");';                   
                     script.text  += '} else {';
-                    script.text  += 'geoObject.options.set("preset", "islands#greenStretchyIcon");';                    
+                    script.text  += 'geoObject.options.set("preset", "islands#greenStretchyIcon");';
+                    script.text  += 'myMap.setCenter(geoObject.geometry.getCoordinates(),10);';
                     script.text  += '}';
                     script.text  += '});';  
                     script.text  += '});';
+                    script.text  += '$("#tk_delivery_points_list option:eq(4)").prop("selected","selected");';
                     script.text  += '$("#tk_delivery_points_list").change();';
                     script.text  += '}';                   
                     
@@ -582,7 +586,7 @@ function UpdateDelivery(xid) {
             $('#delivery_city').next().prop('align','middle');	
             $('#delivery_address_info').css("display","table-cell");
             $('#delivery_address').css({"width":"400px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
-			fillTKtablePart();
+            fillTKtablePart();
 	} else if (Number(xid)===68) {
             if (document.getElementById('address_and_info')){
                 document.getElementById('address_and_info').style.display='none';               
