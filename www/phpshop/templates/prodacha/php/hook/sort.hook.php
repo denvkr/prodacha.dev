@@ -272,15 +272,15 @@ function display_tovar_delivery_hook($obj, $row) {
 				$dostavka5=$GLOBALS['SysValue']['lang']['delivery_tab_string5'].$GLOBALS['SysValue']['lang']['delivery_tab_string14'].PHPShopText::br(1).'</br>'.$GLOBALS['SysValue']['lang']['delivery_tab_string3'];
 			}
 			if ($price>=10000 && $price<=19999) {
-				$sub_sql1=" where (enabled='1' and id in ('11','66','23','25')) order by city asc";
+				$sub_sql1=" where (enabled='1' and id in ('67','66','23','25')) order by city asc";
 				$dostavka5=$GLOBALS['SysValue']['lang']['delivery_tab_string5'].$GLOBALS['SysValue']['lang']['delivery_tab_string14'].PHPShopText::br(1).'</br>'.$GLOBALS['SysValue']['lang']['delivery_tab_string3'];
 			}
 			if ($price>=20000 && $price<=49999) {
-				$sub_sql1=" where (enabled='1' and id in ('11','66','26','27','28','38','39','40')) order by city asc";
+				$sub_sql1=" where (enabled='1' and id in ('67','66','26','27','28','38','39','40')) order by city asc";
 				$dostavka5=$GLOBALS['SysValue']['lang']['delivery_tab_string5'].$GLOBALS['SysValue']['lang']['delivery_tab_string15'].PHPShopText::br(1).'</br>'.$GLOBALS['SysValue']['lang']['delivery_tab_string3'];
 			}
 			if ($price>=50000) {
-				$sub_sql1=" where (enabled='1' and id in ('11','66','29','30','31','32','33','34','35','36','37','42')) order by city asc";
+				$sub_sql1=" where (enabled='1' and id in ('67','66','29','30','31','32','33','34','35','36','37','42')) order by city asc";
 			}
 			//доставка отсутствует
 			if ($price<1000) {
@@ -753,10 +753,30 @@ function display_tovar_samovyvoz_hook($obj, $row) {
 	
 	$obj->set('deliveryInfo',$tab7_1_html,true);	
 }
-
-	
+/*
+function display_custom_catalogList_hook($obj,$row,$rout) {
+      if($rout == 'END') {
+          $obj->set('display_custom_catalogList_hook_test','test',true);
+          //return true;
+      }  
+}
+*/
+function ceo_spec_hook($obj,$row,$rout) {
+      if($rout == 'END') {
+        //$obj->set('productName',$obj->get('productName').'test1');
+        $ceo_custom_catalog_productname=read_ceo_custom_menu($_SERVER['DOCUMENT_ROOT'] . '/custom_config/product-name_catalog_rename.txt');
+        foreach ($ceo_custom_catalog_productname as $ceo_custom_catalog_productname_item) {
+            if (in_array($obj->PHPShopNav->getId(),$ceo_custom_catalog_productname_item)) {
+                $productname_mod=str_replace(strtolower($ceo_custom_catalog_productname_item['str1']),strtolower($ceo_custom_catalog_productname_item['str2']),$obj->get('productName'));
+                $obj->set('productName',$productname_mod);
+            }
+        }
+      }
+}
 $addHandler=array
 (
-        'checkStore'=>'checkStore_add_sorttable_hook'
+    'checkStore'=>'checkStore_add_sorttable_hook',
+    '#CID_Category'=>'display_custom_catalogList_hook',
+    'product_grid'=>'ceo_spec_hook'
 );
 ?>
