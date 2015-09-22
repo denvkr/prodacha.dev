@@ -44,13 +44,9 @@ php@
   </h1>
 </div>
 
-<!--
 @php
 	require_once ($_SERVER['DOCUMENT_ROOT'] .'/mtbl_tools_catalog_advanced.php');
 php@
--->
-
-<!--<div>@catalogContent@</div>-->
 
 <div class="simpletextbox_h">
 	@catalogContent_h@
@@ -62,7 +58,7 @@ php@
 <div class="add_catalog" style="display:@display_status2@;">@catalogList1@</div>
 </div>
 @php
-	//require_once ($_SERVER['DOCUMENT_ROOT'] . '/filtr_maker.php');
+	//require_once ($_SERVER['DOCUMENT_ROOT'] . '/custom_config/menu-items_catalog_show-hide-choice-merge-equal.php');
 php@  
 <div class="sorting">
 			<div id="paging_container" class="reviewcontainer">
@@ -102,3 +98,4 @@ php@
 			<div class="simpletextbox">
 						@catalogContent@
 			</div>
+                        <div id="catalogList_hook_test">@display_custom_catalogList_hook_test@</div>
