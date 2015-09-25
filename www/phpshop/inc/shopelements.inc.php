@@ -1,5 +1,5 @@
 <?php
-include_once('filtr_config.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/custom_config/config_functions.php');
 /**
  * Элемент характеристик товаров
  * @author PHPShop Software
@@ -576,7 +576,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
      * @var bool
      */
     var $debug = false;
-    var $cache = true;
+    var $cache = false;
 
     /**
      * Массив полей для очистки в кэше для оптимизации кэша. Вырезаем описание каталога и YML настройки.
@@ -593,7 +593,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
     var $grid = true;
 
     /**
-     * Загружает массив из конфигурационного файла custom_menu_1.txt
+     * Загружает массив из конфигурационного файла menu-lvl1-href-modify_catalog_add-analog.txt
      * @var array
      */
 
@@ -753,16 +753,17 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 
         $this->data = $PHPShopOrm->select(array('id',"case name_rambler when '' then name else name_rambler end as name",'num','parent_to','yml','num_row','num_cow','sort','content','vid','name_rambler','servers','title','title_enabled','title_shablon','descrip','descrip_enabled','descrip_shablon','keywords','keywords_enabled','keywords_shablon','skin','skin_enabled','order_by','order_to','secure_groups','content_h','filtr','icon_description'), $where, array('order' => 'num'), array("limit" => 100), __CLASS__, __FUNCTION__);
 		//print_r($this->data);
-        if (is_array($this->data))
-        	
-        	//читаем данные из файла конфигурации по кастомизированным меню
-        	$this->custom_menu_1=array();
-        	$this->custom_menu_1=custom_menu_1('custom_menu_1.txt');
-        	//print_r($this->custom_menu_1);
+        if (is_array($this->data)){
+            //читаем данные из файла конфигурации по кастомизированным меню
+            $this->custom_menu_1=array();
+            $this->custom_menu_1=custom_menu_1($_SERVER['DOCUMENT_ROOT'] . '/custom_config/menu-lvl1-href-modify_catalog_add-analog.txt');
+            //print_r($this->custom_menu_1);
             foreach ($this->data as $row) {
-				$dis.=$this->custommenuoutput($row,$i);
-                $i++;
-			}
+		$dis.=$this->custommenuoutput($row,$i);
+                $i++;               
+            }            
+        }
+
 /*
         // Замена стилей
         if (is_array($replace)) {
@@ -771,7 +772,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
         }
 */
 		// Перехват модуля
-		$hook = $this->setHook(__CLASS__, __FUNCTION__, $row, 'END');
+		$hook = $this->setHook(__CLASS__, __FUNCTION__, false, 'END');
 		if ($hook)
 			return $hook;
 			
@@ -779,7 +780,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
     }
 
     /**
-     * Вывод подкаталогов
+     * Вывод подкаталогов по типу
      * @param int $n ИД каталога
      * @return string
      */
@@ -791,9 +792,9 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
     	$dis = null;
         
         // Перехват модуля
-        $hook = $this->setHook(__CLASS__, __FUNCTION__, $row, 'START');
-        if ($hook)
-        	return $hook;
+        $hook = $this->setHook(__CLASS__, __FUNCTION__, false, 'START');
+        //if ($hook)
+        //	return $hook;
 
         $PHPShopOrm = new PHPShopOrm($this->objBase);
         $PHPShopOrm->cache_format = $this->cache_format;
@@ -812,71 +813,65 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 
         $data = $PHPShopOrm->select(array('id',"case name_rambler when '' then name else name_rambler end as name",'num','parent_to','yml','num_row','num_cow','sort','content','vid','name_rambler','servers','title','title_enabled','title_shablon','descrip','descrip_enabled','descrip_shablon','keywords','keywords_enabled','keywords_shablon','skin','skin_enabled','order_by','order_to','secure_groups','content_h','filtr','icon_description'), $where, array('order' => 'num'), array('limit' => 100), __CLASS__, __FUNCTION__);
 		//print_r($data);
-        if(is_array($data))
-        	 
+        if(is_array($data)){
             foreach($data as $row) {
             	$id_custom_menu_1_true=false;
                 // Каталог по типу
-				if (strpos($row['name'],"(")===false)
-				{
-					foreach ($this->custom_menu_1 as $custom_menu_1_item) {
-						//делаем исключения
-						if (in_array($row['id'],$custom_menu_1_item)===true) {
-							if ($custom_menu_1_item['id']==$row['id'] && in_array($row['id'],$id_custom_menu_array)===false) {
-								$custom_href=$custom_menu_1_item['href'];
-								$custom_css_option_width=$custom_menu_1_item['css_option_width'];
-								//echo '--'.$custom_menu_1_item['id'].' $cnt='.$custom_menu_1_item['href'].' $css_option_width='.$custom_menu_1_item['css_option_width'].'--<br />';
-								//echo $row['id'];
-								$this->set('catalogName',$row['name'].$custom_href);
-								$this->set('width',"$custom_css_option_width");
-								$this->set('catalogUid',$row['id']);
-								$this->set('catalogTitle',$row['name']);
-								// Перехват модуля
-								$this->setHook(__CLASS__,__FUNCTION__,$row);
-									
-								// Подключаем шаблон
-								$dis.=ParseTemplateReturn($this->getValue('templates.podcatalog_forma'));
-								$id_custom_menu_1_true=true;
-								array_push($id_custom_menu_array,$custom_menu_1_item['id'],$custom_menu_1_item['sub_id']);
-								break;
-							}
-						}				
-					}
-					
-					//if ($id_custom_menu_1_true==false) {
-					//	$id_custom_menu_1_false=true;
-					//}
-										
-					//if ($row['id']==555) echo '$id_custom_menu_1_true='.$id_custom_menu_1_true.'$id_custom_menu_1_false='.(bool)$id_custom_menu_1_false;
-								
-					if ($id_custom_menu_1_true===false && in_array($row['id'],$id_custom_menu_array)===false){
-						//echo ' '.$row['id'].' ';
-						$this->set('catalogName',$row['name']);
-						$this->set('width','');
-						$this->set('catalogUid',$row['id']);
-						$this->set('catalogTitle',$row['name']);
-						// Перехват модуля
-						$this->setHook(__CLASS__,__FUNCTION__,$row);
-						
-						// Подключаем шаблон
-						$dis.=ParseTemplateReturn($this->getValue('templates.podcatalog_forma'));
-					}					
-								
-				}
-            }
-			
+                if (strpos($row['name'],"(")===false)
+                {
+                    $hook = $this->setHook(__CLASS__, __FUNCTION__, $row, 'MIDDLE');
+                    if (!empty($hook))
+                    $row['name']=$hook;
+                    foreach ($this->custom_menu_1 as $custom_menu_1_item) {
+                        //делаем исключения
+                        if (in_array($row['id'],$custom_menu_1_item)===true) {
+                            if ($custom_menu_1_item['id']==$row['id'] && in_array($row['id'],$id_custom_menu_array)===false) {
+                                $custom_href=$custom_menu_1_item['href'];
+                                $custom_css_option_width=$custom_menu_1_item['css_option_width'];
+
+                                $this->set('catalogName',$row['name'].$custom_href);
+                                $this->set('width',"$custom_css_option_width");
+                                $this->set('catalogUid',$row['id']);
+                                $this->set('catalogTitle',$row['name']);
+
+                                // Подключаем шаблон
+                                $dis.=ParseTemplateReturn($this->getValue('templates.podcatalog_forma'));
+                                $id_custom_menu_1_true=true;
+                                array_push($id_custom_menu_array,$custom_menu_1_item['id'],$custom_menu_1_item['sub_id']);
+                                break;
+                            }
+                        }				
+                    }
+
+                    if ($id_custom_menu_1_true===false && in_array($row['id'],$id_custom_menu_array)===false){
+                            //echo ' '.$row['id'].' ';
+                            $this->set('catalogName',$row['name']);
+                            $this->set('width','');
+                            $this->set('catalogUid',$row['id']);
+                            $this->set('catalogTitle',$row['name']);
+
+                            // Подключаем шаблон
+                            $dis.=ParseTemplateReturn($this->getValue('templates.podcatalog_forma'));
+                    }				
+                }
+            }		            
+        }       	 
         return $dis;
     }
 
-
+    /**
+     * Вывод подкаталогов по производителю
+     * @param int $n ИД каталога
+     * @return string
+     */
 	 function subcatalog2($n) {
 
-        $dis="";
+        $dis= null;
         
         // Перехват модуля
-        $hook = $this->setHook(__CLASS__, __FUNCTION__, $row, 'START');
-        if ($hook)
-        	return $hook;
+        $hook = $this->setHook(__CLASS__, __FUNCTION__, false, 'START');
+        //if ($hook)
+        //	return $hook;
         
         $PHPShopOrm = new PHPShopOrm($this->objBase);
         $PHPShopOrm->cache_format=$this->cache_format;
@@ -884,7 +879,8 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
         $PHPShopOrm->debug=$this->debug;
 
         $where['parent_to']='='.$n;
-
+        // Не выводить скрытые каталоги
+        $where['skin_enabled'] = "!='1'";
         // Мультибаза
         if($this->PHPShopSystem->ifValue($this->PHPShopSystem->getSerilizeParam('admoption.base_enabled'))) {
             $where['servers']=" REGEXP 'i".$this->PHPShopSystem->getSerilizeParam('admoption.base_id')."i'";
@@ -900,28 +896,31 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
         //	array_push($data,$row);
         //}
         //print_r($data);
-        if(is_array($data))
+        if(is_array($data)){
             foreach($data as $row) {
 
                 // Каталог по производителю
             	if (strpos($row['name'],"(")!==false) {
-            		//от конца строки ищем (
-            		$start_curl_brace_pos=strrpos($row['name'],"(");
-            		//от конца строки ищем )
-            		$stop_curl_brace_pos=strrpos($row['name'],")");
-            		
-            		$product=substr_replace($row['name'],'',$start_curl_brace_pos,($stop_curl_brace_pos-$start_curl_brace_pos)+1);
-					$this->set('catalogName',$product);
-					$this->set('catalogUid',$row['id']);
-					$this->set('catalogTitle',$row['name']);				
-					// Перехват модуля
-					$this->setHook(__CLASS__,__FUNCTION__,$row);
-	
-					// Подключаем шаблон
-					$dis.=ParseTemplateReturn($this->getValue('templates.podcatalog_forma'));
-				}	
+                    $hook = $this->setHook(__CLASS__, __FUNCTION__, $row, 'MIDDLE');
+                    if (!empty($hook)){
+                     $row['name']=$hook;
+                     //$dis.="==$row[name]==";
+                    } 
+                    //от конца строки ищем (
+                    $start_curl_brace_pos=strrpos($row['name'],"(");
+                    //от конца строки ищем )
+                    $stop_curl_brace_pos=strrpos($row['name'],")");
+
+                    $product=substr_replace($row['name'],'',$start_curl_brace_pos,($stop_curl_brace_pos-$start_curl_brace_pos)+1);
+                    $this->set('catalogName',$product);
+                    $this->set('catalogUid',$row['id']);
+                    $this->set('catalogTitle',$row['name']);				
+                    // Подключаем шаблон
+                    $dis.=ParseTemplateReturn($this->getValue('templates.podcatalog_forma'));
+                }	
 				
-            }
+            }            
+        }
         return $dis;
     }
 
@@ -1041,7 +1040,12 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 			$submenuhead5_1='';	
 			
 			//while ($prod_row1 = mysql_fetch_array($res1,MYSQL_ASSOC)) {
-			foreach ($res1 as $prod_row1) {	
+			foreach ($res1 as $prod_row1) {
+                                // Перехват модуля
+                                $hook=$this->setHook(__CLASS__, __FUNCTION__, $prod_row1, 'MIDDLE');
+                                if (!empty($hook)){
+                                    $prod_row1[name]=$hook;                                    
+                                }
 				if ($prod_row1[category_id]==1) {
 					$submenuhead1_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
 				}
@@ -1086,7 +1090,12 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 			$submenuhead5_2='';	
 				
 			//while ($prod_row2 = mysql_fetch_array($res2,MYSQL_ASSOC)) {
-			foreach ($res2 as $prod_row2) {				
+			foreach ($res2 as $prod_row2) {
+                                // Перехват модуля
+                                $hook=$this->setHook(__CLASS__, __FUNCTION__, $prod_row2, 'MIDDLE');
+                                if (!empty($hook)){
+                                $prod_row2[name]=$hook;                                    
+                                }
 				//от конца строки ищем (
 				$start_curl_brace_pos=strrpos($prod_row2[name],"(");
 				//от конца строки ищем )
@@ -1135,10 +1144,9 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 			$this->set('catalogName',$row['name']);
 			$this->set('catalogid_4',$row['id']);
 			// Перехват модуля
-			//$this->setHook(__CLASS__, __FUNCTION__, $row, 'END');
-		
+			$this->setHook(__CLASS__, __FUNCTION__, $row, 'END'); 		
 			$dis.=$this->parseTemplate($this->getValue('templates.catalog_forma_4'));
-			$this->memory_set('sub_li',$submenuhead);
+			//$this->memory_set('sub_li',$submenuhead);                       
 		} 
 		else if ($row['id']=='290') {
 
@@ -1221,7 +1229,12 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 			$submenuhead7_1='';
 			
 			//while ($prod_row1 = mysql_fetch_array($res1,MYSQL_ASSOC)) {
-			foreach ($res1 as $prod_row1) {	
+			foreach ($res1 as $prod_row1) {
+                                // Перехват модуля
+                                $hook=$this->setHook(__CLASS__, __FUNCTION__, $prod_row1, 'MIDDLE');
+                                if (!empty($hook)){
+                                $prod_row1[name]=$hook;                                    
+                                }
 				if ($prod_row1[category_id]==1) {
 					$submenuhead1_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
 				}
@@ -1277,34 +1290,39 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 			
 			//while ($prod_row2 = mysql_fetch_array($res2,MYSQL_ASSOC)) {
 			foreach ($res2 as $prod_row2) {
-				//от конца строки ищем (
-				$start_curl_brace_pos=strrpos($prod_row2[name],"(");
-				//от конца строки ищем )
-				$stop_curl_brace_pos=strrpos($prod_row2[name],")");
-					
-				$product=substr_replace($prod_row2[name],'',$start_curl_brace_pos,($stop_curl_brace_pos-$start_curl_brace_pos)+1);
-				
-				if ($prod_row2[category_id]==1) {
-					$submenuhead1_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
-				}
-				if ($prod_row2[category_id]==2) {
-					$submenuhead2_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
-				}
-				if ($prod_row2[category_id]==3) {
-					$submenuhead3_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
-				}
-				if ($prod_row2[category_id]==4) {
-					$submenuhead4_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
-				}
-				if ($prod_row2[category_id]==5) {
-					$submenuhead5_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
-				}
-				if ($prod_row2[category_id]==6) {
-					$submenuhead6_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
-				}
-				if ($prod_row2[category_id]==7) {
-					$submenuhead7_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
-				}
+                            // Перехват модуля
+                            $hook=$this->setHook(__CLASS__, __FUNCTION__, $prod_row2, 'MIDDLE');
+                            if (!empty($hook)){
+                                $prod_row2[name]=$hook;                                
+                            }
+                            //от конца строки ищем (
+                            $start_curl_brace_pos=strrpos($prod_row2[name],"(");
+                            //от конца строки ищем )
+                            $stop_curl_brace_pos=strrpos($prod_row2[name],")");
+
+                            $product=substr_replace($prod_row2[name],'',$start_curl_brace_pos,($stop_curl_brace_pos-$start_curl_brace_pos)+1);
+
+                            if ($prod_row2[category_id]==1) {
+                                    $submenuhead1_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
+                            }
+                            if ($prod_row2[category_id]==2) {
+                                    $submenuhead2_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
+                            }
+                            if ($prod_row2[category_id]==3) {
+                                    $submenuhead3_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
+                            }
+                            if ($prod_row2[category_id]==4) {
+                                    $submenuhead4_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
+                            }
+                            if ($prod_row2[category_id]==5) {
+                                    $submenuhead5_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
+                            }
+                            if ($prod_row2[category_id]==6) {
+                                    $submenuhead6_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
+                            }
+                            if ($prod_row2[category_id]==7) {
+                                    $submenuhead7_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
+                            }
 			}
 			$submenuhead.=$submenuhead1_2;
 			$submenuhead.='</ul>';
@@ -1341,10 +1359,8 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 			$this->set('catalogName',$row['name']);
 			$this->set('catalogid_4',$row['id']);
 			// Перехват модуля
-			//$this->setHook(__CLASS__, __FUNCTION__, $row, 'END');
-		
-			$dis.=$this->parseTemplate($this->getValue('templates.catalog_forma_4'));
-			
+			$this->setHook(__CLASS__, __FUNCTION__, $row, 'END');		
+			$dis.=$this->parseTemplate($this->getValue('templates.catalog_forma_4'));			
 		} else if ($row['id']=='292') {
 			// Определяем переменные
 			$this->set('catalogId',$row['id']);
@@ -1426,42 +1442,47 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 			
 			//while ($prod_row1 = mysql_fetch_array($res1,MYSQL_ASSOC)) {
 			foreach ($res1 as $prod_row1) {
-				if ($prod_row1[category_id]==1 && $prod_row1[id]==145) {
-					$submenuhead1_1.='<li><span class="inside_menu_head" style="font-size:12px;width: 99%;"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a>&nbsp;';
-					$submenuhead1_1.='(<a href="/shop/CID_426.html" style="font-size:12px;" title="Бензиновые ямобуры">Бензиновые ямобуры</a>,&nbsp;';
-					$submenuhead1_1.='<a href="/shop/CID_427.html" style="font-size:12px;" title="Бензобуры для земляных работ">Бензобуры для земляных работ</a>)</span></li>';
-				} else if ($prod_row1[category_id]==1 && $prod_row1[id]==146) {
-					$submenuhead1_1.='<li><span class="inside_menu_head" style="font-size:12px;width: 99%;"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a>&nbsp;';
-					$submenuhead1_1.='(<a href="/shop/CID_428.html" style="font-size:12px;" title="Бензобуры для рыбалки">Бензобуры для рыбалки</a>,&nbsp;';
-					$submenuhead1_1.='<a href="/shop/CID_429.html" style="font-size:12px;" title="Мотобуры для рыбалки">Мотобуры для рыбалки</a>)</span></li>';
-				} else if (($prod_row1[category_id]==1 && $prod_row1[id]!=426 && $prod_row1[id]!=427 && $prod_row1[id]!=145) &&
-						   ($prod_row1[category_id]==1 && $prod_row1[id]!=428 && $prod_row1[id]!=429 && $prod_row1[id]!=146)) {
-					$submenuhead1_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
-				}
-				if ($prod_row1[category_id]==2) {
-					$submenuhead2_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
-				}
-				if ($prod_row1[category_id]==3) {
-					$submenuhead3_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
-				}
-				if ($prod_row1[category_id]==4) {
-					$submenuhead4_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
-				}
-				if ($prod_row1[category_id]==5) {
-					$submenuhead5_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
-				}
-				if ($prod_row1[category_id]==6) {
-					$submenuhead6_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
-				}
-				if ($prod_row1[category_id]==7) {
-					$submenuhead7_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
-				}
-				if ($prod_row1[category_id]==8) {
-					$submenuhead8_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
-				}
-				if ($prod_row1[category_id]==9) {
-					$submenuhead9_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
-				}
+                            // Перехват модуля
+                            $hook=$this->setHook(__CLASS__, __FUNCTION__, $prod_row1, 'MIDDLE');
+                            if (!empty($hook)){
+                            $prod_row1[name]=$hook;                                
+                            }
+                            if ($prod_row1[category_id]==1 && $prod_row1[id]==145) {
+                                    $submenuhead1_1.='<li><span class="inside_menu_head" style="font-size:12px;width: 99%;"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a>&nbsp;';
+                                    $submenuhead1_1.='(<a href="/shop/CID_426.html" style="font-size:12px;" title="Бензиновые ямобуры">Бензиновые ямобуры</a>,&nbsp;';
+                                    $submenuhead1_1.='<a href="/shop/CID_427.html" style="font-size:12px;" title="Бензобуры для земляных работ">Бензобуры для земляных работ</a>)</span></li>';
+                            } else if ($prod_row1[category_id]==1 && $prod_row1[id]==146) {
+                                    $submenuhead1_1.='<li><span class="inside_menu_head" style="font-size:12px;width: 99%;"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a>&nbsp;';
+                                    $submenuhead1_1.='(<a href="/shop/CID_428.html" style="font-size:12px;" title="Бензобуры для рыбалки">Бензобуры для рыбалки</a>,&nbsp;';
+                                    $submenuhead1_1.='<a href="/shop/CID_429.html" style="font-size:12px;" title="Мотобуры для рыбалки">Мотобуры для рыбалки</a>)</span></li>';
+                            } else if (($prod_row1[category_id]==1 && $prod_row1[id]!=426 && $prod_row1[id]!=427 && $prod_row1[id]!=145) &&
+                                               ($prod_row1[category_id]==1 && $prod_row1[id]!=428 && $prod_row1[id]!=429 && $prod_row1[id]!=146)) {
+                                    $submenuhead1_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
+                            }
+                            if ($prod_row1[category_id]==2) {
+                                    $submenuhead2_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
+                            }
+                            if ($prod_row1[category_id]==3) {
+                                    $submenuhead3_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
+                            }
+                            if ($prod_row1[category_id]==4) {
+                                    $submenuhead4_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
+                            }
+                            if ($prod_row1[category_id]==5) {
+                                    $submenuhead5_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
+                            }
+                            if ($prod_row1[category_id]==6) {
+                                    $submenuhead6_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
+                            }
+                            if ($prod_row1[category_id]==7) {
+                                    $submenuhead7_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
+                            }
+                            if ($prod_row1[category_id]==8) {
+                                    $submenuhead8_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
+                            }
+                            if ($prod_row1[category_id]==9) {
+                                    $submenuhead9_1.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></span></li>';
+                            }
 				
 			}
 			$submenuhead.=$submenuhead1_1;
@@ -1493,40 +1514,45 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 												
 			//while ($prod_row2 = mysql_fetch_array($res2,MYSQL_ASSOC)) {
 			foreach ($res2 as $prod_row2) {
-				//от конца строки ищем (
-				$start_curl_brace_pos=strrpos($prod_row2[name],"(");
-				//от конца строки ищем )
-				$stop_curl_brace_pos=strrpos($prod_row2[name],")");
-					
-				$product=substr_replace($prod_row2[name],'',$start_curl_brace_pos,($stop_curl_brace_pos-$start_curl_brace_pos)+1);
-				
-				if ($prod_row2[category_id]==1) {
-					$submenuhead1_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
-				}
-				if ($prod_row2[category_id]==2) {
-					$submenuhead2_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
-				}
-				if ($prod_row2[category_id]==3) {
-					$submenuhead3_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
-				}
-				if ($prod_row2[category_id]==4) {
-					$submenuhead4_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
-				}
-				if ($prod_row2[category_id]==5) {
-					$submenuhead5_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
-				}
-				if ($prod_row2[category_id]==6) {
-					$submenuhead6_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';
-				}
-				if ($prod_row2[category_id]==7) {
-					$submenuhead7_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';
-				}
-				if ($prod_row2[category_id]==8) {
-					$submenuhead8_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';
-				}
-				if ($prod_row2[category_id]==9) {
-					$submenuhead9_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';
-				}
+                            // Перехват модуля
+                            $hook=$this->setHook(__CLASS__, __FUNCTION__, $prod_row2, 'MIDDLE');
+                            if (!empty($hook)){
+                            $prod_row2[name]=$hook;                               
+                            }
+                            //от конца строки ищем (
+                            $start_curl_brace_pos=strrpos($prod_row2[name],"(");
+                            //от конца строки ищем )
+                            $stop_curl_brace_pos=strrpos($prod_row2[name],")");
+
+                            $product=substr_replace($prod_row2[name],'',$start_curl_brace_pos,($stop_curl_brace_pos-$start_curl_brace_pos)+1);
+
+                            if ($prod_row2[category_id]==1) {
+                                    $submenuhead1_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
+                            }
+                            if ($prod_row2[category_id]==2) {
+                                    $submenuhead2_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
+                            }
+                            if ($prod_row2[category_id]==3) {
+                                    $submenuhead3_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
+                            }
+                            if ($prod_row2[category_id]==4) {
+                                    $submenuhead4_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
+                            }
+                            if ($prod_row2[category_id]==5) {
+                                    $submenuhead5_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';					
+                            }
+                            if ($prod_row2[category_id]==6) {
+                                    $submenuhead6_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';
+                            }
+                            if ($prod_row2[category_id]==7) {
+                                    $submenuhead7_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';
+                            }
+                            if ($prod_row2[category_id]==8) {
+                                    $submenuhead8_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';
+                            }
+                            if ($prod_row2[category_id]==9) {
+                                    $submenuhead9_2.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$product.'">'.$product.'</a></span></li>';
+                            }
 				
 			}
 			$submenuhead.=$submenuhead1_2;
@@ -1556,9 +1582,8 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 			$this->set('catalogName',$row['name']);
 			$this->set('catalogid_4',$row['id']);
 			// Перехват модуля
-			//$this->setHook(__CLASS__, __FUNCTION__, $row, 'END');
-		
-			$dis.=$this->parseTemplate($this->getValue('templates.catalog_forma_4'));					
+			$this->setHook(__CLASS__, __FUNCTION__, $row, 'END');		
+			$dis.=$this->parseTemplate($this->getValue('templates.catalog_forma_4'));
 		} else {
 			// Определяем переменные
 			$this->set('catalogId',$row['id']);
