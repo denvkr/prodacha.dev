@@ -113,7 +113,7 @@ function showManufProduct(obj)
 function showM()
         {
         $.ajax({
-        url: '/filter.php?category=' + $('input[name=\'category_\']').val(),
+        url: '/custom_config/filter.php?category=' + $('input[name=\'category_\']').val(),
                 type: 'post',
                 dataType: 'json',
                 data: $('#filter_ input[type=\'checkbox\']:visible:checked'),
@@ -1307,6 +1307,7 @@ fillTKtablePart();
                                         $("form[name='forma_order']>table:eq(0) tr:eq(9)").css('display','none');
                                         $('#bin').css('display','none');
                                     }
+                                    $('#dostavka_metod').change();
                                 }
                             }
                         };

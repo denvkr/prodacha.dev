@@ -19,7 +19,27 @@ Optional extensions on the jquery.inputmask base
       validator: "[0-9A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5]",
       cardinality: 1,
       casing: "upper"
-    }
+    },
+				'k': {
+					validator: "[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5.* -]",
+					cardinality: 1,
+					showMaskOnFocus: true
+				},
+				'l': {
+					validator: "[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5 -]",
+					cardinality: 1,
+					showMaskOnFocus: true					
+				},
+				'p': {
+					validator: "[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5. -]",
+					cardinality: 1,
+					showMaskOnFocus: true					
+				},
+				'b': {
+					validator: "[0-9A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5/,. -]",
+					cardinality: 1,
+					showMaskOnFocus: true					
+				}  
   });
   inputmask.extendAliases({
     'url': {

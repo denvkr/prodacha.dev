@@ -82,19 +82,7 @@
 				'*': {
 					validator: "[0-9A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5]",
 					cardinality: 1
-				},
-				'k': {
-					validator: "[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5.* -]",
-					cardinality: 1
-				},
-				'l': {
-					validator: "[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5 -]",
-					cardinality: 1
-				},
-				'p': {
-					validator: "[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5. -]",
-					cardinality: 1
-				}  
+				}
 			},
 			//specify keyCodes which should not be considered in the keypress event, otherwise the preventDefault will stop their default behavior especially in FF
 			ignorables: [8, 9, 13, 19, 27, 33, 34, 35, 36, 37, 38, 39, 40, 45, 46, 93, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123],
@@ -1488,11 +1476,12 @@
 				$(input).trigger("input");
 			}
 		}
-
 		function getPlaceholder(pos, test) {
 			test = test || getTest(pos);
-			if (test["placeholder"] != undefined)
-				return test["placeholder"];
+			if (test["placeholder"] != undefined){
+				//console.log(test["placeholder"]);				
+				return test["placeholder"];				
+			}
 			else if (test["fn"] == null) {
 				if (!opts.keepStatic && getMaskSet()["validPositions"][pos] == undefined) {
 					var tests = getTests(pos),
@@ -1508,11 +1497,15 @@
 							prevTest = tests[i];
 					}
 
-					if (hasAlternations)
+					if (hasAlternations){
+						//console.log(opts.placeholder.charAt(pos % opts.placeholder.length));
 						return opts.placeholder.charAt(pos % opts.placeholder.length);
+					}
 				}
-				return test["def"]
+				//console.log(test["def"]);
+				return test["def"];
 			} else {
+				//console.log(opts.placeholder.charAt(pos % opts.placeholder.length));
 				return opts.placeholder.charAt(pos % opts.placeholder.length);
 			}
 		}
