@@ -41,61 +41,84 @@ function specMainIcon_hook($obj) {
 }
  
 function leftCatal_hook($obj,$row,$rout) {
-		if ($rout == 'END') {
-			$href_html='';
-			switch ($row['id']) {
-				case '9': 	$href_html='<ul>'.
-							'<li class="" ><span class="inside_menu_head"><a href="/shop/CID_9.html" title="Генераторы">Генераторы</a></span></li>'.
-							'</ul>';
-							break;
-				case '60': 	$href_html='<ul>'.
-							'<li class="" ><span class="inside_menu_head"><a href="/shop/CID_60.html" title="Снегоуборщики">Снегоуборщики</a></span></li>'.
-							'</ul>';
-							break;
-				case '77':	$href_html='<ul>'.
-							'<li class="" ><span class="inside_menu_head"><a href="/shop/CID_77.html" title="Цепные пилы">Цепные пилы</a></span></li>'.
-							'</ul>';
-							break;
-				case '211':	$href_html='<ul>'.
-							'<li class="" ><span class="inside_menu_head"><a href="/shop/CID_211.html" title="Тракторы и райдеры">Тракторы и райдеры</a></span></li>'.
-							'</ul>';
-							break;			
-				case '228':	$href_html='<ul>'.
-							'<li class="" ><span class="inside_menu_head"><a href="/shop/CID_228.html" title="Техника STIHL">Техника STIHL</a></span></li>'.
-							'</ul>';
-							break;				
-				case '295':	$href_html='<ul>'.
-							'<li class="" ><span class="inside_menu_head"><a href="/shop/CID_295.html" title="Техника VIKING">Техника VIKING</a></span></li>'.
-							'</ul>';
-							break;				
-				case '134':	$href_html='<ul>'.
-							'<li class="" ><span class="inside_menu_head"><a href="/shop/CID_134.html" title="Техника KARCHER">Техника KARCHER</a></span></li>'.
-							'</ul>';
-							break;				
-				case '300': $href_html='<ul>'.
-							'<li class="" ><span class="inside_menu_head"><a href="/shop/CID_300.html" title="Акции, скидки">Акции, скидки</a></span></li>'.
-							'</ul>';
-							$obj->set('top_position','style="top: -85px !important;"');
-							break;
-				case '472': $href_html='<ul>'.
-							'<li class="" ><span class="inside_menu_head"><a href="/shop/CID_472.html" title="Техника по производителю">Техника по производителю</a></span></li>'.
-							'</ul>';
-							$obj->set('top_position','style="top: -85px !important;"');
-							break;
-			}
-			$obj->set('hrefcatalogPodcatalog',$href_html);			
-		}
-			
-		return true;
+    if ($rout == 'MIDDLE') {
+        $ceo_custom_menu1=read_ceo_custom_menu($_SERVER['DOCUMENT_ROOT'] . '/custom_config/menu-items_leftsubmenu_rename.txt');
+        foreach ($ceo_custom_menu1 as $ceo_custom_menu1_item) {
+            if (in_array($row['parent_to'],$ceo_custom_menu1_item)) {
+                $catalogList_mod=str_ireplace($ceo_custom_menu1_item['str1'],$ceo_custom_menu1_item['str2'],$row['name']);
+                $row['name']=$catalogList_mod;
+            }
+            //echo $ceo_custom_menu1_item['id'].$ceo_custom_menu1_item['str1'].$ceo_custom_menu1_item['str2'];
+        }
+        return $row['name'];            
+    }
+    if ($rout == 'END') {
+            $href_html='';
+            switch ($row['id']) {
+                    case '9': 	$href_html='<ul>'.
+                                            '<li class="" ><span class="inside_menu_head"><a href="/shop/CID_9.html" title="Генераторы">Генераторы</a></span></li>'.
+                                            '</ul>';
+                                            break;
+                    case '60': 	$href_html='<ul>'.
+                                            '<li class="" ><span class="inside_menu_head"><a href="/shop/CID_60.html" title="Снегоуборщики">Снегоуборщики</a></span></li>'.
+                                            '</ul>';
+                                            break;
+                    case '77':	$href_html='<ul>'.
+                                            '<li class="" ><span class="inside_menu_head"><a href="/shop/CID_77.html" title="Цепные пилы">Цепные пилы</a></span></li>'.
+                                            '</ul>';
+                                            break;
+                    case '211':	$href_html='<ul>'.
+                                            '<li class="" ><span class="inside_menu_head"><a href="/shop/CID_211.html" title="Тракторы и райдеры">Тракторы и райдеры</a></span></li>'.
+                                            '</ul>';
+                                            break;			
+                    case '228':	$href_html='<ul>'.
+                                            '<li class="" ><span class="inside_menu_head"><a href="/shop/CID_228.html" title="Техника STIHL">Техника STIHL</a></span></li>'.
+                                            '</ul>';
+                                            break;				
+                    case '295':	$href_html='<ul>'.
+                                            '<li class="" ><span class="inside_menu_head"><a href="/shop/CID_295.html" title="Техника VIKING">Техника VIKING</a></span></li>'.
+                                            '</ul>';
+                                            break;				
+                    case '134':	$href_html='<ul>'.
+                                            '<li class="" ><span class="inside_menu_head"><a href="/shop/CID_134.html" title="Техника KARCHER">Техника KARCHER</a></span></li>'.
+                                            '</ul>';
+                                            break;				
+                    case '300': $href_html='<ul>'.
+                                            '<li class="" ><span class="inside_menu_head"><a href="/shop/CID_300.html" title="Акции, скидки">Акции, скидки</a></span></li>'.
+                                            '</ul>';
+                                            $obj->set('top_position','style="top: -85px !important;"');
+                                            break;
+                    case '472': $href_html='<ul>'.
+                                            '<li class="" ><span class="inside_menu_head"><a href="/shop/CID_472.html" title="Техника по производителю">Техника по производителю</a></span></li>'.
+                                            '</ul>';
+                                            $obj->set('top_position','style="top: -85px !important;"');
+                                            break;
+            }
+            $obj->set('hrefcatalogPodcatalog',$href_html);
+    return true;       
+    }
 }
 
-function subcatalog_hook($obj,$row,$rout) {
+function subcatalog_submehook($obj,$row,$rout) {
+    if ($rout == 'MIDDLE') {
+        $ceo_custom_menu1=read_ceo_custom_menu($_SERVER['DOCUMENT_ROOT'] . '/custom_config/menu-items_leftsubmenu_rename.txt');
+        foreach ($ceo_custom_menu1 as $ceo_custom_menu1_item) {
+            if (in_array($row['parent_to'],$ceo_custom_menu1_item)) {
+                $catalogList_mod=str_ireplace($ceo_custom_menu1_item['str1'],$ceo_custom_menu1_item['str2'],$row['name']);
+                $row['name']=$catalogList_mod;
+            }
+            //echo $ceo_custom_menu1_item['id'].$ceo_custom_menu1_item['str1'].$ceo_custom_menu1_item['str2'];
+        }
+        return $row['name'];            
+    }
+    /*
 	if ($rout == 'START') {
 		if ($row['id']=='300') {
 			$obj->set('top_position','style="top: -25px !important;"');
 		}
 	}	
-	return true;	
+	return true;
+     */	
 }
 
 $addHandler=array
@@ -103,8 +126,9 @@ $addHandler=array
         '#nowBuy'=>'nowBuy_hook',
         '#specMain'=>'specMain_hook',
         'leftCatalTable'=>'leftCatalTable_hook',
-		'custommenuoutput'=>'leftCatal_hook',		
-		'#subcatalog'=>'subcatalog_hook'
+	'custommenuoutput'=>'leftCatal_hook',
+        'subcatalog'=>'leftCatal_hook',
+        'subcatalog2'=>'leftCatal_hook'
 );
 
 ?>
