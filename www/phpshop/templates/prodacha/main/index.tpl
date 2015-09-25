@@ -44,8 +44,8 @@
 	<meta content="General" name="rating">
 	<meta name="ROBOTS" content="ALL">
 	<meta name="viewport" content="width=device-width">
-	<link rel="shortcut icon" href="http://www.prodacha.ru/UserFiles/Image/favicon.ico" type="image/x-icon"> 
-	<link rel="icon" href="http://www.prodacha.ru/UserFiles/Image/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="http://www.prodacha.ru/favicon.ico" type="image/x-icon"> 
+	<link rel="icon" href="http://www.prodacha.ru/favicon.ico" type="image/x-icon">
 	<!--Подключаем JQUERY -->
 	<script type="text/javascript" src="java/lib/jquery-1.11.0.min.js"></script>
 	<!--<script type="text/javascript" src="@php echo $GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].chr(47); php@javascript/lib/jquery-1.11.0.min.js"></script>-->
@@ -98,10 +98,15 @@
 	
 	  ga('create', 'UA-29201270-1', 'auto');
 	  ga('require', 'displayfeatures');     
-	  ga('send', 'pageview');
-	
+	  @php	
+			if( isset( $_COOKIE['prodacha_testers'] ) ) {
+				$htmloutput="ga('set', 'dimension1', 'prodacha_testers');";
+				echo $htmloutput;
+			}
+	  php@ 
+	  ga('send', 'pageview');		
 	</script>
-
+  
 	@php
 		if ($_COOKIE['sincity']=="sp")
 			echo '<style type="text/css">.store, .shop, .shop_cheb{display:none;}</style>';
