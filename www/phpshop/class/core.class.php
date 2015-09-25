@@ -584,10 +584,10 @@ class PHPShopCore {
         	if ( (!isset($_GET['s'])) AND (!isset($_GET['f'])) AND (!isset($_GET['v'])) )
         	{
         		if (strpos($sql,"order by num desc")!==false){
-        			$sql = str_replace(" order by num desc", " order by sortorder asc,price desc,num desc ",$sql);
+        			$sql = str_replace(" order by num desc", " order by sortorder asc,price asc,num desc ",$sql);
         		}
         		if (strpos($sql,"order by name")!==false) {
-        			$sql = str_replace(" order by name", " order by sortorder asc,price desc,name desc ",$sql);
+        			$sql = str_replace(" order by name", " order by sortorder asc,price asc,name ",$sql);
         		}
         	}
         	//echo $sql;        	 
