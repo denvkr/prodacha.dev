@@ -44,12 +44,6 @@ php@
   </h1>
 </div>
 
-
-@php
-	require_once ($_SERVER['DOCUMENT_ROOT'] .'/mtbl_tools_catalog_advanced.php');
-php@
-
-
 <div class="simpletextbox_h">
 	@catalogContent_h@
 </div>
