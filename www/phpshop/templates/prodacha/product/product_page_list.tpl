@@ -15,28 +15,39 @@ php@
       </div>
 	<div class="pagetitle">
 <h1>@php
-		require_once ($_SERVER['DOCUMENT_ROOT'] . '/seotools/seotools.class.php');
-		$ST = new Seotools; 
+	require_once ($_SERVER['DOCUMENT_ROOT'] . '/seotools/seotools.class.php');
+        require_once ($_SERVER['DOCUMENT_ROOT'] . '/custom_config/config_functions.php');
+        $ceo_custom_menu1=read_ceo_custom_menu($_SERVER['DOCUMENT_ROOT'] . '/custom_config/pagecontent-h1_catalog_rename.txt');
+        foreach ($ceo_custom_menu1 as $ceo_custom_menu1_item) {
+            if (in_array($GLOBALS['SysValue']['other']['productId'],$ceo_custom_menu1_item)) {
+                $catalogList_mod=str_ireplace($ceo_custom_menu1_item['str1'],$ceo_custom_menu1_item['str2'],$GLOBALS['SysValue']['other']['catalogCategory']);
+                $oldh1=$catalogList_mod;
+            }
+        }
+        if (!isset($oldh1)){
+            	$oldh1=$GLOBALS['SysValue']['other']['catalogCategory']; //"@catalogName@";
+        }
+        $ST = new Seotools; 
 
-		// Вывод метки, где 
-		// $variable = название переменной (столбца). 
-		// $default_value = значение по умолчанию 
+        // Вывод метки, где 
+        // $variable = название переменной (столбца). 
+        // $default_value = значение по умолчанию 
 
-		$oldh1=$GLOBALS['SysValue']['other']['catalogCategory'];//"@catalogCategory@";
-		if ($GLOBALS['SysValue']['other']['productPageThis']=='ALL') {
-			$cur_page_num=' - все товары';
-		} else {
-			if ($GLOBALS['SysValue']['other']['productPageThis']!=1)
-				$cur_page_num=' - страница '.$GLOBALS['SysValue']['other']['productPageThis'];
-			else
-				$cur_page_num='';	
-		}
-		if (stripos( $oldh1 , '(' )===false) {
-			$dis = $oldh1;		
-		} else {
-			$dis = trim(substr ( $oldh1 ,0, stripos( $oldh1 , '(' )-1 ));		
-		}		
-		echo $ST->get("h1", $dis.$cur_page_num); 
+        //$oldh1=$GLOBALS['SysValue']['other']['catalogCategory'];//"@catalogCategory@";
+        if ($GLOBALS['SysValue']['other']['productPageThis']=='ALL') {
+                $cur_page_num=' - все товары';
+        } else {
+                if ($GLOBALS['SysValue']['other']['productPageThis']!=1)
+                        $cur_page_num=' - страница '.$GLOBALS['SysValue']['other']['productPageThis'];
+                else
+                        $cur_page_num='';	
+        }
+        if (stripos( $oldh1 , '(' )===false) {
+                $dis = $oldh1;		
+        } else {
+                $dis = trim(substr ( $oldh1 ,0, stripos( $oldh1 , '(' )-1 ));		
+        }		
+        echo $ST->get("h1", $dis.$cur_page_num); 
 
 php@</h1>
 					
@@ -48,7 +59,7 @@ php@</h1>
 
 
 @php
-	//require_once ($_SERVER['DOCUMENT_ROOT'] . '/filtr_maker.php');
+	//require_once ($_SERVER['DOCUMENT_ROOT'] . '/custom_config/menu-items_catalog_show-hide-choice-merge-equal.php');
 php@  
 <div class="sorting">
 				<div id="paging_container" class="reviewcontainer">

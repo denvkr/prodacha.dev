@@ -22,7 +22,11 @@
 if(!empty($_POST["org_name"])) {
 echo "Компания: ".$_POST["org_name"]."
 ИНН: ".$_POST["org_inn"]."
-КПП: ".$_POST["org_kpp"];
+КПП: ".$_POST["org_kpp"]."
+Расчетный счет: ".$_POST["annual_number"]."
+БИК банка: ".$_POST["bic_bank_number"]."
+Название банка: ".$_POST["bank_name"]."
+ФИО директора: ".$_POST["gen_manager_initial"];
 }
 php@
 Телефон: @tel@

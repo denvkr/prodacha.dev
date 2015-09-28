@@ -190,11 +190,11 @@ class PHPShopText {
         return $tr;
     }
 	
-    function tr2($Arg=null) {
+    function tr2($Arg=null,$td_count=0) {
         //$Arg = func_get_args();
         $tr = '<tr class=tablerow>';
         foreach ($Arg as $val) {
-            $tr.=PHPShopText::td($val, 'tablerow');
+            $tr.=PHPShopText::td($val, 'tablerow',false,false,$td_count);
         }
         $tr.='</tr>';
         return $tr;
@@ -236,10 +236,16 @@ class PHPShopText {
      * @param string $class класс
      * @param string $colspan колспан
      * @param string $id ид
+     * @param number $td_count кол-во столбцов
      * @return string
      */
-    function td($string, $class = false, $colspan = false, $id = false) {
-        return '<td class="' . $class . '" id="' . $id . '" colspan="' . $colspan . '">' . $string . '</td>';
+    function td($string, $class = false, $colspan = false, $id = false,$td_count=0) {
+        if ($td_count>0) {
+            $css_width=round(100/$td_count);
+            return '<td class="' . $class . '" id="' . $id . '" colspan="' . $colspan . '" style="width:'.$css_width.'%">' . $string . '</td>';            
+        }
+        else
+            return '<td class="' . $class . '" id="' . $id . '" colspan="' . $colspan . '">' . $string . '</td>';
     }
 
     /**

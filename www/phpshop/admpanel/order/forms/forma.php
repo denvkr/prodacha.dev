@@ -153,6 +153,23 @@ $datas = PHPShopDate::dataV($datas, "false");
             <td class=tableright>&nbsp;<?= @$order['Person']['org_kpp'] ?></td>
         </tr>
         <tr class=tablerow>
+            <td class=tablerow>Расчетный счет:</td>
+            <td class=tableright>&nbsp;<?= @$order['Person']['annual_number'] ?></td>
+        </tr>
+        <tr class=tablerow>
+            <td class=tablerow>БИК банка:</td>
+            <td class=tableright>&nbsp;<?= @$order['Person']['bic_bank_number'] ?></td>
+        </tr>
+        <tr class=tablerow>
+            <td class=tablerow>Название банка:</td>
+            <td class=tableright>&nbsp;<?= @$order['Person']['bank_name'] ?></td>
+        </tr>
+        <tr class=tablerow>
+            <td class=tablerow>ФИО директора:</td>
+            <td class=tableright>&nbsp;<?= @$order['Person']['gen_manager_initial'] ?></td>
+        </tr>
+
+        <tr class=tablerow>
             <td class=tablerow>Тел:</td>
             <td class=tableright><?= @$order['Person']['tel_code'] . "-" . @$order['Person']['tel_name'] ?></td>
         </tr>

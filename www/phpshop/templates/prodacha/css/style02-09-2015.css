@@ -3137,16 +3137,3 @@ input[name="gen_manager_initial"]
 {
 	border:2px solid #abadb3;
 }
-table.border1px
-{
-	border:1px solid;
-	width: 700px;
-}
-table.border1px td
-{
-	border:1px solid;
-}
-table.border1px th
-{
-	border:1px solid;
-}

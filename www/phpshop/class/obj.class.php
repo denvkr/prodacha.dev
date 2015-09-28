@@ -45,7 +45,7 @@ class PHPShopObj {
      * Режим кэширования
      * @var bool
      */
-    var $cache = false;
+    var $cache = true;
 
     /**
      * Форматирование кэша

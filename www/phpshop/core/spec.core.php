@@ -10,7 +10,7 @@
 class PHPShopSpec extends PHPShopShopCore {
 
     var $debug = false;
-    var $cache = false;
+    var $cache = true;
     var $cache_format = array('content', 'yml_bid_array');
     var $cell;
 

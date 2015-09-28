@@ -16,7 +16,7 @@ class PHPShopSearch extends PHPShopShopCore {
     var $cell = 1;
     var $line = false;
     var $debug = false;
-    var $cache = false;
+    var $cache = true;
     var $grid = false;
     var $empty_index_action = false;
     

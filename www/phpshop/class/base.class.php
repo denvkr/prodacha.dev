@@ -43,7 +43,7 @@ class PHPShopBase {
      * режим отладки
      * @var bool 
      */
-    var $debug = true;
+    var $debug = false;
 
     /**
      * Подключения к БД

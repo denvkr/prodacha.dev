@@ -18,14 +18,24 @@ php@
   <h1>
 @php
 	require_once ($_SERVER['DOCUMENT_ROOT'] . '/seotools/seotools.class.php');
+        require_once ($_SERVER['DOCUMENT_ROOT'] . '/custom_config/config_functions.php');
+        $ceo_custom_menu1=read_ceo_custom_menu($_SERVER['DOCUMENT_ROOT'] . '/custom_config/pagecontent-h1_catalog_rename.txt');
+        foreach ($ceo_custom_menu1 as $ceo_custom_menu1_item) {
+            if (in_array($GLOBALS['SysValue']['other']['productId'],$ceo_custom_menu1_item)) {
+
+                $catalogList_mod=str_ireplace($ceo_custom_menu1_item['str1'],$ceo_custom_menu1_item['str2'],$GLOBALS['SysValue']['other']['catalogName']);
+                $oldh1=$catalogList_mod;
+            }
+        }
+        if (!isset($oldh1)){
+            	$oldh1=$GLOBALS['SysValue']['other']['catalogName']; //"@catalogName@";
+        }
 	$ST = new Seotools; 
 
 	// Вывод метки, где 
 	// $variable = название переменной (столбца). 
 	// $default_value = значение по умолчанию 
 
-
-	$oldh1=$GLOBALS['SysValue']['other']['catalogName']; //"@catalogName@";
 	if ($GLOBALS['SysValue']['other']['productPageThis']=='ALL') {
 		$cur_page_num=' - все товары';
 	} else {
