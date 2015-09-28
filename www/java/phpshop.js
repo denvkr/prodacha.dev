@@ -1693,7 +1693,7 @@ function OrderChek()
 				}
 			}
 			if ($('#tk_delivery_points_list').length && $('#adr_name').length) {
-                            $('#adr_name').val($('#adr_name').val()+'Самовывоз в Санкт-Петербурге - ТК Возовоз - '+$('#tk_delivery_points_list').val().replace("Адрес:", ""));
+                            $('#adr_name').val($('#adr_name').val()+'Самовывоз в Санкт-Петербурге - ТК Возовоз - '+$('#tk_delivery_points_list').val().replace(/(адрес:)|(<br>)/ig, ""));
                         }
 			document.forma_order.submit();
 		}	
