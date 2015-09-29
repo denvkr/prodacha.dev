@@ -2,6 +2,7 @@
 //ini_set('error_reporting', E_ALL);
 //ini_set('display_errors', 1);
 //ini_set('display_startup_errors', 1);
+
 /**
  * Вывод характеристик в кратком описании  товара
  **/
@@ -83,18 +84,18 @@ function checkStore_add_sorttable_hook($obj, $row) {
     //выводим данные для города
     $tab6_html.='<select id="select_vendor_city" name="select_vendor_city" size="1" onchange="check_varranty_firm_city(\'sort.hook\');">';
     //if ($_COOKIE['sincity']=='other'){
-	if ($service_existing_region_desicion['service_existing_in_current_region']==1) {
-		$sql_tab6="SELECT distinct city FROM ".$GLOBALS['SysValue']['base']['service_and_varranty']." ".$sub_sql[0].$sub_sql2;
-		$no_service_in_moscow=false;
-	} elseif (($service_existing_region_desicion['service_existing_in_current_region']==0 && $service_existing_region_desicion['service_existing_in_few_region']==1 && $service_existing_region_desicion['service_existing_in_moscow']==1)) {
-		$sql_tab6="SELECT distinct city FROM ".$GLOBALS['SysValue']['base']['service_and_varranty']." where brand='".$obj->get('vendorName')."'";
-		$no_service_in_moscow=false;
-	} elseif ($_COOKIE['sincity']!='other' && $service_existing_region_desicion['service_existing_in_current_region']==0 && $service_existing_region_desicion['service_existing_in_few_region']==1 && $service_existing_region_desicion['service_existing_in_moscow']==0) {
-		//$no_service_in_moscow=true;
-		//$sql_tab6='';
-		$sql_tab6="SELECT distinct city FROM ".$GLOBALS['SysValue']['base']['service_and_varranty']." where brand='".$obj->get('vendorName')."'";
-		$no_service_in_moscow=true;
-	}
+    if ($service_existing_region_desicion['service_existing_in_current_region']==1) {
+            $sql_tab6="SELECT distinct city FROM ".$GLOBALS['SysValue']['base']['service_and_varranty']." ".$sub_sql[0].$sub_sql2;
+            $no_service_in_moscow=false;
+    } elseif (($service_existing_region_desicion['service_existing_in_current_region']==0 && $service_existing_region_desicion['service_existing_in_few_region']==1 && $service_existing_region_desicion['service_existing_in_moscow']==1)) {
+            $sql_tab6="SELECT distinct city FROM ".$GLOBALS['SysValue']['base']['service_and_varranty']." where brand='".$obj->get('vendorName')."'";
+            $no_service_in_moscow=false;
+    } elseif ($_COOKIE['sincity']!='other' && $service_existing_region_desicion['service_existing_in_current_region']==0 && $service_existing_region_desicion['service_existing_in_few_region']==1 && $service_existing_region_desicion['service_existing_in_moscow']==0) {
+            //$no_service_in_moscow=true;
+            //$sql_tab6='';
+            $sql_tab6="SELECT distinct city FROM ".$GLOBALS['SysValue']['base']['service_and_varranty']." where brand='".$obj->get('vendorName')."'";
+            $no_service_in_moscow=true;
+    }
     //} else {
     //	$sql_tab6="SELECT distinct city FROM ".$GLOBALS['SysValue']['base']['service_and_varranty']." ".$sub_sql[0].$sub_sql2;
     //}
@@ -251,8 +252,15 @@ function display_tovar_delivery_hook($obj, $row) {
 			$price=intval($row['price']);
 		}			
 	}
+        if ($_COOKIE['sincity']=='sp') {
+            $tab7_html=sp_delivery_tab();
+            $tab7_html.='<div id="dostavka_head_text" style="font-size:18px;padding-top:5px;padding-bottom:5px;"><b>Самовывоз (10 пунктов выдачи в Санкт-Петербурге)</b></div>';
+        } else {
 	//Шапка tab доставка
-	$tab7_html=$GLOBALS['SysValue']['lang']['delivery_tab_string8'];
+	$tab7_html=$GLOBALS['SysValue']['lang']['delivery_tab_string8'];            
+        }
+        
+
 	//надпись ваш город и select с городом
 	if ($price>=1000){
 		//$tab7_html.=$GLOBALS['SysValue']['lang']['warranty_tab_string2'].PHPShopText::nbsp(1);
@@ -337,7 +345,7 @@ function display_tovar_delivery_hook($obj, $row) {
 			if ($_COOKIE['sincity']=='sp'){
 				$city='в Санкт-Петербург';
 			}
-				
+	
 			// для "другого региона" доставки нет
 			if ($price<1000) {
 				$sub_sql1=" where enabled='-1'";
@@ -357,10 +365,14 @@ function display_tovar_delivery_hook($obj, $row) {
 		//$tab7_html.='</select>';
 	}
 	//добавляем в заголовок город доставки
-	$tab7_html.=PHPShopText::nbsp(1).$city.'</b></div>';	
-	
+        if ($_COOKIE['sincity']=='sp'){
+            $tab7_html.=ParseTemplateReturn("page/spb_map.tpl");            
+        } else {
+            $tab7_html.=PHPShopText::nbsp(1).$city.'</b></div>';
+        }
+
 	//запись про стоимость доставки в чебоксарах доставки нет
-	if ($price>=1000 && $_COOKIE['sincity']!='chb'){
+	if ($price>=1000 && $_COOKIE['sincity']!='chb'&& $_COOKIE['sincity']!='sp'){
 		$tab7_html.=PHPShopText::br(1).'</br>'.$GLOBALS['SysValue']['lang']['delivery_tab_string1'].$tovar.$GLOBALS['SysValue']['lang']['delivery_tab_string2'];
 	}	
 
@@ -369,7 +381,7 @@ function display_tovar_delivery_hook($obj, $row) {
 	$sql_tab7="SELECT distinct city,price FROM ".$GLOBALS['SysValue']['base']['delivery']." ".$sub_sql1;
 	$res_tab7=mysql_query($sql_tab7);
 	//$tab7_html.=$sql_tab7;
-	if ($_COOKIE['sincity']!='chb'){
+	if ($_COOKIE['sincity']!='chb' && $_COOKIE['sincity']!='sp'){
 		if ($price>=1000){
 			$tab7_html.='<!--noindex--><table id="select_delivery_rules" name="select_delivery_rules" cellpadding="5" cellspacing="10" col="3">';
 			$tab7_html.='<thead><tr><th style="text-align:left">Условия</th><th style="text-align:left">Стоимость доставки</th><th></th></tr></thead><tbody>';
@@ -568,7 +580,7 @@ function display_tovar_delivery_hook($obj, $row) {
 		$tab7_html.=PHPShopText::br(1).'</br>'.PHPShopText::a('http://prodacha.ru/page/delivery.html',$GLOBALS['SysValue']['lang']['delivery_tab_string4']);
 	}
     // в чебоксарах доставки нет
-	if ($price>=1000 && $_COOKIE['sincity']!='chb') {
+	if ($price>=1000 && $_COOKIE['sincity']!='chb' && $_COOKIE['sincity']!='sp') {
 		$tab7_html.=$dostavka5;
 		if ($_COOKIE['sincity']=='other'){
 			$tab7_html.=PHPShopText::a('http://prodacha.ru/page/delivery.html',$GLOBALS['SysValue']['lang']['delivery_tab_string4']);
@@ -595,11 +607,11 @@ function display_tovar_delivery_hook($obj, $row) {
 	
 	$edostout.='<tr height="25">';
 	$edostout.='<td align="right">Куда:</td>';
-	if ($_COOKIE['sincity']=='sp') {
-		$edostout.='<td align="right"><input type="text" id="edost_to_city" name="edost_to_city" size="35" maxlength="80" data-html="true" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Начните вводить название города" value="Санкт-Петербург"></td>';
-	} else {
+	//if ($_COOKIE['sincity']=='sp') {
+	//	$edostout.='<td align="right"><input type="text" id="edost_to_city" name="edost_to_city" size="35" maxlength="80" data-html="true" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Начните вводить название города" value="Санкт-Петербург"></td>';
+	//} else {
 		$edostout.='<td align="right"><input type="text" id="edost_to_city" name="edost_to_city" size="35" maxlength="80" data-html="true" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Начните вводить название города" value=""></td>';
-	}
+	//}
 	$edostout.='<td align="center"><span id="ToReg">-</span></td>';
 	$edostout.='<td><input type="text" id="edost_zip" name="edost_zip" size="6" maxlength="6" title="для отправки Почтой России"></td>';
 	$edostout.='</tr>';
@@ -662,7 +674,7 @@ function display_tovar_delivery_hook($obj, $row) {
 }
 
 /**
- * Вывод tab с условиями самовывозу по выбранного товара
+ * Вывод tab с условиями самовывозу по выбранному товару
  **/
 function display_tovar_samovyvoz_hook($obj, $row) {
 	$tovar=$row['name'];
@@ -753,6 +765,30 @@ function display_tovar_samovyvoz_hook($obj, $row) {
 	
 	$obj->set('deliveryInfo',$tab7_1_html,true);	
 }
+
+function sp_delivery_tab(){
+    $html=PHPShopText::nbsp(1).$GLOBALS['SysValue']['lang']['warranty_tab_string2'].PHPShopText::nbsp(1);
+    $html.='<select id="select_delivery_city" name="select_delivery_city" size="1" onchange="noop;">';
+    switch ($_COOKIE['sincity']) {
+        case 'm': $mselect='selected';
+            break;
+        case 'sp': $spselect='selected';
+            break;
+        case 'chb': $chbselect='selected';
+            break;
+        case 'other': $otherselect='selected';
+            break;
+        default: $mselect='selected';
+    }
+    //если выбран другой регион то пытаемся выделить г.Москва
+    $html.='<option '.$mselect.' value="c0">Москва</option>';
+    $html.='<option '.$spselect.' value="c1">Санкт-Петербург</option>';
+    $html.='<option '.$chbselect.' value="c2">Чебоксары</option>';
+    $html.='<option '.$otherselect.' value="c3">Другой регион</option>';
+    $html.='</select>'.'<br />';
+    return $html;
+}
+
 /*
 function display_custom_catalogList_hook($obj,$row,$rout) {
       if($rout == 'END') {
@@ -761,6 +797,7 @@ function display_custom_catalogList_hook($obj,$row,$rout) {
       }  
 }
 */
+
 function ceo_spec_hook($obj,$row,$rout) {
       if($rout == 'END') {
         //$obj->set('productName',$obj->get('productName').'test1');
