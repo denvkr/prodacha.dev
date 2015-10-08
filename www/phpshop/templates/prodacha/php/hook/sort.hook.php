@@ -252,12 +252,12 @@ function display_tovar_delivery_hook($obj, $row) {
 			$price=intval($row['price']);
 		}			
 	}
+        $tab7_html=sp_delivery_tab();        
         if ($_COOKIE['sincity']=='sp') {
-            $tab7_html=sp_delivery_tab();
-            $tab7_html.='<div id="dostavka_head_text" style="font-size:18px;padding-top:5px;padding-bottom:5px;"><b>Самовывоз (10 пунктов выдачи в Санкт-Петербурге)</b></div>';
+            $tab7_html.='<div id="dostavka_head_text" style="font-size:18px;padding-top:5px;padding-bottom:5px;"><b>Самовывоз (7 пунктов выдачи в Санкт-Петербурге)</b></div>';
         } else {
 	//Шапка tab доставка
-	$tab7_html=$GLOBALS['SysValue']['lang']['delivery_tab_string8'];            
+	$tab7_html.=$GLOBALS['SysValue']['lang']['delivery_tab_string8'];            
         }
         
 
@@ -768,7 +768,7 @@ function display_tovar_samovyvoz_hook($obj, $row) {
 
 function sp_delivery_tab(){
     $html=PHPShopText::nbsp(1).$GLOBALS['SysValue']['lang']['warranty_tab_string2'].PHPShopText::nbsp(1);
-    $html.='<select id="select_delivery_city" name="select_delivery_city" size="1" onchange="noop;">';
+    $html.='<select id="select_delivery_city" name="select_delivery_city" size="1" onchange="save2_(this.options[this.selectedIndex].value);">';
     switch ($_COOKIE['sincity']) {
         case 'm': $mselect='selected';
             break;
@@ -781,11 +781,11 @@ function sp_delivery_tab(){
         default: $mselect='selected';
     }
     //если выбран другой регион то пытаемся выделить г.Москва
-    $html.='<option '.$mselect.' value="c0">Москва</option>';
-    $html.='<option '.$spselect.' value="c1">Санкт-Петербург</option>';
-    $html.='<option '.$chbselect.' value="c2">Чебоксары</option>';
-    $html.='<option '.$otherselect.' value="c3">Другой регион</option>';
-    $html.='</select>'.'<br />';
+    $html.='<option '.$mselect.' value="msc">Москва</option>';
+    $html.='<option '.$spselect.' value="spb">Санкт-Петербург</option>';
+    $html.='<option '.$chbselect.' value="chb">Чебоксары</option>';
+    $html.='<option '.$otherselect.' value="other">Другой регион</option>';
+    $html.='</select>'.'<br /><br />';
     return $html;
 }
 
@@ -810,10 +810,24 @@ function ceo_spec_hook($obj,$row,$rout) {
         }
       }
 }
+
+function ceo_price_hook($obj,$row,$rout){
+    //из строки берем айди каталога 				
+    if (strpos($_SERVER['REQUEST_URI'],"UID")===false) {
+        if ($obj->PHPShopCategory->getParam('num_row')==1)
+            return '<span class="price_cat_1">Цена: </span>'.$row;
+        else {
+            return '<span class="price_cat_3">Цена:</span>'.$row;    
+        }        
+    } else
+        return $row;
+}
+
 $addHandler=array
 (
     'checkStore'=>'checkStore_add_sorttable_hook',
     '#CID_Category'=>'display_custom_catalogList_hook',
-    'product_grid'=>'ceo_spec_hook'
+    'product_grid'=>'ceo_spec_hook',
+    'add_space_to_price'=>'ceo_price_hook'
 );
 ?>
