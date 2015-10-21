@@ -8,17 +8,30 @@
 	
 	$url=$_SERVER['REQUEST_URI'];
 	$host=$_SERVER['HTTP_HOST'];
-	
-	
+
 	if($host=="lander-mobilk.ru") //меняем lander-mobilk.ru/ на продач
 		{
-			$newhost="phpshop.dev";
+			$newhost="prodacha.ru";
 			
 			header("HTTP/1.1 301 Moved Permanently");
 			header("Location:http://".$newhost.$url);
 			exit;
 		}
-	
+
+	if (stripos($url,'/shop/cid_')!==false && strpos('/', substr($url,-1))!==false){
+            $cid_id_posstart=stripos($url,'/shop/cid_')+10;
+            $cid_id_posend=(strlen($url)-1);
+            $cid_id=intval(substr($url,$cid_id_posstart,($cid_id_posend-$cid_id_posstart)));
+            if ($cid_id==0) {
+		header("HTTP/1.1 301 Moved Permanently");
+		header("Location:/shop/404.html");                
+            } else {
+            //echo $cid_id_posstart.' '.$cid_id_posend.' '.$cid_id;
+            header("HTTP/1.1 301 Moved Permanently");
+            header("Location:http://".$host.'/shop/CID_'.$cid_id.'.html');                
+            }
+            exit();
+        }	
 	
 		include_once "redirects.php";	//массив редректов	
 

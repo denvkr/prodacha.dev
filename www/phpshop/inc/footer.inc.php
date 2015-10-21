@@ -5,8 +5,9 @@
 
 // Перехват модуля
 $PHPShopModules->setHookHandler('footer','footer');
-
+/*
 echo '
   </body>
 </html>';
+*/
 ?>

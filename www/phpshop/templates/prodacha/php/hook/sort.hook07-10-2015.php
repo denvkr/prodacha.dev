@@ -254,7 +254,7 @@ function display_tovar_delivery_hook($obj, $row) {
 	}
         $tab7_html=sp_delivery_tab();        
         if ($_COOKIE['sincity']=='sp') {
-            $tab7_html.='<div id="dostavka_head_text" style="font-size:18px;padding-top:5px;padding-bottom:5px;"><b>Самовывоз (5 пунктов выдачи в Санкт-Петербурге)</b></div>';
+            $tab7_html.='<div id="dostavka_head_text" style="font-size:18px;padding-top:5px;padding-bottom:5px;"><b>Самовывоз (7 пунктов выдачи в Санкт-Петербурге)</b></div>';
         } else {
 	//Шапка tab доставка
 	$tab7_html.=$GLOBALS['SysValue']['lang']['delivery_tab_string8'];            

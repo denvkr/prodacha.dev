@@ -1234,9 +1234,9 @@ fillTKtablePart();
                                 set: 2,
                                 ajax: true,
                                 pole: 3
-                        }, error: function (request, error) {
+                }, error: function (request, error) {
                 console.log(arguments);
-                        alert(" Ошибка ajax: " + error);
+                //alert(" Ошибка ajax: " + error);
                 }, success: function(data) {
                 // Результат поиска
                 if (data != 'false') {
@@ -1261,9 +1261,9 @@ fillTKtablePart();
                                 set: 2,
                                 ajax: true,
                                 pole: 3
-                        }, error: function (request, error) {
+                }, error: function (request, error) {
                 console.log(arguments);
-                        alert(" Ошибка ajax: " + error);
+                //alert(" Ошибка ajax: " + error);
                 }, success: function(data) {
                 // Результат поиска
                 if (data != 'false') {
@@ -1846,21 +1846,59 @@ fillTKtablePart();
                         complete: function() {},
                         success: function(json) {
                         $('#light_box').remove();
-                                location.reload();
-                                if ($('#edost_to_city').length && reg === 'spb') {
-                        $('#edost_to_city').val("Санкт-Петербург");
-                                //$("#edost_to_city").click();
-                                console.log($("#edost_to_city").val());
-                        } else if ($('#edost_to_city').length && reg !== 'spb') {
+                        //if (from===false){
+                        location.reload();
+                        //} else {
+                        //location.assign(location.href+'#tab7');
+                        //}
+                        //if ($('#edost_to_city').length && reg === 'spb') {
+                        //$('#edost_to_city').val("Санкт-Петербург");
+                        //$("#edost_to_city").click();
+                        //console.log($("#edost_to_city").val());
+                        //} else if ($('#edost_to_city').length && reg !== 'spb') {
                         $('#edost_to_city').val("");
-                                //$("#edost_to_city").click();
-                                console.log($("#edost_to_city").val());
-                        }
+                        //$("#edost_to_city").click();
+                        //console.log($("#edost_to_city").val());
+                        //}
                         if ($('#edost_zip').length) {
                         $('#edost_zip').val("");
-                                //$("#edost_to_city").click();
+                        //$("#edost_to_city").click();
                         }
-
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                        console.log('error save_(reg)' + ' ' + textStatus);
+                        }
+                });
+                        }
+                function save2_(reg){
+                $.ajax({
+                url: '/set_region.php',
+                        type: 'post',
+                        data: 'reg=' + reg,
+                        dataType: 'json',
+                        beforeSend: function() {},
+                        complete: function() {},
+                        success: function(json) {
+                        $('#light_box').remove();
+                        //if (from===false){
+                        location.hash='tab7';
+                        location.reload();
+                        //} else {
+                        //location.assign(location.href+'#tab7');
+                        //}
+                        //if ($('#edost_to_city').length && reg === 'spb') {
+                        //$('#edost_to_city').val("Санкт-Петербург");
+                        //$("#edost_to_city").click();
+                        //console.log($("#edost_to_city").val());
+                        //} else if ($('#edost_to_city').length && reg !== 'spb') {
+                        $('#edost_to_city').val("");
+                        //$("#edost_to_city").click();
+                        //console.log($("#edost_to_city").val());
+                        //}
+                        if ($('#edost_zip').length) {
+                        $('#edost_zip').val("");
+                        //$("#edost_to_city").click();
+                        }
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
                         console.log('error save_(reg)' + ' ' + textStatus);

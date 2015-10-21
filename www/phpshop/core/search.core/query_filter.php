@@ -83,8 +83,7 @@ function query_filter($obj) {
     }
 
     // Чистка запроса Secure Fix
-    $words = PHPShopSecurity::true_search(PHPShopSecurity::TotalClean($words, 2));
-    debug($words,'denvkr debugging');
+    //$words = PHPShopSecurity::true_search(PHPShopSecurity::TotalClean($words, 4));
 
     if ($set == 1) {
         switch ($pole) {
@@ -182,7 +181,7 @@ function query_filter($obj) {
         'sortV' => $sortV
     );
 
-    $obj->set('searchString', $words);
+    $obj->set('searchString', $words);//$words
 
     if ($set == 1)
         $obj->set('searchSetA', 'checked');

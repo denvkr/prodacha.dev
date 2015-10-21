@@ -37,7 +37,7 @@ if (is_array($data))
     foreach ($data as $row) {
         $stat_pages.= '<url>' . "\n";
         $stat_pages.= '<loc>http://' . $_SERVER['SERVER_NAME'] . '/page/' . $row['link'] . '.html</loc>' . "\n";
-        $stat_pages.= '<lastmod>' . sitemaptime($row['datas'], false) . '</lastmod>' . "\n";
+        $stat_pages.= '<lastmod>' . date('Y-m-d') . '</lastmod>' . "\n"; //sitemaptime($row['datas'], false)
         $stat_pages.= '<changefreq>weekly</changefreq>' . "\n";
         $stat_pages.= '<priority>1.0</priority>' . "\n";
         $stat_pages.= '</url>' . "\n";
@@ -73,7 +73,7 @@ if (is_array($data))
 
         $stat_news.= '<url>' . "\n";
         $stat_news.= '<loc>http://' . $_SERVER['SERVER_NAME'] . '/news/ID_' . $row['id'] . $seourl . '.html</loc>' . "\n";
-        $stat_news.= '<lastmod>' . sitemaptime(PHPShopDate::GetUnixTime($row['datas'])) . '</lastmod>' . "\n";
+        $stat_news.= '<lastmod>' . date('Y-m-d') . '</lastmod>' . "\n";//sitemaptime(PHPShopDate::GetUnixTime($row['datas']))
         $stat_news.= '<changefreq>daily</changefreq>' . "\n";
         $stat_news.= '<priority>0.5</priority>' . "\n";
         $stat_news.= '</url>' . "\n";
@@ -92,7 +92,7 @@ if (is_array($data))
         else
             $stat_products.= '<loc>http://' . $_SERVER['SERVER_NAME'] . '/shop/UID_' . $row['id'] . '_' . PHPShopString::toLatin($row['name']) . '.html</loc>' . "\n";
 
-        $stat_products.= '<lastmod>' . sitemaptime($row['datas']) . '</lastmod>' . "\n";
+        $stat_products.= '<lastmod>' . date('Y-m-d') . '</lastmod>' . "\n";//sitemaptime($row['datas'])
         $stat_products.= '<changefreq>daily</changefreq>' . "\n";
         $stat_products.= '<priority>1.0</priority>' . "\n";
         $stat_products.= '</url>' . "\n";

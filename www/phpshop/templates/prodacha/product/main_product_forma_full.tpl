@@ -1,5 +1,5 @@
 
-<div class="pagetitle">
+<div class="pagetitle" id="_tool_@productUid@">
 
 	<h1>@php
 	require_once ($_SERVER['DOCUMENT_ROOT'] . '/seotools/seotools.class.php');
@@ -226,7 +226,8 @@
 			echo '';
 		} else if ($row_sklad==false && $price_n==true) {
 			echo '@ComStartCart@';
-			echo '<span class="addtochart" style="'.$sdvig_knopki_vlevo.'"><input type="button" onclick="javascript:AddToCart(@productUid@,\\'n@productUid@\\')"  value="'.$SysValue['lang']['productSale'].'"></span>';
+			//echo '<span class="addtochart" style="'.$sdvig_knopki_vlevo.'"><input type="button" onclick="javascript:AddToCart(@productUid@,\\'n@productUid@\\')"  value="'.$SysValue['lang']['productSale'].'"></span>';
+                        echo '<span class="addtochart" style="'.$sdvig_knopki_vlevo.'"><span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@,\\'n@productUid@\\')">'.$SysValue['lang']['productSale'].'</a></span>';
 			echo '@ComEndCart@';
 			echo '@FastOrder@';
 			echo '@firstcreditpunch@';				
@@ -244,7 +245,8 @@
 			echo '</script>';
 		} else {
 			echo '@ComStartCart@';
-			echo '<span class="addtochart" style="'.$sdvig_knopki_vlevo.'"><input type="button" onclick="javascript:AddToCart(@productUid@,\\'n@productUid@\\')"  value="'.$SysValue['lang']['productSale'].'"></span>';
+			//echo '<span class="addtochart" style="'.$sdvig_knopki_vlevo.'"><input type="button" onclick="javascript:AddToCart(@productUid@,\\'n@productUid@\\')"  value="'.$SysValue['lang']['productSale'].'"></span>';
+                        echo '<span class="addtochart" style="'.$sdvig_knopki_vlevo.'"><span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@,\\'n@productUid@\\')">'.$SysValue['lang']['productSale'].'</a></span>';                        
 			echo '@ComEndCart@';
 			echo '@FastOrder@';
 			echo '@firstcreditpunch@';				

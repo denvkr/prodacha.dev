@@ -1,65 +1,81 @@
-    <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-    <script src="placemark.js" type="text/javascript"></script>
-    <style>
-        html, body, #map {
-            width: 100%; height: 100%; padding: 0; margin: 0;
-        }
-    </style> 
-<script>
+<span>Вы можете забрать @php
+	require_once ($_SERVER['DOCUMENT_ROOT'] . '/seotools/seotools.class.php');
+	$ST = new Seotools; 
+
+	// Вывод метки, где 
+	// $variable = название переменной (столбца). 
+	// $default_value = значение по умолчанию 
+
+	$oldh1="@productName@";
+
+	echo $ST->get("h1", $oldh1);
+
+	php@ из пункта самовывоза. Для осуществления самовывоза необходимо оплатить заказ. Заказ в пункте самовывоза будет доступен через 2-4 рабочих дня после оплаты. Подробные условия доставки заказа в пункт самовывоза доступны <a href="http://prodacha.ru/page/shop_spb.html" style="color:#588910;"><u>по ссылке</u></a>.
+<br /><br />
+<span style="font-size: 16px; font-weight: bold;">Стоимость доставки до пункта выдачи</span><br /><br />
+<ul>
+
+<li>Минимальная сумма заказа - 1000 руб. При сумме заказа от 1000 до 4999 руб. - 300 руб.</li>
+<li>При сумме заказа от 5000 руб. - <span style="color: red; font-weight: bold;">бесплатно</span></li>
+</ul><br /><br />
+Адреса пунктов выдачи в Санкт-Петербурге представлены на карте:</span> <br /><br />
+
+<script async type="text/javascript">
 ymaps.ready(init);
-
-function init () {
-    var myMap = new ymaps.Map("map", {
-            center: [59.93,30.34],
-            zoom: 10
-        }, {
-            searchControlProvider: 'yandex#search'
-        }),
-
-    // Создаем геообъект с типом геометрии "Точка".
-        myGeoObject = new ymaps.GeoObject({
-            // Описание геометрии.
-            geometry: {
-                type: "Point",
-                coordinates: [59.93,30.4]
-            },
-            // Свойства.
-            properties: {
-                // Контент метки.
-                iconContent: 'ул.Хрустальная',
-                hintContent: 'Адрес:Санкт-Петербург, Хрустальная ул., д. 27, лит. А. Въезд со стороны ул. 2-ой Луч д. 8',
-            // Чтобы балун и хинт открывались на метке, необходимо задать ей определенные свойства.
-            balloonContentHeader: "Адрес",
-            balloonContentBody: "Санкт-Петербург, Хрустальная ул., д. 27, лит. А. Въезд со стороны ул. 2-ой Луч д. 8",
-            balloonContentFooter: "Подвал",
-            hintContent: "Хинт метки"                
-            }
-        }, {
-            // Опции.
-            // Иконка метки будет растягиваться под размер ее содержимого.
-            preset: 'islands#blackStretchyIcon',
-            // Метку можно перемещать.
-            draggable: true
-        });
-
-    myMap.geoObjects
-        .add(myGeoObject)
-        .add(new ymaps.Placemark([59.907912,30.398692], {
-            
-            balloonContent: 'цвет <strong>воды пляжа бонди</strong>',
-            hintContent: 'Адрес:Санкт-Петербург, Хрустальная ул., д. 27, лит. А. Въезд со стороны ул. 2-ой Луч д. 8'
-        }, {
-            preset: 'islands#icon',
-            iconColor: '#0095b6'
-            }));
+function init() {
+var myGeoObjects;
+var myMap = new ymaps.Map("map", {
+center: [59.965309,30.29271],
+zoom: 10,
+controls: ["zoomControl","rulerControl","routeEditor","searchControl","geolocationControl"]
+});
+myGeoObjects=initgeoobjects();
+for (gobj_cnt=0;gobj_cnt<myGeoObjects.length;gobj_cnt++){
+myMap.geoObjects.add(myGeoObjects[gobj_cnt]);
+$('<option value="'+myGeoObjects[gobj_cnt].properties.get("hintContent")+'">'+myGeoObjects[gobj_cnt].properties.get("iconContent")+'</option>').appendTo('#tk_delivery_points_list');
+$('#tk_geopoints_list').append('<li>'+myGeoObjects[gobj_cnt].properties.get("hintContent").replace('<br>','')+'</li>');
+myGeoObjects[gobj_cnt].events.add('mouseup', function (e) {
+var eMap = e.get('target');           
+$("#tk_delivery_points_list").val(eMap.properties.get("hintContent")).prop("selected",true);
+eMap.options.set("preset","islands#greenStretchyIcon");
+});              
+};
+myMap.geoObjects.events.add("mousedown", function () {
+this.each(function (geoObject, i) {
+if (geoObject.options.get("preset") == "islands#greenStretchyIcon") {
+geoObject.options.set("preset","islands#blackStretchyIcon");
 }
-</script>    
-<div class="page_nava">
-  <div> @breadCrumbs@ </div>
-</div>
-	<div class="pagetitle">
-					<h1>@pageTitle@</h1>
-				</div>
+})}, myMap.geoObjects);
+$("#tk_delivery_points_list").bind("change", function(){              
+var tk_office_adress=$(this).find("option:selected").text();
+myMap.geoObjects.each(function (geoObject) {
+if (geoObject.properties.get("iconContent")!==tk_office_adress){
+geoObject.options.set("preset","islands#blackStretchyIcon");                
+} else {
+geoObject.options.set("preset", "islands#greenStretchyIcon");                
+}
+});
+});
+$("#tk_delivery_points_list").change();
+}
 
-<p>@catContent@</p>
-<div style="padding:5px 0px">@pageContent@    <div id="map"></div></div>
+</script>
+<table>
+<tr>
+<td>
+<div id="spb_map_area" style="position:relative;top:-13px;"><div style="height:18px;display:block;"></div><div id="map" style="width:530px; height:555px;"></div></div>
+</td>
+<td style="vertical-align: top;">
+<ul id="tk_geopoints_list" style="padding-left: 0px;">
+</ul>
+</td>
+</tr>
+</table>
+<br /><br />
+
+<span style="font-size: 16px; font-weight: bold;">Доставка заказов из пункта выдачи по Санкт-Петербургу и Ленинградской области</span><br /><br />
+<ul>
+<li>Транспортная компания Vozovoz может организовать доставку вашего заказа по необходимому адресу. </li>
+<li>Стоимость доставки зависит от габаритов груза и в среднем составляет 300-500 руб. (в пределах КАД). Точную стоимость можно рассчитать <a href="http://vozovoz.ru/calculate-the-order" target="_blank" style="color: #588910; text-decoration: underline;">по ссылке.</a> Габариты груза уточняйте в описании товара на сайте, либо по телефону у наших менеджеров. </li>
+<li>Внимание! При заказе доставки груза "до адреса" водитель подъедет максимально близко к месту разгрузки, но выгрузку груза из машины Получатель осуществляет самостоятельно. Груз будет расположен на краю кузова машины для обеспечения удобства разгрузки. Если вам требуется разгрузка или подъем груза до офиса или квартиры, необходимо заказать услугу "Разгрузочные работы".</li>
+</ul>

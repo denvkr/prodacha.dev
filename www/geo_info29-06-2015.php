@@ -14,7 +14,7 @@ $rejim_rabotu['sp']='
 } </script>
 <div style="clear:both"></div>
 				<br />
-				<table style="font-size: 12px; width: 220px; text-align: center; margin-left: -7px;">
+				<table style="font-size: 12px; width: 220px; text-align: center; margin-left: -7px; margin-top: -18px;">
 					<tr style="font-weight: bold;">
 						<td>Режим работы</td>
 						<td>Пн-Пт</td>
@@ -28,8 +28,8 @@ $rejim_rabotu['sp']='
 						<td>вых.</td>
 					</tr>
 				</table>
-				<span style="text-align: left; margin-left: -30px;">
-				<a href="http://prodacha.ru/page/shop_spb.html" style="text-decoration: underline; color: #588910;">Пункты выдачи заказов в Санкт-Петербурге</a> </span>
+				<span style="text-align: left; color: red; margin-left: -30px;">Внимание! Магазин на пр-те Художников</span><br /> <span style="text-align: left; color: red; margin-left: -30px;">закрыт с 29.06. 
+				<a href="http://prodacha.ru/page/shop_spb.html" style="text-decoration: underline;">Подробная информация.</a> </span>
 				';
 
 $rejim_rabotu['chb']='

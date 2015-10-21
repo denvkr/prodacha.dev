@@ -1696,7 +1696,7 @@ left: 115px;
 .productbox .parameters a
 {
 	color: #444;
-	text-decoration: underline;
+	//text-decoration: underline;
 	text-transform: uppercase;
 }
 .productbox .parameters a:hover
@@ -1786,6 +1786,9 @@ left: 115px;
 .productbox .price .smallfont
 {
 	font-size: 12px;
+}
+.parameters tr[class='tablerow']>.tablerow:first-child,.productbox tr[class='tablerow']>.tablerow:first-child{
+    font-weight: bold
 }
 .parameters table
 {

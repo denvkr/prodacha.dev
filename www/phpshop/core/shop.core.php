@@ -1209,6 +1209,7 @@ class PHPShopShop extends PHPShopShopCore {
 					$this->PHPShopNav->getId()==549 || $this->PHPShopNav->getId()==555 || $this->PHPShopNav->getId()==562 || 
                                         $this->PHPShopNav->getId()==581 || $this->PHPShopNav->getId()==586
 				   )) {
+                                   
 					//по типу смотрим если есть доп ссылка в конф файле menu-lvl3-href-modify_catalog_add-analog.txt
 					if (preg_match('/^.*\(.*\).*$/i',$row['name'])==0) {
 						foreach ($this->custom_menu_3 as $custom_menu_3_item) {
@@ -1249,6 +1250,7 @@ class PHPShopShop extends PHPShopShopCore {
 						$cnt2++;
 						$cnt_cur_row_by_maker++;
 					}
+                
 				//исключение для 473 каталога по производителю
 				} else if ($this->PHPShopNav->getId()==472 || $this->PHPShopNav->getId()==473 ||
                                             $this->PHPShopNav->getId()==474 ||
@@ -1284,6 +1286,11 @@ class PHPShopShop extends PHPShopShopCore {
                                         }
                                     }
                                 }
+                                if ( $cnt_by_type>count($catalog_items_by_type_table_td) && ($cnt_by_type-count($catalog_items_by_type_table_td))==1 ){
+                                   //echo $custom_menu_count_item_cnt.' '.$cnt_by_type.' '.count($catalog_items_by_type_table_td).' '.$cnt_cur_row_by_type.' '.$cnt1.'<br>';
+                                   $custom_menu_count_item_cnt=$cnt_cur_row_by_type;
+                                   //$cnt_cur_row_by_type=$cnt_by_type;
+                                }
 
                                 if ($cnt1%$custom_menu_count_item_cnt==0 || $cnt_cur_row_by_type==$cnt_by_type) {
                                         $catalog_items_table1.=PHPShopText::tr2($catalog_items_by_type_table_td,$custom_menu_count_item_cnt);
@@ -1298,6 +1305,10 @@ class PHPShopShop extends PHPShopShopCore {
                                 }
                                 $custom_menu_count_item_id=0;
                                 $custom_menu_count_item_cnt=4;
+                                                                      //if ($this->PHPShopNav->getId()==186) {
+                                                                      //    print_r($catalog_items_by_type_table_td);
+                                                                      //    echo $cnt_by_type;
+                                                                      //}                                
                         }
                         if 	(
                                 $this->PHPShopNav->getId()==5 || $this->PHPShopNav->getId()==9 || $this->PHPShopNav->getId()==16 ||
@@ -1346,7 +1357,7 @@ class PHPShopShop extends PHPShopShopCore {
                                 $this->PHPShopNav->getId()==502 || $this->PHPShopNav->getId()==503 || $this->PHPShopNav->getId()==509 || 
                                 $this->PHPShopNav->getId()==536 || $this->PHPShopNav->getId()==538 || $this->PHPShopNav->getId()==543 || 
                                 $this->PHPShopNav->getId()==545 || $this->PHPShopNav->getId()==549 || $this->PHPShopNav->getId()==555 || 
-                                $this->PHPShopNav->getId()==562 || $this->PHPShopNav->getId()==581 || $this->PHPShopNav->getId()==586) {
+                                $this->PHPShopNav->getId()==562 || $this->PHPShopNav->getId()==581 || $this->PHPShopNav->getId()==586) {                           
                                 $disp1=PHPShopText::table($catalog_items_table1,1,1,'center','98%',false,0,'catalog_items_table1');
                                 $disp2=PHPShopText::table($catalog_items_table2,1,1,'center','98%',false,0,'catalog_items_table2');			
                         } else {	
@@ -1367,7 +1378,7 @@ class PHPShopShop extends PHPShopShopCore {
 			$this->set('display_status1','none');
 		} else {
 			$this->set('display_status1','block');		
-		}		
+		}
         $this->set('catalogList', $disp1);
 		
 		if ($cnt_by_maker==0) {
@@ -1544,7 +1555,7 @@ class PHPShopShop extends PHPShopShopCore {
 				$this->num_row = $num_cow;
 
 			$orderby=' sklad asc,price asc,outdated asc ';
-			$orderby_1=' sortorder asc,price asc ';
+			$orderby_1=' sorting asc,sortorder asc,price asc ';
 	        if (!empty($_GET['s']) and is_numeric($_GET['s']) and !empty($_GET['f']) and is_numeric($_GET['f'])) {
 				if ($_GET['f']==1 and $_GET['s']==2) {
 					$orderby=' price asc,sklad asc,outdated asc ';
@@ -1594,26 +1605,26 @@ class PHPShopShop extends PHPShopShopCore {
 	        		$sql="select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and enabled='1' and parent_enabled='0' order by ".$orderby." LIMIT 1,".$this->num_row;
 	        		*/
-	        		$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,sortorder from (select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,1 as sortorder from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
+	        		$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,sortorder,sorting from (select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,1 as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and parent_enabled='0' and sklad='0' and enabled='1' and outdated='0'".
 	        		" union all ".
-	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,2 as sortorder from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
+	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,2 as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and parent_enabled='0' and sklad='1' and enabled='1' and outdated='0'".
 	        		" union all ".
-	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,3 as sortorder from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
+	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,3 as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and parent_enabled='0' and sklad='1' and enabled='1' and outdated='1') t1 order by ".$orderby_1." LIMIT 1,".$this->num_row;
 	        	} else if ($this->PHPShopNav->isPageAll()) {
 	        		/*
 	        		$sql="select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and enabled='1' and parent_enabled='0' order by ".$orderby;
 	        		*/
-	        		$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,sortorder from (select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,1 as sortorder from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
+	        		$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,sortorder,sorting from (select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,1 as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and parent_enabled='0' and sklad='0' and enabled='1' and outdated='0'".
 	        		" union all ".
-	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,2 as sortorder from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
+	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,2 as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and parent_enabled='0' and sklad='1' and enabled='1' and outdated='0'".
 	        		" union all ".
-	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,3 as sortorder from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
+	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,3 as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and parent_enabled='0' and sklad='1' and enabled='1' and outdated='1') t1 order by ".$orderby_1;
 	        	} else {
 	        		$num_row=$this->PHPShopNav->getPage()*$this->num_row;
@@ -1623,27 +1634,27 @@ class PHPShopShop extends PHPShopShopCore {
 	        		$sql="select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and enabled='1' and parent_enabled='0' order by ".$orderby.$sql_2;
 	        		*/
-	        		$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,sortorder from (select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,1 as sortorder from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
+	        		$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,sortorder,sorting from (select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,1 as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and parent_enabled='0' and sklad='0' and enabled='1' and outdated='0'".
 	        		" union all ".
-	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,2 as sortorder from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
+	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,2 as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and parent_enabled='0' and sklad='1' and enabled='1' and outdated='0'".
 	        		" union all ".
-	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,3 as sortorder from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
+	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,3 as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and parent_enabled='0' and sklad='1' and enabled='1' and outdated='1') t1 order by ".$orderby_1.$sql_2;
 	         	}
 					        	
 			} else {
 				if ($this->PHPShopNav->getPage()=='') {
 					//select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat from u301639_test.phpshop_products
-					$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift, case when sklad='0' and outdated='0' then 1 when sklad='1' and outdated='0' then 2 when sklad='1' and outdated='1' then 3 end as sortorder from ".$GLOBALS['SysValue']['base']['products']." where category in"
+					$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift, case when sklad='0' and outdated='0' then 1 when sklad='1' and outdated='0' then 2 when sklad='1' and outdated='1' then 3 end as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where category in"
 					." (SELECT id FROM ".$GLOBALS['SysValue']['base']['categories']." where parent_to in"
 					." (SELECT id FROM ".$GLOBALS['SysValue']['base']['categories']." where parent_to=".$cid_id
 					." union all"
 					." SELECT id FROM ".$GLOBALS['SysValue']['base']['categories']." where id=".$cid_id.")) and enabled='1' and parent_enabled='0' order by ".$orderby_1." LIMIT 1,".$this->num_row;
 					//$select_array=array('id','category','name','content','price','price_n','sklad','p_enabled','enabled','uid','num','price2','price3','price4','price5');
 				} else if ($this->PHPShopNav->isPageAll()) {
-					$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift, case when sklad='0' and outdated='0' then 1 when sklad='1' and outdated='0' then 2 when sklad='1' and outdated='1' then 3 end as sortorder from ".$GLOBALS['SysValue']['base']['products']." where category in"
+					$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift, case when sklad='0' and outdated='0' then 1 when sklad='1' and outdated='0' then 2 when sklad='1' and outdated='1' then 3 end as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where category in"
 					." (SELECT id FROM ".$GLOBALS['SysValue']['base']['categories']." where parent_to in"
 					." (SELECT id FROM ".$GLOBALS['SysValue']['base']['categories']." where parent_to=".$cid_id
 					." union all"
@@ -1653,7 +1664,7 @@ class PHPShopShop extends PHPShopShopCore {
 					$num_row=$this->PHPShopNav->getPage()*$this->num_row;
 					//echo $num_row.' '.$this->num_row;
 					$sql_2=" LIMIT ".($num_row-$this->num_row).",".$this->num_row;
-					$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift, case when sklad='0' and outdated='0' then 1 when sklad='1' and outdated='0' then 2 when sklad='1' and outdated='1' then 3 end as sortorder from ".$GLOBALS['SysValue']['base']['products']." where category in"
+					$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift, case when sklad='0' and outdated='0' then 1 when sklad='1' and outdated='0' then 2 when sklad='1' and outdated='1' then 3 end as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where category in"
 					." (SELECT id FROM ".$GLOBALS['SysValue']['base']['categories']." where parent_to in"
 					." (SELECT id FROM ".$GLOBALS['SysValue']['base']['categories']." where parent_to=".$cid_id
 					." union all"
@@ -2037,7 +2048,7 @@ class PHPShopShop extends PHPShopShopCore {
 						//вывод товара со статусом доступен для покупки
 						//$addtochart='<input type="button" onclick="javascript:AddToCart('.$prod_row['id'].')"  value="'.$this->lang('product_sale').'" />';
                                                 //модификация CEO 05-10-2015
-                                                $addtochart='<a href="#" onclick="javascript:AddToCart('.$prod_row['id'].')">'.$this->lang('product_sale').'</a>';
+                                                $addtochart='<a href="#_tool_'.$prod_row['id'].'" id="a'.$prod_row['id'].'"onclick="javascript:AddToCart('.$prod_row['id'].')">'.$this->lang('product_sale').'</a>';
 						//$productnotice='<input type="button" onclick="window.location.replace(\'/users/notice.html?productId='.$prod_row['id'].'\');"  value="'.$this->lang('product_notice').'" />';
 						$productnotice='<input type="button" onclick="ask_product_availability(\'/shop/UID_'.$prod_row['id'].'.html\',document.getElementsByClassName(\'netref\'));" value="'.$this->lang('product_notice').'">';
 						$comnotice='<div class="prev_price" style="font-size:11px !important;top:-10px;">'.$this->lang('sklad_mesage').'</div>';
@@ -2077,7 +2088,7 @@ class PHPShopShop extends PHPShopShopCore {
 					$this->sort_table($prod_row);
 					//echo $this->get('Producticons');
 					$disp_cat.='<tr>'
-					.'<td class="panel_l panel_1_1" valign="top"><div id="_tool_" class="tool_'.$prod_row['id'].'">'
+					.'<td class="panel_l panel_1_1" valign="top"><div id="_tool_'.$prod_row['id'].'" class="tool_'.$prod_row['id'].'">'
 					.'<div class="tovar1"> <div class="item1">'
 					.'<span class="popular-"></span>'
 					.'<div class="thumb">'
@@ -2123,7 +2134,7 @@ class PHPShopShop extends PHPShopShopCore {
 						//echo $this->lang('outdated_message');
 						if ($cnt == 1) {
 							$disp_cat.='<tr><td class="panel_l panel_3_1"><div class="tovar" style="position: relative;display: block;float: left;margin: 0 30px 15px 0;width: 243px;height: 275px;background-image: url(..images/prod_bg.png) !important;background-position-x: 0px;background-position-y: 0px;background-size: initial;background-repeat-x: no-repeat;background-repeat-y: no-repeat;background-attachment: scroll;background-origin: initial;background-clip: initial;background-color: transparent;" onmouseover="this.style.backgroundPosition=\'0px -276px\';" onmouseout="this.style.backgroundPosition=\'0px 0px\';">';
-							$disp_cat.='<div class="item">'
+							$disp_cat.='<div class="item" id="_tool_'.$prod_row['id'].'">'
 							.'<span class="new"></span>'
 							.'<div class="thumb">'
 							.'<table width="100%" border="0" cellspacing="0" cellpadding="0">'
@@ -2159,7 +2170,7 @@ class PHPShopShop extends PHPShopShopCore {
 					}
 					if ($cell==2 || $cell==3 || $cell==4) {
 						if  ($cnt == 2) {
-							$disp_cat.='<td class="panel_r panel_3_2"><div class="tovar" style="position: relative;display: block;float: left;margin: 0 30px 15px 0;width: 243px;height: 275px;background-image: url(..images/prod_bg.png) !important;background-position-x: 0px;background-position-y: 0px;background-size: initial;background-repeat-x: no-repeat;background-repeat-y: no-repeat;background-attachment: scroll;background-origin: initial;background-clip: initial;background-color: transparent;" onmouseover="this.style.backgroundPosition=\'0px -276px\';" onmouseout="this.style.backgroundPosition=\'0px 0px\';"><div class="item">'
+							$disp_cat.='<td class="panel_r panel_3_2"><div class="tovar" style="position: relative;display: block;float: left;margin: 0 30px 15px 0;width: 243px;height: 275px;background-image: url(..images/prod_bg.png) !important;background-position-x: 0px;background-position-y: 0px;background-size: initial;background-repeat-x: no-repeat;background-repeat-y: no-repeat;background-attachment: scroll;background-origin: initial;background-clip: initial;background-color: transparent;" onmouseover="this.style.backgroundPosition=\'0px -276px\';" onmouseout="this.style.backgroundPosition=\'0px 0px\';"><div class="item" id="_tool_'.$prod_row['id'].'">'
 							.'<span class="new"></span>'
 							.'<div class="thumb">'
 							.'<table width="100%" border="0" cellspacing="0" cellpadding="0">'
@@ -2195,7 +2206,7 @@ class PHPShopShop extends PHPShopShopCore {
 					}
 					if ($cell==3 || $cell==4) {
 						if  ($cnt == 3) {
-							$disp_cat.='<td class="panel_l panel_3_2"><div class="tovar" style="position: relative;display: block;float: left;margin: 0 30px 15px 0;width: 243px;height: 275px;background-image: url(..images/prod_bg.png) !important;background-position-x: 0px;background-position-y: 0px;background-size: initial;background-repeat-x: no-repeat;background-repeat-y: no-repeat;background-attachment: scroll;background-origin: initial;background-clip: initial;background-color: transparent;" onmouseover="this.style.backgroundPosition=\'0px -276px\';" onmouseout="this.style.backgroundPosition=\'0px 0px\';"><div class="item">'
+							$disp_cat.='<td class="panel_l panel_3_2"><div class="tovar" style="position: relative;display: block;float: left;margin: 0 30px 15px 0;width: 243px;height: 275px;background-image: url(..images/prod_bg.png) !important;background-position-x: 0px;background-position-y: 0px;background-size: initial;background-repeat-x: no-repeat;background-repeat-y: no-repeat;background-attachment: scroll;background-origin: initial;background-clip: initial;background-color: transparent;" onmouseover="this.style.backgroundPosition=\'0px -276px\';" onmouseout="this.style.backgroundPosition=\'0px 0px\';"><div class="item" id="_tool_'.$prod_row['id'].'">'
 							.'<span class="new"></span>'
 							.'<div class="thumb">'
 							.'<table width="100%" border="0" cellspacing="0" cellpadding="0">'
@@ -2231,8 +2242,8 @@ class PHPShopShop extends PHPShopShopCore {
 					}
 					if ($cell==4) {
 						if  ($cnt == 4) {
-							$disp_cat.='<td class="panel_l panel_3_3"><div class="tovar"  style="position: relative;display: block;float: left;margin: 0 30px 15px 0;width: 243px;height: 275px;background-image: url(..images/prod_bg.png) !important;background-position-x: 0px;background-position-y: 0px;background-size: initial;background-repeat-x: no-repeat;background-repeat-y: no-repeat;background-attachment: scroll;background-origin: initial;background-clip: initial;background-color: transparent;" onmouseover="this.style.backgroundPosition=\'0px -276px\';" onmouseout="this.style.backgroundPosition=\'0px 0px\';"><div class="item">'
-							.'<div class="item">'
+							$disp_cat.='<td class="panel_l panel_3_3"><div class="tovar"  style="position: relative;display: block;float: left;margin: 0 30px 15px 0;width: 243px;height: 275px;background-image: url(..images/prod_bg.png) !important;background-position-x: 0px;background-position-y: 0px;background-size: initial;background-repeat-x: no-repeat;background-repeat-y: no-repeat;background-attachment: scroll;background-origin: initial;background-clip: initial;background-color: transparent;" onmouseover="this.style.backgroundPosition=\'0px -276px\';" onmouseout="this.style.backgroundPosition=\'0px 0px\';"><div class="item" id="_tool_'.$prod_row['id'].'">'
+							.'<div class="item" id="_tool_'.$prod_row['id'].'">'
 							.'<span class="new"></span>'
 							.'<div class="thumb">'
 							.'<table width="100%" border="0" cellspacing="0" cellpadding="0">'

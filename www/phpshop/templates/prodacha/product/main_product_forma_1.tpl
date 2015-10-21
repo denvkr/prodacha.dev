@@ -1,4 +1,4 @@
-<div id="_tool_" class="tool_@productUid@">
+<div id="_tool_@productUid@" class="tool_@productUid@">
 
 <div class="tovar1"> <div class="item1"> 
 
@@ -120,7 +120,8 @@
 			echo '@ComEndNotice@';	
 		} else if ($row_sklad==false && $price_n==true && $row_outdated==true) {
 			echo '@ComStartCart@';
-			echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@)"  value="'.$SysValue['lang']['productSale'].'"></span>';
+			//echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@)"  value="'.$SysValue['lang']['productSale'].'"></span>';
+                        echo '<span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@)">'.$SysValue['lang']['productSale'].'</a></span>';
 			echo '@ComEndCart@';
 		} else if ($row_sklad==true && $row_outdated==true) {
 			echo '@ComStartCart@';
@@ -128,7 +129,8 @@
 			echo '@ComEndCart@';
 		} else {
 			echo '@ComStartCart@';
-			echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@)"  value="'.$SysValue['lang']['productSale'].'"></span>';
+			//echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@)"  value="'.$SysValue['lang']['productSale'].'"></span>';
+                        echo '<span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@)">'.$SysValue['lang']['productSale'].'</a></span>';
 			echo '@ComEndCart@';	
 		}
 		

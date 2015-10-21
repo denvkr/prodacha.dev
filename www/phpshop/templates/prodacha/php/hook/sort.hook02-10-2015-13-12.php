@@ -254,7 +254,7 @@ function display_tovar_delivery_hook($obj, $row) {
 	}
         $tab7_html=sp_delivery_tab();        
         if ($_COOKIE['sincity']=='sp') {
-            $tab7_html.='<div id="dostavka_head_text" style="font-size:18px;padding-top:5px;padding-bottom:5px;"><b>Самовывоз (5 пунктов выдачи в Санкт-Петербурге)</b></div>';
+            $tab7_html.='<div id="dostavka_head_text" style="font-size:18px;padding-top:5px;padding-bottom:5px;"><b>Самовывоз (7 пунктов выдачи в Санкт-Петербурге)</b></div>';
         } else {
 	//Шапка tab доставка
 	$tab7_html.=$GLOBALS['SysValue']['lang']['delivery_tab_string8'];            
@@ -815,9 +815,9 @@ function ceo_price_hook($obj,$row,$rout){
     //из строки берем айди каталога 				
     if (strpos($_SERVER['REQUEST_URI'],"UID")===false) {
         if ($obj->PHPShopCategory->getParam('num_row')==1)
-            return '<span class="price_cat_1">Цена: </span>'.$row;
+            return '<span style="font-size:14pt; font-weight: normal; color:#588910;">ЦЕНА: </span>'.$row;
         else {
-            return '<span class="price_cat_3">Цена:</span>'.$row;    
+            return '<span style="display:block; font-size:8pt; font-weight: normal; color:#6c4b46;">ЦЕНА:</span>'.$row;    
         }        
     } else
         return $row;

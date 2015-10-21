@@ -103,10 +103,10 @@
 	<script type="text/javascript" src="java/carhartl-jquery-cookie-3caf209/jquery.cookie.js"></script>
 	<!-- Подключаем библиотеку слайдеры и iframe -->
 	<!-- Fancybox -->
-    <link rel="stylesheet" href="@php echo $GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].chr(47); php@javascript/fancybox/jquery.fancybox.css">
-    <script type="text/javascript" src="@php echo $GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].chr(47); php@javascript/fancybox/jquery.fancybox.pack.js"></script>
-    <!-- /Fancybox -->
-    <!-- Bootstrap -->
+        <link rel="stylesheet" href="@php echo $GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].chr(47); php@javascript/fancybox/jquery.fancybox.css">
+        <script type="text/javascript" src="@php echo $GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].chr(47); php@javascript/fancybox/jquery.fancybox.pack.js"></script>
+        <!-- /Fancybox -->
+        <!-- Bootstrap -->
     	<link id="bootstrap_theme" href="@php echo $GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin']; php@css/bootstrap.css" rel="stylesheet">
         <script src="@php echo $GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].chr(47); php@js/bootstrap.js"></script>
 	<!--/Bootstrap-->    
@@ -212,8 +212,8 @@
 	  ga('send', 'pageview');
 	
 	</script>
-    <script src="https://api-maps.yandex.ru/2.1-dev/?lang=ru_RU&load=package.full&mode=debug&onerror=mymaperror(err)" type="text/javascript"></script>
-	<script src="/geopointsgroup.js" type="text/javascript"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&load=package.standard,package.geoObjects&mode=release&onerror=mymaperror(err)" type="text/javascript"></script><!--&package.full&mode=debug-->
+    <script src="/geopointsgroup.js" type="text/javascript"></script>
     <!--<script src="placemark.js" type="text/javascript"></script>-->
     <style>
         html, body, #map {

@@ -1,0 +1,1 @@
+SELECT concat('update u301639.phpshop_products set price=',price,' where id=',id,';') FROM u301639.phpshop_products where uid='' or uid is null;

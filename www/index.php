@@ -508,7 +508,7 @@ if ($SysValue['my']['debug'] == "true")
 if ($PhpshopCopyright == "Yes") {
     //echo '  <!-- Copyright PHPShop -->  <div style="clear: both; width:100%">     <div align="center" style="display:block;padding:5px;color:' . $RegTo['CopyrightColor'] . ';font-size:11px">     <a href="http://www.phpshop.ru" title="Создание интернет-магазина"  style="color:' . $RegTo['CopyrightColor'] . ';font-size:11px" target="_blank">Создание Интернет-магазина</a> ' . $RegTo['RegisteredTo'] . ' - PHPShop. Все права защищены © 2003-' . date("Y") . '.     </div>  </div>  <!-- БД ' . $SysValue['sql']['num'] . ' запроса ~ ' . $seconds . ' sec, ' . $_MEM . ' Сборка ' . $SysValue['upload']['version'] . ' -->';
 }
-include_once ($SysValue['file']['footer']);
+//include_once ($SysValue['file']['footer']);
 if ($SysValue['my']['gzip'] == "true")
     GzDocOut($SysValue['my']['gzip_level'], $SysValue['my']['gzip_debug']);
  

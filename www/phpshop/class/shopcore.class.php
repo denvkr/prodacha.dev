@@ -25,7 +25,7 @@ class PHPShopShopCore extends PHPShopCore {
      * Отладка
      * @var bool
      */
-    var $debug = false;
+    var $debug = true;
 
     /**
      * Кэширование, рекомендуется [true]
@@ -63,6 +63,11 @@ class PHPShopShopCore extends PHPShopCore {
      * @var int
      */	
 	public $num_of_pages=0;
+     /**
+     * Кол-во ячеек в выводе сетки товаров
+     * @var int
+     */	       
+    //var $cell;
     /**
      * Конструктор
      */
@@ -577,7 +582,7 @@ class PHPShopShopCore extends PHPShopCore {
             	//модифицируем вывод цены с пробелом
             	$mod_price=$this->add_space_to_price($mod_price);
 		        
-		        $this->set('productPrice',$mod_price);
+		$this->set('productPrice',$mod_price);
                 $this->set('productPriceRub', '');
 
             }
@@ -657,12 +662,12 @@ class PHPShopShopCore extends PHPShopCore {
         	}
 
         	$mod_price=strval($price);
-        	 
+
         	//модифицируем вывод цены с пробелом
         	$mod_price=$this->add_space_to_price($mod_price);
         	 
         	$this->set('productPrice',$mod_price);
-        	 
+         	//echo 'test5';        	 
         	/* 
             $this->set('collaboration','lostandfound');
             if ( ($_COOKIE['sincity']=="sp") AND ($row['price2']!=0) ) {
@@ -700,12 +705,13 @@ class PHPShopShopCore extends PHPShopCore {
             $this->set('productValutaName', null);
         }
         //Для каталога stihl модифицируем кнопку уточнить		
-		//$this->stihl_catalog_settings($row);
-		//перенесено из хука sort.hook.php
-		if (empty($this->category)) {
-			$this->PHPShopCategory = new PHPShopCategory($row['category']);
-		}		
-		$this->doLoadFunction('PHPShopShop', 'sort_table', $row, 'shop');
+        //$this->stihl_catalog_settings($row);
+        //перенесено из хука sort.hook.php
+        if (empty($this->category)) {
+                $this->PHPShopCategory = new PHPShopCategory($row['category']);
+        }		
+        $this->doLoadFunction('PHPShopShop', 'sort_table', $row, 'shop');
+
         // Перехват модуля, занесение в память наличия модуля для оптимизации
         if ($this->memory_get(__CLASS__ . '.' . __FUNCTION__, true)) {
             $hook = $this->setHook(__CLASS__, __FUNCTION__, $row);
@@ -918,7 +924,8 @@ class PHPShopShopCore extends PHPShopCore {
 				$mod_price=substr($mod_price,0,1).' '.substr($mod_price,1,strlen($mod_price)-1);
 				break;				
 		}
-		return $mod_price;
+                $hook=$this->setHook(__CLASS__, __FUNCTION__, $mod_price);                
+		return $hook;
 	}
 	
 	function stihl_catalog_settings($row) {

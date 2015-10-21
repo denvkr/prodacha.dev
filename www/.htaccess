@@ -1,5 +1,6 @@
 #php_flag register_globals off
 #php_value error_reporting 0
+
 php_value session.gc_maxlifetime 10800
 
 DirectoryIndex index0.php
@@ -56,3 +57,12 @@ Order Deny,Allow
 Deny From All
 
 </files>
+#<IfModule mod_headers.c>
+#Header append Vary User-Agent
+#set Content-Encoding for all css files
+#    <FilesMatch FilesMatch .*\.css$>
+#  Header set Content-Encoding: gzip
+  #Header unset Cache-control
+#: private
+#    </FilesMatch>
+#</IfModule>

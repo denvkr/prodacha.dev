@@ -310,11 +310,16 @@ function UpdateDelivery(xid) {
                     script.text  = "ymaps.ready(init);";
                     script.text  += 'function init () {';
                     script.text  += 'var myGeoObjects;';
+                    script.text  += 'var myMapcenter;';
+                    script.text  += 'var myMapzoom;';
                     script.text  += 'var myMap = new ymaps.Map("map", {';
                     script.text  += 'center: [59.9281401,30.3626595],';
                     script.text  += 'zoom: 10,';
                     script.text  += 'controls: ["zoomControl","rulerControl","routeEditor","searchControl","geolocationControl"]';
                     script.text  += '});';
+                    script.text  += 'myMapcenter=getmapcenter();';
+                    script.text  += 'myMapzoom=getmapzoom();';
+                    script.text  += 'myMap.setCenter(myMapcenter,myMapzoom);';                    
                     script.text  += 'myGeoObjects=initgeoobjects();';
                     script.text  += 'for (gobj_cnt=0;gobj_cnt<myGeoObjects.length;gobj_cnt++){';
                     script.text  += 'myMap.geoObjects.add(myGeoObjects[gobj_cnt]);';
@@ -338,11 +343,11 @@ function UpdateDelivery(xid) {
                     script.text  += 'geoObject.options.set("preset","islands#blackStretchyIcon");';                   
                     script.text  += '} else {';
                     script.text  += 'geoObject.options.set("preset", "islands#greenStretchyIcon");';
-                    script.text  += 'myMap.setCenter(geoObject.geometry.getCoordinates(),10);';
+                    //script.text  += 'myMap.setCenter(geoObject.geometry.getCoordinates(),10);';
                     script.text  += '}';
                     script.text  += '});';  
                     script.text  += '});';
-                    script.text  += '$("#tk_delivery_points_list option:eq(4)").prop("selected","selected");';
+                    script.text  += '$("#tk_delivery_points_list option:eq(0)").prop("selected","selected");';
                     script.text  += '$("#tk_delivery_points_list").change();';
                     script.text  += '}';                   
                     
@@ -1089,7 +1094,7 @@ function ChekUserForma(){
 
 
 function do_err(err){
-	console.log(err);
+	//console.log(err);
     return true;
 }
 

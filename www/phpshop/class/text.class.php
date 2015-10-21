@@ -240,12 +240,21 @@ class PHPShopText {
      * @return string
      */
     function td($string, $class = false, $colspan = false, $id = false,$td_count=0) {
+        if ($class!==false){
+            $class='class="'.$class.'"';
+        }
+        if ($id!==false){
+            $id='id="' . $id.'"';
+        }
+        if ($colspan!==false){
+            $colspan='colspan="' . $colspan . '"';
+        }
         if ($td_count>0) {
             $css_width=round(100/$td_count);
-            return '<td class="' . $class . '" id="' . $id . '" colspan="' . $colspan . '" style="width:'.$css_width.'%">' . $string . '</td>';            
+            return '<td '.$class.' ' . $id . ' ' . $colspan . ' style="width:'.$css_width.'%">' . $string . '</td>';
         }
         else
-            return '<td class="' . $class . '" id="' . $id . '" colspan="' . $colspan . '">' . $string . '</td>';
+            return '<td ' . $class . ' ' . $id . ' ' . $colspan . '>' . $string . '</td>';
     }
 
     /**

@@ -7,6 +7,9 @@
  * @version 1.3
  * @package PHPShopShopCore
  */
+//ini_set('error_reporting', E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
 class PHPShopSearch extends PHPShopShopCore {
 
     /**
@@ -42,7 +45,6 @@ class PHPShopSearch extends PHPShopShopCore {
 
         if (isset($_REQUEST['ajax']))
         	exit();
-        
         // Подключаем шаблон
         $this->parseTemplate($this->getValue('templates.search_page_list'));
     }
@@ -196,20 +198,21 @@ class PHPShopSearch extends PHPShopShopCore {
             //echo $order;
             // Сложный запрос
             $this->PHPShopOrm->sql = $order;
-            $this->PHPShopOrm->debug=false;
+            $this->PHPShopOrm->debug=$this->debug;
             $this->PHPShopOrm->mysql_error = false;
             $this->PHPShopOrm->comment = __CLASS__ . '.' . __FUNCTION__;
             $this->dataArray = $this->PHPShopOrm->select();
             $this->PHPShopOrm->clean();
-			//print_r($this->dataArray);
+            //print_r($this->dataArray);
             if (!empty($this->dataArray)) {
 
                 // Пагинатор
                 $this->setPaginator(count($this->dataArray), $order);
 
                 // Ajax Search
-
+                //echo 'test3';
                 if (isset($_REQUEST['ajax'])) {
+                        //echo 'test4';
 	               	foreach ($this->dataArray as $row) {
 	               		// Название
 	            		$this->set('productName', $row['name']);
@@ -259,14 +262,14 @@ class PHPShopSearch extends PHPShopShopCore {
 	                echo $disp;
                 } else {
                 	// Добавляем в дизайн ячейки с товарами
-                	$grid=$this->product_grid($this->dataArray, $this->cell, $template=false, $this->line);
+                	$grid=$this->product_grid_search($this->dataArray, $this->cell, $template=false, $this->line);
                 	$this->add($grid, true);
                 }
 	                
             }
             else {
             	if (isset($_REQUEST['ajax'])) {
-            		//echo 'false';
+            		//echo '';
             		exit();
             	}
             	 
@@ -279,10 +282,9 @@ class PHPShopSearch extends PHPShopShopCore {
             $this->setHook(__CLASS__, __FUNCTION__, $this->dataArray, 'END');
         }
         if (isset($_REQUEST['ajax'])){
-        	//echo 'false';
+        	//echo '';
         	exit();
         }
-        
         // Подключаем шаблон
         $this->parseTemplate($this->getValue('templates.search_page_list'));
     }
@@ -321,7 +323,7 @@ class PHPShopSearch extends PHPShopShopCore {
         $result = $this->PHPShopOrm->query("select COUNT('id') as count from " . $this->objBase . $SQL);
         $row = mysql_fetch_array($result);
         $this->num_page = $row['count'];
-
+        //echo 'test1';
         $i = 1;
         $navigat = null;
         $num = round(($this->num_page / $this->num_row) + 0.4);
@@ -355,7 +357,7 @@ class PHPShopSearch extends PHPShopShopCore {
                     $navigat.=PHPShopText::b($p_start . '-' . $p_end . ' / ');
                 $i++;
             }
-
+        //echo 'test2';
 
             $nav = $this->getValue('lang.page_now') . ': ';
             $nav.=PHPShopText::a("./?words=" . $this->search_order['words'] . "&pole=" .
@@ -396,7 +398,7 @@ class PHPShopSearch extends PHPShopShopCore {
      * @param int $cell разряд сетки [1-5]
      * @return string
      */
-    function product_grid_search($dataArray, $cell = 2, $template=false) {
+    function product_grid_search($dataArray, $cell = 2, $template=false,$line=false) {
     
     	if (empty($cell))
     		$cell = 2;
@@ -407,7 +409,7 @@ class PHPShopSearch extends PHPShopShopCore {
     	$j = 1;
     	$item = 1;
     	$lastmodified = 0;
-    
+     
     	// Локализация
     	$this->set('productSale', $this->lang('product_sale'));
     	$this->set('productInfo', $this->lang('product_info'));
@@ -454,8 +456,8 @@ class PHPShopSearch extends PHPShopShopCore {
     			$this->set('productUid', $row['id']);
     
     			//~nah
-    			if ($template!==false)
-    				$this->catalog_product_icons($row);//"icon_".$row['id'];
+    			//if ($template!==false)
+    			//	$this->catalog_product_icons($row);//"icon_".$row['id'];
     			//echo $uid;
     			//$this->set('Producticons',$uid);
     
@@ -474,6 +476,7 @@ class PHPShopSearch extends PHPShopShopCore {
     			}
     			else	  $this->set('firstcreditpunch','');
     			*/
+
     			// Опции склада
     			$this->checkStore($row);
     			//echo time().'<br/>';
@@ -481,22 +484,23 @@ class PHPShopSearch extends PHPShopShopCore {
     			//$this->option_select($row);
     			// Перехват модуля
     			//$this->setHook(__CLASS__, __FUNCTION__, $row);
+
     			$this->setHook(__CLASS__, __FUNCTION__, $row, 'END');
-    
+
     			if(empty($template))
     				$template=$this->getValue('templates.main_product_forma_' . $this->cell);
-    
     			// Подключаем шаблон ячейки товара
-    			$dis = $this->ParseTemplateReturn($template);
+    			$this->parseTemplate($template,false);
+                        //echo $this->Disp;
     			//$this->ParseTemplateReturn($template);
     			//echo $template;
     			// Убераем последний разделитель в сетке
     			if ($item == $total)
     				$this->setka_footer = false;
     
-    			//$cell_name = 'd' . $j;
-    			//$$cell_name = $dis;
-    /*
+    			$cell_name = 'd' . $j;
+    			$$cell_name = $this->Disp;
+                        //echo $j.' '.$this->cell.' '.$item.' '.$total;
     			if ($j == $this->cell) {
     				$table.=$this->setCell($d1, $d2, $d3, $d4, $d5, $d6, $d7);
     				$d1 = $d2 = $d3 = $d4 = $d5 = $d6 = $d7 = null;
@@ -507,14 +511,33 @@ class PHPShopSearch extends PHPShopShopCore {
     
     			$j++;
     			$item++;
-    */
+                        //echo $table;
+
     		}
     	}
     
     	//$this->lastmodified = $lastmodified;
-    	return $dis;
+
+    	return $table;
     }
-    
+	function add_space_to_price($mod_price) {
+		switch (strlen($mod_price)) {
+			case 4:
+				$mod_price=substr($mod_price,0,1).' '.substr($mod_price,1,strlen($mod_price)-1);
+				break;
+			case 5:
+				$mod_price=substr($mod_price,0,2).' '.substr($mod_price,2,strlen($mod_price)-2);
+				break;
+			case 6:
+				$mod_price=substr($mod_price,0,3).' '.substr($mod_price,3,strlen($mod_price)-3);
+				break;
+			case 7:
+				$mod_price=substr($mod_price,0,1).' '.substr($mod_price,1,strlen($mod_price)-1);
+				break;				
+		}
+                $hook=$this->setHook(__CLASS__, __FUNCTION__, $mod_price);                
+		return $mod_price;
+	}    
 }
 
 ?>

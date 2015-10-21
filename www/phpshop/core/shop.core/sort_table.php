@@ -31,17 +31,19 @@ function sort_table($obj, $row) {
 
         // ћассив имен характеристик
         $PHPShopOrm = new PHPShopOrm();
-		$PHPShopOrm->cache = true;		
+	$PHPShopOrm->cache = true;		
         $PHPShopOrm->debug = $obj->debug;
         $PHPShopOrm->cache = $obj->cache;
         $PHPShopOrm->cache_format = $obj->cache_format;        
         $result = $PHPShopOrm->query("select id,name,category from " . $SysValue['base']['sort_categories'] . " where ($sortCat and goodoption!='1') order by num");
         while (@$row = mysql_fetch_assoc($result)) {
-
-		//nah~ не выводим эти харки - 3 иконко		
-		$array=array('181','184','185','186','302');
+        if (strpos($obj->PHPShopNav->getUrl(),"UID")===false) {	
+            $array=array('181','184','185','186','302','42','48');            
+        } else {		
+            $array=array('181','184','185','186','302');
+        }
 		
-		if (!in_array($row['id'],$array))
+	if (!in_array($row['id'],$array))
             $arrayVendor[$row['id']]=$row;
         }
 
@@ -63,7 +65,7 @@ function sort_table($obj, $row) {
 			$sortValue = substr($sortValue, 0, strlen($sortValue) - 1).')';
             // ћассив значений характеристик
             $PHPShopOrm = new PHPShopOrm();
-			$PHPShopOrm->cache = true;			
+            $PHPShopOrm->cache = true;			
             $PHPShopOrm->debug = $obj->debug;
             $PHPShopOrm->cache = $obj->cache;
             $PHPShopOrm->cache_format = $obj->cache_format;            
@@ -86,7 +88,7 @@ function sort_table($obj, $row) {
                         //if (!empty($value['page']))
                         //    $dis.=PHPShopText::tr(PHPShopText::b($value['name']) . ': ', PHPShopText::a('../page/' . $value['page'] . '.html', substr($arrayVendorValue[$idCategory]['name'], 2)));
                         //else
-                            $dis.=PHPShopText::tr(PHPShopText::b($value['name']) . ': ', substr($arrayVendorValue[$idCategory]['name'], 2));
+                            $dis.=PHPShopText::tr($value['name'] . ': ', substr($arrayVendorValue[$idCategory]['name'], 2));//PHPShopText::b()
                     }
                 }
 				//if ($cnt==4) break;

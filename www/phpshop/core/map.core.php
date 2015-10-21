@@ -59,15 +59,17 @@ class PHPShopMap extends PHPShopCore {
      */
     function subcategory($cat) {
         $dis = null;
+
         if (!empty($this->ParentArray[$cat]) and is_array($this->ParentArray[$cat])) {
+
             foreach ($this->ParentArray[$cat] as $val) {
                 $sup = $this->subcategory($val);
                 $name = $this->PHPShopCategoryArray->getParam($val . '.name');
-                if (empty($sup)) {
 
+                if (empty($sup)) {
                     $dis.=PHPShopText::li($name, $this->seourl($val, 'category', $name));
                 } else {
-                    $dis.=PHPShopText::li(PHPShopText::b($name));
+                    $dis.=PHPShopText::li($name, $this->seourl($val, 'category', $name));//PHPShopText::b($name)
                     $dis.=$sup;
                 }
             }
@@ -95,8 +97,10 @@ class PHPShopMap extends PHPShopCore {
                 if (empty($vid)) {
                     $name = $this->PHPShopCategoryArray->getParam($val . '.name');
                     $sup = $this->subcategory($val);
-                    if (!empty($sup))
-                        $dis.=PHPShopText::p(PHPShopText::b($name) . $sup);
+                    if (!empty($sup)){
+
+                        $dis.=PHPShopText::p(PHPShopText::a($this->seourl($val, 'category', $name), PHPShopText::b($name), $name) . $sup);//PHPShopText::b($name)
+                    }
                     else
                         $dis.=PHPShopText::p(PHPShopText::a($this->seourl($val, 'category', $name), PHPShopText::b($name), $name));
                 }
