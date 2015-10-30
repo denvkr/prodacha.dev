@@ -1,5 +1,5 @@
 <?php
-
+//setlocale(LC_ALL, "Russian_Russia.1251");
 /**
  * Обработчик карты сайта
  * @author PHPShop Software
@@ -119,6 +119,9 @@ class PHPShopMap extends PHPShopCore {
         if (!empty($this->ParentPageArray[$cat]) and is_array($this->ParentPageArray[$cat])) {
             foreach ($this->ParentPageArray[$cat] as $val) {
                 $vid = $this->PHPShopCategoryArray->getParam($val . '.vid');
+                                //if (strtolower($vid)!='новости') {
+                                //echo '---'.strtolower($vid).'---';    
+                               //}
                 if (empty($vid)) {
                     $sup = $this->subcategory_page($val);
                     $name = $this->PHPShopPageCategoryArray->getParam($val . '.name');
@@ -146,12 +149,15 @@ class PHPShopMap extends PHPShopCore {
             foreach ($this->ParentPageArray[0] as $val) {
                 $sup = $this->subcategory_page($val);
                 $name = $this->PHPShopPageCategoryArray->getParam($val . '.name');
-                if (empty($sup)) {
-                    $dis.=PHPShopText::p(PHPShopText::a($this->seourl($val, 'category_page', $name), PHPShopText::b($name), $name));
-                } else {
-                    $dis.=PHPShopText::b($name);
-                    $dis.=$sup;
-                }
+                //echo strtolower($name).' '.iconv("windows-1251", "windows-1251//IGNORE", 'подсказки :)');
+                if (strtolower($name)!='Подсказки :)' && strtolower($name)!='Новости') {
+                    if (empty($sup)) {
+                        $dis.=PHPShopText::p(PHPShopText::a($this->seourl($val, 'category_page', $name), PHPShopText::b($name), $name));
+                    } else {
+                        $dis.=PHPShopText::b($name);
+                        $dis.=$sup;
+                    }                   
+                } 
             }
         }
         $this->add(PHPShopText::ul($dis), true);
@@ -161,9 +167,12 @@ class PHPShopMap extends PHPShopCore {
      * Акции
      */
     function special() {
-        $special = PHPShopText::ul(PHPShopText::li(__('Новинки'), '/newtip/') . PHPShopText::li(__('Спецпредложение'), '/spec/') .
-                        PHPShopText::li(__('Распродажа'), '/newprice/'));
-        $this->add(PHPShopText::b(__('Акции')) . $special, true);
+        //$special = PHPShopText::ul(PHPShopText::li(__('Новинки'), '/newtip/') . PHPShopText::li(__('Спецпредложение'), '/spec/') .
+        //                PHPShopText::li(__('Распродажа'), '/newprice/'));
+        //$special = PHPShopText::li(__('Спецпредложение'), '/spec/');
+        $special = PHPShopText::p(PHPShopText::a('/spec/', PHPShopText::b('Спецпредложение'), 'Спецпредложение'));
+        //$this->add(PHPShopText::b(__('Акции')) . $special, true);
+        $this->add($special, true);        
     }
 
     /**
@@ -207,7 +216,7 @@ class PHPShopMap extends PHPShopCore {
         $this->special();
 
         // Новости
-        $this->news();
+        //$this->news();
 
         // Мета
         $this->title = "Карта сайта - " . $this->PHPShopSystem->getValue("name");

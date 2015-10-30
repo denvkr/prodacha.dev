@@ -435,7 +435,7 @@
 			<div class="foot_menu">
 				<ul>
 					@topMenu@
-					<li><a href="http://prodacha.ru/map/"> ¿–“¿ —¿…“¿</a></li>
+					<li><a href="http://prodacha.ru/catalog/"> ¿–“¿ —¿…“¿</a></li>
 				</ul>
                 </div>
 		</div>	

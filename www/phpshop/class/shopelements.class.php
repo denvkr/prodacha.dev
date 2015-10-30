@@ -280,7 +280,7 @@ class PHPShopProductElements extends PHPShopElements {
         	
         	$this->set('productPrice',$mod_price);        	
             //$this->set('productPrice', $this->price($row));
-            $this->set('productPriceRub', $this->lang('sklad_mesage'));
+            //$this->set('productPriceRub', $this->lang('sklad_mesage'));
             //$this->set('ComStartNotice', '');
             //$this->set('ComEndNotice', '');
             //$this->set('ComStartCart', PHPShopText::comment('<'));

@@ -6,7 +6,7 @@
   <div class="thumb">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td height="160" align="top"><a href="/shop/UID_@productUid@@nameLat@.html"><img src="@productImg@" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,'@pathTemplate@')" onload="EditFoto(this,@productImgWidth@)" alt="@productName@" title="@productName@" border="0"></a></td>
+        <td height="160" align="top"><a href="/shop/UID_@productUid@@nameLat@.html" alt="@productName@" title="@productName@"><img src="@productImg@" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,'@pathTemplate@')" onload="EditFoto(this,@productImgWidth@)" alt="@productName@" title="@productName@" border="0"></a></td>
       </tr>
     </table>
   </div>

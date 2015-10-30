@@ -22,6 +22,9 @@ RewriteRule ^index\.html$ http://prodacha.dev/ [R=301,L]
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /page/index\.html\ HTTP/
 RewriteRule ^page/index\.html$ http://prodacha.dev/ [R=301,L]
 
+RewriteCond %{REQUEST_URI} ^(/map/)|(/map/(.*).html)$
+RewriteRule ^(.*)$ "/catalog/" [R=301,L]
+
 RewriteCond %{REQUEST_URI} ^/shop/phpshop/templates/prodacha/javascript/edost_example/edost\.php$
 RewriteRule (.*) /phpshop/templates/prodacha/javascript/edost_example/edost\.php [R=307,L]
 

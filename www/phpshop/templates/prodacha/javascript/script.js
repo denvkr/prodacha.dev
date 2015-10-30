@@ -997,29 +997,29 @@ num_page_links_to_display : 4,
 $('#credit_forma').click();
 }
 if ($('#select_vendor_brand').length && $('#select_vendor_city').length) {
-$('#select_vendor_brand').change();
-        $('#select_vendor_city').change();
+    $('#select_vendor_brand').change();
+    $('#select_vendor_city').change();
 }
 
 myTimer = setTimeout("showNext()", 3000);
-        showNext(); //loads first image
-        if ($('#thumbs li').length) {
-$('#thumbs li').bind('click', function(e){
-var count = $(this).attr('rel');
-        showImage(parseInt(count) - 1);
+showNext(); //loads first image
+if ($('#thumbs li').length) {
+    $('#thumbs li').bind('click', function(e){
+    var count = $(this).attr('rel');
+    showImage(parseInt(count) - 1);
 });
 }
 
 //работаем с tab'ami
 if ($('div.tabs > div').length) {
-var tabContainers = $('div.tabs > div');
-        tabContainers.hide().filter(':first').show();
-        $('div.tabs ul.tabNavigation a').click(function () {
-tabContainers.hide();
-        tabContainers.filter(this.hash).show();
-        $('div.tabs ul.tabNavigation a').removeClass('selected');
-        $(this).addClass('selected');
-        return false;
+    var tabContainers = $('div.tabs > div');
+    tabContainers.hide().filter(':first').show();
+    $('div.tabs ul.tabNavigation a').click(function () {
+    tabContainers.hide();
+    tabContainers.filter(this.hash).show();
+    $('div.tabs ul.tabNavigation a').removeClass('selected');
+    $(this).addClass('selected');
+    return false;
 }).filter(':visible:first').click();
 }
 if ($("#mail").length ||
@@ -1235,7 +1235,7 @@ fillTKtablePart();
                                 ajax: true,
                                 pole: 3
                 }, error: function (request, error) {
-                console.log(arguments);
+                //console.log(arguments);
                 //alert(" ќшибка ajax: " + error);
                 }, success: function(data) {
                 // –езультат поиска
@@ -1262,7 +1262,7 @@ fillTKtablePart();
                                 ajax: true,
                                 pole: 3
                 }, error: function (request, error) {
-                console.log(arguments);
+                //console.log(arguments);
                 //alert(" ќшибка ajax: " + error);
                 }, success: function(data) {
                 // –езультат поиска
@@ -1330,7 +1330,24 @@ fillTKtablePart();
                         //console.log($(this).text());
                 });
                 }
-
+                //модификаци€ CEO вывод сокрытие надписей в классе prev_price lostandfound
+                //console.log($('.prev_price.lostandfound:first-child').length);
+                if ($('.prev_price.lostandfound').length){
+                   //$('.prev_price.lostandfound').next().html('уточните наличие');
+                   $('.prev_price.lostandfound').html('<!--noindex-->уточн€йте наличие<!--/noindex-->');
+                   //console.log('уточните наличие');
+                }
+                //console.log($('.prev_price').css('margin'));
+                if ($('.prev_price').length){
+                    $('.prev_price').each(function(index) {
+                        //исключение дл€ блоков вывода по 3 купить,посмотреть аналог
+                        if ($(this).css('left')!='150px' && $(this).css('margin')!== '-15px 0px 0px 10px' && $(this).prev('div').prev('.price').prev('.addtochart').length)
+                            $(this).html('<!--noindex-->уточн€йте наличие<!--/noindex-->');
+                                //console.log($(this).prev('div').prev('.price').prev('.addtochart').length);
+                        if ($(this).next('.price').next('.buybuttons:eq(0)').children('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').val()==='”точнить')
+                            $(this).html('<!--noindex-->уточн€йте наличие<!--/noindex-->');                            
+                    });
+                }
                 });
                 //функци€ обработки части форма forma_dost дл€ “ранспортных компаний
                     function fillTKtablePart(){

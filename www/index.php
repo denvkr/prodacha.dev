@@ -130,7 +130,8 @@ function ParseTemplate($TemplateName)
             "/\/fail\//i" => $root . "fail/",
             "/\/rss\//i" => $root . "rss/",
             "/\/newtip\//i" => $root . "newtip/",
-            "/\/spec\//i" => $root . "spec/"
+            "/\/spec\//i" => $root . "spec/",
+            "/\/catalog\//i" => $root . "catalog/"
         );
     } else {
         $replaces = array(

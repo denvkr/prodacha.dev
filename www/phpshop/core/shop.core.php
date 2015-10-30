@@ -1,5 +1,6 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'] . '/custom_config/config_functions.php');
+
 //ini_set('error_reporting', E_ALL);
 //ini_set('display_errors', 1);
 //ini_set('display_startup_errors', 1);
@@ -594,7 +595,8 @@ class PHPShopShop extends PHPShopShopCore {
         	 intval($this->category)==499 || intval($this->category)==500 || intval($this->category)==501 ||
         	 intval($this->category)==502 || intval($this->category)==536 || intval($this->category)==538 || 
 		 intval($this->category)==543 || intval($this->category)==545 || intval($this->category)==549 || 
-        	 intval($this->category)==555 || intval($this->category)==562 || intval($this->category)==581) {
+        	 intval($this->category)==555 || intval($this->category)==562 || intval($this->category)==581 || 
+                 intval($this->category)==585 || intval($this->category)==586) {
         	switch (intval($this->category)) {
         		case 473 : $where=' where id in (38,120,62,314,45,74,19,15,17,20,21,22,30,27,28,23,24,25,26,29,229,126,173)';
         					break;
@@ -672,6 +674,10 @@ class PHPShopShop extends PHPShopShopCore {
         					break;
         		case 581: $where = " where id in (582,569,572,571,576,578,583)";
         					break;
+                        case 585: $where = " where id in (584,586)";
+                                          break;
+                        case 586: $where = " where id in (587,588)";
+                                          break;
         	}
         	$this->PHPShopOrm->sql = 'select '.intval($this->category).' as id,name,num,'.intval($this->category).' as parent_to,yml,num_row,num_cow,sort,content,vid,name_rambler,servers,title,title_enabled,title_shablon,descrip,descrip_enabled,descrip_shablon,keywords,keywords_enabled,keywords_shablon,skin,skin_enabled,order_by,order_to,secure_groups,content_h,filtr,icon_description from ' . $this->getValue('base.categories').$where.' LIMIT 1';
         	//echo $this->PHPShopOrm->sql;
@@ -1039,8 +1045,10 @@ class PHPShopShop extends PHPShopShopCore {
         			  break;
                 case 581: $where = " where id in (582,569,572,571,576,578,583)";
         			  break;
-                case 586: $where = " where id in (587,588)";
+                case 585: $where = " where id in (584,586)";
         			  break;
+                case 586: $where = " where id in (587,588)";
+        			  break;                              
         	default: // ”слови€ выборки
 					 $where = array('parent_to' => '=' . $this->category, 'skin_enabled' => "!='1'");
         }
@@ -1067,7 +1075,7 @@ class PHPShopShop extends PHPShopShopCore {
                 intval($this->PHPShopNav->getId())==509	|| intval($this->PHPShopNav->getId())==536 || intval($this->PHPShopNav->getId())==538 ||
                 intval($this->PHPShopNav->getId())==543 || intval($this->PHPShopNav->getId())==545 || intval($this->PHPShopNav->getId())==549 || 
                 intval($this->PHPShopNav->getId())==555 || intval($this->PHPShopNav->getId())==562 || intval($this->PHPShopNav->getId())==581 ||
-                intval($this->PHPShopNav->getId())==586) 
+                intval($this->PHPShopNav->getId())==585 || intval($this->PHPShopNav->getId())==586) 
         {
                 $PHPShopOrm->sql="select id,case name_rambler when '' then name else name_rambler end as name,num,".$this->PHPShopNav->getId().' as parent_to,yml,num_row,num_cow,sort,content,vid,name_rambler,servers,title,title_enabled,title_shablon,descrip,descrip_enabled,descrip_shablon,keywords,keywords_enabled,keywords_shablon,skin,skin_enabled,order_by,order_to,secure_groups,content_h,filtr,icon_description from '. $this->getValue('base.categories') . $where;
                 $dataArray = $PHPShopOrm->select();
@@ -1127,7 +1135,7 @@ class PHPShopShop extends PHPShopShopCore {
 					$this->PHPShopNav->getId()==538 || $this->PHPShopNav->getId()==509 || $this->PHPShopNav->getId()==536 || 
 					$this->PHPShopNav->getId()==543 || $this->PHPShopNav->getId()==545 || $this->PHPShopNav->getId()==549 || 
 					$this->PHPShopNav->getId()==555 || $this->PHPShopNav->getId()==562 || $this->PHPShopNav->getId()==581 || 
-                                        $this->PHPShopNav->getId()==586
+                                        $this->PHPShopNav->getId()==585 || $this->PHPShopNav->getId()==586
 					)) {
 					if (preg_match('/^.*\(.*\).*$/i',$row['name'])==0) {
 						$cnt_by_type++;
@@ -1157,7 +1165,7 @@ class PHPShopShop extends PHPShopShopCore {
 						   $this->PHPShopNav->getId()==543 || $this->PHPShopNav->getId()==545 ||
 						   $this->PHPShopNav->getId()==549 || $this->PHPShopNav->getId()==555 ||
 						   $this->PHPShopNav->getId()==562 || $this->PHPShopNav->getId()==581 ||
-                                                    $this->PHPShopNav->getId()==586
+                                                   $this->PHPShopNav->getId()==585 || $this->PHPShopNav->getId()==586
 						) {
 						$cnt_by_type++;
 				}			
@@ -1207,7 +1215,7 @@ class PHPShopShop extends PHPShopShopCore {
 					$this->PHPShopNav->getId()==503 || $this->PHPShopNav->getId()==509 || $this->PHPShopNav->getId()==536 || 
 					$this->PHPShopNav->getId()==538 || $this->PHPShopNav->getId()==543 || $this->PHPShopNav->getId()==545 ||
 					$this->PHPShopNav->getId()==549 || $this->PHPShopNav->getId()==555 || $this->PHPShopNav->getId()==562 || 
-                                        $this->PHPShopNav->getId()==581 || $this->PHPShopNav->getId()==586
+                                        $this->PHPShopNav->getId()==581 || $this->PHPShopNav->getId()==585 || $this->PHPShopNav->getId()==586
 				   )) {
                                    
 					//по типу смотрим если есть доп ссылка в конф файле menu-lvl3-href-modify_catalog_add-analog.txt
@@ -1271,7 +1279,7 @@ class PHPShopShop extends PHPShopShopCore {
                                             $this->PHPShopNav->getId()==509 || $this->PHPShopNav->getId()==536 || 
                                             $this->PHPShopNav->getId()==538 || $this->PHPShopNav->getId()==543 || 
                                             $this->PHPShopNav->getId()==545 || $this->PHPShopNav->getId()==549 ||
-                                            $this->PHPShopNav->getId()==562) {
+                                            $this->PHPShopNav->getId()==562 || $this->PHPShopNav->getId()==585) {
 					$catalog_items_content=PHPShopText::a($this->path . '/CID_' . $row['id'] . '.html', $row['name'],false,false,false,false,false);
 					array_push($catalog_items_by_type_table_td,$catalog_items_content);
 					$cnt1++;
@@ -1357,7 +1365,8 @@ class PHPShopShop extends PHPShopShopCore {
                                 $this->PHPShopNav->getId()==502 || $this->PHPShopNav->getId()==503 || $this->PHPShopNav->getId()==509 || 
                                 $this->PHPShopNav->getId()==536 || $this->PHPShopNav->getId()==538 || $this->PHPShopNav->getId()==543 || 
                                 $this->PHPShopNav->getId()==545 || $this->PHPShopNav->getId()==549 || $this->PHPShopNav->getId()==555 || 
-                                $this->PHPShopNav->getId()==562 || $this->PHPShopNav->getId()==581 || $this->PHPShopNav->getId()==586) {                           
+                                $this->PHPShopNav->getId()==562 || $this->PHPShopNav->getId()==581 || $this->PHPShopNav->getId()==585 || 
+                                $this->PHPShopNav->getId()==586) {                           
                                 $disp1=PHPShopText::table($catalog_items_table1,1,1,'center','98%',false,0,'catalog_items_table1');
                                 $disp2=PHPShopText::table($catalog_items_table2,1,1,'center','98%',false,0,'catalog_items_table2');			
                         } else {	
@@ -1466,7 +1475,8 @@ class PHPShopShop extends PHPShopShopCore {
 			$this->PHPShopNav->getId()==502 || $this->PHPShopNav->getId()==503 || $this->PHPShopNav->getId()==509 || 
 			$this->PHPShopNav->getId()==536 || $this->PHPShopNav->getId()==538 || $this->PHPShopNav->getId()==543 || 
 			$this->PHPShopNav->getId()==545 || $this->PHPShopNav->getId()==549 || $this->PHPShopNav->getId()==555 ||
-			$this->PHPShopNav->getId()==562 || $this->PHPShopNav->getId()==581 || $this->PHPShopNav->getId()==586
+			$this->PHPShopNav->getId()==562 || $this->PHPShopNav->getId()==581 || $this->PHPShopNav->getId()==585 || 
+                        $this->PHPShopNav->getId()==586
 		) {
 			$this->set('productId', $this->PHPShopNav->getId());
 			$this->set('productPageThis', $this->PHPShopNav->getPage());
@@ -1491,7 +1501,8 @@ class PHPShopShop extends PHPShopShopCore {
 			$this->PHPShopNav->getId()==499 || $this->PHPShopNav->getId()==500 || $this->PHPShopNav->getId()==501 ||
 			$this->PHPShopNav->getId()==502 || $this->PHPShopNav->getId()==509 || $this->PHPShopNav->getId()==536 || 
 			$this->PHPShopNav->getId()==538 || $this->PHPShopNav->getId()==543 || $this->PHPShopNav->getId()==545 ||
-			$this->PHPShopNav->getId()==549 || $this->PHPShopNav->getId()==555 || $this->PHPShopNav->getId()==562) {
+			$this->PHPShopNav->getId()==549 || $this->PHPShopNav->getId()==555 || $this->PHPShopNav->getId()==562 || 
+                        $this->PHPShopNav->getId()==585) {
 			$this->parseTemplate($this->getValue('templates.catalog_info_forma_1'));
 		} else
         	$this->parseTemplate($this->getValue('templates.catalog_info_forma'));
@@ -1541,7 +1552,7 @@ class PHPShopShop extends PHPShopShopCore {
 				$cid_id==499 || $cid_id==500 || $cid_id==501 || $cid_id==502 ||
 				$cid_id==503 || $cid_id==509 || $cid_id==536 || $cid_id==538 || 
 				$cid_id==543 || $cid_id==545 || $cid_id==549 || $cid_id==555 ||
-				$cid_id==562 || $cid_id==581 || $cid_id==586
+				$cid_id==562 || $cid_id==581 || $cid_id==585 || $cid_id==586
 		) {
 			// ѕуть дл€ навигации
 			$this->objPath = './CID_' . $this->category . '_';	
@@ -1599,7 +1610,7 @@ class PHPShopShop extends PHPShopShopCore {
 	         	$cid_id==493 || $cid_id==494 || $cid_id==495 || $cid_id==496 || $cid_id==497 || 
 	         	$cid_id==498 || $cid_id==499 || $cid_id==500 || $cid_id==501 || $cid_id==502 ||
 			$cid_id==536 ||	$cid_id==538 || $cid_id==543 || $cid_id==545 || $cid_id==549 ||
-	         	$cid_id==555 || $cid_id==562 || $cid_id==581 || $cid_id==586) {
+	         	$cid_id==555 || $cid_id==562 || $cid_id==581 || $cid_id==585 || $cid_id==586) {
 				if ($this->PHPShopNav->getPage()=='') {
 	        		/*
 	        		$sql="select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
@@ -1744,7 +1755,8 @@ class PHPShopShop extends PHPShopShopCore {
 					$cid_id==496 || $cid_id==497 || $cid_id==498 || $cid_id==499 || 
 					$cid_id==500 || $cid_id==501 || $cid_id==502 || $cid_id==536 || 
 					$cid_id==538 || $cid_id==543 || $cid_id==545 || $cid_id==549 || 
-					$cid_id==555 || $cid_id==562 || $cid_id==581 || $cid_id==586
+					$cid_id==555 || $cid_id==562 || $cid_id==581 || $cid_id==585 || 
+                                        $cid_id==586
 					)  && $cell==1) {
 				//echo 1;
 				$disp_cat.='<div class="content"><table cellpadding="0" cellspacing="0" border="0" width="100%" id="manufacturers_products" style="display: table;">';
@@ -1896,10 +1908,10 @@ class PHPShopShop extends PHPShopShopCore {
 							//используем отдельное форматирование дл€ вывода в каталогах с кол-м €чеек больше 1
 							if ($cell>1) {
 								$sdvig_vpravo='left:20px;';
-								$comnotice='<div class="prev_price" style="position:relative;font-size:11px !important;'.$sdvig_vpravo.'">'.$this->lang('sklad_mesage').'</div>';
+								$comnotice='<div class="prev_price" style="position:relative;font-size:11px !important;'.$sdvig_vpravo.'"><!--noindex-->'.''.'<!--/noindex--></div>';//$this->lang('sklad_mesage')
 							} else {
 								$sdvig_vpravo='';
-								$comnotice=$this->lang('sklad_mesage');
+								//$comnotice=$this->lang('sklad_mesage');
 							}
 						} else {
 							$comnotice='';
@@ -1959,10 +1971,10 @@ class PHPShopShop extends PHPShopShopCore {
 							//используем отдельное форматирование дл€ вывода в каталогах с кол-м €чеек больше 1
 							if ($cell>1) {
 								$sdvig_vpravo='left:20px;';
-								$comnotice='<div class="prev_price" style="position:relative;font-size:11px !important;'.$sdvig_vpravo.'top:-10px;">'.$this->lang('sklad_mesage').'</div>';
+								$comnotice='<div class="prev_price" style="position:relative;font-size:11px !important;'.$sdvig_vpravo.'top:-10px;"><!--noindex-->'.''.'<!--/noindex--></div>';//$this->lang('sklad_mesage')
 							} else {
 								$sdvig_vpravo='';
-								$comnotice=$this->lang('sklad_mesage');
+								//$comnotice=$this->lang('sklad_mesage');
 							}
 						} else {
 							$comnotice='';
@@ -1991,7 +2003,7 @@ class PHPShopShop extends PHPShopShopCore {
 							$cid_id==496 || $cid_id==497 || $cid_id==498 || $cid_id==499 || 
 							$cid_id==500 || $cid_id==501 || $cid_id==502 || $cid_id==536 || 
 							$cid_id==538 || $cid_id==543 || $cid_id==545 || $cid_id==549 || 
-							$cid_id==555 || $cid_id==562 || $cid_id==581
+							$cid_id==555 || $cid_id==562 || $cid_id==581 || $cid_id==585
 						) {
 							$comnotice='';
 							$productnotice='';
@@ -2037,10 +2049,10 @@ class PHPShopShop extends PHPShopShopCore {
 						//используем отдельное форматирование дл€ вывода в каталогах с кол-м €чеек больше 1
 						if ($cell>1) {
 							$sdvig_vpravo='left:20px;';
-							$comnotice='<div class="prev_price" style="position:relative;font-size:11px !important;'.$sdvig_vpravo.'top:-10px;">'.$this->lang('sklad_mesage').'</div>';
+							$comnotice='<div class="prev_price" style="position:relative;font-size:11px !important;'.$sdvig_vpravo.'top:-10px;"><!--noindex-->'.''.'<!--/noindex--></div>';//$this->lang('sklad_mesage')
 						} else {
 							$sdvig_vpravo='';
-							$comnotice=$this->lang('sklad_mesage');
+							//$comnotice=$this->lang('sklad_mesage');
 						}
 						$outdated_style='';
 						$comnotice_price_n='';
@@ -2051,7 +2063,7 @@ class PHPShopShop extends PHPShopShopCore {
                                                 $addtochart='<a href="#_tool_'.$prod_row['id'].'" id="a'.$prod_row['id'].'"onclick="javascript:AddToCart('.$prod_row['id'].')">'.$this->lang('product_sale').'</a>';
 						//$productnotice='<input type="button" onclick="window.location.replace(\'/users/notice.html?productId='.$prod_row['id'].'\');"  value="'.$this->lang('product_notice').'" />';
 						$productnotice='<input type="button" onclick="ask_product_availability(\'/shop/UID_'.$prod_row['id'].'.html\',document.getElementsByClassName(\'netref\'));" value="'.$this->lang('product_notice').'">';
-						$comnotice='<div class="prev_price" style="font-size:11px !important;top:-10px;">'.$this->lang('sklad_mesage').'</div>';
+						$comnotice='<div class="prev_price" style="font-size:11px !important;top:-10px;"><!--noindex-->'.''.'<!--/noindex--></div>';//$this->lang('sklad_mesage')
 						$outdated_style='';
 						$comnotice_30='';
 						if (!empty($prod_row['price_n'])){
@@ -2081,7 +2093,7 @@ class PHPShopShop extends PHPShopShopCore {
 					$cid_id==496 || $cid_id==497 || $cid_id==498 || $cid_id==499 || 
 					$cid_id==500 || $cid_id==501 || $cid_id==502 || $cid_id==536 || 
 					$cid_id==538 || $cid_id==543 || $cid_id==545 || $cid_id==549 ||
-					$cid_id==555 || $cid_id==562 || $cid_id==581
+					$cid_id==555 || $cid_id==562 || $cid_id==581 || $cid_id==585
 					) && $cell==1) {
 					//echo 2;
 					$this->catalog_product_icons($prod_row);
@@ -2094,7 +2106,7 @@ class PHPShopShop extends PHPShopShopCore {
 					.'<div class="thumb">'
 					.'<table width="100%" border="0" cellspacing="0" cellpadding="0">'
 					.'<tbody><tr>'
-					.'<td height="150" align="top"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="phpshop/templates/prodacha/images/shop/no_photo.gif" onerror="NoFoto(this,\'phpshop/templates/prodacha\')" onload="EditFoto(this,)" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'
+					.'<td height="150" align="top"><a href="/shop/UID_'.$prod_row['id'].'.html" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"><img src="'.$prod_row['pic_small'].'" lowsrc="phpshop/templates/prodacha/images/shop/no_photo.gif" onerror="NoFoto(this,\'phpshop/templates/prodacha\')" onload="EditFoto(this,)" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'
 					.'</tr>'
 					.'</tbody></table>'
 					.'</div>'
@@ -2139,7 +2151,7 @@ class PHPShopShop extends PHPShopShopCore {
 							.'<div class="thumb">'
 							.'<table width="100%" border="0" cellspacing="0" cellpadding="0">'
 							.'<tr>'
-							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'
+							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'
 							.'</tr>'
 							.'</table>'
 							.'</div>'
@@ -2175,7 +2187,7 @@ class PHPShopShop extends PHPShopShopCore {
 							.'<div class="thumb">'
 							.'<table width="100%" border="0" cellspacing="0" cellpadding="0">'
 							.'<tr>'
-							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'
+							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'
 							.'</tr>'
 							.'</table>'
 							.'</div>'
@@ -2211,7 +2223,7 @@ class PHPShopShop extends PHPShopShopCore {
 							.'<div class="thumb">'
 							.'<table width="100%" border="0" cellspacing="0" cellpadding="0">'
 							.'<tr>'
-							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'
+							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'
 							.'</tr>'
 							.'</table>'
 							.'</div>'
@@ -2248,7 +2260,7 @@ class PHPShopShop extends PHPShopShopCore {
 							.'<div class="thumb">'
 							.'<table width="100%" border="0" cellspacing="0" cellpadding="0">'
 							.'<tr>'
-							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'
+							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'
 							.'</tr>'
 							.'</table>'
 							.'</div>'

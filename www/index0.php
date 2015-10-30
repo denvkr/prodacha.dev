@@ -1,4 +1,5 @@
 <?
+//require '\..\vendor\autoload.php';
 
 		//гео определение города	
 		//include_once "geo_engine.php";

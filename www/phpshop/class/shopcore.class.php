@@ -617,7 +617,7 @@ class PHPShopShopCore extends PHPShopCore {
         	//под заказ
         	if ($row['sklad']==1 && empty($row['outdated'])) {        		
         		$this->set('collaboration','lostandfound');
-        		$this->set('productPriceRub', $this->lang('sklad_mesage'));
+        		//$this->set('productPriceRub', $this->lang('sklad_mesage'));
         		$this->set('price_comlain','<span class="price_comlain" ><noindex>нашли дешевле?</noindex></span>');
         	}
         	//снят с производства

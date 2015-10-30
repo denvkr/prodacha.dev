@@ -1,0 +1,16 @@
+{
+    "name": "denvkr/prodacha.dev",
+    "description": "prodacha.ru dev project",
+    "require": {
+        "phpunit/phpunit": "4.8"
+    },
+    "require-dev": {
+        "phpdocumentor/phpdocumentor": "^2.8"
+    },
+    "authors": [
+        {
+            "name": "Denis Krasavin",
+            "email": "denvkr@yandex.ru"
+        }
+    ]
+}

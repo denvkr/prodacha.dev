@@ -1970,11 +1970,23 @@ ul.tabNavigation li a:focus
 .italic { font-style: italic; }
 .underline { text-decoration: underline; }
 
-.mapa li
+.catalog>.mapa>ul>li
+{
+	margin-left:20px;
+	margin-top:5px;        
+}
+.catalog>.mapa>ul
+{
+	//margin-left:20px;
+}
+.catalog>.mapa>ul>ul
 {
 	margin-left:20px;
 }
-
+.catalog>.mapa>ul>ul>li
+{
+	margin-top:5px;
+}
 .pagesmapa a
 {
 	text-decoration:underline;

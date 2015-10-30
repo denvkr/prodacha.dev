@@ -16,7 +16,7 @@ function index_speccore_hook($obj,$row,$rout) {
 
 $addHandler=array
         (
-        'index'=>'index_speccore_hook',
+        'index'=>'index_speccore_hook'
 );
 
 ?>
