@@ -139,7 +139,7 @@ class PHPShopSecurity {
                 break;
 
             case 2:
-                return htmlspecialchars(stripslashes($str));
+                return htmlspecialchars(stripslashes($str),ENT_QUOTES,'cp1251');
                 break;
 
             case 3:
@@ -151,7 +151,7 @@ class PHPShopSecurity {
             case 4:
                 if (preg_match("/[^(\w)|(\x7F-\xFF)|(\s)]/", $str))
                     $str = "";
-                return htmlspecialchars(stripslashes($str));
+                return htmlspecialchars(stripslashes($str),ENT_QUOTES,'cp1251');
                 break;
 
             case 5:

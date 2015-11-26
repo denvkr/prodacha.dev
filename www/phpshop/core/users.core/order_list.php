@@ -16,7 +16,7 @@ function order_list($obj,$tip,$uid=null) {
         $where=array('user'=>'='.$obj->UsersId);
     // Режим проверка заказа
     elseif($tip==2 and !empty($uid))
-        $where=array('uid'=>'="'.htmlspecialchars($uid).'"');
+        $where=array('uid'=>'="'.htmlspecialchars($uid,ENT_QUOTES,'cp1251').'"');
 
     $PHPShopOrm = new PHPShopOrm($obj->getValue('base.orders'));
     $data=$PHPShopOrm->select(array('*'),$where,array('order'=>'datas desc'),array('limit'=>100));

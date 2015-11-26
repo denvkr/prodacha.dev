@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_URI']=="/shop/CID_16.html")
 					$res1=mysql_query($sql1);
 					while($row1=mysql_fetch_assoc($res1))
 					{
-						$title=htmlspecialchars($row1['name']);
+						$title=htmlspecialchars($row1['name'],ENT_QUOTES,'cp1251');
 						$vuvod.='<a href="/shop/UID_'.$row1['id'].'.html" alt="'.$title.'" title="'.$title.'" >';
 						
 						//if (!empty($row1['pic_small']))

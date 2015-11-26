@@ -39,7 +39,7 @@ if (isset($_POST['product']))
 					$res1=mysql_query($sql1);
 					$row1=mysql_fetch_assoc($res1);
 					
-					$title=htmlspecialchars($row1['name']);
+					$title=htmlspecialchars($row1['name'],ENT_QUOTES,'cp1251');
 				 
 				 
 				//письмо

@@ -104,7 +104,7 @@ class PHPShopString {
 
     // Отрезаем до точки с заменой &
     function mySubstr($str, $a) {
-        $str = htmlspecialchars(strip_tags(trim($str)));
+        $str = htmlspecialchars(strip_tags(trim($str)),ENT_QUOTES,'cp1251');
         $len = strlen($str);
 
         if ($len < $a)

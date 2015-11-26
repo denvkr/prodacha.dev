@@ -182,7 +182,7 @@ class OrderWrite {
 	  function CleanStr($str){
 	  $str=str_replace("/","|",$str);
 	  $str=str_replace("\"","*",$str);
-	  return htmlspecialchars(stripslashes($str));
+	  return htmlspecialchars(stripslashes($str),ENT_QUOTES,'cp1251');
 	  }
 	  
 	  function OrderMas($VAR,$Discount,$UserId){

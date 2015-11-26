@@ -145,7 +145,7 @@ class Sypex_Dumper {
 					exit;
 				}
 				foreach(array('user', 'pass', 'host', 'port') AS $key){
-					$_POST[$key] = !empty($_POST[$key]) ? htmlspecialchars($_POST[$key], ENT_NOQUOTES) : '';
+					$_POST[$key] = !empty($_POST[$key]) ? htmlspecialchars($_POST[$key], ENT_NOQUOTES,'cp1251') : '';
 				}
 				$_POST['save'] = !empty($_POST['save']) ? ' CHECKED' : '';
 			}

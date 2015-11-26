@@ -32,7 +32,7 @@ function TotalClean($str,$flag)// чистка
    }
  elseif($flag==2)// убирает бяки
       {
-	  return htmlspecialchars(stripslashes($str));
+	  return htmlspecialchars(stripslashes($str),ENT_QUOTES,'cp1251');
 	  }
  elseif($flag==3)// обработка строки на бяки в мыле
       {
@@ -49,7 +49,7 @@ function TotalClean($str,$flag)// чистка
         {
         $str="";
          }
-       return  htmlspecialchars(stripslashes($str));
+       return  htmlspecialchars(stripslashes($str),ENT_QUOTES,'cp1251');
 	  }
  elseif($flag==5)// проверка вводимых цифр
       {

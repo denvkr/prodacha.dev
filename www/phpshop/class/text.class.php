@@ -384,7 +384,60 @@ class PHPShopText {
     function setInputText($caption, $name, $value, $size = 300, $description = false, $float = "none", $class = false) {
         return PHPShopText::setInput('text', $name, $value, $float, $size, false, $class, $caption, $description);
     }
+    
+    function ru_eng_alphabet_sort($str1, $str2){
+        $ord_val1=0;
+        $ord_val2=0;        
+        //$ru_eng_alphabet=array('à','á','â','ã','ä','å','¸','æ','ç','è','ê','ë','ì','í','î','ï','ð','ñ','ò','ó','ô','õ','ö','÷','ø','ù','ý','þ','ÿ','a','b','c','d','e','f','g','h','j','i','k','l','m','n','o','p','q','r','s','t','u','x','y','z');
+        //$str1_chr_pos=0;
+        //$str2_chr_pos=0;
+        //echo '$str1='.lcfirst(substr($str1,0,1)).' ord($str1)='.ord(lcfirst(substr($str1,0,1))).'<br>';
+        //echo '$str2='.lcfirst(substr($str1,0,1)).' ord($str2)='.ord(lcfirst(substr($str2,0,1))).'<br>';
+/*
+        if (strcmp(strtolower(substr($str1,0,1)), strtolower(substr($str2,0,1))) == 0){
+            return 0;
+        }
+ */
+        if ( ord(lcfirst(substr($str1,0,1)))<224 )
+                $ord_val1=ord(lcfirst(substr($str1,0,1)))+224;
+        else
+                $ord_val1=ord(lcfirst(substr($str1,0,1)));
+        if ( ord(lcfirst(substr($str2,0,1)))<224 )
+                $ord_val2=ord(lcfirst(substr($str2,0,1)))+224;
+        else
+                $ord_val2=ord(lcfirst(substr($str2,0,1)));
+        /*
+        if (ord(lcfirst(substr($str1,0,1))) == ord(lcfirst(substr($str2,0,1)))){
+            return 0;
+        }
+        for ($walker=0;$walker<count($ru_eng_alphabet);$walker++){
+        echo 'char='.lcfirst(substr($ru_eng_alphabet[$walker],0,1)).' ord='.ord(lcfirst(substr($ru_eng_alphabet[$walker],0,1))).'<br>';
+        }
+         */    
+/*
+        for ($walker=0;$walker<=count($ru_eng_alphabet);$walker++){
+            if ($ru_eng_alphabet[$walker]==strtolower(substr($str1,0,1)))
+                $str1_chr_pos=$walker;
+            if ($ru_eng_alphabet[$walker]==strtolower(substr($str2,0,1)))
+                $str2_chr_pos=$walker;
+        }
 
+        return ($str1_chr_pos>$str2_chr_pos)? 1 : -1;
+ */
+        return ($ord_val1>$ord_val2)? 1 : -1;
+    }
+    function array_submenuhead1_cmp($key) {
+    return function ($a, $b) use ($key) {
+        //echo $a[$key].' '.$b[$key].'<br>';
+        return strcoll($a[$key], $b[$key]);// strnatcmp($a[$key], $b[$key]);strnatcasecmp
+    };
+    }
+    function array_submenuhead2_cmp($key) {
+    return function ($a, $b) use ($key) {
+        //echo $a[$key].' '.$b[$key].'<br>';
+        return PHPShopText::ru_eng_alphabet_sort($a[$key], $b[$key]);// strnatcmp($a[$key], $b[$key]);
+    };
+    }
 }
 
 ?>

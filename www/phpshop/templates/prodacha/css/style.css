@@ -1049,7 +1049,7 @@ margin-left: 22px;
 display:inline-block;
 
 }
-.content .item .addtochart input , .sorting .item1 .addtochart input
+.content .item .addtochart input
 {
 	display: block;
 	padding-left: 20px;
@@ -1062,9 +1062,41 @@ display:inline-block;
 	font-size: 11px;
 	/*text-indent: -999em;*/
 }
-
-.content .item .addtochart a ,.content .item1 .addtochart a
+.sorting .item1 .addtochart input[type="button"]
 {
+        position: relative;
+        left: -25px;
+	display: block;
+	padding-left: 20px;
+	width: 104px;
+	height: 26px;
+	border: none;
+	background: url("../images/add_chart.png") no-repeat left top;
+	color: #fff;/*#333;*/
+	text-transform: uppercase;
+	font-size: 11px;
+	/*text-indent: -999em;*/
+}
+.content .item .addtochart a
+{
+	display: block;
+        padding-left: 12px;
+        padding-top: 5px;
+	width: 104px;
+	height: 26px;
+	border: none;
+	background: url("../images/add_chart.png") no-repeat left top;
+	color: #fff;/*#333;*/
+	text-transform: uppercase;
+	font-size: 11px;
+        text-align: center;
+	/*text-indent: -999em;*/
+}
+
+.content .item1 .addtochart a
+{
+        position: relative;
+        left: -25px;
 	display: block;
         padding-left: 12px;
         padding-top: 5px;
@@ -2771,7 +2803,13 @@ p.ul_marg
 	.addchart_block_table_price .price + .prev_price
 	{
 		position: absolute;
-		right: 40px;
+		right: 65px;
+		top: -35px;
+	}
+	.addchart_block_table_price .price + .prev_price,.outdated>strong
+	{
+		position: relative;
+		right: 65px;
 		top: -35px;
 	}
 	.addchart_block_table_price .price + .prev_price.lostandfound

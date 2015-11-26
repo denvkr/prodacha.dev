@@ -278,7 +278,9 @@ class PHPShopProductElements extends PHPShopElements {
         			break;
         	}
         	
-        	$this->set('productPrice',$mod_price);        	
+        	$this->set('productPrice',$mod_price);
+                $this->set('productPriceRub', '');
+
             //$this->set('productPrice', $this->price($row));
             //$this->set('productPriceRub', $this->lang('sklad_mesage'));
             //$this->set('ComStartNotice', '');

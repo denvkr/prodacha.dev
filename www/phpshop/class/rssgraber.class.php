@@ -324,7 +324,7 @@ class fase4_rdf {
                 $this->_display_opt["channel"] != "hidden") {
             $this->_output .= "<tr><td>\n";
             $this->_output .= '<table border="0" width="100%" class="fase4_rdf_meta" cellspacing="5" cellpadding="2">'."\n";
-            $this->_output .= "<tr><td class=\"fase4_rdf\"><div class=\"fase4_rdf_title\">".htmlspecialchars($this->_citem["title"])."</div></td></tr>\n";
+            $this->_output .= "<tr><td class=\"fase4_rdf\"><div class=\"fase4_rdf_title\">".htmlspecialchars($this->_citem["title"],ENT_QUOTES,'cp1251')."</div></td></tr>\n";
             $this->_output .= "<tr><td class=\"fase4_rdf\">".strip_tags($this->_citem["description"], "<a>, <img>")."</td></tr>\n";
             $this->_output .= "<tr><td>&nbsp;</td></tr>\n";
             $this->_output .= "<tr><td class=\"fase4_rdf\">\n";
@@ -411,7 +411,7 @@ class fase4_rdf {
                 if($this->_display_opt["channel"] != "hidden" AND $this->_item["title"] != "") {
                     $this->_output .= "<tr><td>\n";
                     $this->_output .= '<table border="0" width="100%" class="fase4_rdf_meta" cellspacing="5" cellpadding="2">'."\n";
-                    $this->_output .= "<tr><td class=\"fase4_rdf\"><div class=\"fase4_rdf_title\">".htmlspecialchars($this->_item["title"])."</div></td></tr>\n";
+                    $this->_output .= "<tr><td class=\"fase4_rdf\"><div class=\"fase4_rdf_title\">".htmlspecialchars($this->_item["title"],ENT_QUOTES,'cp1251')."</div></td></tr>\n";
                     $this->_output .= "<tr><td class=\"fase4_rdf\">".strip_tags($this->_item["description"], "<a>, <img>")."</td></tr>\n";
                     $this->_output .= "<tr><td>&nbsp;</td></tr>\n";
                     $this->_output .= "<tr><td class=\"fase4_rdf\">\n";

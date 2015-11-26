@@ -167,7 +167,7 @@ $GetOplataMetodArray = GetOplataMetodArray();
 
 // Форматирование строки
 function Clean($s) {
-    $a = htmlspecialchars($s, ENT_QUOTES);
+    $a = htmlspecialchars($s, ENT_QUOTES,'cp1251');
     return $a;
 }
 

@@ -399,13 +399,13 @@ class PHPShopUsers extends PHPShopCore {
             if (count($this->error) == 0) {
                 $this->PHPShopOrm->update(array(
                     'mail_new' => $_POST['mail_new'],
-                    'name_new' => htmlspecialchars($_POST['name_new']),
-                    'company_new' => htmlspecialchars($_POST['company_new']),
-                    'inn_new' => htmlspecialchars($_POST['inn_new']),
-                    'tel_new' => htmlspecialchars($_POST['tel_new']),
-                    'adres_new' => htmlspecialchars($_POST['adres_new']),
-                    'kpp_new' => htmlspecialchars($_POST['kpp_new']),
-                    'tel_code_new' => htmlspecialchars($_POST['tel_code_new'])), array('id' => '=' . $_SESSION['UsersId']));
+                    'name_new' => htmlspecialchars($_POST['name_new'],ENT_QUOTES,'cp1251'),
+                    'company_new' => htmlspecialchars($_POST['company_new'],ENT_QUOTES,'cp1251'),
+                    'inn_new' => htmlspecialchars($_POST['inn_new'],ENT_QUOTES,'cp1251'),
+                    'tel_new' => htmlspecialchars($_POST['tel_new'],ENT_QUOTES,'cp1251'),
+                    'adres_new' => htmlspecialchars($_POST['adres_new'],ENT_QUOTES,'cp1251'),
+                    'kpp_new' => htmlspecialchars($_POST['kpp_new'],ENT_QUOTES,'cp1251'),
+                    'tel_code_new' => htmlspecialchars($_POST['tel_code_new']),ENT_QUOTES,'cp1251'), array('id' => '=' . $_SESSION['UsersId']));
                 $this->error[] = $this->locale['done'];
 
                 // Перехват модуля
@@ -672,15 +672,15 @@ class PHPShopUsers extends PHPShopCore {
             'password_new' => $this->encode($_POST['password_new']),
             'datas_new' => time(),
             'mail_new' => $_POST['mail_new'],
-            'name_new' => htmlspecialchars($_POST['name_new']),
-            'company_new' => htmlspecialchars($_POST['company_new']),
-            'inn_new' => htmlspecialchars($_POST['inn_new']),
-            'tel_new' => htmlspecialchars($_POST['tel_new']),
-            'adres_new' => htmlspecialchars($_POST['adres_new']),
+            'name_new' => htmlspecialchars($_POST['name_new'],ENT_QUOTES,'cp1251'),
+            'company_new' => htmlspecialchars($_POST['company_new'],ENT_QUOTES,'cp1251'),
+            'inn_new' => htmlspecialchars($_POST['inn_new'],ENT_QUOTES,'cp1251'),
+            'tel_new' => htmlspecialchars($_POST['tel_new'],ENT_QUOTES,'cp1251'),
+            'adres_new' => htmlspecialchars($_POST['adres_new'],ENT_QUOTES,'cp1251'),
             'enabled_new' => $user_mail_activate,
             'status_new' => $this->user_status,
-            'kpp_new' => htmlspecialchars($_POST['kpp_new']),
-            'tel_code_new' => htmlspecialchars($_POST['tel_code_new'])
+            'kpp_new' => htmlspecialchars($_POST['kpp_new'],ENT_QUOTES,'cp1251'),
+            'tel_code_new' => htmlspecialchars($_POST['tel_code_new'],ENT_QUOTES,'cp1251')
         );
 
         // Перехват модуля

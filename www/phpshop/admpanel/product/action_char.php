@@ -10,7 +10,7 @@ if (CheckedRules($UserStatus["cat_prod"], 2) == 1) {
     $JsHttpRequest = new Subsys_JsHttpRequest_Php("windows-1251");
 
     // Прием переменных
-    $addit = trim(htmlspecialchars($_REQUEST['addit']));
+    $addit = trim(htmlspecialchars($_REQUEST['addit'],ENT_QUOTES,'cp1251'));
     $seld = $_REQUEST['selopts'];
 
     if (strlen($addit)) {

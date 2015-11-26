@@ -11,7 +11,7 @@ function mySubstr($str,$a) {
 
     if(empty($str)) return $str;
 
-    $str = htmlspecialchars(strip_tags($str));
+    $str = htmlspecialchars(strip_tags($str),ENT_QUOTES,'cp1251');
     for ($i = 1; $i <= $a; $i++) {
         if($str{$i} == ".") $T=$i;
     }

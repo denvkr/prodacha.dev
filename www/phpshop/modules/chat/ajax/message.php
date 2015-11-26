@@ -80,7 +80,7 @@ if (!empty($_SESSION['mod_chat_user_session'])) {
         // Новое сообщение System
         $PHPShopOrm = new PHPShopOrm($PHPShopModules->getParam("base.chat.chat_jurnal"));
         $insert['user_session_new'] = $_SESSION['mod_chat_user_session'];
-        $insert['content_new'] = htmlspecialchars('Пользователь ' . $_SESSION['mod_chat_user_name'] . ' покинул чат');
+        $insert['content_new'] = htmlspecialchars('Пользователь ' . $_SESSION['mod_chat_user_name'] . ' покинул чат',ENT_QUOTES,'cp1251');
         $insert['status_new'] = 1;
         $insert['name_new'] = 'System';
         $insert['date_new'] = time();
@@ -103,7 +103,7 @@ if (!empty($_SESSION['mod_chat_user_session'])) {
     if (!empty($_REQUEST['addtext'])) {
         $PHPShopOrm = new PHPShopOrm($PHPShopModules->getParam("base.chat.chat_jurnal"));
         $insert['user_session_new'] = $_SESSION['mod_chat_user_session'];
-        $insert['content_new'] = htmlspecialchars($_REQUEST['addtext']);
+        $insert['content_new'] = htmlspecialchars($_REQUEST['addtext'],ENT_QUOTES,'cp1251');
         $insert['name_new'] = $_SESSION['mod_chat_user_name'];
         $insert['status_new'] = 1;
         $insert['date_new'] = time();

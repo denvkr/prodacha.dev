@@ -619,6 +619,7 @@ class PHPShopShopCore extends PHPShopCore {
         		$this->set('collaboration','lostandfound');
         		//$this->set('productPriceRub', $this->lang('sklad_mesage'));
         		$this->set('price_comlain','<span class="price_comlain" ><noindex>нашли дешевле?</noindex></span>');
+                        $this->set('productPriceRub', '');
         	}
         	//снят с производства
         	if ( !(empty($row['outdated'])) ) {
@@ -635,7 +636,7 @@ class PHPShopShopCore extends PHPShopCore {
 					$sdvig_vlevo='left:-20px;';
 				} else {
 					$sdvig_vlevo='';
-					$this->set('productPriceRub', '<strong style="position:relative;top:65px;left:-4px;font-size:13px;width:100%">'.$this->lang('outdated_message').'</strong>');
+					$this->set('productPriceRub', '<strong style="position:relative;left:65px;font-size:13px;width:100%">'.$this->lang('outdated_message').'</strong>');//"position:relative;top:65px;left:-4px;font-size:13px;width:100%"
 				}
 				if ( !(empty($row['analog'])) ) {
 					$this->set('price_comlain','<span id="price_comlain'.$row['id'].'" class="price_comlain" style="position:relative;'.$sdvig_vlevo.'"><noindex>'.$this->lang('outdated_message2').'</noindex></span>'.
@@ -667,6 +668,8 @@ class PHPShopShopCore extends PHPShopCore {
         	$mod_price=$this->add_space_to_price($mod_price);
         	 
         	$this->set('productPrice',$mod_price);
+
+                
          	//echo 'test5';        	 
         	/* 
             $this->set('collaboration','lostandfound');
@@ -852,8 +855,8 @@ class PHPShopShopCore extends PHPShopCore {
                 // Ид товара
                 $this->set('productUid', $row['id']);
 				
-				//~nah
-				$this->catalog_product_icons($row);//"icon_".$row['id'];
+                //~nah
+                $this->catalog_product_icons($row);//"icon_".$row['id'];
 				//echo $uid;
 				//$this->set('Producticons',$uid);
 

@@ -123,7 +123,7 @@ if ($FlagProxy == 1) {
 
 
 if (isset($_POST['pas_to_mail']) and strpos($_SERVER["HTTP_REFERER"], $_SERVER['SERVER_NAME'])) {
-    $log = htmlspecialchars(addslashes($_POST['log']));
+    $log = htmlspecialchars(addslashes($_POST['log']),ENT_QUOTES,'cp1251');
     if (!PHPShopSecurity::true_login($log))
         $log = null;
     $sql = "select password,mail from $table_name19 where login='" . $log . "'";

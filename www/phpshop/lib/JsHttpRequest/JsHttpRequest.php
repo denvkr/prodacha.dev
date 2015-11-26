@@ -135,7 +135,7 @@ class JsHttpRequest
         if ($this->SCRIPT_DECODE_MODE == 'entities')
             return str_replace(array('"', '<', '>'), array('&quot;', '&lt;', '&gt;'), $s);
         else
-            return htmlspecialchars($s);
+            return htmlspecialchars($s,ENT_QUOTES,'cp1251');
     }
 
 

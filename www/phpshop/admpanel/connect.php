@@ -169,7 +169,7 @@ function TotalClean($str, $flag) {
         return abs($str);
     }
     elseif ($flag == 2) {// убирает бяки
-        return htmlspecialchars(stripslashes($str));
+        return htmlspecialchars(stripslashes($str),ENT_QUOTES,'cp1251');
     } elseif ($flag == 3) {// обработка строки на бяки в мыле
         //проверка почты
         if (!preg_match("/^([a-z0-9_\.-]+@[a-z0-9_\.\-]+\.[a-z0-9_-]{2,6})$/i", $str)) {
@@ -180,7 +180,7 @@ function TotalClean($str, $flag) {
         if (preg_match("/[^(\w)|(\x7F-\xFF)|(\s)]/", $str)) {
             $str = "";
         }
-        return htmlspecialchars(stripslashes($str));
+        return htmlspecialchars(stripslashes($str),ENT_QUOTES,'cp1251');
     } elseif ($flag == 5) {// проверка вводимых цифр
         if (preg_match("/[^(0-9)|(\-)|(\.]/", $str)) {
             $str = "0";
@@ -194,7 +194,7 @@ function CleanStr($str) {
     $str = str_replace("/", "|", $str);
     $str = str_replace("\"", "*", $str);
     $str = str_replace("'", "*", $str);
-    return htmlspecialchars(stripslashes($str));
+    return htmlspecialchars(stripslashes($str),ENT_QUOTES,'cp1251');
 }
 
 // Вывод настроек магазина

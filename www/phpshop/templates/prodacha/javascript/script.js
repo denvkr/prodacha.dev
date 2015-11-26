@@ -1337,7 +1337,7 @@ fillTKtablePart();
                    $('.prev_price.lostandfound').html('<!--noindex-->уточн€йте наличие<!--/noindex-->');
                    //console.log('уточните наличие');
                 }
-                //console.log($('.prev_price').css('margin'));
+              
                 if ($('.prev_price').length){
                     $('.prev_price').each(function(index) {
                         //исключение дл€ блоков вывода по 3 купить,посмотреть аналог
@@ -1345,7 +1345,14 @@ fillTKtablePart();
                             $(this).html('<!--noindex-->уточн€йте наличие<!--/noindex-->');
                                 //console.log($(this).prev('div').prev('.price').prev('.addtochart').length);
                         if ($(this).next('.price').next('.buybuttons:eq(0)').children('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').val()==='”точнить')
-                            $(this).html('<!--noindex-->уточн€йте наличие<!--/noindex-->');                            
+                            $(this).html('<!--noindex-->уточн€йте наличие<!--/noindex-->');
+                        //дл€ каталогов типа 551    
+                        if ($(this).next('.price').next('.buybuttons:eq(0)').children('.addtochart:eq(0)').children('input[type="button"]:eq(0)').val()==='”точнить')
+                            $(this).html('<!--noindex-->уточн€йте наличие<!--/noindex-->');
+                        console.log($(this).prev('.price:eq(0)').prev('.addtochart:eq(0)'));
+                        //дл€ заглавной страницы
+                        if ($(this).parent('.price:eq(0)').prev('.addtochart:eq(0)').children('input[type="button"]:eq(0)').val()==='”точнить')
+                            $(this).html('<!--noindex-->уточн€йте наличие<!--/noindex-->');                        
                     });
                 }
                 });

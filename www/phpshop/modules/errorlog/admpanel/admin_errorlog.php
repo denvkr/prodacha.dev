@@ -28,7 +28,7 @@ function actionStart() {
         foreach($data as $row) {
             extract($row);
 
-            $PHPShopInterface->setRow($id,PHPShopDate::dataV($date),$ip,htmlspecialchars($error));
+            $PHPShopInterface->setRow($id,PHPShopDate::dataV($date),$ip,htmlspecialchars($error,ENT_QUOTES,'cp1251'));
         }
 
     $link = "../modules/errorlog/admpanel/export.php?sortdate_start=".$_GET['sortdate_start']."&sortdate_end=".$_GET['sortdate_end'];
