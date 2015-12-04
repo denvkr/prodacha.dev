@@ -103,11 +103,18 @@ h5, .h4 {
 }
 .topline
 {
+    /*position:absolute;*/
 	top: 0;
 	margin-bottom: 20px;
 	width: 100%;
 	height: 54px;
 	background: url(../images/top_line.png) repeat-x;
+}
+.topline ul {
+	color: #383838;
+	font-size: 12px;
+	line-height: 18px;
+	list-style: inside disc;
 }
 .topline li
 {
@@ -146,17 +153,20 @@ h5, .h4 {
 }
 .topline .wrapper
 {
+        /*position:absolute;*/
 	margin: 0 auto;
-	width: 1030px;	height: 54px;   background: url(../images/top_line.png) repeat-x;
+	width: 1030px;
+        height: 54px;   
+        background: url(../images/top_line.png) repeat-x;
 }
-.topmenu li { list-style-type:none!important;}
+
 .topmenu
 { 
-	position: absolute;	
+	position: relative;
 	float: left;
 	width: 850px;
 }
-
+.topmenu li { list-style-type:none!important;}
 /* Login begin */
 #errorenter { position:absolute; top:5px; right:0px; color: #F00; }
 .login

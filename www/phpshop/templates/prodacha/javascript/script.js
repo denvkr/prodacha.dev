@@ -1349,7 +1349,7 @@ fillTKtablePart();
                         //для каталогов типа 551    
                         if ($(this).next('.price').next('.buybuttons:eq(0)').children('.addtochart:eq(0)').children('input[type="button"]:eq(0)').val()==='Уточнить')
                             $(this).html('<!--noindex-->уточняйте наличие<!--/noindex-->');
-                        console.log($(this).prev('.price:eq(0)').prev('.addtochart:eq(0)'));
+                            //console.log($(this).prev('.price:eq(0)').prev('.addtochart:eq(0)'));
                         //для заглавной страницы
                         if ($(this).parent('.price:eq(0)').prev('.addtochart:eq(0)').children('input[type="button"]:eq(0)').val()==='Уточнить')
                             $(this).html('<!--noindex-->уточняйте наличие<!--/noindex-->');                        
@@ -2556,9 +2556,9 @@ fillTKtablePart();
                 });
                         }
 
-                function close_stihl_window() {
-                $('#light_box').remove();
-                        }
+    function close_stihl_window() {
+        $('#light_box').remove();
+    }
 
                 function viking_window(region_info, my_url, referer_info){
                 $.ajax({
@@ -2696,10 +2696,146 @@ fillTKtablePart();
                 });
                         }
 
-                function close_viking_window() {
-                $('#light_box').remove();
+    function close_viking_window() {
+        $('#light_box').remove();
+    }
+
+                function addtochart_window(id){
+                $.ajax({
+                url: '/popup_windows/addtochart.php',
+                        type: 'post',
+                        data: 'xid=' + id,
+                        dataType: 'json',
+                        error: function (request, error) {
+                            console.log(error);
+                            alert(" Ошибка ajax: " + error);
+                        },
+                        beforeSend: function() {},
+                        complete: function() {},
+                        success: function(json) {
+                        if (json['ok'] == '1'){
+
+                            html = '<div class="addtochart_window">';
+                            html += '<div id="addtochart_window" style="position:relative;background-color:#A0A0A0;top:1px;width:740px;float:left;"><label style="font-size:18px;">Товар добавлен в корзину</label></div>';
+                            html += '<div style="position:absolute;clear:both;width:100%;"></div>';
+                            //html += '<form id="addtochart_form" action="http://prodacha.dev/snip_call.php" method="POST">';
+                            html += '<div id="product_info_zone_left" style="position: absolute;top:20px;width:480px;height:200px;float:left;">';
+                            html += '    <div id="product_info" style="position: absolute;margin: 20px 5px 5px 5px;">';
+                            html += '        <div id="prod_image" name="prod_image" style="position:absolute;display:inline-block;top:1px;width:180px;height:160px;overflow-y:hidden;overflow-x:hidden;"><img src="'+json['item6']+'" alt="'+json['item2']+'" height="160" width="180" style="height:100%;width:100%;"></div>';
+                            html += '        <div id="prod_name" name="prod_name" style="position:absolute;display:inline;top:15px;left:200px;width:300px;height:35px;font: 15px/1.2 \'Myriad Pro\', sans-serif;">'+json['item2']+'</div>';
+                            html += '        <div id="prod_price_info" name="prod_price_info" style="position:absolute;display:inline;top:66px;left:200px;width:250px;height:30px;font: 14px/1.2 \'Myriad Pro\', sans-serif;">Цена: <span id="prod_price_info_val" style="font: 16px/1.2 \'Myriad Pro\', sans-serif;font-weight:bold;">'+json['item3']+'</span>&nbsp'+json['item4']+'</div>';
+                            html += '        <div id="prod_num_info" style="position:absolute;display:inline;top:100px;left:200px;width:80px;height:30px;font: 14px/1.2 \'Myriad Pro\', sans-serif;">Количество:</div>';
+                            html += '        <div style="position:absolute;display:inline;top:100px;left:280px;width:160px;height:30px;">';
+                            html += '        <input type="image" name="edit_del" src="/phpshop/templates/prodacha/images/shop/cart_delete.gif" value="delet" alt="Удалить" width="20" height="20" onclick="ChangeNumProduct2(\'num_new'+id+'\',\'-\');" style="position:absolute;display:inline;vertical-align:middle"/>';
+                            html += '        <input type="hidden" name="id_delete" value="'+id+'"/>';
+                            html += '        <input type="text" value="1" size="1" maxlength="3" name="num_new'+id+'" id="num_new'+id+'" onchange="ChangeNumProduct2(\'num_new'+id+'\',\'=\');" style="font: 14px/1.2 \'Myriad Pro\', sans-serif;position:absolute;display:inline;left:20px;"/>';
+                            html += '        <input type="image" name="edit_num" src="/phpshop/templates/prodacha/images/shop/cart_add.gif" value="edit" width="20" height="20" alt="Пересчитать" hspace="5" onclick="ChangeNumProduct2(\'num_new'+id+'\',\'+\');" style="position:absolute;display:inline;vertical-align:middle;;left:60px;"/>';
+                            html += '        <input type="hidden" name="id_edit" value="'+id+'"/>';
+                            html += '        </div>';
+                            html += '    </div>';
+                            html += '    <a href="#_tool_'+id+'" id="a_temp_'+id+'" style="position: absolute;top: 185px;border: none;width:175px;height:30px;padding: 5px 5px 25px 5px !important;float:left;font: 16px/1.2 \'Myriad Pro\', sans-serif;" onclick="AddToCartNum('+id+',\'num_new'+id+'\',2)">< Продолжить покупки</a>'; //<!--<a href="#_tool_'+id+'" id="a_temp_'+id+'" style="position: absolute;top: 185px;border: none;width:175px;height:30px;padding: 5px 5px 25px 5px !important;float:left;font: 16px/1.2 \'Myriad Pro\', sans-serif;" onclick="redirect_addtochart_window('+id+');">< Продолжить покупки</a>--> <input type="button" style="position: absolute;top: 185px;border: none;width:175px;height:30px;padding: 5px 5px 25px 5px !important;float:left;font: 16px/1.2 \'Myriad Pro\', sans-serif;" class="ok" id="addtochart_ok" value="< Продолжить покупки" onclick="redirect_addtochart_window('+id+');"/> <a id="a_temp_'+id+'" data-fancybox-href="#_tool_'+id+'" class="fancybox" href="javascript:;" style="position: absolute;top: 185px;border: none;width:175px;height:30px;padding: 5px 5px 25px 5px !important;float:left;font: 16px/1.2 \'Myriad Pro\', sans-serif;">< Продолжить покупки</a>
+                            html += '</div>';
+                            html += '<div id="product_info_zone_right" style="position:absolute;width:225px;height:200px;left:530px;top:40px;background-color:#A0A0A0;border-radius:3px;">';
+                            html += '    <div id="order_info" style="position: absolute;margin: 20px 5px 5px 5px;">';
+                            html += '    <div style="padding: 55px 5px 5px 15px;"><label style="font: 16px/1.2 \'Myriad Pro\', sans-serif;"> В корзине: </label><label id="prod_count_label" style="font: 16px/1.2 \'Myriad Pro\', sans-serif;">1</label>&nbsp<label id="prod_tovar_label" style="font: 16px/1.2 \'Myriad Pro\', sans-serif;">товар</label>&nbsp<label style="font: 16px/1.2 \'Myriad Pro\', sans-serif;">на сумму&nbsp</label><label id="prod_sum_info" style="font: 16px/1.2 \'Myriad Pro\', sans-serif;font-weight:bold;">'+json['item3']+'</label><label id="prod_sum_valuta_info" style="font: 16px/1.2 \'Myriad Pro\', sans-serif;">&nbsp'+json['item4']+'</label>';
+                            html += '    </div>';
+                            html += '    <input type="button" style="position: absolute;left: 25px;top: 140px;border: 1px solid black;width:170px;height:30px;padding: 5px 5px 5px 5px !important;font: 16px/1.2 \'Myriad Pro\', sans-serif;font-weight:bold;" class="ok" id="addtochart_ok" value="Перейти в корзину >" onclick="AddToCartNum('+id+',\'num_new'+id+'\',2);"/>';
+                            html += '    </div>';                            
+                            html += '</div>';
+                            html += '    <input id="cv3" type="hidden" name="cv3" value="nohspamcode"/>';
+                            html += '    <span id="prod_base_price_val" style="visibility:hidden;">'+json['item3']+'</span>'
+                            //html += '</form>';
+                            html += '</div>';
+
+                            //var script = document.createElement("script");
+                            //script.type = "text/javascript";
+                            //script.text = "ga('send', 'event', 'kak kupit', 'click');"; // use this for inline script
+                            //script.text  += "console.log('kak kupit');";
+                            //document.body.appendChild(script);
+                            // remove from the dom
+                            //document.body.removeChild(document.body.lastChild);
+                            //var url = window.location.href;//'http://prodacha.dev/popup_windows/addtochart_window.php';
+                            //console.log(window.location.href);
+                            //href: url,
+                            /*
+                            $(".fancybox").fancybox({
+                                    width : 760,
+                                    height : 250,
+                                    overlayOpacity:0,
+                                    autoSize:false,
+                                    type: 'iframe',
+                                    content: html,
+                                    scrolling: 'no',
+                                    href: url,
+                                    helpers : {
+                                    overlay : {
+                                    css : { 'overflow' : 'hidden' }
+                                    }}
+                            });
+                            */
+
+                            $.fancybox
+                            ({
+                                    width : 760,
+                                    height : 250,
+                                    overlayOpacity:0,
+                                    autoSize:false,
+                                    type: 'iframe',
+                                    content: html,
+                                    scrolling: 'no',
+                                    'afterShow': function() {
+                                                //$('body').append('<a href="#_tool_'+id+'" id="a_temp_'+id+'" style="visibility:hidden;"></a>');
+                                                //$('.fancybox-item.fancybox-close:eq(0)').prop('href','#_tool_'+id);
+                                                //console.log($('.fancybox-item.fancybox-close:eq(0)').attr('title'));
+                                            },                                    
+                                    'afterClose': function() {
+                                                //console.log(typeof document.getElementById('a_temp_'+id))
+                                                //if (typeof document.getElementById('a_temp_'+id)=="object") {
+                                                //    document.getElementById('a_temp_'+id).click();                                                    
+                                                //}
+                                                //$('.fancybox-item.fancybox-close:eq(0)').click
+
+                                            },
+                                    helpers : {
+                                    overlay : {
+                                    css : { 'overflow' : 'hidden' }
+                                    }}
+                            });
+
+                        }
+                        }
+                });
                         }
 
+    function close_addtochart_window(){
+        $('#light_box').remove();
+    }
+    function redirect_addtochart_window(id) {
+        
+        //$('body').append('<a href="#_tool_'+id+'" id="a_temp_'+id+'" style="visibility:hidden;"></a>');
+        //$("#a_temp_"+id).click();
+        //document.getElementById('a_temp_'+id).click();
+/*
+        $.fancybox({
+        'afterClose': function() { 
+            //$('body').append('<a href="#_tool_'+id+'" id="a_temp_'+id+'" style="visibility:hidden;"></a>');
+            document.getElementById('a_temp_'+id).click();
+        }});
+*/
+        //location.reload(true);
+        
+        $.fancybox.close();
+        //console.log(window.location.href);
+        //document.getElementById('.fancybox-item.fancybox-close').click();
+        //$('.fancybox-item.fancybox-close').click()
+        //document.getElementById('a_temp_'+id).click();
+        //$.fancybox.close();
+
+        //$('.fancybox-item.fancybox-close').click();
+        //console.log('#a_temp_'+id);        
+        //window.location.href('#_tool_'+id);
+        //window.location.replace('#_tool_'+id);
+    }
                 function check_varranty_firm_city(source) {
                 //console.log('check_varranty_firm_city() was called');
                 //получаем значение производителя и города для СЦ

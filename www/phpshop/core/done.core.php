@@ -390,7 +390,12 @@ class PHPShopDone extends PHPShopCore {
             "dos_ot" => PHPShopSecurity::CleanStr(@$_POST['dos_ot']),
             "dos_do" => PHPShopSecurity::CleanStr(@$_POST['dos_do']),
             "order_metod" => @$_POST['order_metod']);
-
+	//ob_start();
+        //print_r($person);
+	//$handle = fopen("phpshop/inc/sql_query.txt", "w+");
+	//fwrite($handle, ob_get_contents());//ob_get_contents()
+	//fclose($handle);        
+	//ob_end_clean();
         // Данные по корзине
         $cart = array(
             "cart" => $this->PHPShopCart->getArray(),

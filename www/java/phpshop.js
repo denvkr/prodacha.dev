@@ -1176,7 +1176,91 @@ if (typeof txtnode !== 'undefined') {
     if(znak=="-" && num>0) document.getElementById(pole).value=(num-1);
 	if(znak=="=") document.getElementById(pole).value=(num);
 }
+// Изменение кол-ва в поле
+function ChangeNumProduct2(pole,znak){
 
+    var num=Number(document.getElementById(pole).value);
+    if(znak=="+") {
+        if (num>=999){
+            num=998;
+        }
+        num=(num+1);
+        var num_str=num.toString();
+        
+        if (Number(num_str.slice(-1))==1){       
+            document.getElementById('prod_tovar_label').innerHTML='товар';
+        }
+        if ((Number(num_str.slice(-1))>1 && Number(num_str.slice(-1))<=4)){
+            document.getElementById('prod_tovar_label').innerHTML='товара';
+        }
+        if (((Number(num_str.slice(-1))>4 && Number(num_str.slice(-1))<=9) || Number(num_str.slice(-1))==0)){
+            document.getElementById('prod_tovar_label').innerHTML='товаров';
+        }
+        if (num>4 && num<=20){
+            document.getElementById('prod_tovar_label').innerHTML='товаров';
+        }
+
+        document.getElementById(pole).value=num;
+        document.getElementById('prod_count_label').innerHTML=document.getElementById(pole).value;
+        price=document.getElementById('prod_base_price_val').innerHTML;
+        price=price*document.getElementById(pole).value;
+        document.getElementById('prod_sum_info').innerHTML=price;
+    }
+    if(znak=="-") {
+        if (num<=1){
+            document.getElementById(pole).value=1;
+            document.getElementById('prod_tovar_label').innerHTML='товар';
+            document.getElementById('prod_count_label').innerHTML=document.getElementById(pole).value;
+            document.getElementById('prod_sum_info').innerHTML=document.getElementById('prod_base_price_val').innerHTML;          
+        } else {
+            num=(num-1);
+            var num_str=num.toString();
+
+            if (Number(num_str.slice(-1))==1){       
+                document.getElementById('prod_tovar_label').innerHTML='товар';
+            }
+            if ((Number(num_str.slice(-1))>1 && Number(num_str.slice(-1))<=4)){
+                document.getElementById('prod_tovar_label').innerHTML='товара';
+            }
+            if (((Number(num_str.slice(-1))>4 && Number(num_str.slice(-1))<=9) || Number(num_str.slice(-1))==0)){
+                document.getElementById('prod_tovar_label').innerHTML='товаров';
+            }
+            if (num>4 && num<=20){
+                document.getElementById('prod_tovar_label').innerHTML='товаров';
+            }
+            document.getElementById(pole).value=num;
+            document.getElementById('prod_count_label').innerHTML=document.getElementById(pole).value;
+            price=document.getElementById('prod_sum_info').innerHTML;
+            price=price-document.getElementById('prod_base_price_val').innerHTML;
+            document.getElementById('prod_sum_info').innerHTML=price;            
+        }
+    }
+    if(znak=="=") {
+        if (num<=0){
+            num=1;
+        }
+        if (num>=999){
+            num=999;
+        }
+        var num_str=num.toString();
+        
+        if (Number(num_str.slice(-1))==1){       
+            document.getElementById('prod_tovar_label').innerHTML='товар';
+        }
+        if ((Number(num_str.slice(-1))>1 && Number(num_str.slice(-1))<=4)){
+            document.getElementById('prod_tovar_label').innerHTML='товара';
+        }
+        if (((Number(num_str.slice(-1))>4 && Number(num_str.slice(-1))<=9) || Number(num_str.slice(-1))==0)){
+            document.getElementById('prod_tovar_label').innerHTML='товаров';
+        }
+        if (num>4 && num<=20){
+            document.getElementById('prod_tovar_label').innerHTML='товаров';
+        }
+        document.getElementById(pole).value=(num);
+        document.getElementById('prod_count_label').innerHTML=document.getElementById(pole).value;
+        document.getElementById('prod_sum_info').innerHTML=document.getElementById('prod_base_price_val').innerHTML*num;
+    }
+}
 // Смена валюты
 function ChangeValuta(){
     document.ValutaForm.submit();
@@ -1230,40 +1314,104 @@ function ToCart(xid,num,xxid) {
 function AddToCart(xid) {
     var num=1;
     var xxid=0;
+    //console.log('before_addtochart_window');    
+    addtochart_window(xid);
+    //console.log('after_addtochart_window');
+    return true;
+    /*
     if (confirm("Добавить выбранный товар ("+num+" шт.) в корзину?")){
         ToCart(xid,num,xxid);
         if(document.getElementById("order")) document.getElementById("order").style.display='block';
-        var script   = document.createElement("script");
-        script.type  = "text/javascript";
-        script.text  = "ga('send', 'event', 'buy', 'click');";              // use this for inline script
-        //script.text  += "console.log('buy');";              // use this for inline script
-        document.body.appendChild(script);
-        // remove from the dom
-        document.body.removeChild(document.body.lastChild);        
+            var script   = document.createElement("script");
+            script.type  = "text/javascript";
+            script.text  = "ga('send', 'event', 'buy', 'click');";              // use this for inline script
+            //script.text  += "console.log('buy');";              // use this for inline script
+            document.body.appendChild(script);
+            // remove from the dom
+            document.body.removeChild(document.body.lastChild);        
         
-		return true;
+            return true;
     }
 	else
 	{
-		return false;
+            return false;
 	}
+        */
 }	
-		
+
+// Добавление товара в корзину 1 шт.
+/*
+ * 
+ * @param {type} xid id товара
+ * @param {type} option 1-с переходом в корзину, 2 без перехода в корзину
+ * @returns {Boolean}
+ */
+function AddToCart2(xid,option) {
+    var num=1;
+    var xxid=0;
+    //console.log(xid);
+    ToCart(xid,num,xxid);
+    //if(document.getElementById("order")) document.getElementById("order").style.display='block';
+
+    var script   = document.createElement("script");
+    script.type  = "text/javascript";
+    script.text  = "ga('send', 'event', 'buy', 'click');";// use this for inline script
+    //script.text  += "console.log('buy');";              // use this for inline script
+    document.body.appendChild(script);
+    // remove from the dom
+    document.body.removeChild(document.body.lastChild);
+
+    if ($('.fancybox-item.fancybox-close:eq(0)').length) $.fancybox.close();//$('.fancybox-item.fancybox-close:eq(0)').click();
+    //a_temp=document.getElementsByTagName('body')[0];
+    //console.log(typeof a_temp);
+    //if (typeof document.getElementById('a_temp_'+id)=="object") {
+        //console.log($('#a_temp_'+xid).length);
+        //$('#a_temp_'+xid).remove();
+        //a_temp.removeChild(document.getElementById('a_temp_'+id));
+        //document.body.removeChild(document.getElementById('a_temp_'+id));
+        //console.log($('#a_temp_'+xid).length);
+    //}
+    //console.log(typeof a_temp);
+    if (option==1)
+        window.location.replace('/order/');
+
+    return true;
+}
+
 // Добавление товара в корзину N шт.
-function AddToCartNum(xid,pole) {
+/*
+ * 
+ * @param {type} xid
+ * @param {type} pole
+ * @param {type} option 1-с переходом в корзину, 2 без перехода в корзину
+ * @returns {Boolean}
+ */
+function AddToCartNum(xid,pole,option) {
     var num=Number(document.getElementById(pole).value);
     var xxid=xid;
     if(num<1) num=1;
-    if(confirm("Добавить выбранный товар ("+num+" шт.) в корзину?"))
-	{
-        ToCart(xid,num,xxid);
-        if(document.getElementById("order")) document.getElementById("order").style.display='block';
-		return true;
+    //if(confirm("Добавить выбранный товар ("+num+" шт.) в корзину?"))
+	//{
+    ToCart(xid,num,xxid);
+    if(document.getElementById("order")) document.getElementById("order").style.display='block';
+    var script   = document.createElement("script");
+    script.type  = "text/javascript";
+    script.text  = "ga('send', 'event', 'buy', 'click');";              // use this for inline script
+    //script.text  += "console.log('buy');";              // use this for inline script
+    document.body.appendChild(script);
+    // remove from the dom
+    document.body.removeChild(document.body.lastChild);        
+    if ($('.fancybox-item.fancybox-close:eq(0)').length) $.fancybox.close();//$('.fancybox-item.fancybox-close:eq(0)').click();
+    if (option==1)
+        window.location.replace('/order/');
+    return true;
+    /*        
     }
 	else
 	{
 		return false;
 	}
+    */
 }
 	
 // Добавление подчиненного товара в корзину N шт.
