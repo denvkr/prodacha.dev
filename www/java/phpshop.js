@@ -1094,7 +1094,7 @@ function ChekUserForma(){
 
 
 function do_err(err){
-	//console.log(err);
+	console.log(err);
     return true;
 }
 
@@ -1180,13 +1180,33 @@ if (typeof txtnode !== 'undefined') {
 function ChangeNumProduct2(pole,znak){
 
     var num=Number(document.getElementById(pole).value);
+    var cart_num=Number(document.getElementById("prod_count_label").innerHTML);
+    var cart_price=Number(document.getElementById("prod_sum_info").innerHTML);
+    var cart_base_num=Number(document.getElementById("cart_base_num_val").innerHTML);
+    var cart_base_price=Number(document.getElementById("cart_base_price_val").innerHTML);    
+    //console.log(cart_num);
+    //console.log(cart_price);
+    //console.log(cart_base_num);
+    //console.log(cart_base_price);
+    
     if(znak=="+") {
+        var price=Number(document.getElementById('prod_base_price_val').innerHTML);
         if (num>=999){
-            num=998;
+            num=999;
+            price=cart_price;
+        } else {
+            price=price+cart_price;
+            cart_num=cart_num+1;
+            num=(num+1);
         }
-        num=(num+1);
-        var num_str=num.toString();
-        
+
+        document.getElementById(pole).value=num;
+        //document.getElementById('prod_count_label').innerHTML=document.getElementById(pole).value;
+        document.getElementById('prod_sum_info').innerHTML=price;
+        document.getElementById('prod_count_label').innerHTML=cart_num;
+
+        var num_str=document.getElementById('prod_count_label').innerHTML;
+        //console.log(num_str);
         if (Number(num_str.slice(-1))==1){       
             document.getElementById('prod_tovar_label').innerHTML='товар';
         }
@@ -1196,26 +1216,16 @@ function ChangeNumProduct2(pole,znak){
         if (((Number(num_str.slice(-1))>4 && Number(num_str.slice(-1))<=9) || Number(num_str.slice(-1))==0)){
             document.getElementById('prod_tovar_label').innerHTML='товаров';
         }
-        if (num>4 && num<=20){
+        if (Number(num_str)>4 && Number(num_str)<=20){
             document.getElementById('prod_tovar_label').innerHTML='товаров';
         }
 
-        document.getElementById(pole).value=num;
-        document.getElementById('prod_count_label').innerHTML=document.getElementById(pole).value;
-        price=document.getElementById('prod_base_price_val').innerHTML;
-        price=price*document.getElementById(pole).value;
-        document.getElementById('prod_sum_info').innerHTML=price;
     }
     if(znak=="-") {
         if (num<=1){
             document.getElementById(pole).value=1;
-            document.getElementById('prod_tovar_label').innerHTML='товар';
-            document.getElementById('prod_count_label').innerHTML=document.getElementById(pole).value;
-            document.getElementById('prod_sum_info').innerHTML=document.getElementById('prod_base_price_val').innerHTML;          
-        } else {
-            num=(num-1);
-            var num_str=num.toString();
-
+            var num_str=document.getElementById('prod_count_label').innerHTML;
+            //console.log(num_str);
             if (Number(num_str.slice(-1))==1){       
                 document.getElementById('prod_tovar_label').innerHTML='товар';
             }
@@ -1225,14 +1235,33 @@ function ChangeNumProduct2(pole,znak){
             if (((Number(num_str.slice(-1))>4 && Number(num_str.slice(-1))<=9) || Number(num_str.slice(-1))==0)){
                 document.getElementById('prod_tovar_label').innerHTML='товаров';
             }
-            if (num>4 && num<=20){
+            if (Number(num_str)>4 && Number(num_str)<=20){
+                document.getElementById('prod_tovar_label').innerHTML='товаров';
+            }        
+        } else {
+            num=(num-1);
+            var num_str=num.toString();
+
+            document.getElementById(pole).value=num;
+            document.getElementById('prod_count_label').innerHTML=(cart_num-1);
+            //price=price-Number(document.getElementById('prod_base_price_val').innerHTML);
+            document.getElementById('prod_sum_info').innerHTML=cart_price-Number(document.getElementById('prod_base_price_val').innerHTML);;
+            
+            var num_str=document.getElementById('prod_count_label').innerHTML;
+            //console.log(num_str);
+            if (Number(num_str.slice(-1))==1){       
+                document.getElementById('prod_tovar_label').innerHTML='товар';
+            }
+            if ((Number(num_str.slice(-1))>1 && Number(num_str.slice(-1))<=4)){
+                document.getElementById('prod_tovar_label').innerHTML='товара';
+            }
+            if (((Number(num_str.slice(-1))>4 && Number(num_str.slice(-1))<=9) || Number(num_str.slice(-1))==0)){
                 document.getElementById('prod_tovar_label').innerHTML='товаров';
             }
-            document.getElementById(pole).value=num;
-            document.getElementById('prod_count_label').innerHTML=document.getElementById(pole).value;
-            price=document.getElementById('prod_sum_info').innerHTML;
-            price=price-document.getElementById('prod_base_price_val').innerHTML;
-            document.getElementById('prod_sum_info').innerHTML=price;            
+            if (Number(num_str)>4 && Number(num_str)<=20){
+                document.getElementById('prod_tovar_label').innerHTML='товаров';
+            }
+
         }
     }
     if(znak=="=") {
@@ -1242,8 +1271,13 @@ function ChangeNumProduct2(pole,znak){
         if (num>=999){
             num=999;
         }
-        var num_str=num.toString();
+
+        document.getElementById(pole).value=num;
+        document.getElementById('prod_count_label').innerHTML=(cart_base_num+num);
+        document.getElementById('prod_sum_info').innerHTML=cart_base_price+(Number(document.getElementById('prod_base_price_val').innerHTML)*num);
         
+        var num_str=document.getElementById('prod_count_label').innerHTML;
+        //console.log(num_str);
         if (Number(num_str.slice(-1))==1){       
             document.getElementById('prod_tovar_label').innerHTML='товар';
         }
@@ -1253,12 +1287,9 @@ function ChangeNumProduct2(pole,znak){
         if (((Number(num_str.slice(-1))>4 && Number(num_str.slice(-1))<=9) || Number(num_str.slice(-1))==0)){
             document.getElementById('prod_tovar_label').innerHTML='товаров';
         }
-        if (num>4 && num<=20){
+        if (Number(num_str)>4 && Number(num_str)<=20){
             document.getElementById('prod_tovar_label').innerHTML='товаров';
         }
-        document.getElementById(pole).value=(num);
-        document.getElementById('prod_count_label').innerHTML=document.getElementById(pole).value;
-        document.getElementById('prod_sum_info').innerHTML=document.getElementById('prod_base_price_val').innerHTML*num;
     }
 }
 // —мена валюты
@@ -1299,7 +1330,7 @@ function ToCart(xid,num,xxid) {
     } else {
         addname="";
     }
-
+    console.log(xid+' '+num+' '+xxid+' '+same);
     req.open('POST', truePath+'/phpshop/ajax/cartload.php', true);
     req.send({
         xid: xid,
@@ -1389,20 +1420,20 @@ function AddToCart2(xid,option) {
 function AddToCartNum(xid,pole,option) {
     var num=Number(document.getElementById(pole).value);
     var xxid=xid;
-    if(num<1) num=1;
+    if (num<1) num=1;
     //if(confirm("ƒобавить выбранный товар ("+num+" шт.) в корзину?"))
 	//{
     ToCart(xid,num,xxid);
     if(document.getElementById("order")) document.getElementById("order").style.display='block';
     var script   = document.createElement("script");
     script.type  = "text/javascript";
-    script.text  = "ga('send', 'event', 'buy', 'click');";              // use this for inline script
+    script.text  = "ga('send', 'event', 'buy', 'click');";// use this for inline script
     //script.text  += "console.log('buy');";              // use this for inline script
     document.body.appendChild(script);
     // remove from the dom
     document.body.removeChild(document.body.lastChild);        
     if ($('.fancybox-item.fancybox-close:eq(0)').length) $.fancybox.close();//$('.fancybox-item.fancybox-close:eq(0)').click();
-    if (option==1)
+    if (option===1)
         window.location.replace('/order/');
     return true;
     /*        
