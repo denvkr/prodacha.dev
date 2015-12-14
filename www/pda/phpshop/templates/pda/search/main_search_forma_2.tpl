@@ -19,7 +19,7 @@
      </div>
 	 <div class="product_cart" align="center">
    @ComStart@
-   <img src="images/shop/basket_put.gif" alt="@productSale@" border="0" align="absmiddle" hspace="5"><A href="javascript:AddToCart(@productUid@)" title="Купить @productName@">@productSale@</A>@ComEnd@
+   <img src="images/shop/basket_put.gif" alt="@product_sale@" border="0" align="absmiddle" hspace="5"><A href="javascript:AddToCart(@productUid@)" title="Купить @productName@">@product_sale@</A>@ComEnd@
 <img src="images/shop/information.gif" alt="@productInfo@" border="0" align="absmiddle" hspace="5"><A href="/shop/UID_@productUid@.html">@productInfo@</A>
    </div>
    </div>

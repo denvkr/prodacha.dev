@@ -1,5 +1,4 @@
 <?php
-
 if (!defined("OBJENABLED")) {
     require_once(dirname(__FILE__) . "/product.class.php");
     require_once(dirname(__FILE__) . "/security.class.php");
@@ -25,7 +24,8 @@ class PHPShopCart {
      */
     function PHPShopCart($import_cart = false) {
         global $PHPShopSystem, $PHPShopValutaArray;
-
+        //$this->debug = true;
+        //print_r($PHPShopSystem);
         // Режим проверки остатков на складе
         if ($PHPShopSystem->getSerilizeParam('admoption.sklad_status') == 1)
             $this->store_check = false;
@@ -36,13 +36,11 @@ class PHPShopCart {
         }
 
         $this->Valuta = $PHPShopValutaArray->getArray();
-
+        //echo 2;
         if ($import_cart)
             $this->_CART = $import_cart;
         else
             $this->_CART = &$_SESSION['cart'];
-			
-		$this->debug = false;
     }
 
     /**

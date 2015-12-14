@@ -69,7 +69,7 @@
 			$region_info='m';
 		}
 		//echo '@ComStartCart@<span class="addtochart">';
-		//echo '<input type="button" onclick="javascript:stihl_window(\\''.$region_info.'\\')"  value="@productSale@" />';
+		//echo '<input type="button" onclick="javascript:stihl_window(\\''.$region_info.'\\')"  value="@product_sale@" />';
 		//echo '</span>@ComEndCart@';		
 		echo '@ComStartNotice@';
 		if ($row_sklad==true && $row_outdated==false) {
@@ -83,9 +83,9 @@
 			echo '@ComEndNotice@';		
 
 			echo '@ComStart@';	
-			echo '<div class="price">@productPrice@ @productValutaName@';   
-            echo '<div style="clear:both"></div>';
-            echo '<div class="prev_price">@productPriceRub@</div>         </div>';
+			echo '<div class="price"><span class="price_cat_3">Öåíà:</span>@productPrice@ @productValutaName@';   
+                        echo '<div style="clear:both"></div>';
+                        echo '<div class="prev_price">@productPriceRub@</div>         </div>';
 			echo '@ComEnd@';
 			
 		} else if ( $row_sklad==true && $row_outdated==true && !(empty($row_analog)) ) {
@@ -102,7 +102,7 @@
 			echo $productnotice;
 
 			echo '@ComStart@';	
-			echo '<div class="price" style="display:relative;margin:-32px 15px 0px 0px;">@productPrice@ @productValutaName@';   
+			echo '<div class="price" style="display:relative;margin:-32px 15px 0px 0px;"><span class="price_cat_3">Öåíà:</span>@productPrice@ @productValutaName@';   
 			echo '@ComEnd@';
 
 			echo '@ComEndNotice@';		
@@ -121,7 +121,7 @@
 				echo '<span class="addtochart notice"> <input type="button" style="font-size:9px;" onclick="stihl_window(\\''.$region_info.'\\',\\'/shop/UID_'.$GLOBALS['SysValue']['other']['productUid'].'.html\\',document.getElementsByClassName(\\'netref\\'))"  value="'.$SysValue['lang']['stihl_string'].'" /> </span>';
 			}
 			echo '@ComStart@';	
-			echo '<div class="price">@productPrice@ @productValutaName@';   
+			echo '<div class="price"><span class="price_cat_3">Öåíà:</span>@productPrice@ @productValutaName@';   
 			echo '@ComEnd@';
 
 			echo '@ComEndNotice@';		
@@ -156,27 +156,27 @@
 			echo '@ComEndNotice@';
 
 			echo '@ComStart@';	
-			echo '<div class="price">@productPrice@ @productValutaName@';   
-            echo '<div style="clear:both"></div>';
-            echo '<div class="prev_price">@productPriceRub@</div>         </div>';
+			echo '<div class="price"><span class="price_cat_3">Öåíà:</span>@productPrice@ @productValutaName@';   
+                        echo '<div style="clear:both"></div>';
+                        echo '<div class="prev_price">@productPriceRub@</div>         </div>';
 			echo '@ComEnd@';
 
 		} else if ($row_sklad==false) {
 
 			echo '@ComStartCart@';
-			//echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@)"  value="'.$SysValue['lang']['productSale'].'"></span>';
-                        echo '<span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@)">'.$SysValue['lang']['productSale'].'</a></span>';
+			//echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@)"  value="'.$SysValue['lang']['product_sale'].'"></span>';
+                        echo '<span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@)">'.$SysValue['lang']['product_sale'].'</a></span>';
 			echo '@ComEndCart@';
 			
 			echo '@ComStart@';	
-			echo '<div class="price">@productPrice@ @productValutaName@';   
+			echo '<div class="price"><span class="price_cat_3">Öåíà:</span>@productPrice@ @productValutaName@';   
 			echo '@ComEnd@';
 			
 		} else if ($row_sklad==true && $row_outdated==true && !empty($row_analog)) {
 
 			echo '@ComStartCart@';
 			//echo '@price_comlain@';
-			echo '<span class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-15px 0px 0px 10px;font-size:12px !important;"><!--noindex-->'.$SysValue['lang']['outdated_message'].'<!--/noindex--></span>';
+			echo '<span class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-5px 0px 0px 10px;font-size:12px !important;"><!--noindex-->'.$SysValue['lang']['outdated_message'].'<!--/noindex--></span>';
 			echo '@ComEndCart@';
 			$productnotice= '<div id="price_comlain'.$GLOBALS['SysValue']['other']['productUid'].'" class="price_comlain" style="position:relative;display: inline-block;margin:0px 95px 0px 0px;font-size:13px !important;"><!--noindex-->'.$SysValue['lang']['outdated_message2'].'<!--/noindex--></div>';
 			$productnotice.='<a id="analog_href'.$GLOBALS['SysValue']['other']['productUid'].'" style="visibility: hidden;" href="http://prodacha.ru/shop/UID_'.$row_analog.'.html"></a>';
@@ -189,34 +189,31 @@
 			$productnotice.='</script>';
 			echo $productnotice;
 			echo '@ComStart@';	
-			echo '<div class="price" style="display:relative;margin:-32px 15px 0px 0px;">@productPrice@ @productValutaName@';   
+			echo '<div class="price" style="display:relative;margin:-32px 15px 0px 0px;"><span class="price_cat_3">Öåíà:</span>@productPrice@ @productValutaName@';   
 			echo '@ComEnd@';
 
 		} else if ( $row_sklad==true && $row_outdated==true && empty($row_analog) ) {
 
 			echo '@ComStart@';	
-            echo '<div style="clear:both"></div>';
-			echo '<span class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-15px 0px 0px 10px;font-size:12px !important;"><!--noindex-->'.$SysValue['lang']['outdated_message'].'<!--/noindex--></span>';
-			echo '<div class="price" style="display:relative;margin:-5px 15px 0px 0px;">@productPrice@ @productValutaName@';
+                        echo '<div style="clear:both"></div>';
+			echo '<span class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-5px 0px 0px 10px;font-size:12px !important;"><!--noindex-->'.$SysValue['lang']['outdated_message'].'<!--/noindex--></span>';
+			echo '<div class="price" style="display:relative;margin:-5px 15px 0px 0px;"><span class="price_cat_3">Öåíà:</span>@productPrice@ @productValutaName@';
 			echo '</div>         </div>';
 			echo '@ComEnd@';
 
 		} else {
 
 			echo '@ComStartCart@';
-			//echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@)"  value="'.$SysValue['lang']['productSale'].'"></span>';
-                        echo '<span class="addtochart"><a href="#a@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@)">'.$SysValue['lang']['productSale'].'</a></span>';
+			//echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@)"  value="'.$SysValue['lang']['product_sale'].'"></span>';
+                        echo '<span class="addtochart"><a href="#a@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@)">'.$SysValue['lang']['product_sale'].'</a></span>';
 			echo '@ComEndCart@';
 
 			echo '@ComStart@';	
-			echo '<div class="price">@productPrice@ @productValutaName@';   
+			echo '<div class="price"><span class="price_cat_3">Öåíà:</span>@productPrice@ @productValutaName@';   
 			echo '@ComEnd@';
 
 		}
 	}
-
-	php@
-						
-						</div>
-
+	php@			
+	</div>
 </div>

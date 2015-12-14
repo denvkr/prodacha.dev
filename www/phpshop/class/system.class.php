@@ -37,6 +37,7 @@ class PHPShopSystem extends PHPShopObj {
      */
     function getSerilizeParam($param) {
         $param=explode(".",$param);
+        //echo $param; 
         $val=parent::unserializeParam($param[0]);
         return $val[$param[1]];
     }

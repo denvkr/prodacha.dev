@@ -9,11 +9,11 @@
 	<div>
      @ComStart@Цена: <strong>@productPrice@</strong> @productValutaName@ @ComEnd@<br>
 	@ComStartCart@
-	<img src="images/shop/arr2.gif" alt="" width="16" height="16" border="0" align="absmiddle"><A href="/order/?xid=@productUid@" title="@productSale@">[@productSale@]</A><br>
+	<img src="images/shop/arr2.gif" alt="" width="16" height="16" border="0" align="absmiddle"><A href="/order/?xid=@productUid@" title="@product_sale@">[@product_sale@]</A><br>
 
 	@ComEndCart@
 	<!-- Блок корзина -->
-	<img src="images/shop/arrow_left.gif" alt="" width="16" height="16" border="0" align="absmiddle"><A href="javascript:history.back(1)" title="@productSale@">[@productBack@]</A><br>
+	<img src="images/shop/arrow_left.gif" alt="" width="16" height="16" border="0" align="absmiddle"><A href="javascript:history.back(1)" title="@product_sale@">[@productBack@]</A><br>
    </div>
 
 	</td>

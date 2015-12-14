@@ -405,6 +405,7 @@ include ($SysValue['class']['lang']);
 include ($SysValue['class']['user']);
 include ($SysValue['class']['text']);
 include ($SysValue['class']['parser']);
+//include ($SysValue['class']['cart']);
 
 $PHPShopSystem = new PHPShopSystem();
 $PHPShopNav = new PHPShopNav();
@@ -512,6 +513,5 @@ if ($PhpshopCopyright == "Yes") {
 //include_once ($SysValue['file']['footer']);
 if ($SysValue['my']['gzip'] == "true")
     GzDocOut($SysValue['my']['gzip_level'], $SysValue['my']['gzip_debug']);
- 
-
+ //include_once('/popup_windows/addtochart.php');
 ?>

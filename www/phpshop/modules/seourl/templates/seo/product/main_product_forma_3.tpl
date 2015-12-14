@@ -31,7 +31,7 @@
 
         </div>
         <div class="tovarDivAdd1">
-            <div class="tovarDivAdd3"><!-- Блок купить -->@ComStartCart@<a href="javascript:AddToCart(@productUid@)" title="@productSale@">@productSale@</a>@ComEndCart@<!-- Блок купить --><!-- Блок уведомить -->@ComStartNotice@<a href="/users/notice.html?productId=@productUid@" title="@productNotice@">@productNotice@</a>@ComEndNotice@<!-- Блок уведомить --></div><div class="tovarDivAdd2"><a href="javascript:AddToCompare(@productUid@)" title="Сравнить @productName@">Сравнить</a></div>
+            <div class="tovarDivAdd3"><!-- Блок купить -->@ComStartCart@<a href="javascript:AddToCart(@productUid@)" title="@product_sale@">@product_sale@</a>@ComEndCart@<!-- Блок купить --><!-- Блок уведомить -->@ComStartNotice@<a href="/users/notice.html?productId=@productUid@" title="@productNotice@">@productNotice@</a>@ComEndNotice@<!-- Блок уведомить --></div><div class="tovarDivAdd2"><a href="javascript:AddToCompare(@productUid@)" title="Сравнить @productName@">Сравнить</a></div>
         </div>
 
     </div>

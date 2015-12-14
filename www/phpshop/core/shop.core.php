@@ -67,6 +67,12 @@ class PHPShopShop extends PHPShopShopCore {
      */
     private $custom_menu_count=array();
     
+    private $CustomCatalogIDArray1=array(473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,509,536,538,543,545,549,551,555,562,581,585,586,591,594,595);
+    private $CustomCatalogIDArray2=array(5,9,16,18,30,31,32,33,34,35,36,37,38,44,60,62,77,81,85,88,96,97,98,99,120,121,122,123,134,141,142,143,154,172,186,190,191,201,211,215,224,227,228,234,247,248,249,254,252,256,257,258,270,272,288,290,292,293,295,297,298,299,300,332,333,334,335,336,337,350,351,352,353,354,355,356,382,414,415,416,418,419,420,421,422,423,424,425,436,437,440,442,459,461,464,465,467,503,509,536,538,543,545,549,551,555,562,581,585,586,591,594,595);
+    private $CustomCatalogIDArray2_1=array(5,9,16,18,30,31,32,33,34,35,36,37,38,44,60,62,77,81,85,88,96,97,98,99,120,121,122,123,134,141,142,143,154,172,186,190,191,201,211,215,224,227,228,234,247,248,249,254,252,256,257,258,270,272,288,290,292,293,295,297,298,299,300,332,333,334,335,336,337,350,351,352,353,354,355,356,382,414,415,416,418,419,420,421,422,423,424,425,436,437,440,442,459,461,464,465,467,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,509,536,538,543,545,549,551,555,562,581,585,586,591,594,595);
+    private $CustomCatalogIDArray3=array(472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,509,536,538,543,545,549,551,555,562,581,585,586,591,594,595);
+    private $CustomCatalogIDArray2_2=array(30,31,32,33,34,35,81,96,121,141,154,186,190,191,201,227,333,334,382,414,415,416,418,419,420,421,422,423,424,425,431,432,436,433,437,440,442,459,461,464,465,467,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,536,538,543,545,549,551,555,562,581,585,586,591,594,595);
+    private $id_excluded=array();
     /**
      * Конструктор
      */
@@ -587,20 +593,7 @@ class PHPShopShop extends PHPShopShopCore {
         $this->category_name = $this->PHPShopCategory->getName();
 
         // Запрос на подкаталоги
-        if ( intval($this->category)==473 || intval($this->category)==474 || intval($this->category)==475 ||
-        	 intval($this->category)==476 || intval($this->category)==477 || intval($this->category)==478 ||
-        	 intval($this->category)==479 || intval($this->category)==480 || intval($this->category)==481 ||
-        	 intval($this->category)==482 || intval($this->category)==483 || intval($this->category)==484 ||
-        	 intval($this->category)==485 || intval($this->category)==486 || intval($this->category)==486 ||
-        	 intval($this->category)==487 || intval($this->category)==488 || intval($this->category)==489 ||
-        	 intval($this->category)==490 || intval($this->category)==491 || intval($this->category)==492 ||
-        	 intval($this->category)==493 || intval($this->category)==494 || intval($this->category)==495 ||
-        	 intval($this->category)==496 || intval($this->category)==497 || intval($this->category)==498 ||
-        	 intval($this->category)==499 || intval($this->category)==500 || intval($this->category)==501 ||
-        	 intval($this->category)==502 || intval($this->category)==536 || intval($this->category)==538 || 
-		 intval($this->category)==543 || intval($this->category)==545 || intval($this->category)==549 || 
-        	 intval($this->category)==551 || intval($this->category)==555 || intval($this->category)==562 || 
-                 intval($this->category)==581 || intval($this->category)==585 || intval($this->category)==586) {
+        if (in_array(intval($this->category),$this->CustomCatalogIDArray1)) {
         	switch (intval($this->category)) {
         		case 473 : $where=' where id in (38,120,62,314,45,74,19,15,17,20,21,22,30,27,28,23,24,25,26,29,229,126,173)';
         					break;
@@ -662,7 +655,7 @@ class PHPShopShop extends PHPShopShopCore {
         					break;
         		case 502: $where = " where id in (244,522,523,524)";
         					break;
-        		case 536: $where = " where id in (537)";
+        		case 536: $where = " where id in (537,596)";
         					break;
         		case 538: $where = " where id in (539,540)";
         					break;
@@ -683,6 +676,12 @@ class PHPShopShop extends PHPShopShopCore {
                         case 585: $where = " where id in (584,586)";
                                           break;
                         case 586: $where = " where id in (587,588)";
+                                          break;
+                        case 591: $where = " where id in (592,593,597)";
+                                          break;
+                        case 594: $where = " where id in (598,599)";
+                                          break;
+                        case 595: $where = " where id in (600,601)";
                                           break;
         	}
         	$this->PHPShopOrm->sql = 'select '.intval($this->category).' as id,name,num,'.intval($this->category).' as parent_to,yml,num_row,num_cow,sort,content,vid,name_rambler,servers,title,title_enabled,title_shablon,descrip,descrip_enabled,descrip_shablon,keywords,keywords_enabled,keywords_shablon,skin,skin_enabled,order_by,order_to,secure_groups,content_h,filtr,icon_description from ' . $this->getValue('base.categories').$where.' LIMIT 1';
@@ -814,7 +813,7 @@ class PHPShopShop extends PHPShopShopCore {
         $cat = $this->PHPShopCategory->getParam('parent_to');
 		//echo $cat;
 
-		// Данные родительской категории
+	// Данные родительской категории
         if (!empty($cat)) {
             $parent_category_row = $this->select(array('id,name,parent_to'), array('id' => '=' . $cat), false, array('limit' => 1), __FUNCTION__, array('base' => $this->getValue('base.categories'), 'cache' => 'true'));
         } else {
@@ -945,11 +944,11 @@ class PHPShopShop extends PHPShopShopCore {
      * Вывод списка категорий
      */
     function CID_Category() {
-    	$CustomCatalogIDArray1=array(473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,509,536,538,543,545,549,551,555,562,581,585,586);
-        $CustomCatalogIDArray2=array(5,9,16,18,30,31,32,33,34,35,36,37,38,44,60,62,77,81,85,88,96,97,98,99,120,121,122,123,134,141,142,143,154,172,186,190,191,201,211,215,224,227,228,234,247,248,249,254,252,256,257,258,270,272,288,290,292,293,295,297,298,299,300,332,333,334,335,336,337,350,351,352,353,354,355,356,382,414,415,416,418,419,420,421,422,423,424,425,436,437,440,442,459,461,464,465,467,503,509,536,538,509,536,543,545,549,551,555,562,581,585,586);
-        $CustomCatalogIDArray2_1=array(5,9,16,18,30,31,32,33,34,35,36,37,38,44,60,62,77,81,85,88,96,97,98,99,120,121,122,123,134,141,142,143,154,172,186,190,191,201,211,215,224,227,228,234,247,248,249,254,252,256,257,258,270,272,288,290,292,293,295,297,298,299,300,332,333,334,335,336,337,350,351,352,353,354,355,356,382,414,415,416,418,419,420,421,422,423,424,425,436,437,440,442,459,461,464,465,467,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,509,536,538,543,545,549,551,555,562,581,585,586);
-        $CustomCatalogIDArray3=array(472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,509,536,538,543,545,549,551,555,562,581,585,586);
-    	$id_excluded=array();
+    	//$this->CustomCatalogIDArray1=array(473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,509,536,538,543,545,549,551,555,562,581,585,586,596);
+        //$this->CustomCatalogIDArray2=array(5,9,16,18,30,31,32,33,34,35,36,37,38,44,60,62,77,81,85,88,96,97,98,99,120,121,122,123,134,141,142,143,154,172,186,190,191,201,211,215,224,227,228,234,247,248,249,254,252,256,257,258,270,272,288,290,292,293,295,297,298,299,300,332,333,334,335,336,337,350,351,352,353,354,355,356,382,414,415,416,418,419,420,421,422,423,424,425,436,437,440,442,459,461,464,465,467,503,509,536,538,543,545,549,551,555,562,581,585,586,596);
+        //$this->CustomCatalogIDArray2_1=array(5,9,16,18,30,31,32,33,34,35,36,37,38,44,60,62,77,81,85,88,96,97,98,99,120,121,122,123,134,141,142,143,154,172,186,190,191,201,211,215,224,227,228,234,247,248,249,254,252,256,257,258,270,272,288,290,292,293,295,297,298,299,300,332,333,334,335,336,337,350,351,352,353,354,355,356,382,414,415,416,418,419,420,421,422,423,424,425,436,437,440,442,459,461,464,465,467,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,509,536,538,543,545,549,551,555,562,581,585,586,596);
+        //$this->CustomCatalogIDArray3=array(472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,509,536,538,543,545,549,551,555,562,581,585,586,596);
+    	$this->id_excluded=array();
     	    	
         // Перехват модуля в начале функции
         $hook = $this->setHook(__CLASS__, __FUNCTION__, false, 'START');
@@ -1039,7 +1038,7 @@ class PHPShopShop extends PHPShopShopCore {
         	//		  break;
         	case 509: $where = " where skin_enabled!='1' and id in (510,511,512,513,514)";
         			  break;
-        	case 536: $where = " where skin_enabled!='1' and id in (537)";
+        	case 536: $where = " where skin_enabled!='1' and id in (537,596)";
         			  break;
         	case 538: $where = " where skin_enabled!='1' and id in (539,540)";
         			  break;
@@ -1060,9 +1059,15 @@ class PHPShopShop extends PHPShopShopCore {
                 case 585: $where = " where id in (584,586)";
         			  break;
                 case 586: $where = " where id in (587,588)";
-        			  break;                              
+        			  break;
+                case 591: $where = " where id in (592,593,597)";
+                                  break;
+                case 594: $where = " where id in (598,599)";
+                                  break;
+                case 595: $where = " where id in (600,601)";
+                                  break;
         	default: // Условия выборки
-					 $where = array('parent_to' => '=' . $this->category, 'skin_enabled' => "!='1'");
+                         $where = array('parent_to' => '=' . $this->category, 'skin_enabled' => "!='1'");
         }
         // Мультибаза
         if ($this->PHPShopSystem->ifSerilizeParam('admoption.base_enabled')) {
@@ -1074,7 +1079,7 @@ class PHPShopShop extends PHPShopShopCore {
         $PHPShopOrm->cache = $this->cache;
         $dis = null;
         //изменение для каталогов меняем название каталога при выводе используем значение поля name_rambler
-        if (in_array(intval($this->PHPShopNav->getId()),$CustomCatalogIDArray1)) 
+        if (in_array(intval($this->PHPShopNav->getId()),$this->CustomCatalogIDArray1)) 
         {
                 $PHPShopOrm->sql="select id,case name_rambler when '' then name else name_rambler end as name,num,".$this->PHPShopNav->getId().' as parent_to,yml,num_row,num_cow,sort,content,vid,name_rambler,servers,title,title_enabled,title_shablon,descrip,descrip_enabled,descrip_shablon,keywords,keywords_enabled,keywords_shablon,skin,skin_enabled,order_by,order_to,secure_groups,content_h,filtr,icon_description from '. $this->getValue('base.categories') . $where;
                 $dataArray = $PHPShopOrm->select();
@@ -1096,7 +1101,7 @@ class PHPShopShop extends PHPShopShopCore {
                         $custom_menu_count_item_cnt=4;			
 			foreach ($dataArray as $row) {
 				//считаем сколько у нас элементов без скобок, по типу и со скобками, по производителю
-				if (in_array($this->PHPShopNav->getId(),$CustomCatalogIDArray2)) {
+				if (in_array($this->PHPShopNav->getId(),$this->CustomCatalogIDArray2)) {
 					if (preg_match('/^.*\(.*\).*$/i',$row['name'])==0) {
 						$cnt_by_type++;
 					}
@@ -1104,7 +1109,7 @@ class PHPShopShop extends PHPShopShopCore {
 						$cnt_by_maker++;
 					}
 				//исключение для каталогов считаем только техника по типу
-				} else if (in_array($this->PHPShopNav->getId(),$CustomCatalogIDArray3)) {
+				} else if (in_array($this->PHPShopNav->getId(),$this->CustomCatalogIDArray3)) {
 						$cnt_by_type++;
 				}			
 			}
@@ -1125,7 +1130,7 @@ class PHPShopShop extends PHPShopShopCore {
                             $dis.=PHPShopText::li($row['name'], $this->path . '/CID_' . $row['id'] . '.html');
                             //if ($row['id']=76) echo $row['name'];
                             //выбираем позиции для каталогов из массива $CustomCatalogIDArray2
-                            if (in_array($this->PHPShopNav->getId(),$CustomCatalogIDArray2)) {
+                            if (in_array($this->PHPShopNav->getId(),$this->CustomCatalogIDArray2)) {
 
                                     //по типу смотрим если есть доп ссылка в конф файле menu-lvl3-href-modify_catalog_add-analog.txt
                                     if (preg_match('/^.*\(.*\).*$/i',$row['name'])==0) {
@@ -1138,7 +1143,7 @@ class PHPShopShop extends PHPShopShopCore {
                                                                     $id_custom_menu_3_true=true;
                                                                     $catalog_items_content=PHPShopText::a($this->path . '/CID_' . $row['id'] . '.html', $row['name'],false,false,false,false,false).$custom_href;
                                                                     array_push($catalog_items_by_type_table_td,$catalog_items_content);//PHPShopText::td($catalog_items_content,false,false,false)
-                                                                    array_push($id_excluded,$custom_menu_3_item['sub_id']);
+                                                                    array_push($this->id_excluded,$custom_menu_3_item['sub_id']);
                                                                     $cnt1++;
                                                                     $cnt_cur_row_by_type++;
                                                                     break;
@@ -1147,7 +1152,7 @@ class PHPShopShop extends PHPShopShopCore {
                                                             $id_custom_menu_3_false=true;
                                                     }
                                             }
-                                            if ($id_custom_menu_3_true===false && $id_custom_menu_3_false===true && in_array($row['id'],$id_excluded)===false){
+                                            if ($id_custom_menu_3_true===false && $id_custom_menu_3_false===true && in_array($row['id'],$this->id_excluded)===false){
                                                 $catalog_items_content=PHPShopText::a($this->path . '/CID_' . $row['id'] . '.html', $row['name'],false,false,false,false,false);
                                                 array_push($catalog_items_by_type_table_td,$catalog_items_content);//PHPShopText::td($catalog_items_content,false,false,false)
                                                 $cnt1++;
@@ -1155,7 +1160,7 @@ class PHPShopShop extends PHPShopShopCore {
                                             }
                                     }
                             //исключение для 472 каталога по производителю группы $CustomCatalogIDArray3
-                            } else if (in_array($this->PHPShopNav->getId(),$CustomCatalogIDArray3)) {
+                            } else if (in_array($this->PHPShopNav->getId(),$this->CustomCatalogIDArray3)) {
                                 $catalog_items_content=PHPShopText::a($this->path . '/CID_' . $row['id'] . '.html', $row['name'],false,false,false,false,false);
                                 array_push($catalog_items_by_type_table_td,$catalog_items_content);
                                 $cnt1++;
@@ -1163,7 +1168,7 @@ class PHPShopShop extends PHPShopShopCore {
                             }
                             //print_r($catalog_items_by_type_table_td);
                             //по типу для каталога из группы $CustomCatalogIDArray2
-                            if (preg_match('/^.*\(.*\).*$/i',$row['name'])==0 || in_array($this->PHPShopNav->getId(),$CustomCatalogIDArray2)) {
+                            if (preg_match('/^.*\(.*\).*$/i',$row['name'])==0 || in_array($this->PHPShopNav->getId(),$this->CustomCatalogIDArray2)) {
                                 $cnt_catalog_items_by_type_table_td=count($catalog_items_by_type_table_td);
                                 $cnt_catalog_items_by_type_table_td++;
                                 //echo '$cnt1='.$cnt1.'<br>';
@@ -1232,7 +1237,7 @@ class PHPShopShop extends PHPShopShopCore {
                         //for ($cnt_sort=0;$cnt_sort<=$catalog_items_table1_cnt;$cnt_sort++){
                         //    $catalog_items_table1.=PHPShopText::tr2($catalog_items_table1,$custom_menu_count_item_cnt);//$custom_menu_count_item_cnt
                         //}
-                        if (in_array($this->PHPShopNav->getId(),$CustomCatalogIDArray2_1)) {
+                        if (in_array($this->PHPShopNav->getId(),$this->CustomCatalogIDArray2_1)) {
                                 $disp1=PHPShopText::table($catalog_items_table1,1,1,'center','98%',false,0,'catalog_items_table1');
                                 $disp2=PHPShopText::table($catalog_items_table2,1,1,'center','98%',false,0,'catalog_items_table2');
                         } else {
@@ -1315,7 +1320,7 @@ class PHPShopShop extends PHPShopShopCore {
             $catalog_items_table1_sorted[]=array('name'=>trim($this_get_name),'href'=>$this_get_cataloglist_part);
             //оставляем часть строки для дальнейшего анализа
             $this_get_cataloglist_part=substr($this->get('catalogList'),($href_end_pos+4));
-
+            //для хранения оставшейся части строки используем переменную вывода, что не очень хорошо
             $this->set('catalogList',$this_get_cataloglist_part);
         }
         //сортируем массив
@@ -1343,18 +1348,67 @@ class PHPShopShop extends PHPShopShopCore {
             $cnt1++;
         }
 
-        if (in_array($this->PHPShopNav->getId(),$CustomCatalogIDArray2_1)) {
+        //формируем отсортированный массив по производителю
+        $href_start_pos=0;
+        $href_end_pos=0;
+        $catalog_items_table2_sorted=array();
+        while ($href_start_pos!==false) {
+            //вычленяем ссылку
+            $href_start_pos=strpos($this->get('catalogList1'), '<a href');
+            if ($href_start_pos===false) break;
+            $href_end_pos=strpos($this->get('catalogList1'), '</a>');
+
+            $this_get_cataloglist_part=substr($this->get('catalogList1'),$href_start_pos,(($href_end_pos+4)-$href_start_pos));
+            //ищем строку по которой будем делать сортировку
+            $name_start_pos=strpos($this_get_cataloglist_part, '">');
+            $name_end_pos=strpos($this_get_cataloglist_part, '</a>');
+            $this_get_name=substr($this_get_cataloglist_part,$name_start_pos+2,($name_end_pos-($name_start_pos+2)));
+            $catalog_items_table2_sorted[]=array('name'=>trim($this_get_name),'href'=>$this_get_cataloglist_part);
+            //оставляем часть строки для дальнейшего анализа
+            $this_get_cataloglist_part=substr($this->get('catalogList1'),($href_end_pos+4));
+            //для хранения оставшейся части строки используем переменную вывода, что не очень хорошо
+            $this->set('catalogList1',$this_get_cataloglist_part);
+        }
+        //сортируем массив
+        usort($catalog_items_table2_sorted, PHPShopText::array_submenuhead2_cmp('name'));
+        
+        //var_dump($catalog_items_table1_sorted);
+        //выводим отсортированный массив по типу
+        $cnt2=1;
+        $catalog_items_table2='';
+        $catalog_items_by_maker_table_td=array();
+        $catalog_items_table2_sorted_cnt=count($catalog_items_table2_sorted);
+        foreach ($catalog_items_table2_sorted as $catalog_items_table2_sorted_item=>$val){
+            
+            array_push($catalog_items_by_maker_table_td,$val['href']);
+            if ($cnt2%4==0){
+                $catalog_items_table2.=PHPShopText::tr2($catalog_items_by_maker_table_td,4);
+                //echo $catalog_items_by_type_table_td.'<br>';
+                $catalog_items_by_maker_table_td=array();
+                $cnt_cur_row_by_maker=$cnt2;
+            }
+            if ($catalog_items_table2_sorted_cnt%4<>0 && $cnt2==$catalog_items_table2_sorted_cnt){
+                $catalog_items_table2.=PHPShopText::tr2($catalog_items_by_maker_table_td,4);
+                //echo $catalog_items_by_type_table_td.'<br>';
+                $catalog_items_by_maker_table_td=array();
+            }
+            $cnt2++;
+        }
+
+
+        if (in_array($this->PHPShopNav->getId(),$this->CustomCatalogIDArray2_1)) {
                 $disp1=PHPShopText::table($catalog_items_table1,1,1,'center','98%',false,0,'catalog_items_table1');
                 $disp2=PHPShopText::table($catalog_items_table2,1,1,'center','98%',false,0,'catalog_items_table2');
         } else {
                 $disp = PHPShopText::ul($dis);
         }
-        //выводим итоговый результат в переменную системы с сортированным массивом 
+        //выводим итоговый результат в переменную системы с сортированным массивом по типу
         $this->set('catalogList', $disp1);
-        
+        //выводим итоговый результат в переменную системы с сортированным массивом по производителю
+        $this->set('catalogList1', $disp2);        
         $this->catalog_improvements();
 		
-		if (in_array($this->PHPShopNav->getId(),$CustomCatalogIDArray2)) {
+		if (in_array($this->PHPShopNav->getId(),$this->CustomCatalogIDArray2_1)) {
 			$this->set('productId', $this->PHPShopNav->getId());
 			$this->set('productPageThis', $this->PHPShopNav->getPage());
 		}
@@ -1366,7 +1420,7 @@ class PHPShopShop extends PHPShopShopCore {
 		}
 		//echo 'catalog_end';
 		// Подключаем шаблон
-		if (in_array($this->PHPShopNav->getId(),$CustomCatalogIDArray3)) {
+		if (in_array($this->PHPShopNav->getId(),$this->CustomCatalogIDArray3)) {
 			$this->parseTemplate($this->getValue('templates.catalog_info_forma_1'));
 		} else
         	$this->parseTemplate($this->getValue('templates.catalog_info_forma'));
@@ -1384,41 +1438,7 @@ class PHPShopShop extends PHPShopShopCore {
                 $ceo_custom_catalog_productname=read_ceo_custom_menu($_SERVER['DOCUMENT_ROOT'] . '/custom_config/product-name_catalog_rename.txt');
 		//получаем текущий каталог
 		$cid_id=$this->PHPShopNav->getId();
-		if 	(	$cid_id==5 || $cid_id==9 ||	$cid_id==16 || $cid_id==18 ||	
-				$cid_id==30 || $cid_id==31 || $cid_id==32 || $cid_id==33 ||
-				$cid_id==34 || $cid_id==35 || $cid_id==36 || $cid_id==37 ||
-				$cid_id==44 || $cid_id==60 || $cid_id==77 || $cid_id==81 ||				
-				$cid_id==85 || $cid_id==88 || $cid_id==96 || $cid_id==97 ||
-				$cid_id==121 ||	$cid_id==134 ||	$cid_id==141 ||	$cid_id==142 ||	
-				$cid_id==154 ||
-				$cid_id==172 ||	$cid_id==186 ||	$cid_id==190 ||	$cid_id==191 ||
-				$cid_id==201 ||	$cid_id==211 ||	$cid_id==215 ||	$cid_id==224 ||
-				$cid_id==227 ||	$cid_id==228 ||	$cid_id==247 ||	$cid_id==248 ||
-				$cid_id==254 ||	$cid_id==256 ||	$cid_id==272 ||	$cid_id==288 || 
-				$cid_id==290 || $cid_id==292 || $cid_id==293 ||	$cid_id==295 ||				
-				$cid_id==297 ||	$cid_id==298 ||	$cid_id==299 ||	$cid_id==300 ||
-				$cid_id==332 ||	$cid_id==333 ||	$cid_id==334 ||	$cid_id==335 ||	
-				$cid_id==336 ||	$cid_id==337 ||	$cid_id==350 ||	$cid_id==351 ||
-				$cid_id==352 ||	$cid_id==353 ||	$cid_id==354 ||	$cid_id==355 ||
-				$cid_id==356 ||	$cid_id==382 ||	$cid_id==414 ||	$cid_id==415 ||
-				$cid_id==416 ||	$cid_id==418 ||	$cid_id==419 ||	$cid_id==420 ||
-				$cid_id==421 ||	$cid_id==422 ||	$cid_id==423 ||	$cid_id==424 ||
-				$cid_id==425 ||	$cid_id==431 ||	$cid_id==432 ||	$cid_id==433 ||
-				$cid_id==436 ||	$cid_id==437 ||	$cid_id==440 ||	$cid_id==442 ||
-				$cid_id==459 ||	$cid_id==461 ||	$cid_id==464 || $cid_id==465 ||
-				$cid_id==467 || $cid_id==472 || $cid_id==473 || $cid_id==474 ||
-				$cid_id==475 || $cid_id==476 || $cid_id==477 || $cid_id==478 ||
-				$cid_id==479 || $cid_id==480 || $cid_id==481 || $cid_id==482 ||
-				$cid_id==483 || $cid_id==484 || $cid_id==485 || $cid_id==486 || 
-				$cid_id==487 || $cid_id==488 || $cid_id==489 || $cid_id==490 || 
-				$cid_id==491 || $cid_id==492 || $cid_id==493 || $cid_id==494 || 
-				$cid_id==495 || $cid_id==496 || $cid_id==497 || $cid_id==498 || 
-				$cid_id==499 || $cid_id==500 || $cid_id==501 || $cid_id==502 ||
-				$cid_id==503 || $cid_id==509 || $cid_id==536 || $cid_id==538 || 
-				$cid_id==543 || $cid_id==545 || $cid_id==549 || $cid_id==551 ||
-				$cid_id==555 || $cid_id==562 || $cid_id==581 || $cid_id==585 || 
-                                $cid_id==586
-		) {
+		if (in_array($cid_id,$this->CustomCatalogIDArray2_1)) {
 			// Путь для навигации
 			$this->objPath = './CID_' . $this->category . '_';	
 		
@@ -1459,24 +1479,7 @@ class PHPShopShop extends PHPShopShopCore {
 				}
 				
 	        }
-			if ($cid_id==31 || $cid_id==32 || $cid_id==33 || $cid_id==34 || $cid_id==35 ||
-	         	$cid_id==81 || $cid_id==96 || $cid_id==121 || $cid_id==141 || $cid_id==154 || 
-                        $cid_id==186 || $cid_id==190 ||
-	         	$cid_id==191 || $cid_id==201 ||	$cid_id==227 ||	$cid_id==333 || $cid_id==334 ||
-	         	$cid_id==382 ||	$cid_id==414 ||	$cid_id==415 ||	$cid_id==416 || $cid_id==418 ||
-	         	$cid_id==419 || $cid_id==420 ||	$cid_id==421 ||	$cid_id==422 ||	$cid_id==423 ||
-	         	$cid_id==424 ||	$cid_id==425 || $cid_id==431 || $cid_id==432 ||	$cid_id==436 ||
-         		$cid_id==433 ||	$cid_id==437 || $cid_id==440 || $cid_id==442 ||	$cid_id==459 ||
-	         	$cid_id==461 || $cid_id==464 || $cid_id==465 || $cid_id==467 || $cid_id==472 ||
-	         	$cid_id==473 || $cid_id==474 ||	$cid_id==475 || $cid_id==476 || $cid_id==477 ||
-	         	$cid_id==478 ||	$cid_id==479 || $cid_id==480 || $cid_id==481 || $cid_id==482 ||
-			$cid_id==483 || $cid_id==484 || $cid_id==485 || $cid_id==486 || $cid_id==487 || 
-	         	$cid_id==488 || $cid_id==489 || $cid_id==490 || $cid_id==491 || $cid_id==492 ||
-	         	$cid_id==493 || $cid_id==494 || $cid_id==495 || $cid_id==496 || $cid_id==497 || 
-	         	$cid_id==498 || $cid_id==499 || $cid_id==500 || $cid_id==501 || $cid_id==502 ||
-			$cid_id==536 ||	$cid_id==538 || $cid_id==543 || $cid_id==545 || $cid_id==549 ||
-	         	$cid_id==551 || $cid_id==555 || $cid_id==562 || $cid_id==581 || $cid_id==585 || 
-                        $cid_id==586) {
+			if (in_array($cid_id,$this->CustomCatalogIDArray2_2)) {
 				if ($this->PHPShopNav->getPage()=='') {
 	        		/*
 	        		$sql="select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
@@ -1549,7 +1552,7 @@ class PHPShopShop extends PHPShopShopCore {
 					//$select_array=array('id','category','name','content','price','price_n','sklad','p_enabled','enabled','uid','num','price2','price3','price4','price5');
 				}
 			}
-			//echo $sql;
+                        //echo $sql;
 			//$sql="select distinct * from u301639_test.phpshop_products";
 			//$sql2="(category in (38,39,70,65) or dop_cat LIKE '%#288#%') and enabled='1' and parent_enabled='0' order by COALESCE(sklad,0) = 1 asc, ".$orderby;
 			
@@ -1579,10 +1582,12 @@ class PHPShopShop extends PHPShopShopCore {
 			// Пагинатор
 			//echo $order['sql'];
 			//echo $order;
-			
+			//echo var_export($this->PHPShopNav->isPageAll());
 			if ($this->PHPShopNav->isPageAll()) {
+                            //echo 1;
 				$this->setPaginator($num_cow, $order);
 			} else {
+                            //echo 2;
 				$this->setPaginator($num_cow, $order['sql']);			
 			}
 			
@@ -1601,29 +1606,7 @@ class PHPShopShop extends PHPShopShopCore {
 			//echo '$db_rows='.$db_rows;
 			//echo '$num_cow='.$num_cow;
 			//в зависимости от типа каталога строим контент
-			if (($cid_id==30 || $cid_id==31 || $cid_id==32 || $cid_id==33 ||
-					$cid_id==34 || $cid_id==35 || $cid_id==81 || $cid_id==96 || 
-					$cid_id==121 || $cid_id==141 ||
-					$cid_id==154 || $cid_id==186 || $cid_id==190 || $cid_id==191 ||
-					$cid_id==201 || $cid_id==227 || $cid_id==333 || $cid_id==334 ||
-					$cid_id==382 || $cid_id==414 || $cid_id==415 || $cid_id==416 ||
-					$cid_id==418 || $cid_id==419 || $cid_id==420 || $cid_id==421 ||
-					$cid_id==422 || $cid_id==423 || $cid_id==424 || $cid_id==425 ||
-					$cid_id==431 || $cid_id==432 || $cid_id==433 || $cid_id==436 ||
-					$cid_id==437 || $cid_id==440 || $cid_id==442 || $cid_id==459 ||
-					$cid_id==461 || $cid_id==464 || $cid_id==465 || $cid_id==467 ||
-					$cid_id==472 || $cid_id==473 || $cid_id==474 ||	$cid_id==475 ||
-					$cid_id==476 || $cid_id==477 ||	$cid_id==478 ||	$cid_id==479 || 
-					$cid_id==480 || $cid_id==481 || $cid_id==482 ||	$cid_id==483 || 
-					$cid_id==484 || $cid_id==485 || $cid_id==486 || $cid_id==487 || 
-					$cid_id==488 || $cid_id==489 || $cid_id==490 || $cid_id==491 || 
-					$cid_id==492 ||	$cid_id==493 || $cid_id==494 || $cid_id==495 || 
-					$cid_id==496 || $cid_id==497 || $cid_id==498 || $cid_id==499 || 
-					$cid_id==500 || $cid_id==501 || $cid_id==502 || $cid_id==536 || 
-					$cid_id==538 || $cid_id==543 || $cid_id==545 || $cid_id==549 || 
-					$cid_id==551 || $cid_id==555 || $cid_id==562 || $cid_id==581 || 
-                                        $cid_id==585 || $cid_id==586
-					)  && $cell==1) {
+			if (in_array($cid_id,$this->CustomCatalogIDArray2_2)  && $cell==1) {
 				//echo 1;
 				$disp_cat.='<div class="content"><table cellpadding="0" cellspacing="0" border="0" width="100%" id="manufacturers_products" style="display: table;">';
 			} else {
@@ -1727,6 +1710,7 @@ class PHPShopShop extends PHPShopShopCore {
 						//вывод сообщения об устаревшем товаре
 						$comnotice_30=$this->lang('outdated_message');//'<div class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-15px 0px 0px 10px;font-size:12px !important;"><noindex>'..'</noindex></div>'
 						$productnotice='';
+                                                $outdated_style='';
 						//используем отдельное форматирование для вывода в каталогах с кол-м ячеек больше 1
 						if ($cell>1) {
 							$productnotice.='<span class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-15px 0px 0px 10px;font-size:12px !important;"><noindex>'.$comnotice_30.'</noindex></span>';
@@ -1751,6 +1735,7 @@ class PHPShopShop extends PHPShopShopCore {
 							$productnotice.='	return false;';
 							$productnotice.='});});';
 							$productnotice.='</script>';
+                                                        $outdated_style='style="display:relative;margin:-55px 15px 0px 0px;"';
 						} else {
 							//если нет аналога то выводим пустышку
 							$comnotice_30=$this->lang('outdated_message');//'<div class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-15px 0px 0px 10px;font-size:12px !important;"><noindex>'..'</noindex></div>'
@@ -1762,7 +1747,8 @@ class PHPShopShop extends PHPShopShopCore {
 							$productnotice.='<div id="price_comlain'.$prod_row['id'].'" class="price_comlain" style="position:relative;display: inline-block;margin:0px 95px 0px 0px;font-size:13px !important;border-bottom:1px;"><!--noindex-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!--/noindex--></div>';
 						}
 						$comnotice='';
-						$outdated_style='style="display:relative;margin:-32px 15px 0px 0px;"';
+                                                if (empty($outdated_style))
+                                                    $outdated_style='style="display:relative;margin:-25px 15px 0px 0px;"';
                                                 $comnotice_price_n='';
 					} else {
 						//товар со статусом в наличие/под заказ
@@ -1792,6 +1778,7 @@ class PHPShopShop extends PHPShopShopCore {
 						//вывод сообщения об устаревшем товаре
 						$comnotice_30=$this->lang('outdated_message');//'<div class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-15px 0px 0px 10px;font-size:12px !important;"><noindex>'..'</noindex></div>'
 						$productnotice='';
+                                                $outdated_style='';
 						//используем отдельное форматирование для вывода в каталогах с кол-м ячеек больше 1
 						if ($cell>1) {
 							$productnotice.='<span class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-15px 0px 0px 10px;font-size:12px !important;"><noindex>'.$comnotice_30.'</noindex></span>';
@@ -1816,6 +1803,7 @@ class PHPShopShop extends PHPShopShopCore {
 							$productnotice.='	return false;';
 							$productnotice.='});});';
 							$productnotice.='</script>';
+                                                        $outdated_style='style="display:relative;margin:-55px 15px 0px 0px;"';
 						} else {
 							//если нет аналога то выводим пустышку
 							$comnotice_30=$this->lang('outdated_message');//'<div class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-15px 0px 0px 10px;font-size:12px !important;"><noindex>'..'</noindex></div>'
@@ -1827,7 +1815,8 @@ class PHPShopShop extends PHPShopShopCore {
 							$productnotice.='<div id="price_comlain'.$prod_row['id'].'" class="price_comlain" style="position:relative;display: inline-block;margin:0px 95px 0px 0px;font-size:13px !important;	border-bottom:1px;"><!--noindex-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!--/noindex--></div>';
 						}						
 						$comnotice='';
-						$outdated_style='style="display:relative;margin:-32px 15px 0px 0px;"';
+                                                if (empty($outdated_style))
+                                                    $outdated_style='style="display:relative;margin:-25px 15px 0px 0px;"';
                                                 $comnotice_price_n='';
 					} else {
 						//товар со статусом в наличие/под заказ
@@ -1853,38 +1842,17 @@ class PHPShopShop extends PHPShopShopCore {
 				} else {
 					// снят с производства+должен быть под заказ, для модифицированных категорий
 					if (!(empty($prod_row['sklad'])) && !(empty($prod_row['outdated']))) {                                           
-						if ($cid_id==30 || $cid_id==31 || $cid_id==32 || $cid_id==33 ||
-							$cid_id==34 || $cid_id==35 || $cid_id==81 || $cid_id==96 || 
-							$cid_id==121 || $cid_id==141 ||
-							$cid_id==154 || $cid_id==186 || $cid_id==190 || $cid_id==191 ||
-							$cid_id==201 || $cid_id==227 || $cid_id==333 || $cid_id==334 ||
-							$cid_id==382 || $cid_id==414 || $cid_id==415 || $cid_id==416 ||
-							$cid_id==418 || $cid_id==419 || $cid_id==420 || $cid_id==421 ||
-							$cid_id==422 || $cid_id==423 || $cid_id==424 || $cid_id==425 ||
-							$cid_id==431 || $cid_id==432 || $cid_id==433 || $cid_id==436 ||
-							$cid_id==437 || $cid_id==440 || $cid_id==442 || $cid_id==465 ||
-							$cid_id==472 || $cid_id==473 || $cid_id==474 ||	$cid_id==475 || 
-							$cid_id==476 || $cid_id==477 ||	$cid_id==478 ||	$cid_id==479 ||
-							$cid_id==480 || $cid_id==481 || $cid_id==482 ||	$cid_id==483 ||
-							$cid_id==484 || $cid_id==485 || $cid_id==486 || $cid_id==487 || 
-                                                        $cid_id==488 || $cid_id==489 || $cid_id==490 || $cid_id==491 || 
-							$cid_id==492 ||	$cid_id==493 || $cid_id==494 || $cid_id==495 || 
-							$cid_id==496 || $cid_id==497 || $cid_id==498 || $cid_id==499 || 
-							$cid_id==500 || $cid_id==501 || $cid_id==502 || $cid_id==536 || 
-							$cid_id==538 || $cid_id==543 || $cid_id==545 || $cid_id==549 || 
-							$cid_id==551 || $cid_id==555 || $cid_id==562 || $cid_id==581 || 
-                                                        $cid_id==585
-						) {
+						if (in_array($cid_id,$this->CustomCatalogIDArray2_2)) {
 							$comnotice='';
 							$productnotice='';
 							$comnotice_30=$this->lang('outdated_message');//$this->lang('sklad_mesage');
 							if ($cell>1) {
-								$productnotice.='<span class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-15px 0px 0px 10px;font-size:12px !important;"><noindex>'.$comnotice_30.'</noindex></span>';
+								$productnotice.='<span class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-5px 0px 0px 10px;font-size:12px !important;"><noindex>'.$comnotice_30.'</noindex></span>';
 							}
 							//снят с производства+должен быть под заказ, для всех остальных категорий
 						} else {
 							$comnotice='';
-							$productnotice_0='<div class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-15px 0px 0px 10px;font-size:12px !important;"><noindex>'.$this->lang('outdated_message').'</noindex></div>';
+							$productnotice_0='<div class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-5px 0px 0px 10px;font-size:12px !important;"><noindex>'.$this->lang('outdated_message').'</noindex></div>';
 							$productnotice=$productnotice_0;
 						}
 						//используем отдельное форматирование для вывода в каталогах с кол-м ячеек больше 1
@@ -1893,6 +1861,7 @@ class PHPShopShop extends PHPShopShopCore {
 						} else {
 							$sdvig_vlevo='left:-20px;';
 						}
+                                                $outdated_style='';
 						//вывод ссылки на аналогичный товар
 						if ( !(empty($prod_row['analog'])) ) {
 							$productnotice.='<div id="price_comlain'.$prod_row['id'].'" class="price_comlain" style="position:relative;display: inline-block;margin:0px 95px 0px 0px;font-size:13px !important;'.$sdvig_vlevo.'"><noindex>'.$this->lang('outdated_message2').'</noindex></div>';
@@ -1904,12 +1873,14 @@ class PHPShopShop extends PHPShopShopCore {
 							$productnotice.='	return false;';
 							$productnotice.='});});';
 							$productnotice.='</script>';
+                                                        $outdated_style='style="display:relative;margin:-55px 15px 0px 0px;"';
 						} else {
 							//вывод пустышки если нет ссылки на аналог
 							$productnotice.='<div id="price_comlain'.$prod_row['id'].'" class="price_comlain" style="position:relative;display: inline-block;margin:0px 95px 0px 0px;font-size:13px !important;	border-bottom:1px;'.$sdvig_vlevo.'"><!--noindex-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!--/noindex--></div>';
 						}
 						$comnotice='';
-						$outdated_style='style="display:relative;margin:-32px 15px 0px 0px;"';
+                                                if (empty($outdated_style))
+                                                    $outdated_style='style="display:relative;margin:-25px 15px 0px 0px;"';
 						$comnotice_price_n='';
 						//вывод статуса под заказ
 					} else if (!(empty($prod_row['sklad'])) && (empty($prod_row['outdated']))) {
@@ -1944,29 +1915,7 @@ class PHPShopShop extends PHPShopShopCore {
 					}
 				}
 				//вариант вывода карточки товара с одной ячейкой для модифицированных категорий
-				if (($cid_id==30 || $cid_id==31 || $cid_id==32 || $cid_id==33 ||
-					$cid_id==34 || $cid_id==35 || $cid_id==81 || $cid_id==96 || 
-					$cid_id==121 || $cid_id==141 ||
-					$cid_id==154 || $cid_id==186 || $cid_id==190 || $cid_id==191 ||
-					$cid_id==201 || $cid_id==227 || $cid_id==333 || $cid_id==334 ||
-					$cid_id==382 || $cid_id==414 || $cid_id==415 || $cid_id==416 ||
-					$cid_id==418 || $cid_id==419 || $cid_id==420 || $cid_id==421 ||
-					$cid_id==422 || $cid_id==423 || $cid_id==424 || $cid_id==425 ||
-					$cid_id==431 || $cid_id==432 || $cid_id==433 || $cid_id==436 ||
-					$cid_id==437 || $cid_id==440 || $cid_id==442 || $cid_id==459 ||
-					$cid_id==461 || $cid_id==464 || $cid_id==465 || $cid_id==467 ||
-					$cid_id==472 || $cid_id==473 || $cid_id==474 ||	$cid_id==475 || 
-					$cid_id==476 || $cid_id==477 ||	$cid_id==478 ||	$cid_id==479 ||
-					$cid_id==480 || $cid_id==481 || $cid_id==482 ||	$cid_id==483 ||
-					$cid_id==484 || $cid_id==485 || $cid_id==486 || $cid_id==487 || 
-                                        $cid_id==488 || $cid_id==489 || $cid_id==490 || $cid_id==491 || 
-					$cid_id==492 ||	$cid_id==493 || $cid_id==494 || $cid_id==495 || 
-					$cid_id==496 || $cid_id==497 || $cid_id==498 || $cid_id==499 || 
-					$cid_id==500 || $cid_id==501 || $cid_id==502 || $cid_id==536 || 
-					$cid_id==538 || $cid_id==543 || $cid_id==545 || $cid_id==549 ||
-					$cid_id==551 || $cid_id==555 || $cid_id==562 || $cid_id==581 || 
-                                        $cid_id==585
-					) && $cell==1) {
+				if (in_array($cid_id,$this->CustomCatalogIDArray2_2) && $cell==1) {
 					//echo 2;
 					$this->catalog_product_icons($prod_row);
 					$this->sort_table($prod_row);

@@ -90,7 +90,7 @@
 		}
 		echo '@ComEndNotice@';		
 		//echo '@ComStartCart@<span class="addtochart">';
-		//echo '<input type="button" onclick="javascript:stihl_window(\\''.$region_info.'\\')"  value="@productSale@" />';
+		//echo '<input type="button" onclick="javascript:stihl_window(\\''.$region_info.'\\')"  value="@product_sale@" />';
 		//echo '</span>@ComEndCart@';	
 	} else {
 		//echo 'main_product_forma_1';
@@ -120,8 +120,8 @@
 			echo '@ComEndNotice@';	
 		} else if ($row_sklad==false && $price_n==true && $row_outdated==true) {
 			echo '@ComStartCart@';
-			//echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@)"  value="'.$SysValue['lang']['productSale'].'"></span>';
-                        echo '<span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@)">'.$SysValue['lang']['productSale'].'</a></span>';
+			//echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@)"  value="'.$SysValue['lang']['product_sale'].'"></span>';
+                        echo '<span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@)">'.$SysValue['lang']['product_sale'].'</a></span>';
 			echo '@ComEndCart@';
 		} else if ($row_sklad==true && $row_outdated==true) {
 			echo '@ComStartCart@';
@@ -129,13 +129,13 @@
 			echo '@ComEndCart@';
 		} else {
 			echo '@ComStartCart@';
-			//echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@)"  value="'.$SysValue['lang']['productSale'].'"></span>';
-                        echo '<span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@)">'.$SysValue['lang']['productSale'].'</a></span>';
+			//echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@)"  value="'.$SysValue['lang']['product_sale'].'"></span>';
+                        echo '<span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@)">'.$SysValue['lang']['product_sale'].'</a></span>';
 			echo '@ComEndCart@';	
 		}
 		
 		//echo '@ComStartCart@<span class="addtochart">';
-		//echo '<input type="button" onclick="javascript:AddToCart(@productUid@)"  value="@productSale@" />';
+		//echo '<input type="button" onclick="javascript:AddToCart(@productUid@)"  value="@product_sale@" />';
 		//echo '</span>@ComEndCart@';
 		//echo '@ComStartNotice@';
 		//echo '<span class="addtochart notice"> <input type="button" onclick="window.location.replace(\\'/users/notice.html?productId=@productUid@\\');" value="'.$SysValue['lang']['product_notice'].'" /> </span>'; //@productNotice@

@@ -486,7 +486,7 @@ class PHPShopShopCore extends PHPShopCore {
             else
                 $nav.=PHPShopText::nbsp(2) . PHPShopText::a($this->objPath . 'ALL.html' . $sort, __('Все позиции'));
 			
-            //echo $nav;
+            //echo 3;
             // Назначаем переменную шаблонизатора
             $this->set('productPageNav', $nav);
 

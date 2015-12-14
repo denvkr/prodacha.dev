@@ -21,7 +21,7 @@
               <tr>
                 <td align="left" valign="middle"><div class="tovarDivAdd3">
                     <!-- блок купить -->
-                    <!--@ComStartCart@<a href="javascript:AddToCart(@productUid@)" title="@productSale@">@productSale@</a>@ComEndCart@-->
+                    <!--@ComStartCart@<a href="javascript:AddToCart(@productUid@)" title="@product_sale@">@product_sale@</a>@ComEndCart@-->
                     <!-- блок купить -->
                     <!-- блок уведомить -->
                     <!--@ComStartNotice@<a href="/users/notice.html?productId=@productUid@" title="@productNotice@">@productNotice@</a>@ComEndNotice@-->

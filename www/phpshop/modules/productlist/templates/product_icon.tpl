@@ -22,7 +22,7 @@
       <div class="tovarDivAdd1">
         <div class="tovarDivAdd3">
           <!-- Блок купить -->
-          @ComStartCart@<a href="javascript:AddToCart(@productlist_product_id@)" title="@productSale@">@productSale@</a>@ComEndCart@
+          @ComStartCart@<a href="javascript:AddToCart(@productlist_product_id@)" title="@product_sale@">@product_sale@</a>@ComEndCart@
           <div style="clear:both; height:10px"></div>
           <!-- Блок купить -->
           <!-- Блок уведомить -->

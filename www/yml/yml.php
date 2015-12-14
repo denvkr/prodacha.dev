@@ -268,7 +268,7 @@ while (list($key, $val) = @each($PRODUCT)) {
    
 $XML.= ('
 <offer id="'.$PRODUCT[$key]['id'].'" available="'.$PRODUCT[$key]['p_enabled'].'" '.$bid_str.'>
- <url>http://'.$_SERVER['SERVER_NAME'].'/shop/UID_'.$PRODUCT[$key]['id'].'.html?from=yml</url>
+ <url>http://'.$_SERVER['SERVER_NAME'].'/shop/UID_'.$PRODUCT[$key]['id'].'.html</url>
       <price>'.$PRODUCT[$key]['price'].'</price>
       <currencyId>'.$VALUTA[$SYSTEM['dengi']]['iso'].'</currencyId>
       <categoryId>'.$PRODUCT[$key]['category'].'</categoryId>

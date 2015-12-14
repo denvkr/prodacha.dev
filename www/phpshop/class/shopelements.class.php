@@ -391,7 +391,7 @@ class PHPShopProductElements extends PHPShopElements {
         $item = 1;
 
         $this->set('productInfo', $this->lang('productInfo'));
-        $this->set('productSale', $this->lang('productSale'));
+        $this->set('productSale', $this->lang('product_sale'));
         $this->set('productValutaName', $this->currency());
 
         $d1 = $d2 = $d3 = $d4 = $d5 = $d6 = $d7 = null;

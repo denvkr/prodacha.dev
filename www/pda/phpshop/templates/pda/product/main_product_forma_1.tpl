@@ -12,7 +12,7 @@
 	<div>
     @ComStart@Цена: <strong>@productPrice@</strong> @productValutaName@ @ComEnd@
 	@ComStartCart@
-	<img src="images/shop/arr2.gif" alt="" width="16" height="16" border="0" align="absmiddle"><A href="/order/?xid=@productUid@" title="@productSale@">[@productSale@]</A>
+	<img src="images/shop/arr2.gif" alt="" width="16" height="16" border="0" align="absmiddle"><A href="/order/?xid=@productUid@" title="@product_sale@">[@product_sale@]</A>
 	@ComEndCart@
 	<!-- Блок корзина -->
    </div>
