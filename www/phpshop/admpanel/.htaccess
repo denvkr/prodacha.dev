@@ -1,5 +1,0 @@
-Options +FollowSymLinks
-Options +Indexes
-DirectoryIndex index.php
-Order allow,deny
-Allow from all

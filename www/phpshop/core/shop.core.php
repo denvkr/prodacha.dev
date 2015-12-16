@@ -1901,7 +1901,7 @@ class PHPShopShop extends PHPShopShopCore {
 						//вывод товара со статусом доступен для покупки
 						//$addtochart='<input type="button" onclick="javascript:AddToCart('.$prod_row['id'].')"  value="'.$this->lang('product_sale').'" />';
                                                 //модификация CEO 05-10-2015
-                                                $addtochart='<a href="#_tool_'.$prod_row['id'].'" id="a'.$prod_row['id'].'"onclick="javascript:AddToCart('.$prod_row['id'].')">'.$this->lang('product_sale').'</a>';
+                                                $addtochart='<a href="#_tool_'.$prod_row['id'].'" id="a'.$prod_row['id'].'" onclick="javascript:AddToCart('.$prod_row['id'].')">'.$this->lang('product_sale').'</a>';
 						//$productnotice='<input type="button" onclick="window.location.replace(\'/users/notice.html?productId='.$prod_row['id'].'\');"  value="'.$this->lang('product_notice').'" />';
 						$productnotice='<input type="button" onclick="ask_product_availability(\'/shop/UID_'.$prod_row['id'].'.html\',document.getElementsByClassName(\'netref\'));" value="'.$this->lang('product_notice').'">';
 						$comnotice='<div class="prev_price" style="font-size:11px !important;top:-10px;"><noindex>'.''.'</noindex></div>';//$this->lang('sklad_mesage')
