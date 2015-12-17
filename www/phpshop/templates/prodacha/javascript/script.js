@@ -2012,16 +2012,16 @@ fillTKtablePart();
                         success: function(json) {
                         if (json['ok'] == '1'){
                         html = '<div class="fast_order_window_iframe" style"margin:10px,5px,5px,5px;">';
-                                html += '<form id="fast_order_form" action="http://prodacha.ru/snip_call.php" method="POST">';
-                                html += '<div id="fast_order_window_item1" style="position:relative;top: 25px;left: 10px;font-size:18px;width:150px;"><b>' + json['item1'] + '</b></div>';
-                                html += '<div id="fast_order_window_item2" style="position:relative;top: 70px;left: 10px;font-size:20px;">' + json['item2'] + '</div>';
-                                if ((json['item6'].length + json['item7'].length + json['item8'].length) < 60) {
-                        yo_name_top_comment = 85;
+                        html += '<form id="fast_order_form" action="http://prodacha.ru/snip_call.php" method="POST">';
+                        html += '<div id="fast_order_window_item1" style="position:relative;top: 25px;left: 10px;font-size:18px;width:150px;"><b>' + json['item1'] + '</b></div>';
+                        html += '<div id="fast_order_window_item2" style="position:relative;top: 70px;left: 10px;font-size:20px;">' + json['item2'] + '</div>';
+                        if ((json['item6'].length + json['item7'].length + json['item8'].length) < 60) {
+                            yo_name_top_comment = 85;
                         } else
-                                if ((json['item6'].length + json['item7'].length + json['item8'].length) > 100) {
-                        yo_name_top_comment = 85;
+                        if ((json['item6'].length + json['item7'].length + json['item8'].length) > 100) {
+                            yo_name_top_comment = 85;
                         } else {
-                        yo_name_top_comment = 85;
+                            yo_name_top_comment = 85;
                         }
                         html += '<div id="fast_order_window_item3" style="position:relative;top: ' + (yo_name_top_comment + 5).toString() + 'px;left: 10px;font-size:20px;">' + json['item3'] + '</div>';
                                 html += '<div id="fast_order_window_item4" style="position:relative;top: ' + (yo_name_top_comment + 25).toString() + 'px;left: 10px;font-size:20px;">' + json['item4'] + '</div>';
@@ -2418,7 +2418,7 @@ fillTKtablePart();
                 return regExpr;
                         }
 
-                function stihl_window(region_info, my_url, referer_info){
+                function stihl_window(region_info, my_url, referer_info) {
                 //console.log('{reg_info:"'+region_info+'",my_url:"'+my_url+'"}');
                 $.ajax({
                 url: '/stihl_window.php',
@@ -2435,31 +2435,31 @@ fillTKtablePart();
                         if (json['ok'] == '1'){
 
                         html = '<div class="stihl_window_iframe">'; //<div id="light_box"><div class="stihl_window"><div class="popup_region">
-                                html += '<input type="button" id="stihl_window_close_button" onclick="close_stihl_window();"/>';
-                                html += '<div id="stihl_window_img1"></div>';
-                                html += '<div id="stihl_window_string1">' + json['item1'] + '</div>';
-                                html += '<div id="stihl_window_img2"></div>';
-                                html += '<div id="stihl_window_string2">' + json['item2'] + '</div>';
-                                html += '<div id="stihl_window_string3">' + json['item3'] + '</div>';
-                                html += '<form id="fast_order_form" action="http://prodacha.ru/snip_call.php" method="POST">';
-                                //html +=	'<div id="fast_order_window_item1" style="position:relative;top: 25px;left: 10px;font-size:16px;width:150px;"><b>'+json['item1_1']+'</b></div>';
-                                //html +=	'<div id="fast_order_window_item5" style="position:relative;margin-top: 7px;margin-left: 160px;font-size:12px;width:400px;word-wrap: break-word;">'+json['item5_1']+'</div>';
-                                html += '<div id="fast_order_window_item2" style="position:relative;top:20px;width:150px;font: 18px/1.2 \'Myriad Pro\', sans-serif;">' + json['item2_1'] + '</div>';
-                                if ((json['item6_1'].length + json['item7_1'].length + json['item8_1'].length) < 60) {
-                        yo_name_top_comment = 20;
+                        html += '<input type="button" id="stihl_window_close_button" onclick="close_stihl_window();"/>';
+                        html += '<div id="stihl_window_img1"></div>';
+                        html += '<div id="stihl_window_string1">' + json['item1'] + '</div>';
+                        html += '<div id="stihl_window_img2"></div>';
+                        html += '<div id="stihl_window_string2">' + json['item2'] + '</div>';
+                        html += '<div id="stihl_window_string3">' + json['item3'] + '</div>';
+                        html += '<form id="fast_order_form" action="http://prodacha.ru/snip_call.php" method="POST">';
+                        //html +=	'<div id="fast_order_window_item1" style="position:relative;top: 25px;left: 10px;font-size:16px;width:150px;"><b>'+json['item1_1']+'</b></div>';
+                        //html +=	'<div id="fast_order_window_item5" style="position:relative;margin-top: 7px;margin-left: 160px;font-size:12px;width:400px;word-wrap: break-word;">'+json['item5_1']+'</div>';
+                        html += '<div id="fast_order_window_item2" style="position:relative;top:20px;width:150px;font: 18px/1.2 \'Myriad Pro\', sans-serif;">' + json['item2_1'] + '</div>';
+                        if ((json['item6_1'].length + json['item7_1'].length + json['item8_1'].length) < 60) {
+                            yo_name_top_comment = 20;
                         } else
-                                if ((json['item6_1'].length + json['item7_1'].length + json['item8_1'].length) > 100) {
-                        yo_name_top_comment = 20;
+                        if ((json['item6_1'].length + json['item7_1'].length + json['item8_1'].length) > 100) {
+                            yo_name_top_comment = 20;
                         } else {
-                        yo_name_top_comment = 20;
+                            yo_name_top_comment = 20;
                         }
                         //
                         html += '<div id="fast_order_window_item3" style="position:relative;top: ' + (yo_name_top_comment + 20).toString() + 'px;width:150px;font: 18px/1.2 \'Myriad Pro\', sans-serif;">' + json['item3_1'] + '</div>';
-                                html += '<div id="fast_order_window_item4" style="position:relative;top: ' + (yo_name_top_comment + 30).toString() + 'px;width:150px;font: 18px/1.2 \'Myriad Pro\', sans-serif;">' + json['item4_1'] + '</div>';
-                                html += '<div id="ask_product_availability_item2" style="position:relative;top: ' + (yo_name_top_comment + 40).toString() + 'px;width:150px;font: 18px/1.2 \'Myriad Pro\', sans-serif;">' + json['item10_1'] + '</div>';
-                                html += '<div class="tovar_info" name="tovar_info" style="position:relative;width:530px !Important;height:40px;left:160px;top:-65px;word-wrap: break-word;">';
-                                if ((json['item6_1'].length + json['item7_1'].length + json['item8_1'].length) < 60) {
-                        font_size = 'style="font: 17px/1.2 \'Myriad Pro\', sans-serif;position:relative;display:inline;width:490px !Important;height:40px;left:0px;top:0px;word-wrap: break-word;"';
+                        html += '<div id="fast_order_window_item4" style="position:relative;top: ' + (yo_name_top_comment + 30).toString() + 'px;width:150px;font: 18px/1.2 \'Myriad Pro\', sans-serif;">' + json['item4_1'] + '</div>';
+                        html += '<div id="ask_product_availability_item2" style="position:relative;top: ' + (yo_name_top_comment + 40).toString() + 'px;width:150px;font: 18px/1.2 \'Myriad Pro\', sans-serif;">' + json['item10_1'] + '</div>';
+                        html += '<div class="tovar_info" name="tovar_info" style="position:relative;width:530px !Important;height:40px;left:160px;top:-65px;word-wrap: break-word;">';
+                        if ((json['item6_1'].length + json['item7_1'].length + json['item8_1'].length) < 60) {
+                                font_size = 'style="font: 17px/1.2 \'Myriad Pro\', sans-serif;position:relative;display:inline;width:490px !Important;height:40px;left:0px;top:0px;word-wrap: break-word;"';
                                 yo_name_top = 'style="font: 17px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -93px;width:180px;height:22px;"';
                                 yo_name_top_comment = 'style="position: relative;left: 0px;top: -93px;width:80px;height:22px;"';
                                 yo_phone_top = 'style="font: 17px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -87px;width:180px;height:22px;"';
@@ -2467,7 +2467,7 @@ fillTKtablePart();
                                 yo_mail_top = 'style="font: 17px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -81px;width:180px;height:22px;"';
                                 popup_ok_top = 'style="position: relative;left: 692px;top:125px;border: none;width:105px;height:50px;padding: 10px 5px 25px 5px !important;"';
                         } else if ((json['item6_1'].length + json['item7_1'].length + json['item8_1'].length) > 100) {
-                        font_size = 'style="font: 15px/1.2 \'Myriad Pro\', sans-serif;position:relative;display:inline;width:510px !Important;height:40px;left:0px;top:0px;word-wrap: break-word;"';
+                                font_size = 'style="font: 15px/1.2 \'Myriad Pro\', sans-serif;position:relative;display:inline;width:510px !Important;height:40px;left:0px;top:0px;word-wrap: break-word;"';
                                 yo_name_top = 'style="font: 18px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -93px;width:180px;height:22px;"';
                                 yo_name_top_comment = 'style="position: relative;left: 0px;top: -93px;width:80px;height:22px;"';
                                 yo_phone_top = 'style="font: 18px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -87px;width:180px;height:22px;"';
@@ -2475,7 +2475,7 @@ fillTKtablePart();
                                 yo_mail_top = 'style="font: 18px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -81px;width:180px;height:22px;"';
                                 popup_ok_top = 'style="position: relative;left: 692px;top:125px;border: none;width:105px;height:50px;padding: 10px 5px 25px 5px !important;"';
                         } else {
-                        font_size = 'style="font: 16px/1.2 \'Myriad Pro\', sans-serif;position:relative;display:inline;width:490px !Important;height:40px;left:0px;top:0px;word-wrap: break-word;"';
+                                font_size = 'style="font: 16px/1.2 \'Myriad Pro\', sans-serif;position:relative;display:inline;width:490px !Important;height:40px;left:0px;top:0px;word-wrap: break-word;"';
                                 yo_name_top = 'style="font: 18px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -93px;width:180px;height:22px;"';
                                 yo_name_top_comment = 'style="position: relative;left: 0px;top: -93px;width:80px;height:22px;"';
                                 yo_phone_top = 'style="font: 18px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -87px;width:180px;height:22px;"';
@@ -2485,47 +2485,50 @@ fillTKtablePart();
                         }
 
                         html += '<div id="fast_order_window_item6" name="fast_order_window_item6"' + font_size + '><b>' + json['item6_1'].toString().trim() + '&nbsp;-&nbsp;' + json['item7_1'].toString().trim() + '&nbsp;' + json['item8_1'].toString().trim() + '</b></div>';
-                                html += '</div>';
-                                html += '<div class="user_info" style="position:relative;top:25px;left:160px;width:300px;height:80px;">';
-                                html += '<input type="text" ' + yo_name_top + ' id="yo_name" name="yo_name" onblur="checkresult_value(this);" value="" placeholder="Имя" pattern="^[\-A-Za-z\u0410-\u044F]+$" maxlength="100"/>&nbsp;<span ' + yo_name_top_comment + '>обязательное поле</span>';
-                                html += '<input type="tel" ' + yo_phone_top + ' id="yo_phone" name="yo_phone" onblur="checkresult_value(this);" value="" placeholder="+79101234567" pattern="^[\+0-9]{7,12}$" maxlength="12"/>&nbsp;<span ' + yo_phone_top_comment + '>обязательное поле</span>';
-                                html += '<input type="text" ' + yo_mail_top + ' id="yo_mail" name="yo_mail" onblur="checkresult_value(this);" value="" placeholder="ivan@prodacha.ru" pattern="^[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$" maxlength="100"/>';
-                                html += '</div>';
-                                html += '<input id="cv3" type="hidden" name="cv3" value="nohspamcode" />';
-                                html += '<div class="in_fast_order_window">';
-                                html += '<input type="button" ' + popup_ok_top + ' class="popup_ok" id="stihl_ok" value="OK" onclick="check_fast_order_values(2);"/>';
-                                //html +=	'<input type="button" '+popup_ok_top+' class="popup_ok" id="fast_order_ok" value="OK" onclick="check_fast_order_values(2);"/>'; //onclick="check_fast_order_values()"
-                                html += '</div>';
-                                html += '<input type="hidden" id="referer_info" name="referer_info" value="' + referer_info[0].innerHTML.toString().trim() + '" />';
-                                html += '<input type="hidden" name="tovar_info_input" value="' + json['item6_1'] + ' - ' + json['item7_1'] + ' ' + json['item8_1'] + '" />';
-                                html += '<input type="hidden" name="region" value="' + json['item9_1'] + '" />';
-                                html += '<input type="hidden" name="zakaz_info" value="' + json['item1_1'] + '" />';
-                                html += '<input type="hidden" name="tovar_price" value="' + json['item7_1'] + ' ' + json['item8_1'] + '" />';
-                                html += '</form>';
-                                html += '<div id="fast_order_window_item11" style="position:relative;display:block;top:-97px;height:20px;">' + json['item11'].toString().trim() + '</div>';
-                                if (region_info == 'm') {
-                        html += '<div id="stihl_window_moscow_string1">' + json['item7'] + '</div>';
+                        html += '</div>';
+                        html += '<div class="user_info" style="position:relative;top:25px;left:160px;width:300px;height:80px;">';
+                        html += '<input type="text" ' + yo_name_top + ' id="yo_name" name="yo_name" onblur="checkresult_value(this);" value="" placeholder="Имя" pattern="^[\-A-Za-z\u0410-\u044F]+$" maxlength="100"/>&nbsp;<span ' + yo_name_top_comment + '>обязательное поле</span>';
+                        html += '<input type="tel" ' + yo_phone_top + ' id="yo_phone" name="yo_phone" onblur="checkresult_value(this);" value="" placeholder="+79101234567" pattern="^[\+0-9]{7,12}$" maxlength="12"/>&nbsp;<span ' + yo_phone_top_comment + '>обязательное поле</span>';
+                        html += '<input type="text" ' + yo_mail_top + ' id="yo_mail" name="yo_mail" onblur="checkresult_value(this);" value="" placeholder="ivan@prodacha.ru" pattern="^[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$" maxlength="100"/>';
+                        html += '</div>';
+                        html += '<input id="cv3" type="hidden" name="cv3" value="nohspamcode" />';
+                        html += '<div class="in_fast_order_window">';
+                        html += '<input type="button" ' + popup_ok_top + ' class="popup_ok" id="stihl_ok" value="OK" onclick="check_fast_order_values(2);"/>';
+                        //html +=	'<input type="button" '+popup_ok_top+' class="popup_ok" id="fast_order_ok" value="OK" onclick="check_fast_order_values(2);"/>'; //onclick="check_fast_order_values()"
+                        html += '</div>';
+                        html += '<input type="hidden" id="referer_info" name="referer_info" value="' + referer_info[0].innerHTML.toString().trim() + '" />';
+                        html += '<input type="hidden" name="tovar_info_input" value="' + json['item6_1'] + ' - ' + json['item7_1'] + ' ' + json['item8_1'] + '" />';
+                        html += '<input type="hidden" name="region" value="' + json['item9_1'] + '" />';
+                        html += '<input type="hidden" name="zakaz_info" value="' + json['item1_1'] + '" />';
+                        html += '<input type="hidden" name="tovar_price" value="' + json['item7_1'] + ' ' + json['item8_1'] + '" />';
+                        html += '<input type="hidden" name="tovar_price_short" value="' + json['item7_1'] + '" />';
+                        html += '<input type="hidden" name="tovar_id" value="' + json['item10_2'] + '" />';
+                        html += '</form>';
+                        html += '<div id="fast_order_window_item11" style="position:relative;display:block;top:-97px;height:20px;">' + json['item11'].toString().trim() + '</div>';
+                        
+                        if (region_info == 'm') {
+                                html += '<div id="stihl_window_moscow_string1">' + json['item7'] + '</div>';
                                 html += '<div id="stihl_window_moscow_phone_string1">' + json['item8'] + '</div>';
                                 html += '<div id="stihl_window_moscow_string2">' + json['item9'] + '</div>';
                                 html += '<div id="stihl_window_moscow_phone_string2">' + json['item10'] + '</div>';
                         } else if (region_info == 'sp') {
-                        html += '<div id="stihl_window_spb_string1">' + json['item7'] + '</div>';
+                                html += '<div id="stihl_window_spb_string1">' + json['item7'] + '</div>';
                                 html += '<div id="stihl_window_spb_phone_string1">' + json['item8'] + '</div>';
                         } else if (region_info == 'chb') {
-                        html += '<div id="stihl_window_chb_string1">' + json['item7'] + '</div>';
+                                html += '<div id="stihl_window_chb_string1">' + json['item7'] + '</div>';
                                 html += '<div id="stihl_window_chb_phone_string1">' + json['item8'] + '</div>';
                         } else if (region_info == 'other') {
-                        html += '<div id="stihl_window_other_string1">' + json['item7'] + '</div>';
+                                html += '<div id="stihl_window_other_string1">' + json['item7'] + '</div>';
                                 html += '<div id="stihl_window_other_phone_string1">' + json['item8'] + '</div>';
                         }
 
                         html += '<div id="stihl_window_string4">' + json['item4'] + '</div>';
-                                html += '<div id="stihl_window_string5">' + json['item5'] + '</div>';
-                                html += '<div id="stihl_window_string6">' + json['item6'] + '</div>';
-                                //html +=	'<div class="in_stihl_window">';
-                                //html +=	'<input type="button" class="popup_ok" id="stihl_ok" value="OK" onclick="check_fast_order_values(2);"/>';
-                                //html +=	'</div>';
-                                html += '</div>'; //</div></div>
+                        html += '<div id="stihl_window_string5">' + json['item5'] + '</div>';
+                        html += '<div id="stihl_window_string6">' + json['item6'] + '</div>';
+                        //html +=	'<div class="in_stihl_window">';
+                        //html +=	'<input type="button" class="popup_ok" id="stihl_ok" value="OK" onclick="check_fast_order_values(2);"/>';
+                        //html +=	'</div>';
+                        html += '</div>'; //</div></div>
 
                                 var script = document.createElement("script");
                                 script.type = "text/javascript";
@@ -2576,121 +2579,122 @@ fillTKtablePart();
                         if (json['ok'] == '1'){
 
                         html = '<div class="stihl_window_iframe">'; //<div id="light_box"><div class="stihl_window"><div class="popup_region">
-                                html += '<input type="button" id="stihl_window_close_button" onclick="close_viking_window();"/>';
-                                html += '<div id="viking_window_img1"></div>';
-                                html += '<div id="stihl_window_string1">' + json['item1'] + '</div>';
-                                html += '<div id="stihl_window_img2"></div>';
-                                html += '<div id="stihl_window_string2">' + json['item2'] + '</div>';
-                                html += '<div id="stihl_window_string3">' + json['item3'] + '</div>';
-                                html += '<form id="fast_order_form" action="http://prodacha.ru/snip_call.php" method="POST">';
-                                //html +=	'<div id="fast_order_window_item1" style="position:relative;top: 25px;left: 10px;font-size:16px;width:150px;"><b>'+json['item1_1']+'</b></div>';
-                                //html +=	'<div id="fast_order_window_item5" style="position:relative;margin-top: 7px;margin-left: 160px;font-size:12px;width:400px;word-wrap: break-word;">'+json['item5_1']+'</div>';
-                                html += '<div id="fast_order_window_item2" style="position:relative;top:20px;width:150px;font: 18px/1.2 \'Myriad Pro\', sans-serif;">' + json['item2_1'] + '</div>';
-                                if ((json['item6_1'].length + json['item7_1'].length + json['item8_1'].length) < 60) {
-                        yo_name_top_comment = 20;
-                        } else
-                                if ((json['item6_1'].length + json['item7_1'].length + json['item8_1'].length) > 100) {
-                        yo_name_top_comment = 20;
+                        html += '<input type="button" id="stihl_window_close_button" onclick="close_viking_window();"/>';
+                        html += '<div id="viking_window_img1"></div>';
+                        html += '<div id="stihl_window_string1">' + json['item1'] + '</div>';
+                        html += '<div id="stihl_window_img2"></div>';
+                        html += '<div id="stihl_window_string2">' + json['item2'] + '</div>';
+                        html += '<div id="stihl_window_string3">' + json['item3'] + '</div>';
+                        html += '<form id="fast_order_form" action="http://prodacha.ru/snip_call.php" method="POST">';
+                        //html +=	'<div id="fast_order_window_item1" style="position:relative;top: 25px;left: 10px;font-size:16px;width:150px;"><b>'+json['item1_1']+'</b></div>';
+                        //html +=	'<div id="fast_order_window_item5" style="position:relative;margin-top: 7px;margin-left: 160px;font-size:12px;width:400px;word-wrap: break-word;">'+json['item5_1']+'</div>';
+                        html += '<div id="fast_order_window_item2" style="position:relative;top:20px;width:150px;font: 18px/1.2 \'Myriad Pro\', sans-serif;">' + json['item2_1'] + '</div>';
+                        if ((json['item6_1'].length + json['item7_1'].length + json['item8_1'].length) < 60) {
+                            yo_name_top_comment = 20;
+                        } else if ((json['item6_1'].length + json['item7_1'].length + json['item8_1'].length) > 100) {
+                            yo_name_top_comment = 20;
                         } else {
-                        yo_name_top_comment = 20;
+                            yo_name_top_comment = 20;
                         }
                         //
                         html += '<div id="fast_order_window_item3" style="position:relative;top: ' + (yo_name_top_comment + 20).toString() + 'px;width:150px;font: 18px/1.2 \'Myriad Pro\', sans-serif;">' + json['item3_1'] + '</div>';
-                                html += '<div id="fast_order_window_item4" style="position:relative;top: ' + (yo_name_top_comment + 30).toString() + 'px;width:150px;font: 18px/1.2 \'Myriad Pro\', sans-serif;">' + json['item4_1'] + '</div>';
-                                html += '<div id="ask_product_availability_item2" style="position:relative;top: ' + (yo_name_top_comment + 40).toString() + 'px;width:150px;font: 18px/1.2 \'Myriad Pro\', sans-serif;">' + json['item10_1'] + '</div>';
-                                html += '<div class="tovar_info" name="tovar_info" style="position:relative;width:530px !Important;height:40px;left:160px;top:-65px;word-wrap: break-word;">';
-                                if ((json['item6_1'].length + json['item7_1'].length + json['item8_1'].length) < 60) {
-                        font_size = 'style="font: 17px/1.2 \'Myriad Pro\', sans-serif;position:relative;display:inline;width:490px !Important;height:40px;left:0px;top:0px;word-wrap: break-word;"';
-                                yo_name_top = 'style="font: 17px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -93px;width:180px;height:22px;"';
-                                yo_name_top_comment = 'style="position: relative;left: 0px;top: -93px;width:80px;height:22px;"';
-                                yo_phone_top = 'style="font: 17px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -87px;width:180px;height:22px;"';
-                                yo_phone_top_comment = 'style="position: relative;left: 0px;top: -87px;width:80px;height:22px;"';
-                                yo_mail_top = 'style="font: 17px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -81px;width:180px;height:22px;"';
-                                popup_ok_top = 'style="position: relative;left: 692px;top:125px;border: none;width:105px;height:50px;padding: 10px 5px 25px 5px !important;"';
+                        html += '<div id="fast_order_window_item4" style="position:relative;top: ' + (yo_name_top_comment + 30).toString() + 'px;width:150px;font: 18px/1.2 \'Myriad Pro\', sans-serif;">' + json['item4_1'] + '</div>';
+                        html += '<div id="ask_product_availability_item2" style="position:relative;top: ' + (yo_name_top_comment + 40).toString() + 'px;width:150px;font: 18px/1.2 \'Myriad Pro\', sans-serif;">' + json['item10_1'] + '</div>';
+                        html += '<div class="tovar_info" name="tovar_info" style="position:relative;width:530px !Important;height:40px;left:160px;top:-65px;word-wrap: break-word;">';
+                        if ((json['item6_1'].length + json['item7_1'].length + json['item8_1'].length) < 60) {
+                            font_size = 'style="font: 17px/1.2 \'Myriad Pro\', sans-serif;position:relative;display:inline;width:490px !Important;height:40px;left:0px;top:0px;word-wrap: break-word;"';
+                            yo_name_top = 'style="font: 17px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -93px;width:180px;height:22px;"';
+                            yo_name_top_comment = 'style="position: relative;left: 0px;top: -93px;width:80px;height:22px;"';
+                            yo_phone_top = 'style="font: 17px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -87px;width:180px;height:22px;"';
+                            yo_phone_top_comment = 'style="position: relative;left: 0px;top: -87px;width:80px;height:22px;"';
+                            yo_mail_top = 'style="font: 17px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -81px;width:180px;height:22px;"';
+                            popup_ok_top = 'style="position: relative;left: 692px;top:125px;border: none;width:105px;height:50px;padding: 10px 5px 25px 5px !important;"';
                         } else if ((json['item6_1'].length + json['item7_1'].length + json['item8_1'].length) > 100) {
-                        font_size = 'style="font: 15px/1.2 \'Myriad Pro\', sans-serif;position:relative;display:inline;width:510px !Important;height:40px;left:0px;top:0px;word-wrap: break-word;"';
-                                yo_name_top = 'style="font: 18px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -93px;width:180px;height:22px;"';
-                                yo_name_top_comment = 'style="position: relative;left: 0px;top: -93px;width:80px;height:22px;"';
-                                yo_phone_top = 'style="font: 18px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -87px;width:180px;height:22px;"';
-                                yo_phone_top_comment = 'style="position: relative;left: 0px;top: -87px;width:80px;height:22px;"';
-                                yo_mail_top = 'style="font: 18px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -81px;width:180px;height:22px;"';
-                                popup_ok_top = 'style="position: relative;left: 692px;top:125px;border: none;width:105px;height:50px;padding: 10px 5px 25px 5px !important;"';
+                            font_size = 'style="font: 15px/1.2 \'Myriad Pro\', sans-serif;position:relative;display:inline;width:510px !Important;height:40px;left:0px;top:0px;word-wrap: break-word;"';
+                            yo_name_top = 'style="font: 18px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -93px;width:180px;height:22px;"';
+                            yo_name_top_comment = 'style="position: relative;left: 0px;top: -93px;width:80px;height:22px;"';
+                            yo_phone_top = 'style="font: 18px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -87px;width:180px;height:22px;"';
+                            yo_phone_top_comment = 'style="position: relative;left: 0px;top: -87px;width:80px;height:22px;"';
+                            yo_mail_top = 'style="font: 18px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -81px;width:180px;height:22px;"';
+                            popup_ok_top = 'style="position: relative;left: 692px;top:125px;border: none;width:105px;height:50px;padding: 10px 5px 25px 5px !important;"';
                         } else {
-                        font_size = 'style="font: 16px/1.2 \'Myriad Pro\', sans-serif;position:relative;display:inline;width:490px !Important;height:40px;left:0px;top:0px;word-wrap: break-word;"';
-                                yo_name_top = 'style="font: 18px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -93px;width:180px;height:22px;"';
-                                yo_name_top_comment = 'style="position: relative;left: 0px;top: -93px;width:80px;height:22px;"';
-                                yo_phone_top = 'style="font: 18px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -87px;width:180px;height:22px;"';
-                                yo_phone_top_comment = 'style="position: relative;left: 0px;top: -87px;width:80px;height:22px;"';
-                                yo_mail_top = 'style="font: 18px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -81px;width:180px;height:22px;"';
-                                popup_ok_top = 'style="position: relative;left: 692px;top:125px;border: none;width:105px;height:50px;padding: 10px 5px 25px 5px !important;"';
+                            font_size = 'style="font: 16px/1.2 \'Myriad Pro\', sans-serif;position:relative;display:inline;width:490px !Important;height:40px;left:0px;top:0px;word-wrap: break-word;"';
+                            yo_name_top = 'style="font: 18px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -93px;width:180px;height:22px;"';
+                            yo_name_top_comment = 'style="position: relative;left: 0px;top: -93px;width:80px;height:22px;"';
+                            yo_phone_top = 'style="font: 18px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -87px;width:180px;height:22px;"';
+                            yo_phone_top_comment = 'style="position: relative;left: 0px;top: -87px;width:80px;height:22px;"';
+                            yo_mail_top = 'style="font: 18px/1.2 \'Myriad Pro\', sans-serif;position: relative;left: 0px;top: -81px;width:180px;height:22px;"';
+                            popup_ok_top = 'style="position: relative;left: 692px;top:125px;border: none;width:105px;height:50px;padding: 10px 5px 25px 5px !important;"';
                         }
 
                         html += '<div id="fast_order_window_item6" name="fast_order_window_item6"' + font_size + '><b>' + json['item6_1'].toString().trim() + '&nbsp;-&nbsp;' + json['item7_1'].toString().trim() + '&nbsp;' + json['item8_1'].toString().trim() + '</b></div>';
-                                html += '</div>';
-                                html += '<div class="user_info" style="position:relative;top:25px;left:160px;width:300px;height:80px;">';
-                                html += '<input type="text" ' + yo_name_top + ' id="yo_name" name="yo_name" onblur="checkresult_value(this);" value="" placeholder="Имя" pattern="^[\-A-Za-z\u0410-\u044F]+$" maxlength="100"/>&nbsp;<span ' + yo_name_top_comment + '>обязательное поле</span>';
-                                html += '<input type="tel" ' + yo_phone_top + ' id="yo_phone" name="yo_phone" onblur="checkresult_value(this);" value="" placeholder="+79101234567" pattern="^[\+0-9]{7,12}$" maxlength="12"/>&nbsp;<span ' + yo_phone_top_comment + '>обязательное поле</span>';
-                                html += '<input type="text" ' + yo_mail_top + ' id="yo_mail" name="yo_mail" onblur="checkresult_value(this);" value="" placeholder="ivan@prodacha.ru" pattern="^[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$" maxlength="100"/>';
-                                html += '</div>';
-                                html += '<input id="cv3" type="hidden" name="cv3" value="nohspamcode" />';
-                                html += '<div class="in_fast_order_window">';
-                                html += '<input type="button" ' + popup_ok_top + ' class="popup_ok" id="stihl_ok" value="OK" onclick="check_fast_order_values(2);"/>';
-                                //html +=	'<input type="button" '+popup_ok_top+' class="popup_ok" id="fast_order_ok" value="OK" onclick="check_fast_order_values(2);"/>'; //onclick="check_fast_order_values()"
-                                html += '</div>';
-                                html += '<input type="hidden" id="referer_info" name="referer_info" value="' + referer_info[0].innerHTML.toString().trim() + '" />';
-                                html += '<input type="hidden" name="tovar_info_input" value="' + json['item6_1'] + ' - ' + json['item7_1'] + ' ' + json['item8_1'] + '" />';
-                                html += '<input type="hidden" name="region" value="' + json['item9_1'] + '" />';
-                                html += '<input type="hidden" name="zakaz_info" value="' + json['item1_1'] + '" />';
-                                html += '<input type="hidden" name="tovar_price" value="' + json['item7_1'] + ' ' + json['item8_1'] + '" />';
-                                html += '</form>';
-                                html += '<div id="fast_order_window_item11" style="position:relative;display:block;top:-97px;height:20px;">' + json['item11'].toString().trim() + '</div>';
-                                if (region_info == 'm') {
-                        html += '<div id="stihl_window_moscow_string1">' + json['item7'] + '</div>';
-                                html += '<div id="stihl_window_moscow_phone_string1">' + json['item8'] + '</div>';
-                                html += '<div id="stihl_window_moscow_string2">' + json['item9'] + '</div>';
-                                html += '<div id="stihl_window_moscow_phone_string2">' + json['item10'] + '</div>';
+                        html += '</div>';
+                        html += '<div class="user_info" style="position:relative;top:25px;left:160px;width:300px;height:80px;">';
+                        html += '<input type="text" ' + yo_name_top + ' id="yo_name" name="yo_name" onblur="checkresult_value(this);" value="" placeholder="Имя" pattern="^[\-A-Za-z\u0410-\u044F]+$" maxlength="100"/>&nbsp;<span ' + yo_name_top_comment + '>обязательное поле</span>';
+                        html += '<input type="tel" ' + yo_phone_top + ' id="yo_phone" name="yo_phone" onblur="checkresult_value(this);" value="" placeholder="+79101234567" pattern="^[\+0-9]{7,12}$" maxlength="12"/>&nbsp;<span ' + yo_phone_top_comment + '>обязательное поле</span>';
+                        html += '<input type="text" ' + yo_mail_top + ' id="yo_mail" name="yo_mail" onblur="checkresult_value(this);" value="" placeholder="ivan@prodacha.ru" pattern="^[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$" maxlength="100"/>';
+                        html += '</div>';
+                        html += '<input id="cv3" type="hidden" name="cv3" value="nohspamcode" />';
+                        html += '<div class="in_fast_order_window">';
+                        html += '<input type="button" ' + popup_ok_top + ' class="popup_ok" id="stihl_ok" value="OK" onclick="check_fast_order_values(2);"/>';
+                        //html +=	'<input type="button" '+popup_ok_top+' class="popup_ok" id="fast_order_ok" value="OK" onclick="check_fast_order_values(2);"/>'; //onclick="check_fast_order_values()"
+                        html += '</div>';
+                        html += '<input type="hidden" id="referer_info" name="referer_info" value="' + referer_info[0].innerHTML.toString().trim() + '" />';
+                        html += '<input type="hidden" name="tovar_info_input" value="' + json['item6_1'] + ' - ' + json['item7_1'] + ' ' + json['item8_1'] + '" />';
+                        html += '<input type="hidden" name="region" value="' + json['item9_1'] + '" />';
+                        html += '<input type="hidden" name="zakaz_info" value="' + json['item1_1'] + '" />';
+                        html += '<input type="hidden" name="tovar_price" value="' + json['item7_1'] + ' ' + json['item8_1'] + '" />';
+                        html += '<input type="hidden" name="tovar_price_short" value="' + json['item7_1'] + '" />';                      
+                        html += '<input type="hidden" name="tovar_id" value="' + json['item10_2'] + '" />';
+                        html += '</form>';
+                        html += '<div id="fast_order_window_item11" style="position:relative;display:block;top:-97px;height:20px;">' + json['item11'].toString().trim() + '</div>';
+                        if (region_info == 'm') {
+                            html += '<div id="stihl_window_moscow_string1">' + json['item7'] + '</div>';
+                            html += '<div id="stihl_window_moscow_phone_string1">' + json['item8'] + '</div>';
+                            html += '<div id="stihl_window_moscow_string2">' + json['item9'] + '</div>';
+                            html += '<div id="stihl_window_moscow_phone_string2">' + json['item10'] + '</div>';
                         } else if (region_info == 'sp') {
-                        html += '<div id="stihl_window_spb_string1">' + json['item7'] + '</div>';
-                                html += '<div id="stihl_window_spb_phone_string1">' + json['item8'] + '</div>';
+                            html += '<div id="stihl_window_spb_string1">' + json['item7'] + '</div>';
+                            html += '<div id="stihl_window_spb_phone_string1">' + json['item8'] + '</div>';
                         } else if (region_info == 'chb') {
-                        html += '<div id="stihl_window_chb_string1">' + json['item7'] + '</div>';
-                                html += '<div id="stihl_window_chb_phone_string1">' + json['item8'] + '</div>';
+                            html += '<div id="stihl_window_chb_string1">' + json['item7'] + '</div>';
+                            html += '<div id="stihl_window_chb_phone_string1">' + json['item8'] + '</div>';
                         } else if (region_info == 'other') {
-                        html += '<div id="stihl_window_other_string1">' + json['item7'] + '</div>';
-                                html += '<div id="stihl_window_other_phone_string1">' + json['item8'] + '</div>';
+                            html += '<div id="stihl_window_other_string1">' + json['item7'] + '</div>';
+                            html += '<div id="stihl_window_other_phone_string1">' + json['item8'] + '</div>';
                         }
 
                         html += '<div id="stihl_window_string4">' + json['item4'] + '</div>';
-                                html += '<div id="stihl_window_string5">' + json['item5'] + '</div>';
-                                html += '<div id="stihl_window_string6">' + json['item6'] + '</div>';
-                                //html +=	'<div class="in_stihl_window">';
-                                //html +=	'<input type="button" class="popup_ok" id="stihl_ok" value="OK" onclick="check_fast_order_values(2);"/>';
-                                //html +=	'</div>';
-                                html += '</div>'; //</div></div>
+                        html += '<div id="stihl_window_string5">' + json['item5'] + '</div>';
+                        html += '<div id="stihl_window_string6">' + json['item6'] + '</div>';
+                        //html +=	'<div class="in_stihl_window">';
+                        //html +=	'<input type="button" class="popup_ok" id="stihl_ok" value="OK" onclick="check_fast_order_values(2);"/>';
+                        //html +=	'</div>';
+                        html += '</div>'; //</div></div>
 
-                                var script = document.createElement("script");
-                                script.type = "text/javascript";
-                                script.text = "ga('send', 'event', 'kak kupit', 'click');"; // use this for inline script
-                                //script.text  += "console.log('kak kupit');";
-                                document.body.appendChild(script);
-                                // remove from the dom
-                                document.body.removeChild(document.body.lastChild);
-                                var url = 'http://prodacha.ru/ask_product_availability_window.php';
-                                $.fancybox
-                                ({
-                                width : 800,
-                                        height : 490,
-                                        overlayOpacity:0,
-                                        autoSize:false,
-                                        type: 'iframe',
-                                        href: url,
-                                        content: html,
-                                        scrolling: 'no',
-                                        helpers : {
-                                        overlay : {
-                                        css : { 'overflow' : 'hidden' }
-                                        }}
-                                });
+                        var script = document.createElement("script");
+                        script.type = "text/javascript";
+                        script.text = "ga('send', 'event', 'kak kupit', 'click');"; // use this for inline script
+                        //script.text  += "console.log('kak kupit');";
+                        document.body.appendChild(script);
+                        // remove from the dom
+                        document.body.removeChild(document.body.lastChild);
+                        var url = 'http://prodacha.ru/ask_product_availability_window.php';
+                        $.fancybox
+                        ({
+                        width : 800,
+                                height : 490,
+                                overlayOpacity:0,
+                                autoSize:false,
+                                type: 'iframe',
+                                href: url,
+                                content: html,
+                                scrolling: 'no',
+                                helpers : {
+                                overlay : {
+                                css : { 'overflow' : 'hidden' }
+                                }}
+                        });
                         }
                         }
                 });

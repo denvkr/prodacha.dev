@@ -149,7 +149,7 @@
 		$mas['item9_1']=WinToUtf8('Москва');
 	}
 	$mas['item10_1'] = WinToUtf8($item7_1);
-	
+	$mas['item10_2']=$id;	
 	$mas['ok'] = 1;
 
 	//print_r($mas);

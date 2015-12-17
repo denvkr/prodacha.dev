@@ -30,7 +30,15 @@
 	<div class="prod_parm_col">
 	
 		<div class="articul">
-			<span>Артикул: <span class="prod_articul">@productArt@</span></span>
+	@php
+                if (strtolower(substr($GLOBALS['SysValue']['other']['productArt'],0,2))=='ps' || strtolower(substr($GLOBALS['SysValue']['other']['productArt'],0,3))=='out') {
+                    echo '<span>Код товара: <span class="prod_articul">@productArt@</span></span>';
+                } else {
+                    echo '<span>Артикул: <span class="prod_articul">@productArt@</span></span>';
+                }
+                //echo substr($GLOBALS['SysValue']['other']['productArt'],0,2);
+			
+	php@
 		</div>
 		
 		<div class="parameters">

@@ -1346,10 +1346,10 @@ function AddToCart(xid) {
     var num=1;
     var xxid=0;
     //console.log('before_addtochart_window');    
-    addtochart_window(xid);
+    //addtochart_window(xid);
     //console.log('after_addtochart_window');
-    return true;
-    /*
+    //return true;
+
     if (confirm("Добавить выбранный товар ("+num+" шт.) в корзину?")){
         ToCart(xid,num,xxid);
         if(document.getElementById("order")) document.getElementById("order").style.display='block';
@@ -1367,7 +1367,7 @@ function AddToCart(xid) {
 	{
             return false;
 	}
-        */
+
 }	
 
 // Добавление товара в корзину 1 шт.
