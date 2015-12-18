@@ -1,5 +1,6 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'] . '/custom_config/config_functions.php');
+
 //определяем локаль для системной сортировки
 if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN')
     setlocale(LC_ALL, 'rus'); 
@@ -67,11 +68,11 @@ class PHPShopShop extends PHPShopShopCore {
      */
     private $custom_menu_count=array();
     
-    private $CustomCatalogIDArray1=array(473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,509,536,538,543,545,549,551,555,562,581,585,586,591,594,595);
-    private $CustomCatalogIDArray2=array(5,9,16,18,30,31,32,33,34,35,36,37,38,44,60,62,77,81,85,88,96,97,98,99,120,121,122,123,134,141,142,143,154,172,186,190,191,201,211,215,224,227,228,234,247,248,249,254,252,256,257,258,270,272,288,290,292,293,295,297,298,299,300,332,333,334,335,336,337,350,351,352,353,354,355,356,382,414,415,416,418,419,420,421,422,423,424,425,436,437,440,442,459,461,464,465,467,503,509,536,538,543,545,549,551,555,562,581,585,586,591,594,595);
-    private $CustomCatalogIDArray2_1=array(5,9,16,18,30,31,32,33,34,35,36,37,38,44,60,62,77,81,85,88,96,97,98,99,120,121,122,123,134,141,142,143,154,172,186,190,191,201,211,215,224,227,228,234,247,248,249,254,252,256,257,258,270,272,288,290,292,293,295,297,298,299,300,332,333,334,335,336,337,350,351,352,353,354,355,356,382,414,415,416,418,419,420,421,422,423,424,425,436,437,440,442,459,461,464,465,467,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,509,536,538,543,545,549,551,555,562,581,585,586,591,594,595);
-    private $CustomCatalogIDArray3=array(472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,509,536,538,543,545,549,551,555,562,581,585,586,591,594,595);
-    private $CustomCatalogIDArray2_2=array(30,31,32,33,34,35,81,96,121,141,154,186,190,191,201,227,333,334,382,414,415,416,418,419,420,421,422,423,424,425,431,432,436,433,437,440,442,459,461,464,465,467,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,536,538,543,545,549,551,555,562,581,585,586,591,594,595);
+    private $CustomCatalogIDArray1;//=array(473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,509,536,538,543,545,549,551,555,562,581,585,586,591,594,595);
+    private $CustomCatalogIDArray2;//=array(5,9,16,18,30,31,32,33,34,35,36,37,38,44,60,62,77,81,85,88,96,97,98,99,120,121,122,123,134,141,142,143,154,172,186,190,191,201,211,215,224,227,228,234,247,248,249,254,252,256,257,258,270,272,288,290,292,293,295,297,298,299,300,332,333,334,335,336,337,350,351,352,353,354,355,356,382,414,415,416,418,419,420,421,422,423,424,425,436,437,440,442,459,461,464,465,467,503,509,536,538,543,545,549,551,555,562,581,585,586,591,594,595);
+    private $CustomCatalogIDArray2_1;//=array(5,9,16,18,30,31,32,33,34,35,36,37,38,44,60,62,77,81,85,88,96,97,98,99,120,121,122,123,134,141,142,143,154,172,186,190,191,201,211,215,224,227,228,234,247,248,249,254,252,256,257,258,270,272,288,290,292,293,295,297,298,299,300,332,333,334,335,336,337,350,351,352,353,354,355,356,382,414,415,416,418,419,420,421,422,423,424,425,436,437,440,442,459,461,464,465,467,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,509,536,538,543,545,549,551,555,562,581,585,586,591,594,595);
+    private $CustomCatalogIDArray2_2;//=array(30,31,32,33,34,35,81,96,121,141,154,186,190,191,201,227,333,334,382,414,415,416,418,419,420,421,422,423,424,425,431,432,436,433,437,440,442,459,461,464,465,467,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,536,538,543,545,549,551,555,562,581,585,586,591,594,595);
+    private $CustomCatalogIDArray3;//=array(472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,509,536,538,543,545,549,551,555,562,581,585,586,591,594,595);
     private $id_excluded=array();
     /**
      * Конструктор
@@ -90,7 +91,18 @@ class PHPShopShop extends PHPShopShopCore {
         $this->page = $this->PHPShopNav->getPage();
         if (strlen($this->page) == 0)
             $this->page = 1;
-			
+        
+        include_once($_SERVER['DOCUMENT_ROOT'] . '/custom_config/core_catalog_config.php');
+        $this->CustomCatalogIDArray1=$CustomCatalogIDArray1;
+        //var_dump($this->CustomCatalogIDArray1);
+        $this->CustomCatalogIDArray2=$CustomCatalogIDArray2;
+        //var_dump($this->CustomCatalogIDArray2);
+        $this->CustomCatalogIDArray2_1=$CustomCatalogIDArray2_1;
+        //var_dump($this->CustomCatalogIDArray2_1);
+        $this->CustomCatalogIDArray2_2=$CustomCatalogIDArray2_2;
+        //var_dump($this->CustomCatalogIDArray2_2);
+        $this->CustomCatalogIDArray3=$CustomCatalogIDArray3;
+        //var_dump($this->CustomCatalogIDArray3);
     }
 
     /**
@@ -574,9 +586,9 @@ class PHPShopShop extends PHPShopShopCore {
 
     /**
      * Экшен выборки подробной информации при наличии переменной навигации CID
-     */
+    */
     function CID() {
-
+        include_once($_SERVER['DOCUMENT_ROOT'] . '/custom_config/core_catalog_config.php');
         if ($this->setHook(__CLASS__, __FUNCTION__, false, 'START'))
             return true;
 		/*	
@@ -594,96 +606,8 @@ class PHPShopShop extends PHPShopShopCore {
 
         // Запрос на подкаталоги
         if (in_array(intval($this->category),$this->CustomCatalogIDArray1)) {
-        	switch (intval($this->category)) {
-        		case 473 : $where=' where id in (38,120,62,314,45,74,19,15,17,20,21,22,30,27,28,23,24,25,26,29,229,126,173)';
-        					break;
-        		case 474 : $where=' where id in (42,46,316)';
-        					break;
-        		case 475 : $where=' where id in (41,319,40,318,330)';
-        					break;
-        		case 476: $where = " where id in (70,71,131,102,112,219,409,414,144,198,92,268,269)";
-        					break;
-        		case 477: $where = " where id in (84,127,101,138,216,410,255,309,420,226,305,212)";
-        					break;
-        		case 478: $where = " where id in (83,105,113,415)";
-        					break;
-        		case 479: $where = " where id in (245,103,116,220,411,424,200)";
-        					break;
-        		case 480: $where = " where id in (128,100)";
-        					break;
-        		case 481: $where = " where id in (251,193,203,218,408,310,422,271,225,307,509,517)";
-        					break;
-        		case 482: $where = " where id in (179,178,416,150,325,326)";
-        					break;
-        		case 483: $where = " where id in (129,109,217,421,213)";
-        					break;
-        		case 484: $where = " where id in (171,321)";
-        					break;
-        		case 485: $where = " where id in (240,239,227,241,238,418,204,235)";
-        					break;
-        		case 486: $where = " where id in (174,210,221)";
-        					break;
-        		case 487: $where = " where id in (175,207,223)";
-        					break;
-        		case 488: $where = " where id in (181,205,180,222)";
-        					break;
-        		case 489: $where = " where id in (195,246,194,185,412,199)";
-        					break;
-        		case 490: $where = " where id in (140,111,152)";
-        					break;
-        		case 491: $where = " where id in (139,104)";
-        					break;
-        		case 492: $where = " where id in (52,190)";
-        					break;
-        		case 493: $where = " where id in (303,156,115,413,425,148,243,197,530)";
-        					break;
-        		case 494: $where = " where id in (423,132,106,114,313)";
-        					break;
-        		case 495: $where = " where id in (419,151)";
-        					break;
-        		case 496: $where = " where id in (130,108,306,537)";
-        					break;
-        		case 497: $where = " where id in (168,170)";
-        					break;
-        		case 498: $where = " where id in (209)";
-        					break;
-        		case 499: $where = " where id in (149)";
-        					break;
-        		case 500: $where = " where id in (304,186)";
-        					break;
-        		case 501: $where = " where id in (183)";
-        					break;
-        		case 502: $where = " where id in (244,522,523,524)";
-        					break;
-        		case 536: $where = " where id in (537,596)";
-        					break;
-        		case 538: $where = " where id in (539,540)";
-        					break;
-        		case 543: $where = " where id in (544)";
-        					break;
-        		case 545: $where = " where id in (538,541,542,543)";
-        					break;
-        		case 549: $where = " where id in (550,552)";
-        					break;
-        		case 551: $where = " where id in (549,553,547,548,554)";
-        					break;                                            
-        		case 555: $where = " where id in (556,557,558,559,560)";
-        					break;
-        		case 562: $where = " where id in (563,564,565,566,567)";
-        					break;
-        		case 581: $where = " where id in (582,569,572,571,576,578,583)";
-        					break;
-                        case 585: $where = " where id in (584,586)";
-                                          break;
-                        case 586: $where = " where id in (587,588)";
-                                          break;
-                        case 591: $where = " where id in (592,593,597)";
-                                          break;
-                        case 594: $where = " where id in (598,599)";
-                                          break;
-                        case 595: $where = " where id in (600,601)";
-                                          break;
-        	}
+                $where=call_user_func_array('buildwheresql', array($this->category,1,0));
+                //echo $where;
         	$this->PHPShopOrm->sql = 'select '.intval($this->category).' as id,name,num,'.intval($this->category).' as parent_to,yml,num_row,num_cow,sort,content,vid,name_rambler,servers,title,title_enabled,title_shablon,descrip,descrip_enabled,descrip_shablon,keywords,keywords_enabled,keywords_shablon,skin,skin_enabled,order_by,order_to,secure_groups,content_h,filtr,icon_description from ' . $this->getValue('base.categories').$where.' LIMIT 1';
         	//echo $this->PHPShopOrm->sql;
         	$this->PHPShopOrm->debug = $this->debug;
@@ -691,18 +615,19 @@ class PHPShopShop extends PHPShopShopCore {
 
         	// Перехват модуля
         	$this->setHook(__CLASS__, __FUNCTION__, $parent_category_row, 'MIDDLE');
-        	
+
         	// Если каталоги
         	$this->CID_Category();
 
        		// Перехват модуля
         	$this->setHook(__CLASS__, __FUNCTION__, $parent_category_row, 'END');
-        	      	
+       	      	
         } else {
         	$parent_category_row = $this->select(array('*'), array('parent_to' => '=' . $this->category), false, array('limit' => 1), __FUNCTION__, array('base' => $this->getValue('base.categories')));
-        	
+
         	// Перехват модуля
         	$this->setHook(__CLASS__, __FUNCTION__, $parent_category_row, 'MIDDLE');
+
         	// Если товары
         	if (empty($parent_category_row['id'])) {
         		
@@ -948,6 +873,8 @@ class PHPShopShop extends PHPShopShopCore {
         //$this->CustomCatalogIDArray2=array(5,9,16,18,30,31,32,33,34,35,36,37,38,44,60,62,77,81,85,88,96,97,98,99,120,121,122,123,134,141,142,143,154,172,186,190,191,201,211,215,224,227,228,234,247,248,249,254,252,256,257,258,270,272,288,290,292,293,295,297,298,299,300,332,333,334,335,336,337,350,351,352,353,354,355,356,382,414,415,416,418,419,420,421,422,423,424,425,436,437,440,442,459,461,464,465,467,503,509,536,538,543,545,549,551,555,562,581,585,586,596);
         //$this->CustomCatalogIDArray2_1=array(5,9,16,18,30,31,32,33,34,35,36,37,38,44,60,62,77,81,85,88,96,97,98,99,120,121,122,123,134,141,142,143,154,172,186,190,191,201,211,215,224,227,228,234,247,248,249,254,252,256,257,258,270,272,288,290,292,293,295,297,298,299,300,332,333,334,335,336,337,350,351,352,353,354,355,356,382,414,415,416,418,419,420,421,422,423,424,425,436,437,440,442,459,461,464,465,467,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,509,536,538,543,545,549,551,555,562,581,585,586,596);
         //$this->CustomCatalogIDArray3=array(472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,509,536,538,543,545,549,551,555,562,581,585,586,596);
+        include_once($_SERVER['DOCUMENT_ROOT'] . '/custom_config/core_catalog_config.php');
+        //echo 'CID_Category'.$this->PHPShopNav->getId();
     	$this->id_excluded=array();
     	    	
         // Перехват модуля в начале функции
@@ -972,103 +899,10 @@ class PHPShopShop extends PHPShopShopCore {
         $this->custom_menu_3=custom_menu_1($_SERVER['DOCUMENT_ROOT'] . '/custom_config/menu-lvl3-href-modify_catalog_add-analog.txt');
         $this->custom_menu_count=array();
         $this->custom_menu_count=custom_menu_count($_SERVER['DOCUMENT_ROOT'] . '/custom_config/menu-column-qty_catalog_change.txt');
+
         //собираем запрос на определенные каталоги, которые невозможно связать средствами phpshop
-        switch (intval($this->PHPShopNav->getId())) {
-        	case 473: $where = " where skin_enabled!='1' and id in (38,120,62,314,45,74,19,15,17,20,21,22,30,27,28,23,24,25,26,29,229,126,173)";
-        			  break;
-        	case 474: $where = " where skin_enabled!='1' and id in (42,46,316)";
-        			  break;
-        	case 475: $where = " where skin_enabled!='1' and id in (41,319,40,318,330)";
-        			  break;
-        	case 476: $where = " where skin_enabled!='1' and id in (70,71,131,102,112,219,409,414,144,198,92,268,269)";
-        			  break;
-        	case 477: $where = " where skin_enabled!='1' and id in (84,127,101,138,216,410,255,309,420,226,305,212)";
-        			  break;
-        	case 478: $where = " where skin_enabled!='1' and id in (83,105,113,415)";
-        			  break;
-        	case 479: $where = " where skin_enabled!='1' and id in (245,103,116,220,411,424,200)";
-        			  break;
-        	case 480: $where = " where skin_enabled!='1' and id in (128,100)";
-        			  break;
-        	case 481: $where = " where skin_enabled!='1' and id in (251,193,203,218,408,310,422,271,225,307,509,517)";
-        			  break;
-        	case 482: $where = " where skin_enabled!='1' and id in (179,178,416,150,325,326)";
-        			  break;
-        	case 483: $where = " where skin_enabled!='1' and id in (129,109,217,421,213)";
-        			  break;
-        	case 484: $where = " where skin_enabled!='1' and id in (171,321)";
-        			  break;
-        	case 485: $where = " where skin_enabled!='1' and id in (240,239,227,241,238,418,204,235)";
-        			  break;
-        	case 486: $where = " where skin_enabled!='1' and id in (174,210,221)";
-        			  break;
-        	case 487: $where = " where skin_enabled!='1' and id in (175,207,223)";
-        			  break;
-        	case 488: $where = " where skin_enabled!='1' and id in (181,205,180,222)";
-        			  break;
-        	case 489: $where = " where skin_enabled!='1' and id in (195,246,194,185,412,199)";
-        			  break;
-        	case 490: $where = " where skin_enabled!='1' and id in (140,111,152)";
-        			  break;
-        	case 491: $where = " where skin_enabled!='1' and id in (139,104)";
-        			  break;
-        	case 492: $where = " where skin_enabled!='1' and id in (52,190)";
-        			  break;
-        	case 493: $where = " where skin_enabled!='1' and id in (303,156,115,413,425,148,243,197,530)";
-        			  break;
-        	case 494: $where = " where skin_enabled!='1' and id in (423,132,106,114,313)";
-        			  break;
-        	case 495: $where = " where skin_enabled!='1' and id in (419,151)";
-        			  break;
-        	case 496: $where = " where skin_enabled!='1' and id in (130,108,306,537)";
-        			  break;
-        	case 497: $where = " where skin_enabled!='1' and id in (168,170)";
-        			  break;
-        	case 498: $where = " where skin_enabled!='1' and id in (209)";
-        			  break;
-        	case 499: $where = " where skin_enabled!='1' and id in (149)";
-        			  break;
-        	case 500: $where = " where skin_enabled!='1' and id in (304,186)";
-        			  break;
-        	case 501: $where = " where skin_enabled!='1' and id in (183)";
-        			  break;
-        	case 502: $where = " where skin_enabled!='1' and id in (244,522,523,524)";
-        			  break;
-        	//case 503: $where = " where skin_enabled!='1' and id in (504,505,506,507,508)";
-        	//		  break;
-        	case 509: $where = " where skin_enabled!='1' and id in (510,511,512,513,514)";
-        			  break;
-        	case 536: $where = " where skin_enabled!='1' and id in (537,596)";
-        			  break;
-        	case 538: $where = " where skin_enabled!='1' and id in (539,540)";
-        			  break;
-        	case 543: $where = " where id in (544)";
-        			  break;
-        	case 545: $where = " where id in (538,541,542,543)";
-        			  break;
-        	case 549: $where = " where id in (550,552)";
-        			  break;
-        	case 551: $where = " where id in (549,553,547,548,554)";
-        			  break; 
-        	case 555: $where = " where id in (556,557,558,559,560)";
-        			  break;
-        	case 562: $where = " where id in (563,564,565,566,567)";
-        			  break;
-                case 581: $where = " where id in (582,569,572,571,576,578,583)";
-        			  break;
-                case 585: $where = " where id in (584,586)";
-        			  break;
-                case 586: $where = " where id in (587,588)";
-        			  break;
-                case 591: $where = " where id in (592,593,597)";
-                                  break;
-                case 594: $where = " where id in (598,599)";
-                                  break;
-                case 595: $where = " where id in (600,601)";
-                                  break;
-        	default: // Условия выборки
-                         $where = array('parent_to' => '=' . $this->category, 'skin_enabled' => "!='1'");
-        }
+        $where=call_user_func_array('buildwheresql', array($this->PHPShopNav->getId(),2,$this->category));
+        
         // Мультибаза
         if ($this->PHPShopSystem->ifSerilizeParam('admoption.base_enabled')) {
             $where['servers'] = " REGEXP 'i" . $this->PHPShopSystem->getSerilizeParam('admoption.base_id') . "i'";
