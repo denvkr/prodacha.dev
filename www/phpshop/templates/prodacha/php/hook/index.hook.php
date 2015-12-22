@@ -94,7 +94,7 @@ function leftCatal_hook($obj,$row,$rout) {
                     case '472': $href_html='<ul>'.
                                             '<li class="" ><span class="inside_menu_head"><a href="/shop/CID_472.html" title="Техника по производителю">Техника по производителю</a></span></li>'.
                                             '</ul>';
-                                            $obj->set('top_position','style="top: -85px !important; height:480px;"');
+                                            $obj->set('top_position','style="top: -85px !important; height:525px;"');
                                             break;
             }
             $obj->set('hrefcatalogPodcatalog',$href_html);

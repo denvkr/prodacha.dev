@@ -30,9 +30,9 @@ function read_ceo_custom_menu($filename){
 		$filter_file=fopen($filename,'r+');
 		while (!feof($filter_file)) {
 			$fitler_element=explode("|",str_replace("\n",'',fgets($filter_file)));
-			$my_str2=str_replace('"','',$fitler_element[2]);
-			$my_str1=str_replace('"','',$fitler_element[1]);
-			$my_id=str_replace('"','',$fitler_element[0]);				
+			$my_str2=str_ireplace('"','',$fitler_element[2]);
+			$my_str1=str_ireplace('"','',$fitler_element[1]);
+			$my_id=str_ireplace('"','',$fitler_element[0]);				
 			$filter_array[$item_count]=array('id'=>$my_id,'str1'=>$my_str1,'str2'=>$my_str2);
                         $item_count++;
 		}

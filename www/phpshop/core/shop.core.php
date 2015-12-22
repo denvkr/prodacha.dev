@@ -1272,6 +1272,7 @@ class PHPShopShop extends PHPShopShopCore {
                 $ceo_custom_catalog_productname=read_ceo_custom_menu($_SERVER['DOCUMENT_ROOT'] . '/custom_config/product-name_catalog_rename.txt');
 		//получаем текущий каталог
 		$cid_id=$this->PHPShopNav->getId();
+
 		if (in_array($cid_id,$this->CustomCatalogIDArray2_1)) {
 			// Путь для навигации
 			$this->objPath = './CID_' . $this->category . '_';	
@@ -1286,33 +1287,33 @@ class PHPShopShop extends PHPShopShopCore {
 
 			$orderby=' sklad asc,price asc,outdated asc ';
 			$orderby_1=' sorting asc,sortorder asc,price asc ';
-	        if (!empty($_GET['s']) and is_numeric($_GET['s']) and !empty($_GET['f']) and is_numeric($_GET['f'])) {
-				if ($_GET['f']==1 and $_GET['s']==2) {
-					$orderby=' price asc,sklad asc,outdated asc ';
-					$orderby_1=' price asc,sklad asc,outdated asc ';
-				}
-				if ($_GET['f']==2 and $_GET['s']==2) {
-					$orderby=' price desc,sklad asc,outdated asc ';
-					$orderby_1=' price desc,sklad asc,outdated asc ';
-				}	
-				if ($_GET['f']==1 and $_GET['s']==1) {
-					$orderby=' name asc,sklad asc,outdated asc ';
-					$orderby_1=' name asc,sklad asc,outdated asc ';
-				}
-				if ($_GET['f']==2 and $_GET['s']==1) {
-					$orderby=' name desc,sklad asc,outdated asc ';
-					$orderby_1=' name desc,sklad asc,outdated asc ';
-				}
-				if ($_GET['f']==2 and $_GET['s']==3) {
-					$orderby=' num asc,sklad asc,outdated asc ';
-					$orderby_1=' num asc,sklad asc,outdated asc ';
-				}
-				if ($_GET['f']==1 and $_GET['s']==3) {
-					$orderby=' num desc,sklad asc,outdated asc ';
-					$orderby_1=' num desc,sklad asc,outdated asc ';
-				}
-				
-	        }
+                        if (!empty($_GET['s']) and is_numeric($_GET['s']) and !empty($_GET['f']) and is_numeric($_GET['f'])) {
+                                        if ($_GET['f']==1 and $_GET['s']==2) {
+                                                $orderby=' price asc,sklad asc,outdated asc ';
+                                                $orderby_1=' price asc,sklad asc,outdated asc ';
+                                        }
+                                        if ($_GET['f']==2 and $_GET['s']==2) {
+                                                $orderby=' price desc,sklad asc,outdated asc ';
+                                                $orderby_1=' price desc,sklad asc,outdated asc ';
+                                        }	
+                                        if ($_GET['f']==1 and $_GET['s']==1) {
+                                                $orderby=' name asc,sklad asc,outdated asc ';
+                                                $orderby_1=' name asc,sklad asc,outdated asc ';
+                                        }
+                                        if ($_GET['f']==2 and $_GET['s']==1) {
+                                                $orderby=' name desc,sklad asc,outdated asc ';
+                                                $orderby_1=' name desc,sklad asc,outdated asc ';
+                                        }
+                                        if ($_GET['f']==2 and $_GET['s']==3) {
+                                                $orderby=' num asc,sklad asc,outdated asc ';
+                                                $orderby_1=' num asc,sklad asc,outdated asc ';
+                                        }
+                                        if ($_GET['f']==1 and $_GET['s']==3) {
+                                                $orderby=' num desc,sklad asc,outdated asc ';
+                                                $orderby_1=' num desc,sklad asc,outdated asc ';
+                                        }
+
+                        }
 			if (in_array($cid_id,$this->CustomCatalogIDArray2_2)) {
 				if ($this->PHPShopNav->getPage()=='') {
 	        		/*
@@ -1449,10 +1450,12 @@ class PHPShopShop extends PHPShopShopCore {
 			//сообщение о старой цене
 			$comnotice_price_n='';
 			//основной цикл построения вывода товаров в категории
+
 			foreach ($res as $prod_row) {
                                 foreach ($ceo_custom_catalog_productname as $ceo_custom_catalog_productname_item) {
                                     if (in_array($cid_id,$ceo_custom_catalog_productname_item)) {
                                         $productname_mod=str_ireplace($ceo_custom_catalog_productname_item['str1'],$ceo_custom_catalog_productname_item['str2'],$prod_row['name']);
+
                                         $prod_row['name']=$productname_mod;
                                     }
                                 }                              
