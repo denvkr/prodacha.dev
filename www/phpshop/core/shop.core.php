@@ -1454,7 +1454,7 @@ class PHPShopShop extends PHPShopShopCore {
 			foreach ($res as $prod_row) {
                                 foreach ($ceo_custom_catalog_productname as $ceo_custom_catalog_productname_item) {
                                     if (in_array($cid_id,$ceo_custom_catalog_productname_item)) {
-                                        $productname_mod=str_ireplace($ceo_custom_catalog_productname_item['str1'],$ceo_custom_catalog_productname_item['str2'],$prod_row['name']);
+                                        $productname_mod=str_replace($ceo_custom_catalog_productname_item['str1'],$ceo_custom_catalog_productname_item['str2'],$prod_row['name']);
 
                                         $prod_row['name']=$productname_mod;
                                     }

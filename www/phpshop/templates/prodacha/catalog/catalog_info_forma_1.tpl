@@ -23,7 +23,7 @@ php@
         foreach ($ceo_custom_menu1 as $ceo_custom_menu1_item) {
             if (in_array($GLOBALS['SysValue']['other']['productId'],$ceo_custom_menu1_item)) {
 
-                $catalogList_mod=str_ireplace($ceo_custom_menu1_item['str1'],$ceo_custom_menu1_item['str2'],$GLOBALS['SysValue']['other']['catalogName']);
+                $catalogList_mod=str_replace($ceo_custom_menu1_item['str1'],$ceo_custom_menu1_item['str2'],$GLOBALS['SysValue']['other']['catalogName']);
                 $oldh1=$catalogList_mod;
             }
         }

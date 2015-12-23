@@ -20,7 +20,7 @@ php@
         $ceo_custom_menu1=read_ceo_custom_menu($_SERVER['DOCUMENT_ROOT'] . '/custom_config/pagecontent-h1_catalog_rename.txt');
         foreach ($ceo_custom_menu1 as $ceo_custom_menu1_item) {
             if (in_array($GLOBALS['SysValue']['other']['productId'],$ceo_custom_menu1_item)) {
-                $catalogList_mod=str_ireplace($ceo_custom_menu1_item['str1'],$ceo_custom_menu1_item['str2'],$GLOBALS['SysValue']['other']['catalogCategory']);
+                $catalogList_mod=str_replace($ceo_custom_menu1_item['str1'],$ceo_custom_menu1_item['str2'],$GLOBALS['SysValue']['other']['catalogCategory']);
                 $oldh1=$catalogList_mod;
             }
         }

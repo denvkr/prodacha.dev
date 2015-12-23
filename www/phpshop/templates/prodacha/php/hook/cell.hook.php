@@ -76,9 +76,9 @@ function cid_category_add_spec_hook($obj,$row,$rout) {
 
             foreach ($ceo_custom_menu1 as $ceo_custom_menu1_item) {
                 if (in_array($obj->PHPShopNav->getId(),$ceo_custom_menu1_item)) {
-                    $catalogList_mod=str_ireplace($ceo_custom_menu1_item['str1'],$ceo_custom_menu1_item['str2'],$obj->get('catalogList'));
+                    $catalogList_mod=str_replace($ceo_custom_menu1_item['str1'],$ceo_custom_menu1_item['str2'],$obj->get('catalogList'));
                     $obj->set('catalogList',$catalogList_mod);
-                    $catalogList1_mod=str_ireplace($ceo_custom_menu1_item['str1'],$ceo_custom_menu1_item['str2'],$obj->get('catalogList1'));
+                    $catalogList1_mod=str_replace($ceo_custom_menu1_item['str1'],$ceo_custom_menu1_item['str2'],$obj->get('catalogList1'));
                     $obj->set('catalogList1',$catalogList1_mod);
                     //$obj->set('display_custom_catalogList_hook_test',$ceo_custom_menu1[0]['id'].$ceo_custom_menu1[0]['name'].$ceo_custom_menu1[0]['value'],true);      
                 }

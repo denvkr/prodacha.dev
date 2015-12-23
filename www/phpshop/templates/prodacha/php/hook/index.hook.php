@@ -107,7 +107,7 @@ function subcatalog_submehook($obj,$row,$rout) {
         $ceo_custom_menu1=read_ceo_custom_menu($_SERVER['DOCUMENT_ROOT'] . '/custom_config/menu-items_leftsubmenu_rename.txt');
         foreach ($ceo_custom_menu1 as $ceo_custom_menu1_item) {
             if (in_array($row['parent_to'],$ceo_custom_menu1_item)) {
-                $catalogList_mod=str_ireplace($ceo_custom_menu1_item['str1'],$ceo_custom_menu1_item['str2'],$row['name']);
+                $catalogList_mod=str_replace($ceo_custom_menu1_item['str1'],$ceo_custom_menu1_item['str2'],$row['name']);
                 $row['name']=$catalogList_mod;
             }
             //echo $ceo_custom_menu1_item['id'].$ceo_custom_menu1_item['str1'].$ceo_custom_menu1_item['str2'];

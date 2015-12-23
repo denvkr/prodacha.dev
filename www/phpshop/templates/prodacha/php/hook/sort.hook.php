@@ -804,7 +804,7 @@ function ceo_spec_hook($obj,$row,$rout) {
         $ceo_custom_catalog_productname=read_ceo_custom_menu($_SERVER['DOCUMENT_ROOT'] . '/custom_config/product-name_catalog_rename.txt');
         foreach ($ceo_custom_catalog_productname as $ceo_custom_catalog_productname_item) {
             if (in_array($obj->PHPShopNav->getId(),$ceo_custom_catalog_productname_item)) {
-                $productname_mod=str_ireplace($ceo_custom_catalog_productname_item['str1'],$ceo_custom_catalog_productname_item['str2'],$obj->get('productName'));
+                $productname_mod=str_replace($ceo_custom_catalog_productname_item['str1'],$ceo_custom_catalog_productname_item['str2'],$obj->get('productName'));
                 $obj->set('productName',$productname_mod);
             }
         }
