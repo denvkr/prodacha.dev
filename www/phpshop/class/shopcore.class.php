@@ -636,7 +636,7 @@ class PHPShopShopCore extends PHPShopCore {
 					$sdvig_vlevo='left:-20px;';
 				} else {
 					$sdvig_vlevo='';
-					$this->set('productPriceRub', '<strong style="position:relative;left:65px;font-size:13px;width:100%">'.$this->lang('outdated_message').'</strong>');//"position:relative;top:65px;left:-4px;font-size:13px;width:100%"
+					$this->set('productPriceRub', '<strong style="position:relative;top:65px;left:25px;font-size:13px;width:100%">'.$this->lang('outdated_message').'</strong>');//"position:relative;left:65px;font-size:13px;width:100%"
 				}
 				if ( !(empty($row['analog'])) ) {
 					$this->set('price_comlain','<span id="price_comlain'.$row['id'].'" class="price_comlain" style="position:relative;'.$sdvig_vlevo.'"><noindex>'.$this->lang('outdated_message2').'</noindex></span>'.
