@@ -116,6 +116,8 @@ class PHPShopProductElements extends PHPShopElements {
             $this->max_item = $_SESSION['max_item'];
 
         $limit_start = rand(1, $this->max_item / rand(1, 7));
+
+        //echo ' BETWEEN ' . $limit_start . ' and ' . round($limit_start + $limit + $this->max_item / 3);
         return ' BETWEEN ' . $limit_start . ' and ' . round($limit_start + $limit + $this->max_item / 3);
     }
 
@@ -200,20 +202,10 @@ class PHPShopProductElements extends PHPShopElements {
             		$price=$row['price'];
             	}
             	
-            	$mod_price=strval($price);//$this->price($row)
-            	
-            	switch (strlen($mod_price)) {
-            		case 4:
-            			$mod_price=substr($mod_price,0,1).' '.substr($mod_price,1,strlen($mod_price)-1);
-            			break;
-            		case 5:
-            			$mod_price=substr($mod_price,0,2).' '.substr($mod_price,2,strlen($mod_price)-2);
-            			break;
-            		case 6:
-            			$mod_price=substr($mod_price,0,3).' '.substr($mod_price,3,strlen($mod_price)-3);
-            			break;
-            	}
-            	
+            	$price=strval($price);//$this->price($row)
+            	//echo $mod_price.'<br>';
+            	$mod_price=parent::add_space_to_price($price);
+            	//echo $mod_price.'<br>';
             	$this->set('productPrice',$mod_price);            	
                 //$this->set('productPrice', $this->price($row));
                 $this->set('productPriceRub', '');
@@ -231,20 +223,10 @@ class PHPShopProductElements extends PHPShopElements {
             	}            	
                 //$productPrice = $this->price($row);
                 $productPriceNew = $this->price($row, true);
-                $mod_price=strval($price);
-                
-                switch (strlen($mod_price)) {
-                	case 4:
-                		$mod_price=substr($mod_price,0,1).' '.substr($mod_price,1,strlen($mod_price)-1);
-                		break;
-                	case 5:
-                		$mod_price=substr($mod_price,0,2).' '.substr($mod_price,2,strlen($mod_price)-2);
-                		break;
-                	case 6:
-                		$mod_price=substr($mod_price,0,3).' '.substr($mod_price,3,strlen($mod_price)-3);
-                		break;
-                }
-                
+                $price=strval($price);
+            	//echo $mod_price.'<br>';
+            	$mod_price=parent::add_space_to_price($price);
+            	//echo $mod_price.'<br>';
                 $this->set('productPrice',$mod_price);                
                 //$this->set('productPrice', $productPrice);
                 $this->set('productPriceRub', PHPShopText::strike($productPriceNew));
@@ -264,20 +246,10 @@ class PHPShopProductElements extends PHPShopElements {
         		$price=$row['price'];
         	}
         	 
-        	$mod_price=strval($price);//strval($this->price($row));
-        	
-        	switch (strlen($mod_price)) {
-        		case 4:
-        			$mod_price=substr($mod_price,0,1).' '.substr($mod_price,1,strlen($mod_price)-1);
-        			break;
-        		case 5:
-        			$mod_price=substr($mod_price,0,2).' '.substr($mod_price,2,strlen($mod_price)-2);
-        			break;
-        		case 6:
-        			$mod_price=substr($mod_price,0,3).' '.substr($mod_price,3,strlen($mod_price)-3);
-        			break;
-        	}
-        	
+        	$price=strval($price);//strval($this->price($row));
+            	//echo $mod_price.'<br>';
+            	$mod_price=parent::add_space_to_price($price);
+            	//echo $mod_price.'<br>';
         	$this->set('productPrice',$mod_price);
                 $this->set('productPriceRub', '');
 
@@ -352,15 +324,14 @@ class PHPShopProductElements extends PHPShopElements {
 
         // Если есть новая цена
         if(empty($newprice)) 
-		{
-		
-		//nah
-			if ( ($_COOKIE['sincity']=="sp") AND ($row['price2']!=0) )
-				$price=$row['price2'];
-			else		
-				$price=$row['price'];	
-		
-		}	
+        	if ( ($_COOKIE['sincity']=="sp") AND ($row['price2']!=0) ) {
+        		$price=$row['price2'];
+        	} else if( ($_COOKIE['sincity']=="chb") AND ($row['price3']!=0) ) {
+            		$price=$row['price3'];
+            } 
+            else {
+        		$price=$row['price'];
+        	}	
         else $price=$row['price_n'];
 
         return PHPShopProductFunction::GetPriceValuta($row['id'], array($price, $row['price2'], $row['price3'], $row['price4'], $row['price5']), $row['baseinputvaluta']);

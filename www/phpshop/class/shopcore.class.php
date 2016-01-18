@@ -615,14 +615,14 @@ class PHPShopShopCore extends PHPShopCore {
         
         else {
         	//под заказ
-        	if ($row['sklad']==1 && empty($row['outdated'])) {        		
+        	if (!(empty($row['sklad'])) && empty($row['outdated'])) {        		
         		$this->set('collaboration','lostandfound');
         		//$this->set('productPriceRub', $this->lang('sklad_mesage'));
         		$this->set('price_comlain','<span class="price_comlain" ><noindex>нашли дешевле?</noindex></span>');
                         $this->set('productPriceRub', '');
         	}
         	//сн€т с производства
-        	if ( !(empty($row['outdated'])) ) {
+        	if ( !(empty($row['sklad'])) && !(empty($row['outdated'])) ) {
         		$this->set('collaboration','outdated');
         		
         		//из строки берем айди каталога
@@ -630,26 +630,33 @@ class PHPShopShopCore extends PHPShopCore {
 
         		$s1=strpos($url,"UID");
 
-				if ($s1===false) {
-					$this->set('productPriceRub', '<noindex>'.$this->lang('outdated_message').'</noindex>');
-					//используем отдельное форматирование дл€ вывода в каталогах с кол-м €чеек больше 1
-					$sdvig_vlevo='left:-20px;';
-				} else {
-					$sdvig_vlevo='';
-					$this->set('productPriceRub', '<strong style="position:relative;top:65px;left:25px;font-size:13px;width:100%">'.$this->lang('outdated_message').'</strong>');//"position:relative;left:65px;font-size:13px;width:100%"
-				}
-				if ( !(empty($row['analog'])) ) {
-					$this->set('price_comlain','<span id="price_comlain'.$row['id'].'" class="price_comlain" style="position:relative;'.$sdvig_vlevo.'"><noindex>'.$this->lang('outdated_message2').'</noindex></span>'.
-							'<a id="analog_href'.$row['id'].'" style="visibility: hidden;" href="http://prodacha.ru/shop/UID_'.$row['analog'].'.html"></a>'.
-							'<script type="text/javascript">$(document).ready(function() {'.
-							'$("#price_comlain'.$row['id'].'").click( function( event ) {'.
-							'	window.location=$("#analog_href'.$row['id'].'").attr("href");'.
-							'	return false;'.
-							'});});'.
-							'</script>');					
-				} else {
-					$this->set('price_comlain','<span id="price_comlain'.$row['id'].'" class="price_comlain" style="position:relative;border-bottom:1px;"><!--noindex-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!--/noindex--></span>');
-				}
+                        if ($s1===false) {
+                                //$this->set('productPriceRub', '<noindex>'.$this->lang('outdated_message').'</noindex>');
+                                //используем отдельное форматирование дл€ вывода в каталогах с кол-м €чеек больше 1
+                                //$sdvig_vlevo='left:-20px;';
+                        } else {
+                                //$sdvig_vlevo='';
+                                //$this->set('productPriceRub', '<strong style="position:relative;top:65px;left:25px;font-size:13px;width:100%">'.$this->lang('outdated_message').'</strong>');//"position:relative;left:65px;font-size:13px;width:100%"
+                        }
+                        //$this->set('productPriceRub','<span class="outdated_message" style="position:absolute;font-size:11px !important;">'.$this->lang('outdated_message3').'</span>');
+                        $addtochart_outdated_class=' inactive';
+                        if ( !(empty($row['analog'])) ) {
+                            /*
+                                $this->set('price_comlain','<span id="price_comlain'.$row['id'].'" class="price_comlain" style="position:relative;'.$sdvig_vlevo.'"><noindex>'.$this->lang('outdated_message2').'</noindex></span>'.
+                                                '<a id="analog_href'.$row['id'].'" style="visibility: hidden;" href="http://prodacha.ru/shop/UID_'.$row['analog'].'.html"></a>'.
+                                                '<script type="text/javascript">$(document).ready(function() {'.
+                                                '$("#price_comlain'.$row['id'].'").click( function( event ) {'.
+                                                '	window.location=$("#analog_href'.$row['id'].'").attr("href");'.
+                                                '	return false;'.
+                                                '});});'.
+                                                '</script>');
+                             */
+                            $this->set('price_comlain','<a id="analog_href'.$row['id'].'" href="/shop/UID_'.$row['analog'].'.html">јЌјЋќ√</a>
+                                                        <span class="outdated_message" style="position:relative;font-size:11px !important;left: -12px"><!--noindex-->'.$this->lang('outdated_message3').'<!--/noindex--></span>');
+                        } else {
+                            $this->set('price_comlain','<a id="analog_href'.$row['id'].'" href="/shop/UID_'.$row['analog'].'.html" onclick="return false;">јЌјЋќ√</a>
+                                                        <span class="outdated_message" style="position:relative;font-size:11px !important;left: -12px"><!--noindex-->'.$this->lang('outdated_message3').'<!--/noindex--></span>');
+                        }
 
         	}
         		 

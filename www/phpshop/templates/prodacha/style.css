@@ -1833,13 +1833,18 @@ a:hover img.imgOn, a:hover img.imgOff, img.imgOn, img.imgOff {
 	display:table;
 	padding-bottom:15px;
 }
+/*
 .setka {
-	/*background:#e3e6e9*/
+	background:#e3e6e9;
 }
+*/
+/*
 .setka img {
-/*height: 20px;
-	width: 20px;*/
+    height: 20px;
+    width: 20px;
 }
+*/
+
 input {/* Стиль шрифта для всех вып. списков и всех элементов input */
 	font-size: 12px;
 	color: #000000;

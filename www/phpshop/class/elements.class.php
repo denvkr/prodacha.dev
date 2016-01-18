@@ -346,7 +346,25 @@ class PHPShopElements {
     function setHook($class_name, $function_name, $data = false, $rout = false) {
         return $this->PHPShopModules->setHookHandler($class_name, $function_name, array(&$this), $data, $rout);
     }
-
+    function add_space_to_price($mod_price) {
+            switch (strlen($mod_price)) {
+                    case 4:
+                            $mod_price=substr($mod_price,0,1).' '.substr($mod_price,1,strlen($mod_price)-1);
+                            break;
+                    case 5:
+                            $mod_price=substr($mod_price,0,2).' '.substr($mod_price,2,strlen($mod_price)-2);
+                            break;
+                    case 6:
+                            $mod_price=substr($mod_price,0,3).' '.substr($mod_price,3,strlen($mod_price)-3);
+                            break;
+                    case 7:
+                            $mod_price=substr($mod_price,0,1).' '.substr($mod_price,1,strlen($mod_price)-1);
+                            break;				
+            }
+            //echo $mod_price.'<br>';
+            //$hook=$this->setHook(__CLASS__, __FUNCTION__, $mod_price);                
+            return $mod_price;
+    }
 }
 
 ?>

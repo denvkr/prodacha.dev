@@ -1332,18 +1332,24 @@ fillTKtablePart();
                 }
                 //модификаци€ CEO вывод сокрытие надписей в классе prev_price lostandfound
                 //console.log($('.prev_price.lostandfound:first-child').length);
+                /*
                 if ($('.prev_price.lostandfound').length){
                    //$('.prev_price.lostandfound').next().html('уточните наличие');
-                   $('.prev_price.lostandfound').html('<!--noindex-->уточн€йте наличие<!--/noindex-->');
+                    $('.prev_price.lostandfound').each(function(index) {
+                       $(this).html('<!--noindex-->уточн€йте наличие<!--/noindex-->');
+                    });
                    //console.log('уточните наличие');
                 }
-              
-                if ($('.prev_price').length){
-                    $('.prev_price').each(function(index) {
+           */
+
+                if ($('.prev_price.lostandfound').length){
+                    $('.prev_price.lostandfound').each(function(index) {
                         //исключение дл€ блоков вывода по 3 купить,посмотреть аналог
                         if ($(this).css('left')!='150px' && $(this).css('margin')!== '-15px 0px 0px 10px' && $(this).prev('div').prev('.price').prev('.addtochart').length)
                             $(this).html('<!--noindex-->уточн€йте наличие<!--/noindex-->');
                                 //console.log($(this).prev('div').prev('.price').prev('.addtochart').length);
+                        if ($(this).parent('.price:eq(0)').prev('.addtochart:eq(0)').children('input[type="button"]:eq(0)').val()===' ак купить?')
+                            $(this).html('<!--noindex-->уточн€йте наличие<!--/noindex-->');                                
                         if ($(this).next('.price').next('.buybuttons:eq(0)').children('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').val()==='”точнить')
                             $(this).html('<!--noindex-->уточн€йте наличие<!--/noindex-->');
                         //дл€ каталогов типа 551    
@@ -1355,6 +1361,7 @@ fillTKtablePart();
                             $(this).html('<!--noindex-->уточн€йте наличие<!--/noindex-->');                        
                     });
                 }
+
                 });
                 //функци€ обработки части форма forma_dost дл€ “ранспортных компаний
                     function fillTKtablePart(){
@@ -1405,25 +1412,25 @@ fillTKtablePart();
                                 $("#delivery_city").inputmask("p{55}");
                                 $("#delivery_address").inputmask("b{150}");
                                 $("#tk_other").focusout(function(){
-									//console.log($("input[type=radio][name='tk_list_item']:eq(0):checked").length);
-									if (typeof ($(this).attr('disabled')) === 'undefined' && ($("input[type=radio][name='tk_list_item']:eq(0):checked").length === 0 &&
-											$("input[type=radio][name='tk_list_item']:eq(1):checked").length === 0 &&
-											$("input[type=radio][name='tk_list_item']:eq(2):checked").length === 0)) {
-											var regExpr = new RegExp('^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5* -_]{3,40}$', 'ig');
-											//console.log(regExpr.test($(this).val()));
-											if (regExpr.test($(this).val()) === true) {
-												$(this).css('border-color', '#abadb3');
-											} else if (regExpr.test($(this).val()) === false) {
-												$(this).css('border-color', '#ff5555');
-											}
-									}
-								});
+                                    //console.log($("input[type=radio][name='tk_list_item']:eq(0):checked").length);
+                                    if (typeof ($(this).attr('disabled')) === 'undefined' && ($("input[type=radio][name='tk_list_item']:eq(0):checked").length === 0 &&
+                                                    $("input[type=radio][name='tk_list_item']:eq(1):checked").length === 0 &&
+                                                    $("input[type=radio][name='tk_list_item']:eq(2):checked").length === 0)) {
+                                                    var regExpr = new RegExp('^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5* -_]{3,40}$', 'ig');
+                                                    //console.log(regExpr.test($(this).val()));
+                                                    if (regExpr.test($(this).val()) === true) {
+                                                            $(this).css('border-color', '#abadb3');
+                                                    } else if (regExpr.test($(this).val()) === false) {
+                                                            $(this).css('border-color', '#ff5555');
+                                                    }
+                                    }
+                                });
                                 $("#tk_other").mouseover(function() {
-									$(this).popover({placement : 'top'});
-								});
+				$(this).popover({placement : 'top'});
+				});
                                 $("#tk_other").mouseout(function() {
-									$(this).popover('hide');
-								});
+                                    $(this).popover('hide');
+				});
 
                                 $("#firstname").focusout(function(){
 									//console.log($(this).attr('disabled'));

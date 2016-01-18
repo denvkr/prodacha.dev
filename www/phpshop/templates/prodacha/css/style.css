@@ -13,8 +13,8 @@
 	font-family: 'Conv_NeoSansCyr-Regular';
 	src: url('../fonts/NeoSansCyr-Regular.eot');
 	src: url('../fonts/NeoSansCyr-Regular.woff') format('woff'),
-		 url('../fonts/NeoSansCyr-Regular.ttf') format('truetype'),
-		 url('../fonts/NeoSansCyr-Regular.svg') format('svg');
+             url('../fonts/NeoSansCyr-Regular.ttf') format('truetype'),
+             url('../fonts/NeoSansCyr-Regular.svg') format('svg');
 }
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,select,button,sup,sub,a {
 	margin: 0;  
@@ -297,12 +297,15 @@ h5, .h4 {
 	background: url(../images/logo.png) no-repeat;
 }
 .logo a
-{ position:absolute; top:0px; left:0px; z-index:1354354;
-	display: inline;	float: left;
-	width: 255px;
-	height: 66px; 
-	text-decoration: none;
-
+{ position:absolute; 
+  top:0px; 
+  left:0px; 
+  z-index:1354354;
+  display: inline;
+  float: left;
+  width: 255px;
+  height: 66px; 
+  text-decoration: none;
 }
 .head .phone
 {
@@ -1039,6 +1042,8 @@ h5, .h4 {
 	margin: 5px auto 5px;
 	width: 160px;
 	height: 150px;
+        z-index:0;
+        
 }
 .content .item .thumb img
 {
@@ -1050,6 +1055,12 @@ h5, .h4 {
 	border-collapse: collapse;
         margin-top:0px;
 }
+.content .item table
+{
+	border-collapse: collapse;
+        margin-top:0px;
+        z-index:0;
+}
 .content .item .description
 {
 	display: block;
@@ -1060,10 +1071,27 @@ h5, .h4 {
 
 .buybuttons
 {
-position: relative;
-	float: left;
-clear: both;
-margin-left: 22px;
+    position: relative;
+    float: left;
+    clear: both;
+    margin-left: 22px;
+}
+
+.buybuttons>a[id^="analog_href"]
+{
+        position: relative;
+	display: block;
+        padding-left: 10px;
+        padding-top: 5px;
+	width: 104px;
+	height: 26px;
+        left: -25px;
+	border: none;
+	background: url("../images/add_chart.png") no-repeat left top;
+	color: #fff;/*#333;*/
+	text-transform: uppercase;
+	font-size: 11px;
+        text-align: center;    
 }
 .addtochart
 {
@@ -1074,10 +1102,12 @@ margin-left: 22px;
 display:inline-block;
 
 }
-.content .item .addtochart input
+
+.content .item .addtochart input[type="button"][value="Как купить?"]
 {
+        position: absolute;
 	display: block;
-	padding-left: 20px;
+        padding-left: 20px;
 	width: 104px;
 	height: 26px;
 	border: none;
@@ -1085,12 +1115,18 @@ display:inline-block;
 	color: #fff;/*#333;*/
 	text-transform: uppercase;
 	font-size: 11px;
+        text-align: center;
+        top: 215px;
+        left: 15px;
+        z-index:1
 	/*text-indent: -999em;*/
 }
+
 .content .item .addtochart input[type="button"][value="Уточнить"]
 {
+        position: absolute;
 	display: block;
-	padding-left: 20px;
+        padding-left: 12px;
 	width: 104px;
 	height: 26px;
 	border: none;
@@ -1098,10 +1134,14 @@ display:inline-block;
 	color: #fff;/*#333;*/
 	text-transform: uppercase;
 	font-size: 11px;
+        text-align: center;
+        top: 215px;
+        left: 15px;
+        z-index:1
 	/*text-indent: -999em;*/
-        margin-left: -20px;
 }
-.sorting .item1 .addtochart input[type="button"]
+
+.sorting .item1 .addtochart input[type="button"][value="Уточнить"]
 {
         position: relative;
         left: -25px;
@@ -1118,6 +1158,7 @@ display:inline-block;
 }
 .content .item .addtochart a
 {
+        position: absolute;
 	display: block;
         padding-left: 12px;
         padding-top: 5px;
@@ -1129,7 +1170,15 @@ display:inline-block;
 	text-transform: uppercase;
 	font-size: 11px;
         text-align: center;
+        top: 215px;
+        left: 15px;
+        z-index:1
 	/*text-indent: -999em;*/
+}
+
+.content .item .addtochart.inactive a,.content .item .addtochart.inactive a:hover,.content .item1 .addtochart.inactive a:hover,.buybuttons.inactive>a[id^="analog_href"],.buybuttons.inactive>a[id^="analog_href"]:hover{
+        background: url("../images/add_chart_old.png") no-repeat left top;
+        color: #444444; /*#fff;*/
 }
 
 .content .item1 .addtochart a
@@ -1150,13 +1199,12 @@ display:inline-block;
 	/*text-indent: -999em;*/
 }
 
-.content .item .addtochart input:hover,.content .item .addtochart a:hover, .sorting .content .item1 .addtochart input:hover,.content .item1 .addtochart a:hover
+.content .item .addtochart input:hover,.content .item .addtochart a:hover, .sorting .content .item1 .addtochart input:hover,.content .item1 .addtochart a:hover,.buybuttons>a[id^="analog_href"]:hover
 {
 	background: url("../images/add_chart_hover.png") no-repeat left top;
 	text-transform: uppercase;
 	color: #bbd52b; /*#fff;*/
 }
-
 .addtochart.notice input
 {
 	background-image: url('../images/add_chart_notext.png')  no-repeat left top !important;
@@ -1181,6 +1229,10 @@ display:inline-block;
 	color: #fff !important;
 }
 */
+.content .item .addtochart a[id^="analog_href"]
+{
+        padding-left: 10px;
+}
 
 .productbox .addtochart input.creditinputcart, .content .item .addtochart input.creditinputcart, .sorting .item1 .addtochart input.creditinputcart
 {
@@ -1269,6 +1321,17 @@ left: 115px;
 	/*max-width: 80px;*/
         position: relative;
         right: 5px;
+}
+
+.content .item .price {
+    position: absolute;
+    color: #6c4b46;
+    font-weight: bold;
+    font-size: 14px;
+    right: 10px;
+    top: 215px;
+    width: 100px;
+    z-index:1;
 }
 .content .simpletextbox
 {
@@ -1547,7 +1610,7 @@ left: 115px;
 }
 .sorting .content .item1
 {
-	position: relative !important;
+    position: relative !important;
     display: block;
     width: 793px;
     height: 199px;
@@ -1877,7 +1940,28 @@ left: 115px;
 {
 	border-top: 0;
 }
+/*
 .prev_price
+{
+	float: left;
+	clear: both;
+	margin: 0;
+	color: #e7193f! important;
+	font-weight: bold;
+	font-size: 17px !important;
+        //text-decoration: line-through;*
+}
+*/
+.prev_price
+{
+        position: absolute;
+        z-index:auto;
+	color: #e7193f! important;
+	font-weight: bold;
+        font-size:11px !Important;
+}
+
+.outdated_message
 {
 	float: left;
 	clear: both;
@@ -1887,6 +1971,7 @@ left: 115px;
 	font-size: 17px !important;
         /*text-decoration: line-through;*/
 }
+/*
 .tovar .prev_price
 {
 	clear: both;
@@ -1900,7 +1985,7 @@ left: 115px;
         left: 0px;
         /*top: -10px;*/
 }
-
+*/
 .productbox span.quantity
 {
 	padding-left: 20px;
@@ -3286,9 +3371,12 @@ span.price_cat_1
 }
 span.price_cat_3
 {
+        position: relative;
 	display:block; 
 	font-size:8pt; 
 	font-weight: normal; 
 	color:#6c4b46; 
 	text-transform: uppercase;
+        text-align: center;
+        z-index:auto;
 }

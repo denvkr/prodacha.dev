@@ -398,7 +398,7 @@
 			</div>	
 		</div>
 		<div class="copyright">
-			<span class="copy">&copy; 2015 PROДАЧА - интернет-магазин садовой техники</span>
+			<span class="copy">&copy; 2016 PROДАЧА - интернет-магазин садовой техники</span>
 			<div class="foot_menu">
 				<ul>
 					@topMenu@
