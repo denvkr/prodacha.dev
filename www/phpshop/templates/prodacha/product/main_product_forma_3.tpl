@@ -349,7 +349,7 @@
                                     $old_price=substr($old_price,0,1).' '.substr($old_price,1,strlen($old_price)-1);
                                     break;				
                     }
-                    echo '<div class="prev_price" style="top: 245px;left: '.$left.'px;"><strike>'.$old_price.'</strike></div>';
+                    echo '<div class="prev_price" style="top: 245px;left: '.$left.'px;text-decoration:line-through;">'.$old_price.'</div>';
                     echo '</div>';
             }
         }

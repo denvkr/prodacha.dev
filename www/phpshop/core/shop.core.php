@@ -1447,15 +1447,15 @@ class PHPShopShop extends PHPShopShopCore {
 			} else {
 				$disp_cat.='<div class="wrapper"><table cellspacing="0" cellpadding="0" border="0">';
 			}
+                        
 			//сообщение о старой цене
 			$comnotice_price_n='';
+                        
 			//основной цикл построения вывода товаров в категории
-
 			foreach ($res as $prod_row) {
                                 foreach ($ceo_custom_catalog_productname as $ceo_custom_catalog_productname_item) {
                                     if (in_array($cid_id,$ceo_custom_catalog_productname_item)) {
                                         $productname_mod=str_replace($ceo_custom_catalog_productname_item['str1'],$ceo_custom_catalog_productname_item['str2'],$prod_row['name']);
-
                                         $prod_row['name']=$productname_mod;
                                     }
                                 }                              
@@ -1465,7 +1465,7 @@ class PHPShopShop extends PHPShopShopCore {
 				}
 				//в зависимости от статуса товара $prod_row['sklad']=1 (под заказ)
 				//комментируем некоторые разделы вывода
-				if ($prod_row['sklad']==0) {
+				if (empty($prod_row['sklad'])) {
 					$ComStartNotice='<!--';
 					$ComEndNotice='-->';			
 					$ComStartCart='';
@@ -1477,13 +1477,14 @@ class PHPShopShop extends PHPShopShopCore {
 					$ComStartCart='<!--';
 					$ComEndCart='-->';
 				}
-				$region_info='m';
+                                //по умолчанию регион делаем Москву
+                                $region_info='m';
 				if (isset($_COOKIE['sincity'])) {
 					$region_info=$_COOKIE['sincity'];
 				}
+                                
 				// Если товар на складе
 				if (empty($prod_row['sklad'])) {
-				
 					// Если нет новой цены
 					if (empty($prod_row['price_n'])) {
 						if ( ($_COOKIE['sincity']=="sp") AND ($prod_row['price2']!=0) ) {
@@ -1499,8 +1500,7 @@ class PHPShopShop extends PHPShopShopCore {
 				
 						//модифицируем вывод цены с пробелом
 						$mod_price=$this->add_space_to_price($mod_price);
-						$comnotice_price_n='';
-						
+						$comnotice_price_n='';		
 					}
 					// Если есть новая цена
 					else {
@@ -1543,18 +1543,22 @@ class PHPShopShop extends PHPShopShopCore {
                                         $comnotice_price_n='';
 				}				
 				//формируем карточку для stihl
-				if ( $cid_id==121 || $cid_id==228 || $cid_id==459 || $cid_id==461 || $cid_id==464 ) {
+				if ( $cid_id==121 || $cid_id==228 || $cid_id==459 || $cid_id==461 || $cid_id==464) {
 					// снят с производства+должен быть под заказ
 					if ( !(empty($prod_row['sklad'])) && !(empty($prod_row['outdated'])) ) {
 						//вывод сообщения об устаревшем товаре
-                                                $comnotice='<span class="outdated_message" style="position:absolute;font-size:11px !important;left: -106px;top: 25px;"><noindex>'.$this->lang('outdated_message3').'</noindex></span>';
+                                                if ($cell>1){
+                                                    $comnotice='<span class="outdated_message" style="position:absolute;font-size:11px !important;left: -106px;top: 25px;"><noindex>'.$this->lang('outdated_message3').'</noindex></span>';
+                                                } else {
+                                                    $comnotice='<span class="outdated_message" style="position:absolute;font-size:11px !important;left: -12px;top:"><noindex>'.$this->lang('outdated_message3').'</noindex></span>';                                                    
+                                                }
 
 						//$comnotice_30=$this->lang('outdated_message');//'<div class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-15px 0px 0px 10px;font-size:12px !important;"><noindex>'..'</noindex></div>'
 						$productnotice='';
                                                 $outdated_style='';
 						//используем отдельное форматирование для вывода в каталогах с кол-м ячеек больше 1
 						if ($cell>1) {
-							$productnotice='<span class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-15px 0px 0px 10px;font-size:12px !important;"><noindex>'.$comnotice.'</noindex></span>';//$comnotice_30
+							//$productnotice='<span class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-15px 0px 0px 10px;font-size:12px !important;"><noindex>'.$comnotice.'</noindex></span>';//$comnotice_30
 						}
                                                 $addtochart_outdated_class=' inactive';
                                                 
@@ -1600,11 +1604,13 @@ class PHPShopShop extends PHPShopShopCore {
                                                     //$outdated_style='style="display:relative;margin:-25px 15px 0px 0px;"';
                                                 $outdated_style='';
                                                 $comnotice_price_n='';
+                                                $stihl_viking='';
 					} else {
 						//товар со статусом в наличие/под заказ
+                                                $stihl_viking=' stihlvikingbuy';
 						$comnotice_30='';
-						$addtochart='<input type="button" onclick="stihl_window(\''.$region_info.'\',\'/shop/UID_'.$prod_row['id'].'.html\',document.getElementsByClassName(\'netref\'))"  value="'.$this->lang('stihl_string').'" />';
-						$productnotice='<input type="button" onclick="stihl_window(\''.$region_info.'\',\'/shop/UID_'.$prod_row['id'].'.html\',document.getElementsByClassName(\'netref\'))"  value="'.$this->lang('stihl_string').'" />';
+						$addtochart='<input type="button" style="font-size:9px;" onclick="stihl_window(\''.$region_info.'\',\'/shop/UID_'.$prod_row['id'].'.html\',document.getElementsByClassName(\'netref\'))"  value="'.$this->lang('stihl_string').'" />';
+						$productnotice='<input type="button" style="font-size:9px;" onclick="stihl_window(\''.$region_info.'\',\'/shop/UID_'.$prod_row['id'].'.html\',document.getElementsByClassName(\'netref\'))"  value="'.$this->lang('stihl_string').'" />';
 						//если товар под заказ
 						if (!(empty($prod_row['sklad']))) {
 							//используем отдельное форматирование для вывода в каталогах с кол-м ячеек больше 1
@@ -1613,7 +1619,7 @@ class PHPShopShop extends PHPShopShopCore {
 								$comnotice='<div class="prev_price lostandfound" style="position:absolute;font-size:11px !important;left: -117px;top: 25px;"><!--noindex--><!--/noindex--></div>';//$this->lang('sklad_mesage')
 							} else {
 								$sdvig_vpravo='';
-								//$comnotice=$this->lang('sklad_mesage');
+                                                                $comnotice='<div class="prev_price lostandfound" style="position:relative;font-size:11px !important;left:-24px;top:5px;"><!--noindex--><!--/noindex--></div>';
 							}
 						} else {
 							$comnotice='';
@@ -1626,15 +1632,17 @@ class PHPShopShop extends PHPShopShopCore {
 					// снят с производства+должен быть под заказ
 					if (!(empty($prod_row['sklad'])) && !(empty($prod_row['outdated']))) {
 						//вывод сообщения об устаревшем товаре
-						//вывод сообщения об устаревшем товаре
-                                                $comnotice='<span class="outdated_message" style="position:absolute;font-size:11px !important;left: -106px;top: 25px;"><noindex>'.$this->lang('outdated_message3').'</noindex></span>';
-
+                                                if ($cell>1){
+                                                    $comnotice='<span class="outdated_message" style="position:absolute;font-size:11px !important;left: -106px;top: 25px;"><noindex>'.$this->lang('outdated_message3').'</noindex></span>';
+                                                } else {
+                                                    $comnotice='<span class="outdated_message" style="position:absolute;font-size:11px !important;left: -12px;top:"><noindex>'.$this->lang('outdated_message3').'</noindex></span>';                                                    
+                                                }
 						//$comnotice_30=$this->lang('outdated_message');//'<div class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-15px 0px 0px 10px;font-size:12px !important;"><noindex>'..'</noindex></div>'
 						$productnotice='';
                                                 $outdated_style='';
 						//используем отдельное форматирование для вывода в каталогах с кол-м ячеек больше 1
 						if ($cell>1) {
-							$productnotice='<span class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-15px 0px 0px 10px;font-size:12px !important;"><noindex>'.$comnotice.'</noindex></span>';//$comnotice_30
+							//$productnotice='<span class="prev_price" style="position:relative;display: inline-block;top:3px;margin:-15px 0px 0px 10px;font-size:12px !important;"><noindex>'.$comnotice.'</noindex></span>';//$comnotice_30
 						}
                                                 $addtochart_outdated_class=' inactive';
                                                 
@@ -1680,12 +1688,13 @@ class PHPShopShop extends PHPShopShopCore {
                                                     //$outdated_style='style="display:relative;margin:-25px 15px 0px 0px;"';
                                                 $outdated_style='';
                                                 $comnotice_price_n='';
+                                                $stihl_viking='';
 					} else {
 						//товар со статусом в наличие/под заказ
-                                                $addtochart_outdated_class='';
+                                                $stihl_viking=' stihlvikingbuy';
 						$comnotice_30='';
-						$addtochart='<input type="button" onclick="viking_window(\''.$region_info.'\',\'/shop/UID_'.$prod_row['id'].'.html\',document.getElementsByClassName(\'netref\'))"  value="'.$this->lang('stihl_string').'" />';
-						$productnotice='<input type="button" onclick="viking_window(\''.$region_info.'\',\'/shop/UID_'.$prod_row['id'].'.html\',document.getElementsByClassName(\'netref\'))"  value="'.$this->lang('stihl_string').'" />';
+						$addtochart='<input type="button" style="font-size:9px;" onclick="stihl_window(\''.$region_info.'\',\'/shop/UID_'.$prod_row['id'].'.html\',document.getElementsByClassName(\'netref\'))"  value="'.$this->lang('stihl_string').'" />';
+						$productnotice='<input type="button" style="font-size:9px;" onclick="stihl_window(\''.$region_info.'\',\'/shop/UID_'.$prod_row['id'].'.html\',document.getElementsByClassName(\'netref\'))"  value="'.$this->lang('stihl_string').'" />';
 						//если товар под заказ
 						if (!(empty($prod_row['sklad']))) {
 							//используем отдельное форматирование для вывода в каталогах с кол-м ячеек больше 1
@@ -1694,7 +1703,7 @@ class PHPShopShop extends PHPShopShopCore {
 								$comnotice='<div class="prev_price lostandfound" style="position:absolute;font-size:11px !important;left: -117px;top: 25px;"><!--noindex--><!--/noindex--></div>';//$this->lang('sklad_mesage')
 							} else {
 								$sdvig_vpravo='';
-								//$comnotice=$this->lang('sklad_mesage');
+                                                                $comnotice='<div class="prev_price lostandfound" style="position:relative;font-size:11px !important;left:-24px;top:5px;"><!--noindex--><!--/noindex--></div>';
 							}
 						} else {
 							$comnotice='';
@@ -1712,7 +1721,9 @@ class PHPShopShop extends PHPShopShopCore {
 							if ($cell>1) {
                                                             //$productnotice.='<span class="outdated_message" style="position:relative;display: inline-block;top:3px;margin:-5px 0px 0px 10px;font-size:12px !important;"><noindex>'.$this->lang('outdated_message3').'</noindex></span>';
                                                             $comnotice='<span class="outdated_message" style="position:absolute;font-size:11px !important;left: -106px;top: 25px;"><noindex>'.$this->lang('outdated_message3').'</noindex></span>';
-							}
+							} else {
+                                                            $comnotice='<span class="outdated_message" style="position: relative;font-size: 11px !important;left: -12px;"><noindex>'.$this->lang('outdated_message3').'</noindex></span>';
+                                                        }
 							//снят с производства+должен быть под заказ, для всех остальных категорий
 						} else {
                                                     //$comnotice='';
@@ -1770,6 +1781,7 @@ class PHPShopShop extends PHPShopShopCore {
 						} else {
 							$sdvig_vpravo='';
 							//$comnotice=$this->lang('sklad_mesage');
+							$comnotice='<div class="prev_price lostandfound" style="position: relative;font-size: 11px !important;left: -24px;top: 5px;"></div>';//$this->lang('sklad_mesage') style="position:relative;font-size:11px !important;'.$sdvig_vpravo.'top:-10px;"
 						}
 						$outdated_style='';
 						$comnotice_price_n='';
@@ -1813,15 +1825,19 @@ class PHPShopShop extends PHPShopShopCore {
 					.'</tbody></table>'
 					.'</div>'
 					.'<div class="descr_wrapper"><a href="/shop/UID_'.$prod_row['id'].'.html"><span class="description">'.$prod_row['name'].'</span></a>'
+                                        .'<div style="clear:both;"></div>'
 					.$this->get('Producticons')
-					.'<span class="prev_price"><noindex>'.$comnotice.$comnotice_30.'</noindex></span><span class="price">'.$mod_price.'<span class="smallfont">&nbsp;'.$this->PHPShopSystem->getDefaultValutaCode(true).'</span></span>'					
+					//.'<span class="prev_price"><noindex>'.$comnotice.$comnotice_30.'</noindex></span>'
+                                        .'<span class="price">'.$mod_price.'<span class="smallfont">&nbsp;'.$this->PHPShopSystem->getDefaultValutaCode(true).'</span></span>'					
 					.'<div class="buybuttons">'
-					.$ComStartCart.'<span class="addtochart">'
+					.$ComStartCart.'<span class="addtochart'.$stihl_viking.'">'
 					.$addtochart
 					.'</span>'.$ComEndCart	
-					.$ComStartNotice.'<span class="addtochart">'
+					.$ComStartNotice.'<span class="addtochart notice'.$addtochart_outdated_class.'">'
 					.$productnotice
-					.'</span>'.$ComEndNotice									
+					.'</span>'.$ComEndNotice
+                                        .$comnotice
+                                        //.'549-core-cat-1'
 					.'<!--@firstcreditpunch@-->'
 					.'</div>'
 					.'</div>'

@@ -23,7 +23,7 @@
 @ComStartNotice@
 @Producticons@
   
-   <span class="prev_price">@productPriceRub@</span> @ComStart@ <span class="price">@productPrice@<span class="smallfont">@productValutaName@</span></span>
+@ComStart@ <span class="price">@productPrice@<span class="smallfont">@productValutaName@</span></span>
 
    @ComEnd@
   

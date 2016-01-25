@@ -1074,7 +1074,7 @@ h5, .h4 {
     position: relative;
     float: left;
     clear: both;
-    margin-left: 22px;
+    margin-left: 25px;
 }
 
 .buybuttons>a[id^="analog_href"]
@@ -1092,6 +1092,11 @@ h5, .h4 {
 	text-transform: uppercase;
 	font-size: 11px;
         text-align: center;    
+}
+.addchart_block_table_addtochart .buybuttons>a[id^="analog_href"]
+{
+    position: relative;
+    left: 0px;
 }
 .addtochart
 {
@@ -1118,7 +1123,7 @@ display:inline-block;
         text-align: center;
         top: 215px;
         left: 15px;
-        z-index:1
+        z-index:1;
 	/*text-indent: -999em;*/
 }
 
@@ -1137,7 +1142,7 @@ display:inline-block;
         text-align: center;
         top: 215px;
         left: 15px;
-        z-index:1
+        z-index:1;
 	/*text-indent: -999em;*/
 }
 
@@ -1172,11 +1177,12 @@ display:inline-block;
         text-align: center;
         top: 215px;
         left: 15px;
-        z-index:1
+        z-index:1;
 	/*text-indent: -999em;*/
 }
 
-.content .item .addtochart.inactive a,.content .item .addtochart.inactive a:hover,.content .item1 .addtochart.inactive a:hover,.buybuttons.inactive>a[id^="analog_href"],.buybuttons.inactive>a[id^="analog_href"]:hover{
+.content .item .addtochart.inactive a,.content .item .addtochart.inactive a:hover,.content .item1 .addtochart.inactive a:hover,.buybuttons.inactive>a[id^="analog_href"],.buybuttons.inactive>a[id^="analog_href"]:hover,.productbox .parameters .buybuttons.inactive>a[id^="analog_href"]:hover,.content .item1 .addtochart.notice.inactive>a[id^="analog_href"]
+{
         background: url("../images/add_chart_old.png") no-repeat left top;
         color: #444444; /*#fff;*/
 }
@@ -1198,16 +1204,33 @@ display:inline-block;
         text-align: center;
 	/*text-indent: -999em;*/
 }
-
-.content .item .addtochart input:hover,.content .item .addtochart a:hover, .sorting .content .item1 .addtochart input:hover,.content .item1 .addtochart a:hover,.buybuttons>a[id^="analog_href"]:hover
+.addtochart.notice input[value="Как купить?"],.addtochart.stihlvikingbuy input[value="Как купить?"]
+{
+        position: relative;
+        left: -25px;
+	display: block;
+        padding-left: 12px;
+	width: 104px;
+	height: 26px;
+	border: none;
+	background: url("../images/add_chart.png") no-repeat left top;
+	color: #fff;/*#333;*/
+	text-transform: uppercase;
+	font-size: 11px;
+        text-align: center;
+	/*text-indent: -999em;*/
+}
+.content .item .addtochart input:hover,.content .item .addtochart a:hover, .sorting .content .item1 .addtochart input:hover,.content .item1 .addtochart a:hover,.buybuttons>a[id^="analog_href"]:hover,.productbox .parameters .buybuttons>a[id^="analog_href"]:hover,.content .item .addtochart input[type="button"][value="Уточнить"]:hover,.content .item .addtochart input[type="button"][value="Как купить?"]:hover,.content .item1 .addtochart.stihlvikingbuy input[type="button"][value="Как купить?"]:hover
 {
 	background: url("../images/add_chart_hover.png") no-repeat left top;
 	text-transform: uppercase;
 	color: #bbd52b; /*#fff;*/
 }
+
+/*
 .addtochart.notice input
 {
-	background-image: url('../images/add_chart_notext.png')  no-repeat left top !important;
+	background-image: url('../images/add_chart_notext.png') !important;
 	/*text-indent: 0 !important;*/
 	text-transform: uppercase;
 	color: #fff !important;
@@ -1215,12 +1238,12 @@ display:inline-block;
 
 .addtochart.notice input:hover
 {
-	background-image: url('../images/add_chart_notext_hover.png')  no-repeat left top !important;
+	background-image: url('../images/add_chart_notext_hover.png') !important;
 	/*text-indent: 0 !important;*/
 	text-transform: uppercase;
 	color: #bbd52b !important;
 }
-
+*/
 /*
 .addtochart.fast_order1 input, .addtochart.fast_order1 input:hover
 {
@@ -1674,21 +1697,23 @@ left: 115px;
 	width: 240px;
 	text-align: left;
 }
+
 .sorting .item1 .description
 {
 	float: left;
 	margin: 0;
 	margin-bottom: 10px;
-	height: 40px;
+	/*height: 40px;*/
 	color: #444;
 	font-weight: bold;
 	font-size: 12px;
 }
 .sorting .item1 .price
 {
+        position:relative;
 	float: left;
 	clear: both;
-	margin: 20px 0 10px 0;
+        margin: -15px 0 10px 5px;
 	color: #588910;
 	font-size: 30px;
 }
@@ -1696,15 +1721,16 @@ left: 115px;
 {
 	font-size: 12px;
 }
-.sorting .item1 .prev_price
+
+.sorting .item1 .price ~ .prev_price
 {
-	float: left;
+        position:relative;
 	clear: both;
-	margin: 20px 0 -20px 0;
 	color: #888;
 	text-decoration: none;
-	font-size: 14px!important;
+	font-size: 11px!important;
 }
+
 .sorting .item1 .parameters
 {
 	float: left!important;
@@ -1804,11 +1830,11 @@ left: 115px;
 }
 .productbox .articul
 {
-	float: left;
 	width: 200px;
 	height: 20px;
 	color: #888;
 	font-size: 11px;
+        padding-left:5px;
 }
 .productbox .prod_articul
 {
@@ -1819,7 +1845,7 @@ left: 115px;
 	float: left;
 	clear: both;
 	text-align: left;
-	
+	width: 310px;
 }
 .productbox .parameters table
 {
@@ -1855,15 +1881,24 @@ left: 115px;
 .productbox .addchart_block
 {
 	padding-top: 30px;
+	padding-left: 10px;        
 	color: #444;
 	font-size: 12px;
 }
-.productbox .addtochart
+.productbox .addtochart,.addchart_block_table_addtochart .buybuttons
 {
 	position:relative;
 	float: left;
 	margin-top: 0px;	
 	margin-left: 6px;
+}
+.addchart_block_table_addtochart .addtochart.buyincredit2>.creditinputcart
+{
+	position:relative;
+	float: left;
+	margin-top: 10px;	
+	margin-left: 0px;
+        left:-50px;
 }
 .productbox .addtochart input
 {
@@ -1878,7 +1913,7 @@ left: 115px;
 	font-size: 11px;
 	
 }
-.productbox .addtochart a
+.productbox .addtochart a,.addchart_block_table_addtochart .buybuttons a
 {
 	padding-left: 4px;
 	padding-top: 5px;
@@ -1915,7 +1950,7 @@ left: 115px;
 {
 	float: left;
 	clear: both;
-	margin: 0 0 15px 0;
+	/*margin: 0 0 15px 0;*/
 	color: #588910;
 	font-size: 30px;
 }
@@ -2449,27 +2484,40 @@ p.ul_marg
 /* Login end */
 
 .price_comlain {
-	border-bottom:1px dashed #588910;
-	color: #588910;
-	white-space:nowrap;
-	font-weight:bold;
-	font-size: 14px;
-	cursor:pointer;
+    border-bottom:1px dashed #588910;
+    color: #588910;
+    white-space:nowrap;
+    font-weight:bold;
+    font-size: 14px;
+    cursor:pointer;
 }
+.addchart_block_table_addtochart > .price_comlain.fast_order1 {
+    position: relative;
+    border-bottom: 1px dashed #588910;
+    color: #588910;
+    white-space: nowrap;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    float:left;
+    left: -43px;
+    margin-left:0px;
+}
+
 .price_comlain:hover {
 	border-bottom-color: transparent;
 }
 
 .addchart_block_table_price>.price_comlain {
-	position:absolute !important;
-	left:0px !important;
-	top:53px !important;
-	border-bottom:1px dashed #588910;
-	color: #588910;
-	white-space:nowrap;
-	font-weight:bold;
-	font-size: 14px;
-	cursor:pointer;
+    position:absolute !important;
+    left:-5px !important;
+    top:53px !important;
+    border-bottom:1px dashed #588910;
+    color: #588910;
+    white-space:nowrap;
+    font-weight:bold;
+    font-size: 14px;
+    cursor:pointer;
 }
 .addchart_block_table_price>.price_comlain:hover {
 	border-bottom-color: transparent;
@@ -2477,14 +2525,14 @@ p.ul_marg
 
 /* lightbox */
 #light_box {
-	position: fixed;right: 0;bottom: 0;left: 0;
-	z-index: 1000;
-	width: 100%;
-	height: 100%;
-	background: url(./images/bg_lightbox_ie.png) repeat 0 0;
-	background: rgba(0,0,0,0.3);
-	/*display: none;*/
-	top: 0;
+    position: fixed;right: 0;bottom: 0;left: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background: url(./images/bg_lightbox_ie.png) repeat 0 0;
+    background: rgba(0,0,0,0.3);
+    /*display: none;*/
+    top: 0;
 }
 
 /* Container */
@@ -2819,11 +2867,11 @@ p.ul_marg
 /* List */			
 .tovar1 .product_icons 
 {
-	position:absolute;
-	top:53px;
-	width:450px;
-	/*left:220px;*/
-	height:80px;
+    position: relative;
+    /* top: 53px; */
+    width: 250px;
+    left: -7px;
+    height: 57px;
 }
 .tovar1 .product_icons .product_icon
 {
@@ -2929,11 +2977,11 @@ p.ul_marg
 		width:190px;
 	}
 	
-	.addchart_block_table_price .price + .prev_price
+	.addchart_block_table_price .price.margino + .prev_price
 	{
 		position: absolute;
-		right: 65px;
-		top: -35px;
+		right: 90px;
+		top: -30px;
 	}
 	.addchart_block_table_price .price + .prev_price.outdated
 	{
@@ -2950,9 +2998,12 @@ p.ul_marg
 	}
 	.addchart_block_table_price .price + .prev_price.lostandfound
 	{
-		left:1px;
+		position: absolute;
+                left: -5px;
 		top: 25px;
 		font-size:12px !Important;
+                right: 0px;
+                max-width: 100%;
 	}
         .productbox+.addchart_block_table_price .price + .prev_price.lostandfound{
 		left:1px;

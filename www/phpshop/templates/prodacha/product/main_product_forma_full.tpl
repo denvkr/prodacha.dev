@@ -122,7 +122,10 @@
 	$viking_catalog_search=false;
 	$row_sklad=false;
 	$row_outdated=false;
-	$sdvig_knopki_vlevo='left:-50px;';
+        $sdvig_knopki_vlevo='left:-50px;';
+	$sdvig_knopki_vlevo_buy='left:-50px;';
+	$sdvig_knopki_vlevo_ask='left:-50px;';
+	$sdvig_knopki_vlevo_old='left:-50px;'; 
 	$sql="select id,name,sklad,outdated from ".$SysValue['base']['products']." where category in (select id from ".$SysValue['base']['categories']." where name_rambler like '%stihl%' or name_rambler like '%viking%' or name like '%stihl%' or name like '%viking%') and id=".$us_;
 	//echo $sql;
 	$res=mysql_query($sql);
@@ -200,8 +203,7 @@
 		}
 		if (($row_sklad==true && $price_n==true && $outdated==false) || ($row_sklad==true && $price_n==false && $outdated==false)) {
 			echo '@ComStartNotice@';
-			echo '<span class="addtochart notice" style="'.$sdvig_knopki_vlevo.'">';
-			//echo '<input type="button" onclick="window.location.replace(\\'/users/notice.html?productId=@productUid@\\');"  value="'.$SysValue['lang']['product_notice'].'">';
+			echo '<span class="addtochart notice" style="'.$sdvig_knopki_vlevo_ask.'">';
 			echo '<input type="button" onclick="ask_product_availability(window.location,document.getElementsByClassName(\\'netref\\'));" value="'.$SysValue['lang']['product_notice'].'">';			
 			echo '</span>';
 			echo '@ComEndNotice@';
@@ -210,7 +212,6 @@
 			echo '<script type="text/javascript">';
 			echo '$(document).ready(function() {';
 			echo '$(".addchart_block_table_price > .price_comlain").click( function( event ) {';
-			//echo "	ga('send', 'event', 'buy-in-credit', 'click');";
 			echo '	$("#light_box1, #complainlayer-container").show();';
 			echo '	return false;';
 			echo '});';
@@ -222,7 +223,11 @@
 		} else if ($row_sklad==true && $outdated==true && !empty($analog)) {
 			echo '@ComStartNotice@';
 			echo '@ComEndNotice@';
-			echo '<a id="analog_href" style="visibility: hidden;" href="http://prodacha.ru/shop/UID_'.$analog.'.html"></a>';
+			echo '<span class="buybuttons" style="'.$sdvig_knopki_vlevo_old.'">';
+			echo '<a id="analog_href'.$GLOBALS['SysValue']['other']['productId'].'" href="http://prodacha.ru/shop/UID_'.$analog.'.html">¿Õ¿ÀŒ√</a>';
+			echo '<span class="outdated_message" style="position:relative;font-size:11px !important;left: 11px;"><!--noindex-->'.$GLOBALS['SysValue']['lang']['outdated_message3'].'<!--/noindex--></span>';
+                        echo '</span>';
+                        /*
 			echo '<script type="text/javascript">';
 			echo '$(document).ready(function() {';
 			echo '$(".addchart_block_table_price > .price_comlain").click( function( event ) {';
@@ -230,19 +235,34 @@
 			echo '	return false;';
 			echo '});});';
 			echo '</script>';
+                        */
+                        //echo 'outdated product witht analog';
 		} else if ($row_sklad==true && $outdated==true && empty($analog)) {
-			echo '';
+			echo '@ComStartNotice@';
+			echo '@ComEndNotice@';
+			echo '<span class="buybuttons inactive" style="'.$sdvig_knopki_vlevo_old.'">';
+			echo '<a id="analog_href'.$GLOBALS['SysValue']['other']['productId'].'" href="http://prodacha.ru/shop/UID_'.$analog.'.html" onclick="return false;">¿Õ¿ÀŒ√</a>';
+			echo '<span class="outdated_message" style="position:relative;font-size:11px !important;left: 11px;"><!--noindex-->'.$GLOBALS['SysValue']['lang']['outdated_message3'].'<!--/noindex--></span>';
+                        echo '</span>';
+                        /*
+			echo '<script type="text/javascript">';
+			echo '$(document).ready(function() {';
+			echo '$(".addchart_block_table_price > .price_comlain").click( function( event ) {';
+			echo '	window.location =$("#analog_href").attr("href");';
+			echo '	return false;';
+			echo '});});';
+			echo '</script>';
+                        */
+                        //echo 'outdated product without analog';
 		} else if ($row_sklad==false && $price_n==true) {
 			echo '@ComStartCart@';
-			//echo '<span class="addtochart" style="'.$sdvig_knopki_vlevo.'"><input type="button" onclick="javascript:AddToCart(@productUid@,\\'n@productUid@\\')"  value="'.$SysValue['lang']['product_sale'].'"></span>';
-                        echo '<span class="addtochart" style="'.$sdvig_knopki_vlevo.'"><span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@,\\'n@productUid@\\')">'.$SysValue['lang']['product_sale'].'</a></span>';
+                        echo '<span class="addtochart" style="'.$sdvig_knopki_vlevo_buy.'"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@,\\'n@productUid@\\')">'.$SysValue['lang']['product_sale'].'</a></span>';
 			echo '@ComEndCart@';
 			echo '@FastOrder@';
 			echo '@firstcreditpunch@';				
 			echo '<script type="text/javascript">';
 			echo '$(document).ready(function() {';
 			echo '$(".addchart_block_table_price > .price_comlain").click( function( event ) {';
-			//echo "	ga('send', 'event', 'buy-in-credit', 'click');";
 			echo '	$("#light_box1, #complainlayer-container").show();';
 			echo '	return false;';
 			echo '});';
@@ -253,8 +273,7 @@
 			echo '</script>';
 		} else {
 			echo '@ComStartCart@';
-			//echo '<span class="addtochart" style="'.$sdvig_knopki_vlevo.'"><input type="button" onclick="javascript:AddToCart(@productUid@,\\'n@productUid@\\')"  value="'.$SysValue['lang']['product_sale'].'"></span>';
-                        echo '<span class="addtochart" style="'.$sdvig_knopki_vlevo.'"><span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@,\\'n@productUid@\\')">'.$SysValue['lang']['product_sale'].'</a></span>';                        
+                        echo '<span class="addtochart" style="'.$sdvig_knopki_vlevo_buy.'"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@,\\'n@productUid@\\')">'.$SysValue['lang']['product_sale'].'</a></span>';                        
 			echo '@ComEndCart@';
 			echo '@FastOrder@';
 			echo '@firstcreditpunch@';				
@@ -272,7 +291,11 @@
 			echo '</script>';
 		}
 	}
-		
+        //echo $GLOBALS['SysValue']['other']['productId'].'<br>';
+        //echo $row_sklad.'<br>';
+        //echo $price_n.'<br>';
+        //echo $outdated.'<br>';
+	//echo $analog.'<br>';
 	function curPageURL() {
 		 $pageURL = 'http';
 		 if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
@@ -284,6 +307,7 @@
 		 }
 		 return $pageURL;
 	}
+
 	php@
 							</div>
 						</td>

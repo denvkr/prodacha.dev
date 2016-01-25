@@ -950,22 +950,22 @@ target.parents("span").next(".submenuhead").fadeIn('fast');
 }
 
 });
-        $('.menu').mouseleave(function() {
-$(document).find(".submenuhead").fadeOut('fast');
+$('.menu').mouseleave(function() {
+        $(document).find(".submenuhead").fadeOut('fast');
         $("#fade").css("display", "none");
 });
-        $('.login_popup').click(function() {
-$('.log_popup').fadeIn('fast');
+$('.login_popup').click(function() {
+        $('.log_popup').fadeIn('fast');
 });
-        $('.city_link').click(function() {
-$('.city_popup').fadeIn('fast');
+$('.city_link').click(function() {
+        $('.city_popup').fadeIn('fast');
 });
-        $('.log_popup, .city_popup').mouseleave(function() {
-$(this).fadeOut('fast');
+$('.log_popup, .city_popup').mouseleave(function() {
+        $(this).fadeOut('fast');
 });
         /* Sorted items paginate */
         $('#paging_container').pajinate({
-num_page_links_to_display : 4,
+        num_page_links_to_display : 4,
         items_per_page : 3,
         nav_label_prev : '<',
         nav_label_next : '>'
@@ -994,7 +994,7 @@ num_page_links_to_display : 4,
         //	credit_forma_el.onclick;
         //}
         if ($('#credit_forma').length) {
-$('#credit_forma').click();
+            $('#credit_forma').click();
 }
 if ($('#select_vendor_brand').length && $('#select_vendor_city').length) {
     $('#select_vendor_brand').change();
@@ -1047,28 +1047,28 @@ $(this).popover('hide');
         //console.log($(this).val());
         //console.log(regExpr.test($(this).val()));
         if (regExpr.test($(this).val()) === true && $(this).val() !== '') {
-$(this).css('border-color', '#abadb3');
-} else if (regExpr.test($(this).val()) === false && $(this).val() !== '') {
-$(this).css('border-color', '#ff5555');
-}
+            $(this).css('border-color', '#abadb3');
+        } else if (regExpr.test($(this).val()) === false && $(this).val() !== '') {
+            $(this).css('border-color', '#ff5555');
+        }
 });
-        $("#mail").mouseover(function() {
-$(this).popover({placement : 'right'});
+$("#mail").mouseover(function() {
+        $(this).popover({placement : 'right'});
         $(this).css('border-color', '#abadb3');
 });
 $("#name_person").mouseout(function() {
-$(this).popover('hide');
+        $(this).popover('hide');
         var regExpr = new RegExp('^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5* -_]{3,40}$', 'ig');
         //console.log($(this).val());
         //console.log(regExpr.test($(this).val()));
         if (regExpr.test($(this).val()) === true && $(this).val() !== '') {
-$(this).css('border-color', '#abadb3');
-} else if (regExpr.test($(this).val()) === false && $(this).val() !== '') {
-$(this).css('border-color', '#ff5555');
-}
+            $(this).css('border-color', '#abadb3');
+        } else if (regExpr.test($(this).val()) === false && $(this).val() !== '') {
+            $(this).css('border-color', '#ff5555');
+        }
 });
         $("#name_person").mouseover(function() {
-$(this).popover({placement : 'right'});
+        $(this).popover({placement : 'right'});
         $(this).css('border-color', '#abadb3');
 });
         //console.log($(this).inputmask("getmetadata")["name_en"]);
@@ -1076,12 +1076,12 @@ $(this).popover({placement : 'right'});
         if (typeof ($.browser.android) === 'undefined')
         $("#tel_name").inputmask("mask", {mask: "+7(999)999-99-99"}); //{mask: "+7(9##)###-##-##"}
         else if (typeof ($.browser.android) !== 'undefined' && $.browser.android === true){
-$("#tel_name").attr("data-content", "¬ведите моб. телефон без восьмерки в формате: [9011234567]");
+        $("#tel_name").attr("data-content", "¬ведите моб. телефон без восьмерки в формате: [9011234567]");
         $("#tel_name").attr("placeholder", "9011234567");
         $("#tel_name").attr("maxlength", "10");
 }
 $("#tel_name").mouseout(function() {
-$(this).popover('hide');
+        $(this).popover('hide');
         if (typeof ($.browser.android) === 'undefined')
         var regExpr = new RegExp('^\+[7]\([0-9]{3}\)[0-9]{3}\-[0-9]{2}\-[0-9]{2}$', 'ig');
         else if (typeof ($.browser.android) !== 'undefined' && $.browser.android === true)
@@ -1089,42 +1089,42 @@ $(this).popover('hide');
         //console.log($(this).val());
         //console.log(regExpr.test($(this).val()));
         if (regExpr.test($(this).val()) === true && $(this).val() !== '') {
-$(this).css('border-color', '#abadb3');
-} else if (regExpr.test($(this).val()) === false && $(this).val() !== '') {
-$(this).css('border-color', '#ff5555');
-}
+            $(this).css('border-color', '#abadb3');
+        } else if (regExpr.test($(this).val()) === false && $(this).val() !== '') {
+            $(this).css('border-color', '#ff5555');
+        }
 });
-        $("#tel_name").mouseover(function() {
-$(this).popover({placement : 'right'});
+$("#tel_name").mouseover(function() {
+        $(this).popover({placement : 'right'});
         $(this).css('border-color', '#abadb3');
 });
-        $("#tel_name").keyup(function(){
-$("#tel2").val($(this).val());
+$("#tel_name").keyup(function(){
+        $("#tel2").val($(this).val());
 })
-        $("#edost_to_city").mouseout(function() {
-$(this).popover('hide');
+$("#edost_to_city").mouseout(function() {
+        $(this).popover('hide');
 });
-        $("#edost_to_city").mouseover(function() {
-$(this).popover({placement : 'right'});
+$("#edost_to_city").mouseover(function() {
+        $(this).popover({placement : 'right'});
 });
-        $("input[name='dos_ot'],input[name='dos_do']").each(function() {
-$(this).inputmask("mask", {mask: "99"});
-        $(this).mouseout(function() {
-//$(this).popover('hide');
-if (typeof ($.browser.android) === 'undefined')
-        var regExpr = new RegExp('^(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)$', 'ig');
+$("input[name='dos_ot'],input[name='dos_do']").each(function() {
+    $(this).inputmask("mask", {mask: "99"});
+    $(this).mouseout(function() {
+        //$(this).popover('hide');
+        if (typeof ($.browser.android) === 'undefined')
+            var regExpr = new RegExp('^(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)$', 'ig');
         if (typeof ($.browser.android) !== 'undefined' && $.browser.android === true)
-        var regExpr = new RegExp('^(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)$', 'ig');
+            var regExpr = new RegExp('^(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)$', 'ig');
         //console.log($(this).val());
         //console.log(regExpr.test($(this).val()));
         //console.log(typeof($.browser.android));
         //console.log($.browser.android);
         if (regExpr.test($(this).val()) === true && $(this).val() !== '') {
-$(this).css('border-color', '#abadb3');
-} else if (regExpr.test($(this).val()) === false && $(this).val() !== '') {
-$(this).css('border-color', '#ff5555');
-}
-});
+            $(this).css('border-color', '#abadb3');
+        } else if (regExpr.test($(this).val()) === false && $(this).val() !== '') {
+            $(this).css('border-color', '#ff5555');
+        }
+    });
 });
         $("input[name='org_name']").inputmask("mask", {mask: "*",
         "repeat": 100,
@@ -1345,13 +1345,25 @@ fillTKtablePart();
                 if ($('.prev_price.lostandfound').length){
                     $('.prev_price.lostandfound').each(function(index) {
                         //исключение дл€ блоков вывода по 3 купить,посмотреть аналог
-                        if ($(this).css('left')!='150px' && $(this).css('margin')!== '-15px 0px 0px 10px' && $(this).prev('div').prev('.price').prev('.addtochart').length)
-                            $(this).html('<!--noindex-->уточн€йте наличие<!--/noindex-->');
-                                //console.log($(this).prev('div').prev('.price').prev('.addtochart').length);
+                        //if ($(this).css('left')!='150px' && $(this).css('margin')!== '-15px 0px 0px 10px' && $(this).prev('div').prev('.price').prev('.addtochart').length)
+                            //$(this).html('<!--noindex-->уточн€йте наличие<!--/noindex-->');
+                            //console.log($(this).prev('div').prev('.price').prev('.addtochart').length);
+                        //дл€ каталогов по 3 в р€д?    
                         if ($(this).parent('.price:eq(0)').prev('.addtochart:eq(0)').children('input[type="button"]:eq(0)').val()===' ак купить?')
                             $(this).html('<!--noindex-->уточн€йте наличие<!--/noindex-->');                                
-                        if ($(this).next('.price').next('.buybuttons:eq(0)').children('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').val()==='”точнить')
+                        //дл€ каталогов по 1 в р€д?    
+                        if ($(this).prev('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').val()===' ак купить?')
+                            $(this).html('<!--noindex-->уточн€йте наличие<!--/noindex-->');                                
+                        //if ($(this).next('.price').next('.buybuttons:eq(0)').children('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').val()==='”точнить')
+                            //console.log($(this).prev('.addtochart.notice:eq(0)').html());
+                        //индивидуальные карточки товаров
+                        //console.log($(this).prev('.price.margino:eq(0)').parent('.addchart_block_table_price:eq(0)').parent('td:first').next('td:first').children('.addchart_block_table_addtochart:eq(0)').children('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').attr('type'));
+                        if ($(this).prev('.price.margino:eq(0)').parent('.addchart_block_table_price:eq(0)').parent('td:first').next('td:first').children('.addchart_block_table_addtochart:eq(0)').children('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').val()==='”точнить')
                             $(this).html('<!--noindex-->уточн€йте наличие<!--/noindex-->');
+                        
+                        if ($(this).prev('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').val()==='”точнить')
+                            $(this).html('<!--noindex-->уточн€йте наличие<!--/noindex-->');
+
                         //дл€ каталогов типа 551    
                         if ($(this).next('.price').next('.buybuttons:eq(0)').children('.addtochart:eq(0)').children('input[type="button"]:eq(0)').val()==='”точнить')
                             $(this).html('<!--noindex-->уточн€йте наличие<!--/noindex-->');

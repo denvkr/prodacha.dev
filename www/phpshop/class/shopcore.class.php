@@ -583,7 +583,7 @@ class PHPShopShopCore extends PHPShopCore {
             	$mod_price=$this->add_space_to_price($mod_price);
 		        
 		$this->set('productPrice',$mod_price);
-                $this->set('productPriceRub', '');
+                //$this->set('productPriceRub', '');
 
             }
 
@@ -619,7 +619,7 @@ class PHPShopShopCore extends PHPShopCore {
         		$this->set('collaboration','lostandfound');
         		//$this->set('productPriceRub', $this->lang('sklad_mesage'));
         		$this->set('price_comlain','<span class="price_comlain" ><noindex>нашли дешевле?</noindex></span>');
-                        $this->set('productPriceRub', '');
+                        //$this->set('productPriceRub', '');
         	}
         	//снят с производства
         	if ( !(empty($row['sklad'])) && !(empty($row['outdated'])) ) {
@@ -651,11 +651,15 @@ class PHPShopShopCore extends PHPShopCore {
                                                 '});});'.
                                                 '</script>');
                              */
+                            if ($s1===false) {
                             $this->set('price_comlain','<a id="analog_href'.$row['id'].'" href="/shop/UID_'.$row['analog'].'.html">АНАЛОГ</a>
                                                         <span class="outdated_message" style="position:relative;font-size:11px !important;left: -12px"><!--noindex-->'.$this->lang('outdated_message3').'<!--/noindex--></span>');
+                            }
                         } else {
+                            if ($s1===false) {
                             $this->set('price_comlain','<a id="analog_href'.$row['id'].'" href="/shop/UID_'.$row['analog'].'.html" onclick="return false;">АНАЛОГ</a>
                                                         <span class="outdated_message" style="position:relative;font-size:11px !important;left: -12px"><!--noindex-->'.$this->lang('outdated_message3').'<!--/noindex--></span>');
+                            }
                         }
 
         	}
