@@ -116,17 +116,18 @@
 		
 	$us_ = $id;
 
-    //Для каталога stihl модифицируем кнопку уточнить
+        //Для каталога stihl модифицируем кнопку уточнить
 
-    $stihl_catalog_search=false;
+        $stihl_catalog_search=false;
 	$viking_catalog_search=false;
 	$row_sklad=false;
 	$row_outdated=false;
         $sdvig_knopki_vlevo='left:-50px;';
+        $sdvig_knopki_vlevo_stihl='left:-25px;';
 	$sdvig_knopki_vlevo_buy='left:-50px;';
 	$sdvig_knopki_vlevo_ask='left:-50px;';
 	$sdvig_knopki_vlevo_old='left:-50px;'; 
-	$sql="select id,name,sklad,outdated from ".$SysValue['base']['products']." where category in (select id from ".$SysValue['base']['categories']." where name_rambler like '%stihl%' or name_rambler like '%viking%' or name like '%stihl%' or name like '%viking%') and id=".$us_;
+	$sql="select id,name,sklad,outdated,analog from ".$SysValue['base']['products']." where name like '%stihl%' or name like '%viking%' and id=".$us_;
 	//echo $sql;
 	$res=mysql_query($sql);
     while ($catalog_id_rows=mysql_fetch_row($res)) {
@@ -142,6 +143,7 @@
 			}
 			if ($catalog_id_rows[3]==1) {
 				$row_outdated=true;
+				$analog=$catalog_id_rows[4];
 			}				
 		}          	 
     }
@@ -152,21 +154,33 @@
 		} else {
 			$region_info='m';
 		}
-		echo '@ComStartNotice@';		
-		if ($row_sklad==true && $row_outdated==false) {
-			//echo '<span class="addtochart notice"> <input type="button" onclick="window.location.replace(\\'/users/notice.html?productId=@productUid@\\');" value="'.$SysValue['lang']['product_notice'].'" /> </span>';//@productNotice@
-			if ($viking_catalog_search==true) {
-				echo '<span class="addtochart notice" style="'.$sdvig_knopki_vlevo.'"> <input type="button" style="font-size:9px;" onclick="viking_window(\\''.$region_info.'\\',\\'/shop/UID_'.$us_.'.html\\',document.getElementsByClassName(\\'netref\\'))"  value="'.$SysValue['lang']['stihl_string'].'" /> </span>';		
-			} else {
-				echo '<span class="addtochart notice" style="'.$sdvig_knopki_vlevo.'"> <input type="button" style="font-size:9px;" onclick="stihl_window(\\''.$region_info.'\\',\\'/shop/UID_'.$us_.'.html\\',document.getElementsByClassName(\\'netref\\'))"  value="'.$SysValue['lang']['stihl_string'].'" /> </span>';
-			}
+		echo '@ComStartNotice@';
 
-		} else if ($row_sklad==true && $row_outdated==true) {
+		if ($row_sklad==true && $row_outdated==false) {
+			if ($viking_catalog_search==true) {
+				echo '<span class="addtochart notice" style="'.$sdvig_knopki_vlevo_stihl.'"> <input type="button" style="font-size:9px;" onclick="viking_window(\\''.$region_info.'\\',\\'/shop/UID_'.$us_.'.html\\',document.getElementsByClassName(\\'netref\\'))"  value="'.$SysValue['lang']['stihl_string'].'" /> </span>';
+			} else {
+				echo '<span class="addtochart notice" style="'.$sdvig_knopki_vlevo_stihl.'"> <input type="button" style="font-size:9px;" onclick="stihl_window(\\''.$region_info.'\\',\\'/shop/UID_'.$us_.'.html\\',document.getElementsByClassName(\\'netref\\'))"  value="'.$SysValue['lang']['stihl_string'].'" /> </span>';
+			}
+		} else if ($row_sklad==true && $row_outdated==true && !empty($analog)) {
+			echo '@ComStartNotice@';
+			echo '@ComEndNotice@';
+			echo '<span class="buybuttons" style="'.$sdvig_knopki_vlevo_old.'">';
+			echo '<a id="analog_href'.$GLOBALS['SysValue']['other']['productId'].'" href="http://prodacha.ru/shop/UID_'.$analog.'.html">АНАЛОГ</a>';
+			echo '<span class="outdated_message" style="position:relative;font-size:11px !important;left: 11px;"><!--noindex-->'.$GLOBALS['SysValue']['lang']['outdated_message3'].'<!--/noindex--></span>';
+                        echo '</span>';
+		} else if ($row_sklad==true && $row_outdated==true && empty($analog)) {
+			echo '@ComStartNotice@';
+			echo '@ComEndNotice@';
+			echo '<span class="buybuttons inactive" style="'.$sdvig_knopki_vlevo_old.'">';
+			echo '<a id="analog_href'.$GLOBALS['SysValue']['other']['productId'].'" href="http://prodacha.ru/shop/UID_'.$analog.'.html" onclick="return false;">АНАЛОГ</a>';
+			echo '<span class="outdated_message" style="position:relative;font-size:11px !important;left: 11px;"><!--noindex-->'.$GLOBALS['SysValue']['lang']['outdated_message3'].'<!--/noindex--></span>';
+                        echo '</span>';
 		} else {
 			if ($viking_catalog_search==true) {
-				echo '<span class="addtochart notice" style="'.$sdvig_knopki_vlevo.'"> <input type="button" style="font-size:9px;" onclick="viking_window(\\''.$region_info.'\\',\\'/shop/UID_'.$us_.'.html\\',document.getElementsByClassName(\\'netref\\'))"  value="'.$SysValue['lang']['stihl_string'].'" /> </span>';		
+				echo '<span class="addtochart notice" style="'.$sdvig_knopki_vlevo_stihl.'"> <input type="button" style="font-size:9px;" onclick="viking_window(\\''.$region_info.'\\',\\'/shop/UID_'.$us_.'.html\\',document.getElementsByClassName(\\'netref\\'))"  value="'.$SysValue['lang']['stihl_string'].'" /> </span>';		
 			} else {
-				echo '<span class="addtochart notice" style="'.$sdvig_knopki_vlevo.'"> <input type="button" style="font-size:9px;" onclick="stihl_window(\\''.$region_info.'\\',\\'/shop/UID_'.$us_.'.html\\',document.getElementsByClassName(\\'netref\\'))"  value="'.$SysValue['lang']['stihl_string'].'" /> </span>';
+				echo '<span class="addtochart notice" style="'.$sdvig_knopki_vlevo_stihl.'"> <input type="button" style="font-size:9px;" onclick="stihl_window(\\''.$region_info.'\\',\\'/shop/UID_'.$us_.'.html\\',document.getElementsByClassName(\\'netref\\'))"  value="'.$SysValue['lang']['stihl_string'].'" /> </span>';
 			}
 		}
 		echo '@ComEndNotice@';
@@ -174,7 +188,6 @@
 			echo '<script type="text/javascript">';
 			echo '$(document).ready(function() {';
 			echo '$(".addchart_block_table_price > .price_comlain").click( function( event ) {';
-			//echo "	ga('send', 'event', 'buy-in-credit', 'click');";
 			echo '	$("#light_box1, #complainlayer-container").show();';
 			echo '	return false;';
 			echo '});';

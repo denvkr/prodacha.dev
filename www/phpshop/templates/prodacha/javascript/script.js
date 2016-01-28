@@ -214,47 +214,46 @@ $.fancybox
         // $('div.bic_box').show();
 }
 });
-        //в кредит из карточки
-        $("input.creditinputcart").click(function(e){
-
-var id = $(this).attr('rel');
-        var url = 'http://prodacha.ru/crediter.php?id=' + id;
-        var cnt = $(this).attr('cnt');
-        var isAdded = AddToCartNum(id, cnt);
-        if (isAdded === true)
-{
-ga('send', 'event', 'buy-in-credit', 'click');
-        //console.log('buy-in-credit');
-        $.fancybox
-        ({
-        width : 300,
+//в кредит из карточки
+$("input.creditinputcart").click(function(e){
+            var id = $(this).attr('rel');
+            var url = 'http://prodacha.ru/crediter.php?id=' + id;
+            var cnt = $(this).attr('cnt');
+            var isAdded = AddToCartNum(id, cnt);
+            if (isAdded === true)
+            {
+            ga('send', 'event', 'buy-in-credit', 'click');
+            //console.log('buy-in-credit');
+            $.fancybox
+            ({
+                width : 300,
                 height : 130,
                 overlayOpacity:0,
                 autoSize:false,
                 type: 'iframe',
                 href: url
-        });
+            });
 }
 });
-        // Отметить все
-        // собираем информацию о существующих классах товаров
-        var manufacturers_products = [];
-        $('#manufacturers_products div[class^="tool_"]').each(function(){
-manufacturers_products.push($(this).attr('class'));
+// Отметить все
+// собираем информацию о существующих классах товаров
+var manufacturers_products = [];
+$('#manufacturers_products div[class^="tool_"]').each(function(){
+        manufacturers_products.push($(this).attr('class'));
 });
-        //console.log(manufacturers_products);
-        // Оставляем Производителей (инпуты) с товарами
-        $('#filter_ input[type="checkbox"]').each(function(){
-var classNames = explode(';', $(this).attr('classToAdd'));
+//console.log(manufacturers_products);
+// Оставляем Производителей (инпуты) с товарами
+$('#filter_ input[type="checkbox"]').each(function(){
+        var classNames = explode(';', $(this).attr('classToAdd'));
         var classExists = false;
         //console.log(classNames);
         for (var i in classNames)
-{
-if (classNames[i] && in_array(classNames[i], manufacturers_products))
-{
-classExists = true;
-        break;
-}
+        {
+        if (classNames[i] && in_array(classNames[i], manufacturers_products))
+        {
+            classExists = true;
+            break;
+        }
 }
 
 if (!classExists)
@@ -1359,6 +1358,9 @@ fillTKtablePart();
                         //индивидуальные карточки товаров
                         //console.log($(this).prev('.price.margino:eq(0)').parent('.addchart_block_table_price:eq(0)').parent('td:first').next('td:first').children('.addchart_block_table_addtochart:eq(0)').children('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').attr('type'));
                         if ($(this).prev('.price.margino:eq(0)').parent('.addchart_block_table_price:eq(0)').parent('td:first').next('td:first').children('.addchart_block_table_addtochart:eq(0)').children('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').val()==='Уточнить')
+                            $(this).html('<!--noindex-->уточняйте наличие<!--/noindex-->');
+
+                        if ($(this).prev('.price.margino:eq(0)').parent('.addchart_block_table_price:eq(0)').parent('td:first').next('td:first').children('.addchart_block_table_addtochart:eq(0)').children('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').val()==='Как купить?')
                             $(this).html('<!--noindex-->уточняйте наличие<!--/noindex-->');
                         
                         if ($(this).prev('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').val()==='Уточнить')

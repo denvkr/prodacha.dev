@@ -1220,7 +1220,24 @@ display:inline-block;
         text-align: center;
 	/*text-indent: -999em;*/
 }
-.content .item .addtochart input:hover,.content .item .addtochart a:hover, .sorting .content .item1 .addtochart input:hover,.content .item1 .addtochart a:hover,.buybuttons>a[id^="analog_href"]:hover,.productbox .parameters .buybuttons>a[id^="analog_href"]:hover,.content .item .addtochart input[type="button"][value="Уточнить"]:hover,.content .item .addtochart input[type="button"][value="Как купить?"]:hover,.content .item1 .addtochart.stihlvikingbuy input[type="button"][value="Как купить?"]:hover
+.addchart_block_table_addtochart .addtochart.notice input[value="Как купить?"]
+{
+        position: relative;
+        /*left: -25px;*/
+	display: block;
+        padding-left: 12px;
+	width: 104px;
+	height: 26px;
+	border: none;
+	background: url("../images/add_chart.png") no-repeat left top;
+	color: #fff;/*#333;*/
+	text-transform: uppercase;
+	font-size: 11px;
+        text-align: center;
+	/*text-indent: -999em;*/
+}
+
+.content .item .addtochart input:hover,.content .item .addtochart a:hover, .sorting .content .item1 .addtochart input:hover,.content .item1 .addtochart a:hover,.buybuttons>a[id^="analog_href"]:hover,.productbox .parameters .buybuttons>a[id^="analog_href"]:hover,.content .item .addtochart input[type="button"][value="Уточнить"]:hover,.content .item .addtochart input[type="button"][value="Как купить?"]:hover,.content .item1 .addtochart.stihlvikingbuy input[type="button"][value="Как купить?"]:hover,.addchart_block_table_addtochart .addtochart.notice input[value="Как купить?"]:hover
 {
 	background: url("../images/add_chart_hover.png") no-repeat left top;
 	text-transform: uppercase;
@@ -2738,7 +2755,6 @@ p.ul_marg
 			cursor:pointer;
 		}
 
-		/* Г‚Г±ГЇГ«Г»ГўГ ГёГЄГ  */		
 		.product_icon_desc
 		{
 			position: absolute;
@@ -2746,16 +2762,12 @@ p.ul_marg
 			z-index: 10000;
 			display: none;
 			margin-left: 24px;
-			
 			width: auto !important;
-			
 			border: 2px solid #94c946;
 			border-radius: 10px;
 			background: #f4f4f1;
-			
 			 -webkit-box-shadow: 0px 5px 6px 3px rgba(0, 0, 0, 0.19);
 			box-shadow: 0px 5px 6px 3px rgba(0, 0, 0, 0.19);
-			
 			behavior: url('PIE.htc');
 		}
 
@@ -2766,16 +2778,12 @@ p.ul_marg
 			z-index: 10000;
 			display: none;
 			margin-left: 24px;
-			
 			width: auto !important;
-			
 			border: 2px solid #94c946;
 			border-radius: 10px;
 			background: #f4f4f1;
-			
 			 -webkit-box-shadow: 0px 5px 6px 3px rgba(0, 0, 0, 0.19);
-			box-shadow: 0px 5px 6px 3px rgba(0, 0, 0, 0.19);
-			
+			box-shadow: 0px 5px 6px 3px rgba(0, 0, 0, 0.19);			
 			behavior: url('PIE.htc');
 		}
 
@@ -2884,21 +2892,19 @@ p.ul_marg
 	}
 	.tovar1  .product_icons .product_icon .product_icon_img img
 	{
-	max-width:30px;
+                max-width:30px;
 	}
 	
 	
 	.tovar1 .product_icon_desc
 	{
-		bottom: 80px;
+		bottom: 62px;
+                margin-left: -1px;
+                font-size:100%;
 	}
 	.tovar1 .product_icon
 	{      
 		font-size:10px;
-	}
-	.tovar1 .product_icon_desc
-	{
-		font-size:100%;
 	}
 
 	.menutype ul
