@@ -977,6 +977,7 @@ h5, .h4 {
 .content .special div.tovar,
 .content .bought div.tovar
 {
+    /*
 	position: relative;
 	display: block;
 	float: left;
@@ -984,8 +985,28 @@ h5, .h4 {
 	width: 243px;
 	height: 275px;
 	background: url("../images/prod_bg.png") no-repeat scroll 0 0 transparent;
+*/
+ }
+.tovar{
+    position: relative;
+    display: block;
+    float: left;
+    margin: 0 30px 15px 0;
+    width: 243px;
+    height: 275px;
+    background-image: url(../images/prod_bg.png) !important;
+    background-position: 0px 0px;
+    background-size: initial;
+    background-repeat-x: no-repeat;
+    background-repeat-y: no-repeat;
+    background-attachment: scroll;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: transparent;
 }
-
+.tovar:hover{
+    background-position: 0 -276px;    
+}
 .sorting .content .item 
 
 {
@@ -1007,7 +1028,7 @@ h5, .h4 {
 .content .special div.tovar:hover,
 .content .bought div.tovar:hover
 {
-	background-position: 0 -276px;
+	/*background-position: 0 -276px;*/
 }
 .popular .item .new
 {
