@@ -1094,7 +1094,7 @@ function ChekUserForma(){
 
 
 function do_err(err){
-	console.log(err);
+	//console.log(err);
     return true;
 }
 
@@ -1341,14 +1341,36 @@ function ToCart(xid,num,xxid) {
     });
 }
 
+// Ajax добавление в корзину
+function ToCartSync(xid,num,xxid) {
+    var truePath=dirPath();
+
+    $.ajax({
+        url: truePath+'/phpshop/ajax/cartloadsync.php',
+        type: 'post',
+        data: 'xid='+ xid+'&num='+ num+'&xxid='+xxid,
+        dataType: 'json',
+        async: false,
+        beforeSend: function() {},
+        complete: function() {},
+        success: function(json) {
+        if (json['ok'] == '1'){
+            document.getElementById('num').innerHTML = (json['num']||'');
+            document.getElementById('sum').innerHTML = (json['sum']||'');
+        }
+        }
+    });
+}
+
 // Добавление товара в корзину 1 шт.
 function AddToCart(xid) {
     var num=1;
     var xxid=0;
     //console.log('before_addtochart_window');    
-    //addtochart_window(xid);
+    addtochart_window(xid);
     //console.log('after_addtochart_window');
-    //return true;
+
+    return true;
 
     if (confirm("Добавить выбранный товар ("+num+" шт.) в корзину?")){
         ToCart(xid,num,xxid);
@@ -1404,8 +1426,9 @@ function AddToCart2(xid,option) {
     //}
     //console.log(typeof a_temp);
     if (option==1)
+    {
         window.location.replace('/order/');
-
+    }
     return true;
 }
 
@@ -1418,23 +1441,31 @@ function AddToCart2(xid,option) {
  * @returns {Boolean}
  */
 function AddToCartNum(xid,pole,option) {
-    var num=Number(document.getElementById(pole).value);
+    var num=Number(document.getElementById(pole).value); 
     var xxid=xid;
     if (num<1) num=1;
     //if(confirm("Добавить выбранный товар ("+num+" шт.) в корзину?"))
 	//{
-    ToCart(xid,num,xxid);
+    ToCartSync(xid,num,xxid);
     if(document.getElementById("order")) document.getElementById("order").style.display='block';
-    var script   = document.createElement("script");
-    script.type  = "text/javascript";
-    script.text  = "ga('send', 'event', 'buy', 'click');";// use this for inline script
+    ga('send', 'event', 'buy', 'click');
+    //var script   = document.createElement("script");
+    //script.type  = "text/javascript";
+    //script.text  = "ga('send', 'event', 'buy', 'click');";// use this for inline script
     //script.text  += "console.log('buy');";              // use this for inline script
-    document.body.appendChild(script);
+    //document.body.appendChild(script);
     // remove from the dom
-    document.body.removeChild(document.body.lastChild);        
-    if ($('.fancybox-item.fancybox-close:eq(0)').length) $.fancybox.close();//$('.fancybox-item.fancybox-close:eq(0)').click();
-    if (option===1)
+    //document.body.removeChild(document.body.lastChild);        
+    if ($('.fancybox-item.fancybox-close:eq(0)').length) 
+        $.fancybox.close();//$('.fancybox-item.fancybox-close:eq(0)').click();
+        if ($('#_tool_'+xid).length){
+            var top = $('#_tool_'+xid).offset(); //Getting Y of target element
+            $("body,html,document").scrollTop(top.top);            
+        }
+        //console.log('11111111');
+    if (option===1){
         window.location.replace('/order/');
+    }
     return true;
     /*        
     }

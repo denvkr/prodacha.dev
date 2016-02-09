@@ -785,11 +785,23 @@ class PHPShopShop extends PHPShopShopCore {
 		//print_r($this->PHPShopNav);
 			
 	if ($this->PHPShopNav->getPage()==1) {
-		// Описание каталога
+                if ($this->PHPShopCategory->getContent_h()!='' && $this->PHPShopCategory->getContent()!='') {
+                // Описание каталога верх
+                $this->set('catalogContent_h', $this->PHPShopCategory->getContent_h().'<div class="more_href page_nava">
+                                            <a class="scroll" href="#more" title="перейти к подробному описанию."><span>Подробнее</span><img id="more_arrow_img" src="..images/city_choose_arrow.png"></a>
+                                            </div>');
+                } else
+                $this->set('catalogContent_h', $this->PHPShopCategory->getContent_h());
+                // Описание каталога низ
 		$this->set('catalogContent', Parser($this->PHPShopCategory->getContent()));
-				
-		// Описание каталога
-		$this->set('catalogContent_h', $this->PHPShopCategory->getContent_h());
+                /*
+                if ($this->PHPShopCategory->getContent_h()!='' && $this->PHPShopCategory->getContent()!='') {
+                   $this->set('more_href','<div class="more_href page_nava" style="position:relative;width:100px;height:20px;clear:both;">
+                                            <a class="scroll" href="#more" title="перейти к подробному описанию."><span>Подробнее</span><img id="more_arrow_img" src="../images/city_choose_arrow.png" vspace="0" hspace="6px"></a>
+                                            </div>'); 
+                }
+                 */
+                
 	}
 		//echo $this->dataArray[2][category];
 		//$this->stihl_catalog_settings($parent_category_row);
@@ -1247,10 +1259,22 @@ class PHPShopShop extends PHPShopShopCore {
 			$this->set('productPageThis', $this->PHPShopNav->getPage());
 		}
 		if ($this->PHPShopNav->getPage()==1) {
-			// Описание каталога
+                        if ($this->PHPShopCategory->getContent_h()!='' && $this->PHPShopCategory->getContent()!='') {
+                        // Описание каталога верх
+			$this->set('catalogContent_h', $this->PHPShopCategory->getContent_h().'<div class="more_href page_nava">
+                                            <a class="scroll" href="#more" title="перейти к подробному описанию."><span>Подробнее</span><img id="more_arrow_img" src="..images/city_choose_arrow.png"></a>
+                                            </div>');
+                        } else
+			$this->set('catalogContent_h', $this->PHPShopCategory->getContent_h());
+                        // Описание каталога низ
 			$this->set('catalogContent', Parser($this->PHPShopCategory->getContent()));
-			// Описание каталога
-			$this->set('catalogContent_h', $this->PHPShopCategory->getContent_h());	
+                        /*
+                        if ($this->PHPShopCategory->getContent_h()!='' && $this->PHPShopCategory->getContent()!='') {
+                           $this->set('more_href','<div class="more_href page_nava" style="position:relative;width:100px;height:20px;clear:both;">
+                                                    <a class="scroll" href="#more" title="перейти к подробному описанию."><span>Подробнее</span><img id="more_arrow_img" src="../images/city_choose_arrow.png" vspace="0" hspace="6px"></a>
+                                                    </div>'); 
+                        }
+                         */
 		}
 		//echo 'catalog_end';
 		// Подключаем шаблон
@@ -1820,7 +1844,7 @@ class PHPShopShop extends PHPShopShopCore {
 					.'<div class="thumb">'
 					.'<table width="100%" border="0" cellspacing="0" cellpadding="0">'
 					.'<tbody><tr>'
-					.'<td height="150" align="top"><a href="/shop/UID_'.$prod_row['id'].'.html" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"><img src="'.$prod_row['pic_small'].'" lowsrc="phpshop/templates/prodacha/images/shop/no_photo.gif" onerror="NoFoto(this,\'phpshop/templates/prodacha\')" onload="EditFoto(this,)" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'
+					.'<td height="150" align="top"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="phpshop/templates/prodacha/images/shop/no_photo.gif" onerror="NoFoto(this,\'phpshop/templates/prodacha\')" onload="EditFoto(this,)" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'// alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"
 					.'</tr>'
 					.'</tbody></table>'
 					.'</div>'
@@ -1862,14 +1886,15 @@ class PHPShopShop extends PHPShopShopCore {
 				} else {
 					if ($cell==1 || $cell==2 || $cell==3 || $cell==4) {
 						//echo $this->lang('outdated_message');
+                                                //style="position: relative;display: block;float: left;margin: 0 30px 15px 0;width: 243px;height: 275px;background-image: url(..images/prod_bg.png) !important;background-position-x: 0px;background-position-y: 0px;background-size: initial;background-repeat-x: no-repeat;background-repeat-y: no-repeat;background-attachment: scroll;background-origin: initial;background-clip: initial;background-color: transparent;"
 						if ($cnt == 1) {
-							$disp_cat.='<tr><td class="panel_l panel_3_1"><div class="tovar" style="position: relative;display: block;float: left;margin: 0 30px 15px 0;width: 243px;height: 275px;background-image: url(..images/prod_bg.png) !important;background-position-x: 0px;background-position-y: 0px;background-size: initial;background-repeat-x: no-repeat;background-repeat-y: no-repeat;background-attachment: scroll;background-origin: initial;background-clip: initial;background-color: transparent;" onmouseover="this.style.backgroundPosition=\'0px -276px\';" onmouseout="this.style.backgroundPosition=\'0px 0px\';">';
+							$disp_cat.='<tr><td class="panel_l panel_3_1"><div class="tovar" onmouseover="this.style.backgroundPosition=\'0px -276px\';" onmouseout="this.style.backgroundPosition=\'0px 0px\';">';
 							$disp_cat.='<div class="item" id="_tool_'.$prod_row['id'].'">'
 							.'<span class="new"></span>'
 							.'<div class="thumb">'
 							.'<table width="100%" border="0" cellspacing="0" cellpadding="0">'
 							.'<tr>'
-							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'
+							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'// alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"
 							.'</tr>'
 							.'</table>'
 							.'</div>'
@@ -1900,13 +1925,14 @@ class PHPShopShop extends PHPShopShopCore {
 						}
 					}
 					if ($cell==2 || $cell==3 || $cell==4) {
+                                                //style="position: relative;display: block;float: left;margin: 0 30px 15px 0;width: 243px;height: 275px;background-image: url(..images/prod_bg.png) !important;background-position-x: 0px;background-position-y: 0px;background-size: initial;background-repeat-x: no-repeat;background-repeat-y: no-repeat;background-attachment: scroll;background-origin: initial;background-clip: initial;background-color: transparent;"
 						if  ($cnt == 2) {
-							$disp_cat.='<td class="panel_r panel_3_2"><div class="tovar" style="position: relative;display: block;float: left;margin: 0 30px 15px 0;width: 243px;height: 275px;background-image: url(..images/prod_bg.png) !important;background-position-x: 0px;background-position-y: 0px;background-size: initial;background-repeat-x: no-repeat;background-repeat-y: no-repeat;background-attachment: scroll;background-origin: initial;background-clip: initial;background-color: transparent;" onmouseover="this.style.backgroundPosition=\'0px -276px\';" onmouseout="this.style.backgroundPosition=\'0px 0px\';"><div class="item" id="_tool_'.$prod_row['id'].'">'
+							$disp_cat.='<td class="panel_r panel_3_2"><div class="tovar" onmouseover="this.style.backgroundPosition=\'0px -276px\';" onmouseout="this.style.backgroundPosition=\'0px 0px\';"><div class="item" id="_tool_'.$prod_row['id'].'">'
 							.'<span class="new"></span>'
 							.'<div class="thumb">'
 							.'<table width="100%" border="0" cellspacing="0" cellpadding="0">'
 							.'<tr>'
-							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'
+							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'// alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"
 							.'</tr>'
 							.'</table>'
 							.'</div>'
@@ -1938,12 +1964,13 @@ class PHPShopShop extends PHPShopShopCore {
 					}
 					if ($cell==3 || $cell==4) {
 						if  ($cnt == 3) {
-							$disp_cat.='<td class="panel_l panel_3_2"><div class="tovar" style="position: relative;display: block;float: left;margin: 0 30px 15px 0;width: 243px;height: 275px;background-image: url(..images/prod_bg.png) !important;background-position-x: 0px;background-position-y: 0px;background-size: initial;background-repeat-x: no-repeat;background-repeat-y: no-repeat;background-attachment: scroll;background-origin: initial;background-clip: initial;background-color: transparent;" onmouseover="this.style.backgroundPosition=\'0px -276px\';" onmouseout="this.style.backgroundPosition=\'0px 0px\';"><div class="item" id="_tool_'.$prod_row['id'].'">'
+                                                        // style="position: relative;display: block;float: left;margin: 0 30px 15px 0;width: 243px;height: 275px;background-image: url(..images/prod_bg.png) !important;background-position-x: 0px;background-position-y: 0px;background-size: initial;background-repeat-x: no-repeat;background-repeat-y: no-repeat;background-attachment: scroll;background-origin: initial;background-clip: initial;background-color: transparent;"
+							$disp_cat.='<td class="panel_l panel_3_2"><div class="tovar" onmouseover="this.style.backgroundPosition=\'0px -276px\';" onmouseout="this.style.backgroundPosition=\'0px 0px\';"><div class="item" id="_tool_'.$prod_row['id'].'">'
 							.'<span class="new"></span>'
 							.'<div class="thumb">'
 							.'<table width="100%" border="0" cellspacing="0" cellpadding="0">'
 							.'<tr>'
-							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'
+							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'// alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"
 							.'</tr>'
 							.'</table>'
 							.'</div>'
@@ -1975,13 +2002,14 @@ class PHPShopShop extends PHPShopShopCore {
 					}
 					if ($cell==4) {
 						if  ($cnt == 4) {
-							$disp_cat.='<td class="panel_l panel_3_3"><div class="tovar"  style="position: relative;display: block;float: left;margin: 0 30px 15px 0;width: 243px;height: 275px;background-image: url(..images/prod_bg.png) !important;background-position-x: 0px;background-position-y: 0px;background-size: initial;background-repeat-x: no-repeat;background-repeat-y: no-repeat;background-attachment: scroll;background-origin: initial;background-clip: initial;background-color: transparent;" onmouseover="this.style.backgroundPosition=\'0px -276px\';" onmouseout="this.style.backgroundPosition=\'0px 0px\';"><div class="item" id="_tool_'.$prod_row['id'].'">'
+                                                        //style="position: relative;display: block;float: left;margin: 0 30px 15px 0;width: 243px;height: 275px;background-image: url(..images/prod_bg.png) !important;background-position-x: 0px;background-position-y: 0px;background-size: initial;background-repeat-x: no-repeat;background-repeat-y: no-repeat;background-attachment: scroll;background-origin: initial;background-clip: initial;background-color: transparent;"
+							$disp_cat.='<td class="panel_l panel_3_3"><div class="tovar" onmouseover="this.style.backgroundPosition=\'0px -276px\';" onmouseout="this.style.backgroundPosition=\'0px 0px\';"><div class="item" id="_tool_'.$prod_row['id'].'">'
 							.'<div class="item" id="_tool_'.$prod_row['id'].'">'
 							.'<span class="new"></span>'
 							.'<div class="thumb">'
 							.'<table width="100%" border="0" cellspacing="0" cellpadding="0">'
 							.'<tr>'
-							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'
+							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'// alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"
 							.'</tr>'
 							.'</table>'
 							.'</div>'

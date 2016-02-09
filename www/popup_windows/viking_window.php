@@ -1,5 +1,5 @@
 <?
-	$SysValue = parse_ini_file('phpshop/inc/config.ini', 1);
+	$SysValue = parse_ini_file('../phpshop/inc/config.ini', 1);
 
 	$item1=$SysValue['lang']['viking_window_string1'];
 	$item2=$SysValue['lang']['viking_window_string2'];

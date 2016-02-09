@@ -5,7 +5,7 @@
  * @tutorial https://trello.com/
  * @version 1.0
  */
-	$SysValue = parse_ini_file('phpshop/inc/config.ini', 1);
+	$SysValue = parse_ini_file('../phpshop/inc/config.ini', 1);
 	//print_r($_REQUEST);
 	//вывод информации в окно
 	$item1=$SysValue['lang']['stihl_window_string1'];

@@ -9,7 +9,7 @@
         </table></td>
     </tr>
     <tr>
-      <td height="130" valign="top"><div class="tovarDivName1"><a href="/shop/UID_@productUid@@nameLat@.html" title="@productName@">@productName@</a></div>
+      <td height="130" valign="top"><div class="tovarDivName1"><a href="/shop/UID_@productUid@@nameLat@.html">@productName@</a></div>
         <span class="tovarDivArt">
         @productArt@</span> @ComStart@
         <div class="tovarDivPrice1">@productPrice@ @productValutaName@<br />

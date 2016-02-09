@@ -37,12 +37,10 @@
 	<meta name="cmsmagazine" content="c45d4085c1835d45ae4ee5d8a8b6e1f9">
 	<meta http-equiv="Content-Type" content="text-html; charset=windows-1251">
 	<meta name="description" content="@pageDesc@">
-	<meta name="keywords" content="@pageKeyw@">
 	<meta name="copyright" content="@pageReg@">
 	<meta name="engine-copyright" content="PHPSHOP.RU, @pageProduct@">
 	<meta name="domen-copyright" content="@pageDomen@">
 	<meta content="General" name="rating">
-	<meta name="ROBOTS" content="ALL">
 	<meta name="viewport" content="width=device-width">
 	<link rel="shortcut icon" href="http://www.prodacha.ru/favicon.ico" type="image/x-icon"> 
 	<link rel="icon" href="http://www.prodacha.ru/favicon.ico" type="image/x-icon">
@@ -267,12 +265,7 @@
 	<div id="main">
 		<div class="left">
 			<div class="search">
-					<!--
-				   <form method="post" name="forma_search" action="/search/" onsubmit="return SearchChek()">
-					<input  class="keyword" type="text" name="words"  value="Я ищу..." onfocus="if(this.value=='Я ищу...'){this.value='';}" onblur="if(this.value==''){this.value='Я ищу...';}">
-					<input name="s" value="" class="input-search__button input-search__button--enabled" type="submit">
-				</form>
-				-->
+
 				<form action="/search/" role="search" method="post">
                                 <div class="input-group">
                                     <input name="words" maxlength="50" id="search" class="form-control" placeholder="Умный поиск" required type="text" data-trigger="manual" data-placement="bottom" data-html="true" data-container="body" data-toggle="popover">

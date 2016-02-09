@@ -54,6 +54,7 @@ php@</h1>
 <div class="simpletextbox_h">
 	@catalogContent_h@
 </div>
+<div class="splitter"></div>
 @php
 	//require_once ($_SERVER['DOCUMENT_ROOT'] . '/custom_config/menu-items_catalog_show-hide-choice-merge-equal.php');
 php@  
@@ -100,7 +101,7 @@ php@
 			<!-- paging container end -->
 			</div>
 			<!-- sorting end -->
-			<div class="simpletextbox">
+			<div id="more" class="simpletextbox">
 						@catalogContent@
 			</div>
 

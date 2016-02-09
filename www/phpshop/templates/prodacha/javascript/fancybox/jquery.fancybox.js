@@ -11,7 +11,7 @@
  */
 
 (function (window, document, $, undefined) {
-	"use strict";
+	//"use strict";
 
 	var H = $("html"),
 		W = $(window),
@@ -413,8 +413,8 @@
 			} else {
 				F.isOpen = F.isOpened = false;
 				F.isClosing = true;
-
-				$('.fancybox-item, .fancybox-nav').remove();
+                        console.log("'.fancybox-item,.fancybox-nav'.remove()");
+				$('.fancybox-item,.fancybox-nav').remove();
 
 				F.wrap.stop(true, true).removeClass('fancybox-opened');
 
@@ -1070,9 +1070,9 @@
 
 			if (previous) {
 				F.trigger('beforeChange', previous);
-
+                                console.log(".find('.fancybox-item,.fancybox-nav')");
 				previous.wrap.stop(true).removeClass('fancybox-opened')
-					.find('.fancybox-item, .fancybox-nav')
+					.find('.fancybox-item,.fancybox-nav')
 					.remove();
 			}
 
@@ -1963,7 +1963,8 @@
 			that.unbind('click.fb-start').bind('click.fb-start', run);
 
 		} else {
-			D.undelegate(selector, 'click.fb-start').delegate(selector + ":not('.fancybox-item, .fancybox-nav')", 'click.fb-start', run);
+                        console.log(":not('.fancybox-item,.fancybox-nav')");
+			D.undelegate(selector, 'click.fb-start').delegate(selector + ":not('.fancybox-item,.fancybox-nav')", 'click.fb-start', run); 
 		}
 
 		this.filter('[data-fancybox-start=1]').trigger('click');

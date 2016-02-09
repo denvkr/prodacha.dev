@@ -57,6 +57,7 @@ php@
 <div class="simpletextbox_h">
 	@catalogContent_h@
 </div>
+<div class="splitter"></div>
 <div class="filter_" id="filter_">
 <!--<div id="by_type" style="display:@display_status1@;font: 18px Myriad Pro;"><b>По типу</b></div>-->
 <div class="add_catalog" style="display:@display_status1@;">@catalogList@</div>
@@ -101,7 +102,7 @@ php@
 
 </div>
 <!-- sorting end -->
-			<div class="simpletextbox">
+			<div id="more" class="simpletextbox">
 						@catalogContent@
 			</div>
                                                 <div id="catalogList_hook_test">@display_custom_catalogList_hook_test@</div>

@@ -1381,11 +1381,12 @@ left: 115px;
 	line-height: 20px;
 }
 .content .simpletextbox_h{
-	float: left;
+	/*float: left;*/
 	clear: both;
-	
 	line-height: 20px;
+        z-index:auto;
 }
+
 .content .simpletextbox .more,.content .simpletextbox_h.more
 {
 	border-bottom: 1px dashed #588910;
@@ -1398,9 +1399,13 @@ left: 115px;
 	border-bottom: none;
 	content: ">";
 }
-.content .simpletextbox p,.content .simpletextbox_h p
+.content .simpletextbox p
 {
 	margin-bottom: 15px;
+}
+.content .simpletextbox_h p {
+    	margin-bottom: 15px;
+        display:inline;
 }
 .phone .name, .work_time .name
 {
@@ -3436,4 +3441,24 @@ span.price_cat_3
 	text-transform: uppercase;
         text-align: center;
         z-index:auto;
+}
+#more_arrow_img
+{
+    position:relative;
+    top:2px;
+    left:5px;
+    z-index:auto;
+}
+.more_href.page_nava {
+    position:relative;
+    width:100px;
+    left:8px;
+    display:inline;
+    z-index:auto;
+}
+.splitter {
+    position:relative;
+    height:20px;
+    width:100%;
+    z-index:auto;
 }

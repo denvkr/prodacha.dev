@@ -1375,8 +1375,7 @@ fillTKtablePart();
                             $(this).html('<!--noindex-->уточняйте наличие<!--/noindex-->');                        
                     });
                 }
-
-                });
+});
                 //функция обработки части форма forma_dost для Транспортных компаний
                     function fillTKtablePart(){
 
@@ -2024,7 +2023,7 @@ fillTKtablePart();
 
                 function fast_order_window2(my_url, referer_info) {
                 $.ajax({
-                url: '/fast_order.php',
+                url: '/popup_windows/fast_order.php',
                         type: 'post',
                         data: 'url=' + my_url,
                         dataType: 'json',
@@ -2033,7 +2032,7 @@ fillTKtablePart();
                         success: function(json) {
                         if (json['ok'] == '1'){
                         html = '<div class="fast_order_window_iframe" style"margin:10px,5px,5px,5px;">';
-                        html += '<form id="fast_order_form" action="http://prodacha.ru/snip_call.php" method="POST">';
+                        html += '<form id="fast_order_form" action="/snip_call.php" method="POST">';
                         html += '<div id="fast_order_window_item1" style="position:relative;top: 25px;left: 10px;font-size:18px;width:150px;"><b>' + json['item1'] + '</b></div>';
                         html += '<div id="fast_order_window_item2" style="position:relative;top: 70px;left: 10px;font-size:20px;">' + json['item2'] + '</div>';
                         if ((json['item6'].length + json['item7'].length + json['item8'].length) < 60) {
@@ -2082,13 +2081,14 @@ fillTKtablePart();
                                 html += '<input type="hidden" name="tovar_price_short" value="' + json['item7'] + '" />';
                                 html += '<input type="hidden" name="tovar_id" value="' + json['item10'] + '" />';
                                 html += '<input type="hidden" name="transact_id" value="' + json['item11'] + '" />';
+                                html += '<input type="hidden" name="window_type" value="fast_order_window2" />';
                                 html += '</form></div>';
                                 //ga('send', 'event', 'buy-fast', 'click');
                                 ga('send', 'pageview', '/buy-fast/open');
                                 ga('send', 'pageview');
                                 //console.log('buy-fast.click');		
 
-                                var url = 'http://prodacha.ru/fast_order_window.php';
+                                var url = '/popup_windows/fast_order_window.php';
                                 $.fancybox
                                 ({
                                 width : 600,
@@ -2111,7 +2111,7 @@ fillTKtablePart();
 
                 function ask_product_availability(my_url, referer_info) {
                 $.ajax({
-                url: '/ask_product_availability.php',
+                url: '/popup_windows/ask_product_availability.php',
                         type: 'post',
                         data: 'url=' + my_url,
                         dataType: 'json',
@@ -2123,18 +2123,17 @@ fillTKtablePart();
                         complete: function() {},
                         success: function(json) {
                         if (json['ok'] == '1'){
-                        html = '<div class="fast_order_window_iframe">'; //style="margin:10px,5px,5px,5px;"
-                                html += '<form id="fast_order_form" action="http://prodacha.ru/snip_call.php" method="POST">';
+                                html = '<div class="fast_order_window_iframe">'; //style="margin:10px,5px,5px,5px;"
+                                html += '<form id="fast_order_form" action="/snip_call.php" method="POST">';
                                 html += '<div id="fast_order_window_item1" style="position:relative;top: 25px;left: 10px;font-size:16px;width:150px;"><b>' + json['item1'] + '</b></div>';
                                 html += '<div id="fast_order_window_item5" style="position:relative;margin-top: 7px;margin-left: 160px;font-size:12px;width:400px;word-wrap: break-word;">' + json['item5'] + '</div>';
                                 html += '<div id="fast_order_window_item2" style="position:relative;top: 20px;left: 10px;font-size:20px;width:150px">' + json['item2'] + '</div>';
-                                if ((json['item6'].length + json['item7'].length + json['item8'].length) < 60) {
-                        yo_name_top_comment = 25;
-                        } else
-                                if ((json['item6'].length + json['item7'].length + json['item8'].length) > 100) {
-                        yo_name_top_comment = 25;
+                        if ((json['item6'].length + json['item7'].length + json['item8'].length) < 60) {
+                                yo_name_top_comment = 25;
+                        } else if ((json['item6'].length + json['item7'].length + json['item8'].length) > 100) {
+                                yo_name_top_comment = 25;
                         } else {
-                        yo_name_top_comment = 25;
+                                yo_name_top_comment = 25;
                         }
 
                         html += '<div id="fast_order_window_item3" style="position:relative;top: ' + (yo_name_top_comment + 13).toString() + 'px;left: 10px;font-size:20px;width:150px">' + json['item3'] + '</div>';
@@ -2148,13 +2147,13 @@ fillTKtablePart();
                                 yo_mail_top = 'style="position: relative;left: 0px;top: -75px;width:180px;height:25px;font-size:17px;"';
                                 popup_ok_top = 'style="position: relative;left: 460px;top: -145px;border: none;width:105px;height:50px;padding: 5px 5px 25px 5px !important;"';
                         } else if ((json['item6'].length + json['item7'].length + json['item8'].length) > 100) {
-                        font_size = 'style="font-size:12px;position:relative;display:inline;width:450px !Important;height:70px;left:0px;top:-30px;word-wrap: break-word;"';
+                                font_size = 'style="font-size:12px;position:relative;display:inline;width:450px !Important;height:70px;left:0px;top:-30px;word-wrap: break-word;"';
                                 yo_name_top = 'style="position: relative;left: 0px;top: -100px;width:180px;height:25px;font-size:17px;"';
                                 yo_phone_top = 'style="position: relative;left: 0px;top: -88px;width:180px;height:25px;font-size:17px;"';
                                 yo_mail_top = 'style="position: relative;left: 0px;top: -75px;width:180px;height:25px;font-size:17px;"';
                                 popup_ok_top = 'style="position: relative;left: 460px;top: -145px;border: none;width:105px;height:50px;padding: 5px 5px 25px 5px !important;"';
                         } else {
-                        font_size = 'style="font-size:13px;position:relative;display:inline;width:430px !Important;height:70px;left:0px;top:-30px;word-wrap: break-word;"';
+                                font_size = 'style="font-size:13px;position:relative;display:inline;width:430px !Important;height:70px;left:0px;top:-30px;word-wrap: break-word;"';
                                 yo_name_top = 'style="position: relative;left: 0px;top: -100px;width:180px;height:25px;font-size:17px;"';
                                 yo_phone_top = 'style="position: relative;left: 0px;top: -88px;width:180px;height:25px;font-size:17px;"';
                                 yo_mail_top = 'style="position: relative;left: 0px;top: -75px;width:180px;height:25px;font-size:17px;"';
@@ -2176,15 +2175,19 @@ fillTKtablePart();
                                 html += '<input type="hidden" name="region" value="' + json['item9'] + '" />';
                                 html += '<input type="hidden" name="zakaz_info" value="' + json['item1'] + '" />';
                                 html += '<input type="hidden" name="tovar_price" value="' + json['item7'] + ' ' + json['item8'] + '" />';
+                                html += '<input type="hidden" name="window_type" value="ask_product_availability" />';
                                 html += '</form></div>';
-                                var script = document.createElement("script");
-                                script.type = "text/javascript";
-                                script.text = "ga('send', 'event', 'utochnit', 'open');ga('send', 'pageview', '/utochnit/open');ga('send', 'pageview');"; // use this for inline script
+                                //var script = document.createElement("script");
+                                //script.type = "text/javascript";
+                                //script.text = "ga('send', 'event', 'utochnit', 'open');ga('send', 'pageview', '/utochnit/open');ga('send', 'pageview');"; // use this for inline script
                                 //script.text  += "console.log('utochnit.open');";
-                                document.body.appendChild(script);
+                                //document.body.appendChild(script);
                                 // remove from the dom
-                                document.body.removeChild(document.body.lastChild);
-                                var url = 'http://prodacha.ru/ask_product_availability_window.php';
+                                //document.body.removeChild(document.body.lastChild);
+                                //ga('send', 'event', 'utochnit', 'open');
+                                //ga('send', 'pageview', '/utochnit/open');
+                                //ga('send', 'pageview');
+                                var url = '/popup_windows/ask_product_availability_window.php';
                                 $.fancybox
                                 ({
                                 width : 600,
@@ -2212,7 +2215,7 @@ fillTKtablePart();
                 function ask_reverse_call(referer_info) {
 
                 $.ajax({
-                url: '/ask_reverse_call.php',
+                url: '/popup_windows/ask_reverse_call.php',
                         type: 'post',
                         data: 'a=1',
                         dataType: 'json',
@@ -2224,9 +2227,9 @@ fillTKtablePart();
                         complete: function() {},
                         success: function(json) {
                         if (json['ok'] == '1'){
-                        console.log('ask_reverse_call');
+                        //console.log('ask_reverse_call');
                                 html = '<div class="fast_order_window_iframe">';
-                                html += '<form id="fast_order_form" action="http://prodacha.ru/snip_call.php" method="POST">';
+                                html += '<form id="fast_order_form" action="/snip_call.php" method="POST">';
                                 html += '<div id="fast_order_window_item1" style="position: absolute; font-size: 16px; width: 150px; display: inline; left: 10px; top: 25px;"><b>' + json['item1'] + '</b></div>';
                                 html += '<div id="fast_order_window_item5" style="position: absolute; font-size: 16px; width: 400px; word-wrap: break-word; display: inline-block; left: 180px; top: 25px;">' + json['item5'] + '</div>';
                                 html += '<div id="fast_order_window_item3" style="position: absolute; top: 80px; left: 10px; font-size: 20px; width: 150px; display: inline;">Ваше имя:</div>';
@@ -2265,8 +2268,10 @@ fillTKtablePart();
                                 html += '<input type="button" style="position: absolute; left: 485px; top: 215px; border: none; width: 105px; height: 50px; padding: 5px 5px 25px 5px !important;" class="popup_ok" id="fast_order_ok" value="OK" onclick="check_fast_order_values(1);"></div>';
                                 html += '<input type="hidden" id="referer_info" name="referer_info" value="' + referer_info[0].innerHTML.toString().trim() + '" />';
                                 html += '<input type="hidden" name="region" value="' + json['item9'] + '" />';
-                                html += '<input type="hidden" name="zakaz_info" value="' + json['item1'] + '" /></form></div>';
-                                var url = 'http://prodacha.ru/ask_reverse_call_window.php';
+                                html += '<input type="hidden" name="zakaz_info" value="' + json['item1'] + '" />';
+                                html += '<input type="hidden" name="window_type" value="ask_reverse_call" />';
+                                html += '</form></div>';
+                                var url = '/popup_windows/ask_reverse_call_window.php';
                                 $.fancybox
                                 ({
                                 width : 600,
@@ -2289,43 +2294,43 @@ fillTKtablePart();
 
                 function check_fast_order_values(caller) {
                 if (caller == 1) {
-                var yo_nameRegularIssue = false;
+                        var yo_nameRegularIssue = false;
                         var yo_phoneRegularIssue = false;
-                        if ($('#yo_name').val() == '' && $('#yo_phone').val() == '') {
-                alert('Возникла ошибка. Пожалуйста проверьте вводимые данные: Имя,телефон.');
+                if ($('#yo_name').val() == '' && $('#yo_phone').val() == '') {
+                        alert('Возникла ошибка. Пожалуйста проверьте вводимые данные: Имя,телефон.');
                         return false;
                 } else if ($('#yo_name').val() == '' && $('#yo_phone').val() != '') {
-                alert('Возникла ошибка. Пожалуйста проверьте вводимые данные: Имя.');
+                        alert('Возникла ошибка. Пожалуйста проверьте вводимые данные: Имя.');
                         return false;
                 } else if ($('#yo_name').val() != '' && $('#yo_phone').val() == '') {
-                alert('Возникла ошибка. Пожалуйста проверьте вводимые данные: телефон.');
+                        alert('Возникла ошибка. Пожалуйста проверьте вводимые данные: телефон.');
                         return false;
                 } else {
-                field = document.getElementById('yo_name');
+                        field = document.getElementById('yo_name');
                         var regExpr = new RegExp('^[\-A-Za-z\u0410-\u044F]+$', 'ig');
-                        if (regExpr.test(field.value) === false) {
-                yo_nameRegularIssue = true;
+                if (regExpr.test(field.value) === false) {
+                        yo_nameRegularIssue = true;
                 } else {
-                yo_nameRegularIssue = false;
+                        yo_nameRegularIssue = false;
                 }
 
                 field = document.getElementById('yo_phone');
-                        var regExpr = new RegExp('^[\+0-9]{7,12}$', 'ig');
-                        if (regExpr.test(field.value) === false) {
-                yo_phoneRegularIssue = true;
+                var regExpr = new RegExp('^[\+0-9]{7,12}$', 'ig');
+                if (regExpr.test(field.value) === false) {
+                        yo_phoneRegularIssue = true;
                 } else {
-                yo_phoneRegularIssue = false;
+                        yo_phoneRegularIssue = false;
                 }
 
                 //console.log(yo_nameRegularIssue,yo_phoneRegularIssue,yo_mailRegularIssue);
                 if (yo_nameRegularIssue === true && yo_phoneRegularIssue === true) {
-                alert("Возникла ошибка. Пожалуйста проверьте вводимые данные: Имя (Имя должно содержать только буквы), Телефон (номер должен быть в формате +[xxx]код страны [xxx]код оператора [xxxxxxx]  номер абонента).");
+                        alert("Возникла ошибка. Пожалуйста проверьте вводимые данные: Имя (Имя должно содержать только буквы), Телефон (номер должен быть в формате +[xxx]код страны [xxx]код оператора [xxxxxxx]  номер абонента).");
                         return false;
                 } else if (yo_nameRegularIssue === true && yo_phoneRegularIssue === false) {
-                alert("Возникла ошибка. Пожалуйста проверьте вводимые данные: Имя (Имя должно содержать только буквы).");
+                        alert("Возникла ошибка. Пожалуйста проверьте вводимые данные: Имя (Имя должно содержать только буквы).");
                         return false;
                 } else if (yo_nameRegularIssue === false && yo_phoneRegularIssue === true) {
-                alert("Возникла ошибка. Пожалуйста проверьте вводимые данные: Телефон (номер должен быть в формате +[xxx]код страны [xxx]код оператора [xxxxxxx]  номер абонента).");
+                        alert("Возникла ошибка. Пожалуйста проверьте вводимые данные: Телефон (номер должен быть в формате +[xxx]код страны [xxx]код оператора [xxxxxxx]  номер абонента).");
                         return false;
                 } else if (yo_nameRegularIssue === false && yo_phoneRegularIssue === false) {
                 if (typeof document.getElementById("fast_order_form") != 'undefined') {
@@ -2342,47 +2347,47 @@ fillTKtablePart();
                 }
 
                 if (caller == 2) {
-                var yo_nameRegularIssue = false;
+                        var yo_nameRegularIssue = false;
                         var yo_phoneRegularIssue = false;
                         var yo_mailRegularIssue = false;
-                        if ($('#yo_name').val() == '' && $('#yo_phone').val() == '' && $('#yo_mail').val() == '') {
-                alert('Возникла ошибка. Пожалуйста проверьте вводимые данные: Имя,телефон,Email.');
+                if ($('#yo_name').val() == '' && $('#yo_phone').val() == '' && $('#yo_mail').val() == '') {
+                        alert('Возникла ошибка. Пожалуйста проверьте вводимые данные: Имя,телефон,Email.');
                         return false;
                 } else if (($('#yo_name').val() == '' && $('#yo_phone').val() != '' && $('#yo_mail').val() != '')) {
-                alert('Возникла ошибка. Пожалуйста проверьте вводимые данные: Имя.');
+                        alert('Возникла ошибка. Пожалуйста проверьте вводимые данные: Имя.');
                         return false;
                 } else if (($('#yo_name').val() != '' && $('#yo_phone').val() == '' && $('#yo_mail').val() == '')) {
-                alert('Возникла ошибка. Пожалуйста проверьте вводимые данные: телефон,Email.');
+                        alert('Возникла ошибка. Пожалуйста проверьте вводимые данные: телефон,Email.');
                         return false;
                 } else if (($('#yo_name').val() == '' && $('#yo_phone').val() != '' && $('#yo_mail').val() == '')) {
-                alert('Возникла ошибка. Пожалуйста проверьте вводимые данные: Имя,Email.');
+                        alert('Возникла ошибка. Пожалуйста проверьте вводимые данные: Имя,Email.');
                         return false;
                 } else if (($('#yo_name').val() == '' && $('#yo_phone').val() == '' && $('#yo_mail').val() != '')) {
-                alert('Возникла ошибка. Пожалуйста проверьте вводимые данные: Имя,телефон.');
+                        alert('Возникла ошибка. Пожалуйста проверьте вводимые данные: Имя,телефон.');
                         return false;
                 } else {
-                field = document.getElementById('yo_name');
+                        field = document.getElementById('yo_name');
                         var regExpr = new RegExp('^[\-A-Za-z\u0410-\u044F]+$', 'ig');
                         if (regExpr.test(field.value) === false) {
-                yo_nameRegularIssue = true;
+                        yo_nameRegularIssue = true;
                 } else {
-                yo_nameRegularIssue = false;
+                        yo_nameRegularIssue = false;
                 }
 
                 field = document.getElementById('yo_phone');
                         var regExpr = new RegExp('^[\+0-9]{7,12}$', 'ig');
                         if (regExpr.test(field.value) === false) {
-                yo_phoneRegularIssue = true;
+                        yo_phoneRegularIssue = true;
                 } else {
-                yo_phoneRegularIssue = false;
+                        yo_phoneRegularIssue = false;
                 }
 
                 field = document.getElementById('yo_mail');
                         var regExpr = new RegExp('^[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?', 'ig');
                         if (regExpr.test(field.value) === false) {
-                yo_mailRegularIssue = true;
+                        yo_mailRegularIssue = true;
                 } else {
-                yo_mailRegularIssue = false;
+                        yo_mailRegularIssue = false;
                 }
                 //console.log(yo_nameRegularIssue,yo_phoneRegularIssue,yo_mailRegularIssue);
                 if (yo_nameRegularIssue === true && yo_phoneRegularIssue === true && yo_mailRegularIssue === true) {
@@ -2411,15 +2416,22 @@ fillTKtablePart();
                 //(yo_nameRegularIssue===false && yo_phoneRegularIssue===true && yo_mailRegularIssue===false) ||
                 //if ($('#stihl_window_iframe').length) $('#stihl_window_iframe').hide();
                 //if ($('#fast_order_window_iframe').length) $('#fast_order_window_iframe').hide();
-                if (typeof document.getElementById("fast_order_form") != 'undefined') document.getElementById("fast_order_form").submit();
-                        var script = document.createElement("script");
-                        script.type = "text/javascript";
-                        script.text = "ga('send', 'event', 'utochnit', 'submit');ga('send', 'pageview', '/utochnit/submit');ga('send', 'pageview');"; // use this for inline script
+                
+                if (typeof document.getElementById("fast_order_form") != 'undefined') {
+                    ga('send', 'event', 'utochnit', 'open');
+                    ga('send', 'pageview', '/utochnit/open');
+                    ga('send', 'pageview');
+                    document.getElementById("fast_order_form").submit();
+                    return true;
+
+                }
+                        //var script = document.createElement("script");
+                        //script.type = "text/javascript";
+                        //script.text = "ga('send', 'event', 'utochnit', 'submit');ga('send', 'pageview', '/utochnit/submit');ga('send', 'pageview');"; // use this for inline script
                         //script.text  += "console.log('utochnit.submit');";              // use this for inline script
-                        document.body.appendChild(script);
+                        //document.body.appendChild(script);
                         // remove from the dom
-                        document.body.removeChild(document.body.lastChild);
-                        return true;
+                        //document.body.removeChild(document.body.lastChild);
                 }
                 }
                 }
@@ -2442,7 +2454,7 @@ fillTKtablePart();
                 function stihl_window(region_info, my_url, referer_info) {
                 //console.log('{reg_info:"'+region_info+'",my_url:"'+my_url+'"}');
                 $.ajax({
-                url: '/stihl_window.php',
+                url: '/popup_windows/stihl_window.php',
                         type: 'post',
                         data: 'reg_info=' + region_info + '&my_url=' + my_url,
                         dataType: 'json',
@@ -2462,7 +2474,7 @@ fillTKtablePart();
                         html += '<div id="stihl_window_img2"></div>';
                         html += '<div id="stihl_window_string2">' + json['item2'] + '</div>';
                         html += '<div id="stihl_window_string3">' + json['item3'] + '</div>';
-                        html += '<form id="fast_order_form" action="http://prodacha.ru/snip_call.php" method="POST">';
+                        html += '<form id="fast_order_form" action="/snip_call.php" method="POST">';
                         //html +=	'<div id="fast_order_window_item1" style="position:relative;top: 25px;left: 10px;font-size:16px;width:150px;"><b>'+json['item1_1']+'</b></div>';
                         //html +=	'<div id="fast_order_window_item5" style="position:relative;margin-top: 7px;margin-left: 160px;font-size:12px;width:400px;word-wrap: break-word;">'+json['item5_1']+'</div>';
                         html += '<div id="fast_order_window_item2" style="position:relative;top:20px;width:150px;font: 18px/1.2 \'Myriad Pro\', sans-serif;">' + json['item2_1'] + '</div>';
@@ -2524,6 +2536,7 @@ fillTKtablePart();
                         html += '<input type="hidden" name="tovar_price" value="' + json['item7_1'] + ' ' + json['item8_1'] + '" />';
                         html += '<input type="hidden" name="tovar_price_short" value="' + json['item7_1'] + '" />';
                         html += '<input type="hidden" name="tovar_id" value="' + json['item10_2'] + '" />';
+                        html += '<input type="hidden" name="window_type" value="stihl_window" />';
                         html += '</form>';
                         html += '<div id="fast_order_window_item11" style="position:relative;display:block;top:-97px;height:20px;">' + json['item11'].toString().trim() + '</div>';
                         
@@ -2559,7 +2572,7 @@ fillTKtablePart();
                                 // remove from the dom
                                 document.body.removeChild(document.body.lastChild);
                                 //$('#footer').after(html);
-                                var url = 'http://prodacha.ru/ask_product_availability_window.php';
+                                var url = '/popup_windows/ask_product_availability_window.php';
                                 $.fancybox
                                 ({
                                 width : 800,
@@ -2586,7 +2599,7 @@ fillTKtablePart();
 
                 function viking_window(region_info, my_url, referer_info){
                 $.ajax({
-                url: '/viking_window.php',
+                url: '/popup_windows/viking_window.php',
                         type: 'post',
                         data: 'reg_info=' + region_info + '&my_url=' + my_url,
                         dataType: 'json',
@@ -2606,7 +2619,7 @@ fillTKtablePart();
                         html += '<div id="stihl_window_img2"></div>';
                         html += '<div id="stihl_window_string2">' + json['item2'] + '</div>';
                         html += '<div id="stihl_window_string3">' + json['item3'] + '</div>';
-                        html += '<form id="fast_order_form" action="http://prodacha.ru/snip_call.php" method="POST">';
+                        html += '<form id="fast_order_form" action="/snip_call.php" method="POST">';
                         //html +=	'<div id="fast_order_window_item1" style="position:relative;top: 25px;left: 10px;font-size:16px;width:150px;"><b>'+json['item1_1']+'</b></div>';
                         //html +=	'<div id="fast_order_window_item5" style="position:relative;margin-top: 7px;margin-left: 160px;font-size:12px;width:400px;word-wrap: break-word;">'+json['item5_1']+'</div>';
                         html += '<div id="fast_order_window_item2" style="position:relative;top:20px;width:150px;font: 18px/1.2 \'Myriad Pro\', sans-serif;">' + json['item2_1'] + '</div>';
@@ -2667,6 +2680,7 @@ fillTKtablePart();
                         html += '<input type="hidden" name="tovar_price" value="' + json['item7_1'] + ' ' + json['item8_1'] + '" />';
                         html += '<input type="hidden" name="tovar_price_short" value="' + json['item7_1'] + '" />';                      
                         html += '<input type="hidden" name="tovar_id" value="' + json['item10_2'] + '" />';
+                        html += '<input type="hidden" name="window_type" value="viking_window" />';
                         html += '</form>';
                         html += '<div id="fast_order_window_item11" style="position:relative;display:block;top:-97px;height:20px;">' + json['item11'].toString().trim() + '</div>';
                         if (region_info == 'm') {
@@ -2700,7 +2714,7 @@ fillTKtablePart();
                         document.body.appendChild(script);
                         // remove from the dom
                         document.body.removeChild(document.body.lastChild);
-                        var url = 'http://prodacha.ru/ask_product_availability_window.php';
+                        var url = '/popup_windows/ask_product_availability_window.php';
                         $.fancybox
                         ({
                         width : 800,
@@ -2750,30 +2764,31 @@ fillTKtablePart();
                 //console.log(json['item7']);
                 //console.log(json['item8']);
                 html = '<div class="addtochart_window">';
-                html += '<div id="addtochart_window" style="position:relative;top:1px;width:740px;float:left;"><label style="font-size:18px;">Товар добавлен в корзину</label></div>';//background-color:#A0A0A0;
+                html += '<div id="addtochart_window" style="position:relative;top:1px;width:630px;float:left;"><label style="font-size:18px;">Товар добавлен в корзину</label></div>';//background-color:#A0A0A0;
                 html += '<div style="position:absolute;clear:both;width:100%;"></div>';
-                //html += '<form id="addtochart_form" action="http://prodacha.dev/snip_call.php" method="POST">';
-                html += '<div id="product_info_zone_left" style="position: absolute;top:20px;width:480px;height:200px;float:left;">';
+                //html += '<form id="addtochart_form" action="/snip_call.php" method="POST">';
+                html += '<div id="product_info_zone_left" style="position: absolute;top:20px;width:480px;height:220px;float:left;">';
                 html += '    <div id="product_info" style="position: absolute;margin: 20px 5px 5px 5px;">';
-                html += '        <div id="prod_image" name="prod_image" style="position:absolute;display:inline-block;top:1px;width:180px;height:160px;overflow-y:hidden;overflow-x:hidden;"><img src="'+json['item6']+'" alt="'+json['item2']+'" height="160" width="180" style="height:100%;width:100%;"></div>';
-                html += '        <div id="prod_name" name="prod_name" style="position:absolute;display:inline;top:15px;left:200px;width:300px;height:35px;font: 15px/1.2 \'Myriad Pro\', sans-serif;">'+json['item2']+'</div>';
+                html += '        <div id="prod_image" name="prod_image" style="position:absolute;display:inline-block;top:1px;width:195px;height:195px;overflow-y:hidden;overflow-x:hidden;"><img src="'+json['item6']+'" alt="'+json['item2']+'" height="195" width="195" style="max-height: 90%;max-width: 100%;"></div>';
+                html += '        <div id="prod_name" name="prod_name" style="position:absolute;display:inline;top:15px;left:200px;width:445px;height:35px;font: 15px/1.2 \'Myriad Pro\', sans-serif;">'+json['item2']+'</div>';
                 html += '        <div id="prod_price_info" name="prod_price_info" style="position:absolute;display:inline;top:66px;left:200px;width:250px;height:30px;font: 14px/1.2 \'Myriad Pro\', sans-serif;">Цена: <span id="prod_price_info_val" style="font: 16px/1.2 \'Myriad Pro\', sans-serif;font-weight:bold;">'+json['item3']+'</span>&nbsp;'+json['item4']+'</div>';
-                html += '        <div id="prod_num_info" style="position:absolute;display:inline;top:100px;left:200px;width:80px;height:30px;font: 14px/1.2 \'Myriad Pro\', sans-serif;">Количество:</div>';
+                html += '        <div id="prod_num_info" style="position:absolute;display:inline;top:100px;left:200px;width:80px;height:30px;font: 14px/1.2 \'Myriad Pro\', sans-serif;padding-top:2px;">Количество:</div>';
                 html += '        <div style="position:absolute;display:inline;top:100px;left:280px;width:160px;height:30px;">';
                 html += '        <input type="image" name="edit_del" src="/phpshop/templates/prodacha/images/shop/cart_delete.gif" value="delet" alt="Удалить" width="20" height="20" onclick="ChangeNumProduct2(\'num_new'+id+'\',\'-\');" style="position:absolute;display:inline;vertical-align:middle"/>';
                 html += '        <input type="hidden" name="id_delete" value="'+id+'"/>';
-                html += '        <input type="text" value="1" size="1" maxlength="3" name="num_new'+id+'" id="num_new'+id+'" onchange="ChangeNumProduct2(\'num_new'+id+'\',\'=\');" style="font: 14px/1.2 \'Myriad Pro\', sans-serif;position:absolute;display:inline;left:20px;"/>';
+                html += '        <input type="text" value="1" size="1" maxlength="3" name="num_new'+id+'" id="num_new'+id+'" onchange="ChangeNumProduct2(\'num_new'+id+'\',\'=\');" style="font: 14px/1.2 \'Myriad Pro\', sans-serif;position:absolute;display:inline;left:25px;margin-top: 1px;width: 30px;"/>';
                 html += '        <input type="image" name="edit_num" src="/phpshop/templates/prodacha/images/shop/cart_add.gif" value="edit" width="20" height="20" alt="Пересчитать" hspace="5" onclick="ChangeNumProduct2(\'num_new'+id+'\',\'+\');" style="position:absolute;display:inline;vertical-align:middle;;left:60px;"/>';
                 html += '        <input type="hidden" name="id_edit" value="'+id+'"/>';
                 html += '        </div>';
                 html += '    </div>';
-                html += '    <a href="#_tool_'+id+'" id="a_temp_'+id+'" style="position: absolute;top: 185px;border: none;width:175px;height:30px;padding: 5px 5px 25px 5px !important;float:left;font: 16px/1.2 \'Myriad Pro\', sans-serif;" onclick="AddToCartNum('+id+',\'num_new'+id+'\',2)">< Продолжить покупки</a>'; //<!--<a href="#_tool_'+id+'" id="a_temp_'+id+'" style="position: absolute;top: 185px;border: none;width:175px;height:30px;padding: 5px 5px 25px 5px !important;float:left;font: 16px/1.2 \'Myriad Pro\', sans-serif;" onclick="redirect_addtochart_window('+id+');">< Продолжить покупки</a>--> <input type="button" style="position: absolute;top: 185px;border: none;width:175px;height:30px;padding: 5px 5px 25px 5px !important;float:left;font: 16px/1.2 \'Myriad Pro\', sans-serif;" class="ok" id="addtochart_ok" value="< Продолжить покупки" onclick="redirect_addtochart_window('+id+');"/> <a id="a_temp_'+id+'" data-fancybox-href="#_tool_'+id+'" class="fancybox" href="javascript:;" style="position: absolute;top: 185px;border: none;width:175px;height:30px;padding: 5px 5px 25px 5px !important;float:left;font: 16px/1.2 \'Myriad Pro\', sans-serif;">< Продолжить покупки</a>
+                //html += '    <a href="#_tool_'+id+'" id="a_temp_'+id+'" style="position: relative;top:195px;left:205px; border: none;width:175px;height:30px;float:left;font: 16px/1.2 \'Myriad Pro\', sans-serif;" onclick="AddToCartNum('+id+',\'num_new'+id+'\',2);">< Продолжить покупки</a>'; //<!--<a href="#_tool_'+id+'" id="a_temp_'+id+'" style="position: absolute;top: 185px;border: none;width:175px;height:30px;padding: 5px 5px 25px 5px !important;float:left;font: 16px/1.2 \'Myriad Pro\', sans-serif;" onclick="redirect_addtochart_window('+id+');">< Продолжить покупки</a>--> <input type="button" style="position: absolute;top: 185px;border: none;width:175px;height:30px;padding: 5px 5px 25px 5px !important;float:left;font: 16px/1.2 \'Myriad Pro\', sans-serif;" class="ok" id="addtochart_ok" value="< Продолжить покупки" onclick="redirect_addtochart_window('+id+');"/> <a id="a_temp_'+id+'" data-fancybox-href="#_tool_'+id+'" class="fancybox" href="javascript:;" style="position: absolute;top: 185px;border: none;width:175px;height:30px;padding: 5px 5px 25px 5px !important;float:left;font: 16px/1.2 \'Myriad Pro\', sans-serif;">< Продолжить покупки</a>
+                html += '    <input type="button" id="a_temp_'+id+'" style="position: relative;top:188px;left:205px; border: none;width:175px;height:30px;float:left;font: 16px/1.2 \'Myriad Pro\', sans-serif;" onclick="AddToCartNum('+id+',\'num_new'+id+'\',2);"value="< Продолжить покупки"/>';
                 html += '</div>';
-                html += '<div id="product_info_zone_right" style="position:absolute;width:225px;height:200px;left:530px;top:40px;border-radius:3px;">';//background-color:#A0A0A0;
-                html += '    <div id="order_info" style="position: absolute;margin: 20px 5px 5px 5px;">';
-                html += '    <div style="padding: 55px 5px 5px 15px;"><label style="font: 16px/1.2 \'Myriad Pro\', sans-serif;"> В корзине: </label><label id="prod_count_label" style="font: 16px/1.2 \'Myriad Pro\', sans-serif;">'+cart_prod_num+'</label>&nbsp;<label id="prod_tovar_label" style="font: 16px/1.2 \'Myriad Pro\', sans-serif;">товар</label>&nbsp;<label style="font: 16px/1.2 \'Myriad Pro\', sans-serif;">на сумму&nbsp;</label><label id="prod_sum_info" style="font: 16px/1.2 \'Myriad Pro\', sans-serif;font-weight:bold;">'+cart_prod_price+'</label><label id="prod_sum_valuta_info" style="font: 16px/1.2 \'Myriad Pro\', sans-serif;">&nbsp;'+json['item4']+'</label>';
+                html += '<div id="product_info_zone_right" style="position:absolute;width:225px;height:200px;left:430px;top:40px;border-radius:3px;">';//background-color:#A0A0A0;
+                html += '    <div id="order_info" style="position: absolute;top:50px;left:25px;width:200px;height:160px;">';
+                html += '    <div style="position:relative;top:50px;left:25px;width:170px;"><label style="font: 14px/1.2 \'Myriad Pro\', sans-serif;"> В корзине: </label><label id="prod_count_label" style="font: 14px/1.2 \'Myriad Pro\', sans-serif;">'+cart_prod_num+'</label>&nbsp;<label id="prod_tovar_label" style="font: 14px/1.2 \'Myriad Pro\', sans-serif;">товар</label>&nbsp;<label style="font: 16px/1.2 \'Myriad Pro\', sans-serif;">на сумму&nbsp;</label><label id="prod_sum_info" style="font: 14px/1.2 \'Myriad Pro\', sans-serif;font-weight:bold;">'+cart_prod_price+'</label><label id="prod_sum_valuta_info" style="font: 14px/1.2 \'Myriad Pro\', sans-serif;">&nbsp;'+json['item4']+'</label>';
                 html += '    </div>';
-                html += '    <input type="button" style="position: absolute;left: 25px;top: 140px;border: 1px solid black;width:170px;height:30px;padding: 5px 5px 5px 5px !important;font: 16px/1.2 \'Myriad Pro\', sans-serif;font-weight:bold;" class="ok" id="addtochart_ok" value="Перейти в корзину >" onclick="AddToCartNum('+id+',\'num_new'+id+'\',1);"/>';
+                html += '    <input type="button" style="position: relative;left: 25px;top: 80px;border: 1px solid black;width:170px;height:30px;padding: 5px 5px 5px 5px !important;font: 16px/1.2 \'Myriad Pro\', sans-serif;font-weight:bold;" class="ok" id="addtochart_ok" value="Перейти в корзину >" onclick="AddToCartNum('+id+',\'num_new'+id+'\',1);"/>';
                 html += '    </div>';                            
                 html += '</div>';
                 html += '    <input id="cv3" type="hidden" name="cv3" value="nohspamcode"/>';
@@ -2809,33 +2824,66 @@ fillTKtablePart();
                         }}
                 });
                 */
-
                 $.fancybox
                 ({
-                        width : 760,
+                        width : 660,
                         height : 250,
                         overlayOpacity:0,
                         autoSize:false,
-                        type: 'iframe',
+                        closeBtn:true,
+                        closeBtn2:true,
                         content: html,
                         scrolling: 'no',
+                        'beforeShow': function () {
+                            //var url = '#_tool_'+id;
+                            //$(this).fancybox({
+                            //   href:url
+                           //});
+                        },
                         'afterShow': function() {
                                     //$('body').append('<a href="#_tool_'+id+'" id="a_temp_'+id+'" style="visibility:hidden;"></a>');
-                                    //$('.fancybox-item.fancybox-close:eq(0)').prop('href','#_tool_'+id);
+                                    $('.fancybox-item.fancybox-close:eq(0)').prop('href',"#");
+                                    $('.fancybox-item.fancybox-close:eq(0)').bind('click.fb', function(e) {
+                                        //console.log("AddToCartNum("+id+",'num_new"+id+"',2);");
+                                        e.preventDefault();
+                                        AddToCartNum(id,"num_new"+id,2); 
+					$(this).fancybox.close();
+                                    });
                                     //console.log($('.fancybox-item.fancybox-close:eq(0)').attr('title'));
                                 },                                    
                         'afterClose': function() {
-                                    //console.log(typeof document.getElementById('a_temp_'+id))
-                                    //if (typeof document.getElementById('a_temp_'+id)=="object") {
-                                    //    document.getElementById('a_temp_'+id).click();                                                    
-                                    //}
-                                    //$('.fancybox-item.fancybox-close:eq(0)').click
+                                    //var top = $('#_tool_'+id).offset(); //Getting Y of target element
+                                     //console.log('top'+top.top+' '+'_tool_'+id); 
+                                     //$(window).scrollTop(top.top);
+                                     //window.scrollTop(0, top);                        //Go there directly or some transition
 
+                                    //console.log('top'+top);
+/*
+                                    function showNode (oNode) {
+                                      var nLeft = 0, nTop = 0;
+                                      for (var oItNode = oNode; oItNode; nLeft += oItNode.offsetLeft, nTop += oItNode.offsetTop, oItNode = oItNode.offsetParent);
+                                      document.documentElement.scrollTop = nTop;
+                                      document.documentElement.scrollLeft = nLeft;
+                                                                          console.log('nTop'+nTop+' nLeft'+nLeft);
+                                    }
+
+                                    function showBookmark (sBookmark, bUseHash) {
+                                      if (arguments.length === 1 || bUseHash) { location.hash = sBookmark; return; }
+                                      var oBookmark = document.querySelector(sBookmark);
+                                      if (oBookmark) { showNode(oBookmark); }
+                                    }
+*/
+                                    //if (typeof document.getElementById('_tool_'+id)=="object") {
+                                        //location.replace('#_tool_'+id);
+                                        //showNode('_tool_'+id);
+                                        //showBookmark ('_tool_'+id,null);
+                                    //}
                                 },
                         helpers : {
-                        overlay : {
-                        css : { 'overflow' : 'hidden' }
-                        }}
+                            overlay : {
+                                css : { 'overflow' : 'hidden' }
+                            }
+                        }
                 });
                 var cart_prod_num_str=cart_prod_num.toString();
 
@@ -2885,108 +2933,140 @@ fillTKtablePart();
         //window.location.href('#_tool_'+id);
         //window.location.replace('#_tool_'+id);
     }
-                function check_varranty_firm_city(source) {
-                //console.log('check_varranty_firm_city() was called');
-                //получаем значение производителя и города для СЦ
-                field_vendor_brand = document.getElementById('select_vendor_brand');
-                        field_vendor_city = document.getElementById('select_vendor_city');
-                        //console.log(field_vendor_brand.options[field_vendor_brand.selectedIndex].text);
-                        //console.log(select_vendor_city.options[field_vendor_city.selectedIndex].text);
-                        //var jsonstring='field_vendor_brand='+field_vendor_brand.options[field_vendor_brand.selectedIndex].text+'&field_vendor_city='+field_vendor_city.options[field_vendor_city.selectedIndex].text;
-                        //активируем ajax запрос чтобы получить новые данные по сервисным центрам
-                        var req = new Subsys_JsHttpRequest_Js('windows-1251');
-                        req.onreadystatechange = function() {
-                        if (req.readyState == 4) {
-                        if (req.responseJS) {
-                        //document.getElementById('fotoload').innerHTML = (req.responseJS.foto||'');
-                        //Удаляем текущий список организаций
-                        //$('#select_varranty_firm').remove();
-                        //var elem_old = document.getElementById('select_varranty_firm');
-                        //elem_old.parentNode.removeChild(elem_old);
-                        $('#select_varranty_firm').remove();
-                                //добавляем контент
-                                //$('#tab6').append(html);
-                                if (source == 'sort.hook') {
-                        var elem_new = document.getElementById('tab6');
-                        } else if (source == 'service.hook') {
-                        var elem_new = document.getElementsByClassName('page_content');
-                        }
-                        //console.log(req.responseJS.result);
-                        //result=json2array(req.responseJS.result);
-                        //console.log(result);
-                        //html=req.responseJS.result;
-                        //var arr=jQuery.makeArray(req.responseJS.result);
-                        //console.log(result);
-                        //for (i=0;i<result.length;i++) {
-                        //	html+=//result[i].toString();
-                        //console.log(result[i]);					
-                        //}
+function check_varranty_firm_city(source) {
+    //console.log('check_varranty_firm_city() was called');
+    //получаем значение производителя и города для СЦ
+    field_vendor_brand = document.getElementById('select_vendor_brand');
+        field_vendor_city = document.getElementById('select_vendor_city');
+        //console.log(field_vendor_brand.options[field_vendor_brand.selectedIndex].text);
+        //console.log(select_vendor_city.options[field_vendor_city.selectedIndex].text);
+        //var jsonstring='field_vendor_brand='+field_vendor_brand.options[field_vendor_brand.selectedIndex].text+'&field_vendor_city='+field_vendor_city.options[field_vendor_city.selectedIndex].text;
+        //активируем ajax запрос чтобы получить новые данные по сервисным центрам
+        var req = new Subsys_JsHttpRequest_Js('windows-1251');
+        req.onreadystatechange = function() {
+        if (req.readyState == 4) {
+        if (req.responseJS) {
+        //document.getElementById('fotoload').innerHTML = (req.responseJS.foto||'');
+        //Удаляем текущий список организаций
+        //$('#select_varranty_firm').remove();
+        //var elem_old = document.getElementById('select_varranty_firm');
+        //elem_old.parentNode.removeChild(elem_old);
+        $('#select_varranty_firm').remove();
+                //добавляем контент
+                //$('#tab6').append(html);
+                if (source == 'sort.hook') {
+        var elem_new = document.getElementById('tab6');
+        } else if (source == 'service.hook') {
+        var elem_new = document.getElementsByClassName('page_content');
+        }
+        //console.log(req.responseJS.result);
+        //result=json2array(req.responseJS.result);
+        //console.log(result);
+        //html=req.responseJS.result;
+        //var arr=jQuery.makeArray(req.responseJS.result);
+        //console.log(result);
+        //for (i=0;i<result.length;i++) {
+        //	html+=//result[i].toString();
+        //console.log(result[i]);					
+        //}
 
-                        //for (i=0;i<parseInt(req.responseJS.cnt);i++) {
-                        //	html[i]=req.responseJS.result[i].toString();
-                        //console.log(arr[i]);	
-                        //}
+        //for (i=0;i<parseInt(req.responseJS.cnt);i++) {
+        //	html[i]=req.responseJS.result[i].toString();
+        //console.log(arr[i]);	
+        //}
 
-                        //console.log(html);
-                        if (source == 'sort.hook') {
-                        $('#tab6').append(req.responseJS.result);
-                        } else if (source == 'service.hook') {
-                        $('.page_content').append(req.responseJS.result);
-                        }
-                        //elem_new.insertAdjacentHTML('beforeend', html);                
-                        }
-                        }
-                        }
-                req.caching = false;
-                        // Подготваливаем объект.
-                        // Реальное размещение
-                        //console.log(window.location.host);
-                        var dir = dirPath();
-                        //req.setRequestHeader('Content-type: text/html; charset=windows-1251')
-                        req.open('GET', dir + '/phpshop/ajax/varranty_firm_list.php', true);
-                        req.send({
-                        select_vendor_brand: field_vendor_brand.options[field_vendor_brand.selectedIndex].text,
-                                select_vendor_city: select_vendor_city.options[field_vendor_city.selectedIndex].text
-                        });
-                        /*
-                         $.ajax({
-                         url: '/phpshop/ajax/varranty_firm_list.php',
-                         type: 'post',
-                         data: jsonstring,
-                         dataType: 'json',
-                         //contentType: "text/html; charset=windows-1251",
-                         beforeSend: function() {},
-                         complete: function() {},		
-                         success: function(json) {
-                         if (json['ok'] == '1'){
-                         for (i=0;i<json.length;i++) {
-                         html += json[i];						
-                         }
-                         
-                         //Удаляем текущий список организаций
-                         //$('#select_varranty_firm').remove();
-                         var elem_old = document.getElementById('select_varranty_firm');
-                         elem_old.parentNode.removeChild(elem_old);
-                         //добавляем контент со звездами рейтинга в div IMGloader
-                         //$('#tab6').append(html);
-                         var elem_new = document.getElementById('tab6');
-                         elem_new.insertAdjacentHTML('beforeend', html);
-                         }
-                         }
-                         });
-                         */
-                        }
+        //console.log(html);
+        if (source == 'sort.hook') {
+        $('#tab6').append(req.responseJS.result);
+        } else if (source == 'service.hook') {
+        $('.page_content').append(req.responseJS.result);
+        }
+        //elem_new.insertAdjacentHTML('beforeend', html);                
+        }
+        }
+        }
+req.caching = false;
+        // Подготваливаем объект.
+        // Реальное размещение
+        //console.log(window.location.host);
+        var dir = dirPath();
+        //req.setRequestHeader('Content-type: text/html; charset=windows-1251')
+        req.open('GET', dir + '/phpshop/ajax/varranty_firm_list.php', true);
+        req.send({
+        select_vendor_brand: field_vendor_brand.options[field_vendor_brand.selectedIndex].text,
+                select_vendor_city: select_vendor_city.options[field_vendor_city.selectedIndex].text
+        });
+        /*
+         $.ajax({
+         url: '/phpshop/ajax/varranty_firm_list.php',
+         type: 'post',
+         data: jsonstring,
+         dataType: 'json',
+         //contentType: "text/html; charset=windows-1251",
+         beforeSend: function() {},
+         complete: function() {},		
+         success: function(json) {
+         if (json['ok'] == '1'){
+         for (i=0;i<json.length;i++) {
+         html += json[i];						
+         }
 
-                function dirPath(){
-                ROOT_PATH = "";
-                        return ROOT_PATH; //'/'+window.location.host+'/www';
-                        }
+         //Удаляем текущий список организаций
+         //$('#select_varranty_firm').remove();
+         var elem_old = document.getElementById('select_varranty_firm');
+         elem_old.parentNode.removeChild(elem_old);
+         //добавляем контент со звездами рейтинга в div IMGloader
+         //$('#tab6').append(html);
+         var elem_new = document.getElementById('tab6');
+         elem_new.insertAdjacentHTML('beforeend', html);
+         }
+         }
+         });
+         */
+        }
 
-                function json2array(json){
-                var result = [];
-                        var keys = Object.keys(json);
-                        keys.forEach(function(key){
-                        result.push(json[key]);
-                        });
-                        return result;
-                        }
+function dirPath(){
+    ROOT_PATH = "";
+    return ROOT_PATH; //'/'+window.location.host+'/www';
+}
+
+function json2array(json){
+    var result = [];
+    var keys = Object.keys(json);
+    keys.forEach(function(key){
+        result.push(json[key]);
+    });
+    return result;
+}
+
+//small scroll library  
+document.addEventListener("DOMContentLoaded", function() {
+  "use strict"
+  var links = document.querySelectorAll("a.scroll");
+  var i = links.length;
+  //console.log('links.length'+i);
+  var root = /firefox|trident/i.test(navigator.userAgent) ? document.documentElement : document.body;
+  var easeInOutCubic = function(t, b, c, d) {
+    if ((t/=d/2) < 1) return c/2*t*t*t + b;
+    return c/2*((t-=2)*t*t + 2) + b;
+  }
+
+  while (i--) 
+    links.item(i).addEventListener("click", function(e) {
+      var startTime;
+      var startPos = root.scrollTop;
+      var endPos = document.getElementById(/[^#]+$/.exec(this.href)[0]).getBoundingClientRect().top;
+      var maxScroll = root.scrollHeight - window.innerHeight;
+      var scrollEndValue = startPos + endPos < maxScroll ? endPos : maxScroll - startPos;
+      var duration = 900;
+      var scroll = function(timestamp) {
+        startTime = startTime || timestamp;
+        var elapsed = timestamp - startTime;
+        var progress = easeInOutCubic(elapsed, startPos, scrollEndValue, duration);
+        root.scrollTop = progress;
+        elapsed < duration && requestAnimationFrame(scroll);
+      }   
+      requestAnimationFrame(scroll);
+      e.preventDefault();
+    });
+})

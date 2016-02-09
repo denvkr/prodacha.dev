@@ -269,7 +269,7 @@
                         //echo 'outdated product without analog';
 		} else if ($row_sklad==false && $price_n==true) {
 			echo '@ComStartCart@';
-                        echo '<span class="addtochart" style="'.$sdvig_knopki_vlevo_buy.'"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@,\\'n@productUid@\\')">'.$SysValue['lang']['product_sale'].'</a></span>';
+                        echo '<span class="addtochart" style="'.$sdvig_knopki_vlevo_buy.'"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@,\\'n@productUid@\\');">'.$SysValue['lang']['product_sale'].'</a></span>';
 			echo '@ComEndCart@';
 			echo '@FastOrder@';
 			echo '@firstcreditpunch@';				
@@ -286,7 +286,7 @@
 			echo '</script>';
 		} else {
 			echo '@ComStartCart@';
-                        echo '<span class="addtochart" style="'.$sdvig_knopki_vlevo_buy.'"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@,\\'n@productUid@\\')">'.$SysValue['lang']['product_sale'].'</a></span>';                        
+                        echo '<span class="addtochart" style="'.$sdvig_knopki_vlevo_buy.'"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@,\\'n@productUid@\\');">'.$SysValue['lang']['product_sale'].'</a></span>';                        
 			echo '@ComEndCart@';
 			echo '@FastOrder@';
 			echo '@firstcreditpunch@';				

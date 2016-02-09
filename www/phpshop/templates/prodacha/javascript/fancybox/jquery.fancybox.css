@@ -170,7 +170,7 @@
 }
 
 .fancybox-lock body {
-    overflow: hidden !important;
+    /*overflow: hidden !important;*/
 }
 
 .fancybox-lock-test {

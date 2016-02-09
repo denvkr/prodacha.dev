@@ -5,7 +5,7 @@
  * @tutorial https://trello.com/c/dy3WB3Rz/49--
  * @version 1.0
  */
-	$SysValue = parse_ini_file('phpshop/inc/config.ini', 1);
+	$SysValue = parse_ini_file('../phpshop/inc/config.ini', 1);
 	$item1=$SysValue['lang']['ask_product_availability_item1'];
 	$item2=$SysValue['lang']['fast_order_window_item2'];
 	$item3=$SysValue['lang']['fast_order_window_item3'];

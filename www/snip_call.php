@@ -34,6 +34,7 @@ $PHPShopOrm = new PHPShopOrm();
 //echo '3'.var_dump(!empty($_POST['yo_phone']) && !empty($_POST['yo_mail']) && !isset($_POST['yo_start_hour'])).'</br>';
 //echo '4'.var_dump((empty($_POST['yo_question']) || !empty($_POST['yo_question'])) && isset($_POST['yo_start_hour']) && isset($_POST['yo_end_hour'])).'</br>';
 //echo 'yo_name '.$_POST['yo_name'].'yo_phone '.$_POST['yo_phone'].'cv3 '.$_POST['cv3'];
+
 if (isset($_POST['email']))
 {
 
@@ -155,14 +156,16 @@ if (isset($_POST['yo_name']) && (isset($_POST['yo_phone']) || isset($_POST['yo_m
 		$mail_to=$GLOBALS['SysValue']['mail']['msc_mail'];
 	}
 	
-	//$mail_to="denvkr@yandex.ru,zakaz@prodacha.ru";
+	//$mail_to="denvkr@yandex.ru,".$mail_to;
 
 	$mailheaders="Content-Type: text/plain; charset=\"windows-1251\"\n ";
 	$mailheaders.= "From:no-reply@".$_SERVER['HTTP_HOST'];
-	//echo $subject.'<br />'.$msg;
+	
+        //echo $mailheaders.'<br>'.$mail_to.'<br>'.$subject.'<br />'.$msg;
 	if ($_POST['cv3']=="nohspamcode") //проверко+антиспам ок
 	{
-		if  (mail($mail_to,$subject,$msg,$mailheaders))
+            $mailed=mail($mail_to,$subject,$msg,$mailheaders);
+		if  ($mailed==true)                        
 		{
 			//пишем данные в базу данных/
 			$PHPShopOrm->debug = false;
@@ -174,30 +177,48 @@ if (isset($_POST['yo_name']) && (isset($_POST['yo_phone']) || isset($_POST['yo_m
 			if (!empty($_POST['yo_phone']) && !empty($_POST['yo_mail']) && !isset($_POST['yo_start_hour']))
 				$sql='INSERT INTO '.$GLOBALS['SysValue']['base']['oneclick_jurnal'].' (`date`,`name`,`tel`,`message`,`product_name`,`product_id`,`product_price`,`status`,`ip`) VALUES (\''.time().'\',\''.$_POST['yo_name'].'\',\''.$_POST['yo_phone'].'\',\''.$_POST['tovar_info_input'].'\',\''.$_POST['zakaz_info'].'. Email: '.trim($_POST['yo_mail']," \t\n\r\0\x0B").' Пришел с '.trim($_POST['referer_info']," \t\n\r\0\x0B").' Регион: '.trim($_POST['region']," \t\n\r\0\x0B").'\',0,\''.$_POST['tovar_price'].'\',\'1\',\''.$ip.'\')';
 				*/
-			if (empty($_POST['yo_phone']) && !empty($_POST['yo_mail']) && !isset($_POST['yo_start_hour'])) {
+			if (empty($_POST['yo_phone']) && !empty($_POST['yo_mail']) && !isset($_POST['yo_start_hour']) && $_POST['window_type']=='fast_order_window2') {
 				$sql='INSERT INTO '.$GLOBALS['SysValue']['base']['oneclick_jurnal'].' (`date`,`name`,`tel`,`message`,`product_name`,`product_id`,`product_price`,`status`,`ip`) VALUES (\''.time().'\',\''.$_POST['yo_name'].'\',\''.$_POST['yo_phone'].'\',\''.$_POST['tovar_info_input'].'\',\''.$_POST['zakaz_info'].'. Email: '.trim($_POST['yo_mail']," \t\n\r\0\x0B").' Пришел с '.trim($_POST['referer_info']," \t\n\r\0\x0B").' Регион: '.trim($_POST['region']," \t\n\r\0\x0B").'\',0,\''.$_POST['tovar_price'].'\',\'1\',\''.$ip.'\')';
 				echo send_to_order_hook($_POST,$PHPShopOrm);
+                                //echo $sql;			
+                                $result = $PHPShopOrm->query($sql);
+                                header("HTTP/1.1 301 Moved Permanently");
+                                header("Location:http://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true");
+                                exit();
 			}
-			if (!empty($_POST['yo_phone']) && empty($_POST['yo_mail']) && !isset($_POST['yo_start_hour'])) {
+			if (!empty($_POST['yo_phone']) && empty($_POST['yo_mail']) && !isset($_POST['yo_start_hour']) && $_POST['window_type']=='fast_order_window2') {
 				$sql='INSERT INTO '.$GLOBALS['SysValue']['base']['oneclick_jurnal'].' (`date`,`name`,`tel`,`message`,`product_name`,`product_id`,`product_price`,`status`,`ip`) VALUES (\''.time().'\',\''.$_POST['yo_name'].'\',\''.$_POST['yo_phone'].'\',\''.$_POST['tovar_info_input'].'\',\''.$_POST['zakaz_info'].'. Пришел с '.trim($_POST['referer_info']," \t\n\r\0\x0B").' Регион: '.trim($_POST['region']," \t\n\r\0\x0B").'\',0,\''.$_POST['tovar_price'].'\',\'1\',\''.$ip.'\')';
 				echo send_to_order_hook($_POST,$PHPShopOrm);
+                                //echo $sql;			
+                                $result = $PHPShopOrm->query($sql);
+                                header("HTTP/1.1 301 Moved Permanently");
+                                header("Location:http://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true");
+                                exit();
 			}
-			if (!empty($_POST['yo_phone']) && !empty($_POST['yo_mail']) && !isset($_POST['yo_start_hour'])) {
+			if (!empty($_POST['yo_phone']) && !empty($_POST['yo_mail']) && !isset($_POST['yo_start_hour']) && $_POST['window_type']=='fast_order_window2') {
 				$sql='INSERT INTO '.$GLOBALS['SysValue']['base']['oneclick_jurnal'].' (`date`,`name`,`tel`,`message`,`product_name`,`product_id`,`product_price`,`status`,`ip`) VALUES (\''.time().'\',\''.$_POST['yo_name'].'\',\''.$_POST['yo_phone'].'\',\''.$_POST['tovar_info_input'].'\',\''.$_POST['zakaz_info'].'. Email: '.trim($_POST['yo_mail']," \t\n\r\0\x0B").' Пришел с '.trim($_POST['referer_info']," \t\n\r\0\x0B").' Регион: '.trim($_POST['region']," \t\n\r\0\x0B").'\',0,\''.$_POST['tovar_price'].'\',\'1\',\''.$ip.'\')';
 				echo send_to_order_hook($_POST,$PHPShopOrm);
+                                //echo $sql;			
+                                $result = $PHPShopOrm->query($sql);
+                                header("HTTP/1.1 301 Moved Permanently");
+                                header("Location:http://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true");
+                                exit();
 			}
 				
-			//echo $sql;
-			//пишем данные в базу данных/
-			$PHPShopOrm->debug = false;
-			if ((empty($_POST['yo_question']) || !empty($_POST['yo_question'])) && isset($_POST['yo_start_hour']) && isset($_POST['yo_end_hour']))
-				$sql='INSERT INTO '.$GLOBALS['SysValue']['base']['reversecall_jurnal'].' (`date`,`time_start`,`time_end`,`name`,`tel`,`message`,`status`,`ip`) VALUES (\''.time().'\','.$_POST['yo_start_hour'].','.$_POST['yo_end_hour'].',\''.$_POST['yo_name'].'\',\''.$_POST['yo_phone'].'\',\''.$_POST['zakaz_info'].' Пришел с '.trim($_POST['referer_info']," \t\n\r\0\x0B").' Регион: '.trim($_POST['region']," \t\n\r\0\x0B").' Вопрос: '.trim($_POST['yo_question']," \t\n\r\0\x0B").'\',\'1\',\''.$ip.'\')';
+
+			if ((empty($_POST['yo_question']) || !empty($_POST['yo_question'])) && isset($_POST['yo_start_hour']) && isset($_POST['yo_end_hour']) && $_POST['window_type']=='ask_reverse_call') {
+				$sql='INSERT INTO '.$GLOBALS['SysValue']['base']['reversecall_jurnal'].' (`date`,`time_start`,`time_end`,`name`,`tel`,`message`,`status`,`ip`) VALUES (\''.time().'\','.$_POST['yo_start_hour'].','.$_POST['yo_end_hour'].',\''.$_POST['yo_name'].'\',\''.$_POST['yo_phone'].'\',\''.$_POST['zakaz_info'].' Пришел с '.trim($_POST['referer_info']," \t\n\r\0\x0B").' Регион: '.trim($_POST['region']," \t\n\r\0\x0B").' Вопрос: '.trim($_POST['yo_question']," \t\n\r\0\x0B").'\',\'1\',\''.$ip.'\')';                            
+                                //echo $sql;			
+                                $result = $PHPShopOrm->query($sql);
+                                header("HTTP/1.1 301 Moved Permanently");
+                                header("Location:http://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true");
+                                exit();                                
+                        }
 				
-			//echo $sql;			
-			$result = $PHPShopOrm->query($sql);
+
 
 			header("HTTP/1.1 301 Moved Permanently");
-			header("Location:http://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true");
+			header("Location:http://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']);
 				
 			exit();
 		}

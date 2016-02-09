@@ -66,7 +66,7 @@ $PHPShopCart=new PHPShopCart(false);
 	$sql0_2="set names utf8;";
 	$res0_2=mysql_query($sql0_2);
         //выбираем товар из базы
-	$sql0_2="SELECT name,price,price_n,price2,price3,baseinputvaluta,pic_small FROM ".$SysValue['base']['products']." WHERE ".$usl." and enabled='1'";
+	$sql0_2="SELECT name,price,price_n,price2,price3,baseinputvaluta,pic_big FROM ".$SysValue['base']['products']." WHERE ".$usl." and enabled='1'";
         //выбираем кол-во товаров из корзины
         //$sql0_3="SELECT  FROM ".$SysValue['base']['orders']." WHERE ".." and enabled='1'";
 	//echo $sql0_2;
@@ -86,7 +86,7 @@ $PHPShopCart=new PHPShopCart(false);
             }
 		$tovar_price=$row0_2['price'];
 		$tovar_basevaluta=$row0_2['baseinputvaluta'];
-                $tovar_pic_small=$row0_2['pic_small'];
+                $tovar_pic_small=$row0_2['pic_big'];
 	}				
 	if ($tovar_basevaluta==6) {
 		$tovar_basevaluta='руб.';

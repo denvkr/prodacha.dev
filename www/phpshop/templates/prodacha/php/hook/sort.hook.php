@@ -346,17 +346,20 @@ function display_tovar_delivery_hook($obj, $row) {
 				$city='в Санкт-Петербург';
 			}
 	
-			// для "другого региона" доставки нет
+
+                        // для "другого региона" доставки нет
 			if ($price<1000) {
 				$sub_sql1=" where enabled='-1'";
 				$dostavka5=$GLOBALS['SysValue']['lang']['delivery_tab_string6'].$tovar.$GLOBALS['SysValue']['lang']['delivery_tab_string7'].PHPShopText::br(1).'</br>'.$GLOBALS['SysValue']['lang']['delivery_tab_string3'];
 			} else {
-				if ($price<3000){
-					$sub_sql1='where id in (41) and enabled=\'1\' order by city asc';
-				} else {
-					$sub_sql1='where id in (11) and enabled=\'1\' order by city asc';
-				}
-			}
+                                if ($price>=5000 &&$price<=9999) {
+                                        $sub_sql1='where id in (11) and enabled=\'1\' order by city asc';			
+                                } else if ($price>=1000 && $price<=4999){
+                                        $sub_sql1='where id in (41) and enabled=\'1\' order by city asc';
+                                } else if ($price>=10000){
+                                        $sub_sql1='where id in (67) and enabled=\'1\' order by city asc';			
+                                }
+                        }
 			break;
 	}
 	//select с городом
@@ -736,10 +739,12 @@ function display_tovar_samovyvoz_hook($obj, $row) {
 		break;
 		case 'other' and 'sp': return true;
 			$city='Другой';
-			if ($price>=3000) {
+			if ($price>=5000 &&$price<=9999) {
 				$sub_sql1='where id in (11) and enabled=\'1\' order by city asc';			
-			} else {
-				$sub_sql1='where id in (41) and enabled=\'1\' order by city asc';			
+			} else if ($price>=1000 && $price<=4999){
+				$sub_sql1='where id in (41) and enabled=\'1\' order by city asc';
+			} else if ($price>=10000){
+				$sub_sql1='where id in (67) and enabled=\'1\' order by city asc';			
 			}
 			break;
 	}

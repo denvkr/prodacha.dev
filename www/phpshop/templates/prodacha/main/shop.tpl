@@ -45,17 +45,16 @@
 	@php
 	if ($GLOBALS['SysValue']['nav']['nav']=='CID') {
 		if ($GLOBALS['SysValue']['other']['productPageThis']==1) {
-				echo '<meta name="keywords" content="@pageKeyw@">';	
+				//echo '<meta name="keywords" content="@pageKeyw@">';	
 		}
 	} else {
-			echo '<meta name="keywords" content="@pageKeyw@">';	
+			//echo '<meta name="keywords" content="@pageKeyw@">';	
 	}
 	php@
 	<meta name="copyright" content="@pageReg@">
 	<meta name="engine-copyright" content="PHPSHOP.RU, @pageProduct@">
 	<meta name="domen-copyright" content="@pageDomen@">
 	<meta content="General" name="rating">
-	<meta name="ROBOTS" content="ALL">
 	<meta name="viewport" content="width=device-width">
 	<!--Подключаем JQUERY -->
 	<script type="text/javascript" src="java/lib/jquery-1.11.0.min.js"></script>
@@ -333,12 +332,6 @@
 	<div id="main">
 		<div class="left">
 			<div class="search">
-					<!--
-				   <form method="post" name="forma_search" action="/search/" onsubmit="return SearchChek()">
-					<input  class="keyword" type="text" name="words"  value="Я ищу..." onfocus="if(this.value=='Я ищу...'){this.value='';}" onblur="if(this.value==''){this.value='Я ищу...';}">
-					<input name="s" value="" class="input-search__button input-search__button--enabled" type="submit">
-				</form>
-				-->
 				<form action="/search/" role="search" method="post">
                                 <div class="input-group">
                                     <input name="words" maxlength="50" id="search1" class="form-control" placeholder="Умный поиск" required type="text" data-trigger="manual" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true"  data-content="">

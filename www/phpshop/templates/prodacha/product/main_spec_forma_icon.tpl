@@ -4,7 +4,7 @@
             <div class="thumb">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                <td height="160" align="center"><a href="/shop/UID_@productUid@@nameLat@.html" alt="@productName@" title="@productName@"><img src="@productImg@" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,'@pathTemplate@')" onload="EditFoto(this,@productImgWidth@)" alt="@productName@" title="@productName@" border="0"/></a></td>
+                <td height="160" align="center"><a href="/shop/UID_@productUid@@nameLat@.html"><img src="@productImg@" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,'@pathTemplate@')" onload="EditFoto(this,@productImgWidth@)" alt="@productName@" title="@productName@" border="0"/></a></td>
                 </tr>
                 </table>
             </div>
@@ -209,10 +209,10 @@
                     echo '</div>';
                     echo '</div>';
             } else if ($row_sklad==false) {
-                    //возможно вывод данного статуса не требуетс€
+                    //раздел ƒл€ работы с товаром ... ¬ы можете приобрести
                     echo '@ComStartCart@';
                     //echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@)"  value="'.$SysValue['lang']['product_sale'].'"></span>';
-                    echo '<span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@)">'.$SysValue['lang']['product_sale'].'</a></span>';
+                    echo '<span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@);">'.$SysValue['lang']['product_sale'].'</a></span>';
                     echo '@ComEndCart@';
 
                     echo '@ComStart@';	
@@ -287,7 +287,7 @@
                     //кнопка купить со старой ценой
                     echo '@ComStartCart@';
                     //echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@)"  value="'.$SysValue['lang']['product_sale'].'"></span>';
-                    echo '<span class="addtochart"><a href="#a@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@)">'.$SysValue['lang']['product_sale'].'</a></span>';
+                    echo '<span class="addtochart"><a href="#a@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@);">'.$SysValue['lang']['product_sale'].'</a></span>';
                     echo '@ComEndCart@';
 
                     echo '@ComStart@';	

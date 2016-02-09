@@ -6,7 +6,7 @@
   <div class="thumb">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td height="160" align="top"><a href="/shop/UID_@productUid@@nameLat@.html" alt="@productName@" title="@productName@"><img src="@productImg@" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,'@pathTemplate@')" onload="EditFoto(this,@productImgWidth@)" alt="@productName@" title="@productName@" border="0"></a></td>
+        <td height="160" align="top"><a href="/shop/UID_@productUid@@nameLat@.html"><img src="@productImg@" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,'@pathTemplate@')" onload="EditFoto(this,@productImgWidth@)" alt="@productName@" title="@productName@" border="0"></a></td>
       </tr>
     </table>
   </div>
@@ -31,7 +31,7 @@
 
 	$res=mysql_query($sql);
         while ($catalog_id_rows=mysql_fetch_row($res)) {
-                            $prod_id=$catalog_id_rows[0];
+                                    $prod_id=$catalog_id_rows[0];
                                     if (preg_match("/stihl/i", $catalog_id_rows[1])) {
                                             $stihl_catalog_search=true;
                                     }
@@ -62,7 +62,7 @@
 			if ($viking_catalog_search==true) {
 				echo '<span class="addtochart notice"> <input type="button" style="font-size:9px;" onclick="viking_window(\\''.$region_info.'\\',\\'/shop/UID_'.$prod_id.'.html\\',document.getElementsByClassName(\\'netref\\'))"  value="'.$SysValue['lang']['stihl_string'].'" /> </span>';		
 			} else {
-				echo '<span class="addtochart notice"> <input type="button" style="font-size:9px;" onclick="stihl_window(\\''.$region_info.'\\')"  value="'.$SysValue['lang']['stihl_string'].'" /> </span>';
+				echo '<span class="addtochart notice"> <input type="button" style="font-size:9px;" onclick="stihl_window(\\''.$region_info.'\\',\\'/shop/UID_'.$prod_id.'.html\\',document.getElementsByClassName(\\'netref\\'))"  value="'.$SysValue['lang']['stihl_string'].'" /> </span>';
 			}
                         echo '<div class="prev_price lostandfound" style="position:relative;font-size:11px !important;left:-24px;top:5px;">@productPriceRub@</div>';
 
@@ -128,12 +128,11 @@
                                 $price=intval($catalog_id_rows[4]);
                         }
                 }
-		if ($row_sklad==true && $price_n==false && $row_outdated==false) {
+		if ($row_sklad==true && $row_outdated==false) {
                         //кнопка уточнить без старой цены
                         echo '<div class="buybuttons">';
 			echo '@ComStartNotice@';
 			echo '<span class="addtochart notice">';
-			//echo '<input type="button" onclick="window.location.replace(\\'/users/notice.html?productId=@productUid@\\');"  value="'.$SysValue['lang']['product_notice'].'">';
 			echo '<input type="button" onclick="ask_product_availability(\\'/shop/UID_'.$GLOBALS['SysValue']['other']['productUid'].'.html\\',document.getElementsByClassName(\\'netref\\'));" value="'.$SysValue['lang']['product_notice'].'">';
 			echo '</span>';
                         echo '<div class="prev_price lostandfound" style="position:relative;font-size:11px !important;left:-24px;top:5px;">@productPriceRub@</div>';
