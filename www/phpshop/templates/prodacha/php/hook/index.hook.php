@@ -59,40 +59,40 @@ function leftCatal_hook($obj,$row,$rout) {
             $href_html='';
             switch ($row['id']) {
                     case '9': 	$href_html='<ul>'.
-                                            '<li class="" ><span class="inside_menu_head"><a href="/shop/CID_9.html" title="Генераторы">Генераторы</a></span></li>'.
+                                            '<li class="inside_menu_head"><a href="/shop/CID_9.html" title="Генераторы">Генераторы</a></li>'.
                                             '</ul>';
                                             break;
                     case '60': 	$href_html='<ul>'.
-                                            '<li class="" ><span class="inside_menu_head"><a href="/shop/CID_60.html" title="Снегоуборщики">Снегоуборщики</a></span></li>'.
+                                            '<li class="inside_menu_head"><a href="/shop/CID_60.html" title="Снегоуборщики">Снегоуборщики</a></li>'.
                                             '</ul>';
                                             break;
                     case '77':	$href_html='<ul>'.
-                                            '<li class="" ><span class="inside_menu_head"><a href="/shop/CID_77.html" title="Цепные пилы">Цепные пилы</a></span></li>'.
+                                            '<li class="inside_menu_head"><a href="/shop/CID_77.html" title="Цепные пилы">Цепные пилы</a></li>'.
                                             '</ul>';
                                             break;
                     case '211':	$href_html='<ul>'.
-                                            '<li class="" ><span class="inside_menu_head"><a href="/shop/CID_211.html" title="Тракторы и райдеры">Тракторы и райдеры</a></span></li>'.
+                                            '<li class="inside_menu_head"><a href="/shop/CID_211.html" title="Тракторы и райдеры">Тракторы и райдеры</a></li>'.
                                             '</ul>';
                                             break;			
                     case '228':	$href_html='<ul>'.
-                                            '<li class="" ><span class="inside_menu_head"><a href="/shop/CID_228.html" title="Техника STIHL">Техника STIHL</a></span></li>'.
+                                            '<li class="inside_menu_head"><a href="/shop/CID_228.html" title="Техника STIHL">Техника STIHL</a></li>'.
                                             '</ul>';
                                             break;				
                     case '295':	$href_html='<ul>'.
-                                            '<li class="" ><span class="inside_menu_head"><a href="/shop/CID_295.html" title="Техника VIKING">Техника VIKING</a></span></li>'.
+                                            '<li class="inside_menu_head"><a href="/shop/CID_295.html" title="Техника VIKING">Техника VIKING</a></li>'.
                                             '</ul>';
                                             break;				
                     case '134':	$href_html='<ul>'.
-                                            '<li class="" ><span class="inside_menu_head"><a href="/shop/CID_134.html" title="Техника KARCHER">Техника KARCHER</a></span></li>'.
+                                            '<li class="inside_menu_head"><a href="/shop/CID_134.html" title="Техника KARCHER">Техника KARCHER</a></li>'.
                                             '</ul>';
                                             break;				
                     case '300': $href_html='<ul>'.
-                                            '<li class="" ><span class="inside_menu_head"><a href="/shop/CID_300.html" title="Акции, скидки">Акции, скидки</a></span></li>'.
+                                            '<li class="inside_menu_head"><a href="/shop/CID_300.html" title="Акции, скидки">Акции, скидки</a></li>'.
                                             '</ul>';
                                             $obj->set('top_position','style="top: -85px !important;"');
                                             break;
                     case '472': $href_html='<ul>'.
-                                            '<li class="" ><span class="inside_menu_head"><a href="/shop/CID_472.html" title="Техника по производителю">Техника по производителю</a></span></li>'.
+                                            '<li class="inside_menu_head"><a href="/shop/CID_472.html" title="Техника по производителю">Техника по производителю</a></li>'.
                                             '</ul>';
                                             $obj->set('top_position','style="top: -85px !important; height:555px;"');
                                             break;
