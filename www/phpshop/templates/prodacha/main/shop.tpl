@@ -135,7 +135,7 @@
 	        // Номер сотового телефона клиента  (поле необязательно).
 	        // Телефон указывает без 8 или +7, (принимаются только номера сотовых в коде страны «+7»).
 	        // Телефон указывается в формате «1231234567».
-	        phone:"@UserTel@",
+	        phone:"@UserTel_credit@",
 	
 	        // css - оформление кнопок
 	        css: "green",
@@ -172,7 +172,7 @@
 	}
 	</script>
 	<!--с 18.11.2014 подключен vsevcredit.ru-->
-    <script type="text/javascript" src="http://vsevcredit.ru/js/widget1251.js"></script>
+    <script type="text/javascript" src="http://vkredit24.ru/js/widget1251.js"></script>
 
 	<script type="text/javascript" src="java/async_js_loader.js"></script>
 		

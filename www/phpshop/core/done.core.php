@@ -49,7 +49,7 @@ class PHPShopDone extends PHPShopCore {
         }
         //убираем из телефонного номера +,()-
         $this->tel_num_repl = array("+", "(", ")", "-", " ");
-        
+        $this->tel_num_repl_credit = array("+7", "(", ")", "-", " ");
     }
 
     /**
@@ -173,6 +173,7 @@ class PHPShopDone extends PHPShopCore {
                 } else {
                 	$this->set('UserName',@$_POST['name_person']);
                 	$this->set('UserTel',@str_replace($this->tel_num_repl, "", $_POST['tel_name']));
+                	$this->set('UserTel_credit',@str_replace($this->tel_num_repl_credit, "", $_POST['tel_name']));
                 }
                 
                 // Данные от способа оплаты
