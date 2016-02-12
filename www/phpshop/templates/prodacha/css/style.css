@@ -908,7 +908,7 @@ h5, .h4 {
 .content
 {
 	z-index: 0;
-	float: left;
+	float: right;
 	margin-left: 19px;
 	width: 785px;
 	zoom: 1;
@@ -1012,7 +1012,7 @@ h5, .h4 {
 {
     display: block;
     width: 243px;
-	height: 275px;
+    height: 275px;
 }
 
 

@@ -330,6 +330,18 @@
 		</div>
 	</div>
 	<div id="main">
+		<div class="content">
+			<script type="text/javascript">
+				hs.registerOverlay({html: '<div class="closebutton" onclick="return hs.close(this)" title="Закрыть"></div>',position: 'top right',fade: 2});
+				hs.graphicsDir = 'java/highslide/graphics/';
+				 hs.wrapperClassName = 'borderless';
+			</script>
+		
+			<div class="catalog">				
+				@DispShop@
+			</div>
+		</div>
+		<!-- Content end -->
 		<div class="left">
 			<div class="search">
 				<form action="/search/" role="search" method="post">
@@ -352,18 +364,6 @@
 			@leftMenu@
 		</div>
 		<!-- left end -->
-		<div class="content">
-			<script type="text/javascript">
-				hs.registerOverlay({html: '<div class="closebutton" onclick="return hs.close(this)" title="Закрыть"></div>',position: 'top right',fade: 2});
-				hs.graphicsDir = 'java/highslide/graphics/';
-				 hs.wrapperClassName = 'borderless';
-			</script>
-		
-			<div class="catalog">				
-				@DispShop@
-			</div>
-		</div>
-		<!-- Content end -->
 	</div>
 	<!-- main end -->
    

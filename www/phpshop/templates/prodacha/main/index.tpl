@@ -263,31 +263,6 @@
 				php@
 
 	<div id="main">
-		<div class="left">
-			<div class="search">
-
-				<form action="/search/" role="search" method="post">
-                                <div class="input-group">
-                                    <input name="words" maxlength="50" id="search" class="form-control" placeholder="Умный поиск" required type="text" data-trigger="manual" data-placement="bottom" data-html="true" data-container="body" data-toggle="popover">
-                                    <!---->
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default form-control" type="submit" style="border-radius: 4px;"><span class="glyphicon glyphicon-search"></span></button>
-                                    </span>
-                                </div>
-                </form>
-			</div>
-			<div class="menu">
-				<ul class="mainmenu">
-             @leftCatal@
-				</ul>
-			</div>
-			<!-- menu end -->
-
-			@banersDisp@
-			@oprosDisp@
-			@leftMenu@
-		</div>
-		<!-- left end -->
 
 		<div class="content">          
 
@@ -332,6 +307,32 @@
 			
 		</div>
 		<!-- Content end -->
+
+		<div class="left">
+			<div class="search">
+
+				<form action="/search/" role="search" method="post">
+                                <div class="input-group">
+                                    <input name="words" maxlength="50" id="search" class="form-control" placeholder="Умный поиск" required type="text" data-trigger="manual" data-placement="bottom" data-html="true" data-container="body" data-toggle="popover">
+                                    <!---->
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default form-control" type="submit" style="border-radius: 4px;"><span class="glyphicon glyphicon-search"></span></button>
+                                    </span>
+                                </div>
+                </form>
+			</div>
+			<div class="menu">
+				<ul class="mainmenu">
+                        @leftCatal@
+				</ul>
+			</div>
+			<!-- menu end -->
+
+			@banersDisp@
+			@oprosDisp@
+			@leftMenu@
+		</div>
+		<!-- left end -->
 		</div>
 	<!-- main end -->
 
