@@ -40,8 +40,7 @@
   </table>
 </FORM>
 <p><br>
-</p>	
-
+</p>
 <div class="sorting">
 <div class="content">
 <div class="wrapper">
@@ -50,8 +49,4 @@
 </table></div>
 </div>
 </div>
-                
-			
-				</div>
-
 <div class="navi">@searchPageNav@</div>

@@ -1375,6 +1375,24 @@ fillTKtablePart();
                             $(this).html('<!--noindex-->уточняйте наличие<!--/noindex-->');                        
                     });
                 }
+                
+                if ($( ".prev_btn" ).length){
+                    $( ".prev_btn" ).click(function(e) {
+                        //$('.sametovarbox:eq(0)').scrollLeft(-290);
+                        var $anchor=$(this);
+                        //console.log(-($($anchor.attr('href')).offset().left));
+                        $('.sametovarbox:eq(0)').animate({scrollLeft: $('.sametovarbox:eq(0)').scrollLeft()-290}, 900);//($($anchor.attr('href')).offset().left)
+                        e.preventDefault();
+                    });
+                }
+                if ($( ".next_btn" ).length){
+                    $( ".next_btn" ).click(function(e) {
+                        var $anchor=$(this);
+                        $('.sametovarbox:eq(0)').animate({scrollLeft: $('.sametovarbox:eq(0)').scrollLeft()+290}, 900);//$($anchor.attr('href')).offset().left
+                        e.preventDefault();
+                    });
+                }
+
 });
                 //функция обработки части форма forma_dost для Транспортных компаний
                     function fillTKtablePart(){

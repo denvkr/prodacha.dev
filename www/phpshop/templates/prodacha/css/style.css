@@ -3481,3 +3481,48 @@ span.price_cat_3
     width:100%;
     z-index:auto;
 }
+
+.prev_btn:link {
+    background: url(../images/slider_arr.png) no-repeat -35px -35px;
+}
+.prev_btn {
+    position: relative;
+    top: 150px;
+    left: 5px;
+    z-index: 101;
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+}
+
+.next_btn:link {
+    background: url(../images/slider_arr.png) no-repeat -35px 0;
+}
+.next_btn {
+    position: relative;
+    top: -160px;
+    right: -750px;
+    z-index: 101;
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+}
+
+.vkredit-button {
+border: 2px solid #8ab943;
+border-radius: 30px;
+text-align: center;
+height: 60px;
+width: 220px;
+top: 15px;
+/*float: left;*/
+position: relative;
+}
+.vkredit-button img {
+position: absolute;
+top: 55%;
+margin-top: -13px;
+left: 50%;
+margin-left: -57px;
+cursor: pointer;
+}

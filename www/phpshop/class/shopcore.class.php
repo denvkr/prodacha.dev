@@ -25,7 +25,7 @@ class PHPShopShopCore extends PHPShopCore {
      * Отладка
      * @var bool
      */
-    var $debug = true;
+    var $debug = false;
 
     /**
      * Кэширование, рекомендуется [true]
@@ -272,6 +272,52 @@ class PHPShopShopCore extends PHPShopCore {
         return $result;
     }
 
+    /**
+     * Выборка из БД native
+     * @param array $select массив условий выборки
+     * @param array $where массив условий выборки
+     * @param array $order массив условий выборки
+     * @param array $option массив условий выборки
+     * @param string $function_name имя функции для отладки
+     * @param array $from массив опций
+     * @return array
+     */
+    function select_native($select, $where, $order = false, $option = array('limit' => 1), $function_name = false, $from = false) {
+
+        if (is_array($from)) {
+            $base = @$from['base'];
+            $cache = @$from['cache'];
+            $cache_format = @$from['cache_format'];
+        } else {
+            $base = $this->objBase;
+            $cache = $this->cache;
+            $cache_format = $this->cache_format;
+        }
+
+        $PHPShopOrm = new PHPShopOrm($base);
+        $PHPShopOrm->objBase = $base;
+        $PHPShopOrm->debug = $this->debug;
+        $PHPShopOrm->cache = $cache;
+        $PHPShopOrm->cache_format = $cache_format;
+        $result = $PHPShopOrm->select_native($select, $where, $order, $option, __CLASS__, $function_name);
+
+        return $result;
+    }
+
+/**
+     * Выборка из БД query
+     * @param string выборка
+     * @return array
+     */
+    function query($sql) {
+echo $sql;
+        $PHPShopOrm = new PHPShopOrm();
+        $PHPShopOrm->debug = $this->debug;
+        $result = $PHPShopOrm->query($sql);
+var_dump($result);
+        return $result;
+    }
+    
     /**
      * Стоимость товара
      * @param array $row массив данных товара

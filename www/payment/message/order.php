@@ -19,10 +19,10 @@ $message_header=$row['message_header'];
 // Определяем переменые nah~
 
 	if ($_POST['order_metod']==25) {
-		$message.="<div class='bictext'>Ваш заказ успешно принят! Для оформления кредита, пожалуйста, заполните данную форму".$_POST['bic_code']."</div><script type='text/javascript'>VVC.initButtons();</script>"; //style='visibility:hidden;'
+		$message.="<div class='bictext'>Ваш заказ успешно принят! Для оформления кредита, пожалуйста, заполните данную форму</div><div class='vkredit-button'><img src='images/white-logo.png' onclick='javascript:ask_credit_form();'/></div><script type='text/javascript'>function ask_credit_form(){VVC.onBuy(".$_POST['bic_code'].",2);};</script>"; //style='visibility:hidden;'
 		$SysValue['other']['mesageText']= "<font style='font-size:14px;color:red'><b>".$message_header."</b></font><br>".$message;
 
-		$this->set('mesageText',$SysValue['other']['mesageText']);
+		$this->add('mesageText',$SysValue['other']['mesageText']);
 		$disp = ParseTemplateReturn($this->getValue('templates.order_forma_mesage'));
 
 		$disp.='<script type="text/javascript">

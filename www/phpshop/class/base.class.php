@@ -45,6 +45,7 @@ class PHPShopBase {
      */
     var $debug = false;
 
+    var $result;
     /**
      * Подключения к БД
      * @param string $iniPath путь до конфигурационного файла config.ini
@@ -160,10 +161,31 @@ class PHPShopBase {
             //echo $this->getParam("connect.host").'<br>';
             //echo $this->getParam("connect.dbase").'<br>';            
         //}//var_dump ($this->SysValue);
-        $result=mysql_connect($this->getParam("connect.host"), $this->getParam("connect.user_db"), $this->getParam("connect.pass_db"),true);// or die($this->errorConnect(101));
-        //var_dump(mysql_error());
-        mysql_select_db($this->getParam("connect.dbase")) or die($this->errorConnect(102));
+        $this->result=mysqli_connect($this->getParam("connect.host"), $this->getParam("connect.user_db"), $this->getParam("connect.pass_db"));// or die($this->errorConnect(101));
+        if (mysqli_connect_errno()) {
+            printf("Connect failed: %s\n", mysqli_connect_error());
+            exit();
+        }
+        $result=mysql_connect($this->getParam("connect.host"), $this->getParam("connect.user_db"), $this->getParam("connect.pass_db"));// or die($this->errorConnect(101));
+
+        //echo $this->getParam("connect.host").'<br>';
+        //echo $this->getParam("connect.user_db").'<br>';
+        //echo $this->getParam("connect.pass_db").'<br>';
+        //echo $this->getParam("connect.dbase");
+
+        mysqli_select_db($this->result,$this->getParam("connect.dbase"));// or die($this->errorConnect(102));
+         if (mysqli_connect_errno()) {
+            printf("Connect failed: %s\n", mysqli_connect_error());
+            exit();
+        }     
+        mysql_select_db($this->getParam("connect.dbase"));// or die($this->errorConnect(102));
+
+        mysqli_query($this->result,"SET NAMES '" . $this->codBase . "'");
         mysql_query("SET NAMES '" . $this->codBase . "'");
+
+        //echo '------------------------------';
+        //echo $this->getParam("connect.dbase");
+        //echo '+++++++';
     }
 
     /**
@@ -198,6 +220,7 @@ class PHPShopBase {
     function getNumRows($from_base, $query) {
         $num = 0;
         $sql = "select COUNT('id') as count from " . $this->SysValue['base'][$from_base] . " " . $query;
+        $result = mysqli_query($this->result,$sql);
         $result = mysql_query($sql);
         $row = mysql_fetch_array(@$result);
         $num = $row['count'];

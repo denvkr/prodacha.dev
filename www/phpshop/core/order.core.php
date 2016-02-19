@@ -260,23 +260,23 @@ class PHPShopOrder extends PHPShopCore {
 				//готовим данные для кредита
 				//$credititems.='{MODEL: "'.$bicname.'", COUNT:"'.$biccount.'", PRICE:"'.$bicprice*$biccount.'"},';
 				$cnt=0;
-				if ($biccount>1) {
-					while ($cnt<$biccount)	{
-						$credititems.='{"id":'.$bicid.',"title":"'.$bicname.'","amount":'.$bicprice.',"info":"'.$bicname.'"},';
-						$cnt++;
-					}			
-				} else
-					$credititems.='{"id":'.$bicid.',"title":"'.$bicname.'","amount":'.$bicprice.',"info":"'.$bicname.'"},';
+				//if ($biccount>1) {
+				//	while ($cnt<$biccount)	{
+				//		$credititems.='{"id":'.$bicid.',"title":"'.$bicname.'","amount":'.$bicprice.'"count":1'.',"info":"'.$bicname.'"},';
+				//		$cnt++;
+				//	}			
+				//} else
+				$credititems.='{"id":'.$bicid.',"title":"'.$bicname.'","amount":'.$bicprice.',"count":'.$biccount.',"info":"'.$bicname.'"},';
 				
 				$allcount+=$biccount;
 				$allcash+=$bicprice*$biccount;
 			
 		}
-		$credititems.='{"id":'.$bicid.',"title":"Комиссия сервиса \'Все в кредит\' - 5%","amount":'.($allcash*0.05).',"info":"Комиссия сервиса \'Все в кредит\' - 5%"},';
+		$credititems.='{"id":'.$bicid.',"title":"Комиссия сервиса \'Все в кредит\' - 5%","amount":'.number_format(($allcash*0.05), 2, '.','').',"count":1,"info":"Комиссия сервиса \'Все в кредит\' - 5%"},';
 		
 		$credititems=substr($credititems,0,-1);
-		
-		$vsevkredit='<div id="VVC_BUTTON_STYLE1_COLORGREEN_ROUND_'.($allcount+1).'_'.$bicid.'" style="display:none;">';
+                //$vsevkredit="<div class='vkredit-button'><img src='http://vkredit24.ru/vk24-www/images/white-logo.png' /></div>";
+		//$vsevkredit='<div id="VVC_BUTTON_STYLE1_COLORGREEN_ROUND_'.($allcount+1).'_'.$bicid.'" style="display:none;">';
 		//if ($allcount>1) {
 			$start_square='[';
 			$end_square=']';
@@ -285,7 +285,7 @@ class PHPShopOrder extends PHPShopCore {
 		//	$end_square='';			
 		//}
 		
-		$vsevkredit.=$start_square.$credititems.$end_square.'</div>';
+		$vsevkredit.=$start_square.$credititems.$end_square;
 
 		$vsevkredit=htmlentities($vsevkredit,ENT_COMPAT|ENT_HTML401,'cp1251');
 
