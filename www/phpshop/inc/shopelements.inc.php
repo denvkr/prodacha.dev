@@ -1088,7 +1088,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 			$submenuhead.='<div class="submenuhead">';
 			$submenuhead.='<div class="menutype">';
 			$submenuhead.='<ul>';
-			$submenuhead.='<li class="inside_menu_head"><a href="/shop/CID_'.$row[id].'.html" title="'.$row[name].'">'.$row[name].'</a></li>';
+			$submenuhead.='<li class="inside_menu_head"><a href="/shop/CID_'.$row[id].'.html"  title="'.$row[name].'">'.$row[name].'</a></li>';
 			$submenuhead.='<li class="inside_menu_head"><a href="/shop/CID_'.$parent_id1.'.html" title="'.$parent_cat_name1.'">'.$parent_cat_name1.'</a></li>';
 			$submenuhead.='</ul>';
 			//генерация первого раздела меню "по типу"
