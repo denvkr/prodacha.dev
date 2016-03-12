@@ -1088,8 +1088,8 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 			$submenuhead.='<div class="submenuhead">';
 			$submenuhead.='<div class="menutype">';
 			$submenuhead.='<ul>';
-			$submenuhead.='<li class="inside_menu_head"><a href="/shop/CID_'.$row[id].'.html"  title="'.$row[name].'">'.$row[name].'</a></li>';
-			$submenuhead.='<li class="inside_menu_head"><a href="/shop/CID_'.$parent_id1.'.html" title="'.$parent_cat_name1.'">'.$parent_cat_name1.'</a></li>';
+			$submenuhead.='<li class="inside_menu_head"><a href="/shop/CID_'.$row[id].'.html">'.$row[name].'</a></li>';
+			$submenuhead.='<li class="inside_menu_head"><a href="/shop/CID_'.$parent_id1.'.html">'.$parent_cat_name1.'</a></li>';
 			$submenuhead.='</ul>';
 			//генерация первого раздела меню "по типу"
 			$this->PHPShopOrm->cache = false;
@@ -1168,24 +1168,24 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 
                         //циклы формируем вывод меню по типу с учетом сортировки
                         foreach ($array_submenuhead1_1 as $prod_row1){
-                                $submenuhead1_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                $submenuhead1_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                         }
                         foreach ($array_submenuhead2_1 as $prod_row1) {
                             if ($prod_row1[id]==13) {
-                                    $submenuhead2_1.='<li class="inside_menu_head" style="font-size:12px;"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a>&nbsp;';
-                                    $submenuhead2_1.='(<a href="/shop/CID_328.html" style="font-size:12px;" title="Мотокультиваторы">Мотокультиваторы</a>)</li>';
+                                    $submenuhead2_1.='<li class="inside_menu_head" style="font-size:12px;"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>&nbsp;';
+                                    $submenuhead2_1.='(<a href="/shop/CID_328.html" style="font-size:12px;">Мотокультиваторы</a>)</li>';
                             } else if ($prod_row1[id]!=328 && $prod_row1[id]!=13) {
-                                    $submenuhead2_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                    $submenuhead2_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                             }
                         }
                         foreach ($array_submenuhead3_1 as $prod_row1){
-                                $submenuhead3_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                $submenuhead3_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                         }
                         foreach ($array_submenuhead4_1 as $prod_row1){
-                                $submenuhead4_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                $submenuhead4_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                         }
                         foreach ($array_submenuhead5_1 as $prod_row1){
-                                $submenuhead5_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                $submenuhead5_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                         }
 
                         $array_submenuhead1_1=array();
@@ -1215,7 +1215,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 			$submenuhead2_2='';
 			$submenuhead3_2='';
 			$submenuhead4_2='';
-			$submenuhead5_2='';						
+			$submenuhead5_2='';
 
                         $cnt=0;
                         $array_submenuhead1_2=array();
@@ -1290,19 +1290,19 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
                         reset($array_submenuhead4_2);
                         reset($array_submenuhead5_2);
                         foreach ($array_submenuhead1_2 as $prod_row2){
-       				$submenuhead1_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+       				$submenuhead1_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         foreach ($array_submenuhead2_2 as $prod_row2){
-                                $submenuhead2_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+                                $submenuhead2_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         foreach ($array_submenuhead3_2 as $prod_row2){
-                                $submenuhead3_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+                                $submenuhead3_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         foreach ($array_submenuhead4_2 as $prod_row2){
-                                $submenuhead4_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+                                $submenuhead4_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         foreach ($array_submenuhead5_2 as $prod_row2){
-                                $submenuhead5_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+                                $submenuhead5_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         $array_submenuhead1_2=array();
                         $array_submenuhead2_2=array();
@@ -1396,8 +1396,8 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 			$submenuhead.='<div class="submenuhead">';
 			$submenuhead.='<div class="menutype">';
 			$submenuhead.='<ul>';
-			$submenuhead.='<li class="inside_menu_head"><a href="/shop/CID_'.$row[id].'.html" title="'.$row[name].'">'.$row[name].'</a></li>';
-			$submenuhead.='<li class="inside_menu_head"><a href="/shop/CID_'.$parent_id1.'.html" title="'.$parent_cat_name1.'">'.$parent_cat_name1.'</a></li>';
+			$submenuhead.='<li class="inside_menu_head"><a href="/shop/CID_'.$row[id].'.html">'.$row[name].'</a></li>';
+			$submenuhead.='<li class="inside_menu_head"><a href="/shop/CID_'.$parent_id1.'.html">'.$parent_cat_name1.'</a></li>';
 			$submenuhead.='</ul>';							
 			//********************************************************************* 18 ***********************************************************************************					
 			$this->PHPShopOrm->cache = true;
@@ -1491,31 +1491,31 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 
                         //циклы формируем вывод меню по типу с учетом сортировки
                         foreach ($array_submenuhead1_1 as $prod_row1){
-                                $submenuhead1_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                $submenuhead1_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                         }
                         foreach ($array_submenuhead2_1 as $prod_row1) {
 				if ($prod_row1[id]==35) {
-					$submenuhead2_1.='<li class="inside_menu_head" style="font-size:12px;"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a>&nbsp;';
-					$submenuhead2_1.='(<a href="/shop/CID_333.html" style="font-size:12px;" title="Мотокосы">Мотокосы</a>,&nbsp;';
-					$submenuhead2_1.='<a href="/shop/CID_334.html" style="font-size:12px;" title="Бензокосы">Бензокосы</a>)</li>';
+					$submenuhead2_1.='<li class="inside_menu_head" style="font-size:12px;"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>&nbsp;';
+					$submenuhead2_1.='(<a href="/shop/CID_333.html" style="font-size:12px;">Мотокосы</a>,&nbsp;';
+					$submenuhead2_1.='<a href="/shop/CID_334.html" style="font-size:12px;">Бензокосы</a>)</li>';
 				} else if ($prod_row1[id]!=333 && $prod_row1[id]!=334 && $prod_row1[id]!=35) {
-					$submenuhead2_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+					$submenuhead2_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
 				}
                         }
                         foreach ($array_submenuhead3_1 as $prod_row1){
-                                $submenuhead3_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                $submenuhead3_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                         }
                         foreach ($array_submenuhead4_1 as $prod_row1){
-                                $submenuhead4_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                $submenuhead4_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                         }
                         foreach ($array_submenuhead5_1 as $prod_row1){
-                                $submenuhead5_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                $submenuhead5_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                         }
                         foreach ($array_submenuhead6_1 as $prod_row1){
-                                $submenuhead6_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                $submenuhead6_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                         }
                         foreach ($array_submenuhead7_1 as $prod_row1){
-                                $submenuhead7_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                $submenuhead7_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                         }
                         $array_submenuhead1_1=array();
                         $array_submenuhead2_1=array();
@@ -1640,25 +1640,25 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
                         reset($array_submenuhead6_2);
                         reset($array_submenuhead7_2);
                         foreach ($array_submenuhead1_2 as $prod_row2){
-       				$submenuhead1_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+       				$submenuhead1_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         foreach ($array_submenuhead2_2 as $prod_row2){
-                                $submenuhead2_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+                                $submenuhead2_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         foreach ($array_submenuhead3_2 as $prod_row2){
-                                $submenuhead3_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+                                $submenuhead3_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         foreach ($array_submenuhead4_2 as $prod_row2){
-                                $submenuhead4_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+                                $submenuhead4_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         foreach ($array_submenuhead5_2 as $prod_row2){
-                                $submenuhead5_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+                                $submenuhead5_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         foreach ($array_submenuhead6_2 as $prod_row2){
-                                $submenuhead6_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+                                $submenuhead6_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         foreach ($array_submenuhead7_2 as $prod_row2){
-                                $submenuhead7_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+                                $submenuhead7_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         $array_submenuhead1_2=array();
                         $array_submenuhead2_2=array();
@@ -1762,8 +1762,8 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 			$submenuhead.='<div class="submenuhead">';
 			$submenuhead.='<div class="menutype">';
 			$submenuhead.='<ul>';
-			$submenuhead.='<li class="inside_menu_head"><a href="/shop/CID_'.$row[id].'.html" title="'.$row[name].'">'.$row[name].'</a></li>';
-			$submenuhead.='<li class="inside_menu_head"><a href="/shop/CID_'.$parent_id1.'.html" title="'.$parent_cat_name1.'">'.$parent_cat_name1.'</a></li>';
+			$submenuhead.='<li class="inside_menu_head"><a href="/shop/CID_'.$row[id].'.html">'.$row[name].'</a></li>';
+			$submenuhead.='<li class="inside_menu_head"><a href="/shop/CID_'.$parent_id1.'.html">'.$parent_cat_name1.'</a></li>';
 			$submenuhead.='</ul>';							
 			//********************************************************************* 142 ***********************************************************************************					
 			$this->PHPShopOrm->cache = true;
@@ -1866,40 +1866,40 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
                         //циклы формируем вывод меню по типу с учетом сортировки
                         foreach ($array_submenuhead1_1 as $prod_row1){
                              if ($prod_row1[id]==145) {
-                                    $submenuhead1_1.='<li class="inside_menu_head" style="font-size:12px;width: 99%;"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a>&nbsp;';
-                                    $submenuhead1_1.='(<a href="/shop/CID_426.html" style="font-size:12px;" title="Бензиновые ямобуры">Бензиновые ямобуры</a>,&nbsp;';
-                                    $submenuhead1_1.='<a href="/shop/CID_427.html" style="font-size:12px;" title="Бензобуры для земляных работ">Бензобуры для земляных работ</a>)</li>';
+                                    $submenuhead1_1.='<li class="inside_menu_head" style="font-size:12px;width: 99%;"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>&nbsp;';
+                                    $submenuhead1_1.='(<a href="/shop/CID_426.html" style="font-size:12px;">Бензиновые ямобуры</a>,&nbsp;';
+                                    $submenuhead1_1.='<a href="/shop/CID_427.html" style="font-size:12px;">Бензобуры для земляных работ</a>)</li>';
                             } else if ($prod_row1[id]==146) {
-                                    $submenuhead1_1.='<li class="inside_menu_head" style="font-size:12px;width: 99%;"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a>&nbsp;';
-                                    $submenuhead1_1.='(<a href="/shop/CID_428.html" style="font-size:12px;" title="Бензобуры для рыбалки">Бензобуры для рыбалки</a>,&nbsp;';
-                                    $submenuhead1_1.='<a href="/shop/CID_429.html" style="font-size:12px;" title="Мотобуры для рыбалки">Мотобуры для рыбалки</a>)</li>';
+                                    $submenuhead1_1.='<li class="inside_menu_head" style="font-size:12px;width: 99%;"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>&nbsp;';
+                                    $submenuhead1_1.='(<a href="/shop/CID_428.html" style="font-size:12px;">Бензобуры для рыбалки</a>,&nbsp;';
+                                    $submenuhead1_1.='<a href="/shop/CID_429.html" style="font-size:12px;">Мотобуры для рыбалки</a>)</li>';
                             } else if (($prod_row1[id]!=426 && $prod_row1[id]!=427 && $prod_row1[id]!=145) && ($prod_row1[id]!=428 && $prod_row1[id]!=429 && $prod_row1[id]!=146)) {
-                                    $submenuhead1_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                    $submenuhead1_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                             }
                         }
                         foreach ($array_submenuhead2_1 as $prod_row1) {
-                                $submenuhead2_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                $submenuhead2_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                         }
                         foreach ($array_submenuhead3_1 as $prod_row1){
-                                $submenuhead3_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                $submenuhead3_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                         }
                         foreach ($array_submenuhead4_1 as $prod_row1){
-                                $submenuhead4_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                $submenuhead4_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                         }
                         foreach ($array_submenuhead5_1 as $prod_row1){
-                                $submenuhead5_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                $submenuhead5_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                         }
                         foreach ($array_submenuhead6_1 as $prod_row1){
-                                $submenuhead6_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                $submenuhead6_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                         }
                         foreach ($array_submenuhead7_1 as $prod_row1){
-                                $submenuhead7_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                $submenuhead7_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                         }
                         foreach ($array_submenuhead8_1 as $prod_row1){
-                                $submenuhead8_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                $submenuhead8_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                         }
                         foreach ($array_submenuhead9_1 as $prod_row1){
-                                $submenuhead9_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html" title="'.$prod_row1[name].'">'.$prod_row1[name].'</a></li>';
+                                $submenuhead9_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
                         }
                         $array_submenuhead1_1=array();
                         $array_submenuhead2_1=array();
@@ -2047,31 +2047,31 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
                         reset($array_submenuhead9_2);
                         
                         foreach ($array_submenuhead1_2 as $prod_row2){
-       				$submenuhead1_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+       				$submenuhead1_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         foreach ($array_submenuhead2_2 as $prod_row2){
-                                $submenuhead2_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+                                $submenuhead2_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         foreach ($array_submenuhead3_2 as $prod_row2){
-                                $submenuhead3_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+                                $submenuhead3_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         foreach ($array_submenuhead4_2 as $prod_row2){
-                                $submenuhead4_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+                                $submenuhead4_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         foreach ($array_submenuhead5_2 as $prod_row2){
-                                $submenuhead5_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+                                $submenuhead5_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         foreach ($array_submenuhead6_2 as $prod_row2){
-                                $submenuhead6_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+                                $submenuhead6_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         foreach ($array_submenuhead7_2 as $prod_row2){
-                                $submenuhead7_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+                                $submenuhead7_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         foreach ($array_submenuhead8_2 as $prod_row2){
-                                $submenuhead8_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+                                $submenuhead8_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         foreach ($array_submenuhead9_2 as $prod_row2){
-                                $submenuhead9_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html" title="'.$prod_row2[name].'">'.$prod_row2[name].'</a></li>';
+                                $submenuhead9_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
                         }
                         $array_submenuhead1_2=array();
                         $array_submenuhead2_2=array();
@@ -2188,8 +2188,8 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 		$submenuhead.='<div class="submenuhead">';
 		$submenuhead.='<div class="menutype">';
 		$submenuhead.='<ul>';
-		$submenuhead.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$row_id.'.html" title="'.$row_name.'">'.$row_name.'</a></span></li>';
-		$submenuhead.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$parent_id.'.html" title="'.$parent_cat_name.'">'.$parent_cat_name.'</a></span></li>';
+		$submenuhead.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$row_id.'.html">'.$row_name.'</a></span></li>';
+		$submenuhead.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$parent_id.'.html">'.$parent_cat_name.'</a></span></li>';
 		$submenuhead.='</ul>';
 		//генерация первого раздела меню "по типу"
 	

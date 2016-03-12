@@ -71,7 +71,7 @@
 	  <td>
 		  <input type="radio" name="order_metod" checked value="3" onClick="document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';"><label>Наличная оплата</label><br>
 		  <input type="radio" @creditdisabled@  name="order_metod" value="25" onClick="document.getElementById('bic').style.display='block';document.getElementById('bin').style.display='none';"><label>Оформить кредит</label><br>
-		  <div id="order_metod_div" style="display:@order_metod_div_display@;"><input type="radio" name="order_metod" value="26" onClick="document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';"><label>Оплата в магазине картой VISA, Mastercard</label><br></div>
+                  @order_metod_div@
 	  </td>
     </tr>
     <tr>

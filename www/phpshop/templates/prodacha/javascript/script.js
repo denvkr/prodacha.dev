@@ -1294,6 +1294,7 @@ fillTKtablePart();
                                     }
                                     //для питера модифицируем корзину удаляя все поля для цены < 1000
                                     if (((Number(xid)===69 || Number(xid)===0 || isNaN(Number(xid))) && city==='sp') && Number(z)<1000){
+                                        //console.log('test');
                                         $('#delivery_warning').html('Минимальная сумма заказа в интернет-магазине PROДАЧА в Санкт-Петербурге составляет 1000 руб. Пожалуйста, дополните ваш заказ до минимальной суммы.');
                                         $('#delivery_warning').css({'display':'table-cell','font-family':'tahoma', 'font-size':'12px'});
                                         $("form[name='forma_order']>table:eq(0) tr:eq(0)").css('display','none');
@@ -1303,6 +1304,7 @@ fillTKtablePart();
                                         $("form[name='forma_order']>table:eq(0) tr:eq(5)").css('display','none');
                                         $("form[name='forma_order']>table:eq(0) tr:eq(6)").css('display','none');
                                         $("form[name='forma_order']>table:eq(0) tr:eq(7)").css('display','none');
+                                        $("form[name='forma_order']>table:eq(0) tr:eq(8)").css('display','none');
                                         $("form[name='forma_order']>table:eq(0) tr:eq(9)").css('display','none');
                                         $('#bin').css('display','none');
                                     }

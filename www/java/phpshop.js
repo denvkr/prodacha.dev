@@ -232,12 +232,17 @@ var flag = false;
 function UpdateDelivery(xid) {
 
     var req = new Subsys_JsHttpRequest_Js();
+
     var sum = document.getElementById('OrderSumma').value;
     var wsum = document.getElementById('WeightSumma').innerHTML;
-    var adr_name_img=getNextElement(document.getElementsByName('adr_name')[0]);
     var adr_name_info=document.getElementsByName('adr_name')[0];
+    var adr_name_img=getNextElement(document.getElementsByName('adr_name')[0]);
+    var legal_form=document.getElementsByName('legal_form');
     var deliver_time_info=document.getElementsByName('delivery_time_info');
     var order_metod=document.getElementById('order_metod_div');
+    var region='m';
+    //console.log(document.getElementById('var_'+xid));
+    //console.log(typeof(document.getElementById('var_'+xid)));
     //модифицируем поле "Адрес и дополнительная информация:"
 
     //if (Number(document.getElementById('TotalSumma').innerHTML)<3000 && xid==1) {
@@ -245,65 +250,183 @@ function UpdateDelivery(xid) {
             //return true;
 
     //}
-
-    if (Number(xid)===10 || Number(xid)===13 || Number(xid)===14 || Number(xid)===43 || Number(xid)===69) {
+    //вывод верхнего уровня доставки самовывоза москва,питер,чебоксары
+    if (typeof(document.getElementById('var_'+xid))!=='undefined' && (Number(xid)===10 || Number(xid)===13 || Number(xid)===14 || Number(xid)===43 || Number(xid)===69 || Number(xid)===70 || Number(xid)===71)) {
+            //получаем список доставок в элементе
             var delivery_options=document.getElementById('var_'+xid);
-            //alert('var_'+xid);
-            if ( typeof(delivery_options)!=='undefined' && delivery_options.selected===true && (Number(xid)===10 || Number(xid)===13 || Number(xid)===14 || Number(xid)===43 || Number(xid)===69) ) {
-                    //alert('var_'+xid);
-                    document.getElementById('address_and_info').innerHTML='Дополнительная<br>информация:';
-                    if (typeof(adr_name_img) !== 'undefined' && adr_name_img !== null) {
-                            adr_name_img.parentNode.removeChild(adr_name_img);				
+            //если выбрана определенная доставка то делаем изменения в выводе элемента address_and_info и флажка обязательности поля
+            if ( ((delivery_options!==null && delivery_options.selected===true) || delivery_options===null) && (Number(xid)===10 || Number(xid)===13 || Number(xid)===14 || Number(xid)===43 || Number(xid)===69) ) {
+                document.getElementById('address_and_info').innerHTML='Дополнительная<br>информация:';
+                if (typeof(adr_name_img) !== 'undefined' && adr_name_img !== null) {
+                        adr_name_img.parentNode.removeChild(adr_name_img);
+                }
+                //скрываем поля времени доставки, при самовывозе они не нужны
+                deliver_time_info[0].style.display='none';
+                deliver_time_info[1].style.display='none';
+                //ветка самовывоза для физлица
+                if ( ((delivery_options!==null && delivery_options.selected===true) || delivery_options===null) && legal_form[0].checked===true && (Number(xid)===10 || Number(xid)===13) ) {
+                    //удаляем почту россии
+                    if ($('#postal_index').length){
+                        delete_order_elements(1);				
                     }
-                    //alert(xid);			
+                    //удаляем ТК
+                    if ($('#pass_no_info').length){
+                        delete_order_elements(2);				
+                    }
+                    //делаем видимыми поля комментарии "Дополнительная информация:"
+                    document.getElementById('address_and_info').style.display="table-cell";
+                    document.getElementById('adr_name').style.display="table-cell";
+                    //в зависимости от доставки и типа пользователя показываем типы оплаты
+                    if (($("td input[name='order_metod']:eq(0)").length && 
+                        $("td input[name='order_metod']:eq(0)+:eq(0)").html()==='Счет (квитанция) для оплаты через банк') ||
+                        ($("td input[name='order_metod']:eq(0)").length && 
+                        $("td input[name='order_metod']:eq(0)+:eq(0)").html()==='Счет на организацию (безналичный расчет)') ||
+                        ($("td input[name='order_metod']:eq(0)").length && 
+                        $("td input[name='order_metod']:eq(0)+:eq(0)").html()==='Наличная оплата' &&                        
+                        $("td input[name='order_metod']:eq(1)").length && 
+                        $("td input[name='order_metod']:eq(1)+:eq(0)").html()==='Оформить кредит' &&
+                        !$("td input[name='order_metod']:eq(2)").length && 
+                        $("td input[name='order_metod']:eq(2)+:eq(0)").html()!=='Оплата в магазине картой VISA, Mastercard')) {
+                        $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"3\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Наличная оплата</label><br>"+
+                            "<input type=\"radio\" @creditdisabled@  name=\"order_metod\" value=\"25\" onClick=\"document.getElementById('bic').style.display='block';document.getElementById('bin').style.display='none';\"><label>Оформить кредит</label><br>"+
+                            "<div id=\"order_metod_div\" style=\"display:table-cell;\"><input type=\"radio\" name=\"order_metod\" value=\"26\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Оплата в магазине картой VISA, Mastercard</label><br></div>");
+                            //console.log('Оплата в магазине картой VISA, Mastercard');
+                    }
+                    //показываем элемент "Оплата в магазине картой VISA, Mastercard"
+                    document.getElementById('order_metod_div').style.display='table-cell';
+                //ветка самовывоза для юрлица
+                } else if ( ((delivery_options!==null && delivery_options.selected===true) || delivery_options===null) && legal_form[1].checked===true && (Number(xid)===10 || Number(xid)===13) ) {
+                    //удаляем почту россии
+                    if ($('#postal_index').length){
+                        delete_order_elements(1);				
+                    }
+                    //удаляем ТК
+                    if ($('#pass_no_info').length){
+                        delete_order_elements(2);				
+                    }
+                    //делаем видимыми поля комментарии "Дополнительная информация:"                    
+                    document.getElementById('address_and_info').style.display="table-cell";
+                    document.getElementById('adr_name').style.display="table-cell";
+                    //показываем типы оплаты
+                    $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"14\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Счет на организацию (безналичный расчет)</label><br>");
+                    //тип оплаты делаем выбранным
+                    document.getElementsByName("order_metod")[0].checked=true;
+                //для питера убираем оплату картой
+                } else if ($('#order_metod_div').length){
+                    document.getElementById('order_metod_div').style.display='none';
+                }
+                //для чебоксар делаем исключение при физлице
+                if (Number(xid)===43 && legal_form[0].checked===true){
+                    $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"3\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Наличная оплата</label><br>"+
+                      "<div id=\"order_metod_div\" style=\"display:table-cell;\"><input type=\"radio\" name=\"order_metod\" value=\"26\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Оплата в магазине картой VISA, Mastercard</label><br></div>");
+                    document.getElementsByName("order_metod")[0].checked=true;
+                    //console.log('чебосары');
+                }
+                //для чебоксар делаем исключение при юрлице
+                if (Number(xid)===43 && legal_form[1].checked===true){
+                    $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"14\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Счет на организацию (безналичный расчет)</label><br>");
+                    document.getElementsByName("order_metod")[0].checked=true;
+                    //console.log('чебосары');
+                }
+                //для спб делаем исключение
+                if (Number(xid)===69){
+                    //удаляем почту россии
+                    if ($('#postal_index').length){
+                        delete_order_elements(1);				
+                    }
+                    //удаляем ТК
+                    if ($('#pass_no_info').length){
+                        delete_order_elements(2);				
+                    }
+                    //делаем видимыми поля комментарии "Дополнительная информация:"  
+                    document.getElementById('address_and_info').style.display="table-cell";
+                    document.getElementById('adr_name').style.display="table-cell";
+                    //оплата при физлице
+                    if (legal_form[0].checked===true){
+                        $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"1\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Счет (квитанция) для оплаты через банк</label><br>");
+                    //оплата при юрлице    
+                    } else if (legal_form[1].checked===true) {
+                        $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"14\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Счет на организацию (безналичный расчет)</label><br>");
+                    }
+                    document.getElementsByName("order_metod")[0].checked=true;
+                    //console.log('Счет (квитанция) для оплаты через банк');
+                }
+                
+            }
+
+            //для питера делаем изменения для доставок по питеру и области через ТК
+            if ( ((delivery_options!==null && delivery_options.selected===true) || delivery_options===null) && (Number(xid)===70 || Number(xid)===71)) {
+                
+                //если поле адреса скрыто то показываем его
+                if (document.getElementById('address_and_info')!==null){
+                    document.getElementById('address_and_info').innerHTML='Адрес доставки и<br>дополнительная<br>информация:';
+                    document.getElementById('address_and_info').style.display='table-cell';
+                }
+                //выводим поле доп информации
+                if (document.getElementById('adr_name')!==null){
+                    document.getElementById('adr_name').style.display='table-cell';
+                }
+                //делаем проверку если существуют и видны поля времени доставки то скрываем их
+                if (deliver_time_info[0]!==null && deliver_time_info[0].style.display==='table-cell'){
                     deliver_time_info[0].style.display='none';
                     deliver_time_info[1].style.display='none';
-                    if ( $('#var_'+xid).length && $('#order_metod_div').length && delivery_options.selected===true && (Number(xid)===10 || Number(xid)===13) ) {
-                            order_metod.style.display='table-cell';
-                    }
+                }
+                //console.log(document.getElementById('order_metod_div'));
+                if (document.getElementById('order_metod_div')!==null){
+                    document.getElementById('order_metod_div').style.display='none';
+                }
+
             }
-			
+            //удаляем почту россии
             if ($('#postal_index').length){
-                    delete_order_elements(1);				
+                delete_order_elements(1);				
             }
-
+            //удаляем ТК
             if ($('#pass_no_info').length){
-                    delete_order_elements(2);				
+                delete_order_elements(2);				
             }
-			
-            if ($("td input[name='order_metod']:eq(0)").length && $("td input[name='order_metod']:eq(0)+:eq(0)").html()==='Счет (квитанция) для оплаты через банк'){
-                            $("td input[name='order_metod']:eq(0)+:eq(0)").next().remove();
-                            $("td input[name='order_metod']:eq(0)+:eq(0)").remove();
-                            $("td input[name='order_metod']:eq(0)").remove();
+            //в случае обновления типа доставки необходимо скорректировать оплату
+            if ($("td input[name='order_metod']:eq(2)").length && $("td input[name='order_metod']:eq(2)+:eq(0)").html()==='Оплата в магазине картой VISA, Mastercard'){
+                get_payments_elements(region,xid);
             }
-            if (!$("td input[name='order_metod']:eq(0)").length && 
-                    $("td input[name='order_metod']:eq(0)+:eq(0)").html()!=='Наличная оплата' &&
-                    !$("td input[name='order_metod']:eq(1)").length && 
-                    $("td input[name='order_metod']:eq(1)+:eq(0)").html()!=='Оформить кредит'
-                    ){
-                            $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"3\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Наличная оплата</label><br>"+
-                              "<input type=\"radio\" @creditdisabled@  name=\"order_metod\" value=\"25\" onClick=\"document.getElementById('bic').style.display='block';document.getElementById('bin').style.display='none';\"><label>Оформить кредит</label><br>"+
-                              "<div id=\"order_metod_div\" style=\"display:@order_metod_div_display@;\"><input type=\"radio\" name=\"order_metod\" value=\"26\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Оплата в магазине картой VISA, Mastercard</label><br></div>");
+            if ($("td input[name='order_metod']:eq(1)").length && $("td input[name='order_metod']:eq(1)+:eq(0)").html()==='Оформить кредит'){
+                get_payments_elements(region,xid);
             }
-
-            if ($("td input[name='order_metod']:eq(0)").length && 
-                    $("td input[name='order_metod']:eq(0)+:eq(0)").html()==='Наличная оплата' &&
-                    $("td input[name='order_metod']:eq(1)").length && 
-                    $("td input[name='order_metod']:eq(1)+:eq(0)").html()==='Оформить кредит' &&
-                    !$("td input[name='order_metod']:eq(2)").length && 
-                    $("td input[name='order_metod']:eq(2)+:eq(0)").html()!=='Оплата в магазине картой VISA, Mastercard') {
-                    $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"3\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Наличная оплата</label><br>"+
-                      "<input type=\"radio\" @creditdisabled@  name=\"order_metod\" value=\"25\" onClick=\"document.getElementById('bic').style.display='block';document.getElementById('bin').style.display='none';\"><label>Оформить кредит</label><br>"+
-                      "<div id=\"order_metod_div\" style=\"display:@order_metod_div_display@;\"><input type=\"radio\" name=\"order_metod\" value=\"26\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Оплата в магазине картой VISA, Mastercard</label><br></div>");
-
+            if ($("td input[name='order_metod']:eq(0)").length && $("td input[name='order_metod']:eq(0)+:eq(0)").html()==='Наличная оплата'){
+                get_payments_elements(region,xid);
             }
-            if (typeof(delivery_options)!=='undefined' && delivery_options.selected===true && Number(xid)===69) {
-                delete_order_payments_elements();
+            //производим вывод карты с пунктами доставки в спб
+            if (((delivery_options!==null && delivery_options.selected===true) || delivery_options===null) && (Number(xid)===69 || Number(xid)===70 || Number(xid)===71)) {
                 
+                if (legal_form[0].checked===true){
+                    $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"1\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Счет (квитанция) для оплаты через банк</label><br>");
+                    $('#spb_map_delivery_office_info').css('top','-245px');
+                    //оплата при юрлице    
+                } else if (legal_form[1].checked===true){
+                    $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"14\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Счет на организацию (безналичный расчет)</label><br>");
+                    $('#spb_map_delivery_office_info').css('top','-205px');
+                }
+                document.getElementsByName("order_metod")[0].checked=true;
+                
+                delete_order_payments_elements();
+
                 if (!$('#spb_map_area').length){
-                    $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").html('<div id="spb_map_delivery_office_info" style="position:relative;top:-245px;">Выберите пункт<br>выдачи заказов</div>');
-                    $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").prop('align','right');
-                    $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(1)").html('<div id="spb_map_area" style="position:relative;top:-40px;"><select id="tk_delivery_points_list"></select><div style="height:18px;display:block;"></div><div id="map" style="width:630px; height:450px;"></div></div>');
+                    if (Number(xid)===70 || Number(xid)===71){
+                        $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").html('<div id="spb_map_delivery_office_info" style="position:relative;top:-245px;">Выберите пункт<br>выдачи заказов,<br>из которого будет осуществляться<br>доставка</div>');
+                        $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").prop('align','right');
+                        if (legal_form[1].checked===true)
+                            $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(1)").html('<div id="spb_map_area" style="position:relative;top:0px;"><p>Доставка по Санкт-Петербургу и Ленинградской области производится силами курьерской службы. Сначала ваш заказ поступает в один из пунктов самовывоза в Санкт-Петербурге. Доставка по адресу возможна на следующий день. Стоимость доставки зависит от габаритов груза и в среднем составляет 300-500 руб. (в пределах КАД) - эта сумма оплачивается при получении заказа. Габариты груза уточняйте в описании товара на сайте, либо по телефону у наших менеджеров.</p><select id="tk_delivery_points_list"></select><div style="height:18px;display:block;"></div><div id="map" style="width:630px; height:450px;"></div></div>');
+                         else
+                            $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(1)").html('<div id="spb_map_area" style="position:relative;top:-40px;"><p>Доставка по Санкт-Петербургу и Ленинградской области производится силами курьерской службы. Сначала ваш заказ поступает в один из пунктов самовывоза в Санкт-Петербурге. Доставка по адресу возможна на следующий день. Стоимость доставки зависит от габаритов груза и в среднем составляет 300-500 руб. (в пределах КАД) - эта сумма оплачивается при получении заказа. Габариты груза уточняйте в описании товара на сайте, либо по телефону у наших менеджеров.</p><select id="tk_delivery_points_list"></select><div style="height:18px;display:block;"></div><div id="map" style="width:630px; height:450px;"></div></div>');
+                    } else {
+                        //console.log(1);
+                        $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").html('<div id="spb_map_delivery_office_info" style="position:relative;top:-245px;">Выберите пункт<br>выдачи заказов</div>');
+                        $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").prop('align','right');
+                        if (legal_form[1].checked===true)
+                            $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(1)").html('<div id="spb_map_area" style="position:relative;top:0px;"><select id="tk_delivery_points_list"></select><div style="height:18px;display:block;"></div><div id="map" style="width:630px; height:450px;"></div></div>');
+                         else
+                            $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(1)").html('<div id="spb_map_area" style="position:relative;top:-40px;"><select id="tk_delivery_points_list"></select><div style="height:18px;display:block;"></div><div id="map" style="width:630px; height:450px;"></div></div>');
+                    }
                     $('#order_metod_div').css('display','none');
                     var script   = document.createElement("script");
                     script.type  = "text/javascript";
@@ -350,15 +473,22 @@ function UpdateDelivery(xid) {
                     script.text  += '$("#tk_delivery_points_list option:eq(0)").prop("selected","selected");';
                     script.text  += '$("#tk_delivery_points_list").change();';
                     script.text  += '}';                   
-                    
+                    //добавляем скрипт в конец страницы
                     document.body.appendChild(script);
-                    // remove from the dom
-                    //document.body.removeChild(document.body.lastChild);
+
+                } else {
+                    // в случае перехода с нижнего уровня с кодов доставки 70,71
+                    if ($('#spb_map_area>p:eq(0)').length && Number(xid)===69){
+                       $('#spb_map_area>p:eq(0)').remove();
+                       if (legal_form[1].checked===true) {
+                            $('#spb_map_delivery_office_info').css('top','-205px');
+                       }
+                       $('#spb_map_delivery_office_info').html("Выберите пункт<br>выдачи заказов");
+                    }
                 }
             }
-
-    //('#tk_delivery_block').remove();
-    }  else if (Number(xid)!==10 && Number(xid)!==11 && Number(xid)!==67 && Number(xid)!==41 && Number(xid)!==13 && Number(xid)!==14 && Number(xid)!==43 && Number(xid)!==68 && Number(xid)!==69) {
+    //доставка по мкаду и за мкад
+    }  else if (typeof(document.getElementById('var_'+xid))!=='undefined' && Number(xid)!==10 && Number(xid)!==11 && Number(xid)!==67 && Number(xid)!==41 && Number(xid)!==13 && Number(xid)!==14 && Number(xid)!==43 && Number(xid)!==68 && Number(xid)!==69 && Number(xid)!==70 && Number(xid)!==71) {
             //var delivery_options=document.getElementById('var_'+xid);
             document.getElementById('address_and_info').innerHTML='Адрес и <br> дополнительная<br>информация:';
             document.getElementById('address_and_info').style.display='table-cell';
@@ -383,39 +513,47 @@ function UpdateDelivery(xid) {
 			
             deliver_time_info[0].style.display='table-cell';
             deliver_time_info[1].style.display='table-cell';
-            if ( $('#order_metod_div').length) {
-                order_metod.style.display='none';			
+            if ( $('#order_metod_div').length && order_metod.style.display==='table-cell') {
+                order_metod.style.display='none';
             }
 			
             if ($('#postal_index').length){
-                    delete_order_elements(1);				
+                delete_order_elements(1);				
             }
 
             if ($('#pass_no_info').length){
-                    delete_order_elements(2);				
+                delete_order_elements(2);				
             }
+            
             if ($('#spb_map_area').length){
                 $('#spb_map_area').remove();
                 $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").html('');
                 // remove from the dom
                 document.body.removeChild(document.body.lastChild);
-            }			
-            if ($("td input[name='order_metod']:eq(0)").length && $("td input[name='order_metod']:eq(0)+:eq(0)").html()==='Счет (квитанция) для оплаты через банк'){
-                            $("td input[name='order_metod']:eq(0)+:eq(0)").next().remove();
-                            $("td input[name='order_metod']:eq(0)+:eq(0)").remove();
-                            $("td input[name='order_metod']:eq(0)").remove();
-            }            
-            if (!$("td input[name='order_metod']:eq(0)").length && 
-                    $("td input[name='order_metod']:eq(0)+:eq(0)").html()!=='Наличная оплата' &&
-                    !$("td input[name='order_metod']:eq(1)").length && 
-                    $("td input[name='order_metod']:eq(1)+:eq(0)").html()!=='Оформить кредит'){
-                            $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"3\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Наличная оплата</label><br>"+
-                              "<input type=\"radio\" @creditdisabled@  name=\"order_metod\" value=\"25\" onClick=\"document.getElementById('bic').style.display='block';document.getElementById('bin').style.display='none';\"><label>Оформить кредит</label><br>");
             }
-		
+            if (legal_form[0].checked===true){
+                if ($("td input[name='order_metod']:eq(0)").length && $("td input[name='order_metod']:eq(0)+:eq(0)").html()==='Счет (квитанция) для оплаты через банк'){
+                                $("td input[name='order_metod']:eq(0)+:eq(0)").next().remove();
+                                $("td input[name='order_metod']:eq(0)+:eq(0)").remove();
+                                $("td input[name='order_metod']:eq(0)").remove();
+                }            
+                if ($("td input[name='order_metod']:eq(0)+:eq(0)").html()==='Счет на организацию (безналичный расчет)' || (!$("td input[name='order_metod']:eq(0)").length && 
+                        $("td input[name='order_metod']:eq(0)+:eq(0)").html()!=='Наличная оплата' &&
+                        !$("td input[name='order_metod']:eq(1)").length && 
+                        $("td input[name='order_metod']:eq(1)+:eq(0)").html()!=='Оформить кредит')){
+                                $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"3\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Наличная оплата</label><br>"+
+                                  "<input type=\"radio\" @creditdisabled@  name=\"order_metod\" value=\"25\" onClick=\"document.getElementById('bic').style.display='block';document.getElementById('bin').style.display='none';\"><label>Оформить кредит</label><br>");
+                }
+            }
+            if (legal_form[1].checked===true){
+                $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"14\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Счет на организацию (безналичный расчет)</label><br>");
+            }
+            document.getElementsByName("order_metod")[0].checked=true;
+            
             //('#tk_delivery_block').remove();
             //adr_name_img.src='/phpshop/templates/prodacha/images/shopflag_green.gif';
-	} else if (Number(xid)===11 || Number(xid)===67 || Number(xid)===41) {
+	} else if (typeof(document.getElementById('var_'+xid))!=='undefined' && (Number(xid)===11 || Number(xid)===67 || Number(xid)===41)) {
+            
             if (document.getElementById('address_and_info')){
                 document.getElementById('address_and_info').style.display='none';               
             }
@@ -434,14 +572,28 @@ function UpdateDelivery(xid) {
 			
             delete_order_payments_elements();
 			
-            delete_order_elements(1);
+            //удаляем почту россии
+            if ($('#postal_index').length){
+                delete_order_elements(1);				
+            }
+
+            if ($('#pass_no_info').length){
+                delete_order_elements(2);				
+            }
             
             if ($('#spb_map_area').length){
                 $('#spb_map_area').remove();
                 $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").html('');
-                // remove from the dom
+                // remove script from the dom
                 document.body.removeChild(document.body.lastChild);
             }            
+            if (legal_form[0].checked===true){
+                $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"1\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Счет (квитанция) для оплаты через банк</label><br>");
+            }
+            if (legal_form[1].checked===true){
+                $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"14\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Счет на организацию (безналичный расчет)</label><br>");
+            }
+            document.getElementsByName("order_metod")[0].checked=true;
 
             $('<tr>'+
                 '<td align="right"><div id="tk_info" name="tk_info"> Транспортная компания: </div></td>'+
@@ -550,7 +702,7 @@ function UpdateDelivery(xid) {
             $('#pass_no1').next().prop('width', '16');
             $('#pass_no1').next().prop('border', '0');
             $('#pass_no1').next().prop('hspace','5');
-            $('#pass_no1').next().prop('align','middle');    
+            $('#pass_no1').next().prop('align','middle');
             $('#pass_no2').css({"width":"40px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
             //$('#pass_no2').next().css("display","table-cell");
             $('#pass_no2').next().prop('src','/phpshop/templates/prodacha/images/shop/flag_green.gif');
@@ -559,7 +711,7 @@ function UpdateDelivery(xid) {
             $('#pass_no2').next().prop('width', '16');
             $('#pass_no2').next().prop('border', '0');
             $('#pass_no2').next().prop('hspace','5');
-            $('#pass_no2').next().prop('align','middle');    
+            $('#pass_no2').next().prop('align','middle');
             $('#pass_police_info').css("display","inline");
             $('#pass_police').css({"width":"60px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
             //$('#pass_police').next().css("display","table-cell");
@@ -592,7 +744,8 @@ function UpdateDelivery(xid) {
             $('#delivery_address_info').css("display","table-cell");
             $('#delivery_address').css({"width":"400px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
             fillTKtablePart();
-	} else if (Number(xid)===68) {
+	} else if (typeof(document.getElementById('var_'+xid))!=='undefined' && Number(xid)===68) {
+            
             if (document.getElementById('address_and_info')){
                 document.getElementById('address_and_info').style.display='none';               
             }
@@ -611,12 +764,27 @@ function UpdateDelivery(xid) {
             if ($('#spb_map_area').length){
                 $('#spb_map_area').remove();
                 $("form[name='forma_order']>table:eq(0) tr:eq(14) td:eq(0)").html('');
-                // remove from the dom
+                // remove script from the dom
                 document.body.removeChild(document.body.lastChild);
             }            
             delete_order_payments_elements();
-			
-            delete_order_elements(2);
+
+            //удаляем почту россии
+            if ($('#postal_index').length){
+                delete_order_elements(1);				
+            }
+            
+            if ($('#pass_no_info').length){
+                delete_order_elements(2);				
+            }
+
+            if (legal_form[0].checked===true){
+                $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"1\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Счет (квитанция) для оплаты через банк</label><br>");
+            }
+            if (legal_form[1].checked===true){
+                $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"14\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Счет на организацию (безналичный расчет)</label><br>");
+            }
+            document.getElementsByName("order_metod")[0].checked=true;
 			
             $(  '<tr>'+    
                 '<td align="right"><div id="cart_tk_delivery_pass_msg_info" name="cart_tk_delivery_pass_msg_info"></div></td>'+
@@ -727,11 +895,10 @@ function UpdateDelivery(xid) {
             $('#delivery_address').next().prop('border', '0');
             $('#delivery_address').next().prop('hspace','5');
             $('#delivery_address').next().prop('align','middle');
-			fillTKtablePart();
+            fillTKtablePart();
 	}
 	
-	//console.log(xid);
-
+    //работаем через ajax чтобы получить список доставок для текущего региона
     req.onreadystatechange = function() {
         if (req.readyState === 4) {
             if (req.responseJS) {
@@ -740,7 +907,7 @@ function UpdateDelivery(xid) {
                 document.getElementById('TotalSumma').innerHTML = (req.responseJS.total||'');
                 document.getElementById('seldelivery').innerHTML = (req.responseJS.dellist||'');
             	//console.log(req.responseJS.dellist);			
-                var z=(req.responseJS.total||'');	
+                var z=(req.responseJS.total||'');
                 var city=(req.responseJS.city||'');
 
                 if (Number(z)<5000 && Number(xid)!==69 && city!=='sp'){
@@ -749,7 +916,7 @@ function UpdateDelivery(xid) {
                   document.getElementById('delivery_warning').style.display="none";
                 }
                 //для питера модифицируем корзину удаляя все поля для цены < 1000
-                if (((Number(xid)===69 || Number(xid)===0) && city==='sp') && Number(z)<1000){
+                if (((Number(xid)===69 || Number(xid)===0 || isNaN(Number(xid))) && city==='sp') && Number(z)<1000){
                     $('#delivery_warning').html('Минимальная сумма заказа в интернет-магазине PROДАЧА в Санкт-Петербурге составляет 1000 руб. Пожалуйста, дополните ваш заказ до минимальной суммы.');
                     $('#delivery_warning').css({'display':'table-cell','font-family':'tahoma', 'font-size':'12px'});
                     $("form[name='forma_order']>table:eq(0) tr:eq(0)").css('display','none');
@@ -759,6 +926,7 @@ function UpdateDelivery(xid) {
                     $("form[name='forma_order']>table:eq(0) tr:eq(5)").css('display','none');
                     $("form[name='forma_order']>table:eq(0) tr:eq(6)").css('display','none');
                     $("form[name='forma_order']>table:eq(0) tr:eq(7)").css('display','none');
+                    $("form[name='forma_order']>table:eq(0) tr:eq(8)").css('display','none');
                     $("form[name='forma_order']>table:eq(0) tr:eq(9)").css('display','none');
                     $('bin').css('display','none');
                 }
@@ -778,97 +946,93 @@ function UpdateDelivery(xid) {
     });
 }
 
+function get_payments_elements(region,delivery){
+
+    var req = new Subsys_JsHttpRequest_Js();
+    //region='m';
+    req.onreadystatechange = function() {
+        if (req.readyState == 4) {
+            if (req.responseJS) {
+                //initialize();
+                //setTimeout("initialize_off()",3000);
+                if ($("td input[name='order_metod']:eq(0)").length)
+                    $("td input[name='order_metod']:eq(0)").prop('value',(req.responseJS.payment_method[0]||''));
+                if ($("td input[name='order_metod']:eq(1)").length)
+                    $("td input[name='order_metod']:eq(1)").prop('value',(req.responseJS.payment_method[1]||''));
+                if ($("td input[name='order_metod']:eq(2)").length)
+                    $("td input[name='order_metod']:eq(2)").prop('value',(req.responseJS.payment_method[2]||''));
+            }
+        }
+    }
+    req.caching = false;
+    var truePath=dirPath();
+    //console.log(truePath+'/phpshop/ajax/payment_method.php');
+    req.open('POST', truePath+'/phpshop/ajax/payment_method.php', true);
+    req.send({
+        region: region,
+        delivery:delivery        
+    });
+}
+
 function delete_order_payments_elements(){
             if ($("td input[name='order_metod']:eq(0)").length && $("td input[name='order_metod']:eq(0)+:eq(0)").html()==='Счет (квитанция) для оплаты через банк'){
-				return true;
-            }            
+		return true;
+            }
+            if ($("td input[name='order_metod']:eq(0)").length && $("td input[name='order_metod']:eq(0)+:eq(0)").html()==='Счет на организацию (безналичный расчет)'){
+		return true;
+            }
             if ($("td input[name='order_metod']:eq(0)").length && 
-                    $("td input[name='order_metod']:eq(0)+:eq(0)").html()==='Наличная оплата' &&
-                    $("td input[name='order_metod']:eq(1)").length && 
-                    $("td input[name='order_metod']:eq(1)+:eq(0)").html()==='Оформить кредит'){
-				$("#order_metod_div").remove();
-				$("td input[name='order_metod']:eq(1)+:eq(0)").next().remove();
-				$("td input[name='order_metod']:eq(1)+:eq(0)").remove();
-				$("td input[name='order_metod']:eq(1)").remove();
-				$("td input[name='order_metod']:eq(0)+:eq(0)").next().remove();
-				$("td input[name='order_metod']:eq(0)+:eq(0)").remove();
-				$("td input[name='order_metod']:eq(0)").remove();				
-				if (!$("input[name='order_metod']:eq(0)").length){
-						$("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" value=\"1\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Счет (квитанция) для оплаты через банк</label><br>");
-						//$("td input[name='order_metod']:eq(0)+:eq(0)").fadeOut();
-						//$("td input[name='order_metod']:eq(0)").fadeOut();
-						document.getElementsByName("order_metod")[0].checked=true;
-				}
-				//document.getElementsByName("order_metod")[0].checked=true;
-				//document.getElementsByName("order_metod")[1].checked=false;					
-				//$("td input[name='order_metod']:eq(2)").remove();
-				//$("td input[name='order_metod']:eq(2)+:eq(0)").remove();
-				//$("td input[name='order_metod']:eq(2)+:eq(0)").next().remove();					
-				//$("td input[name='order_metod']:eq(1)+:eq(0)").fadeOut();
-				//$("td input[name='order_metod']:eq(2)+:eq(0)").fadeOut();
-				//console.log($("#order_metod_div>input[name='order_metod']:eq(0)").next());
-				//$("#order_metod_div :input[name='order_metod']:eq(0)").next.fadeOut();
+                $("td input[name='order_metod']:eq(0)+:eq(0)").html()==='Наличная оплата' &&
+                $("td input[name='order_metod']:eq(1)").length && 
+                $("td input[name='order_metod']:eq(1)+:eq(0)").html()==='Оформить кредит'){
+                    $("#order_metod_div").remove();
+                    $("td input[name='order_metod']:eq(1)+:eq(0)").next().remove();
+                    $("td input[name='order_metod']:eq(1)+:eq(0)").remove();
+                    $("td input[name='order_metod']:eq(1)").remove();
+                    $("td input[name='order_metod']:eq(0)+:eq(0)").next().remove();
+                    $("td input[name='order_metod']:eq(0)+:eq(0)").remove();
+                    $("td input[name='order_metod']:eq(0)").remove();				
+                    if (!$("input[name='order_metod']:eq(0)").length){
+                        $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" value=\"1\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Счет (квитанция) для оплаты через банк</label><br>");
+                        //$("td input[name='order_metod']:eq(0)+:eq(0)").fadeOut();
+                        //$("td input[name='order_metod']:eq(0)").fadeOut();
+                        document.getElementsByName("order_metod")[0].checked=true;
+                    }
+                    //document.getElementsByName("order_metod")[0].checked=true;
+                    //document.getElementsByName("order_metod")[1].checked=false;					
+                    //$("td input[name='order_metod']:eq(2)").remove();
+                    //$("td input[name='order_metod']:eq(2)+:eq(0)").remove();
+                    //$("td input[name='order_metod']:eq(2)+:eq(0)").next().remove();					
+                    //$("td input[name='order_metod']:eq(1)+:eq(0)").fadeOut();
+                    //$("td input[name='order_metod']:eq(2)+:eq(0)").fadeOut();
+                    //console.log($("#order_metod_div>input[name='order_metod']:eq(0)").next());
+                    //$("#order_metod_div :input[name='order_metod']:eq(0)").next.fadeOut();
             }
 
 		//удаляем лишние варианты оплаты,оставляем только квитанцию банка
-		//
-		if (document.getElementsByName("order_metod")[0] && 
-				document.getElementsByName("order_metod")[1]){					
+		if (document.getElementsByName("order_metod")[0] && document.getElementsByName("order_metod")[1]){					
 		}
 		return true;
 }
 
 function delete_order_elements(param){
 	//доставка транспортной компанией
-	if (param===2){
-		if ((document.getElementsByName('forma_order')[0]) && 
-					document.getElementById('tk_info') &&
-					document.getElementById('tk_list') &&
-					document.getElementById('firstname_info') &&
-					document.getElementById('firstname') &&
-					document.getElementById('middlename') &&
-					document.getElementById('lastname') &&
-					document.getElementById('tel2_info') &&
-					document.getElementById('tel2') &&
-					document.getElementById('pass_no_info') &&
-					document.getElementById('pass_no1') &&
-					document.getElementById('pass_no2') &&
-					document.getElementById('pass_police_info') &&
-					document.getElementById('pass_police') &&
-					document.getElementById('cart_tk_delivery_pass_msg_info') &&
-					document.getElementById('cart_tk_delivery_pass_msg') &&
-					document.getElementById('delivery_city_info') &&
-					document.getElementById('delivery_city') &&
-					document.getElementById('delivery_address_info') &&
-					document.getElementById('delivery_address')
-					){
-			//console.log($("input[name='forma_order']:eq(0) tr:eq(9)"));
+        console.log(param);
+	if (param==2){
+		if ( document.getElementById('pass_no_info') ){
+			console.log($("input[name='forma_order']:eq(0) tr:eq(9)"));
 			for(i=0;i<=6;i++){
-					$("form[name='forma_order']:eq(0)>table:eq(0) tr:eq(9)").remove();
+                            $("form[name='forma_order']:eq(0)>table:eq(0) tr:eq(9)").remove();
 			}
 		}
 		return true;		
 	}
 	//доставка почтой россии
-	if (param===1){
-		if ((document.getElementsByName('forma_order')[0]) && 
-					document.getElementById('firstname_info') &&
-					document.getElementById('firstname') &&
-					document.getElementById('middlename') &&
-					document.getElementById('lastname') &&
-					document.getElementById('tel2_info') &&
-					document.getElementById('tel2') &&
-					document.getElementById('cart_tk_delivery_pass_msg_info') &&
-					document.getElementById('cart_tk_delivery_pass_msg') &&
-					document.getElementById('delivery_city_info') &&
-					document.getElementById('delivery_city') &&
-					document.getElementById('postal_index') &&					
-					document.getElementById('delivery_address_info') &&
-					document.getElementById('delivery_address')
-					){
-			//console.log($("input[name='forma_order']:eq(0) tr:eq(9)"));
+	if (param==1){
+		if ( document.getElementById('postal_index') ){
+			console.log($("input[name='forma_order']:eq(0) tr:eq(9)"));
 			for(i=0;i<=4;i++){
-					$("form[name='forma_order']:eq(0)>table:eq(0) tr:eq(9)").remove();
+                            $("form[name='forma_order']:eq(0)>table:eq(0) tr:eq(9)").remove();
 			}
 		}
 		return true;		
@@ -893,7 +1057,8 @@ function set_legal_form() {
 	var bank_name_info = document.getElementById('bank_name_info');
 	var bank_name_value = document.getElementById('bank_name_value');
 	var gen_manager_initial_info = document.getElementById('gen_manager_initial_info');
-	var gen_manager_initial_value = document.getElementById('gen_manager_initial_value'); 
+	var gen_manager_initial_value = document.getElementById('gen_manager_initial_value');
+        var dostavka_metod=document.getElementById('dostavka_metod').childNodes;
 	//alert(legal_form_elm[0].select);
 	if ( legal_form_elm[0].checked===true ) {
 		org_name_info.style.display='none';
@@ -935,6 +1100,17 @@ function set_legal_form() {
                 }
 		
 	}
+        //console.log(dostavka_metod.length);
+        for(i=0;i<=dostavka_metod.length;i++){
+            //if (dostavka_metod[i].hasOwnProperty('selected')) console.log(i);
+            if (typeof(dostavka_metod[i])!=='undefined')
+                if (dostavka_metod[i].selected){
+                    console.log(dostavka_metod[i].value);
+                    UpdateDelivery(dostavka_metod[i].value);
+                }
+            //console.log(dostavka_metod[i].selected);
+        }
+        //UpdateDelivery(dostavka_metod.value);
 }
 
 function getNextElement(elem) {
@@ -1094,7 +1270,7 @@ function ChekUserForma(){
 
 
 function do_err(err){
-	//console.log(err);
+	console.log(err);
     return true;
 }
 
@@ -1330,7 +1506,7 @@ function ToCart(xid,num,xxid) {
     } else {
         addname="";
     }
-    console.log(xid+' '+num+' '+xxid+' '+same);
+    //console.log(xid+' '+num+' '+xxid+' '+same);
     req.open('POST', truePath+'/phpshop/ajax/cartload.php', true);
     req.send({
         xid: xid,

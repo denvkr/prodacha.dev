@@ -22,6 +22,9 @@ class PHPShopOrder extends PHPShopCore {
         // Отладка
         $this->debug = false;
 
+        //Хранение методов оплаты
+        $this->value;
+
         // Имя Бд
         $this->objBase = $GLOBALS['SysValue']['base']['orders'];
 
@@ -201,14 +204,14 @@ class PHPShopOrder extends PHPShopCore {
         if (is_array($Payment))
             foreach ($Payment as $val)
                 if (!empty($val['enabled']))
-                    $value[] = array($val['name'], $val['id'], false);
+                    $this->value[] = array($val['name'], $val['id'], false);
 
         // Перехват модуля
-        $hook = $this->setHook(__CLASS__, __FUNCTION__, $value);
+        $hook = $this->setHook(__CLASS__, __FUNCTION__, $this->value);
         if ($hook)
             return $hook;
 
-        $this->set('orderOplata', PHPShopText::select('order_metod', $value, 250));
+        $this->set('orderOplata', PHPShopText::select('order_metod', $this->value, 250));
     }
 
     /**
@@ -295,21 +298,14 @@ class PHPShopOrder extends PHPShopCore {
 			
 		$this->set('credititems',$vsevkredit);
 
-
-        //делаем видимой оплату картами для самовывоза москвы
-        if ( $_COOKIE['sincity']=="m" || $_COOKIE['sincity']=="other") {
-        	$this->set('order_metod_div_display','table-cell');
-        } else {
-        	$this->set('order_metod_div_display','none');
-        }  
         $this->set('address_and_info_text','Дополнительная<br />информация:');
-        
+
         // Доставка
         $this->delivery();
 
         // Поддержка импортируемых данных
         $this->payment();
-
+        
         // Данные пользователя из личного кабинета
         if (!empty($_SESSION['UsersId']) and PHPShopSecurity::true_num($_SESSION['UsersId'])) {
             $PHPShopUser = new PHPShopUser($_SESSION['UsersId']);
@@ -371,7 +367,6 @@ class PHPShopOrder extends PHPShopCore {
         // Перехват модуля
         $this->setHook(__CLASS__, __FUNCTION__, $_GET);
     }
-
 }
 
 /**

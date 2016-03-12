@@ -504,7 +504,7 @@ function GetOplataMetod() {
         $name=$row['name'];
         $id=$row['id'];
         //@$dis.='<option value="'.$id.'" >'.$name.'</option>';
-			@$dis.='<input type="radio" name="order_metod" value="'.$id.'" > '.$name; 
+	@$dis.='<input type="radio" name="order_metod" value="'.$id.'" > '.$name; 
     }
 
     $disp=$dis;

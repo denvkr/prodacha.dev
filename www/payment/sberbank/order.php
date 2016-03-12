@@ -34,6 +34,4 @@ window.document.getElementById('sum').innerHTML='0';
 
 // Очищаем корзину
 unset($_SESSION['cart']);
-
-
 ?>

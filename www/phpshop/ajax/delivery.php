@@ -36,10 +36,10 @@ function GetDeliveryPrice($deliveryID,$sum,$weight=0) {
                 $sql="select id,city,300 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";
             }
             if ($sum>=5000){
-                $sql="select id,city,price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";                            
+                $sql="select id,city,price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";
             }
         } else {
-                $sql="select * from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";            
+                $sql="select * from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";
         }
         $result=mysql_query($sql);
         $num=mysql_numrows($result);
@@ -81,14 +81,14 @@ function GetDeliveryPrice($deliveryID,$sum,$weight=0) {
 $GetDeliveryPrice=GetDeliveryPrice($_REQUEST['xid'],$_REQUEST['sum'],$_REQUEST['wsum']);
 $totalsumma=$PHPShopOrder->returnSumma($_REQUEST['sum']+$GetDeliveryPrice,$PHPShopOrder->ChekDiscount($_REQUEST['sum']));
 $dellist=delivery(false,$_REQUEST['xid'],$totalsumma-$GetDeliveryPrice);
-
+//echo $_REQUEST['xid'].' '.$GetDeliveryPrice;
 // Результат
 $_RESULT = array(
         'delivery' => $GetDeliveryPrice,
         'dellist'=> $dellist,
         'total' => $totalsumma,
         'city' => $_COOKIE['sincity']
-); 
+);
 
 // Перехват модуля в начале функции
 $hook=$PHPShopModules->setHookHandler('delivery','delivery', $_RESULT, $_REQUEST['xid']);

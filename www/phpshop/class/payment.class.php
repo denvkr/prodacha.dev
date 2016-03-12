@@ -57,6 +57,54 @@ class PHPShopPaymentArray extends PHPShopArray {
         parent::PHPShopArray('id', "name", 'path', 'enabled');
     }
 
+    function payment_output($delivery=0,$usertype='phys'){
+        $result_array=array();
+        $delivery_m_others_array=array(3,11,22,23,24,25,27,28,29,30,31,32,33,34,35,36,37,38,40,42,68);
+        $delivery_chb_array=array(12,13);
+        $oplata_m_minka_samo_array=array(3,25,26);
+        $oplata_m_dynamo_samo_array=array(9,10,11);
+        $oplata_m_others_array = array(9,11);
+        //делаем видимой оплату москвы и другого региона
+        if ( $_COOKIE['sincity']=="m" || $_COOKIE['sincity']=="other") {
+            foreach ($this->getArray() as $val) {
+                //оплата для Минки
+                if ( in_array($val['id'],$oplata_m_minka_samo_array) && $delivery==13 ){
+                    $result_array[]=$val['id'];
+                    //'<div id="order_metod_div" style="display:table-cell;"><input type="radio" name="order_metod" value="'.$val['id'].'" onClick="document.getElementById(\'bin\').style.display=\'block\';document.getElementById(\'bic\').style.display=\'none\';"><label>Оплата в магазине картой VISA, Mastercard</label><br></div>';
+                    //$this->set('order_metod_div','<div id="order_metod_div" style="display:table-cell;"><input type="radio" name="order_metod" value="'.$val[1].'" onClick="document.getElementById(\'bin\').style.display=\'block\';document.getElementById(\'bic\').style.display=\'none\';"><label>'.$val[0].'</label><br></div>');
+                    //echo '------------------------';
+                }
+                //оплата для Динамо
+                if ( in_array($val['id'],$oplata_m_dynamo_samo_array) && $delivery==10){
+                    $result_array[]=$val['id'];
+                    //'<div id="order_metod_div" style="display:table-cell;"><input type="radio" name="order_metod" value="'.$val['id'].'" onClick="document.getElementById(\'bin\').style.display=\'block\';document.getElementById(\'bic\').style.display=\'none\';"><label>Оплата в магазине картой VISA, Mastercard</label><br></div>';
+                    //$this->set('order_metod_div','<div id="order_metod_div" style="display:table-cell;"><input type="radio" name="order_metod" value="'.$val[1].'" onClick="document.getElementById(\'bin\').style.display=\'block\';document.getElementById(\'bic\').style.display=\'none\';"><label>'.$val[0].'</label><br></div>');
+                    //echo '------------------------';
+                }
+                //оплата для МО
+                if ( in_array($val['id'],$oplata_m_others_array) && (in_array($delivery, $delivery_m_others_array)) ){
+                    $result_array[]=$val['id'];
+                }
+            }
+            //оплата в чебоксарах
+        } else if ( $_COOKIE['sincity']=="chb") {
+            foreach ($this->getArray() as $val) {
+                if ( in_array($val['id'],$delivery_chb_array) && $delivery==43 ){
+                    $result_array[]=$val['id'];
+                }
+            }
+        } else {
+            foreach ($this->getArray() as $val) {
+                if ($val['id']==26){
+                    return $val['id'];//'<div id="order_metod_div" style="display:none;"><input type="radio" name="order_metod" value="'.$val['id'].'" onClick="document.getElementById(\'bin\').style.display=\'block\';document.getElementById(\'bic\').style.display=\'none\';"><label>'.$val['name'].'</label><br></div>';
+                    //$this->set('order_metod_div','<div id="order_metod_div" style="display:none;"><input type="radio" name="order_metod" value="'.$val['id'].'" onClick="document.getElementById(\'bin\').style.display=\'block\';document.getElementById(\'bic\').style.display=\'none\';"><label>'.$val['name'].'</label><br></div>');
+                    //echo '------------------------';
+                }                
+            }
+        }
+        return $result_array;
+    }
+
 }
 
 /**
