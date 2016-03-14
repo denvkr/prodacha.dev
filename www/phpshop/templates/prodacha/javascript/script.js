@@ -130,60 +130,8 @@ function showM()
                 $('div.' + json['mas'][i].id).removeClass('dn');
                 }
                 }
-                /*for (var i in classNames)
-                 {
-                 if (classNames[i])
-                 {
-                 if ($(obj).attr('checked') != 'checked')
-                 {
-                 $('div.' + classNames[i]).addClass('dn');
-                 }
-                 else
-                 {
-                 $('div.' + classNames[i]).removeClass('dn');
-                 }
-                 }
-                 }*/
                 }
         });
-                /*var mas_ = [];
-                 for (i=0;i<$('#filter_ input.checkbox').length;i++)
-                 {	
-                 if($('#filter_ input.checkbox').attr('checked') == 'checked'){
-                 var classNames = explode(';', $('#filter_ input.checkbox').attr('classToAdd'));
-                 for (var i in classNames)
-                 {
-                 mas_.push(classNames[i]);
-                 }
-                 }*/
-                //
-                //alert();
-                //var classNames = explode(';', $('#filter_ input.checkbox').attr('classToAdd'));
-                //alert(classNames);
-                //for (var i in classNames)
-                //{
-                //mas_.push(i);
-                //alert(i);
-                //}
-                //}
-//	}
-                //alert(mas_);
-                /*var classNames = explode(';', $(obj).attr('classToAdd'));
-                 
-                 for (var i in classNames)
-                 {
-                 if (classNames[i])
-                 {
-                 if ($(obj).attr('checked') != 'checked')
-                 {
-                 $('div.' + classNames[i]).addClass('dn');
-                 }
-                 else
-                 {
-                 $('div.' + classNames[i]).removeClass('dn');
-                 }
-                 }
-                 }*/
                 }
 
 var myTimer;
@@ -974,24 +922,6 @@ $('.log_popup, .city_popup').mouseleave(function() {
         $('#tab3_m').append($('#tab3').html());
         //Убираем содержимое tab3 звездочки должны быть перенесены в блок характеристик под фотографию
         $('#tab3').remove();
-        //productPrice=$('.addchart_block_table_price div').text();
-        //productPrice=productPrice.substring(0, (productPrice.search('руб')-1));
-        //$('.addchart_block_table_price').empty();
-        //$('.addchart_block_table_price').last().attr('id','addchart_block_table_price_1');
-        //$('#addchart_block_table_price_1').append('<span id="price_margino_1" class="price margino"></span>');
-        //$('#price_margino_1').append('<span id="sub_price_margino_1" class="sub_price_margino"></span>');//add('span').addclass('sub_price_margino'); //" style="font-size: 22px; text-transform: uppercase;">Цена</span>');
-        //$('#sub_price_margino_1').css('font-size','22px');
-        //$('#sub_price_margino_1').css('text-transform','uppercase');
-        //$('#sub_price_margino_1').text('Цена');
-        //$('#price_margino_1').append('<div id="Price">'+productPrice+'<span class="smallfont"> руб.</span></div>');
-        //$('#addchart_block_table_price_1').append('<span id="prev_price_1" class="prev_price"></span>');
-        //console.log('productPrice='+productPrice);
-        //console.log('addchart_block_table_price='+$('.addchart_block_table_price').html());
-
-        //var credit_forma_el=document.getElementById('credit_forma');
-        //if (typeof(credit_forma_el) != 'undefined' && credit_forma_el != null) {
-        //	credit_forma_el.onclick;
-        //}
         if ($('#credit_forma').length) {
             $('#credit_forma').click();
 }
@@ -1109,11 +1039,10 @@ $("#edost_to_city").mouseover(function() {
 $("input[name='dos_ot'],input[name='dos_do']").each(function() {
     $(this).inputmask("mask", {mask: "99"});
     $(this).mouseout(function() {
-        //$(this).popover('hide');
         if (typeof ($.browser.android) === 'undefined')
-            var regExpr = new RegExp('^(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)$', 'ig');
+            var regExpr = new RegExp('^(08|09|10|11|12|13|14|15|16|17|18|19|20|21|22)$', 'ig');
         if (typeof ($.browser.android) !== 'undefined' && $.browser.android === true)
-            var regExpr = new RegExp('^(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)$', 'ig');
+            var regExpr = new RegExp('^(08|09|10|11|12|13|14|15|16|17|18|19|20|21|22)$', 'ig');
         //console.log($(this).val());
         //console.log(regExpr.test($(this).val()));
         //console.log(typeof($.browser.android));

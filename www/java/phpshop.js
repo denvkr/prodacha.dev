@@ -311,6 +311,11 @@ function UpdateDelivery(xid) {
                     $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"14\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Счет на организацию (безналичный расчет)</label><br>");
                     //тип оплаты делаем выбранным
                     document.getElementsByName("order_metod")[0].checked=true;
+                    //проверяем если был выбран вариант оплаты в кредит
+                    if (document.getElementById('bic')!==null && document.getElementById('bic').style.display==='block'){
+                        document.getElementById('bic').style.display='none';
+                        document.getElementById('bin').style.display='block';                        
+                    }
                 //для питера убираем оплату картой
                 } else if ($('#order_metod_div').length){
                     document.getElementById('order_metod_div').style.display='none';
@@ -547,6 +552,11 @@ function UpdateDelivery(xid) {
             }
             if (legal_form[1].checked===true){
                 $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"14\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Счет на организацию (безналичный расчет)</label><br>");
+                //проверяем если был выбран вариант оплаты в кредит
+                if (document.getElementById('bic')!==null && document.getElementById('bic').style.display==='block'){
+                    document.getElementById('bic').style.display='none';
+                    document.getElementById('bin').style.display='block';                        
+                }
             }
             document.getElementsByName("order_metod")[0].checked=true;
             
@@ -594,6 +604,12 @@ function UpdateDelivery(xid) {
                 $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"14\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Счет на организацию (безналичный расчет)</label><br>");
             }
             document.getElementsByName("order_metod")[0].checked=true;
+
+            //проверяем если был выбран вариант оплаты в кредит
+            if (document.getElementById('bic')!==null && document.getElementById('bic').style.display==='block'){
+                document.getElementById('bic').style.display='none';
+                document.getElementById('bin').style.display='block';                        
+            }
 
             $('<tr>'+
                 '<td align="right"><div id="tk_info" name="tk_info"> Транспортная компания: </div></td>'+
@@ -785,7 +801,11 @@ function UpdateDelivery(xid) {
                 $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"14\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Счет на организацию (безналичный расчет)</label><br>");
             }
             document.getElementsByName("order_metod")[0].checked=true;
-			
+            //проверяем если был выбран вариант оплаты в кредит
+            if (document.getElementById('bic')!==null && document.getElementById('bic').style.display==='block'){
+                document.getElementById('bic').style.display='none';
+                document.getElementById('bin').style.display='block';                        
+            }			
             $(  '<tr>'+    
                 '<td align="right"><div id="cart_tk_delivery_pass_msg_info" name="cart_tk_delivery_pass_msg_info"></div></td>'+
                 '<td>'+
@@ -1973,11 +1993,20 @@ function OrderChek()
     if (document.getElementById('delivery_city')){
         var s5_8=window.document.forms.forma_order.delivery_city.value;
     }
-	if (document.getElementById('postal_index')){
+    if (document.getElementById('postal_index')){
         var s5_9=window.document.forms.forma_order.postal_index.value;
         var s5_10=window.document.forms.forma_order.delivery_address.value;		
-	}
-   var adr_name_img=getNextElement(document.getElementsByName('adr_name')[0]);
+    }
+    var adr_name_img=getNextElement(document.getElementsByName('adr_name')[0]);
+
+    if (document.getElementsByName('dos_ot')[0] && document.getElementsByName('dos_do')[0]){
+        //console.log($('input[name="dos_ot"]').css('border-color'));
+        if ($('input[name="dos_ot"]').css('border-color')==='rgb(255, 85, 85)' || $('input[name="dos_do"]').css('border-color')==='rgb(255, 85, 85)'){
+            alert("Ошибка заполнения времени доставки.\nВремя доставки должно быть в диапазоне с 08ч. до 22ч.");
+            return false;
+        }
+    }
+
     //console.log(document.getElementById("makeyourchoise"));
     if (document.getElementById("makeyourchoise").value==="DONE") {
         bad=0;
