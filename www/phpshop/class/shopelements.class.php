@@ -38,6 +38,8 @@ class PHPShopProductElements extends PHPShopElements {
     var $no_photo = 'images/shop/no_photo.gif';
     var $total = 0;
     var $product_grid;
+    var $cell;
+    var $setka_footer;
 
     /**
      * Конструктор
@@ -270,8 +272,7 @@ class PHPShopProductElements extends PHPShopElements {
             $this->set('productValutaName', PHPShopText::comment('>'));
         }
 		
-		//$this->stihl_catalog_settings($row);	
-
+        //$this->stihl_catalog_settings($row);	
         // Перехват модуля, занесение в память наличия модуля для оптимизации
         if ($this->memory_get(__CLASS__ . '.' . __FUNCTION__, true)) {
             $hook = $this->setHook(__CLASS__, __FUNCTION__, $row);
@@ -280,6 +281,7 @@ class PHPShopProductElements extends PHPShopElements {
             } else
                 $this->memory_set(__CLASS__ . '.' . __FUNCTION__, 0);
         }
+
 /*
         $mod_price=strval($this->get('productPrice'));
         
@@ -398,13 +400,11 @@ class PHPShopProductElements extends PHPShopElements {
                 if (empty($template))
                     $template = 'main_product_forma_' . $this->cell;
 
-
                 // Перехват модуля
                 $this->setHook(__CLASS__, __FUNCTION__, $row);
 
                 // Подключаем шаблон ячейки товара
                 $dis = ParseTemplateReturn($this->getValue('templates.' . $template));
-
 
                 // Убераем последний разделитель в сетке
                 if ($item == $this->total)
@@ -425,6 +425,7 @@ class PHPShopProductElements extends PHPShopElements {
                 $item++;
             }
         }
+
         $this->product_grid = $table;
 
         return $table;

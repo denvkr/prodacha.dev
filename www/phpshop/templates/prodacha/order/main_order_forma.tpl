@@ -58,10 +58,10 @@
         <td align="right"><div name="delivery_time_info" style="display:none;"> Время доставки: </div></td>
         <td>
       	  <div name="delivery_time_info" style="display:none;">от
-          	<input type="text" name="dos_ot" style="width:50px; height:18px; font-family:tahoma; font-size:11px; color:black;" maxlength="2">
+          	<input type="text" name="dos_ot" data-toggle="popover" data-html="true" style="width:50px; height:18px; font-family:tahoma; font-size:11px; color:black;" maxlength="2">
 	        ч.&nbsp;&nbsp;&nbsp;
     	    до
-			<input type="text" name="dos_do" style="width:50px; height:18px; font-family:tahoma; font-size:11px ; color:black;" maxlength="2">
+			<input type="text" name="dos_do" data-toggle="popover" data-html="true" style="width:50px; height:18px; font-family:tahoma; font-size:11px ; color:black;" maxlength="2">
         	ч.&nbsp;
           </div>
         </td>

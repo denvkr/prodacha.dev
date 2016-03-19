@@ -49,7 +49,7 @@ class PHPShopOrm {
      * лимит элементов в кеше
      * @var integer 
      */
-    var $cache_limit = 100;
+    var $cache_limit = 150;
     var $_SQL;
     var $_DATA;
 

@@ -296,8 +296,8 @@ class PHPShopDone extends PHPShopCore {
         $this->set('name_person', $_POST['name_person']);
         $this->set('tel', @$_POST['tel_code'] . "-" . @str_replace($this->tel_num_repl, "", $_POST['tel_name']));
         $this->set('adr_name', PHPShopSecurity::CleanStr(@$_POST['adr_name']).$dop_info);
-        $this->set('dos_ot', @$_POST['dos_ot']);
-        $this->set('dos_do', @$_POST['dos_do']);
+        $this->set('dos_ot', str_replace('_','',@$_POST['dos_ot']));
+        $this->set('dos_do', str_replace('_','',@$_POST['dos_do']));
         $this->set('deliveryCity', $this->PHPShopDelivery->getCity());
         $this->set('mail', $_POST['mail']);
         $this->set('payment', $this->PHPShopPayment->getName());
@@ -388,8 +388,8 @@ class PHPShopDone extends PHPShopCore {
             "dostavka_metod" => @$_POST['dostavka_metod'],
             "discount" => $this->discount,
             "user_id" => $_SESSION['UsersId'],
-            "dos_ot" => PHPShopSecurity::CleanStr(@$_POST['dos_ot']),
-            "dos_do" => PHPShopSecurity::CleanStr(@$_POST['dos_do']),
+            "dos_ot" => str_replace('_','',PHPShopSecurity::CleanStr(@$_POST['dos_ot'])),
+            "dos_do" => str_replace('_','',PHPShopSecurity::CleanStr(@$_POST['dos_do'])),
             "order_metod" => @$_POST['order_metod']);
 	//ob_start();
         //print_r($person);

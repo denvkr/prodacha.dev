@@ -1036,22 +1036,51 @@ $("#edost_to_city").mouseout(function() {
 $("#edost_to_city").mouseover(function() {
         $(this).popover({placement : 'right'});
 });
+$("input[name='dos_ot']").val(10);
+$("input[name='dos_do']").val(18);
 $("input[name='dos_ot'],input[name='dos_do']").each(function() {
     $(this).inputmask("mask", {mask: "99"});
+    $(this).attr("data-content", 'Доставка производится с 8 до 22 часов в рамках четырехчасового интервала');
+    /*<div><select><option value="08">8</option>'+
+                                        '<option value="09">9</option>'+
+                                        '<option value="10">10</option>'+
+                                        '<option value="11">11</option>'+
+                                        '<option value="12">12</option>'+
+                                        '<option value="13">13</option>'+
+                                        '<option value="14">14</option>'+
+                                        '<option value="15">15</option>'+
+                                        '<option value="16">16</option>'+
+                                        '<option value="17">17</option>'+
+                                        '<option value="18">18</option>'+
+                                        '</select></div>
+    */
     $(this).mouseout(function() {
         if (typeof ($.browser.android) === 'undefined')
-            var regExpr = new RegExp('^(08|09|10|11|12|13|14|15|16|17|18|19|20|21|22)$', 'ig');
+            var regExprOt = new RegExp('^(8_|9_|_8|_9|08|09|10|11|12|13|14|15|16|17|18)$', 'ig');
+            var regExprDo = new RegExp('^(12|13|14|15|16|17|18|19|20|21|22)$', 'ig');
         if (typeof ($.browser.android) !== 'undefined' && $.browser.android === true)
-            var regExpr = new RegExp('^(08|09|10|11|12|13|14|15|16|17|18|19|20|21|22)$', 'ig');
-        //console.log($(this).val());
-        //console.log(regExpr.test($(this).val()));
-        //console.log(typeof($.browser.android));
-        //console.log($.browser.android);
-        if (regExpr.test($(this).val()) === true && $(this).val() !== '') {
-            $(this).css('border-color', '#abadb3');
-        } else if (regExpr.test($(this).val()) === false && $(this).val() !== '') {
-            $(this).css('border-color', '#ff5555');
+            var regExprOt = new RegExp('^(8_|9_|_8|_9|08|09|10|11|12|13|14|15|16|17|18)$', 'ig');
+            var regExprDo = new RegExp('^(12|13|14|15|16|17|18|19|20|21|22)$', 'ig');
+        if ($(this).attr('name')==='dos_ot') {
+            if (regExprOt.test($(this).val()) === true && $(this).val() !== '') {
+                $(this).css('border-color', '#abadb3');
+            } else if (regExprOt.test($(this).val()) === false && $(this).val() !== '') {
+                $(this).css('border-color', '#ff5555');
+            }
         }
+        if ($(this).attr('name')==='dos_do') {
+            if (regExprDo.test($(this).val()) === true && $(this).val() !== '') {
+                $(this).css('border-color', '#abadb3');
+            } else if (regExprDo.test($(this).val()) === false && $(this).val() !== '') {
+                $(this).css('border-color', '#ff5555');
+            }
+        }
+        
+        $(this).popover('hide');
+    });
+    $(this).mouseover(function() {
+            $(this).popover({placement : 'right'});
+            $(this).css('border-color', '#abadb3');
     });
 });
         $("input[name='org_name']").inputmask("mask", {mask: "*",
@@ -1191,7 +1220,6 @@ fillTKtablePart();
                                 pole: 3
                 }, error: function (request, error) {
                 //console.log(arguments);
-                //alert(" Ошибка ajax: " + error);
                 }, success: function(data) {
                 // Результат поиска
                 if (data != 'false') {
@@ -1242,7 +1270,7 @@ fillTKtablePart();
                             }
                         };
                 req.caching = false;
-                        // Подготваливаем объект.
+                        // Подготавливаем объект.
                         // Реальное размещение
                         var dir = dirPath();
                         req.open('POST', dir + '/phpshop/ajax/delivery.php', true);
@@ -1260,34 +1288,17 @@ fillTKtablePart();
                         //console.log($(this).text());
                 });
                 }
-                //модификация CEO вывод сокрытие надписей в классе prev_price lostandfound
-                //console.log($('.prev_price.lostandfound:first-child').length);
-                /*
-                if ($('.prev_price.lostandfound').length){
-                   //$('.prev_price.lostandfound').next().html('уточните наличие');
-                    $('.prev_price.lostandfound').each(function(index) {
-                       $(this).html('<!--noindex-->уточняйте наличие<!--/noindex-->');
-                    });
-                   //console.log('уточните наличие');
-                }
-           */
 
                 if ($('.prev_price.lostandfound').length){
                     $('.prev_price.lostandfound').each(function(index) {
                         //исключение для блоков вывода по 3 купить,посмотреть аналог
-                        //if ($(this).css('left')!='150px' && $(this).css('margin')!== '-15px 0px 0px 10px' && $(this).prev('div').prev('.price').prev('.addtochart').length)
-                            //$(this).html('<!--noindex-->уточняйте наличие<!--/noindex-->');
-                            //console.log($(this).prev('div').prev('.price').prev('.addtochart').length);
                         //для каталогов по 3 в ряд?    
                         if ($(this).parent('.price:eq(0)').prev('.addtochart:eq(0)').children('input[type="button"]:eq(0)').val()==='Как купить?')
                             $(this).html('<!--noindex-->уточняйте наличие<!--/noindex-->');                                
                         //для каталогов по 1 в ряд?    
                         if ($(this).prev('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').val()==='Как купить?')
                             $(this).html('<!--noindex-->уточняйте наличие<!--/noindex-->');                                
-                        //if ($(this).next('.price').next('.buybuttons:eq(0)').children('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').val()==='Уточнить')
-                            //console.log($(this).prev('.addtochart.notice:eq(0)').html());
                         //индивидуальные карточки товаров
-                        //console.log($(this).prev('.price.margino:eq(0)').parent('.addchart_block_table_price:eq(0)').parent('td:first').next('td:first').children('.addchart_block_table_addtochart:eq(0)').children('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').attr('type'));
                         if ($(this).prev('.price.margino:eq(0)').parent('.addchart_block_table_price:eq(0)').parent('td:first').next('td:first').children('.addchart_block_table_addtochart:eq(0)').children('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').val()==='Уточнить')
                             $(this).html('<!--noindex-->уточняйте наличие<!--/noindex-->');
 
@@ -1300,7 +1311,6 @@ fillTKtablePart();
                         //для каталогов типа 551    
                         if ($(this).next('.price').next('.buybuttons:eq(0)').children('.addtochart:eq(0)').children('input[type="button"]:eq(0)').val()==='Уточнить')
                             $(this).html('<!--noindex-->уточняйте наличие<!--/noindex-->');
-                            //console.log($(this).prev('.price:eq(0)').prev('.addtochart:eq(0)'));
                         //для заглавной страницы
                         if ($(this).parent('.price:eq(0)').prev('.addtochart:eq(0)').children('input[type="button"]:eq(0)').val()==='Уточнить')
                             $(this).html('<!--noindex-->уточняйте наличие<!--/noindex-->');                        
@@ -1323,7 +1333,49 @@ fillTKtablePart();
                         e.preventDefault();
                     });
                 }
+//$('#a1656').attr('href','#');
+$('a[href^="#_tool_"][id^="a"]').each(function(index){
+    //prod_id=$(this).attr('href').replace('#_tool_','');
+    //$(this).attr('href','#');
+    //console.log(prod_id);
+    //$(this).unbind('click', handler);
+    $(this).bind('click',function (e){
+        e.preventDefault();
+        //AddToCart(prod_id);
+    });
+});
 
+    /*
+//для рекомендации кокоса делаем вывод блока товаров "довесков"
+if ($('.alsobought:eq(0)')!==null){
+    var last_td;
+    last_td=$('.alsobought:eq(0)>.h1:eq(0)+.wrapper>table:eq(0)>tbody:eq(0)>tr:last-child>td:eq(0)');
+
+    //получаем код карточки товара
+    if ($('.pagetitle:eq(0)')!==null) {
+        console.log($('.pagetitle:eq(0)').attr('id'));
+        prod_id=$('.pagetitle:eq(0)').attr('id').replace('_tool_','');
+    }
+    //делаем ajax запрос для получения второй части блока
+    var req = new Subsys_JsHttpRequest_Js();
+    req.onreadystatechange = function() {
+        if (req.readyState == 4) {
+            if (req.responseJS) {
+                var z=(req.responseJS.sameproduct||'');
+                    z.insertAfter(last_td);
+            }
+        }
+    };
+    req.caching = false;
+    // Подготавливаем объект.
+    // Реальное размещение
+    var dir = dirPath();
+    req.open('POST', dir + '/phpshop/ajax/alsobuy.php', true);
+    req.send({
+    xid: prod_id
+    });    
+}
+*/
 });
                 //функция обработки части форма forma_dost для Транспортных компаний
                     function fillTKtablePart(){
@@ -1736,65 +1788,6 @@ fillTKtablePart();
                         showImage(next);
                 }
 
-                /*    
-                 var myTimer;
-                 
-                 $(document).ready(function() {
-                 myTimer = setTimeout("showNext()", 3000);
-                 showNext(); //loads first image
-                 $('#thumbs li').bind('click',function(e){
-                 var count = $(this).attr('rel');
-                 showImage(parseInt(count)-1);
-                 });
-                 });
-                 */
-
-                /* product page tabs */
-                /*
-                 $(function () {
-                 var tabContainers = $('div.tabs > div');
-                 tabContainers.hide().filter(':first').show();
-                 $('div.tabs ul.tabNavigation a').click(function () {
-                 tabContainers.hide();
-                 tabContainers.filter(this.hash).show();
-                 $('div.tabs ul.tabNavigation a').removeClass('selected');
-                 $(this).addClass('selected');
-                 return false;
-                 }).filter(':visible:first').click();
-                 
-                 //всплывающие подсказки в доставке при заполнении полей
-                 $( "#mail" ).tooltip({ position: { my: "left+23 center", at: "right center",of: "#mail"} });
-                 $( "#name_person" ).tooltip({ position: { my: "left+23 center", at: "right center",of: "#name_person"} });
-                 $( "#tel_name" ).tooltip({ position: { my: "left+23 center", at: "right center",of: "#tel_name"} });	
-                 
-                 //функции работы с edost
-                 function fillReg() {
-                 var ToCity2 = $("#edost_to_city").val();
-                 var weight2 = $("#edost_weight").val();
-                 
-                 $("#Err1").html('');
-                 
-                 if (ToCity1 != ToCity2) {
-                 //---Находим код региона по выбранному городу---
-                 var c1 = -1;
-                 var i;
-                 for (i=0; i<cit.length;i++){ if (cit[i]==ToCity2) {c1 = k[i]; break;} }
-                 if (c1 == -1) $("#ToReg").html('-');
-                 else $("#ToReg").html(r[c1]);
-                 
-                 $("#edost_weight").focus();
-                 }
-                 }
-                 
-                 function findValueCallback(event, data) {
-                 fillReg();
-                 }
-                 
-                 $("#edost_to_city").autocomplete({source:cit,change: function( event, ui ) {fillReg();}});
-                 
-                 
-                 });
-                 */
                 function load_(){
                 $.ajax({
                 url: '/geo_engine.php',
@@ -1839,23 +1832,10 @@ fillTKtablePart();
                         complete: function() {},
                         success: function(json) {
                         $('#light_box').remove();
-                        //if (from===false){
                         location.reload();
-                        //} else {
-                        //location.assign(location.href+'#tab7');
-                        //}
-                        //if ($('#edost_to_city').length && reg === 'spb') {
-                        //$('#edost_to_city').val("Санкт-Петербург");
-                        //$("#edost_to_city").click();
-                        //console.log($("#edost_to_city").val());
-                        //} else if ($('#edost_to_city').length && reg !== 'spb') {
                         $('#edost_to_city').val("");
-                        //$("#edost_to_city").click();
-                        //console.log($("#edost_to_city").val());
-                        //}
                         if ($('#edost_zip').length) {
                         $('#edost_zip').val("");
-                        //$("#edost_to_city").click();
                         }
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
@@ -1873,24 +1853,11 @@ fillTKtablePart();
                         complete: function() {},
                         success: function(json) {
                         $('#light_box').remove();
-                        //if (from===false){
                         location.hash='tab7';
                         location.reload();
-                        //} else {
-                        //location.assign(location.href+'#tab7');
-                        //}
-                        //if ($('#edost_to_city').length && reg === 'spb') {
-                        //$('#edost_to_city').val("Санкт-Петербург");
-                        //$("#edost_to_city").click();
-                        //console.log($("#edost_to_city").val());
-                        //} else if ($('#edost_to_city').length && reg !== 'spb') {
                         $('#edost_to_city').val("");
-                        //$("#edost_to_city").click();
-                        //console.log($("#edost_to_city").val());
-                        //}
                         if ($('#edost_zip').length) {
                         $('#edost_zip').val("");
-                        //$("#edost_to_city").click();
                         }
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
@@ -1945,11 +1912,6 @@ fillTKtablePart();
                                 html += '<script type="text/javascript">';
                                 html += '$(document).ready(function() {';
                                 html += '$("#cv3").val="nohspamcode";';
-                                //html += '$("#fade").click( function(e) {';
-                                //html += 'alert("e.pageX = " + e.pageX + ", e.pageY = " + e.pageY);';
-                                //html += 'if (typeof(e.pageX)=="undefined" && typeof(e.pageY)=="undefined" ) {';
-                                //html += '$("#light_box").remove();';
-                                //html += '}';
                                 html += '});';
                                 html += '});';
                                 html += '</script>';
@@ -1971,92 +1933,92 @@ fillTKtablePart();
                         }
 
                 function fast_order_window2(my_url, referer_info) {
-                $.ajax({
-                url: '/popup_windows/fast_order.php',
-                        type: 'post',
-                        data: 'url=' + my_url,
-                        dataType: 'json',
-                        beforeSend: function() {},
-                        complete: function() {},
-                        success: function(json) {
-                        if (json['ok'] == '1'){
-                        html = '<div class="fast_order_window_iframe" style"margin:10px,5px,5px,5px;">';
-                        html += '<form id="fast_order_form" action="/snip_call.php" method="POST">';
-                        html += '<div id="fast_order_window_item1" style="position:relative;top: 25px;left: 10px;font-size:18px;width:150px;"><b>' + json['item1'] + '</b></div>';
-                        html += '<div id="fast_order_window_item2" style="position:relative;top: 70px;left: 10px;font-size:20px;">' + json['item2'] + '</div>';
-                        if ((json['item6'].length + json['item7'].length + json['item8'].length) < 60) {
-                            yo_name_top_comment = 85;
-                        } else
-                        if ((json['item6'].length + json['item7'].length + json['item8'].length) > 100) {
-                            yo_name_top_comment = 85;
-                        } else {
-                            yo_name_top_comment = 85;
-                        }
-                        html += '<div id="fast_order_window_item3" style="position:relative;top: ' + (yo_name_top_comment + 5).toString() + 'px;left: 10px;font-size:20px;">' + json['item3'] + '</div>';
-                                html += '<div id="fast_order_window_item4" style="position:relative;top: ' + (yo_name_top_comment + 25).toString() + 'px;left: 10px;font-size:20px;">' + json['item4'] + '</div>';
-                                html += '<div id="fast_order_window_item5" style="position:relative;margin-top: -80px;margin-left: 160px;font-size:12px;width:400px;word-wrap: break-word;">' + json['item5'] + '</div>';
-                                html += '<div class="tovar_info" name="tovar_info" style="position:relative;width:430px !Important;height:70px;left:160px;top:35px;word-wrap: break-word;">';
-                                if ((json['item6'].length + json['item7'].length + json['item8'].length) < 60) {
-                        font_size = 'style="font-size:14px;position:relative;display:inline;width:430px !Important;height:70px;left:0px;top:0px;word-wrap: break-word;"';
-                                yo_name_top = 'style="position: relative;left: 0px;top: 35px;width:180px;height:25px;font-size:17px;"';
-                                yo_phone_top = 'style="position: relative;left: 0px;top: 55px;width:180px;height:25px;font-size:17px;"';
-                                popup_ok_top = 'style="position: relative;left: 460px;top: -35px;border: none;width:105px;height:50px;padding: 5px 5px 25px 5px !important;"';
-                        } else if ((json['item6'].length + json['item7'].length + json['item8'].length) > 100) {
-                        font_size = 'style="font-size:12px;position:relative;display:inline;width:450px !Important;height:70px;left:0px;top:0px;word-wrap: break-word;"';
-                                yo_name_top = 'style="position: relative;left: 0px;top: 35px;width:180px;height:25px;font-size:17px;"';
-                                yo_phone_top = 'style="position: relative;left: 0px;top: 55px;width:180px;height:25px;font-size:17px;"';
-                                popup_ok_top = 'style="position: relative;left: 460px;top: -35px;border: none;width:105px;height:50px;padding: 5px 5px 25px 5px !important;"';
-                        } else {
-                        font_size = 'style="font-size:13px;position:relative;display:inline;width:430px !Important;height:70px;left:0px;top:0px;word-wrap: break-word;"';
-                                yo_name_top = 'style="position: relative;left: 0px;top: 35px;width:180px;height:25px;font-size:17px;"';
-                                yo_phone_top = 'style="position: relative;left: 0px;top: 55px;width:180px;height:25px;font-size:17px;"';
-                                popup_ok_top = 'style="position: relative;left: 460px;top: -35px;border: none;width:105px;height:50px;padding: 5px 5px 25px 5px !important;"';
-                        }
-                        html += '<div id="fast_order_window_item6" name="fast_order_window_item6"' + font_size + '><b>' + json['item6'] + ' - ' + json['item7'] + ' ' + json['item8'] + '</b></div>';
-                                html += '</div>';
-                                html += '<div class="user_info" style="position:relative;top:-20px;left:160px;width:260px;height:80px;">';
-                                html += '<input type="text"' + yo_name_top + ' id="yo_name" name="yo_name" onblur="checkresult_value(this);" value="" placeholder="Имя" pattern="^[\-A-Za-z\u0410-\u044F]+$" maxlength="100"/>';
-                                html += '<input type="tel" ' + yo_phone_top + ' id="yo_phone" name="yo_phone" onblur="checkresult_value(this);" value="" placeholder="+79101234567" pattern="^[\+0-9]{7,12}$" maxlength="12"/>';
-                                html += '</div>';
-                                html += '<input id="cv3" type="hidden" name="cv3" value="nohspamcode" />';
-                                html += '<div class="in_fast_order_window">';
-                                html += '<input type="button" ' + popup_ok_top + ' class="popup_ok" id="fast_order_ok" value="OK" onclick="check_fast_order_values(1);"/>'; //onclick="check_fast_order_values()"			
-                                html += '</div>';
-                                html += '<input type="hidden" id="referer_info" name="referer_info" value="' + referer_info[0].innerHTML.toString().trim() + '" />';
-                                html += '<input type="hidden" name="tovar_info_input" value="' + json['item6'] + ' - ' + json['item7'] + ' ' + json['item8'] + '" />';
-                                html += '<input type="hidden" name="region" value="' + json['item9'] + '" />';
-                                html += '<input type="hidden" name="zakaz_info" value="' + json['item1'] + '" />';
-                                html += '<input type="hidden" name="tovar_price" value="' + json['item7'] + ' ' + json['item8'] + '" />';
-                                html += '<input type="hidden" name="tovar_price_short" value="' + json['item7'] + '" />';
-                                html += '<input type="hidden" name="tovar_id" value="' + json['item10'] + '" />';
-                                html += '<input type="hidden" name="transact_id" value="' + json['item11'] + '" />';
-                                html += '<input type="hidden" name="window_type" value="fast_order_window2" />';
-                                html += '</form></div>';
-                                //ga('send', 'event', 'buy-fast', 'click');
-                                ga('send', 'pageview', '/buy-fast/open');
-                                ga('send', 'pageview');
-                                //console.log('buy-fast.click');		
+                    $.ajax({
+                    url: '/popup_windows/fast_order.php',
+                            type: 'post',
+                            data: 'url=' + my_url,
+                            dataType: 'json',
+                            beforeSend: function() {},
+                            complete: function() {},
+                            success: function(json) {
+                            if (json['ok'] == '1'){
+                            html = '<div class="fast_order_window_iframe" style"margin:10px,5px,5px,5px;">';
+                            html += '<form id="fast_order_form" action="/snip_call.php" method="POST">';
+                            html += '<div id="fast_order_window_item1" style="position:relative;top: 25px;left: 10px;font-size:18px;width:150px;"><b>' + json['item1'] + '</b></div>';
+                            html += '<div id="fast_order_window_item2" style="position:relative;top: 70px;left: 10px;font-size:20px;">' + json['item2'] + '</div>';
+                            if ((json['item6'].length + json['item7'].length + json['item8'].length) < 60) {
+                                yo_name_top_comment = 85;
+                            } else
+                            if ((json['item6'].length + json['item7'].length + json['item8'].length) > 100) {
+                                yo_name_top_comment = 85;
+                            } else {
+                                yo_name_top_comment = 85;
+                            }
+                            html += '<div id="fast_order_window_item3" style="position:relative;top: ' + (yo_name_top_comment + 5).toString() + 'px;left: 10px;font-size:20px;">' + json['item3'] + '</div>';
+                                    html += '<div id="fast_order_window_item4" style="position:relative;top: ' + (yo_name_top_comment + 25).toString() + 'px;left: 10px;font-size:20px;">' + json['item4'] + '</div>';
+                                    html += '<div id="fast_order_window_item5" style="position:relative;margin-top: -80px;margin-left: 160px;font-size:12px;width:400px;word-wrap: break-word;">' + json['item5'] + '</div>';
+                                    html += '<div class="tovar_info" name="tovar_info" style="position:relative;width:430px !Important;height:70px;left:160px;top:35px;word-wrap: break-word;">';
+                                    if ((json['item6'].length + json['item7'].length + json['item8'].length) < 60) {
+                            font_size = 'style="font-size:14px;position:relative;display:inline;width:430px !Important;height:70px;left:0px;top:0px;word-wrap: break-word;"';
+                                    yo_name_top = 'style="position: relative;left: 0px;top: 35px;width:180px;height:25px;font-size:17px;"';
+                                    yo_phone_top = 'style="position: relative;left: 0px;top: 55px;width:180px;height:25px;font-size:17px;"';
+                                    popup_ok_top = 'style="position: relative;left: 460px;top: -35px;border: none;width:105px;height:50px;padding: 5px 5px 25px 5px !important;"';
+                            } else if ((json['item6'].length + json['item7'].length + json['item8'].length) > 100) {
+                            font_size = 'style="font-size:12px;position:relative;display:inline;width:450px !Important;height:70px;left:0px;top:0px;word-wrap: break-word;"';
+                                    yo_name_top = 'style="position: relative;left: 0px;top: 35px;width:180px;height:25px;font-size:17px;"';
+                                    yo_phone_top = 'style="position: relative;left: 0px;top: 55px;width:180px;height:25px;font-size:17px;"';
+                                    popup_ok_top = 'style="position: relative;left: 460px;top: -35px;border: none;width:105px;height:50px;padding: 5px 5px 25px 5px !important;"';
+                            } else {
+                            font_size = 'style="font-size:13px;position:relative;display:inline;width:430px !Important;height:70px;left:0px;top:0px;word-wrap: break-word;"';
+                                    yo_name_top = 'style="position: relative;left: 0px;top: 35px;width:180px;height:25px;font-size:17px;"';
+                                    yo_phone_top = 'style="position: relative;left: 0px;top: 55px;width:180px;height:25px;font-size:17px;"';
+                                    popup_ok_top = 'style="position: relative;left: 460px;top: -35px;border: none;width:105px;height:50px;padding: 5px 5px 25px 5px !important;"';
+                            }
+                            html += '<div id="fast_order_window_item6" name="fast_order_window_item6"' + font_size + '><b>' + json['item6'] + ' - ' + json['item7'] + ' ' + json['item8'] + '</b></div>';
+                                    html += '</div>';
+                                    html += '<div class="user_info" style="position:relative;top:-20px;left:160px;width:260px;height:80px;">';
+                                    html += '<input type="text"' + yo_name_top + ' id="yo_name" name="yo_name" onblur="checkresult_value(this);" value="" placeholder="Имя" pattern="^[\-A-Za-z\u0410-\u044F]+$" maxlength="100"/>';
+                                    html += '<input type="tel" ' + yo_phone_top + ' id="yo_phone" name="yo_phone" onblur="checkresult_value(this);" value="" placeholder="+79101234567" pattern="^[\+0-9]{7,12}$" maxlength="12"/>';
+                                    html += '</div>';
+                                    html += '<input id="cv3" type="hidden" name="cv3" value="nohspamcode" />';
+                                    html += '<div class="in_fast_order_window">';
+                                    html += '<input type="button" ' + popup_ok_top + ' class="popup_ok" id="fast_order_ok" value="OK" onclick="check_fast_order_values(1);"/>'; //onclick="check_fast_order_values()"			
+                                    html += '</div>';
+                                    html += '<input type="hidden" id="referer_info" name="referer_info" value="' + referer_info[0].innerHTML.toString().trim() + '" />';
+                                    html += '<input type="hidden" name="tovar_info_input" value="' + json['item6'] + ' - ' + json['item7'] + ' ' + json['item8'] + '" />';
+                                    html += '<input type="hidden" name="region" value="' + json['item9'] + '" />';
+                                    html += '<input type="hidden" name="zakaz_info" value="' + json['item1'] + '" />';
+                                    html += '<input type="hidden" name="tovar_price" value="' + json['item7'] + ' ' + json['item8'] + '" />';
+                                    html += '<input type="hidden" name="tovar_price_short" value="' + json['item7'] + '" />';
+                                    html += '<input type="hidden" name="tovar_id" value="' + json['item10'] + '" />';
+                                    html += '<input type="hidden" name="transact_id" value="' + json['item11'] + '" />';
+                                    html += '<input type="hidden" name="window_type" value="fast_order_window2" />';
+                                    html += '</form></div>';
+                                    //ga('send', 'event', 'buy-fast', 'click');
+                                    ga('send', 'pageview', '/buy-fast/open');
+                                    ga('send', 'pageview');
+                                    //console.log('buy-fast.click');		
 
-                                var url = '/popup_windows/fast_order_window.php';
-                                $.fancybox
-                                ({
-                                width : 600,
-                                        height : 240,
-                                        overlayOpacity:0,
-                                        autoSize:false,
-                                        type: 'iframe',
-                                        href: url,
-                                        content: html,
-                                        scrolling: 'no',
-                                        helpers : {
-                                        overlay : {
-                                        css : { 'overflow' : 'hidden' }
-                                        }}
-                                });
-                        }
-                        }
-                });
-                        }
+                                    var url = '/popup_windows/fast_order_window.php';
+                                    $.fancybox
+                                    ({
+                                    width : 600,
+                                            height : 240,
+                                            overlayOpacity:0,
+                                            autoSize:false,
+                                            type: 'iframe',
+                                            href: url,
+                                            content: html,
+                                            scrolling: 'no',
+                                            helpers : {
+                                            overlay : {
+                                            css : { 'overflow' : 'hidden' }
+                                            }}
+                                    });
+                            }
+                            }
+                    });
+                }
 
                 function ask_product_availability(my_url, referer_info) {
                 $.ajax({
@@ -2698,8 +2660,12 @@ fillTKtablePart();
                 console.log(error);
                 alert(" Ошибка ajax: " + error);
             },
-            beforeSend: function() {},
-            complete: function() {},
+            beforeSend: function() {
+                console.log('beforeSend');
+            },
+            complete: function() {
+                console.log('complete');
+            },
             success: function(json) {
             if (json['ok'] == '1'){
                 if (json['item7']===0){
@@ -2795,7 +2761,7 @@ fillTKtablePart();
                                     $('.fancybox-item.fancybox-close:eq(0)').bind('click.fb', function(e) {
                                         //console.log("AddToCartNum("+id+",'num_new"+id+"',2);");
                                         e.preventDefault();
-                                        AddToCartNum(id,"num_new"+id,2); 
+                                        AddToCartNum(id,"num_new"+id,2);
 					$(this).fancybox.close();
                                     });
                                     //console.log($('.fancybox-item.fancybox-close:eq(0)').attr('title'));

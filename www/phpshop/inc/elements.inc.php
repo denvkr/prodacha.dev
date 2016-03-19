@@ -466,6 +466,7 @@ class PHPShopTextElement extends PHPShopElements {
                 // Подключаем шаблон
                 $dis.=$this->parseTemplate($this->getValue('templates.top_menu'));
             }
+            //echo $dis;
         return $dis;
     }
 

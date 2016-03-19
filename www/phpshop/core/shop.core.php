@@ -488,14 +488,18 @@ class PHPShopShop extends PHPShopShopCore {
             $PHPShopOrm = new PHPShopOrm();
             $PHPShopOrm->debug = $this->debug;
             $result = $PHPShopOrm->query("select * from " . $this->objBase . " where (" . $odnotipList . ") " . $chek_items . " and  enabled='1' and parent_enabled='0' and sklad!='1' order by num");
-            while ($row = mysql_fetch_assoc($result))
+            //По рекомендации кокоса уменьшаем кол-во товаров для индексирования в разделе Для работы с товаром <...> Вы можете приобрести
+            //$cnt=0;
+            while ($row = mysql_fetch_assoc($result)) {
+                //if ($cnt==6) break;
                 $data[] = $row;
+                //$cnt++;
+            }
 
             // Сетка товаров
             if (!empty($data) and is_array($data))
                 $disp = $PHPShopProductIconElements->seamply_forma($data, $this->odnotip_setka_num, $this->template_odnotip, $this->line);
         }
-
 
         if (!empty($disp)) {
             // Вставка в центральную часть

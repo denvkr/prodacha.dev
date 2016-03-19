@@ -201,8 +201,8 @@ class OrderWrite {
 	  "dostavka_metod"=>$VAR['dostavka_metod'],
 	  "discount"=>$Discount,
 	  "user_id"=>$UserId,
-	  "dos_ot"=>$this->CleanStr($VAR['dos_ot']),
-	  "dos_do"=>$this->CleanStr($VAR['dos_do']),
+	  "dos_ot"=>  str_replace('_','', $this->CleanStr($VAR['dos_ot'])),
+	  "dos_do"=>str_replace('_','', $this->CleanStr($VAR['dos_do'])),
 	  "order_metod"=>$VAR['order_metod']);
 	  return $array;
 	  }

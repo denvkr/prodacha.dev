@@ -57,7 +57,7 @@
 	<script type="text/javascript" src="phpshop/lib/JsHttpRequest/JsHttpRequest.js"></script>
 	<script type="text/javascript" src="phpshop/lib/Subsys/JsHttpRequest/Js.js"></script>
 	
-    <script type="text/javascript" src="java/leftcatalogmenu.js"></script>
+        <script type="text/javascript" src="java/leftcatalogmenu.js"></script>
 
 	<!--<link href="@pageCss@" type="text/css" rel="stylesheet">-->
 	<!-- Подключаем javascript библиотеку CMS -->	
@@ -74,8 +74,8 @@
 	<!-- Fancybox -->
     	<script type="text/javascript" src="@php echo $GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].chr(47); php@javascript/fancybox/jquery.fancybox.pack.js"></script>
     	<link rel="stylesheet" href="@php echo $GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].chr(47); php@javascript/fancybox/jquery.fancybox.css">
-    <!-- /Fancybox -->
-    <!-- Bootstrap -->
+        <!-- /Fancybox -->
+        <!-- Bootstrap -->
     	<link id="bootstrap_theme" href="@php echo $GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin']; php@css/bootstrap.css" rel="stylesheet">
         <script src="@php echo $GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].chr(47); php@js/bootstrap.js"></script>
 	<!--/Bootstrap-->    
