@@ -1333,17 +1333,7 @@ fillTKtablePart();
                         e.preventDefault();
                     });
                 }
-//$('#a1656').attr('href','#');
-$('a[href^="#_tool_"][id^="a"]').each(function(index){
-    //prod_id=$(this).attr('href').replace('#_tool_','');
-    //$(this).attr('href','#');
-    //console.log(prod_id);
-    //$(this).unbind('click', handler);
-    $(this).bind('click',function (e){
-        e.preventDefault();
-        //AddToCart(prod_id);
-    });
-});
+customhrefeventsbuybutton();
 
     /*
 //для рекомендации кокоса делаем вывод блока товаров "довесков"
@@ -2661,10 +2651,11 @@ if ($('.alsobought:eq(0)')!==null){
                 alert(" Ошибка ajax: " + error);
             },
             beforeSend: function() {
-                console.log('beforeSend');
+                //console.log('beforeSend');
             },
             complete: function() {
-                console.log('complete');
+                //customhrefeventsbuybutton();
+                //console.log('complete');
             },
             success: function(json) {
             if (json['ok'] == '1'){
@@ -2954,6 +2945,21 @@ function json2array(json){
     return result;
 }
 
+function customhrefeventsbuybutton(){
+    //$('#a1656').attr('href','#');
+$('a[href^="#_tool_"][id^="a"]').each(function(index){
+    //prod_id=$(this).attr('href').replace('#_tool_','');
+    //$(this).attr('href','#');
+    //console.log(prod_id);
+    //$(this).unbind('click', handler);
+    $(this).bind('click',function (e){
+        e.preventDefault();
+        e.stopPropagation();
+        //AddToCart(prod_id);
+    });
+});
+console.log('buy button preventDefault()');
+}
 //small scroll library  
 document.addEventListener("DOMContentLoaded", function() {
   "use strict"

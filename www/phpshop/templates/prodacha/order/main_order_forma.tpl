@@ -109,17 +109,18 @@
     	</td>
     </tr>
 	<tr>
-	    <td></td>
+	    <td><div id="promo_code_info" style="display:table-cell;">¬ведите промо-код: </div></td>
     	<td> 
-	 		<span id="bin" class="need2hide" ><a href="javascript:OrderChek();" class=link style="font-size: 18px; font-weight: bold;"><img src="images/makeorder.png"></a></span>
-			<!-- <span id="bic" class="need2hide" style="display:none;" ><a href="javascript:;" onclick='yescreditmodul([@credititems@],367328,"@orderNum@");'  class=link style="font-size: 18px; font-weight: bold;"><img src="images/buyincredit.png"></a></span>  -->
+	 	<span id="bin" class="need2hide" ><a href="javascript:OrderChek();" class=link style="font-size: 18px; font-weight: bold;"><img src="images/makeorder.png"></a></span>
+		<!-- <span id="bic" class="need2hide" style="display:none;" ><a href="javascript:;" onclick='yescreditmodul([@credititems@],367328,"@orderNum@");'  class=link style="font-size: 18px; font-weight: bold;"><img src="images/buyincredit.png"></a></span>  -->
 	        <!--<span id="bic_credit" class="need2hide" style="display:none;" >@credititems@</span>	-->
-			<!-- <input type="hidden" name="bic_code" value='yescreditmodul([@credititems@],367328,"@orderNum@");' > -->
-			<input type="hidden" name="bic_code" value="@credititems@">
-			<span id="bic" class="need2hide" style="display:none;" ><a href="javascript:OrderChek();"  class=link style="font-size: 18px; font-weight: bold;"><img src="images/buyincredit.png"></a></span>
-			<input type="hidden" name="send_to_order" value="ok">
+		<!-- <input type="hidden" name="bic_code" value='yescreditmodul([@credititems@],367328,"@orderNum@");' > -->
+		<input type="hidden" name="bic_code" value="@credititems@">
+		<span id="bic" class="need2hide" style="display:none;" ><a href="javascript:OrderChek();"  class=link style="font-size: 18px; font-weight: bold;"><img src="images/buyincredit.png"></a></span>
+		<input type="hidden" name="send_to_order" value="ok">
 	        <input type="hidden" name="d" id="d" value="@deliveryId@">
 	        <input type="hidden" name="nav" value="done">
+                <input type="text" name="promo_code" maxlength="4" value="0000" style="width:40px;">
 	    </td>
     </tr>
     <tr>

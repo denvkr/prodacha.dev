@@ -348,8 +348,8 @@ class PHPShopOrder extends PHPShopCore {
         $row = $this->PHPShopOrm->select(array('uid'), false, array('order' => 'id desc'), array('limit' => 1));
         $last = $row['uid'];
         $all_num = explode("-", $last);
-        $ferst_num = $all_num[0];
-        $order_num = $ferst_num + 1;
+        $first_num = $all_num[0];
+        $order_num = $first_num + 1;
         $this->order_num = $order_num . "-" . substr(abs(crc32(uniqid(session_id()))), 0, $this->format);
 
         // Перехват модуля

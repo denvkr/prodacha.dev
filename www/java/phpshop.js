@@ -1637,6 +1637,7 @@ function AddToCart2(xid,option) {
  * @returns {Boolean}
  */
 function AddToCartNum(xid,pole,option) {
+
     var num=Number(document.getElementById(pole).value); 
     var xxid=xid;
     if (num<1) num=1;
@@ -1654,10 +1655,10 @@ function AddToCartNum(xid,pole,option) {
     //document.body.removeChild(document.body.lastChild);        
     if ($('.fancybox-item.fancybox-close:eq(0)').length) 
         $.fancybox.close();//$('.fancybox-item.fancybox-close:eq(0)').click();
-        if ($('#_tool_'+xid).length){
-            var top = $('#_tool_'+xid).offset(); //Getting Y of target element
-            $("body,html,document").scrollTop(top.top);            
-        }
+        //if ($('#_tool_'+xid).length){
+        //    var top = $('#_tool_'+xid).offset(); //Getting Y of target element
+        //    $("body,html,document").scrollTop(top.top);            
+        //}
         //console.log('11111111');
     if (option===1){
         window.location.replace('/order/');
