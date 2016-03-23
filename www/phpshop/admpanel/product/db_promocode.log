@@ -1,0 +1,1 @@
+select promocode,discountprice from phpshop_promocode prc join phpshop_product_promo_relation pppr on prc.id=pppr.promo_id where pppr.product_id=1045--456ghfdsdf--26000

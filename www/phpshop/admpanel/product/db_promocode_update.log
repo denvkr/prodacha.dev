@@ -1,0 +1,1 @@
+update phpshop_promocode set promocode = '456dfg5465',discountprice=26200 where id=2--2--

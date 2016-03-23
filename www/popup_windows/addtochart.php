@@ -1,5 +1,5 @@
 <?
- session_start(); 
+session_start(); 
 $SysValue = parse_ini_file('../phpshop/inc/config.ini', 1);
 global $SysValue;
 include_once('../phpshop/class/obj.class.php');

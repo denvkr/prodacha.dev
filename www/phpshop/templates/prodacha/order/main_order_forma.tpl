@@ -108,8 +108,8 @@
     		</div>
     	</td>
     </tr>
-	<tr>
-	    <td><div id="promo_code_info" style="display:table-cell;">¬ведите промо-код: </div></td>
+    <tr>
+	    <td></td>
     	<td> 
 	 	<span id="bin" class="need2hide" ><a href="javascript:OrderChek();" class=link style="font-size: 18px; font-weight: bold;"><img src="images/makeorder.png"></a></span>
 		<!-- <span id="bic" class="need2hide" style="display:none;" ><a href="javascript:;" onclick='yescreditmodul([@credititems@],367328,"@orderNum@");'  class=link style="font-size: 18px; font-weight: bold;"><img src="images/buyincredit.png"></a></span>  -->
@@ -120,8 +120,13 @@
 		<input type="hidden" name="send_to_order" value="ok">
 	        <input type="hidden" name="d" id="d" value="@deliveryId@">
 	        <input type="hidden" name="nav" value="done">
-                <input type="text" name="promo_code" maxlength="4" value="0000" style="width:40px;">
 	    </td>
+    </tr>
+    <tr>
+	    <td><div id="promo_code_info" style="display:table-cell;">¬ведите промо-код: </div></td>
+    	<td> 
+            <input type="text" name="promo_code_value" maxlength="10" style="width:70px;">&nbsp;&nbsp;<input type="button" name="promo_code_check_button" style="font-size: 18px; font-weight: bold;" value="јктивировать" onclick="javascript:get_promocode(document.getElementsByName('promo_code_value')[0].value);">&nbsp;&nbsp;<label id="wrong_promocode_label"></label>
+        </td>
     </tr>
     <tr>
         <td></td>

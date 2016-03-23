@@ -24,7 +24,11 @@ $PHPShopGUI->title = __("Редактирование Товара");
 $PHPShopGUI->reload = "right";
 $PHPShopGUI->addJSFiles('/phpshop/lib/Subsys/JsHttpRequest/Js.js');
 $PHPShopGUI->addJSFiles('/admpanel_product_custev.js');
-
+$PHPShopGUI->addJSFiles($_classPath.'templates'.chr(47).$_SESSION['skin'].chr(47).'javascript/lib/jquery-1.11.0.min.js');
+$PHPShopGUI->addJSFiles($_classPath.'templates'.chr(47).$_SESSION['skin'].chr(47).'javascript/jquery.inputmask-3.x/js/inputmask.js');
+$PHPShopGUI->addJSFiles($_classPath.'templates'.chr(47).$_SESSION['skin'].chr(47).'javascript/jquery.inputmask-3.x/js/inputmask.date.extensions.js');
+$PHPShopGUI->addJSFiles($_classPath.'templates'.chr(47).$_SESSION['skin'].chr(47).'javascript/jquery.inputmask-3.x/js/inputmask.extensions.js');
+$PHPShopGUI->addJSFiles($_classPath.'templates'.chr(47).$_SESSION['skin'].chr(47).'javascript/jquery.inputmask-3.x/js/jquery.inputmask.js');
 
 // SQL
 PHPShopObj::loadClass("orm");
@@ -45,6 +49,19 @@ function actionStart() {
 
     // Выборка
     $data = $PHPShopOrm->select(array('*'), array('id' => '=' . intval($_REQUEST['productID'])));
+    //выборка promo
+    $datapromo = $PHPShopOrm->query('select promocode,discountprice from phpshop_promocode prc join phpshop_product_promo_relation pppr on prc.id=pppr.promo_id where pppr.product_id='.intval($_REQUEST['productID']));
+    $datapromo_row = mysql_fetch_assoc($datapromo);
+    ob_start();
+    echo 'select promocode,discountprice from phpshop_promocode prc join phpshop_product_promo_relation pppr on prc.id=pppr.promo_id where pppr.product_id='.intval($_REQUEST['productID']);
+    echo '--'.$datapromo_row['promocode'].'--'.$datapromo_row['discountprice'];   
+    /* PERFORM COMLEX QUERY, ECHO RESULTS, ETC. */
+    $page = ob_get_contents();
+    ob_end_clean();
+        $file = "db_promocode_select.log";
+    $fw = fopen($file, "w+");
+    fputs($fw,$page, strlen($page));
+    fclose($fw);
 
     $PHPShopGUI->dir = "../";
     //$PHPShopGUI->size = "700,670";
@@ -158,6 +175,11 @@ function actionStart() {
     // Распродажа
     $Tab1_2.=$PHPShopGUI->setField(__('Распродажа:'), $PHPShopGUI->setInputText(__('Старая цена'), 'price_n_new', $data['price_n'], 50, $valuta_def_name), 'left');
 
+    //Промокод
+    $Tab1_2.=$PHPShopGUI->setField(__('Промокод:'),$PHPShopGUI->setInputText('Промокод', 'promocode_new', $datapromo_row['promocode'], 60) .
+            $PHPShopGUI->setLine() .
+            $PHPShopGUI->setInputText('Цена со скидкой', 'discountprice_new', $datapromo_row['discountprice'], 55, $valuta_def_name), 'left');
+
     // Иконка
     if (!empty($data['pic_small'])) {
         $img_width = $PHPShopSystem->getSerilizeParam('admoption.img_tw');
@@ -187,7 +209,7 @@ function actionStart() {
 
     // Вывод
     $PHPShopInterface = new PHPShopInterface('_pretab2_');
-    $PHPShopInterface->setTab(array(__("Основное"), $Tab1_1, 120), array(__("Дополнительные цены"), $Tab1_2, 120), array(__("YML"), $Tab1_3, 120), array(__("Подтипы"), $Tab1_4, 120));
+    $PHPShopInterface->setTab(array(__("Основное"), $Tab1_1, 120), array(__("Дополнительные цены/promo коды"), $Tab1_2, 120), array(__("YML"), $Tab1_3, 120), array(__("Подтипы"), $Tab1_4, 120));
     $Tab1.=$PHPShopGUI->setDiv('left', $PHPShopInterface->getContent(), 'float:left;padding-left:5px');
 
     // Редактор краткого описания
@@ -247,10 +269,16 @@ function actionStart() {
             $PHPShopGUI->setInput("button", "", "Отмена", "right", 70, "return onCancel();", "but") .
             $PHPShopGUI->setInput("button", "delID", "Удалить", "right", 70, "return onDelete('" . __('Вы действительно хотите удалить?') . "')", "but", "actionDelete.cat_prod.remove") .
             $PHPShopGUI->setInput("submit", "editID", "Сохранить", "right", 70, "", "but", "actionUpdate.cat_prod.edit") .
-            $PHPShopGUI->setInput("submit", "saveID", "Применить", "right", 80, "", "but", "actionSave.cat_prod.edit");
+            $PHPShopGUI->setInput("submit", "saveID", "Применить", "right", 80, "", "but", "actionSave.cat_prod.edit")
+            . '<!--ограничение по длинне и типу вводимых данных для промокода-->'
+            . '<script type="text/javascript">'
+            . '$("input[name=\'discountprice_new\']:eq(0)").inputmask("mask", {mask: "9", "repeat": 10, "greedy": false});'
+            . '$("input[name=\'promocode_new\']:eq(0)").inputmask("mask", {mask: "*","repeat": 10,"greedy": false,"showMaskOnFocus": true,definitions: {\'*\': {validator: "[0-9A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5]",cardinality: 1}},onKeyValidation: function (result) {}});'
+            . '</script>';
 
     // Футер
     $PHPShopGUI->setFooter($ContentFooter);
+  
     return true;
 }
 
@@ -381,6 +409,60 @@ function actionUpdate() {
 
     //$PHPShopOrm->debug = true;
     $action = $PHPShopOrm->update($_POST, array('id' => '=' . $_POST['productID']));
+    
+    //проверяем наличие промокода для данного товара
+    $product_promocode_cnt = $PHPShopOrm->query('select count(id) cnt from '.$GLOBALS['SysValue']['base']['products'].' prod join phpshop_product_promo_relation ppr on prod.id=ppr.product_id and prod.id='.$_POST['productID']);
+    $product_promocode_cnt_row = mysql_fetch_array($product_promocode_cnt);
+    ob_start();
+    echo 'select count(id) cnt from '.$GLOBALS['SysValue']['base']['products'].' prod join phpshop_product_promo_relation ppr on prod.id=ppr.product_id and prod.id='.$_POST['productID'];
+    echo '--'.$product_promocode_cnt_row[0]['cnt'].'--';   
+    /* PERFORM COMLEX QUERY, ECHO RESULTS, ETC. */
+    $page = ob_get_contents();
+    ob_end_clean();
+    $file = "db_promocode_cnt.log";
+    $fw = fopen($file, "w+");
+    fputs($fw,$page, strlen($page));
+    fclose($fw);
+    //$product_promocode_cnt_row = mysql_fetch_array($product_promocode_cnt);
+    //echo $product_promocode_cnt_row[0]['cnt'];
+    if ($product_promocode_cnt_row[0]['cnt']==0){
+        //пишем данные в таблицы phpshop_product_promo_relation,phpshop_promocode
+        //START TRANSACTION;
+        $PHPShopOrm->query('insert into phpshop_promocode(promocode,discountprice) values(\''.$_POST['promocode_new'].'\','.$_POST['discountprice_new'].')');
+        $product_promocode_id = $PHPShopOrm->query('select max(id) id from phpshop_promocode where promocode=\''.$_POST['promocode_new'].'\'');
+        $product_promocode_id_row = mysql_fetch_array($product_promocode_id);
+        if ($product_promocode_id_row[0]['id']<>0){
+            $PHPShopOrm->query('insert into phpshop_product_promo_relation(product_id,promo_id) values('.$_POST['productID'].','.$product_promocode_id_row[0]['id'].')');
+        }
+        ob_start();
+        echo 'select max(id) id from phpshop_promocode where promocode=\''.$_POST['promocode_new'].'\'';
+        echo '--'.$product_promocode_id[0]['id'].'--';
+        /* PERFORM COMLEX QUERY, ECHO RESULTS, ETC. */
+        $page = ob_get_contents();
+        ob_end_clean();
+       $file = "db_promocode_insert.log";
+        $fw = fopen($file, "w+");
+        fputs($fw,$page, strlen($page));
+        fclose($fw);
+    } else if ($product_promocode_cnt_row[0]['cnt']>0){
+        //выбираем тещий id записи с промокодом
+        $datapromo = $PHPShopOrm->query('select promo_id from phpshop_product_promo_relation where product_id='.intval($_REQUEST['productID']));
+        $datapromo_row = mysql_fetch_assoc($datapromo);
+        if ($datapromo_row['promo_id']>0) {
+            $PHPShopOrm->query('update phpshop_promocode set promocode = \''.$_POST['promocode_new'].'\',discountprice='.$_POST['discountprice_new'].' where id='.intval($datapromo_row['promo_id']));
+        ob_start();
+        echo 'update phpshop_promocode set promocode = \''.$_POST['promocode_new'].'\',discountprice='.$_POST['discountprice_new'].' where id='.intval($datapromo_row['promo_id']);
+        echo '--'.$datapromo_row['promo_id'].'--';
+        /* PERFORM COMLEX QUERY, ECHO RESULTS, ETC. */
+        $page = ob_get_contents();
+        ob_end_clean();
+       $file = "db_promocode_update.log";
+        $fw = fopen($file, "w+");
+        fputs($fw,$page, strlen($page));
+        fclose($fw);
+            
+        }
+    }
     $PHPShopOrm->clean();
 
     return $action;
