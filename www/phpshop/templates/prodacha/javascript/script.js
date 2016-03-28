@@ -1336,7 +1336,7 @@ fillTKtablePart();
 customhrefeventsbuybutton();
 if ($("input[name='promo_code_value']:eq(0)").length)
     $("input[name='promo_code_value']:eq(0)").inputmask("mask", {mask: "*","repeat": 10,"greedy": false,"showMaskOnFocus": true,definitions: {'*': {validator: "[0-9A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5]",cardinality: 1}},onKeyValidation: function (result) {}});
-console.log($("input[name='promo_code_value']:eq(0)").length);
+//console.log($("input[name='promo_code_value']:eq(0)").length);
 /*
 //для рекомендации кокоса делаем вывод блока товаров "довесков"
 if ($('.alsobought:eq(0)')!==null){
@@ -2966,20 +2966,54 @@ $('a[href^="#_tool_"][id^="a"]').each(function(index){
 
 //выполнить ajax запрос чтобы узнать promocode
 function get_promocode(promocode){
-    console.log(promocode);
+    //console.log(promocode);
+    //собираем данные по товарам для проверки скидок на них
+    var json_post='promocode='+promocode+'&';
+    var discpricename_val='';
+    var promoname_val='';
+    $('[discpricename^="discountprice"]:eq(0)').each(function (){
+       discpricename_val+=String($(this).attr('discpricename'))+'='+$(this).html()+'&'; 
+    });
+    $('[promoname^="promocode"]').each(function (){
+       promoname_val+=String($(this).attr('promoname'))+'='+$(this).html()+'&';
+    });
+    var json_ready_string=(json_post+discpricename_val+promoname_val).slice(0,-1);
+    console.log(json_ready_string);
+    //console.log($('[promoname^="promocode"]:eq(0)').attr('promo'));
 $.ajax({
-url: '/phpshop/ajax/get_promo_cart.php',
+        url: '/phpshop/ajax/get_promo_cart.php',
         type: 'post',
-        data: 'promocode=' + promocode,
+        data: json_ready_string,
         dataType: 'json',
         beforeSend: function() {},
         complete: function() {},
         success: function(json) {
             if (json['item1']==0)
                 $('#wrong_promocode_label').html('Не правильно введено кодовое слово.');
-            else
-                $('#wrong_promocode_label').html('Промокод принят. спасибо!');
-                
+            else {
+                console.log (json['item1']+' '+json['item2'].length+' '+json['total']);
+                if (json['item2'].length) {
+                    $('#wrong_promocode_label').html('Промокод принят. Спасибо!');
+                    for (cnt=0;cnt<json['item2'].length;cnt++){
+                        //пробегаем по товарам и присваиваем значение цены с учетом промокода
+                        $('input[name="id_delete"]').each(function (){
+                            if ($(this).val()==json['item2'][cnt][0]) {
+                                //console.log(json['item2'][cnt][0]+' '+json['item2'][cnt][1]+'found and price '+$(this).parents('table:eq(0)').parents('td:eq(0)').next('td:eq(0)').html());//parents('table:eq(0)').parents('td:eq(0)').next('td:eq(0)'). siblings('.red').attr('align')
+                                $(this).parents('table:eq(0)').parents('td:eq(0)').next('td:eq(0)').html(json['item2'][cnt][1]+' руб.');
+                            }
+                        }); 
+                    }
+                    //console.log(json['total']+' '+$('#tr_itog>td:nth-last-child(-n+1)').html());
+                    $('#tr_itog>td:nth-last-child(-n+1)').html(json['total']+' руб.');
+                    //высчитываем total с доставкой
+                    delivery=$('#DosSumma').html();
+                    //console.log(delivery+' '+json['total'])
+                    $('#TotalSumma').html((Number(json['total'])+Number(delivery)));
+                    //обновляем total в корзине
+                    $('.summ:eq(0)').next('.red').children('#sum').html(Number(json['total']));
+                } else
+                    $('#wrong_promocode_label').html('В корзине не выбраны товары или не все товары соотв. промокоду.');   
+            }   
         },
         error: function(jqXHR, textStatus, errorThrown) {
         console.log('error save_(reg)' + ' ' + textStatus);

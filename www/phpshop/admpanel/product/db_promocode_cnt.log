@@ -1,1 +1,1 @@
-select count(id) cnt from phpshop_products prod join phpshop_product_promo_relation ppr on prod.id=ppr.product_id and prod.id=1045--1--
+select count(id) cnt from phpshop_products prod join phpshop_product_promo_relation ppr on prod.id=ppr.product_id and prod.id=1163--1--

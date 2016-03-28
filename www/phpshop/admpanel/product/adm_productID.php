@@ -425,8 +425,10 @@ function actionUpdate() {
     fclose($fw);
     //$product_promocode_cnt_row = mysql_fetch_array($product_promocode_cnt);
     //echo $product_promocode_cnt_row[0]['cnt'];
-    if ($product_promocode_cnt_row[0]['cnt']==0){
-        //пишем данные в таблицы phpshop_product_promo_relation,phpshop_promocode
+    //пишем данные в таблицы phpshop_product_promo_relation,phpshop_promocode 
+    //если нет такого промокода для товара
+    //и если промокод не пустой
+    if ( $product_promocode_cnt_row[0]['cnt']==0 && !empty($_POST['promocode_new']) && !empty($_POST['discountprice_new']) ){
         //START TRANSACTION;
         $PHPShopOrm->query('insert into phpshop_promocode(promocode,discountprice) values(\''.$_POST['promocode_new'].'\','.$_POST['discountprice_new'].')');
         $product_promocode_id = $PHPShopOrm->query('select max(id) id from phpshop_promocode where promocode=\''.$_POST['promocode_new'].'\'');
@@ -445,10 +447,15 @@ function actionUpdate() {
         fputs($fw,$page, strlen($page));
         fclose($fw);
     } else if ($product_promocode_cnt_row[0]['cnt']>0){
+
         //выбираем тещий id записи с промокодом
         $datapromo = $PHPShopOrm->query('select promo_id from phpshop_product_promo_relation where product_id='.intval($_REQUEST['productID']));
         $datapromo_row = mysql_fetch_assoc($datapromo);
-        if ($datapromo_row['promo_id']>0) {
+        //если забили пустое значение в промокод тогда удаляем запись
+        if ( $datapromo_row['promo_id']>0 && (empty($_POST['promocode_new']) || empty($_POST['discountprice_new'])) ) {
+            $PHPShopOrm->query('delete from phpshop_promocode where id = '.intval($datapromo_row['promo_id']));
+            $PHPShopOrm->query('delete from phpshop_product_promo_relation where promo_id = '.intval($datapromo_row['promo_id']).' and product_id='.intval($_REQUEST['productID'])); 
+        } else if ( $datapromo_row['promo_id']>0 && !empty($_POST['promocode_new']) && !empty($_POST['discountprice_new']) ) {
             $PHPShopOrm->query('update phpshop_promocode set promocode = \''.$_POST['promocode_new'].'\',discountprice='.$_POST['discountprice_new'].' where id='.intval($datapromo_row['promo_id']));
         ob_start();
         echo 'update phpshop_promocode set promocode = \''.$_POST['promocode_new'].'\',discountprice='.$_POST['discountprice_new'].' where id='.intval($datapromo_row['promo_id']);
@@ -460,7 +467,6 @@ function actionUpdate() {
         $fw = fopen($file, "w+");
         fputs($fw,$page, strlen($page));
         fclose($fw);
-            
         }
     }
     $PHPShopOrm->clean();

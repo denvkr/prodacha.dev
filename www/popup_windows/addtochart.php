@@ -74,17 +74,17 @@ $PHPShopCart=new PHPShopCart(false);
 	while($row0_2=mysql_fetch_assoc($res0_2)){
 		$tovar_name=$row0_2['name'];
             // Если нет новой цены
-            if (empty($row['price_n'])) {
-            	if ( ($_COOKIE['sincity']=="sp") AND ($row['price2']!=0) ) {
-            		$tovar_price=$row['price2'];
-            	} else if( ($_COOKIE['sincity']=="chb") AND ($row['price3']!=0) ) {
-            		$tovar_price=$row['price3'];
+            if (empty($row0_2['price_n'])) {
+            	if ( ($_COOKIE['sincity']=="sp") AND ($row0_2['price2']!=0) ) {
+            		$tovar_price=$row0_2['price2'];
+            	} else if( ($_COOKIE['sincity']=="chb") AND ($row0_2['price3']!=0) ) {
+            		$tovar_price=$row0_2['price3'];
             	}
             	else {
-            		$tovar_price=$row['price'];
+            		$tovar_price=$row0_2['price'];
             	}
-            }
-		$tovar_price=$row0_2['price'];
+            } else
+		$tovar_price=$row0_2['price_n'];
 		$tovar_basevaluta=$row0_2['baseinputvaluta'];
                 $tovar_pic_small=$row0_2['pic_big'];
 	}				

@@ -405,7 +405,14 @@ function ordercartforma($val, $option) {
     PHPShopParser::set('cart_num',$val['num']);
     PHPShopParser::set('cart_price',$realprice);
     PHPShopParser::set('cart_izm',$val['ed_izm']);
-
+    if (!empty($val['discountprice']) && !empty($val['promocode'])) {
+        PHPShopParser::set('discountprice',$val['discountprice']);
+        PHPShopParser::set('promocode',$val['promocode']);
+    } else {
+        PHPShopParser::set('discountprice','0');
+        PHPShopParser::set('promocode','0');        
+    }
+        
     // Перехват модуля в конце функции
     $PHPShopModules->setHookHandler(__FUNCTION__, __FUNCTION__, $val, $option, 'END');
 

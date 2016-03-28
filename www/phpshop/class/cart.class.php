@@ -34,7 +34,8 @@ class PHPShopCart {
             PHPShopObj::loadClass('array');
             PHPShopObj::loadClass('product');
         }
-
+        PHPShopObj::loadClass('orm');
+            
         $this->Valuta = $PHPShopValutaArray->getArray();
         //echo 2;
         if ($import_cart)
@@ -64,14 +65,19 @@ class PHPShopCart {
 
         // Проверка на существование товара
         if (!empty($name)) {
-
+            //добавляем данные по промокоду
+            $PHPShopOrm=new PHPShopOrm();
+            $promo_data=$PHPShopOrm->query('select promocode,discountprice from phpshop_promocode ppc join phpshop_product_promo_relation pppr on pppr.promo_id=ppc.id where pppr.product_id='.intval($objID));
+            $promo_data_row = mysql_fetch_array($promo_data, MYSQL_ASSOC);
         // Массив корзины nah
         $cart = array(
                 "id" => intval($objID),
                 "name" => $name,
                 "price" => PHPShopProductFunction::GetPriceValuta($objID,$objProduct->getParam("price"),$objProduct->getParam("baseinputvaluta"),true),
-				"price2" => PHPShopProductFunction::GetPriceValuta($objID,$objProduct->getParam("price2"),$objProduct->getParam("baseinputvaluta"),true),
-        		"price3" => PHPShopProductFunction::GetPriceValuta($objID,$objProduct->getParam("price3"),$objProduct->getParam("baseinputvaluta"),true),        		
+		"price2" => PHPShopProductFunction::GetPriceValuta($objID,$objProduct->getParam("price2"),$objProduct->getParam("baseinputvaluta"),true),
+        	"price3" => PHPShopProductFunction::GetPriceValuta($objID,$objProduct->getParam("price3"),$objProduct->getParam("baseinputvaluta"),true),
+                "discountprice" => $promo_data_row['discountprice'],
+                "promocode" => $promo_data_row['promocode'],            
                 "uid" => $objProduct->getParam("uid"),
                 "num" => abs($this->_CART[$objID]['num'] + $num),
                 "weight" => $objProduct->getParam("weight"),
@@ -79,7 +85,19 @@ class PHPShopCart {
                 "pic_small" => $objProduct->getParam("pic_small"),
                 "parent" => intval($parentID),
                 "user" => $objProduct->getParam("user"));
-
+        unset($promo_data_row);
+        unset($promo_data);
+        ob_start();
+        echo intval($objID);
+        var_dump ($cart);
+        /* PERFORM COMLEX QUERY, ECHO RESULTS, ETC. */
+        $page = ob_get_contents();
+        ob_end_clean();
+       $file = "cart.log";
+        $fw = fopen($file, "w+");
+        fputs($fw,$page, strlen($page));
+        fclose($fw);
+            
             // Проверка кол-ва товара на складе
             if ($this->store_check) {
                 if ($cart['num'] > PHPShopSecurity::TotalClean($objProduct->getParam("items"),1))
@@ -261,6 +279,14 @@ class PHPShopCart {
         return $this->_CART;
     }
 
+     /**
+     * Изменение массива корзины
+     * @return array
+     */
+    function setArray($id,$item,$val) {
+        $this->_CART[$id][$item]=$val;
+        return $this->_CART;
+    }
 }
 
 ?>

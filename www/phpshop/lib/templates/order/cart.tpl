@@ -16,7 +16,7 @@
             <img src="images/shop/break.gif" width="100%" height="1" border="0">
         </td>
     </tr>
-    <tr style="padding-top:10px">
+    <tr id="tr_itog" style="padding-top:10px">
         <td ><b>Èעמדמ:</b></td>
         <td>
             <strong>@cart_num@</strong> (רע.)
