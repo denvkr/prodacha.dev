@@ -2989,11 +2989,11 @@ $.ajax({
         complete: function() {},
         success: function(json) {
             if (json['item1']==0)
-                $('#wrong_promocode_label').html('Не правильно введено кодовое слово.');
+                $('#wrong_promocode_label').html('Не правильно введен промо-код.');
             else {
                 console.log (json['item1']+' '+json['item2'].length+' '+json['total']);
                 if (json['item2'].length) {
-                    $('#wrong_promocode_label').html('Промокод принят. Спасибо!');
+                    $('#wrong_promocode_label').html('Промо-код принят. Спасибо!');
                     for (cnt=0;cnt<json['item2'].length;cnt++){
                         //пробегаем по товарам и присваиваем значение цены с учетом промокода
                         $('input[name="id_delete"]').each(function (){
@@ -3012,7 +3012,7 @@ $.ajax({
                     //обновляем total в корзине
                     $('.summ:eq(0)').next('.red').children('#sum').html(Number(json['total']));
                 } else
-                    $('#wrong_promocode_label').html('В корзине не выбраны товары или не все товары соотв. промокоду.');   
+                    $('#wrong_promocode_label').html('В корзине не выбраны товары или не все товары соотв. промо-коду.');   
             }   
         },
         error: function(jqXHR, textStatus, errorThrown) {

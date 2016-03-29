@@ -3558,3 +3558,15 @@ width:4px;
 height:0px 
 } 
 .sametovarbox::-webkit-scrollbar{ width: 4px; }
+
+input[name="promo_code_check_button"] {
+    font: normal 12px/1.4 Arial, Helvetica, sans-serif;
+}
+input[name="promo_code_value"] {
+    width:70px;
+    height:18px;
+    font-family:tahoma;
+    font-size:11px;
+    border-color: rgb(171, 173, 179);
+    background-color:#f2f2f2;
+}

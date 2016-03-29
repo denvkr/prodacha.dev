@@ -123,12 +123,6 @@
 	    </td>
     </tr>
     <tr>
-	    <td><div id="promo_code_info" style="display:table-cell;">Введите промо-код: </div></td>
-    	<td> 
-            <input type="text" name="promo_code_value" maxlength="10" style="width:70px;">&nbsp;&nbsp;<input type="button" name="promo_code_check_button" style="font-size: 18px; font-weight: bold;" value="Активировать" onclick="javascript:get_promocode(document.getElementsByName('promo_code_value')[0].value);">&nbsp;&nbsp;<label id="wrong_promocode_label"></label>
-        </td>
-    </tr>
-    <tr>
         <td></td>
         <td>
             <div id=allspecwhite><img src="images/shop/comment.gif" alt="" width="16" height="16" border="0" hspace="5" align="middle" />Данные, отмеченные <b>флажками</b> обязательны для заполнения.<br />
