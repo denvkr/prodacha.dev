@@ -411,6 +411,47 @@ switch ($p) {
         break;
 
     // Загрузка базы
+    case("csvorder"):
+        if (CheckedRules($UserStatus["sql"], 1) == 1) {
+            @$interface.='
+	  <TABLE cellSpacing=0 cellPadding=0 width="50%" align="center">
+<TR>
+
+<TD vAlign=top style="padding-top:25">
+<div align="center"><h4><span name=txtLang id=txtLang>Мастер экспорта заказов в csv файл</span></h4></div>
+<FIELDSET>
+
+<FORM name=csv_upload action="" method=post encType=multipart/form-data>
+<table cellpadding="10" align="center">
+<tr>
+	<td>
+	<span name=txtLang id=txtLang>Данные будут сохранены в файл ordersDDMMYYYMISS.csv</span><br>
+	</td>
+	<td align="right">
+	<INPUT class=but onclick="DoLoadBaseOrders(\'../../../../UserFiles/\')" type=button value=OK><br>
+        <INPUT class=but type=reset name="btnLang"> 
+	</td>
+</tr>
+</table>
+</FIELDSET>
+<div id="OrdercsvExportResultMessage" style="padding-top:10px;display:inline;float:left;">Статус экспорта</div>
+<div style="padding-top:10px;display:inline;float:right;">
+<BUTTON class="help" onclick="initSlide(0);loadhelp();">Справка</BUTTON>
+</div>
+</TD></TR>
+<TR>
+<TD>
+</TD>
+</TR>
+
+</TABLE>
+	  ';
+        }
+        else
+            $interface = $UserChek->BadUserForma();
+        break;
+
+    // Загрузка базы
     case("csv_base"):
         if (CheckedRules($UserStatus["sql"], 1) == 1)
             @$interface.=('

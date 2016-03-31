@@ -412,10 +412,10 @@ function actionUpdate() {
     
     //проверяем наличие промокода для данного товара
     $product_promocode_cnt = $PHPShopOrm->query('select count(id) cnt from '.$GLOBALS['SysValue']['base']['products'].' prod join phpshop_product_promo_relation ppr on prod.id=ppr.product_id and prod.id='.$_POST['productID']);
-    $product_promocode_cnt_row = mysql_fetch_array($product_promocode_cnt);
+    $product_promocode_cnt_row = mysql_fetch_assoc($product_promocode_cnt);
     ob_start();
     echo 'select count(id) cnt from '.$GLOBALS['SysValue']['base']['products'].' prod join phpshop_product_promo_relation ppr on prod.id=ppr.product_id and prod.id='.$_POST['productID'];
-    echo '--'.$product_promocode_cnt_row[0]['cnt'].'--';   
+    echo '--'.$product_promocode_cnt_row['cnt'].'--';   
     /* PERFORM COMLEX QUERY, ECHO RESULTS, ETC. */
     $page = ob_get_contents();
     ob_end_clean();
@@ -428,17 +428,17 @@ function actionUpdate() {
     //пишем данные в таблицы phpshop_product_promo_relation,phpshop_promocode 
     //если нет такого промокода для товара
     //и если промокод не пустой
-    if ( $product_promocode_cnt_row[0]['cnt']==0 && !empty($_POST['promocode_new']) && !empty($_POST['discountprice_new']) ){
+    if ( $product_promocode_cnt_row['cnt']==0 && !empty($_POST['promocode_new']) && !empty($_POST['discountprice_new']) ){
         //START TRANSACTION;
         $PHPShopOrm->query('insert into phpshop_promocode(promocode,discountprice) values(\''.$_POST['promocode_new'].'\','.$_POST['discountprice_new'].')');
         $product_promocode_id = $PHPShopOrm->query('select max(id) id from phpshop_promocode where promocode=\''.$_POST['promocode_new'].'\'');
-        $product_promocode_id_row = mysql_fetch_array($product_promocode_id);
-        if ($product_promocode_id_row[0]['id']<>0){
-            $PHPShopOrm->query('insert into phpshop_product_promo_relation(product_id,promo_id) values('.$_POST['productID'].','.$product_promocode_id_row[0]['id'].')');
+        $product_promocode_id_row = mysql_fetch_assoc($product_promocode_id);
+        if ($product_promocode_id_row['id']<>0){
+            $PHPShopOrm->query('insert into phpshop_product_promo_relation(product_id,promo_id) values('.$_POST['productID'].','.$product_promocode_id_row['id'].')');
         }
         ob_start();
         echo 'select max(id) id from phpshop_promocode where promocode=\''.$_POST['promocode_new'].'\'';
-        echo '--'.$product_promocode_id[0]['id'].'--';
+        echo '--'.$product_promocode_id['id'].'--';
         /* PERFORM COMLEX QUERY, ECHO RESULTS, ETC. */
         $page = ob_get_contents();
         ob_end_clean();
@@ -446,7 +446,7 @@ function actionUpdate() {
         $fw = fopen($file, "w+");
         fputs($fw,$page, strlen($page));
         fclose($fw);
-    } else if ($product_promocode_cnt_row[0]['cnt']>0){
+    } else if ($product_promocode_cnt_row['cnt']>0){
 
         //выбираем тещий id записи с промокодом
         $datapromo = $PHPShopOrm->query('select promo_id from phpshop_product_promo_relation where product_id='.intval($_REQUEST['productID']));

@@ -1023,7 +1023,6 @@ function UpdateFileNameBase1C(name) {
     }
 }
 
-
 // Загрузка базы из 1C 
 function DoLoadBase1C(value, page, name) {
     var tip = new Array();
@@ -1074,6 +1073,21 @@ function DoLoadBase1C(value, page, name) {
     });
 }
 
+//выгрузка ajax заказов в csv файл
+function DoLoadBaseOrders (value) {
+    var req = new JsHttpRequest();
+    req.onreadystatechange = function() {
+        if (req.readyState == 4) {
+            document.getElementById('OrdercsvExportResultMessage').innerHTML = req.responseJS.content;
+        }
+    }
+
+    req.open(null, 'order/ajax/ordercsv.ajax.php', true);
+    req.send({
+        'file': value
+    });
+    
+}
 
 // Загрузка базы из файла 
 function DoLoadBase(value, page, name) {

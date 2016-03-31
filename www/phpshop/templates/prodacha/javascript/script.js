@@ -2978,7 +2978,7 @@ function get_promocode(promocode){
        promoname_val+=String($(this).attr('promoname'))+'='+$(this).html()+'&';
     });
     var json_ready_string=(json_post+discpricename_val+promoname_val).slice(0,-1);
-    console.log(json_ready_string);
+    //console.log(json_ready_string);
     //console.log($('[promoname^="promocode"]:eq(0)').attr('promo'));
 $.ajax({
         url: '/phpshop/ajax/get_promo_cart.php',
@@ -2991,9 +2991,9 @@ $.ajax({
             if (json['item1']==0)
                 $('#wrong_promocode_label').html('Не правильно введен промо-код.');
             else {
-                console.log (json['item1']+' '+json['item2'].length+' '+json['total']);
+                //console.log (json['item1']+' '+json['item2'].length+' '+json['total']);
                 if (json['item2'].length) {
-                    $('#wrong_promocode_label').html('Промо-код принят. Спасибо!');
+                    $('#wrong_promocode_label').html('Промо-код принят. Цена пересчитана.');
                     for (cnt=0;cnt<json['item2'].length;cnt++){
                         //пробегаем по товарам и присваиваем значение цены с учетом промокода
                         $('input[name="id_delete"]').each(function (){

@@ -1,0 +1,1 @@
+select max(id) id from phpshop_promocode where promocode='456D45gfdf'----

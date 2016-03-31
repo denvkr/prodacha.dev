@@ -107,4 +107,5 @@ stm_aix("p11i7","p1i0",[0,"SQL загрузка файла","","",-1,-1,0,"javascript:miniWin
 stm_aix("p11i8","p11i7",[0,"Резервные копии базы (Backup)","","",-1,-1,0,"javascript:miniWin('dumper/dumper.php',500,430)","_self","","","database_save.gif","database_save.gif"]);
 stm_aix("p11i9","p1i1",[]);
 stm_aix("p11i10","p1i0",[0,"1С:Предприятие","","",-1,-1,0,"javascript:DoReload('csv1c')","_self","","","1c_icon.gif","1c_icon.gif"]);
+stm_aix("p11i11","p1i0",[0,"Заказы в csv","","",-1,-1,0,"javascript:DoReload('csvorder')","_self","","","",""]);
 stm_ep();

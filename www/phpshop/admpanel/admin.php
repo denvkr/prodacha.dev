@@ -490,6 +490,8 @@ echo $CreateModulesMenu[0];
                             <td width="3"></td>
                             <td id="but104"  class="butoff"><img name="iconLang" src="icon/1c_icon.gif" alt="Загрузка 1C:Предприятие" title="Загрузка 1C:Предприятие"  width="16" height="16" border="0" onmouseover="ButOn(104)" onmouseout="ButOff(104)" onclick="DoReload('csv1c')"></td>
                             <td width="3"></td>
+                            <td id="but1004"  class="butoff"><img name="iconLang" src="" alt="1" title="1"  width="16" height="16" border="0" onmouseover="ButOn(1004)" onmouseout="ButOff(1004)" onclick="DoReload('csvorder')"></td>
+                            <td width="3"></td>
                             <td id="but5"  class="butoff"><img name="iconLang" src="icon/page_save.gif" alt="Выгрузка прайса" title="Выгрузка прайса" width="16" height="16" border="0" onmouseover="ButOn(5)" onmouseout="ButOff(5)" onclick="miniWin('export/adm_csv.php?IDS=all', 300, 300)"></td>
                             <td width="3"></td>
                             <td width="1" bgcolor="#ffffff"></td>
