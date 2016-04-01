@@ -2778,8 +2778,11 @@ p.ul_marg
 {
         cursor:pointer;
 }
-
-.product_icon_desc
+a[id^="analog_href"]+.outdated_message+.a_product_icon_desc{
+    bottom: 52px;
+    margin-left: -25px;    
+}
+.product_icon_desc,.a_product_icon_desc
 {
         position: absolute;
         bottom: 122px;
@@ -2811,7 +2814,7 @@ p.ul_marg
         behavior: url('PIE.htc');
 }
 
-			.product_icon_desc:after
+			.product_icon_desc:after,.a_product_icon_desc:after
 			{
 				position: absolute;
 				bottom: -6px;
@@ -2835,14 +2838,14 @@ p.ul_marg
 				content:"";	
 			}
 			
-		.product_icons li:hover .product_icon_desc
+		.product_icons li:hover .product_icon_desc,a[id^="analog_href"]:hover~.a_product_icon_desc
 		{
-			display: block;	
+			display: block;
 		}
 
 		.product_icons_1 li:hover .product_icon_desc_1
 		{
-			display: block;	
+			display: block;
 		}
 		
 			.product_icon_desc p

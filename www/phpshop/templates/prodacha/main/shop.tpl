@@ -71,8 +71,8 @@
 	<link rel="stylesheet" href="@php echo $GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin']; php@/style.css" type="text/css">	
 	<script type="text/javascript" src="@php echo $GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].chr(47); php@javascript/jquery.pajinate.min.js"></script>
 	<!-- Подключаем иконки -->
-	<link rel="shortcut icon" href="http://www.prodacha.ru/favicon.ico" type="image/x-icon">
-	<link rel="icon" href="http://www.prodacha.ru/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="http://prodacha.ru/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="http://prodacha.ru/favicon.ico" type="image/x-icon">
 	<!-- Подключаем javascript библиотеку CMS -->
 	<script type="text/javascript" src="java/phpshop.js"></script>
 	<!-- Подключаем совместимость с браузерами -->

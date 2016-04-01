@@ -26,7 +26,7 @@
 	$row_sklad=false;
 	$row_outdated=false;	
 	if (!empty($GLOBALS['SysValue']['other']['productUid'])) {
-		$sql="select id,name,sklad,outdated,analog from ".$SysValue['base']['products']." where id=".$GLOBALS['SysValue']['other']['productUid'];
+		$sql="select id,name,sklad,outdated,analog,gift,pic_small,price from ".$SysValue['base']['products']." where id=".$GLOBALS['SysValue']['other']['productUid'];
 	}
 
 	$res=mysql_query($sql);
@@ -69,6 +69,9 @@
 		} else if ( $row_sklad==true && $row_outdated==true && !(empty($row_analog)) ) {
                         echo '<div class="buybuttons">';
                         echo '<a id="analog_href'.$GLOBALS['SysValue']['other']['productUid'].'" href="/shop/UID_'.$row_analog.'.html">АНАЛОГ</a>';
+                        //$product_icon_desc='<table><tr><td><a href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$catalog_id_rows[5].'.html"><img width="60" height="80" src="'.$catalog_id_rows[6].'" alt="" style="max-width:100%;max-height:100%;"></a></td><td><a href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$catalog_id_rows[5].'.html" style="color: #588910;font: 12px/1.4 Arial,Helvetica,sans-serif;">'.$catalog_id_rows[2].'</a><br><span style="color: #e7193f;font: 14px Arial,Helvetica,sans-serif;font-weight: bold;"><strike>'.$catalog_id_rows[7].' руб.</strike></span><br><span style="font: 14px Arial,Helvetica,sans-serif;font-weight: bold;color:#6C4B46;">В подарок!</span></td></tr></table>';
+			//$vuvod.='<div class="a_product_icon_desc">'.$product_icon_desc.'</div>';
+                        //echo $vuvod;
                         echo '<span class="outdated_message" style="position:relative;font-size:11px !important;left: -12px"><!--noindex-->'.$SysValue['lang']['outdated_message3'].'<!--/noindex--></span>';
                         /*
 			$productnotice='<div id="price_comlain'.$GLOBALS['SysValue']['other']['productUid'].'" class="price_comlain" style="position:relative;display: inline-block;margin:0px 95px 0px 0px;font-size:13px !important;left:-20px;"><noindex>'.$SysValue['lang']['outdated_message2'].'</noindex></div>';
@@ -85,6 +88,9 @@
 		} else if ( $row_sklad==true && $row_outdated==true && empty($row_analog) ) {
                         echo '<div class="buybuttons inactive">';
                         echo '<a id="analog_href'.$GLOBALS['SysValue']['other']['productUid'].'" href="/shop/UID_.html" onclick="return false;">АНАЛОГ</a>';
+                        //$product_icon_desc='<table><tr><td><a href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$catalog_id_rows[5].'.html"><img width="60" height="80" src="'.$catalog_id_rows[6].'" alt="" style="max-width:100%;max-height:100%;"></a></td><td><a href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$catalog_id_rows[5].'.html" style="color: #588910;font: 12px/1.4 Arial,Helvetica,sans-serif;">'.$catalog_id_rows[2].'</a><br><span style="color: #e7193f;font: 14px Arial,Helvetica,sans-serif;font-weight: bold;"><strike>'.$catalog_id_rows[7].' руб.</strike></span><br><span style="font: 14px Arial,Helvetica,sans-serif;font-weight: bold;color:#6C4B46;">В подарок!</span></td></tr></table>';
+			//$vuvod.='<div class="a_product_icon_desc">'.$product_icon_desc.'</div>';
+                        //echo $vuvod;
                         echo '<span class="outdated_message" style="position:relative;font-size:11px !important;left: -12px"><!--noindex-->'.$SysValue['lang']['outdated_message3'].'<!--/noindex--></span>';
 
 			//$productnotice='<div id="price_comlain'.$GLOBALS['SysValue']['other']['productUid'].'" class="price_comlain" style="position:relative;display: inline-block;margin:0px 95px 0px 0px;font-size:13px !important;left:-20px;border-bottom:1px;"><!--noindex-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!--/noindex--></div>';
@@ -108,7 +114,7 @@
 		$price_n=false;
 		$row_outdated=false;
                 $old_price;
-                $sql="select sklad,price_n,outdated,analog,price from ".$SysValue['base']['products']." where id=".$GLOBALS['SysValue']['other']['productUid'];
+                $sql="select sklad,price_n,outdated,analog,price,gift,pic_small,name from ".$SysValue['base']['products']." where id=".$GLOBALS['SysValue']['other']['productUid'];
                 $res=mysql_query($sql);
                 while ($catalog_id_rows=mysql_fetch_row($res)) {
                         if ($catalog_id_rows[0]==1) {
@@ -202,7 +208,10 @@
 		} else if ($row_sklad==true && $row_outdated==true && !empty($row_analog)) {
                         echo '<div class="buybuttons">';
 			echo '@ComStartCart@';
-			echo '@price_comlain@';
+                        echo '@price_comlain@';
+                        //$product_icon_desc='<table><tr><td><a href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$catalog_id_rows[5].'.html"><img width="60" height="80" src="'.$catalog_id_rows[6].'" alt="" style="max-width:100%;max-height:100%;"></a></td><td><a href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$catalog_id_rows[5].'.html" style="color: #588910;font: 12px/1.4 Arial,Helvetica,sans-serif;">'.$catalog_id_rows[7].'</a><br><span style="color: #e7193f;font: 14px Arial,Helvetica,sans-serif;font-weight: bold;"><strike>'.$price.' руб.</strike></span><br><span style="font: 14px Arial,Helvetica,sans-serif;font-weight: bold;color:#6C4B46;">В подарок!</span></td></tr></table>';
+			//$vuvod.='<div class="a_product_icon_desc">'.$product_icon_desc.'</div>';
+                        //echo $vuvod;
 			echo '@ComEndCart@';
                         echo '</div>';
 		} else if ($row_sklad==true && $row_outdated==true && empty($row_analog)) {

@@ -163,6 +163,7 @@ function product_icons($obj, $row) {
 						</li>
 						';
 					}
+                                        //иконка с подарком
 					if ($id_img1=='3375') {
 						//идём вытаскиваем само описание
 						$res3375=$PHPShopOrm->query("SELECT name,price,pic_small FROM ".$SysValue['base']['products']." WHERE id='".$row['gift']."'");
@@ -170,7 +171,7 @@ function product_icons($obj, $row) {
 						$row3375=mysql_fetch_assoc($res3375);
 						
 						$href='<img src="'.$src.'" alt="">';
-						$product_icon_desc='<table><tr><td><img width="60" height="80" src="'.$row3375['pic_small'].'" alt="" style="max-width:100%;max-height:100%;"></td><td><a href="http://prodacha.ru/shop/UID_'.$row['gift'].'.html" style="color: #588910;font: 12px/1.4 Arial,Helvetica,sans-serif;">'.$row3375['name'].'</a><br><span style="color: #e7193f;font: 14px Arial,Helvetica,sans-serif;font-weight: bold;"><strike>'.$row3375['price'].' руб.</strike></span><br><span style="font: 14px Arial,Helvetica,sans-serif;font-weight: bold;color:#6C4B46;">В подарок!</span></td></tr></table>';
+						$product_icon_desc='<table><tr><td><a href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$row['gift'].'.html"><img width="60" height="80" src="'.$row3375['pic_small'].'" alt="" style="max-width:100%;max-height:100%;"></a></td><td><a href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$row['gift'].'.html" style="color: #588910;font: 12px/1.4 Arial,Helvetica,sans-serif;">'.$row3375['name'].'</a><br><span style="color: #e7193f;font: 14px Arial,Helvetica,sans-serif;font-weight: bold;"><strike>'.$row3375['price'].' руб.</strike></span><br><span style="font: 14px Arial,Helvetica,sans-serif;font-weight: bold;color:#6C4B46;">В подарок!</span></td></tr></table>';
 						$vuvod.='<li>
 						<div class="product_icon_desc">
 						'.$product_icon_desc.'
