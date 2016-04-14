@@ -139,7 +139,8 @@
                         echo '<div class="buybuttons">';
 			echo '@ComStartNotice@';
 			echo '<span class="addtochart notice">';
-			echo '<input type="button" onclick="ask_product_availability(\\'/shop/UID_'.$GLOBALS['SysValue']['other']['productUid'].'.html\\',document.getElementsByClassName(\\'netref\\'));" value="'.$SysValue['lang']['product_notice'].'">';
+			//echo '<input type="button" onclick="ask_product_availability(\\'/shop/UID_'.$GLOBALS['SysValue']['other']['productUid'].'.html\\',document.getElementsByClassName(\\'netref\\'));" value="'.$SysValue['lang']['product_notice'].'">';
+                        echo '<a href="#_tool_@productUid@" id="azakaz@productUid@" onclick="ask_product_availability(\\'/shop/UID_@productUid@.html\\',document.getElementsByClassName(\\'netref\\'));">'.$SysValue['lang']['product_notice'].'</a>';
 			echo '</span>';
                         echo '<div class="prev_price lostandfound" style="position:relative;font-size:11px !important;left:-24px;top:5px;">@productPriceRub@</div>';
 			echo '@ComEndNotice@';
@@ -200,8 +201,8 @@
                     echo '<div class="prev_price" style="top:-15px;left:'.$left.'px;text-decoration:line-through;">'.$old_price.'</div>';
                     echo '<div class="buybuttons">';
                     echo '@ComStartCart@';
-                    //echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@)"  value="'.$SysValue['lang']['product_sale'].'"></span>';
-                    echo '<span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@)">'.$SysValue['lang']['product_sale'].'</a></span>';
+                    //echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@);"  value="'.$SysValue['lang']['product_sale'].'"></span>';
+                    echo '<span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@);">'.$SysValue['lang']['product_sale'].'</a></span>';
                     echo '@ComEndCart@';
                     echo '</div>';
 
@@ -223,14 +224,14 @@
 		} else {
                         echo '<div class="buybuttons">';
 			echo '@ComStartCart@';
-			//echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@)"  value="'.$SysValue['lang']['product_sale'].'"></span>';
-                        echo '<span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@)">'.$SysValue['lang']['product_sale'].'</a></span>';
+			//echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@);"  value="'.$SysValue['lang']['product_sale'].'"></span>';
+                        echo '<span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@);">'.$SysValue['lang']['product_sale'].'</a></span>';
 			echo '@ComEndCart@';
                         echo '</div>';
 		}
 		
 		//echo '@ComStartCart@<span class="addtochart">';
-		//echo '<input type="button" onclick="javascript:AddToCart(@productUid@)"  value="@product_sale@" />';
+		//echo '<input type="button" onclick="javascript:AddToCart(@productUid@);"  value="@product_sale@" />';
 		//echo '</span>@ComEndCart@';
 		//echo '@ComStartNotice@';
 		//echo '<span class="addtochart notice"> <input type="button" onclick="window.location.replace(\\'/users/notice.html?productId=@productUid@\\');" value="'.$SysValue['lang']['product_notice'].'" /> </span>'; //@productNotice@

@@ -563,7 +563,6 @@ class PHPShopShop extends PHPShopShopCore {
                     " . $this->get('productValutaName') . ')', $row['id'], false);
             }
 
-
             // Выпадающий список товаров
             if (is_array($Product))
                 foreach ($Product as $p) {
@@ -572,12 +571,14 @@ class PHPShopShop extends PHPShopShopCore {
                         // Если товар на складе
                         if (empty($p['priceSklad'])) {
                             $price = $this->price($p);
-                            $select_value[] = array($p['name'] . ' -  (' . $price . ' ' . $this->get('productValutaName') . ')', $p['id'], false);
+                            $select_value_item=$p['name'] . ' -  (' . $price . ' ' . $this->get('productValutaName') . ')';
+                            $select_value[] = array($select_value_item, $p['id'], false);
+
                         }
                     }
                 }
 
-            $this->set('parentList', PHPShopText::select('parentId', $select_value, false));
+            $this->set('parentList', PHPShopText::select('parentId', $select_value,'270',"both", '',"product_price_change(this.value);", '20', 1, false));
             $this->set('productParentList', ParseTemplateReturn("product/product_odnotip_product_parent.tpl"));
             $this->set('productPrice', '');
             $this->set('productPriceRub', '');
@@ -787,9 +788,11 @@ class PHPShopShop extends PHPShopShopCore {
 		//echo $this->num_of_pages;
 		//echo $this->PHPShopNav->getPage();
 		//print_r($this->PHPShopNav);
-			
+		
 	if ($this->PHPShopNav->getPage()==1) {
-                if ($this->PHPShopCategory->getContent_h()!='' && $this->PHPShopCategory->getContent()!='') {
+
+                if ($this->PHPShopCategory->getContent_h()!='' && $this->PHPShopCategory->getContent()!='' && count(str_split($this->PHPShopCategory->getContent(),1))>100) {
+                //echo count(str_split($this->PHPShopCategory->getContent(),1));
                 // Описание каталога верх
                 $this->set('catalogContent_h', $this->PHPShopCategory->getContent_h().'<div class="more_href page_nava">
                                             <a class="scroll" href="#more" title="перейти к подробному описанию."><span>Подробнее</span><img id="more_arrow_img" src="..images/city_choose_arrow.png"></a>
@@ -1263,7 +1266,8 @@ class PHPShopShop extends PHPShopShopCore {
 			$this->set('productPageThis', $this->PHPShopNav->getPage());
 		}
 		if ($this->PHPShopNav->getPage()==1) {
-                        if ($this->PHPShopCategory->getContent_h()!='' && $this->PHPShopCategory->getContent()!='') {
+                        if ($this->PHPShopCategory->getContent_h()!='' && $this->PHPShopCategory->getContent()!='' && count(str_split($this->PHPShopCategory->getContent(),1))>100) {
+                        //echo count(str_split($this->PHPShopCategory->getContent(),1));
                         // Описание каталога верх
 			$this->set('catalogContent_h', $this->PHPShopCategory->getContent_h().'<div class="more_href page_nava">
                                             <a class="scroll" href="#more" title="перейти к подробному описанию."><span>Подробнее</span><img id="more_arrow_img" src="..images/city_choose_arrow.png"></a>
@@ -1801,7 +1805,8 @@ class PHPShopShop extends PHPShopShopCore {
                                                 $addtochart_outdated_class='';
 						$comnotice_30='';//$this->lang('sklad_mesage');
 						//$productnotice='<input type="button" onclick="window.location.replace(\'/users/notice.html?productId='.$prod_row['id'].'\');"  value="'.$this->lang('product_notice').'" />';
-						$productnotice='<input type="button" onclick="ask_product_availability(\'/shop/UID_'.$prod_row['id'].'.html\',document.getElementsByClassName(\'netref\'));" value="'.$this->lang('product_notice').'">';
+						//$productnotice='<input type="button" onclick="ask_product_availability(\'/shop/UID_'.$prod_row['id'].'.html\',document.getElementsByClassName(\'netref\'));" value="'.$this->lang('product_notice').'">';
+                                                $productnotice='<a href="#_tool_'.$prod_row['id'].'" id="azakaz'.$prod_row['id'].'" onclick="ask_product_availability(\'/shop/UID_'.$prod_row['id'].'.html\',document.getElementsByClassName(\'netref\'));">'.$this->lang('product_notice').'</a>';
 						//используем отдельное форматирование для вывода в каталогах с кол-м ячеек больше 1
 						if ($cell>1) {
 							$sdvig_vpravo='left:20px;';
@@ -1819,9 +1824,10 @@ class PHPShopShop extends PHPShopShopCore {
 						//$addtochart='<input type="button" onclick="javascript:AddToCart('.$prod_row['id'].')"  value="'.$this->lang('product_sale').'" />';
                                                 //модификация CEO 05-10-2015
                                                 $addtochart_outdated_class='';
-                                                $addtochart='<a href="#_tool_'.$prod_row['id'].'" id="a'.$prod_row['id'].'" onclick="javascript:AddToCart('.$prod_row['id'].')">'.$this->lang('product_sale').'</a>';
+                                                $addtochart='<a href="#_tool_'.$prod_row['id'].'" id="a'.$prod_row['id'].'" onclick="javascript:AddToCart('.$prod_row['id'].');">'.$this->lang('product_sale').'</a>';
 						//$productnotice='<input type="button" onclick="window.location.replace(\'/users/notice.html?productId='.$prod_row['id'].'\');"  value="'.$this->lang('product_notice').'" />';
-						$productnotice='<input type="button" onclick="ask_product_availability(\'/shop/UID_'.$prod_row['id'].'.html\',document.getElementsByClassName(\'netref\'));" value="'.$this->lang('product_notice').'">';
+						//$productnotice='<input type="button" onclick="ask_product_availability(\'/shop/UID_'.$prod_row['id'].'.html\',document.getElementsByClassName(\'netref\'));" value="'.$this->lang('product_notice').'">';
+                                                $productnotice='<a href="#_tool_'.$prod_row['id'].'" id="azakaz'.$prod_row['id'].'" onclick="ask_product_availability(\'/shop/UID_'.$prod_row['id'].'.html\',document.getElementsByClassName(\'netref\'));">'.$this->lang('product_notice').'</a>';
 						//$comnotice='<div class="prev_price" style="font-size:11px !important;top:-10px;"><noindex></noindex></div>';//$this->lang('sklad_mesage')
 						$outdated_style='';
 						$comnotice_30='';

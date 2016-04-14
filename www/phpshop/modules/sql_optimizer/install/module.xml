@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<module>
+    <version>1.0</version>
+    <name>sql optimizer</name>
+    <description>Модуль оптимизации sql сервера</description>
+    <icon>icon.png</icon>
+    <base>none</base>
+    <adminmenu>
+        <title>SQL Optmizer</title>
+        <podmenu>
+            <podmenu_name>Настройка SQL Optmizer</podmenu_name>
+            <podmenu_icon>about.png</podmenu_icon>
+            <podmenu_action>javascript:miniWin('../modules/sql_optimizer/admpanel/adm_module.php',510,450);</podmenu_action>
+        </podmenu>
+        <podmenu>
+            <podmenu_name>SQL Оптимизатор</podmenu_name>
+            <podmenu_icon>icon.png</podmenu_icon>
+            <podmenu_action>javascript:window.location.replace('?plugin=sql_optimizer')</podmenu_action>
+        </podmenu>
+         <menu>
+            <menu_name>SQL Оптимизатор</menu_name>
+            <menu_icon>icon.png</menu_icon>
+            <menu_action>javascript:window.location.replace('?plugin=sql_optimizer');</menu_action>
+        </menu>
+    </adminmenu>
+</module>

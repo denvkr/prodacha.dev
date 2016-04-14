@@ -289,7 +289,8 @@ function UpdateDelivery(xid) {
                         $("td input[name='order_metod']:eq(2)+:eq(0)").html()!=='Оплата в магазине картой VISA, Mastercard')) {
                         $("form[name='forma_order']>table:eq(0) tr:eq(9) td:eq(1)").html("<input type=\"radio\" name=\"order_metod\" checked value=\"3\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Наличная оплата</label><br>"+
                             "<input type=\"radio\" @creditdisabled@  name=\"order_metod\" value=\"25\" onClick=\"document.getElementById('bic').style.display='block';document.getElementById('bin').style.display='none';\"><label>Оформить кредит</label><br>"+
-                            "<div id=\"order_metod_div\" style=\"display:table-cell;\"><input type=\"radio\" name=\"order_metod\" value=\"26\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Оплата в магазине картой VISA, Mastercard</label><br></div>");
+                            "<div id=\"order_metod_div\" style=\"display:table-cell;\"><input type=\"radio\" name=\"order_metod\" value=\"26\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Оплата в магазине картой VISA, Mastercard</label><br>"+
+                            "<input type=\"radio\" name=\"order_metod\" value=\"15\" onClick=\"document.getElementById('bin').style.display='block';document.getElementById('bic').style.display='none';\"><label>Онлайн платеж.</label><br></div>");
                             //console.log('Оплата в магазине картой VISA, Mastercard');
                     }
                     //показываем элемент "Оплата в магазине картой VISA, Mastercard"
@@ -1037,10 +1038,10 @@ function delete_order_payments_elements(){
 
 function delete_order_elements(param){
 	//доставка транспортной компанией
-        console.log(param);
+        //console.log(param);
 	if (param==2){
 		if ( document.getElementById('pass_no_info') ){
-			console.log($("input[name='forma_order']:eq(0) tr:eq(9)"));
+			//console.log($("input[name='forma_order']:eq(0) tr:eq(9)"));
 			for(i=0;i<=6;i++){
                             $("form[name='forma_order']:eq(0)>table:eq(0) tr:eq(9)").remove();
 			}
@@ -1050,7 +1051,7 @@ function delete_order_elements(param){
 	//доставка почтой россии
 	if (param==1){
 		if ( document.getElementById('postal_index') ){
-			console.log($("input[name='forma_order']:eq(0) tr:eq(9)"));
+			//console.log($("input[name='forma_order']:eq(0) tr:eq(9)"));
 			for(i=0;i<=4;i++){
                             $("form[name='forma_order']:eq(0)>table:eq(0) tr:eq(9)").remove();
 			}
@@ -1677,6 +1678,11 @@ function AddToCartNum(xid,pole,option) {
 function AddToCartParent(xxid) {
     var num=1;
     var xid=document.getElementById("parentId").value;
+
+    addtochart_window(xid);
+
+    return true;
+
     if(confirm("Добавить выбранный товар ("+num+" шт.) в корзину?")){
         ToCart(xid,num,xxid);
         initialize();

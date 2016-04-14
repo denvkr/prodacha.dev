@@ -111,7 +111,9 @@ function catalog_product_icons($obj, $row) {
 						'.$product_icon_desc.'
 						</div>
 						<div class="product_icon">
+                                                <a href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$row['gift'].'.html">
 						<div class="product_icon_img">'.$href.'</div>
+                                                </a>
 						<!--<div>'.$tovar.'</div> -->
 						</div>
 						</li>

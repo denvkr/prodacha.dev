@@ -20,8 +20,8 @@ $out_summ = $GLOBALS['SysValue']['other']['total'] * $SysValue['webmoney']['kurs
 
 
 $url = ($_SERVER['HTTPS'] ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'];
-$success_url = "$url/success/?LMI_PAYMENT_NO=" . $inv_id . '&payment=intellectmoney';
-$fail_url = "$url/fail/";
+$success_url = "$url/payment/intellectmoney/success.php?LMI_PAYMENT_NO=" . $inv_id . '&payment=intellectmoney';
+$fail_url = "$url/payment/intellectmoney/fail.php";
 
 
 // вывод HTML страницы с кнопкой для оплаты

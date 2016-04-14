@@ -41,31 +41,31 @@ function WriteLog($MY_LMI_HASH) {
  * @return string 
  */
 function UpdateNumOrder($uid) {
-    $last_num = substr($uid, -2);
+    $last_num = substr($uid, -3);
     $total = strlen($uid);
-    $ferst_num = substr($uid, 0, ($total - 2));
+    $ferst_num = substr($uid, 0, ($total - 3));
     return $ferst_num . "-" . $last_num;
 }
 
 /**
- * Запись статуса заказа 101
+ * Запись статуса заказа 106
  * @package PHPShopCoreDepricated
  * @return int 
  */
 function CheckStatusReady() {
     global $SysValue;
-    $sql = "select id from " . $SysValue['base']['table_name32'] . " where id=101 limit 1";
+    $sql = "select id from " . $SysValue['base']['table_name32'] . " where id=106 limit 1";
     $result = mysql_query($sql);
     $num = @mysql_numrows(@$result);
 
     // Запись нового статуса
     if (empty($num)) {
-        $q = "INSERT INTO " . $SysValue['base']['table_name32'] . " VALUES (101, 'Оплачено платежными системами', '#ccff00','')";
+        $q = "INSERT INTO " . $SysValue['base']['table_name32'] . " VALUES (106, 'Оплачено платежными системами', '#ccff00','')";
         mysql_query('SET NAMES cp1251');
         mysql_query($q);
     }
 
-    return 101;
+    return 106;
 }
 
 /**
@@ -108,9 +108,13 @@ $MY_LMI_HASH = strtoupper(md5($HASH));
 if (strtoupper($MY_LMI_HASH) == strtoupper((string)$LMI_HASH)) {
 
     $new_uid = UpdateNumOrder($LMI_PAYMENT_NO);
+    ob_start();
+    echo '$new_uid='.$new_uid;
 
     // Проверяем сущ. заказа
     $sql = "select uid from " . $SysValue['base']['table_name1'] . " where uid='$new_uid'";
+    echo "select uid from " . $SysValue['base']['table_name1'] . " where uid='$new_uid'";
+
     $result = mysql_query($sql);
     $num = mysql_num_rows($result);
     $row = mysql_fetch_array($result);
@@ -119,8 +123,9 @@ if (strtoupper($MY_LMI_HASH) == strtoupper((string)$LMI_HASH)) {
     if ($uid == $new_uid) {
 
         // Записываем платеж в базу
-        $sql = "INSERT INTO " . $SysValue['base']['table_name33'] . " VALUES 
-			('$LMI_PAYMENT_NO','IntellectMoney, $LMI_PAYER_PURSE, WMId$LMI_PAYER_WM','$LMI_PAYMENT_AMOUNT','" . date("U") . "')";
+        $sql = "INSERT INTO " . $SysValue['base']['table_name33'] . " VALUES ('$LMI_PAYMENT_NO','IntellectMoney, $LMI_PAYER_PURSE, WMId$LMI_PAYER_WM','$LMI_PAYMENT_AMOUNT','" . date("U") . "')";
+        echo "INSERT INTO " . $SysValue['base']['table_name33'] . " VALUES ('$LMI_PAYMENT_NO','IntellectMoney, $LMI_PAYER_PURSE, WMId$LMI_PAYER_WM','$LMI_PAYMENT_AMOUNT','" . date("U") . "')";
+        
         $result = mysql_query($sql);
 
         // Заказ есть в БД
@@ -139,6 +144,15 @@ if (strtoupper($MY_LMI_HASH) == strtoupper((string)$LMI_HASH)) {
         echo "bad order num\n";
         exit();
     }
+
+    /* PERFORM COMLEX QUERY, ECHO RESULTS, ETC. */
+    $page = ob_get_contents();
+    ob_end_clean();
+    $file = "db_intellectmoney.log";
+    $fw = fopen($file, "w+");
+    fputs($fw,$page, strlen($page));
+    fclose($fw);
+
 } else {
     echo "bad sign\n";
     WriteLog($MY_LMI_HASH);

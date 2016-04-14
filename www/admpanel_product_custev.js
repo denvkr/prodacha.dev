@@ -1,4 +1,4 @@
-//РїРµСЂРµРѕРїСЂРµРґРµР»СЏРµРј РїРѕРІРµРґРµРЅРёРµ 
+//переопределяем поведение
 
 function addEventsToHTML(from_p_enabled){
     var sklad_new_el=document.getElementById("sklad_new");
@@ -9,14 +9,14 @@ function addEventsToHTML(from_p_enabled){
 	var elm1200;
 	from_p_enabled=from_p_enabled||0;
 
-//	alert(sklad_new.checked);
-//  sklad_new.onchange = changeHandler;
-//  function changeHandler(){
+        // console.log(sklad_new.checked);
+        // sklad_new.onchange = changeHandler;
+        // function changeHandler(){
 	if (sklad_new_el.checked) {
 		
 		yml_new_el.checked=false;
 
-		//РёС‰РµРј РєР°СЂС‚РёРЅРєСѓ СЃР°РјРѕРІС‹РІРѕР·Р° РІ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєР°С…
+		//ищем картинку самовывоза в характеристиках
 		for (var i=0;i<characters_option_el.length;i++) {
 			if (characters_option_el[i].value=="1200" && characters_option_el[i].selected==true) {
 				picture_samovyvoz=true;
@@ -41,7 +41,7 @@ function addEventsToHTML(from_p_enabled){
 	
 		yml_new_el.checked=true;
 
-		//РёС‰РµРј РєР°СЂС‚РёРЅРєСѓ СЃР°РјРѕРІС‹РІРѕР·Р° РІ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєР°С…
+		//ищем картинку самовывоза в характеристиках
 		for (var i=0;i<characters_option_el.length;i++) {
 			if (characters_option_el[i].value=="1200" && characters_option_el[i].selected==true) {
 				picture_samovyvoz=true;

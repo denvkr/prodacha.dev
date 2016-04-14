@@ -118,12 +118,12 @@ function add_same_tovar_box_hook($obj,$row,$rout){
         //$cnt_analog_prod=6;
         if ($price_deviation){
             $percent=$row['price']*$price_deviation_percent;
-            echo '%='.$price_deviation_percent.'<br>';
+            //echo '%='.$price_deviation_percent.'<br>';
             $price_height_border=round($row['price']+$percent);
             $price_low_border=round($row['price']-$percent);//$row['price']-$percent;
             $price_sql_where_part=array('price'=>' between '.$price_low_border.' and '.$price_height_border);
-            echo 'lowest price border='.$price_low_border.'<br>';
-            echo 'heighest price border='.$price_height_border.'<br>';
+            //echo 'lowest price border='.$price_low_border.'<br>';
+            //echo 'heighest price border='.$price_height_border.'<br>';
         } else {
             $price_sql_where_part=array();
         }

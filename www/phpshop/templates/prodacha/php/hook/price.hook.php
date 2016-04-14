@@ -14,7 +14,7 @@ function product_pricecore_hook($obj,$data,$rout) {
             foreach($data as $row) {
                 $name=PHPShopText::a($obj->seourl($row),$row['name']);
                 $idn='n'.$row['id'];
-                $cart=PHPShopText::a('javascript:AddToCartNum('.$row['id'].',\''.$idn.'\')',PHPShopText::img('images/shop/basket_put.gif',false,'absMiddle'),$obj->lang('product_sale')); //'absMiddle'
+                $cart=PHPShopText::a('javascript:AddToCartNum('.$row['id'].',\''.$idn.'\');',PHPShopText::img('images/shop/basket_put.gif',false,'absMiddle'),$obj->lang('product_sale')); //'absMiddle'
 
                 $num=PHPShopText::setInputText(null,"$idn",1,30);
                 $dis.=$obj->tr('#ffffff',$name,$obj->price($row).' '.$obj->currency(),$num,$cart);

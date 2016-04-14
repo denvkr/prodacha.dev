@@ -40,7 +40,7 @@
 			
 	php@
 		</div>
-		
+		@productParentList@		
 		<div class="parameters">
 			@vendorDisp@
 			
@@ -217,7 +217,8 @@
 		if (($row_sklad==true && $price_n==true && $outdated==false) || ($row_sklad==true && $price_n==false && $outdated==false)) {
 			echo '@ComStartNotice@';
 			echo '<span class="addtochart notice" style="'.$sdvig_knopki_vlevo_ask.'">';
-			echo '<input type="button" onclick="ask_product_availability(window.location,document.getElementsByClassName(\\'netref\\'));" value="'.$SysValue['lang']['product_notice'].'">';			
+			//echo '<input type="button" onclick="ask_product_availability(window.location,document.getElementsByClassName(\\'netref\\'));" value="'.$SysValue['lang']['product_notice'].'">';
+                        echo '<a href="#_tool_'.$GLOBALS['SysValue']['other']['productUid'].'" id="azakaz'.$GLOBALS['SysValue']['other']['productUid'].'" onclick="ask_product_availability(\\'/shop/UID_'.$GLOBALS['SysValue']['other']['productUid'].'.html\\',document.getElementsByClassName(\\'netref\\'));">'.$SysValue['lang']['product_notice'].'</a>';
 			echo '</span>';
 			echo '@ComEndNotice@';
 			echo '@FastOrder@';
@@ -237,7 +238,7 @@
 			echo '@ComStartNotice@';
 			echo '@ComEndNotice@';
 			echo '<span class="buybuttons" style="'.$sdvig_knopki_vlevo_old.'">';
-			echo '<a id="analog_href'.$GLOBALS['SysValue']['other']['productId'].'" href="http://prodacha.ru/shop/UID_'.$analog.'.html">¿Õ¿ÀŒ√</a>';
+			echo '<a id="analog_href'.$GLOBALS['SysValue']['other']['productId'].'" href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$analog.'.html">¿Õ¿ÀŒ√</a>';
 			echo '<span class="outdated_message" style="position:relative;font-size:11px !important;left: 11px;"><!--noindex-->'.$GLOBALS['SysValue']['lang']['outdated_message3'].'<!--/noindex--></span>';
                         echo '</span>';
                         /*
@@ -254,7 +255,7 @@
 			echo '@ComStartNotice@';
 			echo '@ComEndNotice@';
 			echo '<span class="buybuttons inactive" style="'.$sdvig_knopki_vlevo_old.'">';
-			echo '<a id="analog_href'.$GLOBALS['SysValue']['other']['productId'].'" href="http://prodacha.ru/shop/UID_'.$analog.'.html" onclick="return false;">¿Õ¿ÀŒ√</a>';
+			echo '<a id="analog_href'.$GLOBALS['SysValue']['other']['productId'].'" href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$analog.'.html" onclick="return false;">¿Õ¿ÀŒ√</a>';
 			echo '<span class="outdated_message" style="position:relative;font-size:11px !important;left: 11px;"><!--noindex-->'.$GLOBALS['SysValue']['lang']['outdated_message3'].'<!--/noindex--></span>';
                         echo '</span>';
                         /*
@@ -286,7 +287,7 @@
 			echo '</script>';
 		} else {
 			echo '@ComStartCart@';
-                        echo '<span class="addtochart" style="'.$sdvig_knopki_vlevo_buy.'"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@,\\'n@productUid@\\');">'.$SysValue['lang']['product_sale'].'</a></span>';                        
+                        echo '<span class="addtochart" style="'.$sdvig_knopki_vlevo_buy.'"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@,\\'n@productUid@\\');">'.$SysValue['lang']['product_sale'].'</a></span>';
 			echo '@ComEndCart@';
 			echo '@FastOrder@';
 			echo '@firstcreditpunch@';				
@@ -336,7 +337,6 @@
 				<div class="tovar_optionsDisp">@optionsDisp@</div>
 				@ComEnd@
 				
-				@productParentList@
 			
 			</div><!-- /.addchart_block -->
 		

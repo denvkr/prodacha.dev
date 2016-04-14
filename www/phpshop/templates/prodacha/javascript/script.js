@@ -1299,20 +1299,20 @@ fillTKtablePart();
                         if ($(this).prev('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').val()==='Как купить?')
                             $(this).html('<!--noindex-->уточняйте наличие<!--/noindex-->');                                
                         //индивидуальные карточки товаров
-                        if ($(this).prev('.price.margino:eq(0)').parent('.addchart_block_table_price:eq(0)').parent('td:first').next('td:first').children('.addchart_block_table_addtochart:eq(0)').children('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').val()==='Уточнить')
+                        if ($(this).prev('.price.margino:eq(0)').parent('.addchart_block_table_price:eq(0)').parent('td:first').next('td:first').children('.addchart_block_table_addtochart:eq(0)').children('.addtochart.notice:eq(0)').children('a[id^="azakaz"]:eq(0)').html()==='Заказать')
                             $(this).html('<!--noindex-->уточняйте наличие<!--/noindex-->');
 
                         if ($(this).prev('.price.margino:eq(0)').parent('.addchart_block_table_price:eq(0)').parent('td:first').next('td:first').children('.addchart_block_table_addtochart:eq(0)').children('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').val()==='Как купить?')
                             $(this).html('<!--noindex-->уточняйте наличие<!--/noindex-->');
                         
-                        if ($(this).prev('.addtochart.notice:eq(0)').children('input[type="button"]:eq(0)').val()==='Уточнить')
+                        if ($(this).prev('.addtochart.notice:eq(0)').children('a[id^="azakaz"]:eq(0)').html()==='Заказать')
                             $(this).html('<!--noindex-->уточняйте наличие<!--/noindex-->');
 
                         //для каталогов типа 551    
-                        if ($(this).next('.price').next('.buybuttons:eq(0)').children('.addtochart:eq(0)').children('input[type="button"]:eq(0)').val()==='Уточнить')
+                        if ($(this).next('.price').next('.buybuttons:eq(0)').children('.addtochart:eq(0)').children('a[id^="azakaz"]:eq(0)').html()==='Заказать')
                             $(this).html('<!--noindex-->уточняйте наличие<!--/noindex-->');
                         //для заглавной страницы
-                        if ($(this).parent('.price:eq(0)').prev('.addtochart:eq(0)').children('input[type="button"]:eq(0)').val()==='Уточнить')
+                        if ($(this).parent('.price:eq(0)').prev('.addtochart:eq(0)').children('a[id^="azakaz"]:eq(0)').html()==='Заказать')
                             $(this).html('<!--noindex-->уточняйте наличие<!--/noindex-->');                        
                     });
                 }
@@ -1333,6 +1333,7 @@ fillTKtablePart();
                         e.preventDefault();
                     });
                 }
+//кастомизируем события кнопки купить
 customhrefeventsbuybutton();
 if ($("input[name='promo_code_value']:eq(0)").length)
     $("input[name='promo_code_value']:eq(0)").inputmask("mask", {mask: "*","repeat": 10,"greedy": false,"showMaskOnFocus": true,definitions: {'*': {validator: "[0-9A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5]",cardinality: 1}},onKeyValidation: function (result) {}});
@@ -3011,8 +3012,10 @@ $.ajax({
                     $('#TotalSumma').html((Number(json['total'])+Number(delivery)));
                     //обновляем total в корзине
                     $('.summ:eq(0)').next('.red').children('#sum').html(Number(json['total']));
-                } else
-                    $('#wrong_promocode_label').html('В корзине не выбраны товары или не все товары соотв. промо-коду.');   
+                } else if (json['prod_name']==null)
+                    $('#wrong_promocode_label').html('В корзине не выбраны товары или не все товары соотв. промо-коду.');
+                 else if(json['prod_name']!=null)
+                    $('#wrong_promocode_label').html('Введенный промокод может быть использован для покупки товара '+json['prod_name']);
             }   
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -3020,6 +3023,30 @@ $.ajax({
         }
 });
 }
+    function product_price_change(podtip_id){
+        //console.log(podtip_id);
+        //делаем ajax запрос для получения цены выбранного подтипа и изменения данных в корзине
+        $.ajax({
+                url: '/phpshop/ajax/get_podtip_cart.php',
+                type: 'post',
+                data: 'prod_podtip_id='+podtip_id,
+                dataType: 'json',
+                beforeSend: function() {},
+                complete: function() {},
+                success: function(json) {
+                if (json['prod_podtip_price']==0)
+                    $('.price.margino').childrens('span:eq(0)').next().html('Цена неизвестна.');
+                else {
+                if ($('.price.margino').children('span:eq(0)').next().length) {
+                    $('.price.margino').children('span:eq(0)').next().html(json['prod_podtip_price']+'<span class="smallfont">&nbsp;руб.</span>');
+                }
+            }   
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+        console.log('error save_(reg)' + ' ' + textStatus);
+        }
+});        
+    }
 
 document.addEventListener("DOMContentLoaded", function() {
   "use strict"

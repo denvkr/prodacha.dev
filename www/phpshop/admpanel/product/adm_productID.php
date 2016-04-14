@@ -40,7 +40,7 @@ $PHPShopModules = new PHPShopModules($_classPath . "modules/");
 
 function actionStart() {
     global $PHPShopGUI, $PHPShopModules, $PHPShopOrm, $PHPShopSystem;
-
+    //echo $PHPShopSystem->getSerilizeParam('admoption.sklad_status');
     // Тип окна
     if ($_COOKIE['winOpenType'] == 'default')
         $dot = ".";
@@ -52,16 +52,16 @@ function actionStart() {
     //выборка promo
     $datapromo = $PHPShopOrm->query('select promocode,discountprice from phpshop_promocode prc join phpshop_product_promo_relation pppr on prc.id=pppr.promo_id where pppr.product_id='.intval($_REQUEST['productID']));
     $datapromo_row = mysql_fetch_assoc($datapromo);
-    ob_start();
-    echo 'select promocode,discountprice from phpshop_promocode prc join phpshop_product_promo_relation pppr on prc.id=pppr.promo_id where pppr.product_id='.intval($_REQUEST['productID']);
-    echo '--'.$datapromo_row['promocode'].'--'.$datapromo_row['discountprice'];   
+    //ob_start();
+    //echo 'select promocode,discountprice from phpshop_promocode prc join phpshop_product_promo_relation pppr on prc.id=pppr.promo_id where pppr.product_id='.intval($_REQUEST['productID']);
+    //echo '--'.$datapromo_row['promocode'].'--'.$datapromo_row['discountprice'];   
     /* PERFORM COMLEX QUERY, ECHO RESULTS, ETC. */
-    $page = ob_get_contents();
-    ob_end_clean();
-        $file = "db_promocode_select.log";
-    $fw = fopen($file, "w+");
-    fputs($fw,$page, strlen($page));
-    fclose($fw);
+    //$page = ob_get_contents();
+    //ob_end_clean();
+    //$file = "db_promocode_select.log";
+    //$fw = fopen($file, "w+");
+    //fputs($fw,$page, strlen($page));
+    //fclose($fw);
 
     $PHPShopGUI->dir = "../";
     //$PHPShopGUI->size = "700,670";
@@ -179,6 +179,10 @@ function actionStart() {
     $Tab1_2.=$PHPShopGUI->setField(__('Промокод:'),$PHPShopGUI->setInputText('Промокод', 'promocode_new', $datapromo_row['promocode'], 60) .
             $PHPShopGUI->setLine() .
             $PHPShopGUI->setInputText('Цена со скидкой', 'discountprice_new', $datapromo_row['discountprice'], 55, $valuta_def_name), 'left');
+    //товар аналог
+    $Tab1_2.=$PHPShopGUI->setField(__('Товар аналог:'),$PHPShopGUI->setInputText('Устарел', 'outdated_new', $data['outdated'], 60) .
+            $PHPShopGUI->setLine() .
+            $PHPShopGUI->setInputText('Товар аналог', 'analog_new', $data['analog'], 55), 'left');
 
     // Иконка
     if (!empty($data['pic_small'])) {
@@ -399,6 +403,12 @@ function actionUpdate() {
     if (isset($_POST['EditorContent2']))
         $_POST['content_new'] = $_POST['EditorContent2'];
 
+    //удаление товара аналога при некорректном вводе
+    if (empty($_POST['outdated_new']) || $_POST['outdated_new']==0 || empty($_POST['analog_new'])) {
+       $_POST['outdated_new']=0;
+       $_POST['analog_new']='';
+    }
+        
     // Перехват модуля
     $PHPShopModules->setAdmHandler($_SERVER["SCRIPT_NAME"], __FUNCTION__, $_POST);
 
@@ -413,16 +423,16 @@ function actionUpdate() {
     //проверяем наличие промокода для данного товара
     $product_promocode_cnt = $PHPShopOrm->query('select count(id) cnt from '.$GLOBALS['SysValue']['base']['products'].' prod join phpshop_product_promo_relation ppr on prod.id=ppr.product_id and prod.id='.$_POST['productID']);
     $product_promocode_cnt_row = mysql_fetch_assoc($product_promocode_cnt);
-    ob_start();
-    echo 'select count(id) cnt from '.$GLOBALS['SysValue']['base']['products'].' prod join phpshop_product_promo_relation ppr on prod.id=ppr.product_id and prod.id='.$_POST['productID'];
-    echo '--'.$product_promocode_cnt_row['cnt'].'--';   
+    //ob_start();
+    //echo 'select count(id) cnt from '.$GLOBALS['SysValue']['base']['products'].' prod join phpshop_product_promo_relation ppr on prod.id=ppr.product_id and prod.id='.$_POST['productID'];
+    //echo '--'.$product_promocode_cnt_row['cnt'].'--';   
     /* PERFORM COMLEX QUERY, ECHO RESULTS, ETC. */
-    $page = ob_get_contents();
-    ob_end_clean();
-    $file = "db_promocode_cnt.log";
-    $fw = fopen($file, "w+");
-    fputs($fw,$page, strlen($page));
-    fclose($fw);
+    //$page = ob_get_contents();
+    //ob_end_clean();
+    //$file = "db_promocode_cnt.log";
+    //$fw = fopen($file, "w+");
+    //fputs($fw,$page, strlen($page));
+    //fclose($fw);
     //$product_promocode_cnt_row = mysql_fetch_array($product_promocode_cnt);
     //echo $product_promocode_cnt_row[0]['cnt'];
     //пишем данные в таблицы phpshop_product_promo_relation,phpshop_promocode 
@@ -436,16 +446,16 @@ function actionUpdate() {
         if ($product_promocode_id_row['id']<>0){
             $PHPShopOrm->query('insert into phpshop_product_promo_relation(product_id,promo_id) values('.$_POST['productID'].','.$product_promocode_id_row['id'].')');
         }
-        ob_start();
-        echo 'select max(id) id from phpshop_promocode where promocode=\''.$_POST['promocode_new'].'\'';
-        echo '--'.$product_promocode_id['id'].'--';
+        //ob_start();
+        //echo 'select max(id) id from phpshop_promocode where promocode=\''.$_POST['promocode_new'].'\'';
+        //echo '--'.$product_promocode_id['id'].'--';
         /* PERFORM COMLEX QUERY, ECHO RESULTS, ETC. */
-        $page = ob_get_contents();
-        ob_end_clean();
-       $file = "db_promocode_insert.log";
-        $fw = fopen($file, "w+");
-        fputs($fw,$page, strlen($page));
-        fclose($fw);
+        //$page = ob_get_contents();
+        //ob_end_clean();
+        //$file = "db_promocode_insert.log";
+        //$fw = fopen($file, "w+");
+        //fputs($fw,$page, strlen($page));
+        //fclose($fw);
     } else if ($product_promocode_cnt_row['cnt']>0){
 
         //выбираем тещий id записи с промокодом
@@ -457,16 +467,16 @@ function actionUpdate() {
             $PHPShopOrm->query('delete from phpshop_product_promo_relation where promo_id = '.intval($datapromo_row['promo_id']).' and product_id='.intval($_REQUEST['productID'])); 
         } else if ( $datapromo_row['promo_id']>0 && !empty($_POST['promocode_new']) && !empty($_POST['discountprice_new']) ) {
             $PHPShopOrm->query('update phpshop_promocode set promocode = \''.$_POST['promocode_new'].'\',discountprice='.$_POST['discountprice_new'].' where id='.intval($datapromo_row['promo_id']));
-        ob_start();
-        echo 'update phpshop_promocode set promocode = \''.$_POST['promocode_new'].'\',discountprice='.$_POST['discountprice_new'].' where id='.intval($datapromo_row['promo_id']);
-        echo '--'.$datapromo_row['promo_id'].'--';
+        //ob_start();
+        //echo 'update phpshop_promocode set promocode = \''.$_POST['promocode_new'].'\',discountprice='.$_POST['discountprice_new'].' where id='.intval($datapromo_row['promo_id']);
+        //echo '--'.$datapromo_row['promo_id'].'--';
         /* PERFORM COMLEX QUERY, ECHO RESULTS, ETC. */
-        $page = ob_get_contents();
-        ob_end_clean();
-       $file = "db_promocode_update.log";
-        $fw = fopen($file, "w+");
-        fputs($fw,$page, strlen($page));
-        fclose($fw);
+        //$page = ob_get_contents();
+        //ob_end_clean();
+        //$file = "db_promocode_update.log";
+        //$fw = fopen($file, "w+");
+        //fputs($fw,$page, strlen($page));
+        //fclose($fw);
         }
     }
     $PHPShopOrm->clean();

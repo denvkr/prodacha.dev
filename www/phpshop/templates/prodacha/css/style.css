@@ -705,7 +705,7 @@ h5, .h4 {
 	margin-left: 6px;
 	color: #8cbf48;
 }
-#forml select { width:150px;}
+
 .left .search
 {
 	float: left;
@@ -1148,7 +1148,7 @@ display:inline-block;
 	/*text-indent: -999em;*/
 }
 
-.content .item .addtochart input[type="button"][value="Уточнить"]
+.content .item .addtochart input[type="button"][value="Заказать"]
 {
         position: absolute;
 	display: block;
@@ -1167,7 +1167,7 @@ display:inline-block;
 	/*text-indent: -999em;*/
 }
 
-.sorting .item1 .addtochart input[type="button"][value="Уточнить"]
+.sorting .item1 .addtochart input[type="button"][value="Заказать"]
 {
         position: relative;
         left: -25px;
@@ -1258,7 +1258,7 @@ display:inline-block;
 	/*text-indent: -999em;*/
 }
 
-.content .item .addtochart input:hover,.content .item .addtochart a:hover, .sorting .content .item1 .addtochart input:hover,.content .item1 .addtochart a:hover,.buybuttons>a[id^="analog_href"]:hover,.productbox .parameters .buybuttons>a[id^="analog_href"]:hover,.content .item .addtochart input[type="button"][value="Уточнить"]:hover,.content .item .addtochart input[type="button"][value="Как купить?"]:hover,.content .item1 .addtochart.stihlvikingbuy input[type="button"][value="Как купить?"]:hover,.addchart_block_table_addtochart .addtochart.notice input[value="Как купить?"]:hover
+.content .item .addtochart input:hover,.content .item .addtochart a:hover, .sorting .content .item1 .addtochart input:hover,.content .item1 .addtochart a:hover,.buybuttons>a[id^="analog_href"]:hover,.productbox .parameters .buybuttons>a[id^="analog_href"]:hover,.content .item .addtochart input[type="button"][value="Заказать"]:hover,.content .item .addtochart input[type="button"][value="Как купить?"]:hover,.content .item1 .addtochart.stihlvikingbuy input[type="button"][value="Как купить?"]:hover,.addchart_block_table_addtochart .addtochart.notice input[value="Как купить?"]:hover
 {
 	background: url("../images/add_chart_hover.png") no-repeat left top;
 	text-transform: uppercase;
@@ -3572,4 +3572,9 @@ input[name="promo_code_value"] {
     font-size:11px;
     border-color: rgb(171, 173, 179);
     background-color:#f2f2f2;
+}
+
+#parent_list_info{
+    font-size:12px;
+    font-weight:bold;    
 }

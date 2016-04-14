@@ -196,7 +196,8 @@
                     //кнопка уточнить без старой цены
                     echo '@ComStartNotice@';
                     echo '<span class="addtochart">';
-                    echo '<input type="button" onclick="ask_product_availability(\\'/shop/UID_'.$GLOBALS['SysValue']['other']['productUid'].'.html\\',document.getElementsByClassName(\\'netref\\'));" value="'.$SysValue['lang']['product_notice'].'">';
+                    //echo '<input type="button" onclick="ask_product_availability(\\'/shop/UID_'.$GLOBALS['SysValue']['other']['productUid'].'.html\\',document.getElementsByClassName(\\'netref\\'));" value="'.$SysValue['lang']['product_notice'].'">';
+                    echo '<a href="#_tool_'.$GLOBALS['SysValue']['other']['productUid'].'" id="azakaz'.$GLOBALS['SysValue']['other']['productUid'].'" onclick="ask_product_availability(\\'/shop/UID_'.$GLOBALS['SysValue']['other']['productUid'].'.html\\',document.getElementsByClassName(\\'netref\\'));">'.$SysValue['lang']['product_notice'].'</a>';
                     echo '</span>';
                     echo '@ComEndNotice@';
 
@@ -210,8 +211,8 @@
             } else if ($row_sklad==false) {
                     //возможно вывод данного статуса не требуется
                     echo '@ComStartCart@';
-                    //echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@)"  value="'.$SysValue['lang']['product_sale'].'"></span>';
-                    echo '<span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@)">'.$SysValue['lang']['product_sale'].'</a></span>';
+                    //echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@);"  value="'.$SysValue['lang']['product_sale'].'"></span>';
+                    echo '<span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@);">'.$SysValue['lang']['product_sale'].'</a></span>';
                     echo '@ComEndCart@';
 
                     echo '@ComStart@';	
@@ -285,8 +286,8 @@
             } else {
                     //кнопка купить со старой ценой
                     echo '@ComStartCart@';
-                    //echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@)"  value="'.$SysValue['lang']['product_sale'].'"></span>';
-                    echo '<span class="addtochart"><a href="#a@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@)">'.$SysValue['lang']['product_sale'].'</a></span>';
+                    //echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@);" value="'.$SysValue['lang']['product_sale'].'"></span>';
+                    echo '<span class="addtochart"><a href="#a@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@);">'.$SysValue['lang']['product_sale'].'</a></span>';
                     echo '@ComEndCart@';
 
                     echo '@ComStart@';	

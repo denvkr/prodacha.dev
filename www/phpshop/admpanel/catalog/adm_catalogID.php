@@ -97,8 +97,15 @@ function actionStart() {
     $oFCKeditor->Config['EditorAreaCSS'] = chr(47) . "phpshop" . chr(47) . "templates" . chr(47) . $PHPShopSystem->getValue('skin') . chr(47) . $PHPShopBase->getParam('css.default');
     $oFCKeditor->ToolbarSet = 'Normal';
     $oFCKeditor->Value = $data['content'];
-    $Tab2 = $oFCKeditor->AddGUI();
 
+    $oFCKeditor2 = new Editor('content_h_new');
+    $oFCKeditor2->Height = '100';
+    $oFCKeditor2->Config['EditorAreaCSS'] = chr(47) . "phpshop" . chr(47) . "templates" . chr(47) . $PHPShopSystem->getValue('skin') . chr(47) . $PHPShopBase->getParam('css.default');
+    $oFCKeditor2->ToolbarSet = 'Normal';
+    $oFCKeditor2->Value = $data['content_h'];
+
+    $Tab2 = $oFCKeditor2->AddGUI().$oFCKeditor->AddGUI();
+    //echo $oFCKeditor->Config['EditorAreaCSS'];
     // Характеристики
     $Tab4 = $PHPShopGUI->loadLib('tab_sorts', $data);
 
@@ -133,7 +140,17 @@ function actionStart() {
             $PHPShopGUI->setInput("button", "", "Отмена", "right", 70, "return onCancel();", "but") .
             $PHPShopGUI->setInput("button", "delID", "Удалить", "right", 70, "return onDelete('" . __('Вы действительно хотите удалить?') . "')", "but", "actionDelete.cat_prod.remove") .
             $PHPShopGUI->setInput("submit", "editID", "Сохранить", "right", 70, "", "but", "actionUpdate.cat_prod.edit") .
-            $PHPShopGUI->setInput("submit", "saveID", "Применить", "right", 80, "", "but", "actionSave.cat_prod.edit");
+            $PHPShopGUI->setInput("submit", "saveID", "Применить", "right", 80, "", "but", "actionSave.cat_prod.edit").
+            //кастомизируем размеры элемента content_new в админке
+            '<script type="text/javascript">
+            document.getElementsByName("content_h_new")[0].style.fontSize="14px";
+            document.getElementsByName("content_h_new")[0].style.width="100%";
+            document.getElementsByName("content_h_new")[0].style.height="100px";
+            document.getElementsByName("content_h_new")[0].style.marginTop="0px";
+            document.getElementsByName("content_new")[0].style.height="350px";
+            document.getElementsByName("content_new")[0].style.marginTop="10px";
+            console.log("content_new");
+            </script>';
 
     // Футер
     $PHPShopGUI->setFooter($ContentFooter);
@@ -168,7 +185,6 @@ function getCatPath($category) {
         return $str;
     }
 }
-
 
 /**
  * Экшен сохранения
@@ -223,26 +239,26 @@ function actionUpdate() {
         $_POST['skin_enabled_new'] = 0;
 
     // Характеристики
-    if ($_POST['catalogID']!=30 &&
-    				$_POST['catalogID']!=31 && $_POST['catalogID']!=32 &&					 
-					$_POST['catalogID']!=33 && $_POST['catalogID']!=34 &&
-					$_POST['catalogID']!=35 && $_POST['catalogID']!=81 && $_POST['catalogID']!=96 &&
-					$_POST['catalogID']!=121 && $_POST['catalogID']!=141 &&	$_POST['catalogID']!=154 &&
-					$_POST['catalogID']!=186 &&	$_POST['catalogID']!=190 &&  
-					$_POST['catalogID']!=191 &&	$_POST['catalogID']!=201 &&
-					$_POST['catalogID']!=227 && $_POST['catalogID']!=333 &&
-					$_POST['catalogID']!=334 &&	$_POST['catalogID']!=382 &&
-					$_POST['catalogID']!=414 &&	$_POST['catalogID']!=415 &&
-					$_POST['catalogID']!=416 &&	$_POST['catalogID']!=418 &&
-					$_POST['catalogID']!=419 &&	$_POST['catalogID']!=420 &&
-					$_POST['catalogID']!=421 &&	$_POST['catalogID']!=422 &&
-					$_POST['catalogID']!=423 &&	$_POST['catalogID']!=424 &&
-					$_POST['catalogID']!=425 &&	$_POST['catalogID']!=436 &&
-					$_POST['catalogID']!=437 &&	$_POST['catalogID']!=440 &&
-					$_POST['catalogID']!=442 &&	$_POST['catalogID']!=459 &&
-					$_POST['catalogID']!=461 &&	$_POST['catalogID']!=464 &&	
-    				$_POST['catalogID']!=465 && $_POST['catalogID']!=467)
-    $_POST['sort_new'] = serialize($_POST['sort_new']);
+    if ($_POST['catalogID']!=30 && $_POST['catalogID']!=31 && $_POST['catalogID']!=32 &&					 
+	$_POST['catalogID']!=33 && $_POST['catalogID']!=34 &&
+	$_POST['catalogID']!=35 && $_POST['catalogID']!=81 && 
+        $_POST['catalogID']!=96 && $_POST['catalogID']!=121 && 
+        $_POST['catalogID']!=141 && $_POST['catalogID']!=154 &&
+	$_POST['catalogID']!=186 && $_POST['catalogID']!=190 &&  
+        $_POST['catalogID']!=191 && $_POST['catalogID']!=201 &&
+	$_POST['catalogID']!=227 && $_POST['catalogID']!=333 &&
+	$_POST['catalogID']!=334 && $_POST['catalogID']!=382 &&
+	$_POST['catalogID']!=414 && $_POST['catalogID']!=415 &&
+	$_POST['catalogID']!=416 && $_POST['catalogID']!=418 &&
+	$_POST['catalogID']!=419 && $_POST['catalogID']!=420 &&
+	$_POST['catalogID']!=421 && $_POST['catalogID']!=422 &&
+	$_POST['catalogID']!=423 && $_POST['catalogID']!=424 &&
+	$_POST['catalogID']!=425 && $_POST['catalogID']!=436 &&
+	$_POST['catalogID']!=437 && $_POST['catalogID']!=440 &&
+	$_POST['catalogID']!=442 && $_POST['catalogID']!=459 &&
+	$_POST['catalogID']!=461 && $_POST['catalogID']!=464 &&	
+    	$_POST['catalogID']!=465 && $_POST['catalogID']!=467)
+        $_POST['sort_new'] = serialize($_POST['sort_new']);
 
     // Описание
     if (isset($_POST['EditorContent1']))
