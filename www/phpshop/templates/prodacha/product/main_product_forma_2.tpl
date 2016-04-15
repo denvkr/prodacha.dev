@@ -122,7 +122,8 @@
 			echo '@ComStartNotice@';
 			echo '<span class="addtochart notice">';
 			//echo '<input type="button" onclick="window.location.replace(\\'/users/notice.html?productId=@productUid@\\');"  value="'.$SysValue['lang']['product_notice'].'">';
-			echo '<input type="button" onclick="ask_product_availability(\\'/shop/UID_'.$GLOBALS['SysValue']['other']['productUid'].'.html\\',document.getElementsByClassName(\\'netref\\'));" value="'.$SysValue['lang']['product_notice'].'">';
+			//echo '<input type="button" onclick="ask_product_availability(\\'/shop/UID_'.$GLOBALS['SysValue']['other']['productUid'].'.html\\',document.getElementsByClassName(\\'netref\\'));" value="'.$SysValue['lang']['product_notice'].'">';
+                        echo '<a href="#_tool_'.$GLOBALS['SysValue']['other']['productUid'].'" id="azakaz'.$GLOBALS['SysValue']['other']['productUid'].'" onclick="ask_product_availability(\\'/shop/UID_'.$GLOBALS['SysValue']['other']['productUid'].'.html\\',document.getElementsByClassName(\\'netref\\'));">'.$SysValue['lang']['product_notice'].'</a>';
 			echo '</span>';
 			echo '@ComEndNotice@';	
 		} else if ($row_sklad==false && $price_n==true && $row_outdated==true) {

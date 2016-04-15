@@ -705,7 +705,7 @@ h5, .h4 {
 	margin-left: 6px;
 	color: #8cbf48;
 }
-
+#forml select { width:150px;}
 .left .search
 {
 	float: left;
@@ -3577,4 +3577,156 @@ input[name="promo_code_value"] {
 #parent_list_info{
     font-size:12px;
     font-weight:bold;    
+}
+
+.tooltip1 { 
+  display: inline-block;
+  position: relative;
+  text-indent: 0px;
+  cursor: help;
+  font-size: 13px;
+  background: #f4f4f1;
+  	
+}
+.tooltip1 > span { 
+    
+  position: absolute;
+  bottom: 100%;
+  left: -20em; 
+  right: -20em; 
+  width: -moz-max-content;
+  width: -webkit-max-content;
+  width: max-content;  
+  max-width: 20em;  
+  max-height: 80vh; 
+  overflow: auto;
+  visibility: hidden;
+  margin: 0 auto .4em; 
+  padding: .3em;
+  border: 2px solid #94c946;
+  border-radius: 10px;
+  background: #f4f4f1;
+  font-size: 90%;
+  background: #fff;
+  line-height: normal;
+  cursor: auto;
+}
+
+.tooltip1:after { 
+  content: "";
+  position: absolute;
+  top: -.55em;
+  left: 50%;
+  visibility: hidden;
+  margin: 0 0 0 -.4em;
+  cursor: auto;
+  width: 14px;
+	height: 6px;
+	background: url('../images/info-corner.png') top center no-repeat;
+				
+}
+
+.tooltip1:before { 
+  content: "";
+  position: absolute;
+  top: -.5em;
+  left: 0;
+  right: 0;
+  height: .4em;
+  visibility: hidden;
+}
+.tooltip1:hover > span,
+.tooltip1:hover:before,
+.tooltip1:hover:after,
+.tooltip1:focus > span,
+.tooltip1:focus:before,
+.tooltip1:focus:after {
+  visibility: visible;
+  transition: 0s .4s;
+}
+.tooltip1:focus { 
+  outline: none;
+}
+
+@media (max-width: 20em) { 
+  .tooltip1 > span {
+    max-width: 100vw; 
+    box-sizing: border-box;
+  }
+}
+
+
+.tooltip { 
+  display: inline-block;
+  position: relative;
+  text-indent: 0px;
+  font-size: 13px;
+  background: #f4f4f1;
+  	
+}
+.tooltip > span { 
+    
+  position: absolute;
+  bottom: 100%;
+  left: -20em; 
+  right: -20em; 
+  width: -moz-max-content;
+  width: -webkit-max-content;
+  width: max-content;  
+  max-width: 23em;  
+  max-height: 80vh; 
+  overflow: auto;
+  visibility: hidden;
+  margin: 0 auto .4em; 
+  padding: .3em;
+  border: 2px solid #94c946;
+  border-radius: 10px;
+  background: #f4f4f1;
+  font-size: 90%;
+  background: #fff;
+  line-height: normal;
+  cursor: auto;
+}
+
+.tooltip:after { 
+  content: "";
+  position: absolute;
+  top: -.55em;
+  left: 50%;
+  visibility: hidden;
+  margin: 0 0 0 -.4em;
+  cursor: auto;
+  width: 14px;
+	height: 6px;
+	background: url('../images/info-corner.png') top center no-repeat;
+				
+}
+
+.tooltip:before { 
+  content: "";
+  position: absolute;
+  top: -.5em;
+  left: 0;
+  right: 0;
+  height: .4em;
+  visibility: hidden;
+}
+.tooltip:hover > span,
+.tooltip:hover:before,
+.tooltip:hover:after,
+.tooltip:focus > span,
+.tooltip:focus:before,
+.tooltip:focus:after {
+  visibility: visible;
+  transition: 0s .4s;
+}
+.tooltip:focus { 
+  outline: none;
+}
+
+@media (max-width: 20em) { 
+  .tooltip > span {
+    max-width: 100vw; 
+    box-sizing: border-box;
+  }
 }
