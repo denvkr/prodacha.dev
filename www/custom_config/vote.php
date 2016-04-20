@@ -7,7 +7,7 @@
 */
 	//require_once $_SERVER['DOCUMENT_ROOT'] ."/phpshop/lib/Subsys/JsHttpRequest/JsHttpRequest.php";
 	require_once $_SERVER['DOCUMENT_ROOT'] ."/phpshop/lib/Subsys/JsHttpRequest/Php.php";
-	include $_SERVER['DOCUMENT_ROOT'] ."/voting_class.php";
+	include $_SERVER['DOCUMENT_ROOT'] ."/custom_config/voting_class.php";
 
 	ini_set('display_errors', true);
 
@@ -15,7 +15,7 @@
 
 	$JsHttpRequest = new Subsys_JsHttpRequest_Php("windows-1251");
 
-	$SysValue = parse_ini_file('phpshop/inc/config.ini', 1);
+	$SysValue = parse_ini_file('../phpshop/inc/config.ini', 1);
 	
 	$host=$SysValue['connect']['host'];
 	$user_db=$SysValue['connect']['user_db'];

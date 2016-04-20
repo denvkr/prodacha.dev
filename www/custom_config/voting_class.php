@@ -1,5 +1,6 @@
 <?php
 ini_set('display_errors', true);
+require_once 'vote_page_config.php';
 /*Скрипт обработки голосования*/
 //echo $_POST['question1'].'<br>';
 //echo $_POST['question2'].'<br>';
@@ -85,62 +86,46 @@ mysql_close($this->conn);
 //						-1-если что то пошло не так
 function alter_voted_session_status($QUESTION,$SESSION_ID,$SESSION_END_TIME){
 	try {
-			$this->db_connect();
+                    $this->db_connect();
 		    mysqli_query($this->conn,"set names utf8;");
-			mysqli_query($this->conn,"SET @RETVAL = 0;");
-			mysqli_query($this->conn,"SET SQL_SAFE_UPDATES=0;");
-			//проверяем есть ли данная сессия в таблице
-			mysqli_query($this->conn,"SET @RETVAL=(SELECT COUNT(SESSION_ID) FROM ".$this->dbname.".session WHERE SESSION_ID='".$SESSION_ID."');");
-			$result = mysqli_query($this->conn,'SELECT @RETVAL');
+                    mysqli_query($this->conn,"SET @RETVAL = 0;");
+                    mysqli_query($this->conn,"SET SQL_SAFE_UPDATES=0;");
+                    //проверяем есть ли данная сессия в таблице
+                    mysqli_query($this->conn,"SET @RETVAL=(SELECT COUNT(SESSION_ID) FROM ".$this->dbname.".session WHERE SESSION_ID='".$SESSION_ID."');");
+                    $result = mysqli_query($this->conn,'SELECT @RETVAL');
 		    $row = mysqli_fetch_array($result);
-			//если сессия имеется то
+                    //если сессия имеется то
 		    if (intval($row[0])==1){
-				mysqli_free_result($result);
-				//проверяем просрочена ли она
-				mysqli_query($this->conn,"SET @RETVAL=(SELECT SESSION_END_TIME FROM ".$this->dbname.".session WHERE SESSION_ID='".$SESSION_ID."');");
-				$result = mysqli_query($this->conn,'SELECT @RETVAL');
+			mysqli_free_result($result);
+			//проверяем просрочена ли она
+			mysqli_query($this->conn,"SET @RETVAL=(SELECT SESSION_END_TIME FROM ".$this->dbname.".session WHERE SESSION_ID='".$SESSION_ID."');");
+			$result = mysqli_query($this->conn,'SELECT @RETVAL');
 		    	$row = mysqli_fetch_array($result);
-				//если не просрочена тогда пробуем оценить сколько ей осталось жить
+			//если не просрочена тогда пробуем оценить сколько ей осталось жить
 		    	if ($row[0]!='') {
+				mysqli_free_result($result);
+				mysqli_query($this->conn,"SET @RETVAL = 0;");					
+				mysqli_query($this->conn,"SET @RETVAL=(select DATEDIFF(SESSION_END_TIME,'".$SESSION_END_TIME."') FROM ".$this->dbname.".session WHERE SESSION_ID='".$SESSION_ID."');");
+				$result = mysqli_query($this->conn,'SELECT @RETVAL');
+				$row = mysqli_fetch_array($result);
+				//если время существования сессии не истекло тогда обновляем поле VOTED
+				if (intval($row[0])==0 || intval($row[0])==-1) {
+					//проверяем голосовала ли уже данная сессия
 					mysqli_free_result($result);
+                                        $vote=call_user_func('get_vote_page_id', $QUESTION);
+
 					mysqli_query($this->conn,"SET @RETVAL = 0;");					
-					mysqli_query($this->conn,"SET @RETVAL=(select DATEDIFF(SESSION_END_TIME,'".$SESSION_END_TIME."') FROM ".$this->dbname.".session WHERE SESSION_ID='".$SESSION_ID."');");
+					mysqli_query($this->conn,"SET @RETVAL=(SELECT ".$vote." FROM ".$this->dbname.".session WHERE SESSION_ID='".$SESSION_ID."');");    	
 					$result = mysqli_query($this->conn,'SELECT @RETVAL');
 					$row = mysqli_fetch_array($result);
-					//если время существования сессии не истекло тогда обновляем поле VOTED
-					if (intval($row[0])==0 || intval($row[0])==-1) {
-						//проверяем голосовала ли уже данная сессия
-						mysqli_free_result($result);
-						if ($QUESTION=='http://test.prodacha.ru/page/china_engines.html' || $QUESTION=='http://prodacha.ru/page/china_engines.html') {
-							  $vote='VOTED1';
-						}
-						 if ($QUESTION=='http://test.prodacha.ru/page/motoblok_ili_motokultivator.html' || $QUESTION=='http://prodacha.ru/page/motoblok_ili_motokultivator.html'){
-							  $vote='VOTED2';
-						}
-						 if ($QUESTION=='http://test.prodacha.ru/page/kak_vybrat_motoblok.html'  || $QUESTION=='http://prodacha.ru/page/kak_vybrat_motoblok.html'){
-							  $vote='VOTED3';
-						}
-						 if ($QUESTION=='http://test.prodacha.ru/page/kak_vybrat_motokultivator.html' || $QUESTION=='http://prodacha.ru/page/kak_vybrat_motokultivator.html'){
-							  $vote='VOTED4';
-						}
-						 if ($QUESTION=='http://test.prodacha.ru/page/frezy_dlya_motobloka.html' || $QUESTION=='http://prodacha.ru/page/frezy_dlya_motobloka.html'){
-							  $vote='VOTED5';
-						}
-						 if ($QUESTION=='http://test.prodacha.ru/page/kak_vybrat_motoblok_po_funkcionalu.html' || $QUESTION=='http://prodacha.ru/page/kak_vybrat_motoblok_po_funkcionalu.html'){
-							  $vote='VOTED6';
-						}
-						mysqli_query($this->conn,"SET @RETVAL = 0;");					
-						mysqli_query($this->conn,"SET @RETVAL=(SELECT ".$vote." FROM ".$this->dbname.".session WHERE SESSION_ID='".$SESSION_ID."');");    	
-						$result = mysqli_query($this->conn,'SELECT @RETVAL');
-						$row = mysqli_fetch_array($result);
-						if (intval($row[0])==0) {
-							mysqli_query($this->conn,"UPDATE ".$this->dbname.".session SET ".$vote."=1 WHERE SESSION_ID='".$SESSION_ID."';");
-							$row[0]='1';
-						}	else {
-							$row[0]='0';
-						}					
-					}
+					if (intval($row[0])==0) {
+						mysqli_query($this->conn,"UPDATE ".$this->dbname.".session SET ".$vote."=1 WHERE SESSION_ID='".$SESSION_ID."';");
+						$row[0]='1';
+					}	else {
+						$row[0]='0';
+					}					
 				}
+			}
 			}
 			//проверяем на всякий случай, если после получения session_id значение $row[0] не обнулялось тогда необходимо признать результат равным 0
 			if (intval($row[0])!=0 && intval($row[0])!=1){
@@ -162,16 +147,16 @@ function alter_voted_session_status($QUESTION,$SESSION_ID,$SESSION_END_TIME){
 //					 -1-если что то пошло не так, сессия удалена из за просрочки или ...
 function get_voted_session_status($QUESTION,$SESSION_ID,$SESSION_END_TIME){
 	try {
-			$this->db_connect();
-		    mysqli_query($this->conn,"set names utf8;");
-			mysqli_query($this->conn,"SET @RETVAL = 0;");
-			mysqli_query($this->conn,"SET SQL_SAFE_UPDATES=0;");
-			//проверяем есть ли данная сессия в таблице
-			mysqli_query($this->conn,"SET @RETVAL=(SELECT COUNT(SESSION_ID) FROM ".$this->dbname.".session WHERE SESSION_ID='".$SESSION_ID."');");
-			$result = mysqli_query($this->conn,'SELECT @RETVAL');
-		    $row = mysqli_fetch_array($result);
-			//если сессия имеется то
-		    if (intval($row[0])==1){
+		$this->db_connect();
+		mysqli_query($this->conn,"set names utf8;");
+		mysqli_query($this->conn,"SET @RETVAL = 0;");
+		mysqli_query($this->conn,"SET SQL_SAFE_UPDATES=0;");
+		//проверяем есть ли данная сессия в таблице
+		mysqli_query($this->conn,"SET @RETVAL=(SELECT COUNT(SESSION_ID) FROM ".$this->dbname.".session WHERE SESSION_ID='".$SESSION_ID."');");
+		$result = mysqli_query($this->conn,'SELECT @RETVAL');
+		$row = mysqli_fetch_array($result);
+		//если сессия имеется то
+		if (intval($row[0])==1){
 				mysqli_free_result($result);
 				//проверяем просрочена ли она
 				mysqli_query($this->conn,"SET @RETVAL=(SELECT SESSION_END_TIME FROM ".$this->dbname.".session WHERE SESSION_ID='".$SESSION_ID."');");
@@ -188,24 +173,7 @@ function get_voted_session_status($QUESTION,$SESSION_ID,$SESSION_END_TIME){
 					if (intval($row[0])==0 || intval($row[0])==-1) {
 						//проверяем голосовала ли уже данная сессия
 						mysqli_free_result($result);
-						if ($QUESTION=='http://test.prodacha.ru/page/china_engines.html' || $QUESTION=='http://prodacha.ru/page/china_engines.html') {
-							  $vote='VOTED1';
-						}
-						 if ($QUESTION=='http://test.prodacha.ru/page/motoblok_ili_motokultivator.html' || $QUESTION=='http://prodacha.ru/page/motoblok_ili_motokultivator.html'){
-							  $vote='VOTED2';
-						}
-						 if ($QUESTION=='http://test.prodacha.ru/page/kak_vybrat_motoblok.html'  || $QUESTION=='http://prodacha.ru/page/kak_vybrat_motoblok.html'){
-							  $vote='VOTED3';
-						}
-						 if ($QUESTION=='http://test.prodacha.ru/page/kak_vybrat_motokultivator.html' || $QUESTION=='http://prodacha.ru/page/kak_vybrat_motokultivator.html'){
-							  $vote='VOTED4';
-						}
-						 if ($QUESTION=='http://test.prodacha.ru/page/frezy_dlya_motobloka.html' || $QUESTION=='http://prodacha.ru/page/frezy_dlya_motobloka.html'){
-							  $vote='VOTED5';
-						}
-						 if ($QUESTION=='http://test.prodacha.ru/page/kak_vybrat_motoblok_po_funkcionalu.html' || $QUESTION=='http://prodacha.ru/page/kak_vybrat_motoblok_po_funkcionalu.html'){
-							  $vote='VOTED6';
-						}
+                                                $vote=call_user_func('get_vote_page_id', $QUESTION);
 						mysqli_query($this->conn,"SET @RETVAL = 0;");					
 						//echo "SET @RETVAL=(SELECT ".$vote." FROM ".$this->dbname.".session WHERE SESSION_ID='".$SESSION_ID."');";
 						$result=mysqli_query($this->conn,"SET @RETVAL=(SELECT ".$vote." FROM ".$this->dbname.".session WHERE SESSION_ID='".$SESSION_ID."');");    	

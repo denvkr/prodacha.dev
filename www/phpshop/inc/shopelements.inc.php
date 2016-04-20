@@ -216,8 +216,10 @@ class PHPShopProductIconElements extends PHPShopProductElements {
                 // Выборка последних добавленных товаров
                 unset($where['id']);
                 unset($where['spec']);
+                //$where['id']=(' in (1639,1391,1390)');
                 $this->dataArray = $this->select(array('*'), $where, array('order' => 'id DESC'), array('limit' => $this->limitspec), __FUNCTION__);
 
+                //var_dump($where);
                 // Проверка на единичную выборку
                 if (!empty($array_pop) and is_array($this->dataArray)) {
                     array_pop($this->dataArray);

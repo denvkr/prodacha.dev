@@ -104,31 +104,7 @@
                     echo '@ComEnd@';
                     echo '</div>';
                     echo '</div>';
-                
-/*                
-                echo '@ComStartCart@';
-                //echo '@price_comlain@';
-                echo '<span class="outdated_message" style="position:relative;display: inline-block;top:3px;margin:-5px 0px 0px 10px;font-size:12px !important;"><!--noindex-->'.$SysValue['lang']['outdated_message'].'<!--/noindex--></span>';
-                echo '@ComEndCart@';                
-                $productnotice='<div id="price_comlain'.$GLOBALS['SysValue']['other']['productUid'].'" class="price_comlain" style="position:relative;display: inline-block;margin:0px 95px 0px 0px;font-size:13px !important;"><!--noindex-->'.$SysValue['lang']['outdated_message2'].'<!--/noindex--></div>';
-                $productnotice.='<a id="analog_href'.$GLOBALS['SysValue']['other']['productUid'].'" style="visibility: hidden;" href="/shop/UID_'.$row_analog.'.html"></a>';
-                $productnotice.='<script type="text/javascript">';
-                $productnotice.='$(document).ready(function() {';
-                $productnotice.='$("#price_comlain'.$GLOBALS['SysValue']['other']['productUid'].'").click( function( event ) {';
-                $productnotice.='	window.location =$("#analog_href'.$GLOBALS['SysValue']['other']['productUid'].'").attr("href");';
-                $productnotice.='	return false;';
-                $productnotice.='});});';
-                $productnotice.='</script>';
-                echo $productnotice;
 
-                echo '@ComStart@';	
-                echo '<div class="price" style="display:relative;margin:-32px 15px 0px 0px;"><span class="price_cat_3">Цена:</span>@productPrice@ @productValutaName@';   
-                echo '@ComEnd@';
-
-                echo '@ComEndNotice@';		
-                echo '</div>';
-                echo '</div>';
-*/
         } else if ( $row_sklad==true && $row_outdated==true && empty($row_analog) ) {
                 //кнопка снято с производства
                     echo '@ComStartCart@';
@@ -144,14 +120,6 @@
                     echo '@ComEnd@';
                     echo '</div>';
                     echo '</div>';
-    /*
-                $productnotice='<div id="price_comlain'.$GLOBALS['SysValue']['other']['productUid'].'" class="price_comlain" style="position:relative;display: inline-block;margin:0px 95px 0px 0px;font-size:13px !important;left:-20px;border-bottom:1px;"><!--noindex-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!--/noindex--></div>';
-                echo $productnotice;
-
-                echo '@ComEndNotice@';		
-                echo '</div>';
-                echo '</div>';
-    */
         } else {
                 //кнопка как купить (предполагается со старой ценой)
                 if ($viking_catalog_search==true) {
@@ -171,6 +139,7 @@
             $row_sklad=false;
             $price_n=false;
             $old_price;
+            $row_outdated=false;
             $sql="select sklad,price_n,outdated,analog,price from ".$SysValue['base']['products']." where id=".$GLOBALS['SysValue']['other']['productUid'];
             $res=mysql_query($sql);
             while ($catalog_id_rows=mysql_fetch_row($res)) {
@@ -192,7 +161,7 @@
                     }
 
             }
-            if ($row_sklad==true && $price_n==false && $row_outdated==false) {
+            if ($row_sklad==true && $row_outdated==false) {
                     //кнопка уточнить без старой цены
                     echo '@ComStartNotice@';
                     echo '<span class="addtochart">';
@@ -237,28 +206,6 @@
                     echo '@ComEnd@';
                     echo '</div>';
                     echo '</div>';
-/*            
-                    //кнопка снято с производства + посмотреть аналог
-                    echo '@ComStartCart@';
-                    //echo '@price_comlain@';
-                    echo '<span class="outdated_message" style="position:relative;display: inline-block;top:3px;margin:-5px 0px 0px 10px;font-size:12px !important;"><!--noindex-->'.$SysValue['lang']['outdated_message'].'<!--/noindex--></span>';
-                    echo '@ComEndCart@';
-                    $productnotice= '<div id="price_comlain'.$GLOBALS['SysValue']['other']['productUid'].'" class="price_comlain" style="position:relative;display: inline-block;margin:0px 95px 0px 0px;font-size:13px !important;"><!--noindex-->'.$SysValue['lang']['outdated_message2'].'<!--/noindex--></div>';
-                    $productnotice.='<a id="analog_href'.$GLOBALS['SysValue']['other']['productUid'].'" style="visibility: hidden;" href="/shop/UID_'.$row_analog.'.html"></a>';
-                    $productnotice.='<script type="text/javascript">';
-                    $productnotice.='$(document).ready( function() {';
-                    $productnotice.='$("#price_comlain'.$GLOBALS['SysValue']['other']['productUid'].'").click( function( event ) {';
-                    $productnotice.='	window.location =$("#analog_href'.$GLOBALS['SysValue']['other']['productUid'].'").attr("href");';
-                    $productnotice.='	return false;';
-                    $productnotice.='});});';
-                    $productnotice.='</script>';
-                    echo $productnotice;
-                    echo '@ComStart@';	
-                    echo '<div class="price" style="display:relative;margin:-32px 15px 0px 0px;"><span class="price_cat_3">Цена:</span>@productPrice@ @productValutaName@';   
-                    echo '@ComEnd@';
-                    echo '</div>';
-                    echo '</div>';
-*/
             } else if ( $row_sklad==true && $row_outdated==true && empty($row_analog) ) {
                     //кнопка снято с производства
                     echo '@ComStartCart@';
@@ -274,32 +221,17 @@
                     echo '@ComEnd@';
                     echo '</div>';
                     echo '</div>';
-
-/*
-                    echo '@ComStart@';	
-                    echo '<div style="clear:both"></div>';
-                    echo '<span class="prev_price" style="position:absolute;display: inline-block;top: 215px;left: 10px;font-size:12px !important;"><!--noindex-->'.$SysValue['lang']['outdated_message'].'<!--/noindex--></span>';
-                    echo '<div class="price"><span class="price_cat_3">Цена:</span>@productPrice@ @productValutaName@';
-                    echo '</div>         </div>';
-                    echo '@ComEnd@';
-                    echo '</div>';                        
-                    echo '</div>';
-*/
             } else {
                     //кнопка купить со старой ценой
                     echo '@ComStartCart@';
                     //echo '<span class="addtochart"><input type="button" onclick="javascript:AddToCart(@productUid@);"  value="'.$SysValue['lang']['product_sale'].'"></span>';
-                    echo '<span class="addtochart"><a href="#a@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@);">'.$SysValue['lang']['product_sale'].'</a></span>';
+                    echo '<span class="addtochart"><a href="#_tool_@productUid@" id="a@productUid@" onclick="javascript:AddToCart(@productUid@);">'.$SysValue['lang']['product_sale'].'</a></span>';
                     echo '@ComEndCart@';
 
                     echo '@ComStart@';	
                     echo '<div class="price"><span class="price_cat_3">Цена:</span>@productPrice@ @productValutaName@';
                     echo '@ComEnd@';
                     echo '</div>';
-                    //$old_price=100000;
-                    //$price=100000;
-                    //$old_price=str_pad($old_price,strlen($old_price)+strlen($old_price)," ",STR_PAD_RIGHT);
-                    //echo strlen($price);
                     if (strlen($price)==3){
                     if (strlen($price)<strlen($old_price))
                             $left=200-strlen($old_price)-46;

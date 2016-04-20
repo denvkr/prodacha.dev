@@ -10,7 +10,8 @@ function delivery($obj,$deliveryID,$totalsumma=0) {
     global $SysValue;
     
     $pred=$br=$my=$alldone=$waytodo=null;
-
+    $sel_size='';
+    //$isfolder_select=false;
     if (empty($SysValue['nav'])) {
         $engineinc=0;
         $pathTemplate=chr(47).$GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].chr(47); // путь до шаблона
@@ -41,7 +42,7 @@ function delivery($obj,$deliveryID,$totalsumma=0) {
             $sqlvariants="select * from ".$table." where (enabled='1' and PID='".$row['PID']."') and id in (1,10,13) order by city";
         }
 		if ($isfolder) { //Если прислали папку, то варианты будут потомки папки
-
+                        //$isfolder_select=true;
 			if ($_COOKIE['sincity']=="m"  || $_COOKIE['sincity']=="other") {
 				if ($totalsumma>=1000 && $totalsumma<=4999) {
 					$sqlvariants="select *,case id when '41' then 1 when '68' then 2 end as num from ".$table." where (enabled='1' and PID='".$deliveryID."' and id in ('41','68')) order by num,city";
@@ -316,8 +317,10 @@ function delivery($obj,$deliveryID,$totalsumma=0) {
         $deliveryID=0;
         $curid=$deliveryID;
     } elseif ($varamount>=1 && $deliveryID>0) {
-        $makechoise='<OPTION value="0" id="makeyourchoise">Выберите доставку</OPTION>'; //$deliveryID
+        //$makechoise='<OPTION value="0" id="makeyourchoise">Выберите доставку</OPTION>'; //$deliveryID
         $alldone='';
+        //if (!$isfolder_select)
+        $sel_size='size="'.$varamount.'"';
     } else {
         $alldone='<INPUT TYPE="HIDDEN" id="makeyourchoise" VALUE="DONE">';
     }
@@ -336,7 +339,7 @@ function delivery($obj,$deliveryID,$totalsumma=0) {
     }
 //echo '$waytodo='.$waytodo;
 //if (!isset($isfolder)) $isfolder=0;
-    $disp='<DIV id="seldelivery">'.$pred.$br.$my.$stylenah.'<SELECT onchange="javascript:UpdateDelivery(this.value);" name="dostavka_metod" id="dostavka_metod">
+    $disp='<DIV id="seldelivery">'.$pred.$br.$my.$stylenah.'<SELECT '.$sel_size.' onchange="javascript:UpdateDelivery(this.value);" name="dostavka_metod" id="dostavka_metod">
 '.$makechoise.'
 '.$disp.'
 </SELECT>'.$alldone.$waytodo.'</DIV>';

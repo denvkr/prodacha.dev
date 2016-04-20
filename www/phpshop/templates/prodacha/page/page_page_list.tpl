@@ -32,8 +32,8 @@ php@</h1>
 @php
 
 
-	include($_SERVER['DOCUMENT_ROOT'].'/voting_class.php');
-
+	include_once($_SERVER['DOCUMENT_ROOT'].'/custom_config/voting_class.php');
+        require_once $_SERVER['DOCUMENT_ROOT'].'/custom_config/vote_page_config.php';
 	$host=$GLOBALS['SysValue']['connect']['host'];          
 	$user_db=$GLOBALS['SysValue']['connect']['user_db'];           
 	$pass_db=$GLOBALS['SysValue']['connect']['pass_db'];       
@@ -50,19 +50,7 @@ php@</h1>
 			exit;
 		}
 	}
-	if (curPageURL()=='http://prodacha.ru/page/china_engines.html' ||
-		curPageURL()=='http://prodacha.ru/page/motoblok_ili_motokultivator.html' || 
-		curPageURL()=='http://prodacha.ru/page/kak_vybrat_motoblok.html' ||
-		curPageURL()=='http://prodacha.ru/page/kak_vybrat_motokultivator.html' ||
-		curPageURL()=='http://prodacha.ru/page/frezy_dlya_motobloka.html' ||
-		curPageURL()=='http://prodacha.ru/page/kak_vybrat_motoblok_po_funkcionalu.html' ||
-		curPageURL()=='http://phpshop.dev/page/china_engines.html' ||
-		curPageURL()=='http://phpshop.dev/page/motoblok_ili_motokultivator.html' || 
-		curPageURL()=='http://phpshop.dev/page/kak_vybrat_motoblok.html' ||
-		curPageURL()=='http://phpshop.dev/page/kak_vybrat_motokultivator.html' ||
-		curPageURL()=='http://phpshop.dev/page/frezy_dlya_motobloka.html' ||
-		curPageURL()=='http://phpshop.dev/page/kak_vybrat_motoblok_po_funkcionalu.html'
-		) {
+	if (call_user_func('get_vote_page_id',curPageURL())!=='' ) {
 		
 		$dbcnx=mysql_connect($host,$user_db,$pass_db);
 		
@@ -130,12 +118,12 @@ php@
 		req.caching = false;
 		// Подготваливаем объект.
 		//alert(window.location.hostname);
-		req.open('POST','../../../vote.php', true);
+		req.open('POST','../../../custom_config/vote.php', true);
 		req.send({
-            // статья нравиться
-            q1_yes: document.getElementById("question1_yes").checked,  
-            // статья не нравится
-            q1_no: document.getElementById("question1_no").checked,
+                        // статья нравиться
+                        q1_yes: document.getElementById("question1_yes").checked,  
+                        // статья не нравится
+                        q1_no: document.getElementById("question1_no").checked,
 			// url статьи
 			q1_page: document.URL,
 			//session_id
