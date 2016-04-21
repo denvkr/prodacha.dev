@@ -1,5 +1,5 @@
 <?
-
+include_once ($_SERVER['DOCUMENT_ROOT'] . '/custom_config/product_icons_config.php');
 function catalog_product_icons($obj, $row) {
     global $SysValue;
 	PHPShopObj::loadClass("orm");
@@ -65,11 +65,14 @@ function catalog_product_icons($obj, $row) {
 				//$sql_1="SELECT name,description FROM ".$SysValue['base']['sort_categories']." USE INDEX (name_2) WHERE id='".$j."'";
 				//$PHPShopOrm->sql=$sql_1;
 				//$res2=$PHPShopOrm->select();
-				$res2=$PHPShopOrm->query("SELECT name,description FROM ".$SysValue['base']['sort_categories']." USE INDEX (name_2) WHERE id='".$j."'");
+				$res2=$PHPShopOrm->query("SELECT id,name,description FROM ".$SysValue['base']['sort_categories']." USE INDEX (name_2) WHERE id='".$j."'");
 				$row2=mysql_fetch_assoc($res2);
 				//$f=mysql_num_rows($res2);
-				$tovar=$row2['name'];
-				$dscr='<p>'.$row2['description'].'</p>';
+                                
+                                $icon_text=call_user_func_array('get_icon_bottom_text', array($row2['id'],$_COOKIE['sincity']));
+
+				$tovar=$icon_text['bottom_text'];//$row2['name'];
+				$dscr='<p>'.$icon_text['description'].'</p>';//$row2['description']
 				//foreach($res1 as $prod_row1) {
 				//$tovar=$res2[0]['name'];
 				//$dscr='<p>'.$res2[0]['description'].'</p>';
@@ -89,7 +92,6 @@ function catalog_product_icons($obj, $row) {
 						$retval.='<li>
 						<div class="product_icon">
 						<div class="product_icon_img">'.$href.'</div>
-						<!-- <div>'.$tovar.'</div> -->
 						</div>
 						<div class="product_icon_desc">
 						'.$dscr.'
@@ -114,7 +116,6 @@ function catalog_product_icons($obj, $row) {
                                                 <a href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$row['gift'].'.html">
 						<div class="product_icon_img">'.$href.'</div>
                                                 </a>
-						<!--<div>'.$tovar.'</div> -->
 						</div>
 						</li>
 						';
@@ -124,17 +125,16 @@ function catalog_product_icons($obj, $row) {
 			}		
 		}
 	}
-
+        $icon_text=call_user_func_array('get_icon_bottom_text', array('dostavka',$_COOKIE['sincity']));
 	if ( ($_COOKIE['sincity']=="m") ) {
 		if ($price>=10000) {
-			$href='<img onclick="window.location=\'/shop/UID_'.$id_tovara.'.html#tab7\';" src="images/delivery_small.png" alt="">'; //window.location=\'/shop/UID_'.$id_img1.'.html\';document.getElementsByClassName(\'tabNavigation\')[0].children[2].className=\'selected\';document.getElementsByClassName(\'tabNavigation\')[0].children[2].children[0].click();
 				$retval.='<li>
-				<div class="product_icon_desc"><p>&nbsp;&nbsp;Заказы от 10000 руб. доставляются бесплатно в пределах МКАД&nbsp;<br />&nbsp;&nbsp;<a href="/page/delivery.html" title="Все условия доставки">Все условия доставки</a></p>
-				</div>
-				<div class="product_icon">
-				<div class="product_icon_img">'.$href.'</div>
-				</div>
-				</li>';
+                                <div class="product_icon_desc"><p>'.$icon_text['description'].'</p>
+                                </div>
+                                <div class="product_icon">
+                                <div class="product_icon_img"><img onclick="window.location=\'/shop/UID_'.$id_tovara.'.html#tab7\';" src="images/delivery_small.png" alt=""></div>
+                                </div>
+                                </li>';
 		}
 	
 	}

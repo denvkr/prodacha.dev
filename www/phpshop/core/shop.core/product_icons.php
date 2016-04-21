@@ -1,4 +1,5 @@
 <?
+include_once ($_SERVER['DOCUMENT_ROOT'] . '/custom_config/product_icons_config.php');
 //ini_set('error_reporting', E_ALL);
 //ini_set('display_errors', 1);
 //ini_set('display_startup_errors', 1);
@@ -46,8 +47,7 @@ function product_icons($obj, $row) {
 	
 	$total_icons=0;
 	
-	foreach ($array as $j)
-	{
+	foreach ($array as $j) {
 		$reg="i".$j."-";//ищем по этому коду наш параметр
 			//echo $reg;
 		if(strpos($vendor,$reg)!==false)
@@ -107,7 +107,8 @@ function product_icons($obj, $row) {
 				//echo '2';
 				//echo empty($src).'||'.$src;
 				//идём вытаскиваем само описание
-				$res2=$PHPShopOrm->query("SELECT name,description FROM ".$SysValue['base']['sort_categories']." WHERE id='".$j."'");
+				$res2=$PHPShopOrm->query("SELECT id,name,description FROM ".$SysValue['base']['sort_categories']." WHERE id='".$j."'");
+                                //echo "SELECT id,name,description FROM ".$SysValue['base']['sort_categories']." WHERE id='".$j."'";
 				//$res2=mysql_query($sql2);
 				$row2=mysql_fetch_assoc($res2);
 				
@@ -137,8 +138,10 @@ function product_icons($obj, $row) {
 				$dscr='<p>'.$row2['description'].'</p>';
 				}
 				*/
-				$tovar=$row2['name'];
-				$dscr='<p>'.$row2['description'].'</p>';
+                                $icon_text=call_user_func_array('get_icon_bottom_text', array($row2['id'],$_COOKIE['sincity']));
+
+				$tovar=$icon_text['bottom_text'];//$row2['name'];
+				$dscr='<p>'.$icon_text['description'].'</p>';//$row2['description']
 				//echo '3';
 				//echo $id_img1.' ';
 				if (!empty($src)) {
@@ -180,7 +183,7 @@ function product_icons($obj, $row) {
                                                 <a href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$row['gift'].'.html">
 						<div class="product_icon_img">'.$href.'</div>
                                                 </a>
-						<div style="color:#e7193f">'.$row2['description'].'</div>
+						<div style="color:#e7193f">'.$icon_text['bottom_text'].'</div>
 						</div>
 						</li>
 						';
@@ -189,44 +192,44 @@ function product_icons($obj, $row) {
 				}
 				
 				}	
-			}
-			if ( ($_COOKIE['sincity']=="m") ) {
-				if ($price>=10000) {
-					if ( $total_icons<4 ) {
-						$href='<img onclick="document.getElementsByClassName(\'tabNavigation\')[0].children[2].children[0].click();document.getElementsByClassName(\'tabNavigation\')[0].children[2].children[0].focus();" src="images/delivery.png" alt="">'; //document.getElementsByClassName(\'tabNavigation\')[0].children[2].className=\'selected\';
-						$vuvod.='<li>
-						<div class="product_icon_desc"><p>&nbsp;&nbsp;Заказы от 10000 руб. доставляются бесплатно в пределах МКАД&nbsp;<br />&nbsp;&nbsp;<a href="/page/delivery.html" title="Все условия доставки">Все условия доставки</a></p>
-						</div>
-						<div class="product_icon">
-						<div class="product_icon_img">'.$href.'</div>
-						<div>Доставка бесплатно</div>
-						</div>
-						</li>';
-					}
-				}
-			
-			}
-			//echo '4';
-			$vuvod.="</ul>";
-			
-			if ( ($_COOKIE['sincity']=="m") ) {
-				if ($price>=10000) {
-					if ( $total_icons>=4 ) {
-						$href='<img onclick="document.getElementsByClassName(\'tabNavigation\')[0].children[2].children[0].click();document.getElementsByClassName(\'tabNavigation\')[0].children[2].children[0].focus();" src="images/delivery.png" alt="">'; //document.getElementsByClassName(\'tabNavigation\')[0].children[2].className=\'selected\';
-						$vuvod.='<br /><ul class="product_icons_1"><li>
-						<div class="product_icon_desc_1"><br />&nbsp;Заказы от 10000 руб. доставляются бесплатно в пределах МКАД&nbsp;<br />&nbsp;<a href="/page/delivery.html" title="Все условия доставки">Все условия доставки</a><br />&nbsp;
-						</div>
-						<div class="product_icon">
-						<div class="product_icon_img">'.$href.'</div>
-						<div>Доставка бесплатно</div>
-						</div>
-						</li></ul>';
-					}
-				}
-			
-			}
-			//echo $vuvod;
-			$obj->set('Product_full_icons',$vuvod);
-			//echo '5';
+	}
+        $icon_text=call_user_func_array('get_icon_bottom_text', array('dostavka',$_COOKIE['sincity']));
+        if ( ($_COOKIE['sincity']=="m") ) {
+                if ($price>=10000) {
+                        if ( $total_icons<4 ) {
+                                $vuvod.='<li>
+                                <div class="product_icon_desc"><p>'.$icon_text['description'].'</p>
+                                </div>
+                                <div class="product_icon">
+                                <div class="product_icon_img"><img onclick="document.getElementsByClassName(\'tabNavigation\')[0].children[2].children[0].click();document.getElementsByClassName(\'tabNavigation\')[0].children[2].children[0].focus();" src="images/delivery.png" alt=""></div>
+                                <div>'.$icon_text['bottom_text'].'</div>
+                                </div>
+                                </li>';
+                        }
+                }
+
+        }
+        //echo '4';
+        $vuvod.="</ul>";
+
+        if ( ($_COOKIE['sincity']=="m") ) {
+                if ($price>=10000) {
+                        if ( $total_icons>=4 ) {
+                                $vuvod.='<br /><ul class="product_icons_1"><li>
+                                <div class="product_icon_desc_1"><br />'.$icon_text['description'].'<br />&nbsp;
+                                </div>
+                                <div class="product_icon">
+                                <div class="product_icon_img"><img onclick="document.getElementsByClassName(\'tabNavigation\')[0].children[2].children[0].click();document.getElementsByClassName(\'tabNavigation\')[0].children[2].children[0].focus();" src="images/delivery.png" alt=""></div>
+                                <div>Доставка бесплатно</div>
+                                </div>
+                                </li></ul>';
+                        }
+                }
+
+        }
+
+        //echo $vuvod;
+        $obj->set('Product_full_icons',$vuvod);
+        //echo '5';
 }
 ?>
