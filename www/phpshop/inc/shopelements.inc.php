@@ -1132,7 +1132,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
                             $res1[$cnt][name]=trim($hook);
                             $prod_row1[name]=trim($hook);
                             }
-                           //нужно сформировать массив для вывода и в нем осуществить сортировку по полю name
+                            //нужно сформировать массив для вывода и в нем осуществить сортировку по полю name
                             if ($prod_row1[category_id]==1) {
                                 $array_submenuhead1_1[]=array('cnt'=>$cnt,'category_id'=>$prod_row1[category_id],'id'=>$prod_row1[id],'name'=>$prod_row1[name]);
                             }
