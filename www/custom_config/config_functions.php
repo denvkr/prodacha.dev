@@ -1,4 +1,13 @@
 <?
+//массив для акций в левом меню "Новинка", "Хит продаж", и "Акция"
+$left_menu_sp_options=array(13=>'<span style="font-size:6px;color:red;">Новинка!</span>',
+                            119=>'&nbsp;&nbsp;&nbsp;<span style="font-size:8px;color:red;">Новинка!</span>',
+                            70=>'&nbsp;&nbsp;&nbsp;<span style="font-size:8px;color:red;">Новинка!</span>',
+                            236=>'<span style="font-size:8px;color:red;">Новинка!</span>',
+                            595=>'&nbsp;&nbsp;&nbsp;<span style="font-size:8px;color:red;">Новинка!</span>',
+                            620=>'<span style="font-size:8px;color:red;">Новинка!</span>'
+    );
+    
 //читаем конфигурационный файл автоматизации выбора фильтра товаров
 function read_filter_info($filename){
 	//echo $filename;
@@ -98,4 +107,10 @@ function is_array_empty($a) {
 	}
 }
 
+function array_custom_search($given_array,$id) {
+ foreach ($given_array as $given_array_key=>$given_array_value){
+     if ($given_array_key==$id)
+         return $given_array_value;
+ }
+}
 ?>

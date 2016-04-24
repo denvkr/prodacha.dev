@@ -796,7 +796,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
      * @return string
      */
     function subcatalog($n) {
-
+        global $left_menu_sp_options;
     	//переменные для построения кастомизированных ссылок типа: товар (аналог)
     	$id_custom_menu_array=array();
     	$id_custom_menu_1_true=false;
@@ -860,6 +860,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
                             $custom_css_option_width=$custom_menu_1_item['css_option_width'];
 
                             $this->set('catalogName',$row['name'].$custom_href);
+                            $this->set('actionName',array_custom_search($left_menu_sp_options,$row['id']));
                             $this->set('width',"$custom_css_option_width");
                             $this->set('catalogUid',$row['id']);
                             $this->set('catalogTitle',$row['name']);
@@ -876,6 +877,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
                 if ($id_custom_menu_1_true===false && in_array($row['id'],$id_custom_menu_array)===false){
                         //echo ' '.$row['id'].' ';
                         $this->set('catalogName',$row['name']);
+                        $this->set('actionName',array_custom_search($left_menu_sp_options,$row['id']));
                         $this->set('width','');
                         $this->set('catalogUid',$row['id']);
                         $this->set('catalogTitle',$row['name']);
@@ -938,7 +940,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
      * @return string
      */
     function subcatalog2($n) {
-
+        global $left_menu_sp_options;
         $dis= null;
         
         // Перехват модуля
@@ -993,6 +995,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 
         foreach($array_submenuhead as $row) {
             $this->set('catalogName',$row['name']);
+            $this->set('actionName',array_custom_search($left_menu_sp_options,$row['id']));
             $this->set('catalogUid',$row['id']);
             $this->set('catalogTitle',$row['name']);				
             // Подключаем шаблон
@@ -1041,6 +1044,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
     }
 	
 	function custommenuoutput ($row,$i) {
+            global $left_menu_sp_options;
             //echo CustomSortOrder.'<br>';
                 $t1=$this->microtime_float();
 		if ($row['id']=='288') {
@@ -1170,24 +1174,24 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 
                         //циклы формируем вывод меню по типу с учетом сортировки
                         foreach ($array_submenuhead1_1 as $prod_row1){
-                                $submenuhead1_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+                                $submenuhead1_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                         }
                         foreach ($array_submenuhead2_1 as $prod_row1) {
                             if ($prod_row1[id]==13) {
                                     $submenuhead2_1.='<li class="inside_menu_head" style="font-size:12px;"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>&nbsp;';
-                                    $submenuhead2_1.='(<a href="/shop/CID_328.html" style="font-size:12px;">Мотокультиваторы</a>)</li>';
+                                    $submenuhead2_1.='(<a href="/shop/CID_328.html" style="font-size:12px;">Мотокультиваторы</a>)'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                             } else if ($prod_row1[id]!=328 && $prod_row1[id]!=13) {
-                                    $submenuhead2_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+                                    $submenuhead2_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                             }
                         }
                         foreach ($array_submenuhead3_1 as $prod_row1){
-                                $submenuhead3_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+                                $submenuhead3_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                         }
                         foreach ($array_submenuhead4_1 as $prod_row1){
-                                $submenuhead4_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+                                $submenuhead4_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                         }
                         foreach ($array_submenuhead5_1 as $prod_row1){
-                                $submenuhead5_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+                                $submenuhead5_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                         }
 
                         $array_submenuhead1_1=array();
@@ -1292,19 +1296,19 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
                         reset($array_submenuhead4_2);
                         reset($array_submenuhead5_2);
                         foreach ($array_submenuhead1_2 as $prod_row2){
-       				$submenuhead1_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+       				$submenuhead1_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         foreach ($array_submenuhead2_2 as $prod_row2){
-                                $submenuhead2_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+                                $submenuhead2_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         foreach ($array_submenuhead3_2 as $prod_row2){
-                                $submenuhead3_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+                                $submenuhead3_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         foreach ($array_submenuhead4_2 as $prod_row2){
-                                $submenuhead4_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+                                $submenuhead4_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         foreach ($array_submenuhead5_2 as $prod_row2){
-                                $submenuhead5_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+                                $submenuhead5_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         $array_submenuhead1_2=array();
                         $array_submenuhead2_2=array();
@@ -1499,25 +1503,25 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 				if ($prod_row1[id]==35) {
 					$submenuhead2_1.='<li class="inside_menu_head" style="font-size:12px;"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>&nbsp;';
 					$submenuhead2_1.='(<a href="/shop/CID_333.html" style="font-size:12px;">Мотокосы</a>,&nbsp;';
-					$submenuhead2_1.='<a href="/shop/CID_334.html" style="font-size:12px;">Бензокосы</a>)</li>';
+					$submenuhead2_1.='<a href="/shop/CID_334.html" style="font-size:12px;">Бензокосы</a>)'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
 				} else if ($prod_row1[id]!=333 && $prod_row1[id]!=334 && $prod_row1[id]!=35) {
-					$submenuhead2_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+					$submenuhead2_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
 				}
                         }
                         foreach ($array_submenuhead3_1 as $prod_row1){
-                                $submenuhead3_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+                                $submenuhead3_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                         }
                         foreach ($array_submenuhead4_1 as $prod_row1){
-                                $submenuhead4_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+                                $submenuhead4_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                         }
                         foreach ($array_submenuhead5_1 as $prod_row1){
-                                $submenuhead5_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+                                $submenuhead5_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                         }
                         foreach ($array_submenuhead6_1 as $prod_row1){
-                                $submenuhead6_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+                                $submenuhead6_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                         }
                         foreach ($array_submenuhead7_1 as $prod_row1){
-                                $submenuhead7_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+                                $submenuhead7_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                         }
                         $array_submenuhead1_1=array();
                         $array_submenuhead2_1=array();
@@ -1642,25 +1646,25 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
                         reset($array_submenuhead6_2);
                         reset($array_submenuhead7_2);
                         foreach ($array_submenuhead1_2 as $prod_row2){
-       				$submenuhead1_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+       				$submenuhead1_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         foreach ($array_submenuhead2_2 as $prod_row2){
-                                $submenuhead2_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+                                $submenuhead2_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         foreach ($array_submenuhead3_2 as $prod_row2){
-                                $submenuhead3_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+                                $submenuhead3_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         foreach ($array_submenuhead4_2 as $prod_row2){
-                                $submenuhead4_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+                                $submenuhead4_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         foreach ($array_submenuhead5_2 as $prod_row2){
-                                $submenuhead5_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+                                $submenuhead5_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         foreach ($array_submenuhead6_2 as $prod_row2){
-                                $submenuhead6_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+                                $submenuhead6_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         foreach ($array_submenuhead7_2 as $prod_row2){
-                                $submenuhead7_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+                                $submenuhead7_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         $array_submenuhead1_2=array();
                         $array_submenuhead2_2=array();
@@ -1870,38 +1874,38 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
                              if ($prod_row1[id]==145) {
                                     $submenuhead1_1.='<li class="inside_menu_head" style="font-size:12px;width: 99%;"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>&nbsp;';
                                     $submenuhead1_1.='(<a href="/shop/CID_426.html" style="font-size:12px;">Бензиновые ямобуры</a>,&nbsp;';
-                                    $submenuhead1_1.='<a href="/shop/CID_427.html" style="font-size:12px;">Бензобуры для земляных работ</a>)</li>';
+                                    $submenuhead1_1.='<a href="/shop/CID_427.html" style="font-size:12px;">Бензобуры для земляных работ</a>)'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                             } else if ($prod_row1[id]==146) {
                                     $submenuhead1_1.='<li class="inside_menu_head" style="font-size:12px;width: 99%;"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>&nbsp;';
                                     $submenuhead1_1.='(<a href="/shop/CID_428.html" style="font-size:12px;">Бензобуры для рыбалки</a>,&nbsp;';
-                                    $submenuhead1_1.='<a href="/shop/CID_429.html" style="font-size:12px;">Мотобуры для рыбалки</a>)</li>';
+                                    $submenuhead1_1.='<a href="/shop/CID_429.html" style="font-size:12px;">Мотобуры для рыбалки</a>)'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                             } else if (($prod_row1[id]!=426 && $prod_row1[id]!=427 && $prod_row1[id]!=145) && ($prod_row1[id]!=428 && $prod_row1[id]!=429 && $prod_row1[id]!=146)) {
-                                    $submenuhead1_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+                                    $submenuhead1_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                             }
                         }
                         foreach ($array_submenuhead2_1 as $prod_row1) {
-                                $submenuhead2_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+                                $submenuhead2_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                         }
                         foreach ($array_submenuhead3_1 as $prod_row1){
-                                $submenuhead3_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+                                $submenuhead3_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                         }
                         foreach ($array_submenuhead4_1 as $prod_row1){
-                                $submenuhead4_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+                                $submenuhead4_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                         }
                         foreach ($array_submenuhead5_1 as $prod_row1){
-                                $submenuhead5_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+                                $submenuhead5_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                         }
                         foreach ($array_submenuhead6_1 as $prod_row1){
-                                $submenuhead6_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+                                $submenuhead6_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                         }
                         foreach ($array_submenuhead7_1 as $prod_row1){
-                                $submenuhead7_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+                                $submenuhead7_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                         }
                         foreach ($array_submenuhead8_1 as $prod_row1){
-                                $submenuhead8_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+                                $submenuhead8_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                         }
                         foreach ($array_submenuhead9_1 as $prod_row1){
-                                $submenuhead9_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a></li>';
+                                $submenuhead9_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                         }
                         $array_submenuhead1_1=array();
                         $array_submenuhead2_1=array();
@@ -2049,31 +2053,31 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
                         reset($array_submenuhead9_2);
                         
                         foreach ($array_submenuhead1_2 as $prod_row2){
-       				$submenuhead1_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+       				$submenuhead1_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         foreach ($array_submenuhead2_2 as $prod_row2){
-                                $submenuhead2_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+                                $submenuhead2_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         foreach ($array_submenuhead3_2 as $prod_row2){
-                                $submenuhead3_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+                                $submenuhead3_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         foreach ($array_submenuhead4_2 as $prod_row2){
-                                $submenuhead4_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+                                $submenuhead4_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         foreach ($array_submenuhead5_2 as $prod_row2){
-                                $submenuhead5_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+                                $submenuhead5_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         foreach ($array_submenuhead6_2 as $prod_row2){
-                                $submenuhead6_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+                                $submenuhead6_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         foreach ($array_submenuhead7_2 as $prod_row2){
-                                $submenuhead7_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+                                $submenuhead7_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         foreach ($array_submenuhead8_2 as $prod_row2){
-                                $submenuhead8_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+                                $submenuhead8_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         foreach ($array_submenuhead9_2 as $prod_row2){
-                                $submenuhead9_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a></li>';
+                                $submenuhead9_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
                         }
                         $array_submenuhead1_2=array();
                         $array_submenuhead2_2=array();

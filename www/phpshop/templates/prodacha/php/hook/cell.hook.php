@@ -138,15 +138,19 @@ function add_same_tovar_box_hook($obj,$row,$rout){
         $category=$row['category'];
         //echo $parent_cat.' '.$category;
         //сначала выбираем товары из родительского каталога
+        $obj->debug=true;
+        //echo '$logic21_22='.(string)$logic21_22;
         if ($logic21_22==true) {
             $cat_list=$obj->select(array('id'), array('parent_to'=>'='.$parent_cat), false, array('limit' => $cnt_analog_prod), __FUNCTION__, array('base' => $obj->getValue('base.categories'), 'cache' => 'true'));
             foreach ($cat_list as $cat_list_item=>$cat_list_val) {
                 //исключаем текущий каталог из вывода в блок
-                if ($cat_list_val['id']<>$category)
-                    $cat_list2.=$cat_list_val['id'].',';
+                //if ($cat_list_val['id']<>$category)
+                $cat_list2.=$cat_list_val['id'].',';
             }
             if (!empty($cat_list2))
                 $cat_list2=substr($cat_list2,0,-1);
+            else
+                $cat_list2=$category;
 
             //echo 'current cat='.$category.',parrent cat='.$parent_cat.'<br>';
             //echo '2.1 product list='.$cat_list2.'<br>';
@@ -218,7 +222,7 @@ function add_same_tovar_box_hook($obj,$row,$rout){
                         $obj->set('productImgWidth',$SysValue['other']['productImgWidth']);
                         $obj->set('productImg',$result1[$cnt-1]['pic_small']);
                         $obj->set('productUid',$result1[$cnt-1]['id']);
-                        $obj->set('productPrice',$result2[$cnt-1]['price']);
+                        $obj->set('productPrice',$result1[$cnt-1]['price']);
                         $obj->set('productName',$result1[$cnt-1]['name']);
                         $obj->set('productValutaName',$SysValue['other']['productValutaName']);            
                         $obj->set('same_tovar_box','<td>'.ParseTemplateReturn($obj->getValue('templates.product_same_box')).'</td>',true);
@@ -251,10 +255,11 @@ function add_same_tovar_box_hook($obj,$row,$rout){
                 $add_cid=$cid_array_def;
             }
             */
-
+            //если $add_cid пустой, то нужно заполнить его текущим каталогом
+            if ($add_cid=='')
+                $add_cid=$category;
             //echo '2.2 additional CIDs='.$add_cid.'<br>';
             //мы должны вывести гарантированные элементы
-            $obj->debug=true;
             $result2=$obj->select_native(array('id','uid','pic_small','name','price'), array_merge(array('id'=>'<>'.$row['id'],'sklad'=>'="0"','outdated'=>'="0"','category'=>' in ('.$add_cid.')'),$price_sql_where_part), array('order'=>'RAND()'), array('limit' => $num_rows), __FUNCTION__, array('base' => $obj->getValue('base.products'), 'cache' => 'false'));
             $result2_count=count(array_keys($result2));
             $result2_key=array_key_exists('0',$result2);

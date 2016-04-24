@@ -1,1 +1,1 @@
-<li class="podcatalog"><a href="/shop/CID_@catalogUid@@nameLat@.html" title="@catalogTitle@ - @catalogName@"> @catalogName@</a></li>
+<li class="podcatalog"><a href="/shop/CID_@catalogUid@@nameLat@.html" title="@catalogTitle@ - @catalogName@"> @catalogName@</a>@actionName@</li>
