@@ -778,24 +778,25 @@ h5, .h4 {
 }
 .left .menu .mainmenu .submenuhead
 {
-	position: absolute;
-	top: -3px;
-	left: 214px; /*214*/
-	display: none;
-	float: left;
-	padding: 0 20px 20px;
-	width: 760px;
-	border: 2px solid #1c1c1c;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	background: #f4f4f1;
+    position: absolute;
+    top: -3px;
+    left: 214px; /*214*/
+    display: none;
+    float: left;
+    padding: 0 20px 20px;
+    width: 760px;
+    border: 2px solid #1c1c1c;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background: #f4f4f1;
 }
 .left .menu .mainmenu .submenuhead div
 {
-	float: left;
-	margin-right: 100px; min-height:320px;
-	width: 760px;
+    float: left;
+    margin-right: 100px; 
+    min-height:320px;
+    width: 760px;
     height: 455px;
 }
 .left .menu .submenuhead .inside_menu_head
@@ -804,23 +805,20 @@ h5, .h4 {
 	background: url(../images/leftarrow.gif) no-repeat right 8px !important;
 	color: #444;
 	cursor: default;
-}
-.left .menu .submenuhead .inside_menu_head
-{ display:inline;
- float: left;
+        display:inline;
+        float: left;
+	margin-left: 0px; /*20px*/
 	margin-right: 5px; /*20*/
 	width: 49%; /*46*/	
 	border-bottom: 1px dashed #c7c7c7; 	
 	line-height: 25px;
+	list-style: outside disc;
+}
+.left .menu .submenuhead .inside_menu_head
+{ 
 }
 .left .menu .submenuhead li ul .inside_menu_head
 {
-	position: relative;
-	margin-left: 0px; /*20px*/
-	background: none !important;
-	color: #444;
-	list-style: outside disc;
-	line-height: 25px;
 }
 .left .menu .submenuhead .inside_menu_head:hover
 {
@@ -831,12 +829,18 @@ h5, .h4 {
 {
 	padding: 15px 0;
 }
-.submenuhead .inside_menu_head a { color:#444!important;}
+.submenuhead .inside_menu_head a { color:#444!important;float:left;}
 .submenuhead .inside_menu_head a:hover { color: #588910!important;}
+
+.submenuhead .inside_menu_head span {
+    display:inline;
+    position: relative;
+    float: left;
+}
 
 .left .menu .submenu li a
 {
-	color: #888; 
+	/*color: #888;*/ 
 	text-transform: none;
 	font-weight: normal;
 }

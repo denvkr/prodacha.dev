@@ -1,10 +1,10 @@
 <?
 //массив для акций в левом меню "Новинка", "Хит продаж", и "Акция"
-$left_menu_sp_options=array(13=>'<span style="font-size:6px;color:red;">Новинка!</span>',
-                            119=>'&nbsp;&nbsp;&nbsp;<span style="font-size:8px;color:red;">Новинка!</span>',
-                            70=>'&nbsp;&nbsp;&nbsp;<span style="font-size:8px;color:red;">Новинка!</span>',
+$left_menu_sp_options=array(13=>'<span style="font-size:7px;color:red;">Новинка!</span>',
+                            119=>'<span>&nbsp;&nbsp;&nbsp;</span><span style="font-size:8px;color:red;">Новинка!</span>',
+                            70=>'<span>&nbsp;&nbsp;&nbsp;</span><span style="font-size:8px;color:red;">Новинка!</span>',
                             236=>'<span style="font-size:8px;color:red;">Новинка!</span>',
-                            595=>'&nbsp;&nbsp;&nbsp;<span style="font-size:8px;color:red;">Новинка!</span>',
+                            595=>'<span>&nbsp;&nbsp;&nbsp;</span><span style="font-size:8px;color:red;">Новинка!</span>',
                             620=>'<span style="font-size:8px;color:red;">Новинка!</span>'
     );
     
