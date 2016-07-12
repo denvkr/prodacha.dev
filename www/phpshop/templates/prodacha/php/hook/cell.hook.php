@@ -138,7 +138,7 @@ function add_same_tovar_box_hook($obj,$row,$rout){
         $category=$row['category'];
         //echo $parent_cat.' '.$category;
         //сначала выбираем товары из родительского каталога
-        $obj->debug=true;
+        //$obj->debug=true;
         //echo '$logic21_22='.(string)$logic21_22;
         if ($logic21_22==true) {
             $cat_list=$obj->select(array('id'), array('parent_to'=>'='.$parent_cat), false, array('limit' => $cnt_analog_prod), __FUNCTION__, array('base' => $obj->getValue('base.categories'), 'cache' => 'true'));
@@ -163,7 +163,9 @@ function add_same_tovar_box_hook($obj,$row,$rout){
                 $result1_count=round(count($result1)/5);
             //проверяем если данных для вывода недостаточно то используем дополнительные элементы
             $num_rows=$cnt_analog_prod-$result1_count;
-
+            //ограничение по параметру ограничения кол-ва элементов
+            if ($result1_count>$cnt_analog_prod)
+                $result1_count=$cnt_analog_prod;
             //комплексный массив для подстановки
             //согласно последней рекомендации убираем этот пункт
             /*
@@ -267,7 +269,13 @@ function add_same_tovar_box_hook($obj,$row,$rout){
                 $result2_count=round(count($result2)/5);
             //проверяем если данных для вывода недостаточно то используем дополнительные элементы
             $num_rows=$cnt_analog_prod-$result2_count;
+            //ограничение по параметру ограничения кол-ва элементов
+            if ($result2_count>$cnt_analog_prod)
+                $result2_count=$cnt_analog_prod;
             //echo '$num_rows='.$num_rows.'<br>';
+            //echo '$result2_count='.$result2_cout.'<br>';
+            //echo '$cnt_analog_prod='.$cnt_analog_prod;
+            //var_dump($result2);
             //согласно последней рекомендации убираем этот пункт
             /*
             if ( $num_rows>0 ) {
@@ -294,6 +302,7 @@ function add_same_tovar_box_hook($obj,$row,$rout){
              */
             //получаем данные по родительскому каталогу
             //$same_tovar_box=ParseTemplateReturn($this->getValue('templates.product_same_box'));
+            //$obj->set('same_tovar_box','',false);
             //скрываем элемент если у нас совсем нечего показать
             if ($num_rows==$cnt_analog_prod) {
                 $same_tovar_box_display='style="display:none;"';
@@ -310,16 +319,18 @@ function add_same_tovar_box_hook($obj,$row,$rout){
                         $obj->set('productValutaName',$SysValue['other']['productValutaName']);            
                         $obj->set('same_tovar_box','<td>'.ParseTemplateReturn($obj->getValue('templates.product_same_box')).'</td>',true);                    
                 } else {
-                    for ($cnt=1;$cnt<=$result2_count;$cnt++) {
+                    //echo '$result2_count='.$result2_count;
+                    for ($cnt=0;$cnt<$result2_count;$cnt++) {
                         $obj->set('same_tovar_num',$cnt);
                         $obj->set('productImgWidth',$SysValue['other']['productImgWidth']);
-                        $obj->set('productImg',$result2[$cnt-1]['pic_small']);
-                        $obj->set('productUid',$result2[$cnt-1]['id']);
-                        $obj->set('productPrice',$result2[$cnt-1]['price']);
-                        $obj->set('productName',$result2[$cnt-1]['name']);
+                        $obj->set('productImg',$result2[$cnt]['pic_small']);
+                        $obj->set('productUid',$result2[$cnt]['id']);
+                        $obj->set('productPrice',$result2[$cnt]['price']);
+                        $obj->set('productName',$result2[$cnt]['name']);
                         $obj->set('productValutaName',$SysValue['other']['productValutaName']);            
                         $obj->set('same_tovar_box','<td>'.ParseTemplateReturn($obj->getValue('templates.product_same_box')).'</td>',true);
                     }
+                    //echo '$cnt='.$cnt;
                 }
             }
 

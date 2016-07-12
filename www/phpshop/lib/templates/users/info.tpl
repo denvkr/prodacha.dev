@@ -45,12 +45,27 @@
         <tr>
             <td>Контактное лицо:&nbsp;&nbsp;&nbsp;
             </td>
-            <td><input type="text" name="name_new" value="@user_name@" style="width:300px"><img src="images/shop/flag_green.gif" alt="" width="16" height="16" border="0" hspace="5" align="absmiddle"></td>
+            <td>
+            <!--<input type="text" name="lastname_new" value="@user_lastname@" style="width:150px"><img src="images/shop/flag_green.gif" alt="" width="16" height="16" border="0" hspace="5" align="absmiddle" placeholder="Фамилия">-->
+            <!--<input type="text" name="name_new" value="@user_name@" style="width:115px"><img src="images/shop/flag_green.gif" alt="" width="16" height="16" border="0" hspace="5" align="absmiddle" placeholder="Имя">-->
+            <input type="text" name="lastname_new" style="width:150px" placeholder="Фамилия" value="@user_lastname@"><img src="images/shop/flag_green.gif" alt="" width="16" height="16" border="0" hspace="5" align="absmiddle">
+            <input type="text" name="name_new" style="width:115px" placeholder="Имя" value="@user_name@"><img src="images/shop/flag_green.gif" alt="" width="16" height="16" border="0" hspace="5" align="absmiddle"><br>(не менее 2 знаков)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(не менее 2 знаков)</td>
+            </td>
         </tr>
         <tr>
             <td>E-mail:
             </td>
             <td><input type="text" name="mail_new" value="@user_mail@" style="width:300px"><img src="images/shop/flag_green.gif" alt="" width="16" height="16" border="0" hspace="5" align="absmiddle"></td>
+        </tr>
+        <tr>
+            <td>Телефон:</td>
+            <td><!--<input type="text" name="tel_code_new" style="width:50px;" value="@user_tel_code@"> --->
+                <input type="text" name="tel_new" style="width:235px;" value="@user_tel@" placeholder="+7(901)123-45-67"></td>
+        </tr>
+        <tr>
+            <td valign="top">Адрес:</td>
+            <td><textarea style="width:300px; height:100px;" name="adres_new">@user_adres@</textarea>
+            </td>
         </tr>
         <tr>
             <td>Компания: </td>
@@ -63,16 +78,6 @@
         <tr>
             <td>КПП:</td>
             <td><input type="text" name="kpp_new" style="width:300px;" value="@user_kpp@"></td>
-        </tr>
-        <tr>
-            <td>Телефон:</td>
-            <td><input type="text" name="tel_code_new" style="width:50px;" value="@user_tel_code@"> -
-                <input type="text" name="tel_new" style="width:240px;" value="@user_tel@"></td>
-        </tr>
-        <tr>
-            <td valign="top">Адрес:</td>
-            <td><textarea style="width:300px; height:100px;" name="adres_new">@user_adres@</textarea>
-            </td>
         </tr>
         <tr>
             <td valign="top" colspan="2">

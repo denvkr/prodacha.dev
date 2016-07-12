@@ -46,9 +46,21 @@ class PHPShopUser extends PHPShopObj {
      * @return string
      */
     function getName() {
-        return $this->getParam("name");
+        $name = split ( ' ' , $this->getParam("name") );
+        //echo $name[0];
+        return $name[1] ;
     }
 
+    /**
+     * Вывод имени пользователя
+     * @return string
+     */
+    function getLastName() {
+        $name = split ( ' ' , $this->getParam("name") );
+        //echo $name[1];
+        return $name[0] ;
+    }
+    
     /**
      * Вывод ID статуса
      * @return int 

@@ -40,8 +40,11 @@ class PHPShopUsers extends PHPShopCore {
             'error_password' => __('Пароли не совпадают'),
             'error_login' => __('Некорректный логин'),
             'error_password_hack' => __('Некорректный пароль'),
+            'error_password_hack1' => __('Некорректный пароль1'),
+            'error_password_hack2' => __('Некорректный пароль2'),
             'error_mail' => __('Некорректный e-mail'),
             'error_name' => __('Некорректное имя'),
+            'error_lastname' => __('Некорректная фамилия'),
             'done' => __('Данные изменены'),
             'activation_title' => __('Активация регистрации пользователя'),
             'activation_admin_title' => __('Активация регистрации пользователя'),
@@ -299,12 +302,13 @@ class PHPShopUsers extends PHPShopCore {
             // Чистка старых активаций
             $this->clean_old_activation();
 
-            $data = $this->PHPShopOrm->select(array('login'), array('status' => "='" . $_GET['key'] . "'"), false, array('limit' => 1));
+            $data = $this->PHPShopOrm->select(array('login','name'), array('status' => "='" . $_GET['key'] . "'"), false, array('limit' => 1));
             if (!empty($data['login'])) {
 
                 $this->set('date', date("d-m-y H:i a"));
                 $this->set('user_ip', $_SERVER['REMOTE_ADDR']);
-                $this->set('user_name', $data['login']);
+                $name=split(' ',$data['name']);
+                $this->set('user_name', str_replace('_','',$data['name']));//$name[1]
                 $this->set('user_login', $data['login']);
 
                 if (!$this->PHPShopSystem->ifSerilizeParam('admoption.user_mail_activate_pre')) {
@@ -393,19 +397,23 @@ class PHPShopUsers extends PHPShopCore {
             if (!PHPShopSecurity::true_email($_POST['mail_new']))
                 $this->error[] = $this->locale('error_mail');
 
-            if (strlen($_POST['name_new']) < 3)
+            if (strlen(str_replace('_','',$_POST['name_new'])) <2)
                 $this->error[] = $this->locale('error_name');
-
+            
+            if (strlen(str_replace('_','',$_POST['lastname_new'])) < 2)
+                $this->error[] = $this->locale('error_lastname');
+            
             if (count($this->error) == 0) {
                 $this->PHPShopOrm->update(array(
                     'mail_new' => $_POST['mail_new'],
-                    'name_new' => htmlspecialchars($_POST['name_new'],ENT_QUOTES,'cp1251'),
+                    'name_new' => htmlspecialchars($_POST['lastname_new'].' '.$_POST['name_new'],ENT_QUOTES,'cp1251'),
                     'company_new' => htmlspecialchars($_POST['company_new'],ENT_QUOTES,'cp1251'),
                     'inn_new' => htmlspecialchars($_POST['inn_new'],ENT_QUOTES,'cp1251'),
                     'tel_new' => htmlspecialchars($_POST['tel_new'],ENT_QUOTES,'cp1251'),
                     'adres_new' => htmlspecialchars($_POST['adres_new'],ENT_QUOTES,'cp1251'),
                     'kpp_new' => htmlspecialchars($_POST['kpp_new'],ENT_QUOTES,'cp1251'),
-                    'tel_code_new' => htmlspecialchars($_POST['tel_code_new']),ENT_QUOTES,'cp1251'), array('id' => '=' . $_SESSION['UsersId']));
+                    //'tel_code_new' => htmlspecialchars($_POST['tel_code_new']),
+                    ENT_QUOTES,'cp1251'), array('id' => '=' . $_SESSION['UsersId']));
                 $this->error[] = $this->locale['done'];
 
                 // Перехват модуля
@@ -537,12 +545,15 @@ class PHPShopUsers extends PHPShopCore {
 
         $this->set('user_login', $this->PHPShopUser->getParam('login'));
         $this->set('user_password', $this->decode($this->PHPShopUser->getParam('password')));
-        $this->set('user_name', $this->PHPShopUser->getName());
+        //echo $this->PHPShopUser->getName();
+        $this->set('user_name', str_replace('_','',$this->PHPShopUser->getName()));
+        //echo $this->PHPShopUser->getLastName();
+        $this->set('user_lastname', str_replace('_','',$this->PHPShopUser->getLastName()));
         $this->set('user_mail', $this->PHPShopUser->getParam('mail'));
         $this->set('user_company', $this->PHPShopUser->getParam('company'));
         $this->set('user_inn', $this->PHPShopUser->getParam('inn'));
-        $this->set('user_tel', $this->PHPShopUser->getParam('tel'));
-        $this->set('user_tel_code', $this->PHPShopUser->getParam('tel_code'));
+        $this->set('user_tel', $this->PHPShopUser->getParam('tel_code').$this->PHPShopUser->getParam('tel'));
+        //$this->set('user_tel_code', $this->PHPShopUser->getParam('tel_code'));
         $this->set('user_adres', $this->PHPShopUser->getParam('adres'));
         $this->set('user_kpp', $this->PHPShopUser->getParam('kpp'));
 
@@ -626,7 +637,12 @@ class PHPShopUsers extends PHPShopCore {
         // Проверка равности паролей 1 и 2
         if ($_POST['password_new'] != $_POST['password_new2'])
             $this->error[] = $this->locale['error_password'];
-
+        // Проверка длинны пароля
+        if (strlen(str_replace('_', '', $_POST['password_new'])) < 6)
+            $this->error[] = $this->locale['error_password_hack1'];
+        if (strlen(str_replace('_', '', $_POST['password_new2'])) < 6)
+            $this->error[] = $this->locale['error_password_hack2'];
+        
         // Проверка валидности логина
         if (!PHPShopSecurity::true_login($_POST['login_new']))
             $this->error[] = $this->locale['error_login'];
@@ -640,8 +656,12 @@ class PHPShopUsers extends PHPShopCore {
             $this->error[] = $this->locale['error_mail'];
 
         // Проверка валидности имени
-        if (strlen($_POST['name_new']) < 3)
+        if (strlen(str_replace('_', '', $_POST['name_new'])) < 2)
             $this->error[] = $this->locale['error_name'];
+
+        // Проверка валидности фамилии
+        if (strlen(str_replace('_', '', $_POST['lastname_new'])) < 2)
+            $this->error[] = $this->locale['error_lastname'];
 
         // Перехват модуля
         $this->setHook(__CLASS__, __FUNCTION__, $_POST);
@@ -672,15 +692,15 @@ class PHPShopUsers extends PHPShopCore {
             'password_new' => $this->encode($_POST['password_new']),
             'datas_new' => time(),
             'mail_new' => $_POST['mail_new'],
-            'name_new' => htmlspecialchars($_POST['name_new'],ENT_QUOTES,'cp1251'),
+            'name_new' => str_replace('_','',htmlspecialchars($_POST['lastname_new'],ENT_QUOTES,'cp1251').' '.htmlspecialchars($_POST['name_new'],ENT_QUOTES,'cp1251')),
             'company_new' => htmlspecialchars($_POST['company_new'],ENT_QUOTES,'cp1251'),
             'inn_new' => htmlspecialchars($_POST['inn_new'],ENT_QUOTES,'cp1251'),
-            'tel_new' => htmlspecialchars($_POST['tel_new'],ENT_QUOTES,'cp1251'),
+            'tel_new' => str_replace('_','',htmlspecialchars($_POST['tel_new'],ENT_QUOTES,'cp1251')),
             'adres_new' => htmlspecialchars($_POST['adres_new'],ENT_QUOTES,'cp1251'),
             'enabled_new' => $user_mail_activate,
             'status_new' => $this->user_status,
-            'kpp_new' => htmlspecialchars($_POST['kpp_new'],ENT_QUOTES,'cp1251'),
-            'tel_code_new' => htmlspecialchars($_POST['tel_code_new'],ENT_QUOTES,'cp1251')
+            'kpp_new' => htmlspecialchars($_POST['kpp_new'],ENT_QUOTES,'cp1251')
+            //,'tel_code_new' => htmlspecialchars($_POST['tel_code_new'],ENT_QUOTES,'cp1251')
         );
 
         // Перехват модуля

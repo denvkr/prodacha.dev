@@ -10,7 +10,7 @@ function message_activation($obj) {
 
     $obj->set('user_key',$obj->user_status);
     $obj->set('user_mail',$_POST['mail_new']);
-    $obj->set('user_name',$_POST['name_new']);
+    $obj->set('user_name',str_replace('_','',$_POST['lastname_new'].' '.$_POST['name_new']));
     $obj->set('user_login',$_POST['login_new']);
     $obj->set('user_password',$_POST['password_new']);
     
@@ -20,7 +20,7 @@ function message_activation($obj) {
     if($obj->PHPShopSystem->ifSerilizeParam('admoption.user_mail_activate')) {
 
         // Заголовок e-mail пользователю
-        $title=$obj->PHPShopSystem->getName()." - ".$obj->locale['activation_title']." ".$_POST['name_new'];
+        $title=$obj->PHPShopSystem->getName()." - ".$obj->locale['activation_title']." ".str_replace('_','',$_POST['lastname_new'].' '.$_POST['name_new']);
 
         // Содержание e-mail пользователю
         $content=ParseTemplateReturn('./phpshop/lib/templates/users/mail_user_activation.tpl',true);
@@ -34,7 +34,7 @@ function message_activation($obj) {
     elseif($obj->PHPShopSystem->ifSerilizeParam('admoption.user_mail_activate_pre')) {
         
         // Заголовок e-mail администратору
-        $title=$obj->PHPShopSystem->getName()." - ".$obj->locale['activation_admin_title']." ".$_POST['name_new'];
+        $title=$obj->PHPShopSystem->getName()." - ".$obj->locale['activation_admin_title']." ".str_replace('_','',$_POST['lastname_new'].' '.$_POST['name_new']);
 
         // Содержание e-mail  администратору
         $content=ParseTemplateReturn('./phpshop/lib/templates/users/mail_admin_activation.tpl',true);

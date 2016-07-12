@@ -618,6 +618,8 @@ function UpdateDelivery(xid) {
                 '<input type="radio" name="tk_list_item" checked="checked" value="Деловые Линии">Деловые Линии&nbsp;&nbsp;'+
 		'<input type="radio" name="tk_list_item" value="ПЭК">ПЭК&nbsp;&nbsp;'+
                 '<input type="radio" name="tk_list_item" value="ЖелДор">ЖелДор&nbsp;&nbsp;'+
+                '<input type="radio" name="tk_list_item" value="Возовоз">Возовоз&nbsp;&nbsp;'+
+                '<input type="radio" name="tk_list_item" value="КИТ">КИТ&nbsp;&nbsp;'+
                 '<input type="radio" name="tk_list_item" value="Прочая">Прочая&nbsp;'+
                 '<input type="text" id="tk_other" disabled="disabled" name="tk_other" maxlength="40" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="введите название ТК">'+
                 '</div>'+
@@ -632,11 +634,11 @@ function UpdateDelivery(xid) {
                 '<tr>'+   
                 '<td align="right"><div id="firstname_info" name="firstname_info"> ФИО получателя: </div></td>'+
                 '<td>'+
-                '<input type="text" id="lastname" name="lastname" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свою фамилию." placeholder="Иванов" maxlength="28">'+
+                '<input type="text" id="lastname" name="lastname" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свою фамилию." placeholder="Фамилия" maxlength="28" value="'+$("#lastname_person").val().replace('_','')+'">'+
                 '<img/>'+
-                '<input type="text" id="firstname" name="firstname" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое имя." placeholder="Иван" maxlength="28">'+
+                '<input type="text" id="firstname" name="firstname" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое имя." placeholder="Имя" maxlength="28" value="'+$("#name_person").val().replace('_','')+'">'+
                 '<img/>'+            
-                '<input type="text" id="middlename" name="middlename" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое отчество." placeholder="Иванович" maxlength="28">'+
+                '<input type="text" id="middlename" name="middlename" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое отчество." placeholder="Отчество" maxlength="28">'+
                 '<img/> '+            
                 '</td>'+
                 '</tr>'+  
@@ -675,7 +677,7 @@ function UpdateDelivery(xid) {
                 '</tr>').insertBefore("form[name='forma_order']>table:eq(0) tr:eq(9)");
             $('#tk_info').css("display","table-cell");
             $('#tk_list').css("display","table-cell");
-            $('#tk_other').css({"width":"240px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
+            $('#tk_other').css({"width":"222px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
             $('#cart_tk_delivery_pass_msg_info').css("display","table-cell");
             $('#cart_tk_delivery_pass_msg').css({"width":"500px", "height":"36px", "font": "normal 12px/1.4 Arial, Helvetica, sans-serif", "color":"black","display":"table-cell"});
             $('#cart_tk_delivery_pass_msg').text("При получении заказа в терминале транспортной компании (ТК) вас попросят предъявить паспорт. Необходимо указать паспортные данные получателя.");
@@ -815,11 +817,11 @@ function UpdateDelivery(xid) {
                 '<tr>'+   
                 '<td align="right"><div id="firstname_info" name="firstname_info"> ФИО получателя: </div></td>'+
                 '<td>'+
-                '<input type="text" id="lastname" name="lastname" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свою фамилию." placeholder="Иванов" maxlength="28">'+
+                '<input type="text" id="lastname" name="lastname" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свою фамилию." placeholder="Фамилия" maxlength="28" value="'+$("#lastname_person").val().replace('_','')+'">'+
                 '<img/>'+
-                '<input type="text" id="firstname" name="firstname" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое имя." placeholder="Иван" maxlength="28">'+
+                '<input type="text" id="firstname" name="firstname" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое имя." placeholder="Имя" maxlength="28" value="'+$("#name_person").val().replace('_','')+'">'+
                 '<img/>'+            
-                '<input type="text" id="middlename" name="middlename" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое отчество." placeholder="Иванович" maxlength="28">'+
+                '<input type="text" id="middlename" name="middlename" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое отчество." placeholder="Отчество" maxlength="28">'+
                 '<img/> '+            
                 '</td>'+
                 '</tr>'+  
@@ -964,6 +966,8 @@ function UpdateDelivery(xid) {
         sum: sum,
         wsum: wsum
     });
+            //добавляем всплывающее окно в случае незаполненного поля инициалов пользователя в заказе если он есть в Личном кабинете
+            add_popover();
 }
 
 function get_payments_elements(region,delivery){
@@ -1230,11 +1234,11 @@ function CheckNewUserForma(){
     var password=d.password_new.value;
     var password2=d.password_new2.value;
     var name=d.name_new.value;
+    var lastname=d.lastname_new.value;
     var mail=d.mail_new.value;
     var tel=d.tel_new.value;
-    var adres=d.adres_new.value;
-
-    if(name=="" || mail=="" || login=="" || password=="" || password!=password2)
+    var adres=d.adres_new.value;   
+    if(name=="" || lastname=="" || mail=="" || login=="" || password=="" || password!=password2 || name.length<2 || lastname.length<2)
         alert("Ошибка заполнения формы регистрации пользователя");
     else d.submit();
 }
@@ -1244,7 +1248,6 @@ function UserLogOut(){
     if(confirm("Вы действительно хотите выйти из личного кабинета?"))
         window.location.replace('?logout=true');
 }
-
 
 // Проверка смены пароля
 function DispPasDiv(){
@@ -1271,9 +1274,11 @@ function UpdateUserPassword(){
 function UpdateUserForma(){
     var d=document.users_data;
     var name=d.name_new.value;
+    var lastname=d.lastname_new.value;
     var mail=d.mail_new.value;
-
-    if(name=="" || mail=="")
+    var tel=d.tel_new.value;
+    var adres=d.adres_new.value; 
+    if(name=="" || lastname=="" || mail=="" || name.length<2 || lastname.length<2)
         alert("Ошибка заполнения формы для изменения данных");
     else d.submit();
 }
@@ -1966,10 +1971,11 @@ function SearchChek()
 }
 
 //Проверка формы заказа
-function OrderChek()
-{
+function OrderChek() {
     var s1=window.document.forms.forma_order.mail.value;
-    var s2=window.document.forms.forma_order.name_person.value;
+    
+    var s2_1=$('input[id="lastname_person"]:eq(0)').val();
+    var s2_2=$('input[id="name_person"]:eq(0)').val();
     var s3=window.document.forms.forma_order.tel_name.value;
     var s4=window.document.forms.forma_order.adr_name.value;
     if (document.getElementById('#tk_other') && typeof ($('#tk_other').prop('disabled'))==='undefined'){
@@ -2024,7 +2030,7 @@ function OrderChek()
     //alert($.browser.android+' '+document.getElementById('tel_name').value.search(/^[0-9]{10}$/)+' '+typeof(adr_name_img));
 	if ( adr_name_img ) {
 		//alert('99');
-		if (s1==="" || s2==="" || s3==="" || s4==="" ) {
+		if (s1==="" || s2_1==="" || s2_2==="" || s3==="" || s4==="" ) {
 			alert("Ошибка заполнения формы заказа.\nДанные отмеченные флажками заполнять обязательно! ");
 		} else if (bad===1) {
 			alert("Ошибка заполнения формы заказа.\nВыберите доставку!");
@@ -2032,41 +2038,62 @@ function OrderChek()
 			//^[a-zA-Z0-9\_\.\+\-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9\-\.]+$
 			alert("Ошибка заполнения формы заказа.\nПоле 'E-mail' заполнено неправильно! ");
 		} else {
+                        console.log(document.getElementById('telregion').value);
 			if (typeof($.browser.android)==='undefined') {
+                            if (document.getElementById('telregion').value==1){
 				if (document.getElementById('tel_name').value.search(/^\+7\([0-9]{3}\)[0-9]{3}\-[0-9]{2}\-[0-9]{2}$/) === -1) {
 					//^[0-9]{10}$/
 					//([0-9]{5,11}) ^[0-9]{3,4}\ [0-9]{5,7}$
 					alert("Ошибка заполнения формы заказа.\nПоле 'телефон' заполнено неправильно! ");
 					return false;
-				} 
-			} else if (typeof($.browser.android)!=='undefined' && $.browser.android===true) {
-				if (document.getElementById('tel_name').value.search(/^[0-9]{10}$/) === -1) {
+				}
+                            }
+                            if (document.getElementById('telregion').value==2){
+				if (document.getElementById('tel_name').value.search(/^\+[0-9]{10,15}$/) === -1) {
 					//^[0-9]{10}$/
 					//([0-9]{5,11}) ^[0-9]{3,4}\ [0-9]{5,7}$
 					alert("Ошибка заполнения формы заказа.\nПоле 'телефон' заполнено неправильно! ");
 					return false;
 				}
+                            }                            
+			} else if (typeof($.browser.android)!=='undefined' && $.browser.android===true) {
+                            if (document.getElementById('telregion').value==1){
+				if (document.getElementById('tel_name').value.search(/^[0-9]{10}$/) === -1) {
+					//^[0-9]{10}$/
+					//([0-9]{5,11}) ^[0-9]{3,4}\ [0-9]{5,7}$
+					alert("Ошибка заполнения формы заказа.\nПоле 'телефон' заполнено неправильно! ");
+					return false;
+				}                                
+                            }
+                            if (document.getElementById('telregion').value==2){
+				if (document.getElementById('tel_name').value.search(/^\+[0-9]{10,15}$/) === -1) {
+					//^[0-9]{10}$/
+					//([0-9]{5,11}) ^[0-9]{3,4}\ [0-9]{5,7}$
+					alert("Ошибка заполнения формы заказа.\nПоле 'телефон' заполнено неправильно! ");
+					return false;
+				}                                
+                            }
 			}
-
 			document.forma_order.submit();
 		}
 	} else {
 		if (s1==="" || 
-                    s2==="" || 
+                    s2_1==="" ||
+                    s2_2==="" || 
                     s3==="" || 
                     s5_1==="" ||
                     s5_2==="" ||
                     s5_3==="" ||
                     s5_4==="" ||
-                    s5_5==="" ||
-                    s5_6==="" ||
                     s5_7==="" ||
                     s5_8==="" ||
                     s5_9==="" ||
                     s5_10==="") 
                 {
                     alert("Ошибка заполнения формы заказа.\nДанные отмеченные флажками заполнять обязательно! ");
-		} else if (bad===1) {
+		} else if ((document.getElementById('telregion').value==1 || document.getElementById('telregion').value==2) && (s5_5==="" || s5_6==="")) {
+                    alert("Ошибка заполнения формы заказа.\nДанные отмеченные флажками заполнять обязательно! ");
+                } else if (bad===1) {
 			alert("Ошибка заполнения формы заказа.\nВыберите доставку!");
 		} else if (document.getElementById('mail').value.toLowerCase().search(/^[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/) === -1) {
 			alert("Ошибка заполнения формы заказа.\nПоле 'E-mail' заполнено неправильно! ");
@@ -2078,10 +2105,12 @@ function OrderChek()
 			alert("Ошибка заполнения формы заказа.\nПоле 'Отчество' заполнено неправильно! ");
 		} else if (typeof (s5_4)!=='undefined' && s5_4.search(/^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5 -_]{2,28}$/) === -1) {
 			alert("Ошибка заполнения формы заказа.\nПоле 'Фамилия' заполнено неправильно! ");
-		} else if (typeof (s5_5)!=='undefined' && s5_5.search(/^[0-9]{4}$/) === -1) {
-			alert("Ошибка заполнения формы заказа.\nПоле 'Серия' заполнено неправильно! ");
-		} else if (typeof (s5_6)!=='undefined' && s5_6.search(/^[0-9]{6}$/) === -1) {
-			alert("Ошибка заполнения формы заказа.\nПоле 'Номер' заполнено неправильно! ");
+		} else if ((document.getElementById('telregion').value==1) && ((typeof (s5_5)!=='undefined' && s5_5.search(/^[0-9]{4}$/) === -1) ||
+                        (typeof (s5_6)!=='undefined' && s5_6.search(/^[0-9]{6}$/) === -1))) {
+                        if (typeof (s5_5)!=='undefined' && s5_5.search(/^[0-9]{4}$/) === -1)
+                            alert("Ошибка заполнения формы заказа.\nПоле 'Серия' заполнено неправильно! ");
+                        if (typeof (s5_6)!=='undefined' && s5_6.search(/^[0-9]{6}$/) === -1)
+                            alert("Ошибка заполнения формы заказа.\nПоле 'Номер' заполнено неправильно! ");
 		} else if (typeof (s5_7)!=='undefined' && s5_7.search(/^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$/) === -1) {
 			alert("Ошибка заполнения формы заказа.\nПоле 'дата выдачи' заполнено неправильно! ");
 		} else if (typeof (s5_8)!=='undefined' && s5_8.search(/^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5. -_]{2,55}/) === -1) {
@@ -2092,31 +2121,74 @@ function OrderChek()
 			alert("Ошибка заполнения формы заказа.\nПоле 'Адрес доставки' заполнено неправильно! ");
 		} else {
 			if (typeof($.browser.android)==='undefined') {
+                            console.log(document.getElementById('telregion').value);
+                            console.log(document.getElementById('tel_name').value.replace());
+                            if (document.getElementById('telregion').value==1){
 				if (document.getElementById('tel_name').value.search(/^\+7\([0-9]{3}\)[0-9]{3}\-[0-9]{2}\-[0-9]{2}$/) === -1) {
 					//^[0-9]{10}$/
 					//([0-9]{5,11}) ^[0-9]{3,4}\ [0-9]{5,7}$
-					alert("Ошибка заполнения формы заказа.\nПоле 'Телефон (моб.)' заполнено неправильно! ");
+					alert("Ошибка заполнения формы заказа.\nПоле 'телефон' заполнено неправильно! ");
 					return false;
 				}
-				if (document.getElementById('tel2') && document.getElementById('tel2').value.search(/^\+7\([0-9]{3}\)[0-9]{3}\-[0-9]{2}\-[0-9]{2}$/) === -1) {
+                                if (document.getElementById('tel2') && document.getElementById('tel2').value.search(/^\+7\([0-9]{3}\)[0-9]{3}\-[0-9]{2}\-[0-9]{2}$/) === -1) {
+                                        //^[0-9]{10}$/
+                                        //([0-9]{5,11}) ^[0-9]{3,4}\ [0-9]{5,7}$
+                                        alert("Ошибка заполнения формы заказа.\nПоле 'Телефон получателя' заполнено неправильно! ");
+                                        return false;
+                                }
+                            }
+                            if (document.getElementById('telregion').value==2){
+				if (document.getElementById('tel_name').value.search(/^\+[0-9]{10,15}$/) === -1) {
 					//^[0-9]{10}$/
 					//([0-9]{5,11}) ^[0-9]{3,4}\ [0-9]{5,7}$
-					alert("Ошибка заполнения формы заказа.\nПоле 'Телефон получателя' заполнено неправильно! ");
+					alert("Ошибка заполнения формы заказа.\nПоле 'телефон' заполнено неправильно! ");
 					return false;
-				} 
+				}
+                                if (document.getElementById('tel2') && document.getElementById('tel2').value.search(/^\+[0-9]{10,15}$/) === -1) {
+                                        //^[0-9]{10}$/
+                                        //([0-9]{5,11}) ^[0-9]{3,4}\ [0-9]{5,7}$
+                                        alert("Ошибка заполнения формы заказа.\nПоле 'Телефон получателя' заполнено неправильно! ");
+                                        return false;
+                                }
+                            }
 			} else if (typeof($.browser.android)!=='undefined' && $.browser.android===true) {
+                            if (document.getElementById('telregion').value==1){
 				if (document.getElementById('tel_name').value.search(/^[0-9]{10}$/) === -1) {
 					//^[0-9]{10}$/
 					//([0-9]{5,11}) ^[0-9]{3,4}\ [0-9]{5,7}$
-					alert("Ошибка заполнения формы заказа.\nПоле 'Телефон (моб.)' заполнено неправильно! ");
+					alert("Ошибка заполнения формы заказа.\nПоле 'телефон' заполнено неправильно! ");
 					return false;
 				}
-				if (document.getElementById('tel2').value.search(/^[0-9]{10}$/) === -1) {
+                                if (document.getElementById('tel2').value.search(/^[0-9]{10}$/) === -1) {
+                                        //^[0-9]{10}$/
+                                        //([0-9]{5,11}) ^[0-9]{3,4}\ [0-9]{5,7}$
+                                        alert("Ошибка заполнения формы заказа.\nПоле 'Телефон получателя' заполнено неправильно! ");
+                                        return false;
+                                }
+                            }
+                            if (document.getElementById('telregion').value==2){
+				if (document.getElementById('tel_name').value.search(/^\+[0-9]{10,15}$/) === -1) {
+					//^[0-9]{10}$/
+					//([0-9]{5,11}) ^[0-9]{3,4}\ [0-9]{5,7}$
+					alert("Ошибка заполнения формы заказа.\nПоле 'телефон' заполнено неправильно! ");
+					return false;
+				}
+				if (document.getElementById('tel2').value.search(/^\+[0-9]{10,15}$/) === -1) {
 					//^[0-9]{10}$/
 					//([0-9]{5,11}) ^[0-9]{3,4}\ [0-9]{5,7}$
 					alert("Ошибка заполнения формы заказа.\nПоле 'Телефон получателя' заполнено неправильно! ");
 					return false;
 				}
+                                
+                            }
+                            /*
+                            if (document.getElementById('tel2').value.search(/^[0-9]{10}$/) === -1) {
+                                    //^[0-9]{10}$/
+                                    //([0-9]{5,11}) ^[0-9]{3,4}\ [0-9]{5,7}$
+                                    alert("Ошибка заполнения формы заказа.\nПоле 'Телефон получателя' заполнено неправильно! ");
+                                    return false;
+                            }
+                            */
 			}
 			if ($('#tk_delivery_points_list').length && $('#adr_name').length) {
                             $('#adr_name').val($('#adr_name').val()+'Самовывоз в Санкт-Петербурге - ТК Возовоз - '+$('#tk_delivery_points_list').val().replace(/(адрес:)|(<br>)/ig, ""));

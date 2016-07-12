@@ -41,12 +41,23 @@
     <tr>
         <td>Контактное лицо:&nbsp;&nbsp;&nbsp;
         </td>
-        <td><input type="text" name="name_new" style="width:300px" value='@php echo $_POST["name_new"]; php@'><img src="images/shop/flag_green.gif" alt="" width="16" height="16" border="0" hspace="5" align="absmiddle"></td>
+        <td><input type="text" name="lastname_new" style="width:150px" placeholder="Фамилия" value='@php echo $_POST["lastname_new"]; php@'><img src="images/shop/flag_green.gif" alt="" width="16" height="16" border="0" hspace="5" align="absmiddle">
+        <input type="text" name="name_new" style="width:115px" placeholder="Имя" value='@php echo $_POST["name_new"]; php@'><img src="images/shop/flag_green.gif" alt="" width="16" height="16" border="0" hspace="5" align="absmiddle"><br>(не менее 2 знаков)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(не менее 2 знаков)</td>
     </tr>
     <tr>
         <td>E-mail:
         </td>
         <td><input type="text" name="mail_new" style="width:300px" value='@php echo $_POST["mail_new"]; php@'><img src="images/shop/flag_green.gif" alt="" width="16" height="16" border="0" hspace="5" align="absmiddle"></td>
+    </tr>
+    <tr>
+        <td>Телефон:</td>
+        <td><!--<input type="text" name="tel_code_new" style="width:50px;" value='@php echo $_POST["tel_code_new"]; php@'> --->
+            <input type="text" name="tel_new" style="width:300px;" value='@php echo $_POST["tel_new"]; php@' placeholder="+7(901)123-45-67"></td>
+    </tr>
+    <tr>
+        <td>Адрес:</td>
+        <td><textarea style="width:300px; height:100px;" name="adres_new">@php echo $_POST["adres_new"]; php@</textarea>
+        </td>
     </tr>
     <tr>
         <td>Компания: </td>
@@ -60,17 +71,7 @@
         <td>КПП:</td>
         <td><input type="text" name="kpp_new" style="width:300px;" value='@php echo $_POST["kpp_new"]; php@'></td>
     </tr>
-    <tr>
-        <td>Телефон:</td>
-        <td><input type="text" name="tel_code_new" style="width:50px;" value='@php echo $_POST["tel_code_new"]; php@'> -
-            <input type="text" name="tel_new" style="width:240px;" value='@php echo $_POST["tel_new"]; php@'></td>
-    </tr>
-    <tr>
-        <td>Адрес:</td>
-        <td><textarea style="width:300px; height:100px;" name="adres_new">@php echo $_POST["adres_new"]; php@</textarea>
 
-        </td>
-    </tr>
 </table>
 <table>
     <tr>
@@ -89,7 +90,7 @@
         <td></td>
         <td>
             <input type="hidden" value="1" name="add_user">
-            <input type="button" value="Регистрация пользователя" onclick="CheckNewUserForma()"></td>
+            <input type="button" value="Регистрация пользователя" onclick="CheckNewUserForma();"></td>
     </tr>
 </table>
 </form>

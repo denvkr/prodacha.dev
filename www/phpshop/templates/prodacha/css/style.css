@@ -3408,7 +3408,7 @@ left: 640px;
 	width:40px;
 	text-decoration:underline;
 }
-#mail,#name_person,#tel_name,[name="promo_code"] {
+#mail,#name_person,#lastname_person,#tel_name,[name="promo_code"] {
 	border-color:#abadb3;
         color:black;    
 }

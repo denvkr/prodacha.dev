@@ -310,7 +310,8 @@ class PHPShopOrder extends PHPShopCore {
         if (!empty($_SESSION['UsersId']) and PHPShopSecurity::true_num($_SESSION['UsersId'])) {
             $PHPShopUser = new PHPShopUser($_SESSION['UsersId']);
             $this->set('UserMail', $PHPShopUser->getValue('mail'));
-            $this->set('UserName', $PHPShopUser->getValue('name'));
+            $this->set('UserName', $PHPShopUser->getName('name'));
+            $this->set('UserLastName', $PHPShopUser->getLastName('lastname'));
             $this->set('UserTel', $PHPShopUser->getValue('tel'));
             $this->set('UserTelCode', $PHPShopUser->getValue('tel_code'));
             $this->set('UserAdres', $PHPShopUser->getValue('adres'));

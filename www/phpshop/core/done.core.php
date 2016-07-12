@@ -108,7 +108,7 @@ class PHPShopDone extends PHPShopCore {
             return true;
 
         if ($this->PHPShopCart->getNum() > 0) {
-            if (PHPShopSecurity::true_param(@$_POST['mail'], @$_POST['name_person'], @$_POST['tel_name'])) { //, $_POST['adr_name']
+            if (PHPShopSecurity::true_param(@$_POST['mail'], @$_POST['lastname_person'], @$_POST['name_person'], @$_POST['tel_name'])) { //, $_POST['adr_name']
 
                 $this->ouid = @$_POST['ouid'];
 
@@ -171,7 +171,7 @@ class PHPShopDone extends PHPShopCore {
                 	$this->set('ComStartReg', PHPShopText::comment());
                 	$this->set('ComEndReg', PHPShopText::comment('>'));
                 } else {
-                	$this->set('UserName',@$_POST['name_person']);
+                	$this->set('UserName',@str_replace("_","",$_POST['lastname_person'].' '.$_POST['name_person']));
                 	$this->set('UserTel',@str_replace($this->tel_num_repl, "", $_POST['tel_name']));
                 	$this->set('UserTel_credit',@str_replace($this->tel_num_repl_credit, "", $_POST['tel_name']));
                 }
@@ -293,7 +293,7 @@ class PHPShopDone extends PHPShopCore {
         $this->set('shop_name', $this->PHPShopSystem->getName());
         $this->set('ouid', $this->ouid);
         $this->set('date', date("d-m-y"));
-        $this->set('name_person', $_POST['name_person']);
+        $this->set('name_person', @str_replace("_","",$_POST['lastname_person'].' '.$_POST['name_person']));
         $this->set('tel', @$_POST['tel_code'] . "-" . @str_replace($this->tel_num_repl, "", $_POST['tel_name']));
         $this->set('adr_name', PHPShopSecurity::CleanStr(@$_POST['adr_name']).$dop_info);
         $this->set('dos_ot', str_replace('_','',@$_POST['dos_ot']));
@@ -368,13 +368,22 @@ class PHPShopDone extends PHPShopCore {
         if ($this->setHook(__CLASS__, __FUNCTION__, $_POST, 'START'))
             return true;
 
+        if (@$_POST['dostavka_metod']==10 ||
+                @$_POST['dostavka_metod']==13 ||
+                @$_POST['dostavka_metod']==70 ||
+                @$_POST['dostavka_metod']==71)
+                $pre_tk=$this->PHPShopDelivery->getCity();
+        if (preg_match('/^(Ìîñêâà).*$/i',$this->PHPShopDelivery->getCity())===1){
+            $pre_tk='Äîñòàâêà ïî Ìîñêâå è ÌÎ';
+        }
+        //$pre_tk=$this->PHPShopDelivery->getCity();
         // Äàííûå ïîêóïàòåëÿ
         $person = array(
             "ouid" => $this->ouid,
             "data" => date("U"),
             "time" => date("H:s a"),
             "mail" => $_POST['mail'],
-            "name_person" => PHPShopSecurity::CleanStr(@$_POST['name_person']),
+            "name_person" => PHPShopSecurity::CleanStr(@str_replace("_","",$_POST['lastname_person'].' '.$_POST['name_person'])),
             "org_name" => PHPShopSecurity::CleanStr(@$_POST['org_name']),
             "org_inn" => PHPShopSecurity::CleanStr(@$_POST['org_inn']),
             "org_kpp" => PHPShopSecurity::CleanStr(@$_POST['org_kpp']),
@@ -384,7 +393,7 @@ class PHPShopDone extends PHPShopCore {
             "gen_manager_initial" => PHPShopSecurity::CleanStr(@$_POST['gen_manager_initial']),
             "tel_code" => PHPShopSecurity::CleanStr(@$_POST['tel_code']),
             "tel_name" => PHPShopSecurity::CleanStr(@str_replace($this->tel_num_repl, "", $_POST['tel_name'])),
-            "adr_name" => PHPShopSecurity::CleanStr(@$_POST['adr_name']),
+            "adr_name" => $pre_tk.' '.PHPShopSecurity::CleanStr(@$_POST['adr_name']),
             "dostavka_metod" => @$_POST['dostavka_metod'],
             "discount" => $this->discount,
             "user_id" => $_SESSION['UsersId'],
@@ -419,8 +428,9 @@ class PHPShopDone extends PHPShopCore {
                 $da=@str_replace("_", "",$_POST['delivery_address']);
             } else {
                 $da=@str_replace("_", "",$_POST['tk_delivery_item']);		
-            }             
+            }
             // Ñòàòóñ çàêàçà
+            /*
            $this->status = array(
                "maneger" => "Òğàíñïîğòíàÿ êîìïàíèÿ:".$tk.
                " Èìÿ:".@str_replace("_", "",$_POST['firstname']).
@@ -432,13 +442,25 @@ class PHPShopDone extends PHPShopCore {
                " Òåëåôîí ãğóçîïîëó÷àòåëÿ:".@str_replace($this->tel_num_repl, "",$_POST['tel2']).
                " Ãîğîä äîñòàâêè:".@str_replace("_", "",$_POST['delivery_city']).
                " Àäğåñ äîñòàâêè:".$da,
-               "time" => "");  
+               "time" => "");
+             */
+            $person["adr_name"]="Òğàíñïîğòíàÿ êîìïàíèÿ:".$tk.
+               " Èìÿ:".@str_replace("_", "",$_POST['firstname']).
+               " Îò÷åñòâî:".@str_replace("_", "",$_POST['middlename']).
+               " Ôàìèëèÿ:".@str_replace("_", "",$_POST['lastname']).
+               " Ñåğèÿ:".@str_replace("_", "",$_POST['pass_no1'].
+               " Íîìåğ:".$_POST['pass_no2']).
+               " Äàòà âûäà÷è:".@str_replace("_", "",$_POST['pass_police']).
+               " Òåëåôîí ãğóçîïîëó÷àòåëÿ:".@str_replace($this->tel_num_repl, "",$_POST['tel2']).
+               " Ãîğîä äîñòàâêè:".@str_replace("_", "",$_POST['delivery_city']).
+               " Àäğåñ äîñòàâêè:".$da;
         } else if (isset($_POST['firstname']) &&
             isset($_POST['middlename']) &&
             isset($_POST['lastname']) &&
             isset($_POST['postal_index']) &&
             isset($_POST['delivery_address'])) {
             // Ñòàòóñ çàêàçà
+            /*
            $this->status = array(
                "maneger" => "Òğàíñïîğòíàÿ êîìïàíèÿ: Ïî÷òà Ğîññèè".
                " Èìÿ:".@str_replace("_", "",$_POST['firstname']).
@@ -448,7 +470,16 @@ class PHPShopDone extends PHPShopCore {
                " Ãîğîä äîñòàâêè:".@str_replace("_", "",$_POST['delivery_city']).
                " Èíäåêñ:".@str_replace("_", "",$_POST['postal_index']).			   
                " Àäğåñ äîñòàâêè:".@str_replace("_", "",$_POST['delivery_address']),
-               "time" => "");  
+               "time" => "");
+             */
+           $person["adr_name"]="Òğàíñïîğòíàÿ êîìïàíèÿ: Ïî÷òà Ğîññèè".
+               " Èìÿ:".@str_replace("_", "",$_POST['firstname']).
+               " Îò÷åñòâî:".@str_replace("_", "",$_POST['middlename']).
+               " Ôàìèëèÿ:".@str_replace("_", "",$_POST['lastname']).
+               " Òåëåôîí ãğóçîïîëó÷àòåëÿ:".@str_replace($this->tel_num_repl, "",$_POST['tel2']).
+               " Ãîğîä äîñòàâêè:".@str_replace("_", "",$_POST['delivery_city']).
+               " Èíäåêñ:".@str_replace("_", "",$_POST['postal_index']).			   
+               " Àäğåñ äîñòàâêè:".@str_replace("_", "",$_POST['delivery_address']);
         } else {
         // Ñòàòóñ çàêàçà
         $this->status = array(

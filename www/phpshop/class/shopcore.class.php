@@ -310,11 +310,11 @@ class PHPShopShopCore extends PHPShopCore {
      * @return array
      */
     function query($sql) {
-echo $sql;
+        //echo $sql;
         $PHPShopOrm = new PHPShopOrm();
         $PHPShopOrm->debug = $this->debug;
         $result = $PHPShopOrm->query($sql);
-var_dump($result);
+        //var_dump($result);
         return $result;
     }
     

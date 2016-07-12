@@ -50,8 +50,8 @@ if (isset($_POST['email']))
 				
 				$date=date("d")." ".$m1." ".date("Y ")."года в ".date(" H:i:s");
 				
-				 $taim=date(" H:i:s, d m Y");
-				 $ip=getenv("REMOTE_ADDR");
+				$taim=date(" H:i:s, d m Y");
+				$ip=getenv("REMOTE_ADDR");
 				 
 				// print_r($_POST);
 				 $msg="				 																		 
@@ -83,9 +83,14 @@ if (isset($_POST['email']))
 
 				
 				$mailheaders="Content-Type: text/plain; charset=\"windows-1251\"\n ";
-				$mailheaders.= "From:no-reply@".$_SERVER['HTTP_HOST'];			
+				$mailheaders.= "From:no-reply@".$_SERVER['HTTP_HOST'];
 
-				if ($_POST['cv']=="nohspamcode") //проверко+антиспам ок
+				if ($_POST['cv']=="nohspamcode" && 
+				!empty($_POST['textArea_ask_question']) && 
+				!empty($_POST['email']) && 
+				strstr($_POST['textArea_ask_question'],'<a href')===false &&
+				strstr($_POST['textArea_ask_question'],'url=')===false &&
+				$ip!='46.161.9.32') //проверко+антиспам ок
 				{
 					
 					if  (mail($mail_to,$subject,$msg,$mailheaders)) 

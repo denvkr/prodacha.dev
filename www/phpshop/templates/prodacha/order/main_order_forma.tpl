@@ -34,13 +34,19 @@
     <tr>
       <td align="right">Контактное лицо: </td>
       <td>
-          <input type="text" id="name_person" name="name_person" style="width:300px; height:18px; font-family:tahoma; font-size:11px;" maxlength="40" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свою фамилию и имя в формате: [ФАМИЛИЯ ИМЯ]" placeholder="Иванов Иван" value="@UserName@" @formaLock@>
+          <input type="text" id="lastname_person" name="lastname_person" style="width:160px; height:18px; font-family:tahoma; font-size:11px;" maxlength="40" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свою фамилию." placeholder="Фамилия" value="@UserLastName@" @formaLock@>
+          <input type="text" id="name_person" name="name_person" style="width:132px; height:18px; font-family:tahoma; font-size:11px;" maxlength="40" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите свое имя." placeholder="Имя" value="@UserName@" @formaLock@>
+          
           <img src="images/shop/flag_green.gif" alt="" width="16" height="16" border="0" hspace="5" align="middle"/> 
       </td>
     </tr>
     <tr>
       <td align="right">Телефон (моб.): </td>
       <td>
+          <select id="telregion" name="telregion" style="width:100px; height:22px; font-family:tahoma; font-size:11px;border: 2px solid #abadb3;">
+              <option value="1">Россия</option>
+              <option value="2">Другая страна</option>
+          </select>
       	  <input type="hidden" name="tel_code" style="width:50px; height:18px; font-family:tahoma; font-size:11px;" value="@php require($_SERVER['DOCUMENT_ROOT'].'/net_pather.php');php@">
  	      <input type="tel" id="tel_name" name="tel_name" style="width:150px; height:18px; font-family:tahoma; font-size:11px;" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите моб. телефон без восьмерки в формате: [+7(901)123-45-67]" placeholder="+7(901)123-45-67" maxlength="16" value="@UserTel@">
  	      <!--pattern="^\+[0-9\(\)]{17}$"-->
