@@ -8,7 +8,7 @@
  */
 function delivery($obj,$deliveryID,$totalsumma=0) {
     global $SysValue;
-    
+    $sqlvariants='';
     $pred=$br=$my=$alldone=$waytodo=null;
     $sel_size='';
     //$isfolder_select=false;
@@ -37,7 +37,7 @@ function delivery($obj,$deliveryID,$totalsumma=0) {
         if ($_COOKIE['sincity']=="sp") {
             $sqlvariants="select * from ".$table." where (enabled='1' and PID='".$row['PID']."') and id in (1,69) order by city";
         } else if ($_COOKIE['sincity']=="chb") {
-            $sqlvariants="select * from ".$table." where (enabled='1' and PID='".$row['PID']."') and id in (1,43) order by city";
+            $sqlvariants="select * from ".$table." where (enabled='1' and PID='".$row['PID']."') and id in (1,41) order by city";
         } else if ($_COOKIE['sincity']=="m" OR $_COOKIE['sincity']=="other") {
             $sqlvariants="select * from ".$table." where (enabled='1' and PID='".$row['PID']."') and id in (1,10,13) order by city";
         }
@@ -63,18 +63,21 @@ function delivery($obj,$deliveryID,$totalsumma=0) {
 
 			if ($_COOKIE['sincity']=="sp") {
 				if ($totalsumma>=1000 && $totalsumma<=9999) {
-					$sqlvariants="select *,case id when '68' then 1 end as num from ".$table." where (enabled='1' and PID='".$deliveryID."' and id in ('68')) order by num,city";
+					//$sqlvariants="select *,case id when '68' then 1 end as num from ".$table." where (enabled='1' and PID='".$deliveryID."' and id in ('68')) order by num,city";
                                         if ($totalsumma>=1000 && $totalsumma<=4999) {
-                                            $sqlvariants="select *,case id when '71' then 1 when '68' then 2 end as num from ".$table." where (enabled='1' and PID='".$deliveryID."' and id in ('68','71')) order by num,city";
+                                            $sqlvariants="select id,city,case id when '67' then 500 else price end as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder,case id when '71' then 1 when '68' then 2 when '67' then 3 end as num from ".$table." where (enabled='1' and PID='".$deliveryID."' and id in ('67','68','71')) order by num,city";
                                         } else if ($totalsumma>=5000){
-                                            $sqlvariants="select *,case id when '70' then 1 when '68' then 2 end as num from ".$table." where (enabled='1' and PID='".$deliveryID."' and id in ('68','70')) order by num,city";
+                                            $sqlvariants="select id,city,case id when '67' then 300 else price end as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder,case id when '70' then 1 when '68' then 2 when '67' then 3 end as num from ".$table." where (enabled='1' and PID='".$deliveryID."' and id in ('67','68','70')) order by num,city";
                                         }
 				}
 				if ($totalsumma>=10000) {
-					$sqlvariants="select *,case id when '67' then 1 when '68' then 2 end as num from ".$table." where (enabled='1' and PID='".$deliveryID."' and id in ('67','68')) order by num,city";
+					//$sqlvariants="select *,case id when '67' then 1 when '68' then 2 end as num from ".$table." where (enabled='1' and PID='".$deliveryID."' and id in ('67','68')) order by num,city";
+                                        $sqlvariants="select *,case id when '70' then 1 when '68' then 2 when '67' then 3 end as num from ".$table." where (enabled='1' and PID='".$deliveryID."' and id in ('67','68','70')) order by num,city";
+                                        /*
                                         if ($totalsumma>=5000){
                                             $sqlvariants="select *,case id when '70' then 1 when '67' then 2 when '68' then 3 end as num from ".$table." where (enabled='1' and PID='".$deliveryID."' and id in ('67','68','70')) order by num,city";
                                         }
+                                         */
 				}
 			}
 			$PIDpr=$deliveryID; //Начальный предок, для приглашения
@@ -103,6 +106,25 @@ function delivery($obj,$deliveryID,$totalsumma=0) {
 				}
 
 				if ($_COOKIE['sincity']=="sp") {
+                                    if ($totalsumma>=1000 && $totalsumma<=9999) {
+                                            //$sqlvariants="select *,case id when '68' then 1 end as num from ".$table." where (enabled='1' and PID='".$deliveryID."' and id in ('68')) order by num,city";
+                                            if ($totalsumma>=1000 && $totalsumma<=4999) {
+                                                $sqlvariants="select id,city,case id when '67' then 500 else price end as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder,case id when '71' then 1 when '68' then 2 when '67' then 3 end as num from ".$table." where (enabled='1' and PID='".$row['PID']."' and id in ('67','68','71')) order by num,city";
+                                            } else if ($totalsumma>=5000){
+                                                $sqlvariants="select id,city,case id when '67' then 300 else price end as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder,case id when '70' then 1 when '68' then 2 when '67' then 3 end as num from ".$table." where (enabled='1' and PID='".$row['PID']."' and id in ('67','68','70')) order by num,city";
+                                            }
+                                    }
+                                    if ($totalsumma>=10000) {
+                                            //$sqlvariants="select *,case id when '67' then 1 when '68' then 2 end as num from ".$table." where (enabled='1' and PID='".$deliveryID."' and id in ('67','68')) order by num,city";
+                                            $sqlvariants="select *,case id when '70' then 1 when '68' then 2 when '67' then 3 end as num from ".$table." where (enabled='1' and PID='".$row['PID']."' and id in ('67','68','70')) order by num,city";
+                                            /*
+                                            if ($totalsumma>=5000){
+                                                $sqlvariants="select *,case id when '70' then 1 when '67' then 2 when '68' then 3 end as num from ".$table." where (enabled='1' and PID='".$deliveryID."' and id in ('67','68','70')) order by num,city";
+                                            }
+                                             */
+                                    }
+
+                                /*
 				if ($totalsumma>=1000 && $totalsumma<=9999) {
 					$sqlvariants="select *,case id when '68' then 1 end as num from ".$table." where (enabled='1' and PID='".$row['PID']."' and id in ('68')) order by num,city";
                                         if ($totalsumma>=1000 && $totalsumma<=4999) {
@@ -114,12 +136,13 @@ function delivery($obj,$deliveryID,$totalsumma=0) {
 				if ($totalsumma>=10000) {
                                     $sqlvariants="select *,case id when '70' then 1 when '67' then 2 when '68' then 3 end as num from ".$table." where (enabled='1' and PID='".$row['PID']."' and id in ('67','68','70')) order by num,city";
                   		}
+                                */
 				}			
 			} else {
                             if ($_COOKIE['sincity']=="sp") {
                                 $sqlvariants="select * from ".$table." where (enabled='1' and PID='".$row['PID']."') and id in (1,69) order by city";
                             } else if ($_COOKIE['sincity']=="chb") {
-                                $sqlvariants="select * from ".$table." where (enabled='1' and PID='".$row['PID']."') and id in (1,43) order by city";
+                                $sqlvariants="select * from ".$table." where (enabled='1' and PID='".$row['PID']."') and id in (1,41) order by city";
                             } else if ($_COOKIE['sincity']=="m" OR $_COOKIE['sincity']=="other") {
                                 $sqlvariants="select * from ".$table." where (enabled='1' and PID='".$row['PID']."') and id in (1,10,13) order by city";
                             }
@@ -134,6 +157,9 @@ function delivery($obj,$deliveryID,$totalsumma=0) {
         $PID=false;
         $deliveryID=0; //Присваиваем нулевой идентификатор, если ничего не прислали
         if ($_COOKIE['sincity']=="sp") {
+            if ($totalsumma<1000) {
+                $sqlvariants="select id,city,0 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$table." where (enabled='1' and PID='0') and id in (1,69) order by city";
+            }
             if ($totalsumma>=1000 && $totalsumma<=4999) {
                 $sqlvariants="select id,city,300 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$table." where (enabled='1' and PID='0') and id in (1,69) order by city";
             }
@@ -141,7 +167,18 @@ function delivery($obj,$deliveryID,$totalsumma=0) {
                 $sqlvariants="select id,city,price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$table." where (enabled='1' and PID='0') and id in (1,69) order by city";
             }
         } else if ($_COOKIE['sincity']=="chb") {
-                $sqlvariants="select id,city,price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$table." where (enabled='1' and PID='0') and id in (1,43) order by city";
+            if ($totalsumma<1000) {
+                $sqlvariants="select id,city,0 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$table." where (enabled='1' and PID='0') and id in (1,41) order by city";
+            }
+            if ($totalsumma>=1000 && $totalsumma<=4999) {
+                $sqlvariants="select id,city,price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$table." where (enabled='1' and PID='0') and id in (1,41) order by city";
+            }
+            if ($totalsumma>=5000 and $totalsumma<=9999) {
+                $sqlvariants="select id,city,300 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$table." where (enabled='1' and PID='0') and id in (1,41) order by city";
+            }
+            if ($totalsumma>=10000) {
+                $sqlvariants="select id,city,0 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$table." where (enabled='1' and PID='0') and id in (1,41) order by city";
+            }
         } else if ($_COOKIE['sincity']=="m" OR $_COOKIE['sincity']=="other") {
                 $sqlvariants="select id,city,price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$table." where (enabled='1' and PID='0') and id in (1,10,13) order by city";
         }
@@ -191,7 +228,7 @@ function delivery($obj,$deliveryID,$totalsumma=0) {
                 if ($_COOKIE['sincity']=="sp") {
                     $PIDret=69;
                 } else if ($_COOKIE['sincity']=="chb") {
-                    $PIDret=43;
+                    $PIDret=41;
                 } else if ($_COOKIE['sincity']=="m" OR $_COOKIE['sincity']=="other") {
                     $PIDret=10;
                 }
@@ -232,7 +269,7 @@ function delivery($obj,$deliveryID,$totalsumma=0) {
 
                 if ( (($_COOKIE['sincity']=="m" || $_COOKIE['sincity']=="other") && $row['id']==10) || 
                         ($_COOKIE['sincity']=="sp" && $row['id']==69) ||
-                        ($_COOKIE['sincity']=="chb" && $row['id']==43)) {
+                        ($_COOKIE['sincity']=="chb" && $row['id']==41)) {
                 	$obj->set('deliveryId',$row['id']);
                 }
                 
@@ -339,7 +376,7 @@ function delivery($obj,$deliveryID,$totalsumma=0) {
     }
 //echo '$waytodo='.$waytodo;
 //if (!isset($isfolder)) $isfolder=0;
-    $disp='<DIV id="seldelivery">'.$pred.$br.$my.$stylenah.'<SELECT '.$sel_size.' onchange="javascript:UpdateDelivery(this.value);" name="dostavka_metod" id="dostavka_metod">
+    $disp='<DIV name="seldelivery" id="seldelivery">'.$pred.$br.$my.$stylenah.'<SELECT '.$sel_size.' onchange="javascript:UpdateDelivery(this.value);" name="dostavka_metod" id="dostavka_metod">
 '.$makechoise.'
 '.$disp.'
 </SELECT>'.$alldone.$waytodo.'</DIV>';

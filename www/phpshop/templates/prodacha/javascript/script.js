@@ -1367,15 +1367,19 @@ fillTKtablePart();
                                     var z=(req.responseJS.total||'');	
                                     var city=(req.responseJS.city||'');
 
-                                    if (Number(z)<5000 && Number(xid)!==69 && city!=='sp'){
+                                    if (Number(z)<5000 && (Number(xid)!==69 && city!=='sp') && (Number(xid)!==41 && city!=='chb')){
                                        document.getElementById('delivery_warning').style.display="table-cell";
                                     } else if (Number(z)>=5000) {
                                       document.getElementById('delivery_warning').style.display="none";
                                     }
-                                    //для питера модифицируем корзину удаляя все поля для цены < 1000
-                                    if (((Number(xid)===69 || Number(xid)===0 || isNaN(Number(xid))) && city==='sp') && Number(z)<1000){
+                                    //для питера и чебоксар модифицируем корзину удаляя все поля для цены < 1000
+                                    if ( ((((Number(xid)===69 || Number(xid)===0 || isNaN(Number(xid))) && city==='sp') || (city==='chb'))) && Number(z)<1000){
                                         //console.log('test');
-                                        $('#delivery_warning').html('Минимальная сумма заказа в интернет-магазине PROДАЧА в Санкт-Петербурге составляет 1000 руб. Пожалуйста, дополните ваш заказ до минимальной суммы.');
+                                        if (city==='sp')
+                                            cityname='Санкт-Петербурге';
+                                        if (city==='chb')
+                                            cityname='Чебоксарах';
+                                        $('#delivery_warning').html('Минимальная сумма заказа в интернет-магазине PROДАЧА в '+cityname+' составляет 1000 руб. Пожалуйста, дополните ваш заказ до минимальной суммы.');
                                         $('#delivery_warning').css({'display':'table-cell','font-family':'tahoma', 'font-size':'12px'});
                                         $("form[name='forma_order']>table:eq(0) tr:eq(0)").css('display','none');
                                         $("form[name='forma_order']>table:eq(0) tr:eq(1)").css('display','none');
@@ -1389,6 +1393,9 @@ fillTKtablePart();
                                         $('#bin').css('display','none');
                                     }
                                     $('#dostavka_metod').change();
+                                    //if (city==='chb')
+                                        //$('div[name="seldelivery"]:eq(1)>a:first').click();
+                                    //console.log($('div[name="seldelivery"]:eq(1)>a:first').text(),city);
                                 }
                             }
                         };
@@ -1511,6 +1518,10 @@ if ($('.alsobought:eq(0)')!==null){
     });    
 }
 */
+    //console.log($('.city_link:eq(0)').text());
+    //if ($('.city_link:eq(0)').text()== 'Чебоксары ')
+    //    $('div[name="seldelivery"]:eq(1)>a').click();
+
 });
                 //функция обработки части форма forma_dost для Транспортных компаний
                     function fillTKtablePart(){
