@@ -646,7 +646,7 @@ function UpdateDelivery(xid) {
                 '<tr>'+
                 '<td align="right"><div id="pass_no_info" name="pass_no_info"> Паспорт серия: </div></td>'+
                 '<td>'+
-                '<input type="text" id="pass_no1" name="pass_no1" maxlength="4" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите серию паспорта." placeholder="1111">&nbsp;'+
+                '<input type="text" id="pass_no1" name="pass_no1" maxlength="4" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите серию паспорта." placeholder="1111">'+
                 '<img/>&nbsp;номер:&nbsp;'+
                 '<input type="text" id="pass_no2" name="pass_no2" maxlength="6" data-container="body" class="tooltip" role="tooltip" data-toggle="tooltip" data-content="Введите номер паспорта." placeholder="111111">'+
                 '<img/>&nbsp;<div id="pass_police_info" name="pass_police_info"> дата выдачи: </div>&nbsp;'+
@@ -2058,6 +2058,7 @@ function OrderChek() {
     }
     //console.log(document.getElementById("dostavka_metod").value);
     //alert($.browser.android+' '+document.getElementById('tel_name').value.search(/^[0-9]{10}$/)+' '+typeof(adr_name_img));
+    console.log($('#pass_no1').next('img').length);
 	if ( adr_name_img ) {
 		//alert('99');
 		if (s1==="" || s2_1==="" || s2_2==="" || s3==="" || s4==="" ) {
@@ -2115,13 +2116,13 @@ function OrderChek() {
                     s5_2==="" ||
                     s5_3==="" ||
                     s5_4==="" ||
-                    s5_7==="" ||
+                    (s5_7==="" && $('#pass_police').next('img').length) ||
                     s5_8==="" ||
                     s5_9==="" ||
                     s5_10==="") 
                 {
                     alert("Ошибка заполнения формы заказа.\nДанные отмеченные флажками заполнять обязательно! ");
-		} else if ((document.getElementById('telregion').value==1 || document.getElementById('telregion').value==2) && (s5_5==="" || s5_6==="")) {
+		} else if ((document.getElementById('telregion').value==1 || document.getElementById('telregion').value==2) && (s5_5==="" || s5_6==="") && $('#pass_no1').next('img').length && $('#pass_no2').next('img').length) {
                     alert("Ошибка заполнения формы заказа.\nДанные отмеченные флажками заполнять обязательно! ");
                 } else if (bad===1) {
 			alert("Ошибка заполнения формы заказа.\nВыберите доставку!");
@@ -2136,12 +2137,12 @@ function OrderChek() {
 		} else if (typeof (s5_4)!=='undefined' && s5_4.search(/^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5 -_]{2,28}$/) === -1) {
 			alert("Ошибка заполнения формы заказа.\nПоле 'Фамилия' заполнено неправильно! ");
 		} else if ((document.getElementById('telregion').value==1) && ((typeof (s5_5)!=='undefined' && s5_5.search(/^[0-9]{4}$/) === -1) ||
-                        (typeof (s5_6)!=='undefined' && s5_6.search(/^[0-9]{6}$/) === -1))) {
+                        (typeof (s5_6)!=='undefined' && s5_6.search(/^[0-9]{6}$/) === -1)) && $('#pass_no1').next('img').length && $('#pass_no2').next('img').length) {
                         if (typeof (s5_5)!=='undefined' && s5_5.search(/^[0-9]{4}$/) === -1)
                             alert("Ошибка заполнения формы заказа.\nПоле 'Серия' заполнено неправильно! ");
                         if (typeof (s5_6)!=='undefined' && s5_6.search(/^[0-9]{6}$/) === -1)
                             alert("Ошибка заполнения формы заказа.\nПоле 'Номер' заполнено неправильно! ");
-		} else if (typeof (s5_7)!=='undefined' && s5_7.search(/^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$/) === -1) {
+		} else if (typeof (s5_7)!=='undefined' && s5_7.search(/^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$/) === -1 && $('#pass_police').next('img').length) {
 			alert("Ошибка заполнения формы заказа.\nПоле 'дата выдачи' заполнено неправильно! ");
 		} else if (typeof (s5_8)!=='undefined' && s5_8.search(/^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5. -_]{2,55}/) === -1) {
 			alert("Ошибка заполнения формы заказа.\nПоле 'Город доставки' заполнено неправильно! ");

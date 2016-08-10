@@ -41,3 +41,20 @@ function get_icon_bottom_text($iconid,$region) {
            return $val;
     }
 }
+
+function get_more_gift($siteurl,$prodid) {
+$searchgift=false;
+//массив содержащий названия
+ $gifts_array=array(
+     364=>'<table><tr><td><span><ul><li><a href="http://'.$siteurl.'/shop/UID_8896.html" style="color: #588910;font: 12px/1.4 Arial,Helvetica,sans-serif;">Бензиновый снегоуборщик MTD SMART M 56</a></li><br/>'
+                       . '<li><a href="http://'.$siteurl.'/shop/UID_8896.html" style="color: #588910;font: 12px/1.4 Arial,Helvetica,sans-serif;">Бензиновая газонокосилка Parton PA550N21RH3 несамоходная</a></li><br/></ul></span><span style="color: #e7193f;font: 14px Arial,Helvetica,sans-serif;font-weight: bold;"><strike>0 руб.</strike></span><br><span style="font: 14px Arial,Helvetica,sans-serif;font-weight: bold;color:#6C4B46;">В подарок!</span></td></tr></table>',
+    );
+ 
+    foreach($gifts_array as $key=>$val) {
+        if ($key== $prodid){
+            $searchgift=true;
+           return $val;            
+        }
+    }
+    return $searchgift;
+}

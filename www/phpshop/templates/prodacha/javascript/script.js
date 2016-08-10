@@ -1766,28 +1766,44 @@ if ($('.alsobought:eq(0)')!==null){
                                 $("input[type=radio][name='tk_list_item']").on('change', function(){
 									//$('#attr_val2').text($(this).val());
 									$(this).each(function(indx){
-										if (($(this).val() === 'Деловые Линии' || $(this).val() === 'ПЭК' || $(this).val() === 'ЖелДор') && typeof ($('#tk_other').attr('disabled')) === 'undefined') {
-											// $('#attr_val2').text(indx);
-											$('#tk_other').attr('disabled', 'disabled');
-											$('#tk_other').css('border-color', '#abadb3');
-											$('#tk_other').val('');
+										if (($(this).val() === 'Деловые Линии' || $(this).val() === 'ПЭК' || $(this).val() === 'ЖелДор' || $(this).val() === 'Возовоз' || $(this).val() === 'КИТ') && typeof ($('#tk_other').attr('disabled')) === 'undefined') {
+                                                                                    // $('#attr_val2').text(indx);
+                                                                                    $('#tk_other').attr('disabled', 'disabled');
+                                                                                    $('#tk_other').css('border-color', '#abadb3');
+                                                                                    $('#tk_other').val('');
 										} else if ($(this).val() === 'Прочая' && typeof ($('#tk_other').attr('disabled')) === 'string'){
-											//$('#attr_val2').text(indx);
-											$('#tk_other').removeAttr('disabled');
+                                                                                    //$('#attr_val2').text(indx);
+                                                                                    $('#tk_other').removeAttr('disabled');
 										}
+                                                                                //если выбраны данные ТК необходимо убрать данные по паспортам
+                                                                                if ($(this).val() === 'ПЭК' || $(this).val() === 'ЖелДор' || $(this).val() === 'Возовоз') {
+                                                                                    $("form[name='forma_order']>table:eq(0) tr:eq(12)").fadeOut();
+                                                                                    if ($('#pass_no1').next('img').length && $('#pass_no2').next('img').length && $('#pass_police').next('img').length){
+                                                                                        $('#pass_no1').next().remove();
+                                                                                        $('#pass_no2').next().remove();
+                                                                                        $('#pass_police').next().remove();                                                                                        
+                                                                                    }
+                                                                                } else {
+                                                                                    $("form[name='forma_order']>table:eq(0) tr:eq(12)").fadeIn();
+                                                                                    if (!$('#pass_no1').next('img').length && !$('#pass_no2').next('img').length && !$('#pass_police').next('img').length){
+                                                                                        $( "#pass_no1" ).after( '<img src="/phpshop/templates/prodacha/images/shop/flag_green.gif" alt="" height="16" width="16" border="0" hspace="5" align="middle"/>');
+                                                                                        $( "#pass_no2" ).after( '<img src="/phpshop/templates/prodacha/images/shop/flag_green.gif" alt="" height="16" width="16" border="0" hspace="5" align="middle"/>');
+                                                                                        $( "#pass_police" ).after( '<img src="/phpshop/templates/prodacha/images/shop/flag_green.gif" alt="" height="16" width="16" border="0" hspace="5" align="middle"/>');                                                                                        
+                                                                                    }
+                                                                                }                                                                                    
 									});
 								});
                                 $("input[type=radio][name='tk_delivery_item']").on('change', function(){
 								//$('#attr_val2').text($(this).val());
 									$(this).each(function(indx){
 										if (($(this).val() === 'до пункта выдачи ТК') && typeof ($('#delivery_address').attr('disabled')) === 'undefined') {
-										// $('#attr_val2').text(indx);
+                                                                                    // $('#attr_val2').text(indx);
 										$('#delivery_address').attr('disabled', 'disabled');
-												$('#delivery_address').css('border-color', '#abadb3');
-												$('#delivery_address').val('');
+                                                                                    $('#delivery_address').css('border-color', '#abadb3');
+                                                                                    $('#delivery_address').val('');
 										} else if ($(this).val() === 'по адресу' && typeof ($('#delivery_address').attr('disabled')) === 'string'){
-										//$('#attr_val2').text(indx);
-										$('#delivery_address').removeAttr('disabled');
+                                                                                    //$('#attr_val2').text(indx);
+                                                                                    $('#delivery_address').removeAttr('disabled');
 										}
 									});
 								});

@@ -768,12 +768,6 @@ function display_tovar_samovyvoz_hook($obj, $row) {
 	
 	$tab7_1_html.=$GLOBALS['SysValue']['lang']['samovyvoz_tab_string4'];
 	
-        //выделенные текст для Чебоксар
-        if ($_COOKIE['sincity']=='chb'){
-            $tab7_1_html=PHPShopText::br(1).'</br>'.$GLOBALS['SysValue']['lang']['samovyvoz_tab_string1'];
-            $tab7_1_html.=$GLOBALS['SysValue']['lang']['samovyvoz_tab_string2'].$tovar.$GLOBALS['SysValue']['lang']['samovyvoz_tab_string3'];
-            $tab7_1_html.=$GLOBALS['SysValue']['lang']['samovyvoz_tab_string5'];
-        }
 	$obj->set('deliveryInfo',$tab7_1_html,true);	
 }
 
