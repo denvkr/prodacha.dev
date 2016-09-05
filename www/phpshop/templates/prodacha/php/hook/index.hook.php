@@ -65,6 +65,7 @@ function leftCatal_hook($obj,$row,$rout) {
                     case '60': 	$href_html='<ul>'.
                                             '<li class="inside_menu_head"><a href="/shop/CID_60.html">Снегоуборщики</a></li>'.
                                             '</ul>';
+                                            $obj->set('top_position','style="height:500px;"');
                                             break;
                     case '77':	$href_html='<ul>'.
                                             '<li class="inside_menu_head"><a href="/shop/CID_77.html">Цепные пилы</a></li>'.

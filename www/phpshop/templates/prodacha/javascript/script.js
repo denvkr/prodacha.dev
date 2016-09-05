@@ -1486,6 +1486,11 @@ if ($('.sametovarbox:eq(0)>table').css('display')!=='none'){
 }
 //кастомизируем вывод полей в профиле зарегистрированного пользователя
 inputmaskforuserprofile();
+if ($('#showsertificate,#showsertificatehref').length){
+    $('#showsertificate,#showsertificatehref').on('click',function(event){
+       event.preventDefault(); 
+    });
+}
 //console.log($("input[name='promo_code_value']:eq(0)").length);
 /*
 //для рекомендации кокоса делаем вывод блока товаров "довесков"
@@ -1776,7 +1781,7 @@ if ($('.alsobought:eq(0)')!==null){
                                                                                     $('#tk_other').removeAttr('disabled');
 										}
                                                                                 //если выбраны данные ТК необходимо убрать данные по паспортам
-                                                                                if ($(this).val() === 'ПЭК' || $(this).val() === 'ЖелДор' || $(this).val() === 'Возовоз') {
+                                                                                if ($(this).val() === 'Возовоз') {
                                                                                     $("form[name='forma_order']>table:eq(0) tr:eq(12)").fadeOut();
                                                                                     if ($('#pass_no1').next('img').length && $('#pass_no2').next('img').length && $('#pass_police').next('img').length){
                                                                                         $('#pass_no1').next().remove();
@@ -3244,6 +3249,45 @@ $.ajax({
         }
         return 1;
     }
+function showsertificate(url){
+    //делаем окно popover
+    console.log('showsertificate',url);
+    html='<div id="dealersertificateview" style="width:600px;height:700px;background: url('+url+'); background-repeat: no-repeat;background-position: center;-webkit-background-size: auto 700px;-moz-background-size: auto 700px;-o-background-size: auto 700px;"></div>'
+    $.fancybox
+    ({
+            width : 600,
+            height : 700,
+            overlayOpacity:0,
+            autoSize:false,
+            closeBtn:true,
+            closeBtn2:false,
+            content: html,
+            scrolling: 'no',
+            'beforeShow': function () {
+            },
+            'afterShow': function() {
+                        //$('body').append('<a href="#_tool_'+id+'" id="a_temp_'+id+'" style="visibility:hidden;"></a>');
+                        $('.fancybox-item.fancybox-close:eq(0)').prop('href',"#");
+                        $('.fancybox-item.fancybox-close:eq(0)').bind('click.fb', function(e) {
+                            //console.log("AddToCartNum("+id+",'num_new"+id+"',2);");
+                            e.preventDefault();
+                            AddToCartNum(id,"num_new"+id,2);
+                            $(this).fancybox.close();
+                        });
+                        //console.log($('.fancybox-item.fancybox-close:eq(0)').attr('title'));
+                    },                                    
+            'afterClose': function() {
+
+                    },
+            helpers : {
+                overlay : {
+                    css : { 'overflow' : 'hidden' }
+                }
+            }
+    });
+    
+}    
+    
 document.addEventListener("DOMContentLoaded", function() {
   "use strict"
   var links = document.querySelectorAll("a.scroll");

@@ -1,17 +1,17 @@
-394<pre class='xdebug-var-dump' dir='ltr'>
+364<pre class='xdebug-var-dump' dir='ltr'>
 <b>array</b> <i>(size=14)</i>
-  'id' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>394</font>
-  'name' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'Мотоблок Ока МБ-1Д1М10 с двигателем Lifan'</font> <i>(length=41)</i>
-  'price' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'28910'</font> <i>(length=5)</i>
+  'id' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>364</font>
+  'name' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'Бензиновый снегоуборщик MTD SMART M 56'</font> <i>(length=38)</i>
+  'price' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'54900'</font> <i>(length=5)</i>
   'price2' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'0'</font> <i>(length=1)</i>
   'price3' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'0'</font> <i>(length=1)</i>
   'discountprice' <font color='#888a85'>=&gt;</font> <font color='#3465a4'>null</font>
   'promocode' <font color='#888a85'>=&gt;</font> <font color='#3465a4'>null</font>
-  'uid' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'ps_394'</font> <i>(length=6)</i>
+  'uid' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'31B-32AD678'</font> <i>(length=11)</i>
   'num' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
-  'weight' <font color='#888a85'>=&gt;</font> <font color='#3465a4'>null</font>
+  'weight' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'56'</font> <i>(length=2)</i>
   'ed_izm' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'шт.'</font> <i>(length=3)</i>
-  'pic_small' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'/UserFiles/Image/img394_10421s.jpg'</font> <i>(length=34)</i>
-  'parent' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>394</font>
+  'pic_small' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'/UserFiles/Image/img364_18517s.jpg'</font> <i>(length=34)</i>
+  'parent' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>364</font>
   'user' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'2'</font> <i>(length=1)</i>
 </pre>

@@ -51,10 +51,26 @@ $searchgift=false;
     );
  
     foreach($gifts_array as $key=>$val) {
-        if ($key== $prodid){
+        if ($key === $prodid){
             $searchgift=true;
            return $val;            
         }
     }
     return $searchgift;
+}
+
+function get_icon_dealer($iconid) {
+$searchdealer=false;
+//массив содержащий названия
+ $icons_text_array=array(
+    445=>array('icon'=>'images/certificate-icon-2.png','description'=>'<table><tr><td><a id="showsertificatehref" href="#" onclick="showsertificate(\'/UserFiles/Image/445.jpg\')"><div style="width:80px;height:40px;background: url(/UserFiles/Image/mtd.png); background-repeat: no-repeat;background-position: center;-webkit-background-size: 80px auto;-moz-background-size: 80px auto;-o-background-size: 80px auto;"></div><div id="showsertificate" onclick="showsertificate(\'/UserFiles/Image/445.jpg\')" style="width:80px;height:40px;color: #588910;"><p>Посмотреть сертификат</p></div></a></td><td><p>PROДАЧА - официальный дилер MTD. Покупая у нас, вы получаете профессиональную консультацию по изделию, высокое качество продукции и официальную гарантию производителя.</p></td></tr></table>'),
+    );
+ 
+    foreach($icons_text_array as $key=>$val) {
+        if ($key === $iconid){
+            $searchdealer=true;
+           return $val;            
+        }
+    }
+    return $searchdealer;
 }
