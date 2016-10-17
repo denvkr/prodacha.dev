@@ -2118,6 +2118,360 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 			// Перехват модуля
 			$this->setHook(__CLASS__, __FUNCTION__, $row, 'END');		
 			$dis.=$this->parseTemplate($this->getValue('templates.catalog_forma_4'));
+		} else if ($row['id']=='677') {
+			// Определяем переменные
+			$this->set('catalogId',$row['id']);
+			//$this->set('catalogI',$i);
+			$this->set('catalogTemplates',$this->getValue('dir.templates').chr(47).$this->PHPShopSystem->getValue('skin').chr(47));
+
+			$sql="select id,case name_rambler when '' then name else name_rambler end as name,name_rambler,case cat1.parent_to when 690 then 1 when 691 then 2 when 685 then 3 when 686 then 4 when 687 then 5 when 688 then 6 when 689 then 7 when 692 then 8 end as category_id,parent_to,(select name from ".$GLOBALS['SysValue']['base']['categories']." where id=cat1.parent_to limit 1) as parent_cat_name from ".$GLOBALS['SysValue']['base']['categories']." as cat1 where cat1.parent_to in (690,691,692,685,686,687,688,689)";
+			$sql_1="select id,case name_rambler when '' then name else name_rambler end as name,name_rambler,case cat1.parent_to when 690 then 1 when 691 then 2 when 685 then 3 when 686 then 4 when 687 then 5 when 688 then 6 when 689 then 7 when 692 then 8 end as category_id,parent_to,(select name from ".$GLOBALS['SysValue']['base']['categories']." where id=cat1.parent_to limit 1) as parent_cat_name from ".$GLOBALS['SysValue']['base']['categories']." as cat1 where cat1.parent_to in (690,691,692,685,686,687,688,689) and name not like '%(%)%' order by num";
+			$sql_2="select id,case name_rambler when '' then name else name_rambler end as name,name_rambler,case cat1.parent_to when 690 then 1 when 691 then 2 when 685 then 3 when 686 then 4 when 687 then 5 when 688 then 6 when 689 then 7 when 692 then 8 end as category_id,parent_to,(select name from ".$GLOBALS['SysValue']['base']['categories']." where id=cat1.parent_to limit 1) as parent_cat_name from ".$GLOBALS['SysValue']['base']['categories']." as cat1 where cat1.parent_to in (690,691,692,685,686,687,688,689) and name like '%(%)%' order by num";
+
+			$this->PHPShopOrm->cache = true;
+			$this->PHPShopOrm->debug = $this->debug;
+			$this->PHPShopOrm->sql=$sql;
+			$res1=$this->PHPShopOrm->select();
+				
+			foreach ($res1 as $prod_row1) {
+				switch ($prod_row1[category_id]) {
+					case 1: $parent_id1=$prod_row1[parent_to];
+					$parent_cat_name1=$prod_row1[parent_cat_name];
+					break;
+					case 2:	$parent_id2=$prod_row1[parent_to];
+					$parent_cat_name2=$prod_row1[parent_cat_name];
+					break;
+					case 3:	$parent_id3=$prod_row1[parent_to];
+					$parent_cat_name3=$prod_row1[parent_cat_name];
+					break;
+					case 4:	$parent_id4=$prod_row1[parent_to];
+					$parent_cat_name4=$prod_row1[parent_cat_name];
+					break;
+					case 5:	$parent_id5=$prod_row1[parent_to];
+					$parent_cat_name5=$prod_row1[parent_cat_name];
+					break;
+					case 6:	$parent_id6=$prod_row1[parent_to];
+					$parent_cat_name6=$prod_row1[parent_cat_name];
+					break;
+					case 7:	$parent_id7=$prod_row1[parent_to];
+					$parent_cat_name7=$prod_row1[parent_cat_name];
+					break;
+					case 8:	$parent_id8=$prod_row1[parent_to];
+					$parent_cat_name8=$prod_row1[parent_cat_name];
+					break;
+				}
+			}
+				
+			if (strlen($parent_cat_name1)>24) {
+				$sdvig_vverh='style="position:relative;top:-14px;"';
+			} else {
+				$sdvig_vverh='';
+			}
+			$submenuhead='<li id-info="'.$parent_id1.'" onclick="document.getElementById(\'fade\').style.display=\'block\'" onmouseover="this.style.backgroundColor=\'#8ab943\'" onmouseout="this.style.backgroundColor=\'#e5e5e5\'" style="display:none;background: #e5e5e5;height: 24px;"><span '.$sdvig_vverh.'>'.$parent_cat_name1.'</span>';
+			$submenuhead.='<div class="submenuhead">';
+			$submenuhead.='<div class="menutype">';
+			$submenuhead.='<ul>';
+			$submenuhead.='<li class="inside_menu_head"><a href="/shop/CID_'.$row[id].'.html">'.$row[name].'</a></li>';
+			$submenuhead.='<li class="inside_menu_head"><a href="/shop/CID_'.$parent_id1.'.html">'.$parent_cat_name1.'</a></li>';
+			$submenuhead.='</ul>';							
+			//********************************************************************* 142 ***********************************************************************************					
+			$this->PHPShopOrm->cache = true;
+			$this->PHPShopOrm->debug = $this->debug;
+			$this->PHPShopOrm->sql=$sql_1;
+			$res1=$this->PHPShopOrm->select();
+				
+
+			$submenuhead.='<p id="catpage1_'.$parent_id1.'" class="menublock" >По типу:</p><ul id="ul_cat_page_1_'.$parent_id1.'" class="catalogPodcatalog1">';
+
+			$submenuhead1_1='';
+			$submenuhead2_1='';
+			$submenuhead3_1='';
+			$submenuhead4_1='';
+			$submenuhead5_1='';
+			$submenuhead6_1='';
+			$submenuhead7_1='';
+			$submenuhead8_1='';
+                        //для изменения значения массива после хука с подстановкой измененного названия в меню
+                        $cnt=0;
+                        //меню с сортировкой сначала русские названия потом английские
+                        $array_submenuhead1_1=array();
+                        $array_submenuhead2_1=array();
+                        $array_submenuhead3_1=array();
+                        $array_submenuhead4_1=array();
+                        $array_submenuhead5_1=array();
+                        $array_submenuhead6_1=array();
+                        $array_submenuhead7_1=array();
+                        $array_submenuhead8_1=array();
+                        //цикл заносим в массивы меню по типу данные плюс применяем хук с подстановкой измененного названия в меню
+
+			foreach ($res1 as $prod_row1) {
+                            // Перехват модуля
+                            $hook=$this->setHook(__CLASS__, __FUNCTION__, $prod_row1, 'MIDDLE');
+                            if (!empty($hook)){
+                            $res1[$cnt][name]=trim($hook);
+                            $prod_row1[name]=trim($hook);
+                            }
+                           //нужно сформировать массив для вывода и в нем осуществить сортировку по полю name
+                            if ($prod_row1[category_id]==1) {
+                                $array_submenuhead1_1[]=array('cnt'=>$cnt,'category_id'=>$prod_row1[category_id],'id'=>$prod_row1[id],'name'=>$prod_row1[name]);
+                            }
+                            if ($prod_row1[category_id]==2) {
+                                $array_submenuhead2_1[]=array('cnt'=>$cnt,'category_id'=>$prod_row1[category_id],'id'=>$prod_row1[id],'name'=>$prod_row1[name]);
+                            }
+                            if ($prod_row1[category_id]==3) {
+                                $array_submenuhead3_1[]=array('cnt'=>$cnt,'category_id'=>$prod_row1[category_id],'id'=>$prod_row1[id],'name'=>$prod_row1[name]);
+                            }
+                            if ($prod_row1[category_id]==4) {
+                                $array_submenuhead4_1[]=array('cnt'=>$cnt,'category_id'=>$prod_row1[category_id],'id'=>$prod_row1[id],'name'=>$prod_row1[name]);
+                            }
+                            if ($prod_row1[category_id]==5) {
+                                $array_submenuhead5_1[]=array('cnt'=>$cnt,'category_id'=>$prod_row1[category_id],'id'=>$prod_row1[id],'name'=>$prod_row1[name]);
+                            }
+                            if ($prod_row1[category_id]==6) {
+                                $array_submenuhead6_1[]=array('cnt'=>$cnt,'category_id'=>$prod_row1[category_id],'id'=>$prod_row1[id],'name'=>$prod_row1[name]);
+                            }
+                            if ($prod_row1[category_id]==7) {
+                                $array_submenuhead7_1[]=array('cnt'=>$cnt,'category_id'=>$prod_row1[category_id],'id'=>$prod_row1[id],'name'=>$prod_row1[name]);
+                            }
+                            if ($prod_row1[category_id]==8) {
+                                $array_submenuhead8_1[]=array('cnt'=>$cnt,'category_id'=>$prod_row1[category_id],'id'=>$prod_row1[id],'name'=>$prod_row1[name]);
+                            }
+                            $cnt++;
+                        }
+                        if (count($array_submenuhead1_1)>1)
+                            usort($array_submenuhead1_1, PHPShopText::array_submenuhead1_cmp('name'));
+                        if (count($array_submenuhead2_1)>1)
+                            usort($array_submenuhead2_1, PHPShopText::array_submenuhead1_cmp('name'));
+                        if (count($array_submenuhead3_1)>1)
+                            usort($array_submenuhead3_1, PHPShopText::array_submenuhead1_cmp('name'));
+                        if (count($array_submenuhead4_1)>1)
+                            usort($array_submenuhead4_1, PHPShopText::array_submenuhead1_cmp('name'));
+                        if (count($array_submenuhead5_1)>1)
+                            usort($array_submenuhead5_1, PHPShopText::array_submenuhead1_cmp('name'));
+                        if (count($array_submenuhead6_1)>1)
+                            usort($array_submenuhead6_1, PHPShopText::array_submenuhead1_cmp('name'));
+                        if (count($array_submenuhead7_1)>1)
+                            usort($array_submenuhead7_1, PHPShopText::array_submenuhead1_cmp('name'));
+                        if (count($array_submenuhead8_1)>1)
+                            usort($array_submenuhead8_1, PHPShopText::array_submenuhead1_cmp('name'));
+                        reset($array_submenuhead1_1);
+                        reset($array_submenuhead2_1);
+                        reset($array_submenuhead3_1);
+                        reset($array_submenuhead4_1);
+                        reset($array_submenuhead5_1);
+                        reset($array_submenuhead6_1);
+                        reset($array_submenuhead7_1);
+                        reset($array_submenuhead8_1);
+                        
+                        //циклы формируем вывод меню по типу с учетом сортировки
+                        foreach ($array_submenuhead1_1 as $prod_row1){
+                                $submenuhead1_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
+                        }
+                        foreach ($array_submenuhead2_1 as $prod_row1) {
+                                $submenuhead2_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
+                        }
+                        foreach ($array_submenuhead3_1 as $prod_row1){
+                                $submenuhead3_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
+                        }
+                        foreach ($array_submenuhead4_1 as $prod_row1){
+                                $submenuhead4_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
+                        }
+                        foreach ($array_submenuhead5_1 as $prod_row1){
+                                $submenuhead5_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
+                        }
+                        foreach ($array_submenuhead6_1 as $prod_row1){
+                                $submenuhead6_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
+                        }
+                        foreach ($array_submenuhead7_1 as $prod_row1){
+                                $submenuhead7_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
+                        }
+                        foreach ($array_submenuhead8_1 as $prod_row1){
+                                $submenuhead8_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
+                        }
+                        $array_submenuhead1_1=array();
+                        $array_submenuhead2_1=array();
+                        $array_submenuhead3_1=array();
+                        $array_submenuhead4_1=array();
+                        $array_submenuhead5_1=array();
+                        $array_submenuhead6_1=array();
+                        $array_submenuhead7_1=array();
+                        $array_submenuhead8_1=array();
+
+			$submenuhead.=$submenuhead1_1;
+			$submenuhead.='</ul>';
+			//генерация второго раздела меню "по производителю"	
+			$this->PHPShopOrm->cache = true;
+			$this->PHPShopOrm->debug = $this->debug;
+			$this->PHPShopOrm->sql=$sql_2;
+			$res2=$this->PHPShopOrm->select();			
+
+			$submenuhead.='<p id="catpage2_'.$parent_id1.'" class="menublock" >По производителю:</p><ul id="ul_cat_page2_'.$parent_id1.'"  class="catalogPodcatalog2">';
+
+			$submenuhead1_2='';
+			$submenuhead2_2='';
+			$submenuhead3_2='';
+			$submenuhead4_2='';
+			$submenuhead5_2='';
+			$submenuhead6_2='';
+			$submenuhead7_2='';
+			$submenuhead8_2='';
+                        $cnt=0;
+                        $array_submenuhead1_2=array();
+                        $array_submenuhead2_2=array();
+                        $array_submenuhead3_2=array();
+                        $array_submenuhead4_2=array();
+                        $array_submenuhead5_2=array();
+                        $array_submenuhead6_2=array();
+                        $array_submenuhead7_2=array();
+                        $array_submenuhead8_2=array();
+			foreach ($res2 as $prod_row2) {
+			    //от конца строки ищем (
+			    $start_curl_brace_pos=strrpos($prod_row2[name],"(");
+			    //от конца строки ищем )
+			    $stop_curl_brace_pos=strrpos($prod_row2[name],")");
+					
+        		    $prod_row2[name]=trim(substr_replace($prod_row2[name],'',$start_curl_brace_pos,($stop_curl_brace_pos-$start_curl_brace_pos)+1));
+
+                            // Перехват модуля
+                            $hook=$this->setHook(__CLASS__, __FUNCTION__, $prod_row2, 'MIDDLE');
+                            if (!empty($hook)){
+                            $res2[$cnt][name]=trim($hook); 
+                            $prod_row2[name]=trim($hook);
+                            }
+                            //нужно сформировать массив для вывода категории 1 и в нем осуществить сортировку по полю name
+                            if ($prod_row2[category_id]==1) {
+                                $array_submenuhead1_2[]=array('cnt'=>$cnt,'category_id'=>$prod_row2[category_id],'id'=>$prod_row2[id],'name'=>$prod_row2[name]);
+                            }
+                            if ($prod_row2[category_id]==2) {
+                                $array_submenuhead2_2[]=array('cnt'=>$cnt,'category_id'=>$prod_row2[category_id],'id'=>$prod_row2[id],'name'=>$prod_row2[name]);
+                            }
+                            if ($prod_row2[category_id]==3) {
+                                $array_submenuhead3_2[]=array('cnt'=>$cnt,'category_id'=>$prod_row2[category_id],'id'=>$prod_row2[id],'name'=>$prod_row2[name]);
+                            }
+                            if ($prod_row2[category_id]==4) {
+                                $array_submenuhead4_2[]=array('cnt'=>$cnt,'category_id'=>$prod_row2[category_id],'id'=>$prod_row2[id],'name'=>$prod_row2[name]);
+                            }
+                            if ($prod_row2[category_id]==5) {
+                                $array_submenuhead5_2[]=array('cnt'=>$cnt,'category_id'=>$prod_row2[category_id],'id'=>$prod_row2[id],'name'=>$prod_row2[name]);
+                            }
+                            if ($prod_row2[category_id]==6) {
+                                $array_submenuhead6_2[]=array('cnt'=>$cnt,'category_id'=>$prod_row2[category_id],'id'=>$prod_row2[id],'name'=>$prod_row2[name]);
+                            }
+                            if ($prod_row2[category_id]==7) {
+                                $array_submenuhead7_2[]=array('cnt'=>$cnt,'category_id'=>$prod_row2[category_id],'id'=>$prod_row2[id],'name'=>$prod_row2[name]);
+                            }
+                            if ($prod_row2[category_id]==8) {
+                                $array_submenuhead8_2[]=array('cnt'=>$cnt,'category_id'=>$prod_row2[category_id],'id'=>$prod_row2[id],'name'=>$prod_row2[name]);
+                            }
+                            $cnt++;
+                        }
+                        if (count($array_submenuhead1_2)>1 && CustomSortOrder==1)
+                            usort($array_submenuhead1_2, PHPShopText::array_submenuhead2_cmp('name'));
+                        elseif (count($array_submenuhead1_2)>1 && CustomSortOrder==0)
+                            usort($array_submenuhead1_2, PHPShopText::array_submenuhead1_cmp('name'));
+                        if (count($array_submenuhead2_2)>1 && CustomSortOrder==1)
+                            usort($array_submenuhead2_2, PHPShopText::array_submenuhead2_cmp('name'));
+                        elseif (count($array_submenuhead2_2)>1 && CustomSortOrder==0)
+                            usort($array_submenuhead2_2, PHPShopText::array_submenuhead1_cmp('name'));
+                        if (count($array_submenuhead3_2)>1 && CustomSortOrder==1)
+                            usort($array_submenuhead3_2, PHPShopText::array_submenuhead2_cmp('name'));
+                        elseif (count($array_submenuhead3_2)>1 && CustomSortOrder==0)
+                            usort($array_submenuhead3_2, PHPShopText::array_submenuhead1_cmp('name'));
+                        if (count($array_submenuhead4_2)>1 && CustomSortOrder==1)
+                            usort($array_submenuhead4_2, PHPShopText::array_submenuhead2_cmp('name'));
+                        elseif (count($array_submenuhead4_2)>1 && CustomSortOrder==0)
+                            usort($array_submenuhead4_2, PHPShopText::array_submenuhead1_cmp('name'));
+                        if (count($array_submenuhead5_2)>1 && CustomSortOrder==1)
+                            usort($array_submenuhead5_2, PHPShopText::array_submenuhead2_cmp('name'));
+                        elseif (count($array_submenuhead5_2)>1 && CustomSortOrder==0)
+                            usort($array_submenuhead5_2, PHPShopText::array_submenuhead1_cmp('name'));
+                        if (count($array_submenuhead6_2)>1 && CustomSortOrder==1)
+                            usort($array_submenuhead6_2, PHPShopText::array_submenuhead2_cmp('name'));
+                        elseif (count($array_submenuhead6_2)>1 && CustomSortOrder==0)
+                            usort($array_submenuhead6_2, PHPShopText::array_submenuhead1_cmp('name'));
+                        if (count($array_submenuhead7_2)>1 && CustomSortOrder==1)
+                            usort($array_submenuhead7_2, PHPShopText::array_submenuhead2_cmp('name'));
+                        elseif (count($array_submenuhead7_2)>1 && CustomSortOrder==0)
+                            usort($array_submenuhead7_2, PHPShopText::array_submenuhead1_cmp('name'));
+                        if (count($array_submenuhead8_2)>1 && CustomSortOrder==1)
+                            usort($array_submenuhead8_2, PHPShopText::array_submenuhead2_cmp('name'));
+                        elseif (count($array_submenuhead8_2)>1 && CustomSortOrder==0)
+                            usort($array_submenuhead8_2, PHPShopText::array_submenuhead1_cmp('name'));
+                        //$t2=$this->microtime_float();
+                        //echo microtime().'<br>';
+                        //$t3=$t2-$t1;
+                        //echo $t3.'<br>';
+                        //print_r($array_submenuhead1_2);
+                        //print_r($array_submenuhead1_2);
+                        reset($array_submenuhead1_2);
+                        reset($array_submenuhead2_2);
+                        reset($array_submenuhead3_2);
+                        reset($array_submenuhead4_2);
+                        reset($array_submenuhead5_2);
+                        reset($array_submenuhead6_2);
+                        reset($array_submenuhead7_2);
+                        reset($array_submenuhead8_2);
+                        
+                        foreach ($array_submenuhead1_2 as $prod_row2){
+       				$submenuhead1_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
+                        }
+                        foreach ($array_submenuhead2_2 as $prod_row2){
+                                $submenuhead2_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
+                        }
+                        foreach ($array_submenuhead3_2 as $prod_row2){
+                                $submenuhead3_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
+                        }
+                        foreach ($array_submenuhead4_2 as $prod_row2){
+                                $submenuhead4_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
+                        }
+                        foreach ($array_submenuhead5_2 as $prod_row2){
+                                $submenuhead5_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
+                        }
+                        foreach ($array_submenuhead6_2 as $prod_row2){
+                                $submenuhead6_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
+                        }
+                        foreach ($array_submenuhead7_2 as $prod_row2){
+                                $submenuhead7_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
+                        }
+                        foreach ($array_submenuhead8_2 as $prod_row2){
+                                $submenuhead8_2.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row2[id].'.html">'.$prod_row2[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row2[id]).'</li>';
+                        }
+                        $array_submenuhead1_2=array();
+                        $array_submenuhead2_2=array();
+                        $array_submenuhead3_2=array();
+                        $array_submenuhead4_2=array();
+                        $array_submenuhead5_2=array();
+                        $array_submenuhead6_2=array();
+                        $array_submenuhead7_2=array();                        
+                        $array_submenuhead8_2=array();
+
+                        $submenuhead.=$submenuhead1_2;
+			$submenuhead.='</ul>';
+			$submenuhead.='</div>';
+			$submenuhead.='</div>';
+			$submenuhead.='</li>';
+			
+			$submenuhead.=$this->custommenuoutput_submenu($parent_id2,$parent_cat_name2,$row[id],$row[name],$submenuhead2_1,$submenuhead2_2);
+			
+			$submenuhead.=$this->custommenuoutput_submenu($parent_id3,$parent_cat_name3,$row[id],$row[name],$submenuhead3_1,$submenuhead3_2);
+				
+			$submenuhead.=$this->custommenuoutput_submenu($parent_id4,$parent_cat_name4,$row[id],$row[name],$submenuhead4_1,$submenuhead4_2);
+			
+			$submenuhead.=$this->custommenuoutput_submenu($parent_id5,$parent_cat_name5,$row[id],$row[name],$submenuhead5_1,$submenuhead5_2);
+				
+			$submenuhead.=$this->custommenuoutput_submenu($parent_id6,$parent_cat_name6,$row[id],$row[name],$submenuhead6_1,$submenuhead6_2);
+				
+			$submenuhead.=$this->custommenuoutput_submenu($parent_id7,$parent_cat_name7,$row[id],$row[name],$submenuhead7_1,$submenuhead7_2);
+				
+			$submenuhead.=$this->custommenuoutput_submenu($parent_id8,$parent_cat_name8,$row[id],$row[name],$submenuhead8_1,$submenuhead8_2);
+								
+			$this->set('sub_li',$submenuhead,true);
+			$this->set('catalogTitle',$row['name']);
+			$this->set('catalogName',$row['name']);
+			$this->set('catalogid_4',$row['id']);
+			// Перехват модуля
+			$this->setHook(__CLASS__, __FUNCTION__, $row, 'END');		
+			$dis.=$this->parseTemplate($this->getValue('templates.catalog_forma_4'));
 		} else {
 			// Определяем переменные
 			$this->set('catalogId',$row['id']);

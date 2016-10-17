@@ -266,7 +266,7 @@ $(this).closest('li').addClass('empty');
 }
 });
         $("#slides").slides({
-preload:true,
+        preload:true,
         preloadImage:"images/loader.gif",
         play:3000,
         pause:2500,
@@ -274,323 +274,144 @@ preload:true,
         paginationClass: 'slider_pagination'
 });
         $('.left .menu .mainmenu > li').click(function (event) {
-var target = $(event.target);
+        var target = $(event.target);
         //$("#fade").css("display", "block");
         //alert(target.is("li"));
 
         $('.mainmenu').find(".submenuhead").fadeOut('fast');
+        var submenuObject={
+        submenuNum:null,
+        submenCatuNum:null,
+        programmenu: function (domobj){
+            //console.log(this.submenCatuNum[0]);
+            if ($(domobj.next('li')).attr("id-info") == this.submenCatuNum[0]) {
+            if (domobj.next('li').css("display") == "block") {
+            domobj.next('li').css("display", "none");
+            } else if (domobj.next('li').css("display") == "none") {
+            domobj.next('li').css("display", "block");
+            }
+            //console.log('submenCatuNum[0] clicked');
+            }            
+        },
+        programSubmenu: function (domobj){
+            console.log(this.submenCatuNum);
+            for (cnt1=1;cnt1<this.submenCatuNum.length;cnt1++){
+                if ($(domobj.nextAll('li').get(this.submenuNum[cnt1])).attr("id-info") == this.submenCatuNum[cnt1]) {
+                if ($(domobj.nextAll('li').get(this.submenuNum[cnt1])).css("display") == "block") {
+                $(domobj.nextAll('li').get(this.submenuNum[cnt1])).css("display", "none");
+                } else if ($(domobj.nextAll('li').get(this.submenuNum[cnt1])).css("display") == "none") {
+                $(domobj.nextAll('li').get(this.submenuNum[cnt1])).css("display", "block");
+                }
+                //console.log(this.submenCatuNum[cnt1],' clicked');
+                }
+            }
+        },
+        programSubMenuClick:function(domobj){
+                    $(domobj).click(function(event) {
+        var target = $(event.target);
+                document.getElementById('fade').style.display = 'block';
+                if (target.is("span")) {
+        target.next(".submenuhead").fadeIn('fast');
+        }
+        if (target.is("li")) {
+        target.children(".submenuhead").fadeIn('fast');
+        }
+        });
+        }
+    };
+        var smenuObject=Object.create(submenuObject);
+        
         if ($(this).attr("id-info") == 288){
-//"мотоблоки"
-if ($($(this).next('li')).attr("id-info") == 37) {
-if ($(this).next('li').css("display") == "block") {
-$(this).next('li').css("display", "none");
-} else if ($(this).next('li').css("display") == "none") {
-$(this).next('li').css("display", "block");
-}
-//console.log('37 clicked');
-}
-//культиваторы
-if ($($(this).nextAll('li').get(1)).attr("id-info") == 44) {
-if ($($(this).nextAll('li').get(1)).css("display") == "block") {
-$($(this).nextAll('li').get(1)).css("display", "none");
-} else if ($($(this).nextAll('li').get(1)).css("display") == "none") {
-$($(this).nextAll('li').get(1)).css("display", "block");
-}
-//console.log('44 clicked');
-}
-//навесное оборудование для мотоблоков
-if ($($(this).nextAll('li').get(2)).attr("id-info") == 16) {
-if ($($(this).nextAll('li').get(2)).css("display") == "block") {
-$($(this).nextAll('li').get(2)).css("display", "none");
-} else if ($($(this).nextAll('li').get(2)).css("display") == "none") {
-$($(this).nextAll('li').get(2)).css("display", "block");
-}
-//console.log('16 clicked');
-}
-//двигатели для мотоблоков
-if ($($(this).nextAll('li').get(3)).attr("id-info") == 5) {
-if ($($(this).nextAll('li').get(3)).css("display") == "block") {
-$($(this).nextAll('li').get(3)).css("display", "none");
-} else if ($($(this).nextAll('li').get(3)).css("display") == "none") {
-$($(this).nextAll('li').get(3)).css("display", "block");
-}
-//console.log('5 clicked');
-}
-//запчасти, расходники для мотоблоков
-if ($($(this).nextAll('li').get(4)).attr("id-info") == 36) {
-if ($($(this).nextAll('li').get(4)).css("display") == "block") {
-$($(this).nextAll('li').get(4)).css("display", "none");
-} else if ($($(this).nextAll('li').get(4)).css("display") == "none") {
-$($(this).nextAll('li').get(4)).css("display", "block");
-}
-//console.log('36 clicked');
-}
-var spanelements = $('.mainmenu').find("li");
+        //"мотоблоки"
+        smenuObject.submenuNum=[0,1,2,3,4];
+        smenuObject.submenCatuNum=[37,44,16,5,36];
+        smenuObject.programmenu($(this));
+        smenuObject.programSubmenu($(this));
+        
+        var spanelements = $('.mainmenu').find("li");
         spanelements.each(function(index) {
 
-        if ($(this).attr("id-info") == 37) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-        if ($(this).attr("id-info") == 44) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-        if ($(this).attr("id-info") == 16) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-        if ($(this).attr("id-info") == 5) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-        if ($(this).attr("id-info") == 36) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-
+            if ($(this).attr("id-info") == 37) {
+                smenuObject.programSubMenuClick($(this));
+            }
+            if ($(this).attr("id-info") == 44) {
+                smenuObject.programSubMenuClick($(this));        
+            }
+            if ($(this).attr("id-info") == 16) {
+                smenuObject.programSubMenuClick($(this));        
+            }
+            if ($(this).attr("id-info") == 5) {
+                smenuObject.programSubMenuClick($(this));        
+            }
+            if ($(this).attr("id-info") == 36) {
+                smenuObject.programSubMenuClick($(this));        
+            }
         });
 }
-
 
 //console.log($($($(this).children("span")[0]).children("div")[0]).text().toLowerCase().substring(0,22));
+
 if ($(this).attr("id-info") == 60) { //'снегоуборщики'
-//console.log($($(this).children("span")[0]).children("div").text());
-document.getElementById('fade').style.display = 'block';
-        //$('.mainmenu').find(".submenuhead").fadeOut('fast');
-        //$(this).children(".submenuhead").fadeIn('fast');
-        //console.log(target);
-        if (target.is("div")) {
-//console.log(target.parent().next(".submenuhead"));
-target.parent().next(".submenuhead").fadeIn('fast');
-}
-if (target.is("li")) {
-target.children(".submenuhead").fadeIn('fast');
-}
+    //console.log($($(this).children("span")[0]).children("div").text());
+    document.getElementById('fade').style.display = 'block';
+    //$('.mainmenu').find(".submenuhead").fadeOut('fast');
+    //$(this).children(".submenuhead").fadeIn('fast');
+    //console.log(target);
+    if (target.is("div")) {
+        //console.log(target.parent().next(".submenuhead"));
+        target.parent().next(".submenuhead").fadeIn('fast');
+    }
+    if (target.is("li")) {
+        target.children(".submenuhead").fadeIn('fast');
+    }
 }
 if ($(this).attr("id-info") == 9) {//'генераторы'
-//console.log($($(this).children("span")[0]).children("div").text());
-document.getElementById('fade').style.display = 'block';
-        //$('.mainmenu').find(".submenuhead").fadeOut('fast');
-        //$(this).children(".submenuhead").fadeIn('fast');
-        //console.log(target);
-        if (target.is("div")) {
-//console.log(target.parent().next(".submenuhead"));
-target.parent().next(".submenuhead").fadeIn('fast');
-}
-if (target.is("li")) {
-target.children(".submenuhead").fadeIn('fast');
-}
-if (target.is("img")) {
-//console.log(target.parents("span").next(".submenuhead"));
-target.parents("span").next(".submenuhead").fadeIn('fast');
-}
+    //console.log($($(this).children("span")[0]).children("div").text());
+    document.getElementById('fade').style.display = 'block';
+    //$('.mainmenu').find(".submenuhead").fadeOut('fast');
+    //$(this).children(".submenuhead").fadeIn('fast');
+    //console.log(target);
+    if (target.is("div")) {
+        //console.log(target.parent().next(".submenuhead"));
+        target.parent().next(".submenuhead").fadeIn('fast');
+    }
+    if (target.is("li")) {
+        target.children(".submenuhead").fadeIn('fast');
+    }
+    if (target.is("img")) {
+        //console.log(target.parents("span").next(".submenuhead"));
+        target.parents("span").next(".submenuhead").fadeIn('fast');
+    }
 }
 //'техника для газона'
 if ($(this).attr("id-info") == 290){
-//"Газонокосилки"
-if ($($(this).nextAll('li').get(5)).attr("id-info") == 18) {
-if ($($(this).nextAll('li').get(5)).css("display") == "block") {
-$($(this).nextAll('li').get(5)).css("display", "none");
-} else if ($($(this).nextAll('li').get(5)).css("display") == "none") {
-$($(this).nextAll('li').get(5)).css("display", "block");
-}
-//console.log('18 clicked');
-}
-//Триммеры для травы
-if ($($(this).nextAll('li').get(6)).attr("id-info") == 85) {
-if ($($(this).nextAll('li').get(6)).css("display") == "block") {
-$($(this).nextAll('li').get(6)).css("display", "none");
-} else if ($($(this).nextAll('li').get(6)).css("display") == "none") {
-$($(this).nextAll('li').get(6)).css("display", "block");
-}
-//console.log('85 clicked');
-}
-//Аэраторы, вертикуттеры, скарификаторы
-if ($($(this).nextAll('li').get(7)).attr("id-info") == 215) {
-if ($($(this).nextAll('li').get(7)).css("display") == "block") {
-$($(this).nextAll('li').get(7)).css("display", "none");
-} else if ($($(this).nextAll('li').get(7)).css("display") == "none") {
-$($(this).nextAll('li').get(7)).css("display", "block");
-}
-//console.log('215 clicked');
-}
-//Сенокосилки фронтальные
-if ($($(this).nextAll('li').get(8)).attr("id-info") == 299) {
-if ($($(this).nextAll('li').get(8)).css("display") == "block") {
-$($(this).nextAll('li').get(8)).css("display", "none");
-} else if ($($(this).nextAll('li').get(8)).css("display") == "none") {
-$($(this).nextAll('li').get(8)).css("display", "block");
-}
-//console.log('299 clicked');
-}
-//Садовые ножницы и кусторезы
-if ($($(this).nextAll('li').get(9)).attr("id-info") == 297) {
-if ($($(this).nextAll('li').get(9)).css("display") == "block") {
-$($(this).nextAll('li').get(9)).css("display", "none");
-} else if ($($(this).nextAll('li').get(9)).css("display") == "none") {
-$($(this).nextAll('li').get(9)).css("display", "block");
-}
-//console.log('297 clicked');
-}
-//Подрезчики края газона
-if ($($(this).nextAll('li').get(10)).attr("id-info") == 254) {
-if ($($(this).nextAll('li').get(10)).css("display") == "block") {
-$($(this).nextAll('li').get(10)).css("display", "none");
-} else if ($($(this).nextAll('li').get(10)).css("display") == "none") {
-$($(this).nextAll('li').get(10)).css("display", "block");
-}
-//console.log('254 clicked');
-}
-//Садовые катки и валики
-if ($($(this).nextAll('li').get(11)).attr("id-info") == 272) {
-if ($($(this).nextAll('li').get(11)).css("display") == "block") {
-$($(this).nextAll('li').get(11)).css("display", "none");
-} else if ($($(this).nextAll('li').get(11)).css("display") == "none") {
-$($(this).nextAll('li').get(11)).css("display", "block");
-}
-//console.log('272 clicked');
-}
-
+    smenuObject.submenuNum=[0,5,6,7,8,9,10,11];
+    smenuObject.submenCatuNum=[0,18,85,215,299,297,254,272];
+    smenuObject.programSubmenu($(this));
 var spanelements = $('.mainmenu').find("li");
         spanelements.each(function(index) {
 
-        if ($(this).attr("id-info") == 18) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-        if ($(this).attr("id-info") == 85) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-        if ($(this).attr("id-info") == 215) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-        if ($(this).attr("id-info") == 299) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-        if ($(this).attr("id-info") == 297) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-        if ($(this).attr("id-info") == 254) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-        if ($(this).attr("id-info") == 272) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
+            if ($(this).attr("id-info") == 18) {
+                smenuObject.programSubMenuClick($(this));
+            }
+            if ($(this).attr("id-info") == 85) {
+                smenuObject.programSubMenuClick($(this));
+            }
+            if ($(this).attr("id-info") == 215) {
+                smenuObject.programSubMenuClick($(this));
+            }
+            if ($(this).attr("id-info") == 299) {
+                smenuObject.programSubMenuClick($(this));
+            }
+            if ($(this).attr("id-info") == 297) {
+                smenuObject.programSubMenuClick($(this));
+            }
+            if ($(this).attr("id-info") == 254) {
+                smenuObject.programSubMenuClick($(this));
+            }
+            if ($(this).attr("id-info") == 272) {
+                smenuObject.programSubMenuClick($(this));
+            }
 
         });
 }
@@ -610,216 +431,87 @@ target.parents("span").next(".submenuhead").fadeIn('fast');
 }
 
 //'Благоустройство участка'
-if ($(this).attr("id-info") == 292){
-//console.log($($(this).nextAll('li').get(12)).attr("id-info"));
-//"Мотобуры"
-if ($($(this).nextAll('li').get(12)).attr("id-info") == 142) {
-if ($($(this).nextAll('li').get(12)).css("display") == "block") {
-$($(this).nextAll('li').get(12)).css("display", "none");
-} else if ($($(this).nextAll('li').get(12)).css("display") == "none") {
-$($(this).nextAll('li').get(12)).css("display", "block");
-}
-//console.log('142 clicked');
-}
-//Мотопомпы для воды
-if ($($(this).nextAll('li').get(13)).attr("id-info") == 293) {
-if ($($(this).nextAll('li').get(13)).css("display") == "block") {
-$($(this).nextAll('li').get(13)).css("display", "none");
-} else if ($($(this).nextAll('li').get(13)).css("display") == "none") {
-$($(this).nextAll('li').get(13)).css("display", "block");
-}
-//console.log('293 clicked');
-}
-//console.log($($(this).nextAll('li').get(14)).attr("id-info"));
-//Водяные насосы
-if ($($(this).nextAll('li').get(14)).attr("id-info") == 503) {
-if ($($(this).nextAll('li').get(14)).css("display") == "block") {
-$($(this).nextAll('li').get(14)).css("display", "none");
-} else if ($($(this).nextAll('li').get(14)).css("display") == "none") {
-$($(this).nextAll('li').get(14)).css("display", "block");
-}
-//console.log('503 clicked');
-}
-//Садовые воздуходувы
-if ($($(this).nextAll('li').get(15)).attr("id-info") == 88) {
-if ($($(this).nextAll('li').get(15)).css("display") == "block") {
-$($(this).nextAll('li').get(15)).css("display", "none");
-} else if ($($(this).nextAll('li').get(15)).css("display") == "none") {
-$($(this).nextAll('li').get(15)).css("display", "block");
-}
-//console.log('88 clicked');
-}
-//Дровоколы
-if ($($(this).nextAll('li').get(16)).attr("id-info") == 224) {
-if ($($(this).nextAll('li').get(16)).css("display") == "block") {
-$($(this).nextAll('li').get(16)).css("display", "none");
-} else if ($($(this).nextAll('li').get(16)).css("display") == "none") {
-$($(this).nextAll('li').get(16)).css("display", "block");
-}
-//console.log('224 clicked');
-}
-//Садовые измельчители
-if ($($(this).nextAll('li').get(17)).attr("id-info") == 256) {
-if ($($(this).nextAll('li').get(17)).css("display") == "block") {
-$($(this).nextAll('li').get(17)).css("display", "none");
-} else if ($($(this).nextAll('li').get(17)).css("display") == "none") {
-$($(this).nextAll('li').get(17)).css("display", "block");
-}
-//console.log('256 clicked');
-}
-//Высоторезы
-if ($($(this).nextAll('li').get(18)).attr("id-info") == 298) {
-if ($($(this).nextAll('li').get(18)).css("display") == "block") {
-$($(this).nextAll('li').get(18)).css("display", "none");
-} else if ($($(this).nextAll('li').get(18)).css("display") == "none") {
-$($(this).nextAll('li').get(18)).css("display", "block");
-}
-//console.log('298 clicked');
-}
-//Виброплиты
-if ($($(this).nextAll('li').get(19)).attr("id-info") == 172) {
-if ($($(this).nextAll('li').get(19)).css("display") == "block") {
-$($(this).nextAll('li').get(19)).css("display", "none");
-} else if ($($(this).nextAll('li').get(19)).css("display") == "none") {
-$($(this).nextAll('li').get(19)).css("display", "block");
-}
-//console.log('172 clicked');
-}
-//Садовые инструменты
-if ($($(this).nextAll('li').get(20)).attr("id-info") == 536) {
-if ($($(this).nextAll('li').get(20)).css("display") == "block") {
-$($(this).nextAll('li').get(20)).css("display", "none");
-} else if ($($(this).nextAll('li').get(20)).css("display") == "none") {
-$($(this).nextAll('li').get(20)).css("display", "block");
-}
-//console.log('536 clicked');
-}
+if ($(this).attr("id-info") == 292) {
+    smenuObject.submenuNum=[0,12,13,14,15,16,17,18,19,20];
+    smenuObject.submenCatuNum=[0,142,293,503,88,224,256,298,172,536];
+    smenuObject.programSubmenu($(this));
 
 var spanelements = $('.mainmenu').find("li");
         spanelements.each(function(index) {
 
-        if ($(this).attr("id-info") == 142) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-        if ($(this).attr("id-info") == 293) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-        if ($(this).attr("id-info") == 503) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-        if ($(this).attr("id-info") == 88) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-        if ($(this).attr("id-info") == 224) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-        if ($(this).attr("id-info") == 256) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-        if ($(this).attr("id-info") == 298) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-        if ($(this).attr("id-info") == 172) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-        if ($(this).attr("id-info") == 536) {
-
-        $(this).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
+            if ($(this).attr("id-info") == 142) {
+                smenuObject.programSubMenuClick($(this));
+            }
+            if ($(this).attr("id-info") == 293) {
+                smenuObject.programSubMenuClick($(this));
+            }
+            if ($(this).attr("id-info") == 503) {
+                smenuObject.programSubMenuClick($(this));
+            }
+            if ($(this).attr("id-info") == 88) {
+                smenuObject.programSubMenuClick($(this));
+            }
+            if ($(this).attr("id-info") == 224) {
+                smenuObject.programSubMenuClick($(this));
+            }
+            if ($(this).attr("id-info") == 256) {
+                smenuObject.programSubMenuClick($(this));
+            }
+            if ($(this).attr("id-info") == 298) {
+                smenuObject.programSubMenuClick($(this));
+            }
+            if ($(this).attr("id-info") == 172) {
+                smenuObject.programSubMenuClick($(this));
+            }
+            if ($(this).attr("id-info") == 536) {
+                smenuObject.programSubMenuClick($(this));
+            }
 
         });
 }
 
-if ($(this).attr("id-info") == 211) {//'тракторы и райдеры'
+//'Тепловое оборудование'
+if ($(this).attr("id-info") == 677){
+    smenuObject.submenuNum=[0,21,22,23,24,25,26,27,28];
+    smenuObject.submenCatuNum=[0,690,691,685,686,687,688,689,692];
+    smenuObject.programSubmenu($(this));
+
+var spanelements = $('.mainmenu').find("li");
+        spanelements.each(function(index) {
+
+        if ($(this).attr("id-info") == 690) {
+            smenuObject.programSubMenuClick($(this));
+        }
+        if ($(this).attr("id-info") == 691) {
+            smenuObject.programSubMenuClick($(this));
+        }
+        if ($(this).attr("id-info") == 692) {
+            smenuObject.programSubMenuClick($(this));
+            }
+        if ($(this).attr("id-info") == 685) {
+            smenuObject.programSubMenuClick($(this));
+        }
+        
+        if ($(this).attr("id-info") == 686) {
+            smenuObject.programSubMenuClick($(this));
+        }
+
+        if ($(this).attr("id-info") == 687) {
+            smenuObject.programSubMenuClick($(this));
+        }
+        
+        if ($(this).attr("id-info") == 688) {
+            smenuObject.programSubMenuClick($(this));
+        }
+        
+        if ($(this).attr("id-info") == 689) {
+            smenuObject.programSubMenuClick($(this));
+        }
+        });
+}
+
+if ($(this).attr("id-info") == 211) {
+//'тракторы и райдеры'
 //console.log($($(this).children("span")[0]).children("div").text());
 document.getElementById('fade').style.display = 'block';
         if (target.is("div")) {
@@ -832,7 +524,9 @@ if (target.is("img")) {
 target.parents("span").next(".submenuhead").fadeIn('fast');
 }
 }
-if ($(this).attr("id-info") == 134) {//'техника karcher'
+
+if ($(this).attr("id-info") == 134) {
+   //'техника karcher'
 //console.log($($(this).children("span")[0]).children("div").text());
 document.getElementById('fade').style.display = 'block';
         if (target.is("div")) {
@@ -845,7 +539,8 @@ if (target.is("img")) {
 target.parents("span").next(".submenuhead").fadeIn('fast');
 }
 }
-if ($(this).attr("id-info") == 228) {//'техника stihl'
+if ($(this).attr("id-info") == 228) {
+//'техника stihl'
 //console.log($($(this).children("span")[0]).children("div").text());
 document.getElementById('fade').style.display = 'block';
         if (target.is("div")) {
@@ -873,7 +568,8 @@ if (target.is("img")) {
 target.parents("span").next(".submenuhead").fadeIn('fast');
 }
 }
-if ($(this).attr("id-info") == 300) {//'акции, скидки'
+if ($(this).attr("id-info") == 300) {
+//'акции, скидки'
 //console.log($($(this).children("span")[0]).children("div").text());
 document.getElementById('fade').style.display = 'block';
         if (target.is("div")) {

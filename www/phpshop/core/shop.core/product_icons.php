@@ -145,8 +145,10 @@ function product_icons($obj, $row) {
 				$dscr='<p>'.$icon_text['description'].'</p>';//$row2['description']
 				//echo '3';
 				//echo $id_img1.' ';
+                                //иконка с дилером
+                                $icondealer=call_user_func_array('get_icon_dealer',array(intval($id_img1)));
 				if (!empty($src)) {
-					if (($_COOKIE['sincity']!="m" && $id_img1!='1200' && $id_img1!='3375' && call_user_func_array('get_icon_dealer',array(intval($id_img1)))===false) || ($_COOKIE['sincity']=="m" && !empty($id_img1) && $id_img1!='3375' && call_user_func_array('get_icon_dealer',array(intval($id_img1)))===false)) {
+					if (($_COOKIE['sincity']!="m" && $id_img1!='1200' && $id_img1!='3375' && $icondealer===false && $j!==42) || ($_COOKIE['sincity']=="m" && !empty($id_img1) && $id_img1!='3375' && $icondealer===false && $j!==42)) {
 						$total_icons++;
 						//echo $id_img1;
 						if ($id_img1==1200) {
@@ -176,7 +178,7 @@ function product_icons($obj, $row) {
 						
 						$href='<img src="'.$src.'" alt="">';
                                                 //логика для нескольких подарков
-                                                $product_icon_desc=call_user_func_array('get_more_gift', array($GLOBALS['SysValue']['other']['serverName'],$id_tovara));
+                                                $product_icon_desc=call_user_func_array('get_more_gift', array($GLOBALS['SysValue']['other']['serverName'],intval($id_tovara)));
                                                 if ($product_icon_desc===false)
                                                     $product_icon_desc='<table><tr><td><a href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$row['gift'].'.html"><div style="width:80px;height:80px;background: url('.$row3375['pic_small'].'); background-repeat: no-repeat;background-position: center;-webkit-background-size: contain;-moz-background-size: contain;-o-background-size: contain;background-size: contain;"></div></a></td><td><a href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$row['gift'].'.html" style="color: #588910;font: 12px/1.4 Arial,Helvetica,sans-serif;">'.$row3375['name'].'</a><br><span style="color: #e7193f;font: 14px Arial,Helvetica,sans-serif;font-weight: bold;"><strike>'.$row3375['price'].' руб.</strike></span><br><span style="font: 14px Arial,Helvetica,sans-serif;font-weight: bold;color:#6C4B46;">В подарок!</span></td></tr></table>';
 						$vuvod.='<li>
@@ -192,17 +194,10 @@ function product_icons($obj, $row) {
 						</li>
 						';
 					}
-                                        //иконка с дилером
-                                        $icondealer=call_user_func_array('get_icon_dealer',array(intval($id_img1)));
+
                                         //var_dump($id_img1,$icondealer,$j);
-					if ($icondealer!==false && $j===42) {
+					if ($icondealer<>false && $j===42) {
                                             //var_dump($id_img1,$icondealer);
-						//идём вытаскиваем само описание
-						$res3375=$PHPShopOrm->query("SELECT name,price,pic_small FROM ".$SysValue['base']['products']." WHERE id='".$row['gift']."'");
-						//$res2=mysql_query($sql2);
-						$row3375=mysql_fetch_assoc($res3375);
-						
-						$href='<img src="'.$src.'" alt="">';
 						$vuvod.='<li>
 						<div class="product_icon_desc" style="width: 400px!important;">
 						'.$icondealer['description'].'
@@ -216,7 +211,7 @@ function product_icons($obj, $row) {
 						</li>
 						';
 					}						
-
+                                        //$vuvod='';
 				}
 				}
 				

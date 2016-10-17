@@ -18,10 +18,10 @@ function catalog_product_icons($obj, $row) {
 	$price=$row['price'];
 
 	//доп харки  - наличие,предпродажа и проч
-	$array=array(186,185,181,184,302);														
+	$array=array(186,185,181,184,302,42);														
 					
 	$retval='<ul class="product_icons">';
-	
+//var_dump($row['vendor']);	
 	foreach ($array as $j)
 	{
 		$reg="i".$j."-";//ищем по этому коду наш параметр					
@@ -80,7 +80,9 @@ function catalog_product_icons($obj, $row) {
 				//echo $src.'<br/>';
 				if (!empty($src)){
 					//$total_icons++;
-					if (($_COOKIE['sincity']!="m" && $id_img1!='1200' && $id_img1!='3375' && call_user_func_array('get_icon_dealer',array(intval($id_img1)))===false) || ($_COOKIE['sincity']=="m" && !empty($id_img1) && $id_img1!='3375' && call_user_func_array('get_icon_dealer',array(intval($id_img1)))===false)) {
+                                        //иконка с дилером
+                                        $icondealer=call_user_func_array('get_icon_dealer',array(intval($id_img1)));
+					if (($_COOKIE['sincity']!="m" && $id_img1!='1200' && $id_img1!='3375' && $icondealer===false && $j!==42) || ($_COOKIE['sincity']=="m" && !empty($id_img1) && $id_img1!='3375' && $icondealer===false && $j!==42)) {
 						if ($id_img1==1200) {
 							$href='<img onclick="window.location=\'/shop/UID_'.$id_tovara.'.html#tab7\';" src="'.$src.'" alt="">';//document.getElementsByClassName(\'tabNavigation\')[0].children[2].className=\'selected\';
 						} else if ($id_img1==1193) {
@@ -108,7 +110,7 @@ function catalog_product_icons($obj, $row) {
 					
 						$href='<img src="'.$src.'" alt="">';
                                                 //логика для нескольких подарков
-                                                $product_icon_desc=call_user_func_array('get_more_gift', array($GLOBALS['SysValue']['other']['serverName'],$id_tovara));
+                                                $product_icon_desc=call_user_func_array('get_more_gift', array($GLOBALS['SysValue']['other']['serverName'],intval($id_tovara)));
                                                 if ($product_icon_desc===false)
 						$product_icon_desc='<table><tr><td><a href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$row['gift'].'.html"><div style="width:60px;height:60px;background: url('.$row3375['pic_small'].'); background-repeat: no-repeat;background-position: center;-webkit-background-size: contain;-moz-background-size: contain;-o-background-size: contain;background-size: contain;"></div></a></td><td><a href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$row['gift'].'.html" style="color: #588910;font: 12px/1.4 Arial,Helvetica,sans-serif;">'.$row3375['name'].'</a><br><span style="color: #e7193f;font: 14px Arial,Helvetica,sans-serif;font-weight: bold;"><strike>'.$row3375['price'].' руб.</strike></span><br><span style="font: 14px Arial,Helvetica,sans-serif;font-weight: bold;color:#6C4B46;">В подарок!</span></td></tr></table>';
 						$retval.='<li>
@@ -123,8 +125,6 @@ function catalog_product_icons($obj, $row) {
 						</li>
 						';
 					}
-                                        //иконка с дилером
-                                        $icondealer=call_user_func_array('get_icon_dealer',array(intval($id_img1)));
                                         //var_dump($id_img1,$icondealer,$j);
 					if ($icondealer!==false && $j===42) {
                                             //var_dump($id_img1,$icondealer);
@@ -134,14 +134,13 @@ function catalog_product_icons($obj, $row) {
 						$row3375=mysql_fetch_assoc($res3375);
 						
 						$href='<img src="'.$src.'" alt="">';
-						$vuvod.='<li>
+						$retval.='<li>
 						<div class="product_icon_desc" style="width: 400px!important;">
 						'.$icondealer['description'].'
 						</div>
 						<div class="product_icon">
                                                 <a id="showsertificatehref" href="#" onclick="showsertificate(\'/UserFiles/Image/'.$id_img1.'.jpg\')">
 						<div class="product_icon_img">'.'<img src="'.$icondealer['icon'].'" alt="">'.'</div>
-						<div style="color:#383838">'.'Официальный дилер'.'</div>
                                                 </a>
 						</div>
 						</li>
