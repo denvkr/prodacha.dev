@@ -91,24 +91,24 @@ return found;
 
 //Скрываем товары по фильтру производителя
 function showManufProduct(obj)
-        {
-        // console.log('showManufProduct(' + obj + ')');
-        var classNames = explode(';', $(obj).attr('classToAdd'));
-                for (var i in classNames)
-        {
-        if (classNames[i])
-        {
-        if ($(obj).attr('checked') != 'checked')
-        {
-        $('div.' + classNames[i]).addClass('dn');
-        }
-        else
-        {
-        $('div.' + classNames[i]).removeClass('dn');
-        }
-        }
-        }
-        }
+{
+// console.log('showManufProduct(' + obj + ')');
+var classNames = explode(';', $(obj).attr('classToAdd'));
+        for (var i in classNames)
+{
+if (classNames[i])
+{
+if ($(obj).attr('checked') != 'checked')
+{
+$('div.' + classNames[i]).addClass('dn');
+}
+else
+{
+$('div.' + classNames[i]).removeClass('dn');
+}
+}
+}
+}
 
 function showM()
         {
@@ -280,45 +280,45 @@ $(this).closest('li').addClass('empty');
 
         $('.mainmenu').find(".submenuhead").fadeOut('fast');
         var submenuObject={
-        submenuNum:null,
-        submenCatuNum:null,
-        programmenu: function (domobj){
-            //console.log(this.submenCatuNum[0]);
-            if ($(domobj.next('li')).attr("id-info") == this.submenCatuNum[0]) {
-            if (domobj.next('li').css("display") == "block") {
-            domobj.next('li').css("display", "none");
-            } else if (domobj.next('li').css("display") == "none") {
-            domobj.next('li').css("display", "block");
-            }
-            //console.log('submenCatuNum[0] clicked');
-            }            
-        },
-        programSubmenu: function (domobj){
-            console.log(this.submenCatuNum);
-            for (cnt1=1;cnt1<this.submenCatuNum.length;cnt1++){
-                if ($(domobj.nextAll('li').get(this.submenuNum[cnt1])).attr("id-info") == this.submenCatuNum[cnt1]) {
-                if ($(domobj.nextAll('li').get(this.submenuNum[cnt1])).css("display") == "block") {
-                $(domobj.nextAll('li').get(this.submenuNum[cnt1])).css("display", "none");
-                } else if ($(domobj.nextAll('li').get(this.submenuNum[cnt1])).css("display") == "none") {
-                $(domobj.nextAll('li').get(this.submenuNum[cnt1])).css("display", "block");
+            submenuNum:null,
+            submenCatuNum:null,
+            programmenu: function (domobj){
+                //console.log(this.submenCatuNum[0]);
+                if ($(domobj.next('li')).attr("id-info") == this.submenCatuNum[0]) {
+                if (domobj.next('li').css("display") == "block") {
+                domobj.next('li').css("display", "none");
+                } else if (domobj.next('li').css("display") == "none") {
+                domobj.next('li').css("display", "block");
                 }
-                //console.log(this.submenCatuNum[cnt1],' clicked');
+                //console.log('submenCatuNum[0] clicked');
+                }            
+            },
+            programSubmenu: function (domobj){
+                console.log(this.submenCatuNum);
+                for (cnt1=1;cnt1<this.submenCatuNum.length;cnt1++){
+                    if ($(domobj.nextAll('li').get(this.submenuNum[cnt1])).attr("id-info") == this.submenCatuNum[cnt1]) {
+                    if ($(domobj.nextAll('li').get(this.submenuNum[cnt1])).css("display") == "block") {
+                    $(domobj.nextAll('li').get(this.submenuNum[cnt1])).css("display", "none");
+                    } else if ($(domobj.nextAll('li').get(this.submenuNum[cnt1])).css("display") == "none") {
+                    $(domobj.nextAll('li').get(this.submenuNum[cnt1])).css("display", "block");
+                    }
+                    //console.log(this.submenCatuNum[cnt1],' clicked');
+                    }
                 }
+            },
+            programSubMenuClick:function(domobj){
+                $(domobj).click(function(event) {
+                    var target = $(event.target);
+                    document.getElementById('fade').style.display = 'block';
+                    if (target.is("span")) {
+                        target.next(".submenuhead").fadeIn('fast');
+                    }
+                if (target.is("li")) {
+                    target.children(".submenuhead").fadeIn('fast');
+                }
+            });
             }
-        },
-        programSubMenuClick:function(domobj){
-                    $(domobj).click(function(event) {
-        var target = $(event.target);
-                document.getElementById('fade').style.display = 'block';
-                if (target.is("span")) {
-        target.next(".submenuhead").fadeIn('fast');
-        }
-        if (target.is("li")) {
-        target.children(".submenuhead").fadeIn('fast');
-        }
-        });
-        }
-    };
+        };
         var smenuObject=Object.create(submenuObject);
         
         if ($(this).attr("id-info") == 288){

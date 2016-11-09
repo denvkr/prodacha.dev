@@ -678,6 +678,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 
             if (is_array($this->data))
                 foreach ($this->data as $row) {
+                    var_dump($row);
                     $dis = null;
                     $podcatalog = null;
                     $this->set('catalogId', $row['id']);
@@ -774,7 +775,6 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
                 $i++;               
             }
         }
-
 /*
         // Замена стилей
         if (is_array($replace)) {
@@ -801,7 +801,6 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
     	$id_custom_menu_array=array();
     	$id_custom_menu_1_true=false;
     	$dis = null;
-        
         // Перехват модуля
         $hook = $this->setHook(__CLASS__, __FUNCTION__, false, 'START');
         //if ($hook)
@@ -1090,6 +1089,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 			} else {
 				$sdvig_vverh='';
 			}
+
 			$submenuhead='<li id-info="'.$parent_id1.'" onclick="document.getElementById(\'fade\').style.display=\'block\'" onmouseover="this.style.backgroundColor=\'#8ab943\'" onmouseout="this.style.backgroundColor=\'#e5e5e5\'" style="display:none;background: #e5e5e5;height: 24px;"><span '.$sdvig_vverh.'>'.$parent_cat_name1.'</span>';
 			$submenuhead.='<div class="submenuhead">';
 			$submenuhead.='<div class="menutype">';
@@ -1343,6 +1343,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 			$this->set('catalogTitle',$row['name']);
 			$this->set('catalogName',$row['name']);
 			$this->set('catalogid_4',$row['id']);
+                        
 			// Перехват модуля
 			$this->setHook(__CLASS__, __FUNCTION__, $row, 'END'); 		
 			$dis.=$this->parseTemplate($this->getValue('templates.catalog_forma_4'));
@@ -2544,8 +2545,11 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 		} else {
 			$sdvig_vverh='';
 		}
+                $top_position='';
+                if ($parent_id==16)
+                    $top_position='style="height:500px;"';
 		$submenuhead.='<li id-info="'.$parent_id.'" onclick="document.getElementById(\'fade\').style.display=\'block\'" onmouseover="this.style.backgroundColor=\'#8ab943\'" onmouseout="this.style.backgroundColor=\'#e5e5e5\'" style="display:none;background: #e5e5e5;height: 24px;"><span '.$sdvig_vverh.'>'.$parent_cat_name.'</span>';
-		$submenuhead.='<div class="submenuhead">';
+		$submenuhead.='<div class="submenuhead" '.$top_position.'>';
 		$submenuhead.='<div class="menutype">';
 		$submenuhead.='<ul>';
 		$submenuhead.='<li><span class="inside_menu_head"><a href="/shop/CID_'.$row_id.'.html">'.$row_name.'</a></span></li>';

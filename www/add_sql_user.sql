@@ -1,3 +1,10 @@
-use u301639;
-CREATE USER 'u301639_second'@'localhost' IDENTIFIED BY 'peREneSti-AB6E';
-GRANT ALL PRIVILEGES ON u301639.* TO 'u301639_second'@'localhost';
+use channelstock;
+use channelstock;
+call add_user('denis',
+'krasavin',
+'krasavin_denis@mail.ru',
+'udl',
+'+79055142423',
+'ddff35655643ert',
+'channelstock',
+'`user`');

@@ -149,7 +149,7 @@ class PHPShopElements {
      * @param bool $flag добавление данных в переменную
      */
     function init($method_name, $flag = false) {
-
+    //var_dump($method_name);
         if (!in_array($this->SysValue['nav']['path'], $this->disp_format)) {
 
             // Если переменная не определена модулем

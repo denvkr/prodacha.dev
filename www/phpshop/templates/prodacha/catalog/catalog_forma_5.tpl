@@ -1,7 +1,6 @@
 <li id-info="@catalogId@" style="padding: @top_padding@ 0px @bottom_padding@ 15px;" onclick="document.getElementById('fade').style.display='block'"><span>@catalogName@</span>
 <div class="submenuhead" @top_position@>
 <div class="menutype">
-
 @hrefcatalogPodcatalog@
 
 <p id="cp1_@catalogUid@" class="menublock" ></p><ul id="ul1_@catalogUid@" class="catalogPodcatalog1">@catalogPodcatalog@</ul>

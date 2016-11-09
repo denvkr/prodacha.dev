@@ -57,7 +57,19 @@ class PHPShopMail {
      * @param strong $header заголовок
      */
     function sendMail($content,$header) {
-        mail($this->to,$this->zag,$content,$header);
+        $curtime=new Datetime;
+        $logfilename="maillogs/mail".$curtime->format('His').'.'.(string)Rand().".txt";
+	$log_file = fopen($logfilename,"a");
+	fwrite($log_file,"***".date("d.m.Y(H:i)")."***\n\r");
+        fwrite($log_file,$this->to."\n\r".$this->zag."\n\r".$content."\n\r".$header."\n\r");
+	fclose($log_file);
+        
+        $retval=mail($this->to,$this->zag,$content,$header);
+
+	$log_file = fopen($logfilename,"a");
+        fwrite($log_file,'Результат функции mail:'.(string)$retval);
+	fclose($log_file);
+        
     }
     /**
      * Вставка копирайта
