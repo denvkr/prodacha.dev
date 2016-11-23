@@ -11,9 +11,9 @@ PHPShopObj::loadClass("security");
 
 // Подключение к БД
 $PHPShopBase = new PHPShopBase($_classPath."/inc/config.ini");
-            //echo 'login.php '.$PHPShopBase->getParam("connect.user_db").'<br>';
-            //echo 'login.php '.$PHPShopBase->getParam("connect.host").'<br>';
-            //echo 'login.php '.$PHPShopBase->getParam("connect.dbase").'<br>';  
+            echo 'login.php '.$PHPShopBase->getParam("connect.user_db").'<br>';
+            echo 'login.php '.$PHPShopBase->getParam("connect.host").'<br>';
+            echo 'login.php '.$PHPShopBase->getParam("connect.dbase").'<br>';  
 // Подключение хука
 function loadHooks() {
     if (@$dh = opendir('hook')) {
@@ -47,6 +47,7 @@ class UserChek {
         $sql="select * from ".$table_name." where enabled='1'";
         @$result=mysql_query(@$sql);
         while (@$row = mysql_fetch_array(@$result)) {
+            //echo $row['login'].' '.$row['password'];
             if($this->logPHPSHOP==$row['login']) {
                 if($this->pasPHPSHOP==$row['password']) {
                     $this->OkFlag=1;
@@ -70,12 +71,13 @@ class UserChek {
 
     function UserChek($logPHPSHOP,$pasPHPSHOP,$table_name) {
         $this->logPHPSHOP=$logPHPSHOP;
-        $this->pasPHPSHOP=$this->myDecode($pasPHPSHOP);
+        $this->pasPHPSHOP=$pasPHPSHOP;//$this->myDecode($pasPHPSHOP);
+        //echo $this->pasPHPSHOP;
         $this->ChekBase($table_name);
         $this->BadUser();
     }
 }
 
 // Проверка авторизации
-$UserChek = new UserChek($_GET['log'],$_GET['pas'],$PHPShopBase->getParam("base.table_name19"));
+$UserChek = new UserChek('denvkr','UGM0ZmRmZg==',$PHPShopBase->getParam("base.table_name19"));//$_GET['log'],$_GET['pas']
 ?>

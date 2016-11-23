@@ -1352,26 +1352,26 @@ class PHPShopShop extends PHPShopShopCore {
 	        		$sql="select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and enabled='1' and parent_enabled='0' order by ".$orderby." LIMIT 1,".$this->num_row;
 	        		*/
-	        		$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,sortorder,sorting from (select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,1 as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
+	        		$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,sortorder,sorting,stockgroup from (select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,1 as sortorder,sorting,stockgroup from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and parent_enabled='0' and sklad='0' and enabled='1' and outdated='0'".
 	        		" union all ".
-	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,2 as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
+	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,2 as sortorder,sorting,stockgroup from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and parent_enabled='0' and sklad='1' and enabled='1' and outdated='0'".
 	        		" union all ".
-	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,3 as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
+	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,3 as sortorder,sorting,stockgroup from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and parent_enabled='0' and sklad='1' and enabled='1' and outdated='1') t1 order by ".$orderby_1." LIMIT 1,".$this->num_row;
 	        	} else if ($this->PHPShopNav->isPageAll()) {
 	        		/*
 	        		$sql="select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and enabled='1' and parent_enabled='0' order by ".$orderby;
 	        		*/
-	        		$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,sortorder,sorting from (select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,1 as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
+	        		$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,sortorder,sorting,stockgroup from (select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,1 as sortorder,sorting,stockgroup from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and parent_enabled='0' and sklad='0' and enabled='1' and outdated='0'".
 	        		" union all ".
-	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,2 as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
+	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,2 as sortorder,sorting,stockgroup from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and parent_enabled='0' and sklad='1' and enabled='1' and outdated='0'".
 	        		" union all ".
-	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,3 as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
+	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,3 as sortorder,sorting,stockgroup from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and parent_enabled='0' and sklad='1' and enabled='1' and outdated='1') t1 order by ".$orderby_1;
 	        	} else {
 	        		$num_row=$this->PHPShopNav->getPage()*$this->num_row;
@@ -1381,27 +1381,27 @@ class PHPShopShop extends PHPShopShopCore {
 	        		$sql="select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and enabled='1' and parent_enabled='0' order by ".$orderby.$sql_2;
 	        		*/
-	        		$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,sortorder,sorting from (select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,1 as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
+	        		$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,sortorder,sorting,stockgroup from (select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,1 as sortorder,sorting,stockgroup from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and parent_enabled='0' and sklad='0' and enabled='1' and outdated='0'".
 	        		" union all ".
-	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,2 as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
+	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,2 as sortorder,sorting,stockgroup from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and parent_enabled='0' and sklad='1' and enabled='1' and outdated='0'".
 	        		" union all ".
-	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,3 as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
+	        		"select distinct id,".$cid_id." as category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift,3 as sortorder,sorting,stockgroup from ".$GLOBALS['SysValue']['base']['products']." where dop_cat like "
 	        		."'%#".$cid_id."#%' and parent_enabled='0' and sklad='1' and enabled='1' and outdated='1') t1 order by ".$orderby_1.$sql_2;
 	         	}
 					        	
 			} else {
 				if ($this->PHPShopNav->getPage()=='') {
 					//select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat from u301639_test.phpshop_products
-					$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift, case when sklad='0' and outdated='0' then 1 when sklad='1' and outdated='0' then 2 when sklad='1' and outdated='1' then 3 end as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where category in"
+					$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift, case when sklad='0' and outdated='0' then 1 when sklad='1' and outdated='0' then 2 when sklad='1' and outdated='1' then 3 end as sortorder,sorting,stockgroup from ".$GLOBALS['SysValue']['base']['products']." where category in"
 					." (SELECT id FROM ".$GLOBALS['SysValue']['base']['categories']." where parent_to in"
 					." (SELECT id FROM ".$GLOBALS['SysValue']['base']['categories']." where parent_to=".$cid_id
 					." union all"
 					." SELECT id FROM ".$GLOBALS['SysValue']['base']['categories']." where id=".$cid_id.")) and enabled='1' and parent_enabled='0' order by ".$orderby_1." LIMIT 1,".$this->num_row;
 					//$select_array=array('id','category','name','content','price','price_n','sklad','p_enabled','enabled','uid','num','price2','price3','price4','price5');
 				} else if ($this->PHPShopNav->isPageAll()) {
-					$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift, case when sklad='0' and outdated='0' then 1 when sklad='1' and outdated='0' then 2 when sklad='1' and outdated='1' then 3 end as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where category in"
+					$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift, case when sklad='0' and outdated='0' then 1 when sklad='1' and outdated='0' then 2 when sklad='1' and outdated='1' then 3 end as sortorder,sorting,stockgroup from ".$GLOBALS['SysValue']['base']['products']." where category in"
 					." (SELECT id FROM ".$GLOBALS['SysValue']['base']['categories']." where parent_to in"
 					." (SELECT id FROM ".$GLOBALS['SysValue']['base']['categories']." where parent_to=".$cid_id
 					." union all"
@@ -1411,7 +1411,7 @@ class PHPShopShop extends PHPShopShopCore {
 					$num_row=$this->PHPShopNav->getPage()*$this->num_row;
 					//echo $num_row.' '.$this->num_row;
 					$sql_2=" LIMIT ".($num_row-$this->num_row).",".$this->num_row;
-					$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift, case when sklad='0' and outdated='0' then 1 when sklad='1' and outdated='0' then 2 when sklad='1' and outdated='1' then 3 end as sortorder,sorting from ".$GLOBALS['SysValue']['base']['products']." where category in"
+					$sql="select distinct id,category,name,content,price,price_n,sklad,p_enabled,enabled,uid,num,pic_small,parent_enabled,parent,price2,price3,price4,price5,dop_cat,outdated,analog,vendor,vendor_array,gift, case when sklad='0' and outdated='0' then 1 when sklad='1' and outdated='0' then 2 when sklad='1' and outdated='1' then 3 end as sortorder,sorting,stockgroup from ".$GLOBALS['SysValue']['base']['products']." where category in"
 					." (SELECT id FROM ".$GLOBALS['SysValue']['base']['categories']." where parent_to in"
 					." (SELECT id FROM ".$GLOBALS['SysValue']['base']['categories']." where parent_to=".$cid_id
 					." union all"

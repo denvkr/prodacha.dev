@@ -296,19 +296,38 @@ class ReadCsv1C extends PHPShopReadCsvPro {
             switch ($this->Sklad_status) {
 
                 case(3):
-                    if ($CsvToArray[18] < 1)
+                    // 0- под заказ на сайте + нет вывода на Яндекс Маркет 
+                    if ((int)$CsvToArray[19]==0){
                         $sql.="sklad='1', ";
-                    else
+                        $sql.="p_enabled='0', ";
+                        $sql.="yml='0', ";
+                        //1,10,11,2,3 - в наличии на сайте (нет галки "под заказ") + вывод на Яндекс Маркете в наличии 
+                    } elseif ((int)$CsvToArray[19]==1 || (int)$CsvToArray[19]==10 || (int)$CsvToArray[19]==11 || (int)$CsvToArray[19]==2) {
                         $sql.="sklad='0', ";
+                        $sql.="p_enabled='1', ";
                         $sql.="yml='1', ";
+                    } elseif ((int)$CsvToArray[19]==3) {
+                        $sql.="sklad='0', ";
+                        $sql.="p_enabled='0', ";
+                        $sql.="yml='1', ";
+                    }
+                    $sql.="enabled='1', ";
                     break;
 
                 case(2):
-                    if ($CsvToArray[18] < 1)
-                        $sql.="enabled='0', ";
-                    else
-                        $sql.="enabled='1', sklad='0',";
+                    // 0- под заказ на сайте + нет вывода на Яндекс Маркет 
+                    if ((int)$CsvToArray[19]==0){
+                        $sql.="p_enabled='0', ";
+                        $sql.="yml='0', ";
+                        //1,10,11,2,3 - в наличии на сайте (нет галки "под заказ") + вывод на Яндекс Маркете в наличии 
+                    } elseif ((int)$CsvToArray[19]==1 || (int)$CsvToArray[19]==10 || (int)$CsvToArray[19]==11 || (int)$CsvToArray[19]==2) {
+                        $sql.="p_enabled='1', ";
                         $sql.="yml='1', ";
+                    } elseif ((int)$CsvToArray[19]==3) {
+                        $sql.="p_enabled='0', ";
+                        $sql.="yml='1', ";
+                    }                    
+                    $sql.="enabled='1', ";                        
                     break;
 
                 default: $sql.="";
@@ -324,7 +343,8 @@ class ReadCsv1C extends PHPShopReadCsvPro {
             $sql.="price4='" . @$CsvToArray[10] . "', "; // цена 4
             $sql.="price5='" . @$CsvToArray[11] . "', "; // цена 5
             $sql.="items='" . @$CsvToArray[18] . "', "; // склад @$CsvToArray[6]
-            
+            $sql.="stockgroup='" . (int)@$CsvToArray[19] . "', "; // склад @$CsvToArray[6]
+			
             // Подчиненные товары
             if (is_numeric($CsvToArray[16]) and $CsvToArray[16] == 1) {
                 $sql.="parent_enabled='1', ";
@@ -333,13 +353,23 @@ class ReadCsv1C extends PHPShopReadCsvPro {
                 $sql.="parent='" . $CsvToArray[16] . "', ";
             }
 
-            if(!empty($CsvToArray[12]))
-            $sql.="weight='" . @$CsvToArray[12] . "', "; // вес
+            //if(!empty($CsvToArray[12]))
+            //$sql.="weight='" . @$CsvToArray[12] . "', "; // вес
 
-			$sql.="datas='" . date("U") . "' "; // дата изменения
+            $sql.="datas='" . date("U") . "' "; // дата изменения
 
             $sql.=" where uid='" . $CsvToArray[0] . "'";
+            /*
+			ob_start();
+			echo $sql;
 
+			$page = ob_get_contents();
+			ob_end_clean();
+			$file = "/uploading.log";
+			$fw = fopen($file, "w+");
+			fputs($fw,$page, strlen($page));
+			fclose($fw);
+            */
             $result = mysql_query($sql);
             $this->ItemUpdate++;
 
@@ -356,14 +386,18 @@ class ReadCsv1C extends PHPShopReadCsvPro {
                     $img_num++;
                 }
             }
-
+            $sql = "SELECT vendor_array,vendor FROM " . $GLOBALS['SysValue']['base']['products']. " where uid='" . $CsvToArray[0] . "'"; //id=9317";
+            $result = mysql_query($sql);
+            $result=mysql_fetch_array($result);
+            $resultvendor=$result[1];
+            $result=unserialize($result[0]);
+            //var_dump ($result,$resultvendor);
             // Обновляем характеристики
-            if ($this->ObjSystem->getSerilizeParam("1c_option.update_category") == 1 and $this->ObjSystem->getSerilizeParam("1c_option.update_sort") == 1 and !empty($CsvToArray[$GLOBALS['option']['sort']])) {
-                $resCharsArray = '';
+            //if ($this->ObjSystem->getSerilizeParam("1c_option.update_category") == 1 and $this->ObjSystem->getSerilizeParam("1c_option.update_sort") == 1 and !empty($CsvToArray[$GLOBALS['option']['sort']])) {
+                //$resCharsArray = '';
 
                 // Генератор характеристик
                 $resCharsArray = charsGenerator($CsvToArray[15], $CsvToArray);
-                $resSerialized = serialize($resCharsArray);
                 $vendor = null;
                 if (is_array($resCharsArray)) {
                     foreach ($resCharsArray as $k => $v) {
@@ -376,40 +410,78 @@ class ReadCsv1C extends PHPShopReadCsvPro {
                         }
                     }
                 }
+                echo (string) stristr ( $resultvendor,'i186' );
+                //закомментировать это в случае ошибки
+                //начало вставки
+                //если не существует самовывоза то добавляем его в случае 1,10,11
+                if ((int)$CsvToArray[19]==1 || (int)$CsvToArray[19]==10 || (int)$CsvToArray[19]==11){
+                   if ((!stristr ( $resultvendor,'i186' ))) 
+                       $resultvendor.="i186-1200i";
+                   //добавляем саму характеристику
+                   $result[186][0] = '1200';
+                } else
+                //если существует самовывоз то удаляем в случае 0,2,3
+                if ((int)$CsvToArray[19]==0 || (int)$CsvToArray[19]==2 || (int)$CsvToArray[19]==3){
+                    if (stristr ( $resultvendor,'i186' ))
+                        $resultvendor=str_replace ( "i186-1200i" , "" ,$resultvendor );
+                   if (array_key_exists(186,$result))
+                      $result[186] = array();
+                   
+                }
+                //конец вставки 
+                //var_dump($result,$resultvendor);
+                
+                $resSerialized = serialize($result);
 
                 $sql = "UPDATE " . $this->TableName . " SET ";
-                $sql.="vendor='" . $vendor . "', ";
+                $sql.="vendor='" . $resultvendor. "', ";
                 $sql.="vendor_array='" . $resSerialized . "' ";
                 $sql.=" where uid='" . $CsvToArray[0] . "'";
                 $result = mysql_query($sql);
-            }
+            //}
         } else {
             // Создаем новый товар
             // Склад
             switch ($this->Sklad_status) {
 
                 case(3):
-                    if ($CsvToArray[18] < 1) {
-			   //$CsvToArray[6]
+                    // 0- под заказ на сайте + нет вывода на Яндекс Маркет 
+                    if ((int)$CsvToArray[19]==0){
                         $sklad = 1;
-                        $enabled = 1;
-                    } else {
+                        $p_enabled=0;
+                        $yml=0;
+                        //1,10,11,2,3 - в наличии на сайте (нет галки "под заказ") + вывод на Яндекс Маркете в наличии 
+                    } elseif ((int)$CsvToArray[19]==1 || (int)$CsvToArray[19]==10 || (int)$CsvToArray[19]==11 || (int)$CsvToArray[19]==2) {
                         $sklad = 0;
-                        $enabled = 1;
+                        $p_enabled=1;
+                        $yml=1;
+                    } elseif ((int)$CsvToArray[19]==3) {
+                        $sklad = 0;
+                        $p_enabled=0;
+                        $yml=0;
                     }
+                    $enabled=1;
                     break;
 
                 case(2):
-                    if ($CsvToArray[18] < 1)
-			   //$CsvToArray[6]
-                        $enabled = 0;
-                    else
-                        $enabled = 1;
+                    if ((int)$CsvToArray[18]==0){
+                        $p_enabled=0;
+                        $yml=0;
+                        //1,10,11,2,3 - в наличии на сайте (нет галки "под заказ") + вывод на Яндекс Маркете в наличии 
+                    } elseif ((int)$CsvToArray[18]==1 || (int)$CsvToArray[18]==10 || (int)$CsvToArray[18]==11 || (int)$CsvToArray[18]==2) {
+                        $p_enabled=1;
+                        $yml=1;
+                    } elseif ((int)$CsvToArray[18]==3) {
+                        $p_enabled=0;
+                        $yml=0;
+                    }
+                    $enabled=1;
                     break;
-
                 default:
                     $sklad = 0;
+                    $p_enabled=1;
                     $enabled = 1;
+                    $yml=1;
                     break;
             }
 
@@ -433,6 +505,7 @@ class ReadCsv1C extends PHPShopReadCsvPro {
                         }
                     }
                 }
+                
                 $vendor_array = serialize($resCharsArray);
             }
 
@@ -452,10 +525,10 @@ class ReadCsv1C extends PHPShopReadCsvPro {
             content='" . addslashes($CsvToArray[4]) . "',
             price='" . $CsvToArray[7] . "',
             sklad='" . $sklad . "',
-            p_enabled='" . PHPShopMath::Zero($CsvToArray[9]) . "',
+            p_enabled='" . $p_enabled . "',
             enabled='" . $enabled . "',
             uid='" . $CsvToArray[0] . "',
-            yml='1',
+            yml='".$yml."',
             datas='" . date("U") . "',
             vendor='" . $vendor . "',
             vendor_array='" . $vendor_array . "',";
@@ -504,7 +577,7 @@ class ReadCsv1C extends PHPShopReadCsvPro {
 if (preg_match("/[^(0-9)|(\-)]/", $_GET['date']))
     $date = "";
 else
-    $date = $_GET['date'];
+    $date = '16-11-2016-22-14';//$_GET['date'];
 
 $path = "sklad";
 $dir = $path . "/" . $date;
@@ -517,9 +590,9 @@ else
 
 // Подключаем настройки магазина
 $PS = new PHPShopSystem();
-
+$upload='upload_0.csv';//$_GET['files'];//"all"
 // Смотрим папку
-if ($_GET['files'] == "all" and is_dir($dir))
+if ($upload == "all" and is_dir($dir))
     if (@$dh = opendir($dir)) {
         while (($file = readdir($dh)) !== false) {
 
@@ -528,8 +601,8 @@ if ($_GET['files'] == "all" and is_dir($dir))
         }
         closedir($dh);
     }
-if (is_file("./" . $dir . "/" . $_GET['files'])) {
-    $list_file[] = $_GET['files'];
+if (is_file("./" . $dir . "/" . $upload)) {
+    $list_file[] = $upload;
 }
 
 // Тестирование
@@ -556,7 +629,7 @@ if (is_array($list_file))
             $GetCatalogCreate+=$ReadCsv->GetCatalogCreate();
 
             // Результат
-            if ($_GET['files'] != "all")
+            if ($upload != "all")
                 echo $date . ";" . $F_done . "
 " . $GetItemCreate . ";" . $GetItemUpdate . ";" . $GetCatalogCreate . ";";
 
@@ -572,7 +645,7 @@ if (is_array($list_file))
 else
     exit("Не могу прочитать файл " . $dir . "/" . $val);
 
-if ($_GET['files'] == "all")
+if ($upload == "all")
     echo $date . ";" . $F_done . "
 " . $GetItemCreate . ";" . $GetItemUpdate . ";" . $GetCatalogCreate . ";";
 ?>

@@ -7,7 +7,7 @@
  */
 // Персонализация настроек
 function mod_option($option) {
-    $GLOBALS['option']['sort'] = 19;
+    $GLOBALS['option']['sort'] = 20;
 }
 
 
@@ -19,6 +19,10 @@ function mod_update($CsvToArray, $class_name, $func_name) {
     if (!empty($CsvToArray[18])) {
         return "items=". $CsvToArray[18] . ", ";
     }
+    if (!empty($CsvToArray[19])) {
+        return "stockgroup=". $CsvToArray[19] . ", ";
+    }
+
 }
 
 // Персонализация вставки
@@ -28,6 +32,9 @@ function mod_insert($CsvToArray, $class_name, $func_name) {
     }
     if (!empty($CsvToArray[18])) {
         return "items=". $CsvToArray[18] . ", ";
+    }
+    if (!empty($CsvToArray[19])) {
+        return "stockgroup='". $CsvToArray[19] . "', ";
     }
 }
 

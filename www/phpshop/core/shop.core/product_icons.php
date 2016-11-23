@@ -140,9 +140,20 @@ function product_icons($obj, $row) {
 				}
 				*/
                                 $icon_text=call_user_func_array('get_icon_bottom_text', array($row2['id'],$_COOKIE['sincity']));
-
+                                
+                                $additiondscr='';
+                                //В зависимости от региона и наличия на складе добавляем текст
+                                if ( ($_COOKIE['sincity']=="m" && (int)$row['stockgroup']==11) ) {
+                                    $additiondscr='. Динамо + Минское ш.';
+                                }
+                                if ( ($_COOKIE['sincity']=="m" && (int)$row['stockgroup']==10) ) {
+                                    $additiondscr='. Динамо';
+                                }
+                                if ( ($_COOKIE['sincity']=="m" && (int)$row['stockgroup']==1) ) {
+                                    $additiondscr='. Минское ш.';
+                                }
 				$tovar=$icon_text['bottom_text'];//$row2['name'];
-				$dscr='<p>'.$icon_text['description'].'</p>';//$row2['description']
+				$dscr='<p>'.$icon_text['description'].$additiondscr.'</p>';//$row2['description']
 				//echo '3';
 				//echo $id_img1.' ';
                                 //иконка с дилером

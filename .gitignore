@@ -1,0 +1,7 @@
+/www/nbproject/private/
+/vendor/
+.htaccess
+/phpshop/inc/config.ini
+/phpshop/admpanel/.htaccess
+index.php
+/www/phpshop/inc/

@@ -21,7 +21,7 @@ function catalog_product_icons($obj, $row) {
 	$array=array(186,185,181,184,302,42);														
 					
 	$retval='<ul class="product_icons">';
-//var_dump($row['vendor']);	
+        //var_dump($row['vendor']);	
 	foreach ($array as $j)
 	{
 		$reg="i".$j."-";//ищем по этому коду наш параметр					
@@ -70,9 +70,20 @@ function catalog_product_icons($obj, $row) {
 				//$f=mysql_num_rows($res2);
                                 
                                 $icon_text=call_user_func_array('get_icon_bottom_text', array($row2['id'],$_COOKIE['sincity']));
-
+                                
+                                $additiondscr='';
+                                //В зависимости от региона и наличия на складе добавляем текст
+                                if ( ($_COOKIE['sincity']=="m" && (int)$row['stockgroup']==11) ) {
+                                    $additiondscr='. Динамо + Минское ш.';
+                                }
+                                if ( ($_COOKIE['sincity']=="m" && (int)$row['stockgroup']==10) ) {
+                                    $additiondscr='. Динамо';
+                                }
+                                if ( ($_COOKIE['sincity']=="m" && (int)$row['stockgroup']==1) ) {
+                                    $additiondscr='. Минское ш.';
+                                }
 				$tovar=$icon_text['bottom_text'];//$row2['name'];
-				$dscr='<p>'.$icon_text['description'].'</p>';//$row2['description']
+				$dscr='<p>'.$icon_text['description'].$additiondscr.'</p>';//$row2['description']
 				//foreach($res1 as $prod_row1) {
 				//$tovar=$res2[0]['name'];
 				//$dscr='<p>'.$res2[0]['description'].'</p>';

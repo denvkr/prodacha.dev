@@ -92,7 +92,7 @@ else
 if (!empty($odnotipList)) {
     
 $result = $PHPShopOrm->query("select * from " . $PHPShopBase->getParam('base.products') . " where (" . $odnotipList . ") " . $chek_items . " and  enabled='1' and parent_enabled='0' and sklad!='1' order by num");
-echo "select * from " . $PHPShopBase->getParam('base.products') . " where (" . $odnotipList . ") " . $chek_items . " and  enabled='1' and parent_enabled='0' and sklad!='1' order by num";
+//echo "select * from " . $PHPShopBase->getParam('base.products') . " where (" . $odnotipList . ") " . $chek_items . " and  enabled='1' and parent_enabled='0' and sklad!='1' order by num";
 //ѕо рекомендации кокоса уменьшаем кол-во товаров дл€ индексировани€ в разделе ƒл€ работы с товаром <...> ¬ы можете приобрести
 $cnt=0;
 while ($row = mysql_fetch_assoc($result)) {
