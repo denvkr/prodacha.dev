@@ -615,7 +615,15 @@ $('.city_link').click(function() {
 $('.log_popup, .city_popup').mouseleave(function() {
         $(this).fadeOut('fast');
 });
-        /* Sorted items paginate */
+$('.service').eq(0).click(function(e){
+        e.preventDefault();
+        $('.pages_popup').eq(0).fadeIn('fast');         
+});
+$('.pages_popup').eq(0).mouseleave(function(){
+        $(this).eq(0).fadeOut('fast');  
+});
+
+/* Sorted items paginate */
         $('#paging_container').pajinate({
         num_page_links_to_display : 4,
         items_per_page : 3,

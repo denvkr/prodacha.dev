@@ -16,7 +16,7 @@ $GetItemUpdate = 0;
 $GetCatalogCreate = 0;
 
 // Номер ячейки характеристик для учета сдвига массива
-$GLOBALS['option']['sort'] = 17;
+$GLOBALS['option']['sort'] = 20;
 
 
 // Персонализация
@@ -342,7 +342,7 @@ class ReadCsv1C extends PHPShopReadCsvPro {
             $sql.="price3='" . @$CsvToArray[9] . "', "; // цена 3
             $sql.="price4='" . @$CsvToArray[10] . "', "; // цена 4
             $sql.="price5='" . @$CsvToArray[11] . "', "; // цена 5
-            $sql.="items='" . @$CsvToArray[18] . "', "; // склад @$CsvToArray[6]
+            $sql.="items='" . (int)  str_replace(',','.', @$CsvToArray[18]) . "', "; // склад @$CsvToArray[6]
             $sql.="stockgroup='" . (int)@$CsvToArray[19] . "', "; // склад @$CsvToArray[6]
 			
             // Подчиненные товары
@@ -417,6 +417,8 @@ class ReadCsv1C extends PHPShopReadCsvPro {
                 if ((int)$CsvToArray[19]==1 || (int)$CsvToArray[19]==10 || (int)$CsvToArray[19]==11){
                    if ((!stristr ( $resultvendor,'i186' ))) 
                        $resultvendor.="i186-1200i";
+                   elseif ((stristr ( $resultvendor,'i186-i' )))
+                       $resultvendor.=str_ireplace ( "i186-i" , "i186-1200i" , $resultvendor );	   
                    //добавляем саму характеристику
                    $result[186][0] = '1200';
                 } else
@@ -464,14 +466,14 @@ class ReadCsv1C extends PHPShopReadCsvPro {
                     break;
 
                 case(2):
-                    if ((int)$CsvToArray[18]==0){
+                    if ((int)$CsvToArray[19]==0){
                         $p_enabled=0;
                         $yml=0;
                         //1,10,11,2,3 - в наличии на сайте (нет галки "под заказ") + вывод на Яндекс Маркете в наличии 
-                    } elseif ((int)$CsvToArray[18]==1 || (int)$CsvToArray[18]==10 || (int)$CsvToArray[18]==11 || (int)$CsvToArray[18]==2) {
+                    } elseif ((int)$CsvToArray[19]==1 || (int)$CsvToArray[19]==10 || (int)$CsvToArray[19]==11 || (int)$CsvToArray[19]==2) {
                         $p_enabled=1;
                         $yml=1;
-                    } elseif ((int)$CsvToArray[18]==3) {
+                    } elseif ((int)$CsvToArray[19]==3) {
                         $p_enabled=0;
                         $yml=0;
                     }

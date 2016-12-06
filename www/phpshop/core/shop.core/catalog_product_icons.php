@@ -71,17 +71,17 @@ function catalog_product_icons($obj, $row) {
                                 
                                 $icon_text=call_user_func_array('get_icon_bottom_text', array($row2['id'],$_COOKIE['sincity']));
                                 
-                                $additiondscr='';
                                 //В зависимости от региона и наличия на складе добавляем текст
-                                if ( ($_COOKIE['sincity']=="m" && (int)$row['stockgroup']==11) ) {
-                                    $additiondscr='. Динамо + Минское ш.';
+                                if ( ($_COOKIE['sincity']=="m" && (int)$row['stockgroup']==11 && $id_img1=='1200') ) {
+                                    $additiondscr='.<br><a href="/page/store.html" itemprop="url"><span itemprop="title">Магазин м. Динамо</span></a><br><a href="/page/shop.html" itemprop="url"><span itemprop="title">Магазин Минское ш.</span></a>';
+                                }elseif ( ($_COOKIE['sincity']=="m" && (int)$row['stockgroup']==10 && $id_img1=='1200') ) {
+                                    $additiondscr='.<br><a href="/page/store.html" itemprop="url"><span itemprop="title">Магазин м. Динамо</span></a>';
+                                }elseif ( ($_COOKIE['sincity']=="m" && (int)$row['stockgroup']==1 && $id_img1=='1200') ) {
+                                    $additiondscr='.<br><a href="/page/shop.html" itemprop="url"><span itemprop="title">Магазин Минское ш.</span></a>';
+                                } else {
+                                    $additiondscr='';                                    
                                 }
-                                if ( ($_COOKIE['sincity']=="m" && (int)$row['stockgroup']==10) ) {
-                                    $additiondscr='. Динамо';
-                                }
-                                if ( ($_COOKIE['sincity']=="m" && (int)$row['stockgroup']==1) ) {
-                                    $additiondscr='. Минское ш.';
-                                }
+                                    
 				$tovar=$icon_text['bottom_text'];//$row2['name'];
 				$dscr='<p>'.$icon_text['description'].$additiondscr.'</p>';//$row2['description']
 				//foreach($res1 as $prod_row1) {
@@ -94,7 +94,7 @@ function catalog_product_icons($obj, $row) {
                                         //иконка с дилером
                                         $icondealer=call_user_func_array('get_icon_dealer',array(intval($id_img1)));
 					if (($_COOKIE['sincity']!="m" && $id_img1!='1200' && $id_img1!='3375' && $icondealer===false && $j!==42) || ($_COOKIE['sincity']=="m" && !empty($id_img1) && $id_img1!='3375' && $icondealer===false && $j!==42)) {
-						if ($id_img1==1200) {
+						if ($id_img1=='1200') {
 							$href='<img onclick="window.location=\'/shop/UID_'.$id_tovara.'.html#tab7\';" src="'.$src.'" alt="">';//document.getElementsByClassName(\'tabNavigation\')[0].children[2].className=\'selected\';
 						} else if ($id_img1==1193) {
 							$href='<img onclick="window.location=\'/shop/UID_'.$id_tovara.'.html#tab6\';" src="'.$src.'" alt="">'; //document.getElementsByClassName(\'tabNavigation\')[0].children[1].className=\'selected\';

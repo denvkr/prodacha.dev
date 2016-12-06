@@ -335,12 +335,13 @@ function actionUpdate() {
     global $PHPShopModules, $PHPShopSystem;
 
     // Списывание со склада
+
     switch ($PHPShopSystem->getSerilizeParam('admoption.sklad_status')) {
 
         case(3):
             if ($_POST['items_new'] < 1) {
                 $_POST['sklad_new'] = 1;
-                $_POST['enabled_new'] = 1;
+                //$_POST['enabled_new'] = 1;
             } else {
                 $_POST['sklad_new'] = 0;
                 $_POST['enabled_new'] = 1;
@@ -359,6 +360,7 @@ function actionUpdate() {
 
         default:
             break;
+
     }
 
 

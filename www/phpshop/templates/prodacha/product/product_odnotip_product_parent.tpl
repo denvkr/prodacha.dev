@@ -9,7 +9,7 @@
         if ($('.price_comlain.fast_order1').length) $('.price_comlain.fast_order1').css('display','none');
         if ($('.creditinputcart').length) $('.creditinputcart').css('display','none');
         if ($('.addchart_block_table_price:eq(0)').length){
-            $('.addchart_block_table_price:eq(0)').css({"position": "absolute","width": "190px","margin-top": "-55px"});  
+            $('.addchart_block_table_price:eq(0)').css({"position": "absolute","width": "190px","margin-top": "0px"});  
         }
         if ($('.addchart_block').length) $('.addchart_block').css('padding-top','0px');
         if ($('#parentId').length)

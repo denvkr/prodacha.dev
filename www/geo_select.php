@@ -19,7 +19,7 @@
 				}
 				
 				
-				
+                //выводим выбор региона
 		echo '			<div class="city_popup">';
 					
 					if ($_COOKIE['sincity']!="m")
@@ -40,5 +40,26 @@
 				</div>		
 	
 		';
-		
+
+                //выводим ссылки на статьи
+		echo '			<div class="pages_popup">';
+					
+					if ($_COOKIE['sincity']!="m")
+						echo '<a onclick="save_(\'msc\');" title="Москва"><span>Москва</span></a>';
+						
+					if ($_COOKIE['sincity']!="sp")	
+						echo '<a onclick="save_(\'spb\');" title="Санкт-Петербург"><span>Санкт-Петербург</span></a>';
+
+					if ($_COOKIE['sincity']!="chb")	
+						echo '<a onclick="save_(\'chb\');" title="Чебоксары"><span>Чебоксары</span></a>';
+						
+					if ($_COOKIE['sincity']!="other")	
+						echo '<a onclick="save_(\'other\');"  title="Другой регион"><span>Другой регион</span></a>';
+						
+						echo '<div class="arrowupline">
+						</div>
+					</div>
+	
+		';
+
 ?>
