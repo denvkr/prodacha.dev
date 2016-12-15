@@ -168,7 +168,7 @@ function checkStore_add_sorttable_hook($obj, $row) {
     }      
     $tab6_html.='<b>'.$GLOBALS['SysValue']['lang']['warranty_tab_string6'].PHPShopText::nbsp(1).$brand.':</b><br />';
     
-    $tab6_html.='<!--noindex--><table id="select_varranty_firm" name="select_varranty_firm" cellpadding="5" cellspacing="10" col="3">';
+    $tab6_html.='<table id="select_varranty_firm" name="select_varranty_firm" cellpadding="5" cellspacing="10" col="3">';
     $tab6_html.='<thead><tr><th style="text-align:left">Наименование</th><th style="text-align:left">Телефон</th><th style="text-align:left">Адрес</th></tr></thead><tbody>';
     
     if ($service_existing_region_desicion['service_existing_in_current_region']==1) {
@@ -188,7 +188,7 @@ function checkStore_add_sorttable_hook($obj, $row) {
     	}
     }
     
-    $tab6_html.='</tbody></table><!--/noindex-->';
+    $tab6_html.='</tbody></table>';
     //$tab6_html.='$no_service_in_moscow'.$no_service_in_moscow.'<br />';
     //$tab6_html.='$service_existing_region_desicion[\'service_existing_in_current_region\']'.$service_existing_region_desicion['service_existing_in_current_region'].'<br />';
     //$tab6_html.='$service_existing_region_desicion[\'service_existing_in_few_region\']'.$service_existing_region_desicion['service_existing_in_few_region'].'<br />';
@@ -386,7 +386,7 @@ function display_tovar_delivery_hook($obj, $row) {
 	//$tab7_html.=$sql_tab7;
 	if ($_COOKIE['sincity']!='chb' && $_COOKIE['sincity']!='sp'){
 		if ($price>=1000){
-			$tab7_html.='<!--noindex--><table id="select_delivery_rules" name="select_delivery_rules" cellpadding="5" cellspacing="10" col="3">';
+			$tab7_html.='<table id="select_delivery_rules" name="select_delivery_rules" cellpadding="5" cellspacing="10" col="3">';
 			$tab7_html.='<thead><tr><th style="text-align:left">Условия</th><th style="text-align:left">Стоимость доставки</th><th></th></tr></thead><tbody>';
 		}
 		
@@ -559,14 +559,14 @@ function display_tovar_delivery_hook($obj, $row) {
 				$tab7_html.='<td>'.$city.'</td><td>'.$dostavka_price.'</td>';
 			} else {
 				if ($city=='- Доставка и отгрузка в транспортную компанию<br />для отправки по России') {
-					$tab7_html.='<td><!--/noindex-->'.$city.'<!--noindex--></td><td><!--/noindex-->'.$dostavka_price.' руб.<!--noindex--></td><td><a href="#edost"><u>Расчет стоимости услуг транспортных компаний</u></a></td>';
+					$tab7_html.='<td>'.$city.'</td><td>'.$dostavka_price.' руб.</td><td><a href="#edost"><u>Расчет стоимости услуг транспортных компаний</u></a></td>';
 				} else	$tab7_html.='<td>'.$city.'</td><td>'.$dostavka_price.' руб.</td><td></td>';
 			}
 			$tab7_html.='</tr>';
 		}
 		
 		if ($price>=1000){
-			$tab7_html.='</tbody></table><!--/noindex-->';
+			$tab7_html.='</tbody></table>';
 		}
 	}
     

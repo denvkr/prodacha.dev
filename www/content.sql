@@ -1,0 +1,1 @@
+select count(*) from phpshop_products where content like '%<p>%</p>%<p>%</p>%'

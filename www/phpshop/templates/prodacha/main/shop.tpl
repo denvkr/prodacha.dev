@@ -178,20 +178,20 @@
 		
 
 	@php
-		if ($_COOKIE['sincity']=="sp")
-			echo '<style type="text/css">.store, .shop, .shop_cheb{display:none;}</style>';
-		else
-			echo '<style type="text/css">.shop_spb{display:none;}</style>';
-			
-		if ($_COOKIE['sincity']=="chb")
-			echo '<style type="text/css">.store, .shop, .shop_spb{display:none;}</style>';
-		else
-			echo '<style type="text/css">.shop_cheb{display:none;}</style>';
-			
-		if ($_COOKIE['sincity']=="other")
-			echo '<style type="text/css">.shop_spb, .shop_cheb{display:none;}</style>';
-	php@
 
+		if ($_COOKIE['sincity']=="sp")
+                        echo '<link rel="stylesheet" href="'.$GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].'css/style_sp1.css" type="text/css">';
+		else
+                        echo '<link rel="stylesheet" href="'.$GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].'css/style_sp2.css" type="text/css">';
+		if ($_COOKIE['sincity']=="chb")
+                        echo '<link rel="stylesheet" href="'.$GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].'css/style_chb1.css" type="text/css">';
+		else
+                        echo '<link rel="stylesheet" href="'.$GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].'css/style_chb2.css" type="text/css">';
+		if ($_COOKIE['sincity']=="other")
+                        echo '<link rel="stylesheet" href="'.$GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].'css/style_other1.css" type="text/css">';
+
+	php@
+        
 	<!-- Universal Analytics counter -->
 	
 	<script>

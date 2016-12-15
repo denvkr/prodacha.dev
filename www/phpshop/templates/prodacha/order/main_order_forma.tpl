@@ -22,7 +22,7 @@
       <td> @orderDelivery@ </td>
     </tr>
     <tr>
-      <td id="delivery_warning" align="left" colspan="2" style="font-size: 10px; padding-left: 170px; display:none;">* Доставка по Москве производится для заказов от 5000 руб. Заказ стоимостью<br /> менее 5000 руб. Вы можете забрать самовывозом из наших магазинов.</td>
+      <td id="delivery_warning" align="left" colspan="2">* Доставка по Москве производится для заказов от 5000 руб. Заказ стоимостью<br /> менее 5000 руб. Вы можете забрать самовывозом из наших магазинов.</td>
     </tr>
     <tr valign="top">
       <td align="right"> E-mail: </td>
@@ -61,9 +61,9 @@
       </td>
     </tr>
     <tr>
-        <td align="right"><div name="delivery_time_info" style="display:none;"> Время доставки: </div></td>
+        <td align="right"><div name="delivery_time_info"> Время доставки: </div></td>
         <td>
-      	  <div name="delivery_time_info" style="display:none;">от
+      	  <div name="delivery_time_info">от
           	<input type="text" name="dos_ot" data-toggle="popover" data-html="true" style="width:50px; height:18px; font-family:tahoma; font-size:11px; color:black;" maxlength="2">
 	        ч.&nbsp;&nbsp;&nbsp;
     	    до
@@ -82,34 +82,34 @@
     </tr>
     <tr>
        <td align="right"><!--style="color: gray;" -->
-       		<div id="org_name_info" style="display:none;">Компания: </div>
+       		<div id="org_name_info">Компания: </div>
        </td>
        <td>
-           <div id="org_name_value" style="display:none;"><input type="text" name="org_name" style="width:405px; height:18px; font-family:tahoma; font-size:11px; color:black;" maxlength="100" value="@UserComp@" @formaLock@></div>
+           <div id="org_name_value"><input type="text" name="org_name" style="width:405px; height:18px; font-family:tahoma; font-size:11px; color:black;" maxlength="100" value="@UserComp@" @formaLock@></div>
        </td>
     </tr>
     <tr>
-      <td align="right"><div id="org_inn_info" style="display:none;">ИНН: </div></td><!--style="color: gray;" -->
+      <td align="right"><div id="org_inn_info">ИНН: </div></td><!--style="color: gray;" -->
       <td>
-        <div id="org_inn_value" style="display:none;"><input type="text" name="org_inn" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:black;" maxlength="12" value="@UserInn@" @formaLock@></div>&nbsp;<div id="org_kpp_info" style="display:none;">КПП:</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div id="org_kpp_value" style="display:none;"><input type="text" name="org_kpp" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F " maxlength="9" value="@UserKpp@" @formaLock@></div>
+        <div id="org_inn_value"><input type="text" name="org_inn" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:black;" maxlength="12" value="@UserInn@" @formaLock@></div>&nbsp;<div id="org_kpp_info">КПП:</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div id="org_kpp_value"><input type="text" name="org_kpp" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F " maxlength="9" value="@UserKpp@" @formaLock@></div>
       </td>
     </tr>
     <tr>
-        <td align="right"><div id="annual_number_info" style="display:none;">Расчетный счет: </div></td><!--style="color: gray;" -->
+        <td align="right"><div id="annual_number_info">Расчетный счет: </div></td><!--style="color: gray;" -->
         <td>
-        <div id="annual_number_value" style="display:none;"><input type="text" name="annual_number" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:black;" maxlength="20" value="@AnnualNumber@" @formaLock@></div>&nbsp;<div id="bic_bank_number_info" style="display:none;">БИК банка:</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div id="bic_bank_number_value" style="display:none;"><input type="text" name="bic_bank_number" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F " maxlength="9" value="@BicBankNumber@" @formaLock@></div>
+        <div id="annual_number_value"><input type="text" name="annual_number" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:black;" maxlength="20" value="@AnnualNumber@" @formaLock@></div>&nbsp;<div id="bic_bank_number_info">БИК банка:</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div id="bic_bank_number_value"><input type="text" name="bic_bank_number" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:#4F4F4F " maxlength="9" value="@BicBankNumber@" @formaLock@></div>
         </td>
     </tr>
     <tr>
-        <td align="right"><div id="bank_name_info" style="display:none;">Название банка: </div></td><!--style="color: gray;" -->
+        <td align="right"><div id="bank_name_info">Название банка: </div></td><!--style="color: gray;" -->
         <td>
-        <div id="bank_name_value" style="display:none;"><input type="text" name="bank_name" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:black;" maxlength="100" value="@BankName@" @formaLock@></div>&nbsp;<div id="gen_manager_initial_info" style="display:none;">ФИО директора:</div>&nbsp;<div id="gen_manager_initial_value" style="display:none;"><input type="text" name="gen_manager_initial" style="width:150px; height:18px; font-family:tahoma; font-size:11px ; color:#4F4F4F " maxlength="100" value="@GenManagerInitial@" @formaLock@></div>
+        <div id="bank_name_value"><input type="text" name="bank_name" style="width:150px; height:18px; font-family:tahoma; font-size:11px; color:black;" maxlength="100" value="@BankName@" @formaLock@></div>&nbsp;<div id="gen_manager_initial_info">ФИО директора:</div>&nbsp;<div id="gen_manager_initial_value"><input type="text" name="gen_manager_initial" style="width:150px; height:18px; font-family:tahoma; font-size:11px ; color:#4F4F4F " maxlength="100" value="@GenManagerInitial@" @formaLock@></div>
         </td>
     </tr>
     <tr>
 		<td></td>
     	<td>
-    		<div style="width: 400px;display:none;">
+    		<div name="cartnotifyaboutprice">
 				<span style="color: red; font-weight: bold;">Внимание!</span> При заказе через корзину указывается <span style="font-weight: bold;">предварительная стоимость</span> для выбранного вами типа доставки. Окончательную стоимость доставки Вам сообщит менеджер при подтверждении заказа (она зависит от расстояния и суммы Вашего заказа). Точную стоимость доставки можно узнать <a target="_blank" href="http://prodacha.ru/page/delivery.html" style="text-decoration: underline;">по ссылке</a>.
     		</div>
     	</td>
@@ -122,7 +122,7 @@
 	        <!--<span id="bic_credit" class="need2hide" style="display:none;" >@credititems@</span>	-->
 		<!-- <input type="hidden" name="bic_code" value='yescreditmodul([@credititems@],367328,"@orderNum@");' > -->
 		<input type="hidden" name="bic_code" value="@credititems@">
-		<span id="bic" class="need2hide" style="display:none;" ><a href="javascript:OrderChek();"  class=link style="font-size: 18px; font-weight: bold;"><img src="images/buyincredit.png"></a></span>
+		<span id="bic" class="need2hide"><a href="javascript:OrderChek();"  class=link style="font-size: 18px; font-weight: bold;"><img src="images/buyincredit.png"></a></span>
 		<input type="hidden" name="send_to_order" value="ok">
 	        <input type="hidden" name="d" id="d" value="@deliveryId@">
 	        <input type="hidden" name="nav" value="done">
@@ -138,7 +138,7 @@
 	<tr>
         <td></td>
         <td>
-            <img src="images/shop/brick_error.gif" border="0" style="vertical-align: middle;  display: none;" />&nbsp;&nbsp;<a href="javascript:forma_order.reset();" class=link style="font-size: 18px; font-weight: bold; display: none;">Очистить форму</a>
+            <img id="clearcartimg" src="images/shop/brick_error.gif" border="0" />&nbsp;&nbsp;<a href="javascript:forma_order.reset();" class=link style="font-size: 18px; font-weight: bold; display: none;">Очистить форму</a>
         </td>	
     </tr>
   </table>

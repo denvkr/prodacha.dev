@@ -363,9 +363,8 @@
 	<!--<div id="tab2">@productFiles@</div>-->
 	
 	<div id="tab3">@ratingfull@</div>
-	
+        <!--noindex-->	
 	<div id="tab4">
-		<!--noindex-->
 		<div id="bg_catalog_1" style="margin-top:10px">Комментарии пользователей</div>
 		
 		<textarea id="message" style="width: 340px" rows="5" onkeyup="return countSymb();"></textarea>
@@ -383,7 +382,6 @@
 			<input type="button"  value="Удалить" onclick="commentList('@productUid@','dell','1')" />
 			<input type="hidden" id="commentEditId" />
 		</div>
-		<!--/noindex-->		
 		<div id="commentList"> </div>
 		
 		<script>
@@ -391,13 +389,16 @@
         </script>
 		
 	</div>
-	
+	<!--/noindex-->
+        <!--noindex-->
 	<div id="tab5">@pagetemaDisp@</div>
-	
+        <!--/noindex-->
+        <!--noindex-->
 	<div id="tab6">@warrantyInfo@</div>
-	
+        <!--/noindex-->
+        <!--noindex-->
 	<div id="tab7">@deliveryInfo@<br></br>@edostInfo@</div>
-		
+        <!--/noindex-->
 	<img src="..images/spacer.gif" width="783" height="1" alt="" />
 
 </div>
