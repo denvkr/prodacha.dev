@@ -225,7 +225,18 @@ class PHPShopSearch extends PHPShopShopCore {
 	                
 	               		// Вес
 	               		$this->set('productWeight', $row['weight']);
-	             
+
+                                //цена по региону
+                                if ( ($_COOKIE['sincity']=="sp") AND ($row['price2']!=0) ) {
+                                        $price=$row['price2'];
+                                } else if( ($_COOKIE['sincity']=="chb") AND ($row['price3']!=0) ) {
+                                        $price=$row['price3'];
+                                } else if( ($_COOKIE['sincity']=="kur") AND ($row['price4']!=0) ) {
+                                        $price=$row['price4'];
+                                }
+                                else {
+                                        $price=intval($row['price']);
+                                }
 	               		// Максимальная дата изменения
 	               		if ($row['datas'] > $lastmodified)
 	                			$lastmodified = $row['datas'];
@@ -253,7 +264,7 @@ class PHPShopSearch extends PHPShopShopCore {
 	                		'</div>'.
 	                		'<div class="media-body">'.
 	                		'<h4 class="media-heading" style="font: normal 12px/1.4 Arial, Helvetica, sans-serif;">'.$row['name'].'</h4>'.
-	                		'<span class="btn btn-default">'.$row['price'].' '.$this->PHPShopSystem->getDefaultValutaCode(true).'</span>'.
+	                		'<span class="btn btn-default">'.$price.' '.$this->PHPShopSystem->getDefaultValutaCode(true).'</span>'.
 	                		'</div>'.
 	                		'</div>'.
 	                		'</a>'.

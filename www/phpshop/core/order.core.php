@@ -256,8 +256,9 @@ class PHPShopOrder extends PHPShopCore {
 					$bicprice=$array['price2'];
 				} else if( ($_COOKIE['sincity']=="chb") AND ($array['price3']!=0) ) {
 					$bicprice=$array['price3'];
-				}
-				else {
+				} else if( ($_COOKIE['sincity']=="kur") AND ($array['price4']!=0) ) {
+					$bicprice=$array['price4'];
+				} else {
 					$bicprice=$array['price'];
 				}
 				//готовим данные для кредита
@@ -396,6 +397,8 @@ function ordercartforma($val, $option) {
 		$realprice=$val['price2'];
 	} else if( ($_COOKIE['sincity']=="chb") AND ($val['price3']!=0) ) {
 		$realprice=$val['price3'];
+	} else if( ($_COOKIE['sincity']=="kur") AND ($val['price4']!=0) ) {
+		$realprice=$val['price4'];
 	}
 	else {
 		$realprice=$val['price'];

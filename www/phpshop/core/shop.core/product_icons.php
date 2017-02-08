@@ -38,9 +38,9 @@ function product_icons($obj, $row) {
 	$price=$row['price'];
 	
 	//названия магазов для ссылок  - ибо со вбитием ссылок через админку траблы
-	$shop_urls['м. Динамо']="http://prodacha.ru/page/store.html";
-	$shop_urls['Минское шоссе']="http://prodacha.ru/page/shop.html";
-	$shop_urls['Лахтинский пр-т.']="http://prodacha.ru/page/shop_spb.html";
+	$shop_urls['м. Динамо']="//prodacha.ru/page/store.html";
+	$shop_urls['Минское шоссе']="//prodacha.ru/page/shop.html";
+	$shop_urls['Лахтинский пр-т.']="//prodacha.ru/page/shop_spb.html";
 		
 	//доп харки  - наличие,предпродажа и проч
 	$array=array(186,185,181,184,302,42);
@@ -192,13 +192,13 @@ function product_icons($obj, $row) {
                                                 //логика для нескольких подарков
                                                 $product_icon_desc=call_user_func_array('get_more_gift', array($GLOBALS['SysValue']['other']['serverName'],intval($id_tovara)));
                                                 if ($product_icon_desc===false)
-                                                    $product_icon_desc='<table><tr><td><a href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$row['gift'].'.html"><div style="width:80px;height:80px;background: url('.$row3375['pic_small'].'); background-repeat: no-repeat;background-position: center;-webkit-background-size: contain;-moz-background-size: contain;-o-background-size: contain;background-size: contain;"></div></a></td><td><a href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$row['gift'].'.html" style="color: #588910;font: 12px/1.4 Arial,Helvetica,sans-serif;">'.$row3375['name'].'</a><br><span style="color: #e7193f;font: 14px Arial,Helvetica,sans-serif;font-weight: bold;"><strike>'.$row3375['price'].' руб.</strike></span><br><span style="font: 14px Arial,Helvetica,sans-serif;font-weight: bold;color:#6C4B46;">В подарок!</span></td></tr></table>';
+                                                    $product_icon_desc='<table><tr><td><a href="//'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$row['gift'].'.html"><div style="width:80px;height:80px;background: url('.$row3375['pic_small'].'); background-repeat: no-repeat;background-position: center;-webkit-background-size: contain;-moz-background-size: contain;-o-background-size: contain;background-size: contain;"></div></a></td><td><a href="//'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$row['gift'].'.html" style="color: #588910;font: 12px/1.4 Arial,Helvetica,sans-serif;">'.$row3375['name'].'</a><br><span style="color: #e7193f;font: 14px Arial,Helvetica,sans-serif;font-weight: bold;"><strike>'.$row3375['price'].' руб.</strike></span><br><span style="font: 14px Arial,Helvetica,sans-serif;font-weight: bold;color:#6C4B46;">В подарок!</span></td></tr></table>';
 						$vuvod.='<li>
 						<div class="product_icon_desc">
 						'.$product_icon_desc.'
 						</div>
 						<div class="product_icon">
-                                                <a href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$row['gift'].'.html">
+                                                <a href="//'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$row['gift'].'.html">
 						<div class="product_icon_img">'.$href.'</div>
                                                 </a>
 						<div style="color:#e7193f">'.$icon_text['bottom_text'].'</div>

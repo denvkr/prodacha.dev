@@ -59,7 +59,7 @@ function checkStore_add_sorttable_hook($obj, $row) {
     //получаем бренд для данного города
     $sql_tab6="SELECT distinct brand FROM ".$GLOBALS['SysValue']['base']['service_and_varranty']." ".$sub_sql[0].$sub_sql2;
     $res_tab6=mysql_query($sql_tab6);
-    
+                
     //если для города нет сервисных центров то выводим все сервисные центры для данного бренда
     if (mysql_num_rows($res_tab6)==0) {
     	//$sub_sql[0]=" where brand='".$obj->get('vendorName')."'";
@@ -79,7 +79,7 @@ function checkStore_add_sorttable_hook($obj, $row) {
     $service_existing_region_desicion=$obj->check_service_existing_by_region($_COOKIE['sincity'],$brand);
     
     $tab6_html.=PHPShopText::nbsp(1).$GLOBALS['SysValue']['lang']['warranty_tab_string2'].PHPShopText::nbsp(1);
-	//признак того что нет сервиса в москве
+    //признак того что нет сервиса в москве
     $no_service_in_moscow=false;
     //выводим данные для города
     $tab6_html.='<select id="select_vendor_city" name="select_vendor_city" size="1" onchange="check_varranty_firm_city(\'sort.hook\');">';
@@ -99,20 +99,20 @@ function checkStore_add_sorttable_hook($obj, $row) {
     //} else {
     //	$sql_tab6="SELECT distinct city FROM ".$GLOBALS['SysValue']['base']['service_and_varranty']." ".$sub_sql[0].$sub_sql2;
     //}
-    if ($no_service_in_moscow==true) {
+    //if ($no_service_in_moscow==true) {
     	//$tab6_html.='<option selected value="c0">Выберите город</option>';
-    }
+    //}
 
     if ((mysqli_errno)){
     	$res_tab6=mysql_query($sql_tab6);
     	$cnt=0;
 	    while ($row_tab6=mysql_fetch_assoc($res_tab6)) {
 	    	//если выбран другой регион то пытаемся выделить г.Москва
-			if ( ($row_tab6['city']=='Москва' && $_COOKIE['sincity']=='m') || ($row_tab6['city']=='Чебоксары' && $_COOKIE['sincity']=='chb') || ($row_tab6['city']=='Санкт-Петербург' && $_COOKIE['sincity']=='sp') || ($_COOKIE['sincity']=='other' && $row_tab6['city']=='Москва') ) {
-				$tab6_html.='<option selected value="c'.$cnt.'">'.$row_tab6['city'].'</option>';   		
-	    	} else if ($no_service_in_moscow==false && $service_existing_region_desicion['service_existing_in_current_region']==0 && $service_existing_region_desicion['service_existing_in_few_region']==1 && ($_COOKIE['sincity']=='chb' || $_COOKIE['sincity']=='sp') && $row_tab6['city']=='Москва') {
+		if ( ($row_tab6['city']=='Москва' && $_COOKIE['sincity']=='m') || ($row_tab6['city']=='Чебоксары' && $_COOKIE['sincity']=='chb') || ($row_tab6['city']=='Санкт-Петербург' && $_COOKIE['sincity']=='sp') || ($row_tab6['city']=='Курск' && $_COOKIE['sincity']=='kur') || ($_COOKIE['sincity']=='other' && $row_tab6['city']=='Москва') ) {
+			$tab6_html.='<option selected value="c'.$cnt.'">'.$row_tab6['city'].'</option>';   		
+	    	} else if ($no_service_in_moscow==false && $service_existing_region_desicion['service_existing_in_current_region']==0 && $service_existing_region_desicion['service_existing_in_few_region']==1 && ($_COOKIE['sincity']=='chb' || $_COOKIE['sincity']=='sp' || $_COOKIE['sincity']=='kur') && $row_tab6['city']=='Москва') {
 	    		$tab6_html.='<option selected value="c'.$cnt.'">'.$row_tab6['city'].'</option>';
-	    	}  	else {
+	    	}  else {
 	    		$tab6_html.='<option value="c'.$cnt.'">'.$row_tab6['city'].'</option>';
 	    	}
 	    	$cnt++;
@@ -223,6 +223,8 @@ function display_tovar_delivery_hook($obj, $row) {
 				$price=$row['price2'];
 			} else if( ($_COOKIE['sincity']=="chb") AND ($row['price3']!=0) ) {
 				$price=$row['price3'];
+			} else if( ($_COOKIE['sincity']=="kur") AND ($row['price4']!=0) ) {
+				$price=$row['price4'];                                
 			}
 			else {
 				$price=$row['price'];
@@ -234,6 +236,8 @@ function display_tovar_delivery_hook($obj, $row) {
 				$price=$row['price2'];
 			} else if( ($_COOKIE['sincity']=="chb") AND ($row['price3']!=0) ) {
 				$price=$row['price3'];
+			} else if( ($_COOKIE['sincity']=="kur") AND ($row['price4']!=0) ) {
+				$price=$row['price4'];
 			}
 			else {
 				$price=$row['price'];
@@ -247,6 +251,8 @@ function display_tovar_delivery_hook($obj, $row) {
 			$price=$row['price2'];
 		} else if( ($_COOKIE['sincity']=="chb") AND ($row['price3']!=0) ) {
 			$price=$row['price3'];
+		} else if( ($_COOKIE['sincity']=="kur") AND ($row['price4']!=0) ) {
+			$price=$row['price4'];
 		}
 		else {
 			$price=intval($row['price']);
@@ -262,14 +268,16 @@ function display_tovar_delivery_hook($obj, $row) {
         
 
 	//надпись ваш город и select с городом
-	if ($price>=1000){
+	//if ($price>=1000){
 		//$tab7_html.=$GLOBALS['SysValue']['lang']['warranty_tab_string2'].PHPShopText::nbsp(1);
 		//выбираем город
 		//$tab7_html.='<select id="select_delivery_city" name="select_delivery_city" size="1">';
-	}
-	
+	//}
+	//echo $_COOKIE['sincity'];
 	switch ($_COOKIE['sincity']) {
-		case 'm': $city='по Москве и Московской области';//$city='Москва,Московская область';
+		case 'm': 
+                        //echo $city;
+                        $city='по Москве и Московской области';//$city='Москва,Московская область';
 			//$sub_sql1='where id in (3,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,42) and enabled=\'1\' order by city asc';
 			if ($price>=1000 && $price<=4999) {
 				$sub_sql1=" where (enabled='1' and id in ('41')) order by city asc";
@@ -326,7 +334,9 @@ function display_tovar_delivery_hook($obj, $row) {
 			}		
 			break;
 			*/
-		case 'chb': //return true; 
+		case 'chb':
+                        //echo $city;
+                        //return true; 
 			// для чебоксар доставки нет
 			//$city='Чебоксары';
 			$city='по Чебоксарам';
@@ -337,7 +347,25 @@ function display_tovar_delivery_hook($obj, $row) {
 				$sub_sql1='where id in (43) and enabled=\'1\' order by city asc';
 			}
 			break;
-		case 'other' and 'sp':
+                case 'kur':
+			$city='по Курску';
+                        //echo $city;
+                        // для "другого региона" доставки нет
+			if ( $price<1000 ) {
+				$sub_sql1=" where enabled='-1'";
+ 				$dostavka5=$GLOBALS['SysValue']['lang']['delivery_tab_string6'].$tovar.$GLOBALS['SysValue']['lang']['delivery_tab_string7'].PHPShopText::br(1).'</br>'.$GLOBALS['SysValue']['lang']['delivery_tab_string3'];
+			} else {
+                                if ($price>=1000 && $price<=4999){
+                                        $sub_sql1='where id in (41,68) and enabled=\'1\' order by city asc';
+                                } else if ($price>=5000 && $price<=9999) {
+                                        $sub_sql1='where id in (11,68,73) and enabled=\'1\' order by city asc';
+                                } else if ($price>=10000){
+                                        $sub_sql1='where id in (67,68,74) and enabled=\'1\' order by city asc';			
+                                }
+                        }
+			break;
+                case 'other' and 'sp':
+                        //echo $city;
 			//$city='Другой';
 			if ($_COOKIE['sincity']=='other'){
 				$city='для других регионов';
@@ -345,28 +373,29 @@ function display_tovar_delivery_hook($obj, $row) {
 			if ($_COOKIE['sincity']=='sp'){
 				$city='в Санкт-Петербург';
 			}
-	
 
                         // для "другого региона" доставки нет
-			if ($price<1000) {
+			if ( $price<1000 ) {
 				$sub_sql1=" where enabled='-1'";
 				$dostavka5=$GLOBALS['SysValue']['lang']['delivery_tab_string6'].$tovar.$GLOBALS['SysValue']['lang']['delivery_tab_string7'].PHPShopText::br(1).'</br>'.$GLOBALS['SysValue']['lang']['delivery_tab_string3'];
 			} else {
-                                if ($price>=5000 &&$price<=9999) {
-                                        $sub_sql1='where id in (11) and enabled=\'1\' order by city asc';			
-                                } else if ($price>=1000 && $price<=4999){
+                                if ($price>=1000 && $price<=4999){
                                         $sub_sql1='where id in (41) and enabled=\'1\' order by city asc';
+                                } else if ($price>=5000 && $price<=9999) {
+                                        $sub_sql1='where id in (11) and enabled=\'1\' order by city asc';
                                 } else if ($price>=10000){
                                         $sub_sql1='where id in (67) and enabled=\'1\' order by city asc';			
                                 }
                         }
 			break;
+                        
 	}
+        //echo $price;
 	//select с городом
-	if ($price>=1000){
+	//if ($price>=1000){
 		//$tab7_html.='<option value="a0">'.$city.'</option>';
 		//$tab7_html.='</select>';
-	}
+	//}
 	//добавляем в заголовок город доставки
         if ($_COOKIE['sincity']=='sp'){
             $tab7_html.=ParseTemplateReturn("page/spb_map.tpl");            
@@ -569,26 +598,27 @@ function display_tovar_delivery_hook($obj, $row) {
 			$tab7_html.='</tbody></table>';
 		}
 	}
-    
+    //echo $tab7_html;
     //$tab7_html.=$dostavka5;
     //$tab7_html.=PHPShopText::br(1).'</br>'.PHPShopText::br(1).'</br>'.$GLOBALS['SysValue']['lang']['delivery_tab_string3'];
 	if ($price<1000 && $_COOKIE['sincity']=='chb'){
 		//$tab7_html.=PHPShopText::br(1).'</br>'.$GLOBALS['SysValue']['lang']['delivery_tab_string3'];
 		$tab7_html.=$GLOBALS['SysValue']['lang']['delivery_tab_string9'].$city.$GLOBALS['SysValue']['lang']['delivery_tab_string10'];
-	} else if ( $price<1000 && ($_COOKIE['sincity']=='m' || $_COOKIE['sincity']=='sp') ) {
+	} else if ( $price<1000 && ($_COOKIE['sincity']=='m' || $_COOKIE['sincity']=='kur' || $_COOKIE['sincity']=='sp') ) {
 		$tab7_html.=$dostavka5;
-		$tab7_html.=PHPShopText::br(1).'</br>'.$GLOBALS['SysValue']['lang']['delivery_tab_string3'];
+                if ($_COOKIE['sincity']!='kur')
+                    $tab7_html.=PHPShopText::br(1).'</br>'.$GLOBALS['SysValue']['lang']['delivery_tab_string3'];
 	} else if ($price<1000 && $_COOKIE['sincity']=='other'){
 		$tab7_html.=$dostavka5;
-		$tab7_html.=PHPShopText::br(1).'</br>'.PHPShopText::a('http://prodacha.ru/page/delivery.html',$GLOBALS['SysValue']['lang']['delivery_tab_string4']);
+		$tab7_html.=PHPShopText::br(1).'</br>'.PHPShopText::a('//prodacha.ru/page/delivery.html',$GLOBALS['SysValue']['lang']['delivery_tab_string4']);
 	}
     // в чебоксарах доставки нет
 	if ($price>=1000 && $_COOKIE['sincity']!='chb' && $_COOKIE['sincity']!='sp') {
 		$tab7_html.=$dostavka5;
 		if ($_COOKIE['sincity']=='other'){
-			$tab7_html.=PHPShopText::a('http://prodacha.ru/page/delivery.html',$GLOBALS['SysValue']['lang']['delivery_tab_string4']);
+			$tab7_html.=PHPShopText::a('//prodacha.ru/page/delivery.html',$GLOBALS['SysValue']['lang']['delivery_tab_string4']);
 		} else {
-			$tab7_html.=PHPShopText::br(1).'</br>'.PHPShopText::a('http://prodacha.ru/page/delivery.html',$GLOBALS['SysValue']['lang']['delivery_tab_string4']);
+			$tab7_html.=PHPShopText::br(1).'</br>'.PHPShopText::a('//prodacha.ru/page/delivery.html',$GLOBALS['SysValue']['lang']['delivery_tab_string4']);
 		}
 	} else if ($price>=1000 && $_COOKIE['sincity']=='chb') {
 		$tab7_html.=PHPShopText::br(1).'</br>'.$GLOBALS['SysValue']['lang']['delivery_tab_string9'].$city.$GLOBALS['SysValue']['lang']['delivery_tab_string10'];
@@ -690,6 +720,8 @@ function display_tovar_samovyvoz_hook($obj, $row) {
 				$price=$row['price2'];
 			} else if( ($_COOKIE['sincity']=="chb") AND ($row['price3']!=0) ) {
 				$price=$row['price3'];
+			} else if( ($_COOKIE['sincity']=="kur") AND ($row['price4']!=0) ) {
+				$price=$row['price4'];
 			}
 			else {
 				$price=$row['price'];
@@ -701,6 +733,8 @@ function display_tovar_samovyvoz_hook($obj, $row) {
 				$price=$row['price2'];
 			} else if( ($_COOKIE['sincity']=="chb") AND ($row['price3']!=0) ) {
 				$price=$row['price3'];
+			} else if( ($_COOKIE['sincity']=="kur") AND ($row['price4']!=0) ) {
+				$price=$row['price4'];
 			}
 			else {
 				$price=$row['price'];
@@ -714,6 +748,8 @@ function display_tovar_samovyvoz_hook($obj, $row) {
 			$price=$row['price2'];
 		} else if( ($_COOKIE['sincity']=="chb") AND ($row['price3']!=0) ) {
 			$price=$row['price3'];
+                } else if( ($_COOKIE['sincity']=="kur") AND ($row['price4']!=0) ) {
+                        $price=$row['price4'];
 		}
 		else {
 			$price=intval($row['price']);
@@ -739,10 +775,10 @@ function display_tovar_samovyvoz_hook($obj, $row) {
 		break;
 		case 'other' and 'sp': return true;
 			$city='Другой';
-			if ($price>=5000 &&$price<=9999) {
-				$sub_sql1='where id in (11) and enabled=\'1\' order by city asc';			
-			} else if ($price>=1000 && $price<=4999){
+			if ($price>=1000 && $price<=4999){
 				$sub_sql1='where id in (41) and enabled=\'1\' order by city asc';
+			} else if ($price>=5000 && $price<=9999) {
+				$sub_sql1='where id in (11) and enabled=\'1\' order by city asc';	
 			} else if ($price>=10000){
 				$sub_sql1='where id in (67) and enabled=\'1\' order by city asc';			
 			}
@@ -787,6 +823,8 @@ function sp_delivery_tab(){
             break;
         case 'chb': $chbselect='selected';
             break;
+        case 'kur': $kurselect='selected';
+            break;
         case 'other': $otherselect='selected';
             break;
         default: $mselect='selected';
@@ -794,6 +832,7 @@ function sp_delivery_tab(){
     //если выбран другой регион то пытаемся выделить г.Москва
     $html.='<option '.$mselect.' value="msc">Москва</option>';
     $html.='<option '.$spselect.' value="spb">Санкт-Петербург</option>';
+    $html.='<option '.$kurselect.' value="kur">Курск</option>';
     $html.='<option '.$chbselect.' value="chb">Чебоксары</option>';
     $html.='<option '.$otherselect.' value="other">Другой регион</option>';
     $html.='</select>'.'<br /><br />';

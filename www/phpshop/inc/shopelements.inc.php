@@ -1090,7 +1090,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 				$sdvig_vverh='';
 			}
 
-			$submenuhead='<li id-info="'.$parent_id1.'" onclick="document.getElementById(\'fade\').style.display=\'block\'" onmouseover="this.style.backgroundColor=\'#8ab943\'" onmouseout="this.style.backgroundColor=\'#e5e5e5\'" style="display:none;background: #e5e5e5;height: 24px;"><span '.$sdvig_vverh.'>'.$parent_cat_name1.'</span>';
+			$submenuhead='<li id-info="'.$parent_id1.'" class="id-info-default id-info-hidden" onclick="document.getElementById(\'fade\').style.display=\'block\'"><span '.$sdvig_vverh.'>'.$parent_cat_name1.'</span>';
 			$submenuhead.='<div class="submenuhead">';
 			$submenuhead.='<div class="menutype">';
 			$submenuhead.='<ul>';
@@ -1399,7 +1399,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 			} else {
 				$sdvig_vverh='';
 			}
-			$submenuhead='<li id-info="'.$parent_id1.'" onclick="document.getElementById(\'fade\').style.display=\'block\'" onmouseover="this.style.backgroundColor=\'#8ab943\'" onmouseout="this.style.backgroundColor=\'#e5e5e5\'" style="display:none;background: #e5e5e5;height: 24px;"><span '.$sdvig_vverh.'>'.$parent_cat_name1.'</span>';
+			$submenuhead='<li id-info="'.$parent_id1.'" class="id-info-default id-info-hidden" onclick="document.getElementById(\'fade\').style.display=\'block\'"><span '.$sdvig_vverh.'>'.$parent_cat_name1.'</span>';
 			$submenuhead.='<div class="submenuhead">';
 			$submenuhead.='<div class="menutype">';
 			$submenuhead.='<ul>';
@@ -1765,7 +1765,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 			} else {
 				$sdvig_vverh='';
 			}
-			$submenuhead='<li id-info="'.$parent_id1.'" onclick="document.getElementById(\'fade\').style.display=\'block\'" onmouseover="this.style.backgroundColor=\'#8ab943\'" onmouseout="this.style.backgroundColor=\'#e5e5e5\'" style="display:none;background: #e5e5e5;height: 24px;"><span '.$sdvig_vverh.'>'.$parent_cat_name1.'</span>';
+			$submenuhead='<li id-info="'.$parent_id1.'" class="id-info-default id-info-hidden" onclick="document.getElementById(\'fade\').style.display=\'block\'"><span '.$sdvig_vverh.'>'.$parent_cat_name1.'</span>';
 			$submenuhead.='<div class="submenuhead">';
 			$submenuhead.='<div class="menutype">';
 			$submenuhead.='<ul>';
@@ -2168,7 +2168,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
 			} else {
 				$sdvig_vverh='';
 			}
-			$submenuhead='<li id-info="'.$parent_id1.'" onclick="document.getElementById(\'fade\').style.display=\'block\'" onmouseover="this.style.backgroundColor=\'#8ab943\'" onmouseout="this.style.backgroundColor=\'#e5e5e5\'" style="display:none;background: #e5e5e5;height: 24px;"><span '.$sdvig_vverh.'>'.$parent_cat_name1.'</span>';
+			$submenuhead='<li id-info="'.$parent_id1.'" class="id-info-default id-info-hidden" onclick="document.getElementById(\'fade\').style.display=\'block\'"><span '.$sdvig_vverh.'>'.$parent_cat_name1.'</span>';
 			$submenuhead.='<div class="submenuhead">';
 			$submenuhead.='<div class="menutype">';
 			$submenuhead.='<ul>';
@@ -2548,7 +2548,7 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
                 $top_position='';
                 if ($parent_id==16)
                     $top_position='style="height:500px;"';
-		$submenuhead.='<li id-info="'.$parent_id.'" onclick="document.getElementById(\'fade\').style.display=\'block\'" onmouseover="this.style.backgroundColor=\'#8ab943\'" onmouseout="this.style.backgroundColor=\'#e5e5e5\'" style="display:none;background: #e5e5e5;height: 24px;"><span '.$sdvig_vverh.'>'.$parent_cat_name.'</span>';
+		$submenuhead.='<li id-info="'.$parent_id.'" class="id-info-default id-info-hidden" onclick="document.getElementById(\'fade\').style.display=\'block\'"><span '.$sdvig_vverh.'>'.$parent_cat_name.'</span>';
 		$submenuhead.='<div class="submenuhead" '.$top_position.'>';
 		$submenuhead.='<div class="menutype">';
 		$submenuhead.='<ul>';

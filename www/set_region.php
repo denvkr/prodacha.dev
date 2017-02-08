@@ -36,7 +36,16 @@
 				
 			}	
 			
-			if ($_POST['reg']=="other")
+			
+			if ($_POST['reg']=="kur")
+			{
+
+				setcookie('sincity',"kur",'0','/');			
+				setcookie('sincity',"kur",'0','/shop');	
+				
+			}
+                        
+                        if ($_POST['reg']=="other")
 			{
 
 				setcookie('sincity',"other",'0','/');			

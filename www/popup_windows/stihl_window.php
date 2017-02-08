@@ -50,7 +50,15 @@
 
 		$mas['item7'] = WinToUtf8($stihl_window_chb_string1);
 		$mas['item8'] = WinToUtf8($stihl_window_chb_phone_string1);
-			
+
+	} elseif ( $_POST['reg_info']=='kur' ) {
+		
+		$stihl_window_kur_string1=$SysValue['lang']['stihl_window_kur_string1'];
+		$stihl_window_kur_phone_string1=$SysValue['lang']['stihl_window_kur_phone_string1'];
+
+		$mas['item7'] = WinToUtf8($stihl_window_kur_string1);
+		$mas['item8'] = WinToUtf8($stihl_window_kur_phone_string1);
+                
 	} elseif ( $_POST['reg_info']=='other' ) {
 		
 		$stihl_window_other_string1=$SysValue['lang']['stihl_window_other_string1'];
@@ -82,7 +90,8 @@
 		exit;
 	}
 	
-	
+        session_start();
+        
 	//из строки берем айди каталога
 	$url=$_POST['my_url'];
 	//$url='http://phpshop.dev/shop/UID_373.html';
@@ -105,12 +114,23 @@
 	//echo $id;
 	$sql0_2="set names utf8;";
 	$res0_2=mysql_query($sql0_2);
-	$sql0_2="SELECT name,price,baseinputvaluta FROM ".$SysValue['base']['products']." WHERE ".$usl." and enabled='1'";// and vendor!=''
+	$sql0_2="SELECT name,price,price2,price3,price4,baseinputvaluta FROM ".$SysValue['base']['products']." WHERE ".$usl." and enabled='1'";// and vendor!=''
 	//echo $sql0_2;
 	$res0_2=mysql_query($sql0_2);
 	while($row0_2=mysql_fetch_assoc($res0_2)){
 		$tovar_name=$row0_2['name'];
-		$tovar_price=$row0_2['price'];
+		if ( ($_COOKIE['sincity']=="sp") AND ($row0_2['price2']!=0) ) {
+			$price=$row0_2['price2'];
+		} else if( ($_COOKIE['sincity']=="chb") AND ($row0_2['price3']!=0) ) {
+			$price=$row0_2['price3'];
+                } else if( ($_COOKIE['sincity']=="kur") AND ($row0_2['price4']!=0) ) {
+                        $price=$row0_2['price4'];
+		}
+		else {
+			$price=intval($row0_2['price']);
+		}
+		//$tovar_price=$price;
+		//$tovar_price=$row0_2['price'];
 		$tovar_basevaluta=$row0_2['baseinputvaluta'];
 	}
 	if ($tovar_basevaluta==6) {
@@ -131,7 +151,7 @@
 	$mas['item4_1'] = WinToUtf8($item4_1);
 	$mas['item5_1'] = WinToUtf8($item5_1);
 	$mas['item6_1'] = $tovar_name;
-	$mas['item7_1'] = $tovar_price;
+	$mas['item7_1'] = $price;
 	$mas['item8_1'] = WinToUtf8($tovar_basevaluta);
 	$mas['item9_1'] = WinToUtf8($item6_1);
 	if (isset($_COOKIE['sincity'])) {
@@ -141,6 +161,8 @@
 			case 'sp':$mas['item9_1']=WinToUtf8('Санкт-Петербург');
 			break;
 			case 'chb':$mas['item9_1']=WinToUtf8('Чебоксары');
+			break;
+			case 'kur':$mas['item9_1']=WinToUtf8('Курск');
 			break;
 			case 'other':$mas['item9_1']=WinToUtf8('другой регион');
 			break;

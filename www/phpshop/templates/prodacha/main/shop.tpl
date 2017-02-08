@@ -71,8 +71,8 @@
 	<link rel="stylesheet" href="@php echo $GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin']; php@/style.css" type="text/css">	
 	<script type="text/javascript" src="@php echo $GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].chr(47); php@javascript/jquery.pajinate.min.js"></script>
 	<!-- Подключаем иконки -->
-	<link rel="shortcut icon" href="http://prodacha.ru/favicon.ico" type="image/x-icon">
-	<link rel="icon" href="http://prodacha.ru/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="//prodacha.ru/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="//prodacha.ru/favicon.ico" type="image/x-icon">
 	<!-- Подключаем javascript библиотеку CMS -->
 	<script type="text/javascript" src="java/phpshop.js"></script>
 	<!-- Подключаем совместимость с браузерами -->
@@ -167,12 +167,12 @@
 	            // название кнопки
 	            text:'Личный кабинет',
 	            // ссылка для перехода
-	            uri:'http://prodacha.ru/'
+	            uri:'//prodacha.ru/'
 	        }
 	}
 	</script>
 	<!--с 18.11.2014 подключен vsevcredit.ru-->
-    <script type="text/javascript" src="http://vkredit24.ru/js/widget1251.js"></script>
+    <script type="text/javascript" src="//vkredit24.ru/js/widget1251.js"></script>
 
 	<script type="text/javascript" src="java/async_js_loader.js"></script>
 		
@@ -183,6 +183,10 @@
                         echo '<link rel="stylesheet" href="'.$GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].'css/style_sp1.css" type="text/css">';
 		else
                         echo '<link rel="stylesheet" href="'.$GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].'css/style_sp2.css" type="text/css">';
+		if ($_COOKIE['sincity']=="kur")
+                        echo '<link rel="stylesheet" href="'.$GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].'css/style_kur1.css" type="text/css">';
+		else
+                        echo '<link rel="stylesheet" href="'.$GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].'css/style_kur2.css" type="text/css">';
 		if ($_COOKIE['sincity']=="chb")
                         echo '<link rel="stylesheet" href="'.$GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].'css/style_chb1.css" type="text/css">';
 		else
@@ -415,7 +419,7 @@
 			<div class="ask_question_div">
 				<div class="h2">Задать вопрос</div>
 
-				<form id="ask_question_form" action="http://prodacha.ru/snip_call.php" method="POST">
+				<form id="ask_question_form" action="//prodacha.ru/snip_call.php" method="POST">
 					<input class="text_ask_question_email" type="text" name="email" value="Ваш E-mail" onfocus="if(this.value=='Ваш E-mail'){this.value='';}" onblur="if(this.value==''){this.value='Ваш E-mail';}">
 					<textarea class="textarea_ask_question" name="textArea_ask_question"  rows="3" cols="30" value="Вопрос" onfocus="if(this.value=='Вопрос'){this.value='';}" onblur="if(this.value==''){this.value='Вопрос';}">Вопрос</textarea>
 					<input id="cv1" type="hidden" name="cv" value="nohspamcode">
@@ -428,7 +432,7 @@
 			<div class="foot_menu">
 				<ul>
 					@topMenu@
-					<li><a href="http://prodacha.ru/catalog/">КАРТА САЙТА</a></li>
+					<li><a href="//prodacha.ru/catalog/">КАРТА САЙТА</a></li>
 				</ul>
                 </div>
 		</div>	

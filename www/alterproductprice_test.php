@@ -11,11 +11,14 @@
 
 //подключаем базу данных
 
-	$host="localhost";          
-	$user_db="u301639_second";           
-	$pass_db="peREneSti-AB6E";       
-	$dbase="u301639";
-				
+	//$host="localhost";          
+	//$user_db="u301639_second";           
+	//$pass_db="peREneSti-AB6E";       
+	//$dbase="u301639";
+$host="u301639.mysql.masterhost.ru";
+$user_db="u301639_test";
+$pass_db="-o97iCiAlLop.";
+$dbase="u301639_test";
         $dbcnx=mysql_connect($host,$user_db,$pass_db);
 
         if (!$dbcnx) 
@@ -36,7 +39,7 @@
         echo '</form>';
         echo '</div>';
 
-        echo '<div id="sqlinfo" style="position:relative;margin 5px 5px 5px 5px;width:600px;height:100%;display:inline;">';
+        echo '<div id="sqlinfo" style="position:relative;margin 5px 5px 5px 5px;width:600px;height:100%;top:10px;display:inline;">';
         //инфо из бд
         $sql0="SELECT id,name,price,price4,price5,price_n FROM phpshop_products where enabled='1' order by id";
         $res0=mysql_query($sql0,$dbcnx);

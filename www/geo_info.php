@@ -29,7 +29,7 @@ $rejim_rabotu['sp']='
 					</tr>
 				</table>
 				<span style="text-align: left; margin-left: -30px;">
-				<a href="http://prodacha.ru/page/shop_spb.html" style="text-decoration: underline; color: #588910;">Пункты выдачи заказов в Санкт-Петербурге</a> </span>
+				<a href="//prodacha.ru/page/shop_spb.html" style="text-decoration: underline; color: #588910;">Пункты выдачи заказов в Санкт-Петербурге</a> </span>
 				';
 
 $rejim_rabotu['chb']='
@@ -54,7 +54,9 @@ $rejim_rabotu['chb']='
 
 				</table>
 				';
-				
+
+$rejim_rabotu['kur']='';				
+
 $rejim_rabotu['m']='
 <script type="text/javascript"> redhlpSettings = {
 	requiredOperator: "prohorenkov"
@@ -74,13 +76,13 @@ $rejim_rabotu['m']='
 						<td style="color: gray;">вых.</td>
 					</tr>
 					<tr>
-						<td style="text-align: left;"><a href="http://prodacha.ru/page/store.html">Магазин м. Динамо</a></td>
+						<td style="text-align: left;"><a href="//prodacha.ru/page/store.html">Магазин м. Динамо</a></td>
 						<td>10-18</td>
 						<td style="color: red;">10-15</td>
 						<td style="color: gray;">вых.</td>
 					</tr>
 					<tr>
-						<td style="text-align: left;"><a href="http://prodacha.ru/page/shop.html">Магазин Минское ш.</a></td>
+						<td style="text-align: left;"><a href="//prodacha.ru/page/shop.html">Магазин Минское ш.</a></td>
 						<td>10-18</td>
 						<td style="color: red;">10-15</td>
 						<td style="color: gray;">вых.</td>
@@ -118,18 +120,23 @@ $telnum['sp']='
 +7 (812) 926-54-10
 </div>
 ';
+
 $telnum['chb']='
 <div style="margin-top: 10px;">
 <span style="font-size: 12px;">Интернет-магазин. Звоните:</span><br />
 +7 (8352) 63-52-95
 </div>
 ';
+
+$telnum['kur']='';				
+
 $telnum['m']='
 <div style="margin-top: 10px;">
 <span style="font-size: 12px;">Интернет-магазин. Звоните:</span><br />
 +7 (495) 380-40-43
 </div>
 ';
+
 $telnum['other']='
 <div style="margin-top: 10px;">
 <span style="font-size: 12px;">Звоните бесплатно по России:</span><br />
@@ -142,7 +149,7 @@ $footcontacts1['m']='
                     	<tr>
 							<td style="vertical-align: top;">
 								<div id="table_main_container" style="display:inline-block;margin-top: -10px;">
-									<div itemscope itemtype="http://schema.org/PostalAddress">
+									<div itemscope itemtype="//schema.org/PostalAddress">
 										<div id="table_container1" style="position:relative;top:1px;left:0px;width:65px;height:50px;text-align:center;display:inline;">
 											<span class="gray" style="font: 12px sans-serif;"><span itemprop="addressLocality">г. Москва</span></span>
 										</div>
@@ -196,7 +203,7 @@ $footcontacts1['other']='
                     	<tr>
 							<td style="vertical-align: top;">
 								<div id="table_main_container" style="display:inline-block;margin-top: -10px;">
-									<div itemscope itemtype="http://schema.org/PostalAddress">
+									<div itemscope itemtype="//schema.org/PostalAddress">
 										<div id="table_container1" style="position:relative;top:1px;left:0px;width:65px;height:50px;text-align:center;display:inline;">
 											<span class="gray" style="font: 12px sans-serif;"><span itemprop="addressLocality">г. Москва</span></span>
 										</div>
@@ -246,7 +253,7 @@ $footcontacts2['other']='
 ';
 
 $footcontacts1['sp']='
-<div itemscope itemtype="http://schema.org/PostalAddress">
+<div itemscope itemtype="//schema.org/PostalAddress">
 <table style="margin-top: -5px;">
                     	<tr>
                     		<td style="vertical-align: top;">
@@ -286,7 +293,7 @@ $footcontacts2['sp']='
 ';
 
 $footcontacts1['chb']='
-<div itemscope itemtype="http://schema.org/PostalAddress">
+<div itemscope itemtype="//schema.org/PostalAddress">
 <table style="margin-top: -5px;">
                     	<tr>
                     		<td style="vertical-align: top;">
@@ -324,21 +331,28 @@ $footcontacts2['chb']='
 						</tr>
 </table>
 ';
+
+$footcontacts1['kur']='';
+
+$footcontacts2['kur']='';
+
 $map['m']='
-<a href="http://www.prodacha.ru/page/store.html#mapdin"><img src="images/map2.png" alt="" style="border: 1px dotted;"></a><br />
-<a href="http://www.prodacha.ru/page/shop.html#mapmin"><img src="images/map1.png" alt="" style="border: 1px dotted; margin-top: 5px;"></a>
+<a href="//www.prodacha.ru/page/store.html#mapdin"><img src="images/map2.png" alt="" style="border: 1px dotted;"></a><br />
+<a href="//www.prodacha.ru/page/shop.html#mapmin"><img src="images/map1.png" alt="" style="border: 1px dotted; margin-top: 5px;"></a>
 ';
 
 $map['sp']='
-<a href="http://www.prodacha.ru/page/shop_spb.html#mapdin"><img src="images/map_spb.jpg" alt="" style="border: 1px dotted;"></a><br />
+<a href="//www.prodacha.ru/page/shop_spb.html#mapdin"><img src="images/map_spb.jpg" alt="" style="border: 1px dotted;"></a><br />
 ';
 
 $map['chb']='
-<a href="http://www.prodacha.ru/page/shop_cheb.html#mapcheb"><img src="images/map_cheb.jpg" alt="" style="border: 1px dotted;"></a>
+<a href="//www.prodacha.ru/page/shop_cheb.html#mapcheb"><img src="images/map_cheb.jpg" alt="" style="border: 1px dotted;"></a>
 ';
 
+$map['kur']='';
+
 $map['other']='
-<a href="http://www.prodacha.ru/page/store.html#mapdin"><img src="images/map2.png" alt="" style="border: 1px dotted;"></a><br />
-<a href="http://www.prodacha.ru/page/shop.html#mapmin"><img src="images/map1.png" alt="" style="border: 1px dotted; margin-top: 5px;"></a>
+<a href="//www.prodacha.ru/page/store.html#mapdin"><img src="images/map2.png" alt="" style="border: 1px dotted;"></a><br />
+<a href="//www.prodacha.ru/page/shop.html#mapmin"><img src="images/map1.png" alt="" style="border: 1px dotted; margin-top: 5px;"></a>
 ';
 ?>

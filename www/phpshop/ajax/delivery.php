@@ -33,55 +33,55 @@ function GetDeliveryPrice($deliveryID,$sum,$weight=0) {
     if(!empty($deliveryID)) {
         if ($_COOKIE['sincity']=="sp" && $deliveryID==69) {
             if ($sum<1000) {
-                $sql="select id,city,0 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";
+                $sql="select id,city,0 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' and enabled='1'";
             }
             if ($sum>=1000 && $sum<=4999) {
-                $sql="select id,city,300 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";
+                $sql="select id,city,300 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' and enabled='1'";
             }
             if ($sum>=5000){
-                $sql="select id,city,price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";
+                $sql="select id,city,price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' and enabled='1'";
             }
         } else if ($_COOKIE['sincity']=="sp" && $deliveryID==67) {
             if ($sum<1000) {
-                $sql="select id,city,0 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";
+                $sql="select id,city,0 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' and enabled='1'";
             }
             if ($sum>=1000 && $sum<=4999) {
-                $sql="select id,city,500 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";
+                $sql="select id,city,500 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' and enabled='1'";
             }
             if ($sum>=5000 && $sum<=9999){
-                $sql="select id,city,300 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";
+                $sql="select id,city,300 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' and enabled='1'";
             }
             if ($sum>=10000){
-                $sql="select id,city,price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";
+                $sql="select id,city,price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' and enabled='1'";
             }
-        } else if ($_COOKIE['sincity']=="chb" && $deliveryID==41) {
+        } else if (($_COOKIE['sincity']=="chb" || $_COOKIE['sincity']=="kur") && $deliveryID==41) {
             if ($sum<1000) {
-                $sql="select id,city,0 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";
+                $sql="select id,city,0 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' and enabled='1'";
             }
             if ($sum>=1000 && $sum<=4999) {
-                $sql="select id,city,price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";
+                $sql="select id,city,price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' and enabled='1'";
             }
             if ($sum>=5000 && $sum<=9999){
-                $sql="select id,city,300 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";
+                $sql="select id,city,300 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' and enabled='1'";
             }
             if ($sum>=10000){
-                $sql="select id,city,0 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";
+                $sql="select id,city,0 as price,enabled,flag,price_null,price_null_enabled,PID,taxa,is_folder from ".$SysValue['base']['table_name30']." where id='$deliveryID' and enabled='1'";
             }
         } else {
-                $sql="select * from ".$SysValue['base']['table_name30']." where id='$deliveryID' ".$usl." and enabled='1'";
+                $sql="select * from ".$SysValue['base']['table_name30']." where id='$deliveryID' and enabled='1'";
         }
         $result=mysql_query($sql);
         $num=mysql_numrows($result);
         $row = mysql_fetch_array($result);
         
         if($num == 0) {
-            $sql="select * from ".$SysValue['base']['table_name30']." where flag='1' ".$usl."  and enabled='1'";
+            $sql="select * from ".$SysValue['base']['table_name30']." where flag='1' and enabled='1'";
             $result=mysql_query($sql);
             $row = mysql_fetch_array($result);
         }
     }
     else {
-        $sql="select * from ".$SysValue['base']['table_name30']." where flag='1' ".$usl."  and enabled='1'";
+        $sql="select * from ".$SysValue['base']['table_name30']." where flag='1' and enabled='1'";
         $result=mysql_query($sql);
         $row = mysql_fetch_array($result);
     }

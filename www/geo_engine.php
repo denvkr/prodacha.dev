@@ -19,13 +19,16 @@
 			
 		$sincity=substr($buff,$pos1+6,$len-6);	
 		
-		if( (empty($sincity)) OR (!isset($sincity)) OR ($sincity!="Санкт-Петербург") OR ($sincity!="Москва") OR ($sincity!="Чебоксары")) //если не Питер или не определно, то везде Москоу		
+		if( (empty($sincity)) OR (!isset($sincity)) OR ($sincity!="Санкт-Петербург") OR ($sincity!="Москва") OR ($sincity!="Чебоксары") OR ($sincity!="Курск")) //если не Питер или не определно, то везде Москоу		
 			$sincity="other";
 		if($sincity == "Санкт-Петербург"){
 			$sincity = "sp";
 		}
 		if($sincity == "Чебоксары"){
 			$sincity = "chb";
+		}
+		if($sincity == "Курск"){
+			$sincity = "kur";
 		}		
 		$_SESSION['sincity']=$sincity;		
 		
@@ -47,6 +50,10 @@
 		if($_COOKIE['sincity'] == "Чебоксары"){
 			setcookie('sincity',"chb",'0','/');
 			setcookie('sincity',"chb",'0','/shop');
+		}
+		if($_COOKIE['sincity'] == "Курск"){
+			setcookie('sincity',"kur",'0','/');
+			setcookie('sincity',"kur",'0','/shop');
 		}		
 		if($_COOKIE['sincity'] == "Другой регион"){
 			setcookie('sincity',"other",'0','/');
@@ -85,8 +92,15 @@
 		}else{
 			$actclass4="";
 		}		
+		if($_COOKIE['sincity']=="kur"){
+			$actclass5="active";
+			$m = 4;
+		}else{
+			$actclass5="";
+		}		
 
 		$mas['url'] = $url;
+		$mas['actclass5'] = $actclass5;
 		$mas['actclass4'] = $actclass4;		
 		$mas['actclass3'] = $actclass3;
 		$mas['actclass2'] = $actclass2;
@@ -95,6 +109,7 @@
 		$mas['ok'] = 1;
 	}else{
 		$mas['url'] = '';
+		$mas['actclass5'] = '';
 		$mas['actclass4'] = '';				
 		$mas['actclass3'] = '';		
 		$mas['actclass2'] = '';

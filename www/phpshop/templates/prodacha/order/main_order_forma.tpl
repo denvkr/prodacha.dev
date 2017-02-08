@@ -110,7 +110,7 @@
 		<td></td>
     	<td>
     		<div name="cartnotifyaboutprice">
-				<span style="color: red; font-weight: bold;">Внимание!</span> При заказе через корзину указывается <span style="font-weight: bold;">предварительная стоимость</span> для выбранного вами типа доставки. Окончательную стоимость доставки Вам сообщит менеджер при подтверждении заказа (она зависит от расстояния и суммы Вашего заказа). Точную стоимость доставки можно узнать <a target="_blank" href="http://prodacha.ru/page/delivery.html" style="text-decoration: underline;">по ссылке</a>.
+				<span style="color: red; font-weight: bold;">Внимание!</span> При заказе через корзину указывается <span style="font-weight: bold;">предварительная стоимость</span> для выбранного вами типа доставки. Окончательную стоимость доставки Вам сообщит менеджер при подтверждении заказа (она зависит от расстояния и суммы Вашего заказа). Точную стоимость доставки можно узнать <a target="_blank" href="//prodacha.ru/page/delivery.html" style="text-decoration: underline;">по ссылке</a>.
     		</div>
     	</td>
     </tr>

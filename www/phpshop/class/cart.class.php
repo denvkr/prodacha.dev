@@ -76,6 +76,7 @@ class PHPShopCart {
                 "price" => PHPShopProductFunction::GetPriceValuta($objID,$objProduct->getParam("price"),$objProduct->getParam("baseinputvaluta"),true),
 		"price2" => PHPShopProductFunction::GetPriceValuta($objID,$objProduct->getParam("price2"),$objProduct->getParam("baseinputvaluta"),true),
         	"price3" => PHPShopProductFunction::GetPriceValuta($objID,$objProduct->getParam("price3"),$objProduct->getParam("baseinputvaluta"),true),
+        	"price4" => PHPShopProductFunction::GetPriceValuta($objID,$objProduct->getParam("price4"),$objProduct->getParam("baseinputvaluta"),true),
                 "discountprice" => $promo_data_row['discountprice'],
                 "promocode" => $promo_data_row['promocode'],            
                 "uid" => $objProduct->getParam("uid"),
@@ -194,6 +195,8 @@ class PHPShopCart {
 					$realprice=$val['price2'];
 				} else if( ($_COOKIE['sincity']=="chb") AND ($val['price3']!=0) ) {
 					$realprice=$val['price3'];
+				} else if( ($_COOKIE['sincity']=="kur") AND ($val['price4']!=0) ) {
+					$realprice=$val['price4'];
 				}
 				else {
 					$realprice=$val['price'];
@@ -241,6 +244,8 @@ class PHPShopCart {
 					$realprice=$val['price2'];
 				} else if( ($_COOKIE['sincity']=="chb") AND ($val['price3']!=0) ) {
 					$realprice=$val['price3'];
+				} else if( ($_COOKIE['sincity']=="kur") AND ($val['price4']!=0) ) {
+					$realprice=$val['price4'];
 				}
 				else {
 					$realprice=$val['price'];

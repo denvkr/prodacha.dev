@@ -199,6 +199,8 @@ class PHPShopProductElements extends PHPShopElements {
             		$price=$row['price2'];
             	} else if( ($_COOKIE['sincity']=="chb") AND ($row['price3']!=0) ) {
             		$price=$row['price3'];
+            	} else if( ($_COOKIE['sincity']=="kur") AND ($row['price4']!=0) ) {
+            		$price=$row['price4'];
             	}
             	else {
             		$price=$row['price'];
@@ -219,6 +221,8 @@ class PHPShopProductElements extends PHPShopElements {
             		$price=$row['price2'];
             	} else if( ($_COOKIE['sincity']=="chb") AND ($row['price3']!=0) ) {
             		$price=$row['price3'];
+            	} else if( ($_COOKIE['sincity']=="kur") AND ($row['price4']!=0) ) {
+            		$price=$row['price4'];
             	}
             	else {
             		$price=$row['price'];
@@ -243,6 +247,8 @@ class PHPShopProductElements extends PHPShopElements {
         		$price=$row['price2'];
         	} else if( ($_COOKIE['sincity']=="chb") AND ($row['price3']!=0) ) {
             		$price=$row['price3'];
+            	} else if( ($_COOKIE['sincity']=="kur") AND ($row['price4']!=0) ) {
+            		$price=$row['price4'];
             } 
             else {
         		$price=$row['price'];
@@ -330,6 +336,8 @@ class PHPShopProductElements extends PHPShopElements {
         		$price=$row['price2'];
         	} else if( ($_COOKIE['sincity']=="chb") AND ($row['price3']!=0) ) {
             		$price=$row['price3'];
+            	} else if( ($_COOKIE['sincity']=="kur") AND ($row['price4']!=0) ) {
+            		$price=$row['price4'];
             } 
             else {
         		$price=$row['price'];

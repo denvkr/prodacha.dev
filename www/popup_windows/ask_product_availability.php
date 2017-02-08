@@ -33,7 +33,8 @@
 		exit;
 	}
 	
-		
+        session_start();
+        
 	//из строки берем айди каталога
 	$url=implode($_POST);
 	//$url='http://phpshop.dev/shop/UID_373.html';
@@ -56,12 +57,22 @@
 	//echo $id;
 	$sql0_2="set names utf8;";
 	$res0_2=mysql_query($sql0_2);
-	$sql0_2="SELECT name,price,baseinputvaluta FROM ".$SysValue['base']['products']." WHERE ".$usl." and enabled='1'";
+	$sql0_2="SELECT name,price,price2,price3,price4,baseinputvaluta FROM ".$SysValue['base']['products']." WHERE ".$usl." and enabled='1'";
 	//echo $sql0_2;
 	$res0_2=mysql_query($sql0_2);
 	while($row0_2=mysql_fetch_assoc($res0_2)){
 		$tovar_name=$row0_2['name'];
-		$tovar_price=$row0_2['price'];
+		if ( ($_COOKIE['sincity']=="sp") AND ($row0_2['price2']!=0) ) {
+			$price=$row0_2['price2'];
+		} else if( ($_COOKIE['sincity']=="chb") AND ($row0_2['price3']!=0) ) {
+			$price=$row0_2['price3'];
+                } else if( ($_COOKIE['sincity']=="kur") AND ($row0_2['price4']!=0) ) {
+                        $price=$row0_2['price4'];
+		}
+		else {
+			$price=intval($row0_2['price']);
+		}
+		//$tovar_price=$row0_2['price'];
 		$tovar_basevaluta=$row0_2['baseinputvaluta'];
 	}				
 	if ($tovar_basevaluta==6) {
@@ -76,7 +87,7 @@
 	$mas['item4'] = WinToUtf8($item4);
 	$mas['item5'] = WinToUtf8($item5);
 	$mas['item6'] = $tovar_name;
-	$mas['item7'] = $tovar_price;
+	$mas['item7'] = $price;
 	$mas['item8'] = WinToUtf8($tovar_basevaluta);
 	$mas['item9'] = WinToUtf8($item6);	
 	if (isset($_COOKIE['sincity'])) {
@@ -86,7 +97,9 @@
 			case 'sp':$mas['item9']=WinToUtf8('Санкт-Петербург');
 				break;
 			case 'chb':$mas['item9']=WinToUtf8('Чебоксары');
-				break;				
+				break;
+			case 'kur':$mas['item9']=WinToUtf8('Курск');
+                                break;
 			case 'other':$mas['item9']=WinToUtf8('другой регион');
 				break;				
 		}

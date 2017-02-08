@@ -55,7 +55,7 @@
 						</td>
 						
 						<td>
-							<span class="quantity" style="display:none"> ÓÎ-‚Ó: <input class="quantity" id="n@productUid@" type="num" maxlength="5" size="3" value="1" name="n@productUid@" style="display:none" /></span>
+							<span class="quantity"> ÓÎ-‚Ó: <input class="quantity" id="n@productUid@" type="num" maxlength="5" size="3" value="1" name="n@productUid@" /></span>
 						</td>
 						
 					</tr>
@@ -166,14 +166,14 @@
 			echo '@ComStartNotice@';
 			echo '@ComEndNotice@';
 			echo '<span class="buybuttons" style="'.$sdvig_knopki_vlevo_old.'">';
-			echo '<a id="analog_href'.$GLOBALS['SysValue']['other']['productId'].'" href="http://prodacha.ru/shop/UID_'.$analog.'.html">¿Õ¿ÀŒ√</a>';
+			echo '<a id="analog_href'.$GLOBALS['SysValue']['other']['productId'].'" href="//prodacha.ru/shop/UID_'.$analog.'.html">¿Õ¿ÀŒ√</a>';
 			echo '<span class="outdated_message" style="position:relative;font-size:11px !important;left: 11px;"><!--noindex-->'.$GLOBALS['SysValue']['lang']['outdated_message3'].'<!--/noindex--></span>';
                         echo '</span>';
 		} else if ($row_sklad==true && $row_outdated==true && empty($analog)) {
 			echo '@ComStartNotice@';
 			echo '@ComEndNotice@';
 			echo '<span class="buybuttons inactive" style="'.$sdvig_knopki_vlevo_old.'">';
-			echo '<a id="analog_href'.$GLOBALS['SysValue']['other']['productId'].'" href="http://prodacha.ru/shop/UID_'.$analog.'.html" onclick="return false;">¿Õ¿ÀŒ√</a>';
+			echo '<a id="analog_href'.$GLOBALS['SysValue']['other']['productId'].'" href="//prodacha.ru/shop/UID_'.$analog.'.html" onclick="return false;">¿Õ¿ÀŒ√</a>';
 			echo '<span class="outdated_message" style="position:relative;font-size:11px !important;left: 11px;"><!--noindex-->'.$GLOBALS['SysValue']['lang']['outdated_message3'].'<!--/noindex--></span>';
                         echo '</span>';
 		} else {
@@ -238,7 +238,7 @@
 			echo '@ComStartNotice@';
 			echo '@ComEndNotice@';
 			echo '<span class="buybuttons" style="'.$sdvig_knopki_vlevo_old.'">';
-			echo '<a id="analog_href'.$GLOBALS['SysValue']['other']['productId'].'" href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$analog.'.html">¿Õ¿ÀŒ√</a>';
+			echo '<a id="analog_href'.$GLOBALS['SysValue']['other']['productId'].'" href="//'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$analog.'.html">¿Õ¿ÀŒ√</a>';
 			echo '<span class="outdated_message" style="position:relative;font-size:11px !important;left: 11px;"><!--noindex-->'.$GLOBALS['SysValue']['lang']['outdated_message3'].'<!--/noindex--></span>';
                         echo '</span>';
                         /*
@@ -255,7 +255,7 @@
 			echo '@ComStartNotice@';
 			echo '@ComEndNotice@';
 			echo '<span class="buybuttons inactive" style="'.$sdvig_knopki_vlevo_old.'">';
-			echo '<a id="analog_href'.$GLOBALS['SysValue']['other']['productId'].'" href="http://'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$analog.'.html" onclick="return false;">¿Õ¿ÀŒ√</a>';
+			echo '<a id="analog_href'.$GLOBALS['SysValue']['other']['productId'].'" href="//'.$GLOBALS['SysValue']['other']['serverName'].'/shop/UID_'.$analog.'.html" onclick="return false;">¿Õ¿ÀŒ√</a>';
 			echo '<span class="outdated_message" style="position:relative;font-size:11px !important;left: 11px;"><!--noindex-->'.$GLOBALS['SysValue']['lang']['outdated_message3'].'<!--/noindex--></span>';
                         echo '</span>';
                         /*
@@ -416,7 +416,7 @@
 				
 			<div class="message">
 				
-				<form id="complainForm" action="http://prodacha.ru/cheap_sbm.php" method="post">
+				<form id="complainForm" action="//prodacha.ru/cheap_sbm.php" method="post">
 					
 					<input type="hidden" name="product" value="@productUid@">
 					

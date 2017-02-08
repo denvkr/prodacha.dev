@@ -344,7 +344,9 @@ class PHPShopDone extends PHPShopCore {
 		if ($_COOKIE['sincity']=="sp") {
 			$PHPShopMail= new PHPShopMail($GLOBALS['SysValue']['mail']['spb_mail'],$_POST['mail'],$title_adm,$content_adm);
 		} else if ($_COOKIE['sincity']=="chb") {
-			$PHPShopMail= new PHPShopMail($GLOBALS['SysValue']['mail']['chb_mail'],$_POST['mail'],$title_adm,$content_adm);		
+			$PHPShopMail= new PHPShopMail($GLOBALS['SysValue']['mail']['chb_mail'],$_POST['mail'],$title_adm,$content_adm);
+		} else if ($_COOKIE['sincity']=="kur") {
+			$PHPShopMail= new PHPShopMail($GLOBALS['SysValue']['mail']['kur_mail'],$_POST['mail'],$title_adm,$content_adm);		
 		} else {
 			if (($_COOKIE['sincity']=="m" || $_COOKIE['sincity']=="other") && strpos($this->PHPShopDelivery->getCity(),'Минское')!==false) {
 				$PHPShopMail= new PHPShopMail($GLOBALS['SysValue']['mail']['msc2_mail'],$_POST['mail'],$title_adm,$content_adm);
@@ -579,6 +581,8 @@ function mailcartforma($val, $option) {
     	$price=$val['price2'];
     } else if( ($_COOKIE['sincity']=="chb") AND ($val['price3']!=0) ) {
     	$price=$val['price3'];
+    } else if( ($_COOKIE['sincity']=="kur") AND ($val['price4']!=0) ) {
+    	$price=$val['price4'];
     }
     else {
     	$price=$val['price'];

@@ -285,10 +285,12 @@ $(this).closest('li').addClass('empty');
             programmenu: function (domobj){
                 //console.log(this.submenCatuNum[0]);
                 if ($(domobj.next('li')).attr("id-info") == this.submenCatuNum[0]) {
-                if (domobj.next('li').css("display") == "block") {
-                domobj.next('li').css("display", "none");
-                } else if (domobj.next('li').css("display") == "none") {
-                domobj.next('li').css("display", "block");
+                if (domobj.next('li').hasClass("id-info-visible")) {
+                    domobj.next('li').removeClass("id-info-visible");
+                    domobj.next('li').addClass("id-info-hidden");
+                } else if (domobj.next('li').hasClass("id-info-hidden")) {
+                    domobj.next('li').removeClass("id-info-hidden");
+                    domobj.next('li').addClass("id-info-visible");
                 }
                 //console.log('submenCatuNum[0] clicked');
                 }            
@@ -297,10 +299,12 @@ $(this).closest('li').addClass('empty');
                 console.log(this.submenCatuNum);
                 for (cnt1=1;cnt1<this.submenCatuNum.length;cnt1++){
                     if ($(domobj.nextAll('li').get(this.submenuNum[cnt1])).attr("id-info") == this.submenCatuNum[cnt1]) {
-                    if ($(domobj.nextAll('li').get(this.submenuNum[cnt1])).css("display") == "block") {
-                    $(domobj.nextAll('li').get(this.submenuNum[cnt1])).css("display", "none");
-                    } else if ($(domobj.nextAll('li').get(this.submenuNum[cnt1])).css("display") == "none") {
-                    $(domobj.nextAll('li').get(this.submenuNum[cnt1])).css("display", "block");
+                    if ($(domobj.nextAll('li').get(this.submenuNum[cnt1])).hasClass("id-info-visible")) {
+                        $(domobj.nextAll('li').get(this.submenuNum[cnt1])).removeClass("id-info-visible");                        
+                        $(domobj.nextAll('li').get(this.submenuNum[cnt1])).addClass("id-info-hidden");
+                    } else if ($(domobj.nextAll('li').get(this.submenuNum[cnt1])).hasClass("id-info-hidden")) {
+                        $(domobj.nextAll('li').get(this.submenuNum[cnt1])).removeClass("id-info-hidden");
+                        $(domobj.nextAll('li').get(this.submenuNum[cnt1])).addClass("id-info-visible");
                     }
                     //console.log(this.submenCatuNum[cnt1],' clicked');
                     }
@@ -1070,11 +1074,19 @@ fillTKtablePart();
                                 if (req.responseJS) {
                                     var z=(req.responseJS.total||'');	
                                     var city=(req.responseJS.city||'');
-
-                                    if (Number(z)<5000 && (Number(xid)!==69 && city!=='sp') && (Number(xid)!==41 && city!=='chb')){
+                                    //для москвы осуществляем вывод информации о мин. стоимости заказа
+                                    if (Number(z)<5000 && (Number(xid)!==69 && city!=='sp') && (Number(xid)!==41 && city!=='chb') && city!=='kur'){
+                                       document.getElementById('delivery_warning').innerHTML='* Доставка по Москве производится для заказов от 5000 руб. Заказ стоимостью<br /> менее 5000 руб. Вы можете забрать самовывозом из нашего магазина.';
                                        document.getElementById('delivery_warning').style.display="table-cell";
-                                    } else if (Number(z)>=5000) {
-                                      document.getElementById('delivery_warning').style.display="none";
+                                    } else if (Number(z)>=5000 && (Number(xid)!==69 && city!=='sp') && (Number(xid)!==41 && city!=='chb') && city!=='kur') {
+                                       document.getElementById('delivery_warning').style.display="none";
+                                    }
+                                    //для курска осуществляем вывод информации о мин. стоимости заказа
+                                    if (Number(z)<5000 && Number(xid)!==69 && Number(xid)!==41 && (city==='kur')){
+                                       document.getElementById('delivery_warning').innerHTML='* Доставка по Курску производится для заказов от 5000 руб. Заказ стоимостью<br /> менее 5000 руб. Вы можете забрать самовывозом из нашего магазина.';
+                                       document.getElementById('delivery_warning').style.display="table-cell";                    
+                                    } else if (Number(z)>=5000 && Number(xid)!==69 && Number(xid)!==41 && city=='kur') {
+                                       document.getElementById('delivery_warning').style.display="none";
                                     }
                                     //для питера и чебоксар модифицируем корзину удаляя все поля для цены < 1000
                                     if ( ((((Number(xid)===69 || Number(xid)===0 || isNaN(Number(xid))) && city==='sp') || (city==='chb'))) && Number(z)<1000){
@@ -1672,8 +1684,10 @@ if ($('.alsobought:eq(0)')!==null){
                         if (json['ok'] == '1'){
 
                         html = '<div id="light_box"><div class="popup_region"><div><span class="popup_title">Ваш регион:</span>';
-                                if (json['city'] == '1'){
+                        if (json['city'] == '1'){
                         html += '<span class="select_region"><b>Санкт-Петербург</b></span><a class="popup_ok" onclick="save_(\'spb\')" title="OK">OK</a></div>';
+                        } else if (json['city'] == '4'){
+                        html += '<span class="select_region"><b>Курск</b></span><a class="popup_ok" onclick="save_(\'kur\')" title="OK">OK</a></div>';
                         } else if (json['city'] == '2'){
                         html += '<span class="select_region"><b>Чебоксары</b></span><a class="popup_ok" onclick="save_(\'chb\')" title="OK">OK</a></div>';
                         } else if (json['city'] == '3'){
@@ -1683,11 +1697,12 @@ if ($('.alsobought:eq(0)')!==null){
                         }
 
                         html += '<div class="popup_hint">Если регион выбран неверно — выберите свой:</div>';
-                                html += '<a class="popup_moscow ' + json['actclass1'] + '" onclick="save_(\'msc\')" title="Москва">Москва</a>';
-                                html += '<a class="popup_spb ' + json['actclass2'] + '" onclick="save_(\'spb\')" title="Санкт-Петербург">Санкт-Петербург</a>';
-                                html += '<a class="popup_chb ' + json['actclass3'] + '" onclick="save_(\'chb\')" title="Чебоксары">Чебоксары</a>';
-                                html += '<a class="popup_else ' + json['actclass4'] + '" onclick="save_(\'other\')"  title="Другой регион">Другой регион</a></div></div>';
-                                $('#footer').after(html);
+                        html += '<a class="popup_moscow ' + json['actclass1'] + '" onclick="save_(\'msc\')" title="Москва">Москва</a>';
+                        html += '<a class="popup_spb ' + json['actclass2'] + '" onclick="save_(\'spb\')" title="Санкт-Петербург">Санкт-Петербург</a>';
+                        html += '<a class="popup_kur ' + json['actclass5'] + '" onclick="save_(\'kur\')" title="Курск">Курск</a>';                        
+                        html += '<a class="popup_chb ' + json['actclass3'] + '" onclick="save_(\'chb\')" title="Чебоксары">Чебоксары</a>';
+                        html += '<a class="popup_else ' + json['actclass4'] + '" onclick="save_(\'other\')"  title="Другой регион">Другой регион</a></div></div>';
+                        $('#footer').after(html);
                         }
                         }
 
@@ -1740,7 +1755,7 @@ if ($('.alsobought:eq(0)')!==null){
 
                 function fast_order_window(my_url, referer_info){
                 $.ajax({
-                url: '/fast_order.php',
+                url: '/popup_windows/fast_order.php',
                         type: 'post',
                         data: 'url=' + my_url,
                         dataType: 'json',

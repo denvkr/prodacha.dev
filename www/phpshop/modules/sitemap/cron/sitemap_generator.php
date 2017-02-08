@@ -123,5 +123,10 @@ $sitemap = $title . $stat_pages . $stat_news . $stat_products . '</urlset>';
 // Запись в файл
 @fwrite(@fopen('../../../../UserFiles/Files/sitemap.xml', "w+"), $sitemap);
 
+//добавляем запись данных для https файла
+$sitemap_https=str_replace('<loc>http://','<loc>https://',$sitemap);
+// Запись в файл
+@fwrite(@fopen('../../../../UserFiles/Files/sitemaphttps.xml', "w+"), $sitemap_https);
+
 echo "Sitemap.xml done!";
 ?>

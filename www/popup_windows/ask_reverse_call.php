@@ -23,13 +23,15 @@ $mas['item9'] = WinToUtf8($item6);
 if (isset($_COOKIE['sincity'])) {
 	switch ($_COOKIE['sincity']) {
 		case 'm':$mas['item9']=WinToUtf8('Москва');
-		break;
+                        break;
 		case 'sp':$mas['item9']=WinToUtf8('Санкт-Петербург');
-		break;
+                        break;
 		case 'chb':$mas['item9']=WinToUtf8('Чебоксары');
-		break;
+                        break;
+                case 'kur':$mas['item9']=WinToUtf8('Курск');
+                        break;
 		case 'other':$mas['item9']=WinToUtf8('другой регион');
-		break;
+                        break;
 	}
 } else {
 	$mas['item9']=WinToUtf8('Москва');

@@ -66,7 +66,7 @@ $PHPShopCart=new PHPShopCart(false);
 	$sql0_2="set names utf8;";
 	$res0_2=mysql_query($sql0_2);
         //выбираем товар из базы
-	$sql0_2="SELECT name,price,price_n,price2,price3,baseinputvaluta,pic_big FROM ".$SysValue['base']['products']." WHERE ".$usl." and enabled='1'";
+	$sql0_2="SELECT name,price,price_n,price2,price3,price4,baseinputvaluta,pic_big FROM ".$SysValue['base']['products']." WHERE ".$usl." and enabled='1'";
         //выбираем кол-во товаров из корзины
         //$sql0_3="SELECT  FROM ".$SysValue['base']['orders']." WHERE ".." and enabled='1'";
 	//echo $sql0_2;
@@ -79,6 +79,8 @@ $PHPShopCart=new PHPShopCart(false);
             		$tovar_price=$row0_2['price2'];
             	} else if( ($_COOKIE['sincity']=="chb") AND ($row0_2['price3']!=0) ) {
             		$tovar_price=$row0_2['price3'];
+            	} else if( ($_COOKIE['sincity']=="kur") AND ($row0_2['price4']!=0) ) {
+            		$tovar_price=$row0_2['price4'];
             	}
             	else {
             		$tovar_price=$row0_2['price'];
@@ -104,7 +106,9 @@ $PHPShopCart=new PHPShopCart(false);
 			case 'sp':$mas['item5']=WinToUtf8('Санкт-Петербург');
 				break;
 			case 'chb':$mas['item5']=WinToUtf8('Чебоксары');
-				break;				
+				break;
+			case 'kur':$mas['item5']=WinToUtf8('Курск');
+				break;
 			case 'other':$mas['item5']=WinToUtf8('другой регион');
 				break;				
 		}

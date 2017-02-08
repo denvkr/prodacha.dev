@@ -15,7 +15,7 @@
 			$newhost="prodacha.ru";
 			
 			header("HTTP/1.1 301 Moved Permanently");
-			header("Location:http://".$newhost.$url);
+			header("Location://".$newhost.$url);
 			exit;
 		}
 
@@ -29,7 +29,7 @@
             } else {
             //echo $cid_id_posstart.' '.$cid_id_posend.' '.$cid_id;
             header("HTTP/1.1 301 Moved Permanently");
-            header("Location:http://".$host.'/shop/CID_'.$cid_id.'.html');                
+            header("Location://".$host.'/shop/CID_'.$cid_id.'.html');                
             }
             exit();
         }	
@@ -66,7 +66,7 @@
 		if ( ($url!="/") AND (substr($url,-1)!="/" ) AND  (strpos($url,"?")===false) AND  (strpos($url,".")===false)  ) //слэш на конце, если нет параметров и не файл
 		{
 				header("HTTP/1.1 301 Moved Permanently");
-				header("Location:http://".$host.$url."/");
+				header("Location://".$host.$url."/");
 				exit();
 		}
 		else // вырезаем / если файл или есть параметры
@@ -76,7 +76,7 @@
 			$newurl=substr($url,0,$pos);
 			
 			header("HTTP/1.1 301 Moved Permanently");
-			header("Location:http://".$host.$newurl);
+			header("Location://".$host.$newurl);
 			exit();
 		}
 		else 

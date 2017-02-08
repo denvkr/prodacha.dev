@@ -252,11 +252,77 @@ function UpdateDelivery(xid) {
     //}
     //вывод верхнего уровня доставки самовывоза москва,питер,чебоксары
     //console.log($('.city_link').eq(0).text());
-    if (typeof(document.getElementById('var_'+xid))!=='undefined' && (Number(xid)===10 || Number(xid)===13 || Number(xid)===14 || Number(xid)===43 || Number(xid)===69 || Number(xid)===70 || Number(xid)===71)) {
+            /*
+    "id"	"city"	"price"	"enabled"	"flag"	"price_null"	"price_null_enabled"	"PID"	"taxa"	"is_folder"
+"1"	"Доставка"	"0"	"1"	"0"	"0"	"0"	"0"	"0"	"1"
+"3"	"Москва в пределах МКАД"	"300"	"1"	""	"10000"	"1"	"1"	"0"	"0"
+"4"	"Москва за пределами МКАД, Московская область"	"250"	"1"	""	"0"	""	"1"	"0"	"0"
+"7"	"Почта России"	"0"	"0"	""	"0"	""	"0"	"0"	"1"
+"8"	"Самара"	"500"	"0"	""	"0"	""	"7"	"50"	"0"
+"9"	"Екатеринбург"	"100"	"0"	""	"1000"	"1"	"7"	"60"	"0"
+"10"	"Самовывоз (Москва, м. Динамо, ул. Красноармейская, д. 4)"	"0"	"1"	"1"	"0"	""	"0"	"0"	"0"
+"11"	"Доставка и отгрузка в транспортную компанию (для отправки по России)"	"300"	"1"	""	"0"	""	"1"	"0"	"0"
+"13"	"Самовывоз (Московская область, Минское ш., 9,5 км от МКАД)"	"0"	"1"	"0"	"0"	"0"	"0"	"0"	"0"
+"14"	"Самовывоз (Санкт-Петербург, Пр-т Художников д. 9, к.1)"	"0"	"1"	"1"	"0"	""	"0"	"0"	"0"
+"15"	"Доставка Почтой России"	"400"	"1"	"1"	"0"	""	"7"	"0"	"0"
+"22"	"Москва за пределами МКАД до 10 км."	"550"	"1"	""	"0"	""	"1"	"0"	"0"
+"23"	"Москва за пределами МКАД до 10 км."	"250"	"1"	""	"0"	""	"1"	"0"	"0"
+"24"	"Москва за пределами МКАД от 11 до 20 км."	"800"	"1"	""	"0"	""	"1"	"0"	"0"
+"25"	"Москва за пределами МКАД от 11 до 20 км."	"500"	"1"	""	"0"	""	"1"	"0"	"0"
+"26"	"Москва за пределами МКАД от 21 до 30 км."	"750"	"1"	""	"0"	""	"1"	"0"	"0"
+"27"	"Москва за пределами МКАД от 31 до 40 км."	"1000"	"1"	""	"0"	""	"1"	"0"	"0"
+"28"	"Москва за пределами МКАД от 41 до 50 км."	"1250"	"1"	""	"0"	""	"1"	"0"	"0"
+"29"	"Москва за пределами МКАД от 51 до 60 км."	"1500"	"1"	""	"0"	""	"1"	"0"	"0"
+"30"	"Москва за пределами МКАД от 61 до 70 км."	"1750"	"1"	""	"0"	""	"1"	"0"	"0"
+"31"	"Москва за пределами МКАД от 71 до 80 км."	"2000"	"1"	""	"0"	""	"1"	"0"	"0"
+"32"	"Москва за пределами МКАД от 81 до 90 км."	"2250"	"1"	""	"0"	""	"1"	"0"	"0"
+"33"	"Москва за пределами МКАД от 91 до 100 км."	"2500"	"1"	""	"0"	""	"1"	"0"	"0"
+"34"	"Москва за пределами МКАД до 10 км."	"250"	"1"	""	"0"	""	"1"	"0"	"0"
+"35"	"Москва за пределами МКАД от 21 до 30 км."	"750"	"1"	""	"0"	""	"1"	"0"	"0"
+"36"	"Москва за пределами МКАД от 31 до 40 км."	"1000"	"1"	""	"0"	""	"1"	"0"	"0"
+"37"	"Москва за пределами МКАД от 41 до 50 км."	"1250"	"1"	""	"0"	""	"1"	"0"	"0"
+"38"	"Москва за пределами МКАД от 11 до 20 км."	"500"	"1"	""	"0"	""	"1"	"0"	"0"
+"41"	"Доставка и отгрузка в транспортную компанию (для отправки по России)"	"500"	"1"	""	"0"	""	"1"	"0"	"0"
+"40"	"Москва за пределами МКАД до 10 км."	"250"	"1"	""	"0"	""	"1"	"0"	"0"
+"42"	"Москва за пределами МКАД от 11 до 20 км."	"500"	"1"	""	"0"	""	"1"	"0"	"0"
+"43"	"Самовывоз (Чебоксары,Складской пр-д, д.6)"	"0"	"1"	"1"	"0"	"0"	"0"	"0"	"0"
+"44"	"Санкт-Петербург в пределах КАД"	"300"	"1"	"0"	"10000"	"0"	"1"	"0"	"0"
+"45"	"Санкт-Петербург за пределами КАД до 10 км."	"550"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"46"	"Санкт-Петербург за пределами КАД до 10 км."	"250"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"47"	"Санкт-Петербург за пределами КАД от 11 до 20 км."	"800"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"48"	"Санкт-Петербург за пределами КАД от 11 до 20 км."	"500"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"49"	"Санкт-Петербург за пределами КАД от 21 до 30 км."	"750"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"50"	"Санкт-Петербург за пределами КАД от 31 до 40 км."	"1000"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"51"	"Санкт-Петербург за пределами КАД от 41 до 50 км."	"1250"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"52"	"Санкт-Петербург за пределами КАД от 51 до 60 км."	"1500"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"53"	"Санкт-Петербург за пределами КАД от 61 до 70 км."	"1750"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"54"	"Санкт-Петербург за пределами КАД от 71 до 80 км."	"2000"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"55"	"Санкт-Петербург за пределами КАД от 81 до 90 км."	"2250"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"56"	"Санкт-Петербург за пределами КАД от 91 до 100 км."	"2500"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"57"	"Санкт-Петербург за пределами КАД до 10 км."	"250"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"58"	"Санкт-Петербург за пределами КАД от 21 до 30 км."	"750"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"59"	"Санкт-Петербург за пределами КАД от 31 до 40 км."	"1000"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"60"	"Санкт-Петербург за пределами КАД от 41 до 50 км."	"1250"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"61"	"Санкт-Петербург за пределами КАД от 11 до 20 км."	"500"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"62"	"Санкт-Петербург за пределами КАД до 10 км."	"250"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"63"	"Санкт-Петербург за пределами КАД от 11 до 20 км."	"500"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"64"	"Санкт-Петербург в пределах КАД"	"0"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"66"	"Москва в пределах МКАД"	"0"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"67"	"Доставка и отгрузка в транспортную компанию (для отправки по России)"	"0"	"1"	""	"0"	""	"1"	"0"	"0"
+"68"	"Доставка Почтой России (для заказов до 3 кг и до 40х25х35см)"	"500"	"1"	""	"0"	""	"1"	"0"	"0"
+"69"	"Самовывоз (Санкт-Петербург, 3 пункта выдачи заказов)"	"0"	"1"	"1"	"0"	""	"0"	"0"	"0"
+"70"	"Доставка по С.-Петербургу и Лен. Области (транспортной компанией)"	"0"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"71"	"Доставка по С.-Петербургу и Лен. Области (транспортной компанией)"	"300"	"1"	"0"	"0"	"0"	"1"	"0"	"0"
+"72"	"Самовывоз (Курск, ул. Радищева, д. 118, магазин ""Крепкий хозяин"")"	"0"	"1"	"1"	"0"	"0"	"0"	"0"	"0"
+"73"	"Доставка по Курску"	"300"	"1"	"0"	"0"	"0"	"0"	"0"	"0"
+"74"	"Доставка по курску"	"0"	"1"	"0"	"0"	"0"	"0"	"0"	"0"
+*/
+    //логика для самовывоза
+    if (typeof(document.getElementById('var_'+xid))!=='undefined' && (Number(xid)===10 || Number(xid)===13 || Number(xid)===14 || Number(xid)===43 || Number(xid)===69 || Number(xid)===70 || Number(xid)===71 || Number(xid)===72 || Number(xid)===75)) {
             //получаем список доставок в элементе
             var delivery_options=document.getElementById('var_'+xid);
             //если выбрана определенная доставка то делаем изменения в выводе элемента address_and_info и флажка обязательности поля
-            if ( ((delivery_options!==null && delivery_options.selected===true) || delivery_options===null) && (Number(xid)===10 || Number(xid)===13 || Number(xid)===14 || Number(xid)===43 || Number(xid)===69) ) {
+            if ( ((delivery_options!==null && delivery_options.selected===true) || delivery_options===null) && (Number(xid)===10 || Number(xid)===13 || Number(xid)===14 || Number(xid)===43 || Number(xid)===69 || Number(xid)===72 || Number(xid)===75) ) {
                 document.getElementById('address_and_info').innerHTML='Дополнительная<br>информация:';
                 if (typeof(adr_name_img) !== 'undefined' && adr_name_img !== null) {
                         adr_name_img.parentNode.removeChild(adr_name_img);
@@ -264,7 +330,7 @@ function UpdateDelivery(xid) {
                 //скрываем поля времени доставки, при самовывозе они не нужны
                 deliver_time_info[0].style.display='none';
                 deliver_time_info[1].style.display='none';
-                //ветка самовывоза для физлица
+                //ветка самовывоза иосквы для физлица
                 if ( ((delivery_options!==null && delivery_options.selected===true) || delivery_options===null) && legal_form[0].checked===true && (Number(xid)===10 || Number(xid)===13) ) {
                     //удаляем почту россии
                     if ($('#postal_index').length){
@@ -295,7 +361,7 @@ function UpdateDelivery(xid) {
                     }
                     //показываем элемент "Оплата в магазине картой VISA, Mastercard"
                     document.getElementById('order_metod_div').style.display='table-cell';
-                //ветка самовывоза для юрлица
+                    //ветка самовывоза москвы для юрлица
                 } else if ( ((delivery_options!==null && delivery_options.selected===true) || delivery_options===null) && legal_form[1].checked===true && (Number(xid)===10 || Number(xid)===13) ) {
                     //удаляем почту россии
                     if ($('#postal_index').length){
@@ -494,7 +560,7 @@ function UpdateDelivery(xid) {
                 }
             }
     //доставка по мкаду и за мкад
-    }  else if (typeof(document.getElementById('var_'+xid))!=='undefined' && Number(xid)!==10 && Number(xid)!==11 && Number(xid)!==67 && Number(xid)!==41 && Number(xid)!==13 && Number(xid)!==14 && Number(xid)!==43 && Number(xid)!==68 && Number(xid)!==69 && Number(xid)!==70 && Number(xid)!==71) {
+    }  else if (typeof(document.getElementById('var_'+xid))!=='undefined' && Number(xid)!==10 && Number(xid)!==11 && Number(xid)!==67 && Number(xid)!==41 && Number(xid)!==13 && Number(xid)!==14 && Number(xid)!==43 && Number(xid)!==68 && Number(xid)!==69 && Number(xid)!==70 && Number(xid)!==71 && Number(xid)!==72 && Number(xid)!==75) {
             //var delivery_options=document.getElementById('var_'+xid);
             document.getElementById('address_and_info').innerHTML='Адрес и <br> дополнительная<br>информация:';
             document.getElementById('address_and_info').style.display='table-cell';
@@ -563,6 +629,7 @@ function UpdateDelivery(xid) {
             
             //('#tk_delivery_block').remove();
             //adr_name_img.src='/phpshop/templates/prodacha/images/shopflag_green.gif';
+            //доставка и отгрузка в ТК
 	} else if (typeof(document.getElementById('var_'+xid))!=='undefined' && (Number(xid)===11 || Number(xid)===67 || Number(xid)===41)) {
             
             if (document.getElementById('address_and_info')){
@@ -763,6 +830,7 @@ function UpdateDelivery(xid) {
             $('#delivery_address_info').css("display","table-cell");
             $('#delivery_address').css({"width":"400px", "height":"18px", "font-family":"tahoma", "font-size":"11px", "color":"black"});
             fillTKtablePart();
+            //доставка почтой россии
 	} else if (typeof(document.getElementById('var_'+xid))!=='undefined' && Number(xid)===68) {
             
             if (document.getElementById('address_and_info')){
@@ -932,34 +1000,43 @@ function UpdateDelivery(xid) {
             	//console.log(req.responseJS.dellist);			
                 var z=(req.responseJS.total||'');
                 var city=(req.responseJS.city||'');
-
-                if (Number(z)<5000 && (Number(xid)!==69 && city!=='sp') && (Number(xid)!==41 && city!=='chb')){
+                //для москвы осуществляем вывод информации о мин. стоимости заказа
+                if (Number(z)<5000 && (Number(xid)!==69 && city!=='sp') && (Number(xid)!==41 && city!=='chb') && city!=='kur'){
+                   document.getElementById('delivery_warning').innerHTML='* Доставка по Москве производится для заказов от 5000 руб. Заказ стоимостью<br /> менее 5000 руб. Вы можете забрать самовывозом из нашего магазина.';
                    document.getElementById('delivery_warning').style.display="table-cell";
-                } else if (Number(z)>=5000) {
+                } else if (Number(z)>=5000 && (Number(xid)!==69 && city!=='sp') && (Number(xid)!==41 && city!=='chb') && city!=='kur') {
                    document.getElementById('delivery_warning').style.display="none";
                 }
-                    //для питера и чебоксар модифицируем корзину удаляя все поля для цены < 1000
-                    if ( ((((Number(xid)===69 || Number(xid)===0 || isNaN(Number(xid))) && city==='sp') || (city==='chb'))) && Number(z)<1000){
-                        //console.log('test');
-                        if (city==='sp') {
-                            cityname='Санкт-Петербурге';
-                            if ($("form[name='forma_order']>table:eq(0) tr:eq(10)").length){
-                                //удаляем лишние элементы
-                                for (cnt=0;cnt<=7;cnt++) {
-                                    $("form[name='forma_order']>table:eq(0) tr:eq(10)").remove();
-                                }            
-                            }                            
+                //для курска осуществляем вывод информации о мин. стоимости заказа
+                if (Number(z)<5000 && Number(xid)!==69 && Number(xid)!==41 && (city==='kur')){
+                   document.getElementById('delivery_warning').innerHTML='* Доставка по Курску производится для заказов от 5000 руб. Заказ стоимостью<br /> менее 5000 руб. Вы можете забрать самовывозом из нашего магазина.';
+                   document.getElementById('delivery_warning').style.display="table-cell";                    
+                } else if (Number(z)>=5000 && Number(xid)!==69 && Number(xid)!==41 && city=='kur') {
+                   document.getElementById('delivery_warning').style.display="none";
+                }
+
+                //для питера и чебоксар модифицируем корзину удаляя все поля для цены < 1000
+                if ( ((((Number(xid)===69 || Number(xid)===0 || isNaN(Number(xid))) && city==='sp') || (city==='chb'))) && Number(z)<1000){
+                    //console.log('test');
+                    if (city==='sp') {
+                        cityname='Санкт-Петербурге';
+                        if ($("form[name='forma_order']>table:eq(0) tr:eq(10)").length){
+                            //удаляем лишние элементы
+                            for (cnt=0;cnt<=7;cnt++) {
+                                $("form[name='forma_order']>table:eq(0) tr:eq(10)").remove();
+                            }            
+                        }                            
+                    }
+                    if (city==='chb') {
+                        cityname='Чебоксарах';
+                        if ($("form[name='forma_order']>table:eq(0) tr:eq(9)").length){
+                            //удаляем лишние элементы
+                            for (cnt=0;cnt<=15;cnt++) {
+                                $("form[name='forma_order']>table:eq(0) tr:eq(9)").remove();
+                            }            
                         }
-                        if (city==='chb') {
-                            cityname='Чебоксарах';
-                            if ($("form[name='forma_order']>table:eq(0) tr:eq(9)").length){
-                                //удаляем лишние элементы
-                                for (cnt=0;cnt<=15;cnt++) {
-                                    $("form[name='forma_order']>table:eq(0) tr:eq(9)").remove();
-                                }            
-                            }
-                        }
-                        $('#delivery_warning').html('Минимальная сумма заказа в интернет-магазине PROДАЧА в '+cityname+' составляет 1000 руб. Пожалуйста, дополните ваш заказ до минимальной суммы.');
+                    }
+                    $('#delivery_warning').html('Минимальная сумма заказа в интернет-магазине PROДАЧА в '+cityname+' составляет 1000 руб. Пожалуйста, дополните ваш заказ до минимальной суммы.');
                     $('#delivery_warning').css({'display':'table-cell','font-family':'tahoma', 'font-size':'12px'});
                     $("form[name='forma_order']>table:eq(0) tr:eq(0)").css('display','none');
                     $("form[name='forma_order']>table:eq(0) tr:eq(1)").css('display','none');
@@ -976,7 +1053,7 @@ function UpdateDelivery(xid) {
                     //$('div[name="seldelivery"]:eq(1)>a:first')[0].click();
                     //console.log($('div[name="seldelivery"]:eq(1)>a:first').text());
                 if (city==='chb' && $('#delivery_city').length)
-                $('#delivery_city').val('Чебоксары');
+                    $('#delivery_city').val('Чебоксары');
             }
         }
     };

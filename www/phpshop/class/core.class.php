@@ -1044,6 +1044,8 @@ width="32" height="32" alt="PHPShopCore Debug On"/ ><strong>Ошибка обработчика с
     		$retval[0]="where city like '%'"; //city='Чебоксары'
     	} elseif($cookie_region=="m") {
     		$retval[0]="where city like '%'"; //city='Москва'
+    	} elseif($cookie_region=="kur") {
+    		$retval[0]="where city like '%'"; //city='Курск'
     	} elseif($cookie_region=="other" || empty($cookie_region)) {
     		$retval[0]="where city like '%'";
     	}
@@ -1058,6 +1060,14 @@ width="32" height="32" alt="PHPShopCore Debug On"/ ><strong>Ошибка обработчика с
     	$has_service_in_region=false;
     
     	switch($cookie_region){
+    		case "kur":
+    			$sql="SELECT brand from ".$GLOBALS['SysValue']['base']['service_and_varranty']." where city='Курск' and brand='".$brand."'";
+    			$res=mysql_query($sql);
+    			//$result=$this->select($select, $where,false,'',false,$GLOBALS['SysValue']['base']['service_and_varranty']);
+    			if ( mysql_num_rows($res)>0 ) {
+    				$has_service_in_region=true;
+    			}
+    			break;
     		case "sp":
     			$sql="SELECT brand from ".$GLOBALS['SysValue']['base']['service_and_varranty']." where city='Санкт-Петербург' and brand='".$brand."'";
     			$res=mysql_query($sql);

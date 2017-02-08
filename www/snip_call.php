@@ -76,6 +76,8 @@ if (isset($_POST['email']))
 					 	$mail_to=$GLOBALS['SysValue']['mail']['spb_mail'];
 					 } else if ($_COOKIE['sincity']=="chb") {
 					 	$mail_to=$GLOBALS['SysValue']['mail']['chb_mail'];
+					 } else if ($_COOKIE['sincity']=="kur") {
+					 	$mail_to=$GLOBALS['SysValue']['mail']['kur_mail'];
 					 } else {
 					 	$mail_to=$GLOBALS['SysValue']['mail']['msc_mail'];
 					 }				
@@ -157,6 +159,8 @@ if (isset($_POST['yo_name']) && (isset($_POST['yo_phone']) || isset($_POST['yo_m
 		$mail_to=$GLOBALS['SysValue']['mail']['spb_mail'];
 	} else if ($_COOKIE['sincity']=="chb") {
 		$mail_to=$GLOBALS['SysValue']['mail']['chb_mail'];
+	} else if ($_COOKIE['sincity']=="kur") {
+		$mail_to=$GLOBALS['SysValue']['mail']['kur_mail'];
 	} else {
 		$mail_to=$GLOBALS['SysValue']['mail']['msc_mail'];
 	}

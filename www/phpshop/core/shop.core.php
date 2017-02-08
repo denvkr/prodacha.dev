@@ -1523,7 +1523,9 @@ class PHPShopShop extends PHPShopShopCore {
 							$price=$prod_row['price2'];
 						} else if( ($_COOKIE['sincity']=="chb") AND ($prod_row['price3']!=0) ) {
 							$price=$prod_row['price3'];
-						}
+						} else if( ($_COOKIE['sincity']=="kur") AND ($prod_row['price4']!=0) ) {
+							$price=$prod_row['price4'];
+                                                }
 						else {
 							$price=$prod_row['price'];
 						}
@@ -1541,6 +1543,8 @@ class PHPShopShop extends PHPShopShopCore {
 							$price=$prod_row['price2'];
 						} else if( ($_COOKIE['sincity']=="chb") AND ($prod_row['price3']!=0) ) {
 							$price=$prod_row['price3'];
+						} else if( ($_COOKIE['sincity']=="kur") AND ($prod_row['price4']!=0) ) {
+							$price=$prod_row['price4'];
 						}
 						else {
 							$price=$prod_row['price'];
@@ -1563,6 +1567,8 @@ class PHPShopShop extends PHPShopShopCore {
 						$price=$prod_row['price2'];
 					} else if( ($_COOKIE['sincity']=="chb") AND ($prod_row['price3']!=0) ) {
 						$price=$prod_row['price3'];
+                                        } else if( ($_COOKIE['sincity']=="kur") AND ($prod_row['price4']!=0) ) {
+                                                $price=$prod_row['price4'];
 					}
 					else {
 						$price=$prod_row['price'];

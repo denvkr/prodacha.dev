@@ -38,12 +38,14 @@ $PHPShopOrm=new PHPShopOrm($PHPShopBase->getParam('base.products'));
  * @version 1.0
  */
 $PHPShopOrm->cache=false;
-$podtip_price=$PHPShopOrm->select(array('price','price2','price3'), array('id'=>'='.$_REQUEST['prod_podtip_id']), false,array('limit'=>1));
+$podtip_price=$PHPShopOrm->select(array('price','price2','price3','price4'), array('id'=>'='.$_REQUEST['prod_podtip_id']), false,array('limit'=>1));
         //переписываем значение цены в корзине для товаров с промкодом
         if ( ($_COOKIE['sincity']=="sp") AND ($podtip_price['price2']!=0) ) {
                 $tovar_price=$podtip_price['price2'];
         } else if( ($_COOKIE['sincity']=="chb") AND ($podtip_price['price3']!=0) ) {
                 $tovar_price=$podtip_price['price3'];
+        } else if( ($_COOKIE['sincity']=="kur") AND ($podtip_price['price4']!=0) ) {
+                $tovar_price=$podtip_price['price4'];
         }
         else {
                 $tovar_price=$podtip_price['price'];

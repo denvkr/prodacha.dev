@@ -205,10 +205,10 @@ function add_same_tovar_box_hook($obj,$row,$rout){
             //$same_tovar_box=ParseTemplateReturn($this->getValue('templates.product_same_box'));
             //скрываем элемент если у нас совсем нечего показать
             if ($num_rows==$cnt_analog_prod) {
-                $same_tovar_box_display='style="display:none;"';
+                $same_tovar_box_display='class="same_tovar_box_display hidden"';
                 $obj->set('same_tovar_box','<table cellspacing="0" cellpadding="0" border="0" '.$same_tovar_box_display.'><tbody><tr>',true);
             } else {
-                $obj->set('same_tovar_box','<table cellspacing="0" cellpadding="0" border="0"><tbody><tr>',true);
+                $obj->set('same_tovar_box','<table cellspacing="0" cellpadding="0" border="0" class="same_tovar_box_display"><tbody><tr>',true);
                 if ($result1_count==1) {
                         $obj->set('same_tovar_num',$cnt);
                         $obj->set('productImgWidth',$SysValue['other']['productImgWidth']);
@@ -305,10 +305,10 @@ function add_same_tovar_box_hook($obj,$row,$rout){
             //$obj->set('same_tovar_box','',false);
             //скрываем элемент если у нас совсем нечего показать
             if ($num_rows==$cnt_analog_prod) {
-                $same_tovar_box_display='style="display:none;"';
+                $same_tovar_box_display='class="same_tovar_box_display hidden"';
                 $obj->set('same_tovar_box','<table cellspacing="0" cellpadding="0" border="0" '.$same_tovar_box_display.'><tbody><tr>',true);
             } else {
-                $obj->set('same_tovar_box','<table cellspacing="0" cellpadding="0" border="0"><tbody><tr>',true);
+                $obj->set('same_tovar_box','<table cellspacing="0" cellpadding="0" border="0" class="same_tovar_box_display"><tbody><tr>',true);
                 if ($result2_count==1) {
                         $obj->set('same_tovar_num',$cnt);
                         $obj->set('productImgWidth',$SysValue['other']['productImgWidth']);

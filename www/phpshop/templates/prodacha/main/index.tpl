@@ -42,8 +42,8 @@
 	<meta name="domen-copyright" content="@pageDomen@">
 	<meta content="General" name="rating">
 	<meta name="viewport" content="width=device-width">
-	<link rel="shortcut icon" href="http://www.prodacha.ru/favicon.ico" type="image/x-icon"> 
-	<link rel="icon" href="http://www.prodacha.ru/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="//www.prodacha.ru/favicon.ico" type="image/x-icon"> 
+	<link rel="icon" href="//www.prodacha.ru/favicon.ico" type="image/x-icon">
 	<!--Подключаем JQUERY -->
 	<script type="text/javascript" src="java/lib/jquery-1.11.0.min.js"></script>
 	<!--<script type="text/javascript" src="@php echo $GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].chr(47); php@javascript/lib/jquery-1.11.0.min.js"></script>-->
@@ -111,6 +111,10 @@
                         echo '<link rel="stylesheet" href="'.$GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].'css/style_sp1.css" type="text/css">';
 		else
                         echo '<link rel="stylesheet" href="'.$GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].'css/style_sp2.css" type="text/css">';
+		if ($_COOKIE['sincity']=="kur")
+                        echo '<link rel="stylesheet" href="'.$GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].'css/style_kur1.css" type="text/css">';
+		else
+                        echo '<link rel="stylesheet" href="'.$GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].'css/style_kur2.css" type="text/css">';
 		if ($_COOKIE['sincity']=="chb")
                         echo '<link rel="stylesheet" href="'.$GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].'css/style_chb1.css" type="text/css">';
 		else
@@ -248,7 +252,7 @@
 	<!--slider end-->
 
 				@php			
-					if ($_COOKIE['sincity']=="m" || $_COOKIE['sincity']=="chb" || $_COOKIE['sincity']=="other" || !isset($_COOKIE['sincity'])) {
+					if ($_COOKIE['sincity']=="m" || $_COOKIE['sincity']=="chb" || $_COOKIE['sincity']=="kur" || $_COOKIE['sincity']=="other" || !isset($_COOKIE['sincity'])) {
 					$str='<script type="text/javascript">
 						  $(document).ready(function(){
 						  	if ((".piter_1").length) {
@@ -383,7 +387,7 @@
 			<div class="ask_question_div">
 				<div class="h2">Задать вопрос</div>
 
-				<form id="ask_question_form" action="http://prodacha.ru/snip_call.php" method="POST">
+				<form id="ask_question_form" action="//prodacha.ru/snip_call.php" method="POST">
 					<input class="text_ask_question_email" type="text" name="email" value="Ваш E-mail" onfocus="if(this.value=='Ваш E-mail'){this.value='';}" onblur="if(this.value==''){this.value='Ваш E-mail';}">
 					<textarea class="textarea_ask_question" name="textArea_ask_question"  rows="3" cols="30" value="Вопрос" onfocus="if(this.value=='Вопрос'){this.value='';}" onblur="if(this.value==''){this.value='Вопрос';}">Вопрос</textarea>
 					<input id="cv1" type="hidden" name="cv" value="nohspamcode">
@@ -396,7 +400,7 @@
 			<div class="foot_menu">
 				<ul>
 					@topMenu@
-					<li><a href="http://prodacha.ru/catalog/">КАРТА САЙТА</a></li>
+					<li><a href="//prodacha.ru/catalog/">КАРТА САЙТА</a></li>
 				</ul>
                 </div>
 		</div>
