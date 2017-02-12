@@ -155,7 +155,7 @@ if ($(this).next().find('li').length == 0) $(this).hide();
         $("input.creditinput").click(function(e){
 
 var id = $(this).attr('rel');
-        var url = 'http://prodacha.ru/crediter.php?id=' + id;
+        var url = '//prodacha.ru/crediter.php?id=' + id;
         var isAdded = AddToCart(id);
         if (isAdded === true)
 {
@@ -174,7 +174,7 @@ $.fancybox
 //в кредит из карточки
 $("input.creditinputcart").click(function(e){
             var id = $(this).attr('rel');
-            var url = 'http://prodacha.ru/crediter.php?id=' + id;
+            var url = '//prodacha.ru/crediter.php?id=' + id;
             var cnt = $(this).attr('cnt');
             var isAdded = AddToCartNum(id, cnt);
             if (isAdded === true)
@@ -1764,7 +1764,7 @@ if ($('.alsobought:eq(0)')!==null){
                         success: function(json) {
                         if (json['ok'] == '1'){
                         html = '<div id="light_box"><div class="fast_order_window"><div class="popup_region">';
-                                html += '<form id="fast_order_form" action="http://prodacha.ru/snip_call.php" method="POST">';
+                                html += '<form id="fast_order_form" action="//prodacha.ru/snip_call.php" method="POST">';
                                 html += '<input type="button" id="fast_order_close_button" onclick="close_fast_order();"/>';
                                 html += '<div id="fast_order_window_item1"><b>' + json['item1'] + '</b></div>';
                                 html += '<div id="fast_order_window_item2">' + json['item2'] + '</div>';
@@ -2946,21 +2946,21 @@ $.ajax({
             if ($('#lastname_person').val()==='' && $('#name_person').val()!==''){
                 $('#lastname_person').unbind('click')
                 $('#lastname_person').popover({'html':true});
-                $('#lastname_person').attr('data-content','Пожалуйста, обновите Ваши контактные данные в <a style="color:#8ab943;text-decoration: underline;" href="http://prodacha.ru/users/"><b>Личном кабинете</b></a>, чтобы продолжить оформление заказа');
+                $('#lastname_person').attr('data-content','Пожалуйста, обновите Ваши контактные данные в <a style="color:#8ab943;text-decoration: underline;" href="//prodacha.ru/users/"><b>Личном кабинете</b></a>, чтобы продолжить оформление заказа');
                 $('#lastname_person').popover('show');
                 console.log('#lastname_person');
             }
             if ($('#name_person').val()==='' && $('#lastname_person').val()!==''){
                 $('#name_person').unbind('click')
                 $('#name_person').popover({'html':true});
-                $('#name_person').attr('data-content','Пожалуйста, обновите Ваши контактные данные в <a style="color:#8ab943;text-decoration: underline;" href="http://prodacha.ru/users/"><b>Личном кабинете</b></a>, чтобы продолжить оформление заказа');
+                $('#name_person').attr('data-content','Пожалуйста, обновите Ваши контактные данные в <a style="color:#8ab943;text-decoration: underline;" href="//prodacha.ru/users/"><b>Личном кабинете</b></a>, чтобы продолжить оформление заказа');
                 $('#name_person').popover('show');
                 console.log('#name_person');
             }
             if ($('#name_person').val()==='' && $('#lastname_person').val()===''){
                 $('#name_person').unbind('click')
                 $('#name_person').popover({'html':true});
-                $('#name_person').attr('data-content','Пожалуйста, обновите Ваши контактные данные в <a style="color:#8ab943;text-decoration: underline;" href="http://prodacha.ru/users/"><b>Личном кабинете</b></a>, чтобы продолжить оформление заказа');
+                $('#name_person').attr('data-content','Пожалуйста, обновите Ваши контактные данные в <a style="color:#8ab943;text-decoration: underline;" href="//prodacha.ru/users/"><b>Личном кабинете</b></a>, чтобы продолжить оформление заказа');
                 $('#name_person').popover('show');
                 console.log('#name_person');
             }

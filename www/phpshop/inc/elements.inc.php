@@ -462,9 +462,12 @@ class PHPShopTextElement extends PHPShopElements {
 
                 // Перехват модуля
                 $this->setHook(__CLASS__, __FUNCTION__, $row);
-
-                // Подключаем шаблон
-                $dis.=$this->parseTemplate($this->getValue('templates.top_menu'));
+                //echo $this->get('topMenuName');
+                if ( $this->getValue('topMenuName')!=='' && $this->get('topMenuLink')!=='' ) {
+                    // Подключаем шаблон
+                    $dis.=$this->parseTemplate($this->getValue('templates.top_menu'));
+                }
+                    
             }
             //echo $dis;
         return $dis;

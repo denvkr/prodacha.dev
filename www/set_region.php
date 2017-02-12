@@ -39,7 +39,6 @@
 			
 			if ($_POST['reg']=="kur")
 			{
-
 				setcookie('sincity',"kur",'0','/');			
 				setcookie('sincity',"kur",'0','/shop');	
 				

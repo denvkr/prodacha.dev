@@ -34,12 +34,8 @@ form[name="forma_order"] span[id="bic"]
 {display:none;}
 form[name="forma_order"] div[name="cartnotifyaboutprice"]
 {width:400px;display:none;}
-form[name="forma_order"] td[id="delivery_warning"]{
-font-size: 10px; padding-left: 170px; display:none;
-}
-form[name="forma_order"]  img[id="clearcartimg"]{
-vertical-align:middle;display:none;
-}
+form[name="forma_order"] td[id="delivery_warning"]{font-size:10px; padding-left:170px;display:none;}
+form[name="forma_order"]  img[id="clearcartimg"]{vertical-align:middle;display:none;}
  .same_tovar_box_display.hidden{display:none;}
  .same_tovar_box_display {display: block;}
  .quantity{display:none;}

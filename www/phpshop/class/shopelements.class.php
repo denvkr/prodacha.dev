@@ -170,7 +170,7 @@ class PHPShopProductElements extends PHPShopElements {
 
         $base_host = $this->PHPShopSystem->getSerilizeParam('admoption.base_host');
         if ($this->PHPShopSystem->getSerilizeParam('admoption.base_enabled') == 1 and !empty($base_host))
-            $this->set('productImg', eregi_replace("/UserFiles/", "http://" . $base_host . "/UserFiles/", $pic_small));
+            $this->set('productImg', eregi_replace("/UserFiles/", "//" . $base_host . "/UserFiles/", $pic_small));
     }
 
     /**

@@ -328,7 +328,7 @@ class PHPShopDone extends PHPShopCore {
         // Отсылаем письмо покупателю
         $PHPShopMail = new PHPShopMail($_POST['mail'], $this->PHPShopSystem->getParam('adminmail2'), $title, $content);
 
-        $this->set('shop_admin', "http://" . $_SERVER['SERVER_NAME'] . $this->getValue('dir.dir') . "/phpshop/admpanel/");
+        $this->set('shop_admin', "//" . $_SERVER['SERVER_NAME'] . $this->getValue('dir.dir') . "/phpshop/admpanel/");
         $this->set('time', date("d-m-y H:i a"));
         $this->set('ip', $_SERVER['REMOTE_ADDR']);
         $content_adm = ParseTemplateReturn('./phpshop/lib/templates/order/adminmail.tpl', true);

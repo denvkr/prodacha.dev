@@ -1920,7 +1920,7 @@ function default_load(copyrigh,protect){
 
 // функция получает данные по голосованию для текущей страницы
 function vote_get() {
-	if (document.URL='http://prodacha.ru/page/china_engines.html') {
+	if (document.URL='//prodacha.ru/page/china_engines.html') {
 		var req = new Subsys_JsHttpRequest_Js();
 		
 		req.onreadystatechange = function() {

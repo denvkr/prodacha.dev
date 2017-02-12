@@ -349,7 +349,8 @@ $map['chb']='
 <a href="//www.prodacha.ru/page/shop_cheb.html#mapcheb"><img src="images/map_cheb.jpg" alt="" style="border: 1px dotted;"></a>
 ';
 
-$map['kur']='';
+$map['kur']='<a href="//www.prodacha.ru/page/shop_kursk.html#mapcheb"><img src="images/map_kur.jpg" alt="" style="border: 1px dotted;"></a>
+';
 
 $map['other']='
 <a href="//www.prodacha.ru/page/store.html#mapdin"><img src="images/map2.png" alt="" style="border: 1px dotted;"></a><br />
