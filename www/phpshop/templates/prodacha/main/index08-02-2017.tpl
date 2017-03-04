@@ -1,4 +1,4 @@
- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	@php
@@ -42,8 +42,8 @@
 	<meta name="domen-copyright" content="@pageDomen@">
 	<meta content="General" name="rating">
 	<meta name="viewport" content="width=device-width">
-	<link rel="shortcut icon" href="//prodacha.ru/favicon.ico" type="image/x-icon"> 
-	<link rel="icon" href="//prodacha.ru/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="//www.prodacha.ru/favicon.ico" type="image/x-icon"> 
+	<link rel="icon" href="//www.prodacha.ru/favicon.ico" type="image/x-icon">
 	<!--Подключаем JQUERY -->
 	<script type="text/javascript" src="java/lib/jquery-1.11.0.min.js"></script>
 	<!--<script type="text/javascript" src="@php echo $GLOBALS['SysValue']['dir']['templates'].chr(47).$_SESSION['skin'].chr(47); php@javascript/lib/jquery-1.11.0.min.js"></script>-->
@@ -344,136 +344,25 @@
 	<div class="center">
 		<div class="foot_contacts">
 			<div class="contacts">
-                            <div class="h2"><a id="kontakty" href="/page/kontakty.html@php
-                                        if ( !isset($_COOKIE['sincity']) )
-                                            $city = 'm';
-                                        else
-                                            $city=$_COOKIE['sincity'];
-
-                                        if ($city=="sp")
-                                                echo '#tab2';
-                                        if ($city=="kur")
-                                                echo '#tab5';
-                                        if ($city=="chb")
-                                                echo '#tab4';
-                                        if ($city=="m" || $city=="other")
-                                                echo '#tab1';
-                                        
-                            php@">Контакты</a></div>
+				<div class="h2">Контакты</div>
 					@php					
-                                            require($_SERVER['DOCUMENT_ROOT'].'/geo_info.php');
-                                            if ( !isset($_COOKIE['sincity']) )
-                                                $city = 'm';
-                                            else
-                                                $city=$_COOKIE['sincity'];
-if ($city=='kur'){
-						echo $footcontacts1[$city];
-                                                $city = 'm';
-						echo $footcontacts1[$city];
-                                                $city = 'sp';
-						echo $footcontacts1[$city];
-                                                $city = 'chb';
-						echo $footcontacts1[$city];
-$city='kur';
-}
-if ($city=='m'){
-						echo $footcontacts1[$city];
-                                                $city = 'kur';
-						echo $footcontacts1[$city];
-                                                $city = 'sp';
-						echo $footcontacts1[$city];
-                                                $city = 'chb';
-						echo $footcontacts1[$city];
-$city='m';
-}
-if ($city=='chb'){
-						echo $footcontacts1[$city];
-                                                $city = 'kur';
-						echo $footcontacts1[$city];
-                                                $city = 'sp';
-						echo $footcontacts1[$city];
-                                                $city = 'm';
-						echo $footcontacts1[$city];
-$city='chb';
-}
-if ($city=='sp'){
-						echo $footcontacts1[$city];
-                                                $city = 'kur';
-						echo $footcontacts1[$city];
-                                                $city = 'm';
-						echo $footcontacts1[$city];
-                                                $city = 'chb';
-						echo $footcontacts1[$city];
-$city='sp';
-}
-if ($city=='other'){
-						echo $footcontacts1[$city];
-                                                $city = 'kur';
-						echo $footcontacts1[$city];
-                                                $city = 'sp';
-						echo $footcontacts1[$city];
-                                                $city = 'chb';
-						echo $footcontacts1[$city];
-}
+						require($_SERVER['DOCUMENT_ROOT'].'/geo_info.php');
+						$city=$_COOKIE['sincity'];													
+						if(!isset($city)){
+							$city = 'm';						
+						}
+						echo $footcontacts1[$city];												
 					php@			
 			</div>
 			<div class="graphic">
 				<div class="h2">График работы</div>				
 				@php					
 					require($_SERVER['DOCUMENT_ROOT'].'/geo_info.php');
-                                            if ( !isset($_COOKIE['sincity']) )
-                                                $city = 'm';
-                                            else
-                                                $city=$_COOKIE['sincity'];
-if ($city=='kur'){
-						echo $footcontacts2[$city];
-                                                $city = 'm';
-						echo $footcontacts2[$city];
-                                                $city = 'sp';
-						echo $footcontacts2[$city];
-                                                $city = 'chb';
-						echo $footcontacts2[$city];
-$city='kur';
-}
-if ($city=='m'){
-						echo $footcontacts2[$city];
-                                                $city = 'kur';
-						echo $footcontacts2[$city];
-                                                $city = 'sp';
-						echo $footcontacts2[$city];
-                                                $city = 'chb';
-						echo $footcontacts2[$city];
-$city='m';
-}
-if ($city=='chb'){
-						echo $footcontacts2[$city];
-                                                $city = 'kur';
-						echo $footcontacts2[$city];
-                                                $city = 'sp';
-						echo $footcontacts2[$city];
-                                                $city = 'm';
-						echo $footcontacts2[$city];
-$city='chb';
-}
-if ($city=='sp'){
-						echo $footcontacts2[$city];
-                                                $city = 'kur';
-						echo $footcontacts2[$city];
-                                                $city = 'm';
-						echo $footcontacts2[$city];
-                                                $city = 'chb';
-						echo $footcontacts2[$city];
-$city='sp';
-}
-if ($city=='other'){
-						echo $footcontacts2[$city];
-                                                $city = 'kur';
-						echo $footcontacts2[$city];
-                                                $city = 'sp';
-						echo $footcontacts2[$city];
-                                                $city = 'chb';
-						echo $footcontacts2[$city];
-}
+					$city=$_COOKIE['sincity'];													
+					if(!isset($city)){
+						$city = 'm';						
+					}
+					echo $footcontacts2[$city];												
 				php@			
 			</div>
 			<div class="map">

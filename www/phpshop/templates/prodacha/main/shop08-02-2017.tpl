@@ -376,76 +376,14 @@
 	<div class="center">
 		<div class="foot_contacts">
 			<div class="contacts">
-				<div class="h2"><a id="kontakty" href="/page/kontakty.html@php
-					$city=$_COOKIE['sincity'];													
-					if(!isset($city)){
-						$city = 'm';						
-					}
-                                        if ($_COOKIE['sincity']=="sp")
-                                                echo '#tab2';
-                                        if ($_COOKIE['sincity']=="kur")
-                                                echo '#tab5';
-                                        if ($_COOKIE['sincity']=="chb")
-                                                echo '#tab4';
-                                        if ($_COOKIE['sincity']=="m" || $_COOKIE['sincity']=="other")
-                                                echo '#tab1';
-                                        
-                            php@">Контакты</a></div>
+				<div class="h2">Контакты</div>
 				@php					
 					require($_SERVER['DOCUMENT_ROOT'].'/geo_info.php');
 					$city=$_COOKIE['sincity'];													
 					if(!isset($city)){
 						$city = 'm';						
 					}
-if ($city=='kur'){
-						echo $footcontacts1[$city];
-                                                $city = 'm';
-						echo $footcontacts1[$city];
-                                                $city = 'sp';
-						echo $footcontacts1[$city];
-                                                $city = 'chb';
-						echo $footcontacts1[$city];
-$city='kur';
-}
-if ($city=='m'){
-						echo $footcontacts1[$city];
-                                                $city = 'kur';
-						echo $footcontacts1[$city];
-                                                $city = 'sp';
-						echo $footcontacts1[$city];
-                                                $city = 'chb';
-						echo $footcontacts1[$city];
-$city='m';
-}
-if ($city=='chb'){
-						echo $footcontacts1[$city];
-                                                $city = 'kur';
-						echo $footcontacts1[$city];
-                                                $city = 'sp';
-						echo $footcontacts1[$city];
-                                                $city = 'm';
-						echo $footcontacts1[$city];
-$city='chb';
-}
-if ($city=='sp'){
-						echo $footcontacts1[$city];
-                                                $city = 'kur';
-						echo $footcontacts1[$city];
-                                                $city = 'm';
-						echo $footcontacts1[$city];
-                                                $city = 'chb';
-						echo $footcontacts1[$city];
-$city='sp';
-}
-if ($city=='other'){
-						echo $footcontacts1[$city];
-                                                $city = 'kur';
-						echo $footcontacts1[$city];
-                                                $city = 'sp';
-						echo $footcontacts1[$city];
-                                                $city = 'chb';
-						echo $footcontacts1[$city];
-}												
+					echo $footcontacts1[$city];												
 				php@			
 			</div>
 			<div class="graphic">
@@ -456,56 +394,7 @@ if ($city=='other'){
 					if(!isset($city)){
 						$city = 'm';						
 					}
-if ($city=='kur'){
-						echo $footcontacts2[$city];
-                                                $city = 'm';
-						echo $footcontacts2[$city];
-                                                $city = 'sp';
-						echo $footcontacts2[$city];
-                                                $city = 'chb';
-						echo $footcontacts2[$city];
-$city='kur';
-}
-if ($city=='m'){
-						echo $footcontacts2[$city];
-                                                $city = 'kur';
-						echo $footcontacts2[$city];
-                                                $city = 'sp';
-						echo $footcontacts2[$city];
-                                                $city = 'chb';
-						echo $footcontacts2[$city];
-$city='m';
-}
-if ($city=='chb'){
-						echo $footcontacts2[$city];
-                                                $city = 'kur';
-						echo $footcontacts2[$city];
-                                                $city = 'sp';
-						echo $footcontacts2[$city];
-                                                $city = 'm';
-						echo $footcontacts2[$city];
-$city='chb';
-}
-if ($city=='sp'){
-						echo $footcontacts2[$city];
-                                                $city = 'kur';
-						echo $footcontacts2[$city];
-                                                $city = 'm';
-						echo $footcontacts2[$city];
-                                                $city = 'chb';
-						echo $footcontacts2[$city];
-$city='sp';
-}
-if ($city=='other'){
-						echo $footcontacts2[$city];
-                                                $city = 'kur';
-						echo $footcontacts2[$city];
-                                                $city = 'sp';
-						echo $footcontacts2[$city];
-                                                $city = 'chb';
-						echo $footcontacts2[$city];
-}
-
+					echo $footcontacts2[$city];												
 				php@			
 			</div>
 			<div class="map">

@@ -1177,11 +1177,11 @@ class PHPShopShopCatalogElement extends PHPShopProductElements {
                                 $submenuhead1_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                         }
                         foreach ($array_submenuhead2_1 as $prod_row1) {
-                            if ($prod_row1[id]==13) {
-                                    $submenuhead2_1.='<li class="inside_menu_head" style="font-size:12px;"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a><span>&nbsp;</span>';
-                                    $submenuhead2_1.='<a href="/shop/CID_328.html" style="font-size:12px;">(Мотокультиваторы)</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
-                            } else if ($prod_row1[id]!=328 && $prod_row1[id]!=13) {
-                                    $submenuhead2_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
+                            if ($prod_row1[id]==328) {
+                                //$submenuhead2_1.='<li class="inside_menu_head" style="font-size:12px;"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a><span>&nbsp;</span>';
+                                $submenuhead2_1.='<li class="inside_menu_head" style="font-size:12px;"><a href="/shop/CID_328.html" style="font-size:12px;">Мотокультиваторы</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
+                            } else {
+                                $submenuhead2_1.='<li class="inside_menu_head"><a href="/shop/CID_'.$prod_row1[id].'.html">'.$prod_row1[name].'</a>'.array_custom_search($left_menu_sp_options,$prod_row1[id]).'</li>';
                             }
                         }
                         foreach ($array_submenuhead3_1 as $prod_row1){

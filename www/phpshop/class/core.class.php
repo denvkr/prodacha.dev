@@ -201,7 +201,7 @@ class PHPShopCore {
 				*/
 				$href_text='<span itemprop="title">'.$v['name'].'</span>';
 				
-				$dis.= $spliter.'<div itemscope itemtype="http:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/CID_' . $v['id'] . '.html" itemprop="url">'.$href_text.'</a></div>'; //. '<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/CID_' . $v['id'] . '.html" itemprop="url">'.$href_text.'</a></div>'; //PHPShopText::a('/' . $this->PHPShopNav->getPath() . '/CID_' . $v['id'] . '.html', $href_text)
+				$dis.= $spliter.'<div itemscope itemtype="https:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/CID_' . $v['id'] . '.html" itemprop="url">'.$href_text.'</a></div>'; 
 				//echo $dis;
 				$cnt++;
             }
@@ -227,12 +227,12 @@ class PHPShopCore {
 				$href_text='<span itemprop="title">'.trim(substr ( $name ,0, stripos($name , '(' )-1 )).'</span>';
 				if ( (($GLOBALS['SysValue']['other']['productPageThis']=='ALL' || $GLOBALS['SysValue']['other']['productPageThis']!=1)  && $GLOBALS['SysValue']['other']['productPageThis']!='' ) || (($this->PHPShopNav->getPage()=='ALL' || $this->PHPShopNav->getPage()!=1) && $this->PHPShopNav->getPage()!='') ) {
 					//$dis = $home . $dis . $spliter . PHPShopText::a('/' . $this->PHPShopNav->getPath() . '/CID_' . $GLOBALS['SysValue']['nav']['id'] . '.html', trim(substr ( $name ,0, stripos($name , '(' )-1 )));
-					$dis = $home . $dis . $spliter .'<div itemscope itemtype="http:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/CID_' . $GLOBALS['SysValue']['nav']['id'] . '.html" itemprop="url">'.$href_text.'</a></div>';
+					$dis = $home . $dis . $spliter .'<div itemscope itemtype="https:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/CID_' . $GLOBALS['SysValue']['nav']['id'] . '.html" itemprop="url">'.$href_text.'</a></div>';
 					//echo '-1-';
 				} else {
 					//$dis = $home . $dis . $spliter .'<div itemscope itemtype="http:data-vocabulary.orgBreadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/' . $GLOBALS['SysValue']['nav']['name'] . '.html" itemprop="url">'.$href_text.'</a></div>';
-					if ($GLOBALS['SysValue']['nav']['nav']=='CID') $dis = $home . $dis . $spliter .'<div itemscope itemtype="http:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/CID_' . $GLOBALS['SysValue']['nav']['id'] . '.html" itemprop="url">'.$href_text.'</a></div>';
-					if ($GLOBALS['SysValue']['nav']['nav']!='CID') $dis = $home . $dis . $spliter .'<div itemscope itemtype="http:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/' . $GLOBALS['SysValue']['nav']['longname'] . '.html" itemprop="url">'.$href_text.'</a></div>';					
+					if ($GLOBALS['SysValue']['nav']['nav']=='CID') $dis = $home . $dis . $spliter .'<div itemscope itemtype="https:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/CID_' . $GLOBALS['SysValue']['nav']['id'] . '.html" itemprop="url">'.$href_text.'</a></div>';
+					if ($GLOBALS['SysValue']['nav']['nav']!='CID') $dis = $home . $dis . $spliter .'<div itemscope itemtype="https:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/' . $GLOBALS['SysValue']['nav']['longname'] . '.html" itemprop="url">'.$href_text.'</a></div>';					
 					//echo '-2-';
 				}
 					//$dis = $home . $dis . $spliter .'<div itemscope itemtype="http:data-vocabulary.orgBreadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/CID_' . $GLOBALS['SysValue']['nav']['id'] . '.html" itemprop="url">'.$href_text.'</a></div>';					
@@ -241,12 +241,12 @@ class PHPShopCore {
 				$href_text='<span itemprop="title">'.$name.'</span>';
 				if ((($GLOBALS['SysValue']['other']['productPageThis']=='ALL' || $GLOBALS['SysValue']['other']['productPageThis']!=1)  && $GLOBALS['SysValue']['other']['productPageThis']!='' ) || (($this->PHPShopNav->getPage()=='ALL' || $this->PHPShopNav->getPage()!=1) && $this->PHPShopNav->getPage()!='') ) {
 					//$dis = $home . $dis . $spliter . PHPShopText::a('/' . $this->PHPShopNav->getPath() . '/CID_' . $GLOBALS['SysValue']['nav']['id'] . '.html', $name);
-					$dis = $home . $dis . $spliter .'<div itemscope itemtype="http:data-vocabulary.orgBreadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/CID_' . $GLOBALS['SysValue']['nav']['id'] . '.html" itemprop="url">'.$href_text.'</a></div>';
+					$dis = $home . $dis . $spliter .'<div itemscope itemtype="https:data-vocabulary.orgBreadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/CID_' . $GLOBALS['SysValue']['nav']['id'] . '.html" itemprop="url">'.$href_text.'</a></div>';
 					//echo '-3-';
 				} else {
 					//$dis = $home . $dis . $spliter .'<div itemscope itemtype="http:data-vocabulary.orgBreadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/' . $GLOBALS['SysValue']['nav']['name'] . '.html" itemprop="url">'.$href_text.'</a></div>';
-					if ($GLOBALS['SysValue']['nav']['nav']=='CID') $dis = $home . $dis . $spliter .'<div itemscope itemtype="http:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/CID_' . $GLOBALS['SysValue']['nav']['id'] . '.html" itemprop="url">'.$href_text.'</a></div>';
-					if ($GLOBALS['SysValue']['nav']['nav']!='CID') $dis = $home . $dis . $spliter .'<div itemscope itemtype="http:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/' . $GLOBALS['SysValue']['nav']['longname'] . '.html" itemprop="url">'.$href_text.'</a></div>';
+					if ($GLOBALS['SysValue']['nav']['nav']=='CID') $dis = $home . $dis . $spliter .'<div itemscope itemtype="https:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/CID_' . $GLOBALS['SysValue']['nav']['id'] . '.html" itemprop="url">'.$href_text.'</a></div>';
+					if ($GLOBALS['SysValue']['nav']['nav']!='CID') $dis = $home . $dis . $spliter .'<div itemscope itemtype="https:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/' . $GLOBALS['SysValue']['nav']['longname'] . '.html" itemprop="url">'.$href_text.'</a></div>';
 					//echo '-4-';
 				}
 					//$dis = $home . $dis . $spliter .'<div itemscope itemtype="http:data-vocabulary.orgBreadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/CID_' . $GLOBALS['SysValue']['nav']['id'] . '.html" itemprop="url">'.$href_text.'</a></div>';					
@@ -257,20 +257,20 @@ class PHPShopCore {
 			if ((($GLOBALS['SysValue']['other']['productPageThis']=='ALL' || $GLOBALS['SysValue']['other']['productPageThis']!=1)  && $GLOBALS['SysValue']['other']['productPageThis']!='' ) || (($this->PHPShopNav->getPage()=='ALL' || $this->PHPShopNav->getPage()!=1) && $this->PHPShopNav->getPage()!='')) {
 				//$dis = $home . $dis . $spliter . PHPShopText::a('/' . $this->PHPShopNav->getPath() . '/CID_' . $GLOBALS['SysValue']['nav']['id'] . '.html', $name);
 				if ($GLOBALS['SysValue']['nav']['nav']=='UID') {
-					$dis = $home . $dis . $spliter .'<div itemscope itemtype="http:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/UID_' . $GLOBALS['SysValue']['nav']['id'] . '.html" itemprop="url">'.$href_text.'</a></div>';
+					$dis = $home . $dis . $spliter .'<div itemscope itemtype="https:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/UID_' . $GLOBALS['SysValue']['nav']['id'] . '.html" itemprop="url">'.$href_text.'</a></div>';
 					//echo '-5-';
 				} else {
-					if ($GLOBALS['SysValue']['nav']['nav']=='CID') $dis = $home . $dis . $spliter .'<div itemscope itemtype="http:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/CID_' . $GLOBALS['SysValue']['nav']['id'] . '.html" itemprop="url">'.$href_text.'</a></div>';
-					if ($GLOBALS['SysValue']['nav']['nav']!='CID') $dis = $home . $dis . $spliter .'<div itemscope itemtype="http:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/' . $GLOBALS['SysValue']['nav']['longname'] . '.html" itemprop="url">'.$href_text.'</a></div>';
+					if ($GLOBALS['SysValue']['nav']['nav']=='CID') $dis = $home . $dis . $spliter .'<div itemscope itemtype="https:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/CID_' . $GLOBALS['SysValue']['nav']['id'] . '.html" itemprop="url">'.$href_text.'</a></div>';
+					if ($GLOBALS['SysValue']['nav']['nav']!='CID') $dis = $home . $dis . $spliter .'<div itemscope itemtype="https:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/' . $GLOBALS['SysValue']['nav']['longname'] . '.html" itemprop="url">'.$href_text.'</a></div>';
 					//echo '-6-';
 				}
 			} else
 				if ($GLOBALS['SysValue']['nav']['nav']=='UID') {
-					$dis = $home . $dis . $spliter .'<div itemscope itemtype="http:data-vocabulary.orgBreadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/UID_' . $GLOBALS['SysValue']['nav']['id'] . '.html" itemprop="url">'.$href_text.'</a></div>';
+					$dis = $home . $dis . $spliter .'<div itemscope itemtype="https:data-vocabulary.orgBreadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/UID_' . $GLOBALS['SysValue']['nav']['id'] . '.html" itemprop="url">'.$href_text.'</a></div>';
 					//echo '-7-';
 				} else {
-					if ($GLOBALS['SysValue']['nav']['nav']=='CID')	$dis = $home . $dis . $spliter .'<div itemscope itemtype="http:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/CID_' . $GLOBALS['SysValue']['nav']['id'] . '.html" itemprop="url">'.$href_text.'</a></div>';
-					if ($GLOBALS['SysValue']['nav']['nav']!='CID')	$dis = $home . $dis . $spliter .'<div itemscope itemtype="http:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/' . $GLOBALS['SysValue']['nav']['longname'] . '.html" itemprop="url">'.$href_text.'</a></div>';
+					if ($GLOBALS['SysValue']['nav']['nav']=='CID')	$dis = $home . $dis . $spliter .'<div itemscope itemtype="https:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/CID_' . $GLOBALS['SysValue']['nav']['id'] . '.html" itemprop="url">'.$href_text.'</a></div>';
+					if ($GLOBALS['SysValue']['nav']['nav']!='CID')	$dis = $home . $dis . $spliter .'<div itemscope itemtype="https:&#47&#47data-vocabulary.org&#47Breadcrumb"><a href="/' . $this->PHPShopNav->getPath() . '/' . $GLOBALS['SysValue']['nav']['longname'] . '.html" itemprop="url">'.$href_text.'</a></div>';
 					//echo '-8-';
 				}
 				//$dis = $home . $dis . $spliter . PHPShopText::b($name);
@@ -312,7 +312,7 @@ class PHPShopCore {
      * Генерация заголовков документа
      */
     function meta() {
-
+	
     	//проверяем для UID
     	//в случае неадекватного номера страницы отправляем ее в стандартную страницу
     	if ($this->PHPShopNav->getName()=='UID') {
@@ -354,9 +354,6 @@ class PHPShopCore {
     			}
     	
     			//теперь остается проверить соответствует ли номеру страницы наша подстрока
-    			//echo $this->page;
-    			//print_r($this->PHPShopNav);
-    			//echo $this->num_of_pages;
     			if ($url_part!='ALL') {
     				if ($url_part-$this->num_of_pages>0) {
     					header("HTTP/1.1 301 Moved Permanently");
@@ -366,15 +363,16 @@ class PHPShopCore {
     			}
     			//если это url с одним "_"
     		} else {
+
     			//echo '5';
     			//выясняем что сожержит строка после _
     			$first_found=strripos($this->PHPShopNav->getUrl(),'_');
     			$last_found=stripos($this->PHPShopNav->getUrl(),'.html');
     			$url_part=substr($this->PHPShopNav->getUrl(),$first_found+1,($last_found-$first_found-1));
-    			//echo $this->curPageURL().'/'.$this->PHPShopNav->getPath().'/'.$this->PHPShopNav->getName().'_'.$this->PHPShopNav->getId().'.html';
+
     			//если там буквы с цифрами или еще чемто то сразу отправляем в 301
     			if ($url_part!='ALL') {
-    				if (strlen((int) $url_part)!=strlen($url_part) || strlen((int) $url_part)>4) {
+    				if (strlen((int) $url_part)!=strlen($url_part) || strlen((int) $url_part)>5) {
     					header("HTTP/1.1 301 Moved Permanently");
     					header("Location:".$this->curPageURL());
     					//echo '5';
@@ -382,14 +380,13 @@ class PHPShopCore {
     			}
     		}
     	}
-    	 
-		//$this->title='Садовая техника купить, интернет магазин садовой техники в ';
-		if ($this->get('catalogName')!='') {
-			$catname=" id='".$this->get('productId')."'"; //$this->get('catalogName')
-		}
-		if ($this->get('catalogCategory')!='') {
-			$catname=" name='".$this->get('catalogCategory')."'";
-		}	
+
+        if ($this->get('catalogName')!='') {
+                $catname=" id='".$this->get('productId')."'"; //$this->get('catalogName')
+        }
+        if ($this->get('catalogCategory')!='') {
+                $catname=" name='".$this->get('catalogCategory')."'";
+        }	
 
         if (!empty($this->title)) {
 		
@@ -416,7 +413,7 @@ class PHPShopCore {
 				}
 
 				$res=$this->PHPShopOrm->select();
-				
+			
 				if (is_array($res)) {
 					foreach ($res as $row_shablon) {
 						$this->set('pageTitl',$row_shablon['title_shablon']);
@@ -427,6 +424,7 @@ class PHPShopCore {
 			} else {
 				$this->set('pageTitl',$this->title);
 			}
+
 		}
         else {
 			if ($catname!='') {
@@ -450,6 +448,7 @@ class PHPShopCore {
 				$this->set('pageTitl', $this->PHPShopSystem->getValue("title"));
 			}
 		}
+
         if (!empty($this->description))
 			//выборка установленных description для конкретного каталога
 			if ($catname!='') {
@@ -711,6 +710,7 @@ class PHPShopCore {
      * @param bool $mod работа в модуле
      */
     function parseTemplate($template, $mod = false) {
+
         $this->set('productPageDis', $this->ListInfoItems);
         $this->Disp = ParseTemplateReturn($template, $mod);
     }
@@ -735,7 +735,6 @@ width="32" height="32" alt="PHPShopCore Debug On"/ ><strong>Ошибка обработчика с
 
         // Переменная вывода
         $this->set('DispShop', $this->Disp, false, true);
-
         // Мета
         $this->meta();
 
@@ -795,6 +794,7 @@ width="32" height="32" alt="PHPShopCore Debug On"/ ><strong>Ошибка обработчика с
     function setAction() {
 
         if (is_array($this->action)) {
+
             foreach ($this->action as $k => $v) {
 
                 switch ($k) {
@@ -849,14 +849,17 @@ width="32" height="32" alt="PHPShopCore Debug On"/ ><strong>Ошибка обработчика с
 
                     // Экшен NAV
                     case("nav"):
-
                         // Если несколько экшенов
                         if (is_array($v)) {
                             foreach ($v as $function) {
+                                            //var_dump($this->PHPShopNav->getNav(),$this->isAction($function),$function);
+
+
                                 if ($this->PHPShopNav->getNav() == $function and $this->isAction($function)) {
                                     return call_user_func(array(&$this, $this->action_prefix . $function));
                                     $call_user_func = true;
                                 }
+
                             }
                             if (empty($call_user_func)) {
                                 if ($this->isAction('index'))
@@ -911,9 +914,9 @@ width="32" height="32" alt="PHPShopCore Debug On"/ ><strong>Ошибка обработчика с
         // Заголовок ошибки
         header("HTTP/1.0 404 Not Found");
         header("Status: 404 Not Found");
-
         // Подключаем шаблон
         $this->parseTemplate($this->getValue('templates.error_page_forma'));
+
     }
 
     /**

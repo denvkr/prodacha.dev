@@ -32,7 +32,7 @@ var cit = new Array("Абаза", "Абакан", "Абдулино", "Абинск", "Автуры", "Агидель"
                 edost_zip = $("#edost_zip").val();
                 sWaitLoad = '<b>Идет расчет стоимости доставки. Ждите...<\/b>';
                 $("#rz").html(sWaitLoad);
-                $("#rz").load('https://prodacha.ru/phpshop/templates/prodacha/javascript/edost_example/edost.php', {edost_to_city:sToCity, edost_weight:sWeight, edost_strah:strah, edost_kod:"1", edost_rus:Rus1, edost_lenght:edost_lenght, edost_width:edost_width, edost_height:edost_height, edost_zip:edost_zip}, function(){});
+                $("#rz").load('phpshop/templates/prodacha/javascript/edost_example/edost.php', {edost_to_city:sToCity, edost_weight:sWeight, edost_strah:strah, edost_kod:"1", edost_rus:Rus1, edost_lenght:edost_lenght, edost_width:edost_width, edost_height:edost_height, edost_zip:edost_zip}, function(){});
                 }
 
 
@@ -137,60 +137,6 @@ function showM()
 var myTimer;
 /* Plugin */
 $(document).ready(function() {
-    //сокрытие лишних элементов в футере
-    if ($('.city_link').length)
-                            switch($('.city_link').eq(0).text().trim()){
-                                case 'Москва':
-                                    $('#table_main_container_sp').addClass('hidden');//addClass('hidden');
-                                    $('#table_main_container_chb').addClass('hidden');
-                                    $('#table_main_container_kur').addClass('hidden');
-                                    $('#table_main_container_other').addClass('hidden');
-                                    $('#table_main_container1_sp').addClass('hidden');
-                                    $('#table_main_container1_chb').addClass('hidden');
-                                    $('#table_main_container1_kur').addClass('hidden');
-                                    $('#table_main_container1_other').addClass('hidden');
-                                    break;
-                                case 'Курск':
-                                    $('#table_main_container_sp').addClass('hidden');//addClass('hidden');
-                                    $('#table_main_container_chb').addClass('hidden');
-                                    $('#table_main_container_m').addClass('hidden');
-                                    $('#table_main_container_other').addClass('hidden');
-                                    $('#table_main_container1_sp').addClass('hidden');
-                                    $('#table_main_container1_chb').addClass('hidden');
-                                    $('#table_main_container1_m').addClass('hidden');
-                                    $('#table_main_container1_other').addClass('hidden');
-                                    break;
-                                case 'Чебоксары':
-                                    $('#table_main_container_sp').addClass('hidden');//addClass('hidden');
-                                    $('#table_main_container_kur').addClass('hidden');
-                                    $('#table_main_container_m').addClass('hidden');
-                                    $('#table_main_container_other').addClass('hidden');
-                                    $('#table_main_container1_sp').addClass('hidden');
-                                    $('#table_main_container1_kur').addClass('hidden');
-                                    $('#table_main_container1_m').addClass('hidden');
-                                    $('#table_main_container1_other').addClass('hidden');
-                                    break;
-                                case 'Санкт-Петербург':
-                                    $('#table_main_container_chb').addClass('hidden');//addClass('hidden');
-                                    $('#table_main_container_kur').addClass('hidden');
-                                    $('#table_main_container_m').addClass('hidden');
-                                    $('#table_main_container_other').addClass('hidden');
-                                    $('#table_main_container1_chb').addClass('hidden');
-                                    $('#table_main_container1_kur').addClass('hidden');
-                                    $('#table_main_container1_m').addClass('hidden');
-                                    $('#table_main_container1_other').addClass('hidden');
-                                    break;
-                                case 'Другой регион':
-                                    $('#table_main_container_chb').addClass('hidden');//addClass('hidden');
-                                    $('#table_main_container_kur').addClass('hidden');
-                                    $('#table_main_container_m').addClass('hidden');
-                                    $('#table_main_container_sp').addClass('hidden');
-                                    $('#table_main_container1_chb').addClass('hidden');
-                                    $('#table_main_container1_kur').addClass('hidden');
-                                    $('#table_main_container1_m').addClass('hidden');
-                                    $('#table_main_container1_sp').addClass('hidden');                                    
-                                    break;
-                            }  
     //маски для элементов в личном кабинете пользователя
     function inputmaskforuserprofile(){
         if ($("input[name='lastname_new']:eq(0)").length || $("input[name='name_new']:eq(0)").length){
@@ -1770,16 +1716,14 @@ if ($('.alsobought:eq(0)')!==null){
                         data: 'reg=' + reg,
                         dataType: 'json',
                         beforeSend: function() {},
-                        complete: function() {
-                          
-                        },
+                        complete: function() {},
                         success: function(json) {
-                            $('#light_box').remove();
-                            location.reload();
-                            $('#edost_to_city').val("");
-                            if ($('#edost_zip').length) {
-                                $('#edost_zip').val("");
-                            }
+                        $('#light_box').remove();
+                        location.reload();
+                        $('#edost_to_city').val("");
+                        if ($('#edost_zip').length) {
+                        $('#edost_zip').val("");
+                        }
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
                         console.log('error save_(reg)' + ' ' + textStatus);

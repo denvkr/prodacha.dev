@@ -95,13 +95,15 @@ class PHPShopText {
      * @return string
      */
     function a($href, $text, $title = false, $color = false, $size = false, $target = false, $class = false) {
+
         $style = 'text-decoration:underline;';
         if ($size)
             $style.='font-size:' . $size . 'px;';
         if ($color)
             $style.='color:' . $color;
-        if (empty($title))
-            $title = $text;
+        if ( (bool) $title === false )
+            $title = '';
+
         return '<a href="' . $href . '" title="' . $title . '" target="' . $target . '" class="' . $class . '" style="' . $style . '">' . $text . '</a>';
     }
 

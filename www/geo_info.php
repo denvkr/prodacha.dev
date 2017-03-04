@@ -16,23 +16,50 @@ $rejim_rabotu['sp']='
 				<br />
 				<table style="font-size: 12px; width: 220px; text-align: center; margin-left: -7px;">
 					<tr style="font-weight: bold;">
-						<td>Режим работы</td>
+						<td style="text-align: right;"><span style="font-weight: bold;">Режим работы</span></td>
 						<td>Пн-Пт</td>
 						<td>Сб</td>
 						<td>Вс</td>
 					</tr>
 					<tr style="vertical-align: top;">
 						<td style="text-align: left;">Интернет-магазин</td>
-						<td>10-18</td>
+						<td style="font-weight: bold;">10-20</td>
 						<td>10-15</td>
 						<td>вых.</td>
 					</tr>
 				</table>
-				<span style="text-align: left; margin-left: -30px;">
-				<a href="//prodacha.ru/page/shop_spb.html" style="text-decoration: underline; color: #588910;">Пункты выдачи заказов в Санкт-Петербурге</a> </span>
+				<span style="text-align: left; margin-left: -5px;">
+				<a href="//prodacha.ru/page/shop_spb.html" style="text-decoration: underline; color: #588910;">Пункты выдачи заказов в С.-Петербурге</a> </span> 
+	
 				';
 
 $rejim_rabotu['chb']='
+<script type="text/javascript"> redhlpSettings = {
+	requiredOperator: "prohorenkov"
+} </script>
+<div style="clear:both"></div>
+				<br />
+				<table style="font-size: 12px; width: 220px; text-align: center; margin-left: -7px;">
+					<tr style="font-weight: bold;">
+						<td style="text-align: right;"><span style="font-weight: bold;">Режим работы</span></td>
+						<td>Пн-Пт</td>
+						<td>Сб</td>
+						<td>Вс</td>
+					</tr>
+					<tr style="vertical-align: top;">
+						<td style="text-align: left;">Интернет-магазин</td>
+						<td style="font-weight: bold;">10-20</td>
+						<td>10-15</td>
+						<td>вых.</td>
+					</tr>
+
+				</table>
+				<span style="text-align: left; margin-left: -5px;">
+				<a href="//prodacha.ru/page/shop_cheb.html" style="text-decoration: underline; color: #588910;">Пункты выдачи заказов в Чебоксарах</a> </span> 
+
+				';
+				
+$rejim_rabotu['kur']='
 <script type="text/javascript"> redhlpSettings = {
 	requiredOperator: "prohorenkov"
 } </script>
@@ -46,49 +73,45 @@ $rejim_rabotu['chb']='
 						<td>Вс</td>
 					</tr>
 					<tr style="vertical-align: top;">
-						<td style="text-align: left;">Складской пр., д.6<br />Чувашгосснаб</td>
-						<td>9-18</td>
-						<td>9-15</td>
-						<td>9-15</td>
+						<td style="text-align: left;">Интернет-магазин</td>
+						<td>10-20</td>
+						<td>10-15</td>
+						<td>вых.</td>
 					</tr>
-
 				</table>
-				';
+				<span style="text-align: left; margin-left: -40px;">
+				<a href="//prodacha.ru/page/shop_kur.html" style="text-decoration: underline; color: #588910;">Пункты выдачи заказов в Курске - ежедневно</a> </span>
+				';		
 
-$rejim_rabotu['kur']='';				
-
+				
 $rejim_rabotu['m']='
 <script type="text/javascript"> redhlpSettings = {
 	requiredOperator: "prohorenkov"
 } </script>
 				<div style="clear:both"></div>
-				<table style="font-size: 11px; width: 220px; text-align: center;">
+				
+				<table style="font-size: 12px; width: 230px; text-align: center; margin-left: -15px; margin-top: 17px;">
 					<tr style="font-weight: bold;">
-						<td>Режим работы</td>
+						<td style="text-align: right;"><span style="font-weight: bold;">Режим работы</span></td>
 						<td>Пн-Пт</td>
 						<td>Сб</td>
 						<td>Вс</td>
 					</tr>
-					<tr>
-						<td style="text-align: left;">Интернет-магазин</td>
-						<td>10-18</td>
-						<td style="color: red;">10-15</td>
-						<td style="color: gray;">вых.</td>
+					<tr style="vertical-align: middle; font-size: 12px;">
+						<td style="text-align: left;"><a href="/page/store.html">Магазин м. Динамо</a></td>
+						<td style="font-weight: bold;">10-20</td>
+						<td>10-15</td>
+						<td rowspan="2">&nbsp;&nbsp;вых.</td>
 					</tr>
-					<tr>
-						<td style="text-align: left;"><a href="//prodacha.ru/page/store.html">Магазин м. Динамо</a></td>
+					<tr style="vertical-align: middle; font-size: 12px;">
+						<td style="text-align: left;"><a href="/page/shop.html">Магазин Минское ш.</a></td>
 						<td>10-18</td>
-						<td style="color: red;">10-15</td>
-						<td style="color: gray;">вых.</td>
-					</tr>
-					<tr>
-						<td style="text-align: left;"><a href="//prodacha.ru/page/shop.html">Магазин Минское ш.</a></td>
-						<td>10-18</td>
-						<td style="color: red;">10-15</td>
-						<td style="color: gray;">вых.</td>
+						<td>10-15</td>
+						
 					</tr>
 
 				</table>
+
 ';	
 
 $rejim_rabotu['other']='
@@ -99,44 +122,46 @@ $rejim_rabotu['other']='
 				<br />
 				<table style="font-size: 12px; width: 220px; text-align: center; margin-left: -7px;">
 					<tr style="font-weight: bold;">
-						<td>Режим работы</td>
+						<td style="text-align: right;"><span style="font-weight: bold;">Режим работы</span></td>
 						<td>Пн-Пт</td>
 						<td>Сб</td>
 						<td>Вс</td>
 					</tr>
 					<tr style="vertical-align: top;">
 						<td style="text-align: left;">Интернет-магазин<br />Москва</td>
-						<td>10-18</td>
+						<td style="font-weight: bold;">10-20</td>
 						<td>10-15</td>
 						<td>вых.</td>
 					</tr>
 
 				</table>
+
 ';	
 
 $telnum['sp']='
 <div style="margin-top: 10px;">
 <span style="font-size: 12px;">Интернет-магазин. Звоните:</span><br />
-+7 (812) 926-54-10
++7 (812) 389-33-98 
 </div>
 ';
-
 $telnum['chb']='
 <div style="margin-top: 10px;">
-<span style="font-size: 12px;">Интернет-магазин. Звоните:</span><br />
-+7 (8352) 63-52-95
+<span style="font-size: 12px;">Звоните бесплатно по России:</span><br />
++7 (804) 333-07-33
 </div>
 ';
-
-$telnum['kur']='';				
-
+$telnum['kur']='
+<div style="margin-top: 10px;">
+<span style="font-size: 12px;">Интернет-магазин. Звоните бесплатно:</span><br />
++7 (804) 333-07-33
+</div>
+';	
 $telnum['m']='
 <div style="margin-top: 10px;">
 <span style="font-size: 12px;">Интернет-магазин. Звоните:</span><br />
 +7 (495) 380-40-43
 </div>
 ';
-
 $telnum['other']='
 <div style="margin-top: 10px;">
 <span style="font-size: 12px;">Звоните бесплатно по России:</span><br />
@@ -145,24 +170,24 @@ $telnum['other']='
 ';
 
 $footcontacts1['m']='
-<table style="margin-top: -5px;">
+<table style="position:absolute;margin-top: -5px;">
                     	<tr>
 							<td style="vertical-align: top;">
-								<div id="table_main_container" style="display:inline-block;margin-top: -10px;">
+								<div id="table_main_container_m" class="table_main_container">
 									<div itemscope itemtype="//schema.org/PostalAddress">
-										<div id="table_container1" style="position:relative;top:1px;left:0px;width:65px;height:50px;text-align:center;display:inline;">
+										<div id="table_container1_m" class="table_container1">
 											<span class="gray" style="font: 12px sans-serif;"><span itemprop="addressLocality">г. Москва</span></span>
 										</div>
-										<div id="table_container2" style="position:relative;top:0px;left:30px;width:125px;height:50px;text-align:left;display:inline-block;">
+										<div id="table_container2_m" class="table_container2">
 											<span class="green" style="font: 12px sans-serif;"><span itemprop="streetAddress">м. Динамо, ул. <br />&nbsp;&nbsp;Красноармейская, 4</span></span>
 											<span class="green" style="font: 12px sans-serif;"><span itemprop="telephone">+7 (495) 380-40-43</span></span>
 										</div>
 									</div>
 									<div>	
-										<div id="table_container1_1" style="position:relative;top:10px;left:0px;width:80px;height:50px;text-align:center;">
+										<div id="table_container1_1_m" class="table_container1_1">
 											<span class="gray" style="font: 12px sans-serif;">г. Одинцово</span>
 										</div>
-										<div id="table_container2_1" style="position:relative;top:-40px;left:80px;width:125px;height:50px;text-align:left;">
+										<div id="table_container2_1_m" class="table_container2_1">
 											<span class="green" style="font: 12px sans-serif;">25-й км Минского ш. <br />&nbsp;&nbsp;(9,5 км от МКАД)</span><br/>
 											<span class="green" style="font: 12px sans-serif;">+7 (499) 678-81-30</span>
 										</div>
@@ -174,21 +199,21 @@ $footcontacts1['m']='
 ';
 
 $footcontacts2['m']='
-<table style="margin-top: -5px;">
+<table style="position:absolute;margin-top: -5px;">
 						<tr>
 							<td style="vertical-align: top;">
-							<div id="table_main_container1" style="display:inline-block;margin-top: -10px;">
-								<div id="table_container3" style="position:relative;top:1px;left:0px;width:65px;height:50px;text-align:center;display:inline;">
+							<div id="table_main_container1_m" class="table_main_container1">
+								<div id="table_container3_m" class="table_container3">
 									<span class="gray" style="font: 12px sans-serif;">г. Москва</span>
 								</div>
-								<div id="table_container4" style="position:relative;top:0px;left:30px;width:125px;height:50px;text-align:left;display:inline-block;">	
-									<span class="green" style="font: 12px sans-serif;">м. Динамо <br />&nbsp;&nbsp;Пн-Пт: 10-18<br /></span>
+								<div id="table_container4_m" class="table_container4">	
+									<span class="green" style="font: 12px sans-serif;">м. Динамо <br />&nbsp;&nbsp;Пн-Пт: 10-20<br /></span>
 									<span class="green" style="font: 12px sans-serif;">Сб: 10-15</span>
 								</div>
-								<div id="table_container3_1" style="position:relative;top:10px;left:0px;width:80px;height:50px;text-align:center;">
+								<div id="table_container3_1_m" class="table_container3_1">
 									<span class="gray" style="font: 12px sans-serif;">г. Одинцово</span>
 								</div>
-								<div id="table_container4_1" style="position:relative;top:-40px;left:80px;width:125px;height:50px;text-align:left;">								
+								<div id="table_container4_1_m" class="table_container4_1">
 									<span class="green" style="font: 12px sans-serif;">Минское ш. <br />&nbsp;&nbsp;Пн-Пт: 10-18<br /></span>
 									<span class="green" style="font: 12px sans-serif;">Сб: 10-15</span>
 								</div>
@@ -199,24 +224,24 @@ $footcontacts2['m']='
 ';
 
 $footcontacts1['other']='
-<table style="margin-top: -5px;">
+<table style="position:absolute;margin-top: -5px;">
                     	<tr>
 							<td style="vertical-align: top;">
-								<div id="table_main_container" style="display:inline-block;margin-top: -10px;">
+								<div id="table_main_container_other" class="table_main_container">
 									<div itemscope itemtype="//schema.org/PostalAddress">
-										<div id="table_container1" style="position:relative;top:1px;left:0px;width:65px;height:50px;text-align:center;display:inline;">
+										<div id="table_container1_other" class="table_container1">
 											<span class="gray" style="font: 12px sans-serif;"><span itemprop="addressLocality">г. Москва</span></span>
 										</div>
-										<div id="table_container2" style="position:relative;top:0px;left:30px;width:125px;height:50px;text-align:left;display:inline-block;">
+										<div id="table_container2_other" class="table_container2">
 											<span class="green" style="font: 12px sans-serif;"><span itemprop="streetAddress">м. Динамо, ул. <br />&nbsp;&nbsp;Красноармейская, 4</span></span>
 											<span class="green" style="font: 12px sans-serif;"><span itemprop="telephone">+7 (495) 380-40-43</span></span>
 										</div>
 									</div>
 									<div>	
-										<div id="table_container1_1" style="position:relative;top:10px;left:0px;width:80px;height:50px;text-align:center;">
+										<div id="table_container1_1_other" class="table_container1_1">
 											<span class="gray" style="font: 12px sans-serif;">г. Одинцово</span>
 										</div>
-										<div id="table_container2_1" style="position:relative;top:-40px;left:80px;width:125px;height:50px;text-align:left;">
+										<div id="table_container2_1_other"  class="table_container2_1">
 											<span class="green" style="font: 12px sans-serif;">25-й км Минского ш. <br />&nbsp;&nbsp;(9,5 км от МКАД)</span><br/>
 											<span class="green" style="font: 12px sans-serif;">+7 (499) 678-81-30</span>
 										</div>
@@ -228,25 +253,25 @@ $footcontacts1['other']='
 ';
 
 $footcontacts2['other']='
-<table style="margin-top: -5px;">
+<table style="position:absolute;margin-top: -5px;">
 						<tr>
 							<td style="vertical-align: top;">
-							<div id="table_main_container1" style="display:inline-block;margin-top: -10px;">
-								<div id="table_container3" style="position:relative;top:1px;left:0px;width:65px;height:50px;text-align:center;display:inline;">
+							<div id="table_main_container1_other" class="table_main_container1">
+								<div id="table_container3_other" class="table_container3">
 									<span class="gray" style="font: 12px sans-serif;">г. Москва</span>
 								</div>
-								<div id="table_container4" style="position:relative;top:0px;left:30px;width:125px;height:50px;text-align:left;display:inline-block;">	
-									<span class="green" style="font: 12px sans-serif;">м. Динамо <br />&nbsp;&nbsp;Пн-Пт: 10-18<br /></span>
+								<div id="table_container4_other" class="table_container4">
+									<span class="green" style="font: 12px sans-serif;">м. Динамо <br />&nbsp;&nbsp;Пн-Пт: 10-20<br /></span>
 									<span class="green" style="font: 12px sans-serif;">Сб: 10-15</span>
 								</div>
-								<div id="table_container3_1" style="position:relative;top:10px;left:0px;width:80px;height:50px;text-align:center;">
+								<div id="table_container3_1_other" class="table_container3_1">
 									<span class="gray" style="font: 12px sans-serif;">г. Одинцово</span>
 								</div>
-								<div id="table_container4_1" style="position:relative;top:-40px;left:80px;width:125px;height:50px;text-align:left;">								
+								<div id="table_container4_1_other" class="table_container4_1">
 									<span class="green" style="font: 12px sans-serif;">Минское ш. <br />&nbsp;&nbsp;Пн-Пт: 10-18<br /></span>
 									<span class="green" style="font: 12px sans-serif;">Сб: 10-15</span>
-								</div>	
-							</div>							
+								</div>
+							</div>		
 							</td>
 						</tr>
 </table>
@@ -254,19 +279,17 @@ $footcontacts2['other']='
 
 $footcontacts1['sp']='
 <div itemscope itemtype="//schema.org/PostalAddress">
-<table style="margin-top: -5px;">
+<table style="position:absolute;margin-top: -5px;">
                     	<tr>
                     		<td style="vertical-align: top;">
-                    		<div id="table_main_container" style="display:inline-block;margin-top: -10px;">
-	                    		<div id="table_container1" style="position:relative;top:1px;left:0px;width:65px;height:50px;text-align:center;display:inline;">
-									<!--<td style="vertical-align: top;"><span class="gray"  style="font: 12px sans-serif;">Магазин</span></td>-->
-									<span class="gray" style="font: 12px sans-serif;"><span itemprop="addressLocality">г. Санкт-Петербург</span></span>
-								</div>
-								<div id="table_container2" style="position:relative;top:0px;left:20px;width:125px;height:50px;text-align:left;display:inline-block;">
-									<span class="green" style="font: 12px sans-serif;"><span itemprop="streetAddress">Пр-т Художников, &nbsp;&nbsp;д.9, к.1<br /></span></span>
-								    <span class="green" style="font: 12px sans-serif;"><span itemprop="telephone">+7 (812) 926-54-10</span></span>
-								</div>
-							</div>	    
+                    		<div id="table_main_container_sp" class="table_main_container">
+	                    		<div id="table_container1_sp" class="table_container1">
+                                            <span class="gray" style="font: 12px sans-serif;"><span itemprop="addressLocality">г. Санкт-Петербург</span></span>
+					</div>
+					<div id="table_container2_sp" class="table_container2">
+					    <span class="green" style="font: 12px sans-serif;"><span itemprop="telephone">+7 (812) 389-33-98</span></span>
+					</div>
+				</div>	    
 	                        </td>
                         </tr>
 </table>
@@ -274,16 +297,16 @@ $footcontacts1['sp']='
 ';
 
 $footcontacts2['sp']='
-<table style="margin-top: -5px;">
+<table style="position:absolute;margin-top: -15px;">
 						<tr>
 							<td style="vertical-align: top;">
-							<div id="table_main_container1" style="display:inline-block;margin-top: -10px;">	
-								<div id="table_container3" style="position:relative;top:1px;left:0px;width:65px;height:50px;text-align:center;display:inline;">					
-									<span class="gray"  style="font: 12px sans-serif;">Магазин</span>
+							<div id="table_main_container1_sp" class="table_main_container1">	
+								<div id="table_container3_sp" class="table_container3">	
+									<span class="gray"  style="font: 12px sans-serif;">Пункты <br />выдачи</span>
 							    </div>
-								<div id="table_container4" style="position:relative;top:0px;left:30px;width:125px;height:50px;text-align:left;display:inline-block;">	
-									<span class="green" style="font: 12px sans-serif;">Пн-Пт: 10.00-18.00</span>
-									<span class="green" style="font: 12px sans-serif;">Сб: 10.00-16.00<br /></span>
+								<div id="table_container4_sp" class="table_container4">	
+									<span class="green" style="font: 12px sans-serif;">Пн-Пт: 09.00-19.00</span>
+									<span class="green" style="font: 12px sans-serif;">Сб: 10.00-19.00<br /></span>
 									<span class="green" style="font: 12px sans-serif;">Вс: вых.</span>
 								</div>
 							</div>
@@ -294,66 +317,111 @@ $footcontacts2['sp']='
 
 $footcontacts1['chb']='
 <div itemscope itemtype="//schema.org/PostalAddress">
-<table style="margin-top: -5px;">
+<table style="position:absolute;margin-top: -5px;">
                     	<tr>
                     		<td style="vertical-align: top;">
-                    		<div id="table_main_container" style="display:inline-block;margin-top: -10px;">
-	                    		<div id="table_container1" style="position:relative;top:1px;left:0px;width:65px;height:46px;text-align:center;display:inline;">
-									<!--<td style="vertical-align: top;"><span class="gray"  style="font: 12px sans-serif;">Магазин</span></td>-->
-									<span class="gray"><span itemprop="addressLocality" style="font: 12px sans-serif;">г. Чебоксары</span></span>
-								</div>
-								<div id="table_container2" style="position:relative;top:0px;left:30px;width:125px;height:46px;text-align:left;display:inline-block;">
-									<span class="green" style="font: 12px sans-serif;"><span itemprop="streetAddress">Складской пр., д.6<br />&nbsp;&nbsp;Чувашгосснаб<br /></span></span>
-									<span class="green" style="font: 12px sans-serif;"><span itemprop="telephone">+7 (8352) 63-52-95</span></span>
-								</div>
-							</div>
-							</td>
-						</tr>
+                    		<div id="table_main_container_chb" class="table_main_container">
+	                    		<div id="table_container1_chb" class="table_container1">
+                                            <span class="gray"><span itemprop="addressLocality" style="font: 12px sans-serif;">г. Чебоксары</span></span>
+					</div>
+					<div id="table_container2_chb" class="table_container2">
+                                            <span class="green" style="font: 12px sans-serif;"><span itemprop="telephone">+7 (804) 333-07-33</span></span>
+					</div>
+				</div>
+				</td>
+			</tr>
 </table>
 </div>
 ';
 
 $footcontacts2['chb']='
-<table style="margin-top: -5px;">
-						<tr>
-							<td style="vertical-align: top;">
-							<div id="table_main_container1" style="display:inline-block;margin-top: -10px;">
-								<div id="table_container3" style="position:relative;top:1px;left:0px;width:65px;height:50px;text-align:center;display:inline;">	
-									<span class="gray" style="font: 12px sans-serif;">Магазин</span>
-								</div>
-								<div id="table_container4" style="position:relative;top:0px;left:30px;width:125px;height:50px;text-align:left;display:inline-block;">	
-									<span class="green" style="font: 12px sans-serif;">Пн-Пт: 09.00-18.00</span>
-									<span class="green" style="font: 12px sans-serif;">Сб: 09.00-15.00<br /></span>
-									<span class="green" style="font: 12px sans-serif;">Вс: вых.</span>
-								</div>
-							</div>
-							</td>
-						</tr>
+<table style="position:absolute;margin-top: -15px;">
+			<tr>
+				<td style="vertical-align: top;">
+				<div id="table_main_container1_chb" class="table_main_container1">
+					<div id="table_container3_chb" class="table_container3">	
+                                            <span class="gray"  style="font: 12px sans-serif;">Пункты <br />выдачи</span>
+					</div>
+					<div id="table_container4_chb" class="table_container4">	
+                                            <span class="green" style="font: 12px sans-serif;">Пн-Пт: 09.00-18.00</span>
+                                            <span class="green" style="font: 12px sans-serif;">Сб: 10.00-16.00<br /></span>
+                                            <span class="green" style="font: 12px sans-serif;">Вс: вых.</span>
+					</div>
+				</div>
+				</td>
+			</tr>
 </table>
 ';
+$footcontacts1['kur']='
+<table style="position:absolute;margin-top: -5px;">
+                    	<tr>
+				<td style="vertical-align: top;">
+                                    <div id="table_main_container_kur" class="table_main_container">
+					<div itemscope itemtype="//schema.org/PostalAddress">
+                                    <div id="table_container1_kur" class="table_container1">
+					<span class="gray" style="font: 12px sans-serif;"><span itemprop="addressLocality">ПВЗ №1</span></span>
+                                    </div>
+                                    <div id="table_container2_kur" class="table_container2">
+                                        <span class="green" style="font: 12px sans-serif;"><span itemprop="streetAddress">ул. Радищева, 118</span></span><br/>
+                                    </div>
+                                    </div>
+                                    <div>	
+                                    <div id="table_container1_1_kur" class="table_container1_1">
+                                            <span class="gray" style="font: 12px sans-serif;">ПВЗ №2</span>
+                                    </div>
+                                    <div id="table_container2_1_kur" class="table_container2_1">
+                                            <span class="green" style="font: 12px sans-serif;">ул. В. Луговая, 12</span><br/>
 
-$footcontacts1['kur']='';
+                                    </div>
+                            </div>
+                            </div>
+                            </td>
+			</tr>
+</table>
 
-$footcontacts2['kur']='';
+';
 
+$footcontacts2['kur']='
+<table style="position:absolute;margin-top: -15px;">
+                        <tr>
+                                <td style="vertical-align: top;">
+                                <div id="table_main_container1_kur" class="table_main_container1">
+                                        <div id="table_container3_kur" class="table_container3">
+                                        <!-- <span class="gray" style="font: 12px sans-serif;">ПВЗ №1</span>-->
+                                        </div> 
+                                        <div id="table_container4_kur" class="table_container4">
+                                                <span class="green" style="font: 12px sans-serif;">Ежедневно 9-19<br /></span>
+                                        </div>
+                                        <div id="table_container3_1_kur" class="table_container3_1">
+                                        <!--<span class="gray" style="font: 12px sans-serif;">ПВЗ №2</span>-->
+                                        </div> 
+                                        <div id="table_container4_1_kur" class="table_container4_1">								
+                                                <span class="green" style="font: 12px sans-serif;">Ежедневно 9-18<br /></span>
+                                        </div>
+                                </div>
+                                </td>
+                        </tr>
+</table>
+
+';
 $map['m']='
-<a href="//www.prodacha.ru/page/store.html#mapdin"><img src="images/map2.png" alt="" style="border: 1px dotted;"></a><br />
-<a href="//www.prodacha.ru/page/shop.html#mapmin"><img src="images/map1.png" alt="" style="border: 1px dotted; margin-top: 5px;"></a>
+<a href="//prodacha.ru/page/store.html#mapdin"><img src="images/map2.png" alt="" style="border: 1px dotted;"></a><br />
+<a href="//prodacha.ru/page/shop.html#mapmin"><img src="images/map1.png" alt="" style="border: 1px dotted; margin-top: 5px;"></a>
 ';
 
 $map['sp']='
-<a href="//www.prodacha.ru/page/shop_spb.html#mapdin"><img src="images/map_spb.jpg" alt="" style="border: 1px dotted;"></a><br />
+<a href="//prodacha.ru/page/shop_spb.html#mapdin"><img src="images/map_spb.jpg" alt="" style="border: 1px dotted;"></a><br />
 ';
 
 $map['chb']='
-<a href="//www.prodacha.ru/page/shop_cheb.html#mapcheb"><img src="images/map_cheb.jpg" alt="" style="border: 1px dotted;"></a>
+<a href="//prodacha.ru/page/shop_cheb.html#mapcheb"><img src="images/map_cheb.jpg" alt="" style="border: 1px dotted;"></a>
 ';
 
-$map['kur']='<a href="//www.prodacha.ru/page/shop_kursk.html#mapcheb"><img src="images/map_kur.jpg" alt="" style="border: 1px dotted;"></a>
+$map['kur']='
+<a href="//prodacha.ru/page/shop_kursk.html#mapkursk"><img src="images/map_kursk.jpg" alt="" style="border: 1px dotted;"></a>
 ';
-
 $map['other']='
-<a href="//www.prodacha.ru/page/store.html#mapdin"><img src="images/map2.png" alt="" style="border: 1px dotted;"></a><br />
-<a href="//www.prodacha.ru/page/shop.html#mapmin"><img src="images/map1.png" alt="" style="border: 1px dotted; margin-top: 5px;"></a>
+<a href="//prodacha.ru/page/store.html#mapdin"><img src="images/map2.png" alt="" style="border: 1px dotted;"></a><br />
+<a href="//prodacha.ru/page/shop.html#mapmin"><img src="images/map1.png" alt="" style="border: 1px dotted; margin-top: 5px;"></a>
 ';
 ?>

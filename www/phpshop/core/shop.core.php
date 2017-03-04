@@ -91,15 +91,20 @@ class PHPShopShop extends PHPShopShopCore {
         $this->page = $this->PHPShopNav->getPage();
         if (strlen($this->page) == 0)
             $this->page = 1;
-        
+
         include_once($_SERVER['DOCUMENT_ROOT'] . '/custom_config/core_catalog_config.php');
+
         $this->CustomCatalogIDArray1=$CustomCatalogIDArray1;
+
         //var_dump($this->CustomCatalogIDArray1);
         $this->CustomCatalogIDArray2=$CustomCatalogIDArray2;
+
         //var_dump($this->CustomCatalogIDArray2);
         $this->CustomCatalogIDArray2_1=$CustomCatalogIDArray2_1;
+
         //var_dump($this->CustomCatalogIDArray2_1);
         $this->CustomCatalogIDArray2_2=$CustomCatalogIDArray2_2;
+
         //var_dump($this->CustomCatalogIDArray2_2);
         $this->CustomCatalogIDArray3=$CustomCatalogIDArray3;
         //var_dump($this->CustomCatalogIDArray3);
@@ -281,7 +286,7 @@ class PHPShopShop extends PHPShopShopCore {
      * Экшен выборки подробной информации при наличии переменной навигации UID
      */
     function UID() {
-    	//echo 'UID';
+
         // Перехват модуля в начале функции
         if ($this->setHook(__CLASS__, __FUNCTION__, null, 'START'))
             return true;
@@ -296,7 +301,6 @@ class PHPShopShop extends PHPShopShopCore {
         // 404 ошибка
         if (empty($row['id']))
             return $this->setError404();
-        
         // Категория
         $this->category = $row['category'];
         $this->PHPShopCategory = new PHPShopCategory($this->category);
@@ -711,7 +715,7 @@ class PHPShopShop extends PHPShopShopCore {
 
         // Фильтр сортировки
         $order = $this->query_filter();
-        //var_dump($order);
+
         // Кол-во товаров на странице
         $num_cow = $this->PHPShopCategory->getParam('num_cow');
         if (!empty($num_cow))
@@ -1178,7 +1182,7 @@ class PHPShopShop extends PHPShopShopCore {
         }
         //сортируем массив
         usort($catalog_items_table1_sorted, PHPShopText::array_submenuhead2_cmp('name'));
-        //var_dump($catalog_items_table1_sorted);
+
         //выводим отсортированный массив по типу
         $cnt1=1;
         $catalog_items_table1='';
@@ -1225,7 +1229,7 @@ class PHPShopShop extends PHPShopShopCore {
         //сортируем массив
         usort($catalog_items_table2_sorted, PHPShopText::array_submenuhead2_cmp('name'));
         
-        //var_dump($catalog_items_table1_sorted);
+
         //выводим отсортированный массив по типу
         $cnt2=1;
         $catalog_items_table2='';
