@@ -50,7 +50,7 @@ function service_page_mod($obj,$row,$rout) {
 			$brand=$row_tab6['brand'];
 		}
 		$tab6_html.='</select>';
-	
+
 		//определяем есть ли среди других сервисов данного производителя сервисы в москве
 		//$service_existing_region_desicion=$obj->check_service_existing_by_region($_COOKIE['sincity'],$brand);
 		
@@ -106,10 +106,10 @@ function service_page_mod($obj,$row,$rout) {
 		}
 		
 		
-		$tab6_html.='<br />'.$GLOBALS['SysValue']['lang']['warranty_tab_string3'].PHPShopText::nbsp(1);
-		$tab6_html.=$brand;
+		//$tab6_html.='<br />'.$GLOBALS['SysValue']['lang']['warranty_tab_string3'].PHPShopText::nbsp(1);
+		//$tab6_html.=$brand;
 		
-		$tab6_html.=PHPShopText::nbsp(1).$GLOBALS['SysValue']['lang']['warranty_tab_string4'].PHPShopText::nbsp(1);
+		//$tab6_html.=PHPShopText::nbsp(1).$GLOBALS['SysValue']['lang']['warranty_tab_string4'].PHPShopText::nbsp(1);
 		
 		//if ($service_existing_region_desicion['service_existing_in_current_region']==1) {
 		$sql_tab6="SELECT distinct varranty_time FROM ".$GLOBALS['SysValue']['base']['service_and_varranty']." ".$sub_sql[0].$sub_sql2;
@@ -122,11 +122,11 @@ function service_page_mod($obj,$row,$rout) {
 		if ((mysqli_errno)){
 			$res_tab6=mysql_query($sql_tab6);
 			$row_tab6=mysql_fetch_assoc($res_tab6);
-			$tab6_html.=$row_tab6['varranty_time'];
+			//$tab6_html.=$row_tab6['varranty_time'];
 		}
 		
-		$tab6_html.=PHPShopText::nbsp(1).$GLOBALS['SysValue']['lang']['warranty_tab_string5'].'<br />';
-		$tab6_html.=$GLOBALS['SysValue']['lang']['warranty_tab_string6'].PHPShopText::nbsp(1).$brand.':<br />';
+		//$tab6_html.=PHPShopText::nbsp(1).$GLOBALS['SysValue']['lang']['warranty_tab_string5'].'<br />';
+		$tab6_html.='<div id="servicess_description">'.$GLOBALS['SysValue']['lang']['warranty_tab_string6'].PHPShopText::nbsp(1).':<br /></div>';
 		
 		$tab6_html.='<table id="select_varranty_firm" name="select_varranty_firm" col="3">';
 		

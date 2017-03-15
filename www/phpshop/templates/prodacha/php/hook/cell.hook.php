@@ -341,6 +341,53 @@ function add_same_tovar_box_hook($obj,$row,$rout){
     }
 }
 
+function add_interest_tovar_box_hook($obj,$row,$rout){
+    global $SysValue;
+    $result2_count=0;
+    if ($rout == 'END'){
+        include_once($_SERVER['DOCUMENT_ROOT'] . '/custom_config/interest_box_config.php');
+
+        //кол-во элементов в блоке    
+        $obj->set('end_card',$cnt_analog_prod);
+        $parent_cat=$obj->PHPShopCategory->getValue('id');
+
+        //получаем данные по продуктам
+        $result1=$obj->select_native(array('id','uid','pic_small','name','price'),array_merge(array('id'=>'<>'.$row['id'],'sklad'=>'="0"','outdated'=>'="0"','id'=>' in ('.$prod_list.')'),$price_sql_where_part) , array('order'=>'RAND()'), array('limit' => $cnt_analog_prod), __FUNCTION__, array('base' => $obj->getValue('base.products'), 'cache' => 'true'));
+        $result1_count=count(array_keys($result1));
+        //скрываем элемент если у нас совсем нечего показать
+        if ($result1_count==0) {
+            $interest_tovar_box_display='class="interest_tovar_box_display hidden"';
+            $obj->set('interest_tovar_box','<table cellspacing="0" cellpadding="0" border="0" '.$interest_tovar_box_display.'><tbody><tr>',true);
+        } else {
+            $obj->set('interest_tovar_box','<table cellspacing="0" cellpadding="0" border="0" class="same_tovar_box_display"><tbody><tr>',true);
+            if ($result1_count==1) {
+                    $obj->set('same_tovar_num',$cnt);
+                    $obj->set('productImgWidth',$SysValue['other']['productImgWidth']);
+                    $obj->set('productImg',$result1['pic_small']);
+                    $obj->set('productUid',$result1['id']);
+                    $obj->set('productPrice',$result1['price']);
+                    $obj->set('productName',$result1['name']);
+                    $obj->set('productValutaName',$SysValue['other']['productValutaName']);            
+                    $obj->set('same_tovar_box','<td>'.ParseTemplateReturn($obj->getValue('templates.product_same_box')).'</td>',true);                    
+            } else {
+                for ($cnt=1;$cnt<=$result1_count;$cnt++) {
+                    $obj->set('same_tovar_num',$cnt);
+                    $obj->set('productImgWidth',$SysValue['other']['productImgWidth']);
+                    $obj->set('productImg',$result1[$cnt-1]['pic_small']);
+                    $obj->set('productUid',$result1[$cnt-1]['id']);
+                    $obj->set('productPrice',$result1[$cnt-1]['price']);
+                    $obj->set('productName',$result1[$cnt-1]['name']);
+                    $obj->set('productValutaName',$SysValue['other']['productValutaName']);            
+                    $obj->set('same_tovar_box','<td>'.ParseTemplateReturn($obj->getValue('templates.product_same_box')).'</td>',true);
+                }
+            }
+        }
+        $obj->set('interest_tovar_box','</tr></tbody></table>',true);
+    }
+        
+}
+
+
 function search_pos($my_val_str,$border_start,$border_end){
     //while (search_pos($my_val_str,$border_start,$border_end)!==false){
     $s1=strpos($my_val_str,$border_start);

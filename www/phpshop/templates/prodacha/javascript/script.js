@@ -673,10 +673,12 @@ $('.city_link').click(function() {
 $('.log_popup, .city_popup').mouseleave(function() {
         $(this).fadeOut('fast');
 });
+/*
 $('.service').eq(0).click(function(e){
         e.preventDefault();
         $('.pages_popup').eq(0).fadeIn('fast');         
 });
+                        */
 $('.pages_popup').eq(0).mouseleave(function(){
         $(this).eq(0).fadeOut('fast');  
 });
@@ -2813,11 +2815,11 @@ function check_varranty_firm_city(source) {
         $('#select_varranty_firm').remove();
                 //добавляем контент
                 //$('#tab6').append(html);
-                if (source == 'sort.hook') {
-        var elem_new = document.getElementById('tab6');
-        } else if (source == 'service.hook') {
-        var elem_new = document.getElementsByClassName('page_content');
-        }
+        //if (source == 'sort.hook') {
+        //    var elem_new = document.getElementById('tab6');
+        //} else if (source == 'service.hook') {
+        //    var elem_new = document.getElementsByClassName('page_content');
+        //}
         //console.log(req.responseJS.result);
         //result=json2array(req.responseJS.result);
         //console.log(result);
@@ -2836,9 +2838,9 @@ function check_varranty_firm_city(source) {
 
         //console.log(html);
         if (source == 'sort.hook') {
-        $('#tab6').append(req.responseJS.result);
+            $('#tab6').append(req.responseJS.result);
         } else if (source == 'service.hook') {
-        $('.page_content').append(req.responseJS.result);
+            $('#servicess_description').eq(0).html(req.responseJS.result);
         }
         //elem_new.insertAdjacentHTML('beforeend', html);                
         }
@@ -2853,7 +2855,8 @@ req.caching = false;
         req.open('GET', dir + '/phpshop/ajax/varranty_firm_list.php', true);
         req.send({
         select_vendor_brand: field_vendor_brand.options[field_vendor_brand.selectedIndex].text,
-                select_vendor_city: select_vendor_city.options[field_vendor_city.selectedIndex].text
+                select_vendor_city: select_vendor_city.options[field_vendor_city.selectedIndex].text,
+                source:source
         });
         /*
          $.ajax({

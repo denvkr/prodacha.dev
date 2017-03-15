@@ -4,6 +4,8 @@ $_classPath="../";
 require_once $_classPath."lib/Subsys/JsHttpRequest/Php.php";
 $JsHttpRequest =& new Subsys_JsHttpRequest_Php("windows-1251");
 $SysValue = parse_ini_file($_classPath.'inc/config.ini', 1);
+include($_classPath."class/obj.class.php");
+PHPShopObj::loadClass("text");
 
 $host=$SysValue['connect']['host'];
 $user_db=$SysValue['connect']['user_db'];
@@ -27,14 +29,41 @@ if (!@mysql_select_db($dbase,$dbcnx))
 
 //if ( !empty($_POST['field_vendor_brand']) && !empty($_POST['field_vendor_city']) ) {
 	//$sql='set names utf8';
-	mysql_query($sql);
+	//mysql_query($sql);
+        if ($_GET['source']=='service.hook'){
+            
+            $sql_tab6="SELECT distinct brand,varranty_time FROM ".$SysValue['base']['service_and_varranty']." WHERE brand='".$_GET['select_vendor_brand']."' and city='".$_GET['select_vendor_city']."'";
+
+            if ((mysqli_errno)){
+                    $res_tab6=mysql_query($sql_tab6);
+                    $row_tab6=mysql_fetch_assoc($res_tab6);
+                    $brand_description=$row_tab6['brand'];
+                    $varranty_time=$row_tab6['varranty_time'];                
+            }
+
+            if ($brand_description && $varranty_time){
+
+                $mas=PHPShopText::br() .$SysValue['lang']['warranty_tab_string3'].PHPShopText::nbsp(1);
+                $mas.=$brand_description;
+
+                $mas.=PHPShopText::nbsp(1).$SysValue['lang']['warranty_tab_string4'].PHPShopText::nbsp(1);
+                $mas.=$varranty_time;	
+                $mas.=PHPShopText::nbsp(1).$SysValue['lang']['warranty_tab_string5'].PHPShopText::br().PHPShopText::br();
+
+            } else {
+                $mas=PHPShopText::br();
+            }
+            $mas.=$SysValue['lang']['warranty_tab_string6'].PHPShopText::nbsp(1).':'.PHPShopText::br();
+            
+        }
+
 	$sql="SELECT service_org_name,phone,address FROM ".$SysValue['base']['service_and_varranty']." WHERE brand='".$_GET['select_vendor_brand']."' and city='".$_GET['select_vendor_city']."'";
 	//$sql="SELECT service_org_name,phone,address FROM ".$user_db.".".$SysValue['base']['service_and_varranty'];
-	echo $sql;
+	//echo $sql;
 	$res=mysql_query($sql) or trigger_error(mysql_error()." in ".$sql);
 
 	$cnt=0;
-	$mas='<table id="select_varranty_firm" name="select_varranty_firm" cellpadding="5" cellspacing="10" col="3">';//[$cnt]
+	$mas.='<table id="select_varranty_firm" name="select_varranty_firm" cellpadding="5" cellspacing="10" col="3">';//[$cnt]
 	$mas.='<thead><tr><th style="text-align:left">Наименование</th><th style="text-align:left">Телефон</th><th style="text-align:left">Адрес</th></tr></thead><tbody>';
 	while ( $row=mysql_fetch_assoc($res) ) {
 			$mas.='<tr>';//[($cnt+1)]
