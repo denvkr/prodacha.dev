@@ -22,12 +22,12 @@ PHPShopObj::loadClass("admgui");
 $PHPShopGUI = new PHPShopGUI();
 $PHPShopGUI->debug_close_window = false;
 $PHPShopGUI->reload = 'top';
-$PHPShopGUI->ajax = "'modules','oneclick'";
+$PHPShopGUI->ajax = "'modules','discount'";
 $PHPShopGUI->includeJava = '<SCRIPT language="JavaScript" src="../../../lib/Subsys/JsHttpRequest/Js.js"></SCRIPT>';
 $PHPShopGUI->dir = $_classPath . "admpanel/";
 
 // SQL
-$PHPShopOrm = new PHPShopOrm($PHPShopModules->getParam("base.oneclick.oneclick_jurnal"));
+$PHPShopOrm = new PHPShopOrm($PHPShopModules->getParam("base.discount.discount_jurnal"));
 
 // Функция обновления
 function actionUpdate() {
@@ -56,7 +56,7 @@ function actionStart() {
 
 
 
-    $Tab1 = $PHPShopGUI->setField('Заказ звонка: ' . PHPShopDate::dataV($date), $PHPShopGUI->setInputText('Имя: ', 'name_new', $name, '300', false, 'left') .
+    $Tab1 = $PHPShopGUI->setField('Скидка: ' . PHPShopDate::dataV($date), $PHPShopGUI->setInputText('Имя: ', 'name_new', $name, '300', false, 'left') .
             $PHPShopGUI->setInputText('№: ', 'tel_new', $tel, '200', false, 'left') .
             $PHPShopGUI->setInputText('Наименование: ID:'.$product_id, 'product_name_new', $product_name, '400', false, 'left') .
              $PHPShopGUI->setText('IP: '.$ip));

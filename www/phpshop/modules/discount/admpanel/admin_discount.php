@@ -1,12 +1,12 @@
 <?php
 
-$TitlePage=" Быстрый Заказ -> Архив заявок";
+$TitlePage=" Купить со скидкой -> Архив заявок";
 
 function actionStart() {
     global $PHPShopInterface,$_classPath;
 
     $PHPShopInterface->size="630,450";
-    $PHPShopInterface->link="../modules/oneclick/admpanel/adm_oneclickID.php";
+    $PHPShopInterface->link="../modules/discount/admpanel/adm_discountID.php";
     $PHPShopInterface->setCaption(array("Дата","5%"),array("Телефон","10%"),array("Имя","20%"),
             array("Наименование","20%"),array("Цена","10%"),
             array("Время","7%"),
@@ -25,7 +25,7 @@ function actionStart() {
     );
 
     // SQL
-    $PHPShopOrm = new PHPShopOrm($PHPShopModules->getParam("base.oneclick.oneclick_jurnal"));
+    $PHPShopOrm = new PHPShopOrm($PHPShopModules->getParam("base.discount.discount_jurnal"));
     $data = $PHPShopOrm->select(array('*'),false,array('order'=>'id DESC'),array("limit"=>"1000"));
     if(is_array($data))
         foreach($data as $row) {

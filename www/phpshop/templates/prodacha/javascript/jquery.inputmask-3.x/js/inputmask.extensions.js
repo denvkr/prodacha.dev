@@ -30,6 +30,11 @@ Optional extensions on the jquery.inputmask base
             cardinality: 1,
             showMaskOnFocus: true
     },
+    'm': {
+            validator: "[0-9\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5\+]{1}",
+            cardinality: 1,
+            showMaskOnFocus: true
+    },
     'p': {
             validator: "[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5. -]",
             cardinality: 1,
@@ -46,7 +51,7 @@ Optional extensions on the jquery.inputmask base
       mask: "ir",
       placeholder: "",
       separator: "",
-      defaultPrefix: "http://",
+      defaultPrefix: "https://",
       regex: {
         urlpre1: new RegExp("[fh]"),
         urlpre2: new RegExp("(ft|ht)"),

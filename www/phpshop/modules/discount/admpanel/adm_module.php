@@ -21,7 +21,7 @@ PHPShopObj::loadClass("admgui");
 $PHPShopGUI = new PHPShopGUI();
 
 // SQL
-$PHPShopOrm = new PHPShopOrm($PHPShopModules->getParam("base.oneclick.oneclick_system"));
+$PHPShopOrm = new PHPShopOrm($PHPShopModules->getParam("base.discount.discount_system"));
 
 // Обновление версии модуля
 function actionBaseUpdate() {
@@ -49,7 +49,7 @@ function actionStart() {
 
 
     $PHPShopGUI->dir=$_classPath."admpanel/";
-    $PHPShopGUI->title="Настройка модуля быстрого заказа";
+    $PHPShopGUI->title="Настройка модуля скидки";
     $PHPShopGUI->size="500,450";
 
     // Выборка
@@ -66,7 +66,7 @@ function actionStart() {
     $w_value[]=array('всплывающее окно',1,$windows);
 
     // Графический заголовок окна
-    $PHPShopGUI->setHeader("Настройка модуля 'Быстрый заказ'","Настройки подключения",$PHPShopGUI->dir."img/i_display_settings_med[1].gif");
+    $PHPShopGUI->setHeader("Настройка модуля 'Скидка'","Настройки подключения",$PHPShopGUI->dir."img/i_display_settings_med[1].gif");
 
     $Tab1=$PHPShopGUI->setField('Заголовок',$PHPShopGUI->setInputText(false,'title_new', $title));
     $Tab1.=$PHPShopGUI->setField('Сообщение', $PHPShopGUI->setTextarea('title_end_new', $title_end));
@@ -75,10 +75,8 @@ function actionStart() {
     
     
     $info='Для произвольной вставки элемента следует выбрать параметр вывода "Не выводить" и в ручном режиме вставить переменную
-        <b>@oneclick@</b> в свой шаблон.
-        <p>Для персонализации формы вывода отредактируйте шаблоны phpshop/modules/oneclick/templates/</p>
-        <p>Для включения режима быстрого заказа для товаров в списке каталога следует переключить файл хука в config.ini на 
-        phpshopshopcore="./phpshop/modules/oneclick/hook/oneclickall.hook.php";
+        <b>@discount@</b> в свой шаблон.
+        <p>Для персонализации формы вывода отредактируйте шаблоны phpshop/modules/discount/templates/</p>
 ';
 
     $Tab2=$PHPShopGUI->setInfo($info, 200, '96%');

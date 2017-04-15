@@ -1,5 +1,8 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
 <?php
-//Error_Reporting(E_ALL & ~E_NOTICE);
+Error_Reporting(E_ALL & ~E_NOTICE);
 
 $_classPath = "phpshop/";
 include_once($_classPath . "class/obj.class.php");
@@ -38,7 +41,7 @@ $PHPShopOrm = new PHPShopOrm();
 if (isset($_POST['email']))
 {
 
-				Error_Reporting(E_ALL & ~E_NOTICE);
+				//Error_Reporting(E_ALL & ~E_NOTICE);
 				
 				if ($_POST['textArea_ask_question']=='Вопрос') {
 					header("HTTP/1.1 301 Moved Permanently");
@@ -69,7 +72,7 @@ if (isset($_POST['email']))
 					Текст послания:	".$_POST['textArea_ask_question']."			
 					";
 					
-					 $subject="Вопрос с  сайта ".$_SERVER['HTTP_HOST']." ";		
+					 $subject="Вопрос с сайта ".$_SERVER['HTTP_HOST']." ";	
 					 
 					 // Отсылаем письмо администратору
 					 if ($_COOKIE['sincity']=="sp") {
@@ -98,7 +101,7 @@ if (isset($_POST['email']))
 					if  (mail($mail_to,$subject,$msg,$mailheaders)) 
 					{					
 						header("HTTP/1.1 301 Moved Permanently");
-						header("Location:http://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']."");	
+						header("Location:https://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']."");	
 						exit();
 					}
 					
@@ -165,7 +168,7 @@ if (isset($_POST['yo_name']) && (isset($_POST['yo_phone']) || isset($_POST['yo_m
 		$mail_to=$GLOBALS['SysValue']['mail']['msc_mail'];
 	}
 	
-	//$mail_to="denvkr@yandex.ru,".$mail_to;
+	$mail_to=$mail_to;//"denvkr@yandex.ru,".$mail_to;
 
 	$mailheaders="Content-Type: text/plain; charset=\"windows-1251\"\n ";
 	$mailheaders.= "From:no-reply@".$_SERVER['HTTP_HOST'];
@@ -186,50 +189,108 @@ if (isset($_POST['yo_name']) && (isset($_POST['yo_phone']) || isset($_POST['yo_m
 			if (!empty($_POST['yo_phone']) && !empty($_POST['yo_mail']) && !isset($_POST['yo_start_hour']))
 				$sql='INSERT INTO '.$GLOBALS['SysValue']['base']['oneclick_jurnal'].' (`date`,`name`,`tel`,`message`,`product_name`,`product_id`,`product_price`,`status`,`ip`) VALUES (\''.time().'\',\''.$_POST['yo_name'].'\',\''.$_POST['yo_phone'].'\',\''.$_POST['tovar_info_input'].'\',\''.$_POST['zakaz_info'].'. Email: '.trim($_POST['yo_mail']," \t\n\r\0\x0B").' Пришел с '.trim($_POST['referer_info']," \t\n\r\0\x0B").' Регион: '.trim($_POST['region']," \t\n\r\0\x0B").'\',0,\''.$_POST['tovar_price'].'\',\'1\',\''.$ip.'\')';
 				*/
+			//$file = "ga_analytic.log";
+				
 			if (empty($_POST['yo_phone']) && !empty($_POST['yo_mail']) && !isset($_POST['yo_start_hour']) && $_POST['window_type']=='fast_order_window2') {
+				$sql="SELECT auto_increment FROM information_schema.tables WHERE table_schema='".$GLOBALS['SysValue']['connect']['dbase']."' and table_name='".$GLOBALS['SysValue']['base']['oneclick_jurnal']."'";			
+				$result = $PHPShopOrm->query($sql);
+				$row=mysql_fetch_assoc($result);
+				
 				$sql='INSERT INTO '.$GLOBALS['SysValue']['base']['oneclick_jurnal'].' (`date`,`name`,`tel`,`message`,`product_name`,`product_id`,`product_price`,`status`,`ip`) VALUES (\''.time().'\',\''.$_POST['yo_name'].'\',\''.$_POST['yo_phone'].'\',\''.$_POST['tovar_info_input'].'\',\''.$_POST['zakaz_info'].'. Email: '.trim($_POST['yo_mail']," \t\n\r\0\x0B").' Пришел с '.trim($_POST['referer_info']," \t\n\r\0\x0B").' Регион: '.trim($_POST['region']," \t\n\r\0\x0B").'\',0,\''.$_POST['tovar_price'].'\',\'1\',\''.$ip.'\')';
-				echo send_to_order_hook($_POST,$PHPShopOrm);
-                                //echo $sql;			
-                                $result = $PHPShopOrm->query($sql);
-                                header("HTTP/1.1 301 Moved Permanently");
-                                header("Location:http://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true");
-                                exit();
-			}
+				//echo $sql;			
+				$result = $PHPShopOrm->query($sql);
+				
+				$ga_aim=send_to_order_hook($_POST,$PHPShopOrm,'buy1click',$row);
+				//$fh=fopen($file,"a+");
+				//fwrite ($fh,$ga_aim);
+				//fclose($fh);				
+				echo $ga_aim;
+				//echo '<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />'
+				echo "<meta http-equiv='refresh' content='0; url=\"/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true\"'>";
+
+				//header("HTTP/1.1 301 Moved Permanently");
+				//header("Location:https://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true");
+				//exit();
+			} else
 			if (!empty($_POST['yo_phone']) && empty($_POST['yo_mail']) && !isset($_POST['yo_start_hour']) && $_POST['window_type']=='fast_order_window2') {
+				$sql="SELECT auto_increment FROM information_schema.tables WHERE table_schema='".$GLOBALS['SysValue']['connect']['dbase']."' and table_name='".$GLOBALS['SysValue']['base']['oneclick_jurnal']."'";			
+				$result = $PHPShopOrm->query($sql);
+				$row=mysql_fetch_assoc($result);
+
 				$sql='INSERT INTO '.$GLOBALS['SysValue']['base']['oneclick_jurnal'].' (`date`,`name`,`tel`,`message`,`product_name`,`product_id`,`product_price`,`status`,`ip`) VALUES (\''.time().'\',\''.$_POST['yo_name'].'\',\''.$_POST['yo_phone'].'\',\''.$_POST['tovar_info_input'].'\',\''.$_POST['zakaz_info'].'. Пришел с '.trim($_POST['referer_info']," \t\n\r\0\x0B").' Регион: '.trim($_POST['region']," \t\n\r\0\x0B").'\',0,\''.$_POST['tovar_price'].'\',\'1\',\''.$ip.'\')';
-				echo send_to_order_hook($_POST,$PHPShopOrm);
-                                //echo $sql;			
-                                $result = $PHPShopOrm->query($sql);
-                                header("HTTP/1.1 301 Moved Permanently");
-                                header("Location:http://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true");
-                                exit();
-			}
+                //echo $sql;			
+				$result = $PHPShopOrm->query($sql);
+				
+				$ga_aim=send_to_order_hook($_POST,$PHPShopOrm,'buy1click',$row);
+				//$fh=fopen($file,"a+");
+				//fwrite ($fh,$ga_aim);
+				//fclose($fh);				
+				echo $ga_aim;
+				//echo '<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />'
+				echo "<meta http-equiv='refresh' content='0; url=\"/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true\"'>";
+
+				//header("HTTP/1.1 301 Moved Permanently");
+				//header("Location:https://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true");
+				//exit();
+			} else
 			if (!empty($_POST['yo_phone']) && !empty($_POST['yo_mail']) && !isset($_POST['yo_start_hour']) && $_POST['window_type']=='fast_order_window2') {
+				$sql="SELECT auto_increment FROM information_schema.tables WHERE table_schema='".$GLOBALS['SysValue']['connect']['dbase']."' and table_name='".$GLOBALS['SysValue']['base']['oneclick_jurnal']."'";			
+				$result = $PHPShopOrm->query($sql);
+				$row=mysql_fetch_assoc($result);
+
 				$sql='INSERT INTO '.$GLOBALS['SysValue']['base']['oneclick_jurnal'].' (`date`,`name`,`tel`,`message`,`product_name`,`product_id`,`product_price`,`status`,`ip`) VALUES (\''.time().'\',\''.$_POST['yo_name'].'\',\''.$_POST['yo_phone'].'\',\''.$_POST['tovar_info_input'].'\',\''.$_POST['zakaz_info'].'. Email: '.trim($_POST['yo_mail']," \t\n\r\0\x0B").' Пришел с '.trim($_POST['referer_info']," \t\n\r\0\x0B").' Регион: '.trim($_POST['region']," \t\n\r\0\x0B").'\',0,\''.$_POST['tovar_price'].'\',\'1\',\''.$ip.'\')';
-				echo send_to_order_hook($_POST,$PHPShopOrm);
-                                //echo $sql;			
-                                $result = $PHPShopOrm->query($sql);
-                                header("HTTP/1.1 301 Moved Permanently");
-                                header("Location:http://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true");
-                                exit();
-			}
-				
+				//echo $sql;			
+				$result = $PHPShopOrm->query($sql);
 
+				$ga_aim=send_to_order_hook($_POST,$PHPShopOrm,'buy1click',$row);
+				//$fh=fopen($file,"a+");
+				//fwrite ($fh,$ga_aim);
+				//fclose($fh);				
+				echo $ga_aim;
+				//echo '<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />'
+				echo "<meta http-equiv='refresh' content='0; url=\"/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true\"'>";
+				//header("HTTP/1.1 301 Moved Permanently");
+				//header("Location:https://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true");
+				//exit();
+			} else	
 			if ((empty($_POST['yo_question']) || !empty($_POST['yo_question'])) && isset($_POST['yo_start_hour']) && isset($_POST['yo_end_hour']) && $_POST['window_type']=='ask_reverse_call') {
-				$sql='INSERT INTO '.$GLOBALS['SysValue']['base']['reversecall_jurnal'].' (`date`,`time_start`,`time_end`,`name`,`tel`,`message`,`status`,`ip`) VALUES (\''.time().'\','.$_POST['yo_start_hour'].','.$_POST['yo_end_hour'].',\''.$_POST['yo_name'].'\',\''.$_POST['yo_phone'].'\',\''.$_POST['zakaz_info'].' Пришел с '.trim($_POST['referer_info']," \t\n\r\0\x0B").' Регион: '.trim($_POST['region']," \t\n\r\0\x0B").' Вопрос: '.trim($_POST['yo_question']," \t\n\r\0\x0B").'\',\'1\',\''.$ip.'\')';                            
-                                //echo $sql;			
-                                $result = $PHPShopOrm->query($sql);
-                                header("HTTP/1.1 301 Moved Permanently");
-                                header("Location:http://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true");
-                                exit();                                
-                        }
+				$sql='INSERT INTO '.$GLOBALS['SysValue']['base']['reversecall_jurnal'].' (`date`,`time_start`,`time_end`,`name`,`tel`,`message`,`status`,`ip`) VALUES (\''.time().'\','.$_POST['yo_start_hour'].','.$_POST['yo_end_hour'].',\''.$_POST['yo_name'].'\',\''.$_POST['yo_phone'].'\',\''.$_POST['zakaz_info'].' Пришел с '.trim($_POST['referer_info']," \t\n\r\0\x0B").' Регион: '.trim($_POST['region']," \t\n\r\0\x0B").' Вопрос: '.trim($_POST['yo_question']," \t\n\r\0\x0B").'\',\'1\',\''.$ip.'\')';
+				//echo $sql;			
+				$result = $PHPShopOrm->query($sql);
+				//echo '<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />'
+				echo "<meta http-equiv='refresh' content='0; url=\"/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true\"'>";
 				
+				//header("HTTP/1.1 301 Moved Permanently");
+				//header("Location:https://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true");
+				//exit();                                
+			} else
+			if (!empty($_POST['yo_phone']) && empty($_POST['yo_mail']) && !isset($_POST['yo_start_hour']) && $_POST['window_type']=='discount_window2') {
+				$sql="SELECT auto_increment FROM information_schema.tables WHERE table_schema='".$GLOBALS['SysValue']['connect']['dbase']."' and table_name='".$GLOBALS['SysValue']['base']['discount_jurnal']."'";			
+				$result = $PHPShopOrm->query($sql);
+				$row=mysql_fetch_assoc($result);
 
+				$sql='INSERT INTO '.$GLOBALS['SysValue']['base']['discount_jurnal'].' (`date`,`name`,`tel`,`message`,`product_name`,`product_id`,`product_price`,`status`,`ip`,`se`) VALUES (\''.time().'\',\''.$_POST['yo_name'].'\',\''.$_POST['yo_phone'].'\',\''.$_POST['tovar_info_input'].'\',\''.$_POST['zakaz_info'].'. Пришел с '.trim($_POST['referer_info']," \t\n\r\0\x0B").' Регион: '.trim($_POST['region']," \t\n\r\0\x0B").'\','.$_POST['tovar_id'].',\''.$_POST['tovar_price'].'\',\'1\',\''.$ip.'\',\''.$_POST['se'].'\')';
+				//echo $sql;
+				$result = $PHPShopOrm->query($sql);
+				$ga_aim=send_to_order_hook($_POST,$PHPShopOrm,'discount',$row);
+				//$fh=fopen($file,"a+");
+				//fwrite ($fh,$ga_aim);
+				//fclose($fh);				
+				echo $ga_aim;
+				//echo '<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">'
+				echo "<meta http-equiv='refresh' content='0; url=\"/redirect.php?url=".$_SERVER['HTTP_REFERER']."&discount=true\"'>";
 
-			header("HTTP/1.1 301 Moved Permanently");
-			header("Location:http://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']);
+				//header("HTTP/1.1 301 Moved Permanently");
+				//header("Location:https://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']."&discount=true");
+				//exit();
+			} else
+			//echo '<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />'
+				echo "<meta http-equiv='refresh' content='0; url=\"/redirect.php?url=".$_SERVER['HTTP_REFERER']."\"'>";
+
+			//header("HTTP/1.1 301 Moved Permanently");
+			//header("Location:https://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']);
 				
-			exit();
+			//exit();
 		}
 
 	}
@@ -270,7 +331,7 @@ function write() {
 
 	Имя:                " . $insert['name_new'] . "
 	Телефон:            " . $insert['tel_new'] . "
-	Товар:              ".$insert['product_name_new']." / ID ".$insert['product_id_new']." / ".$insert['product_price_new']."
+	Товар:              " . $insert['product_name_new']." / ID ".$insert['product_id_new']." / ".$insert['product_price_new']."
 	Сообщение:          " . $insert['message_new'] . "
 	Дата:               " . PHPShopDate::dataV($insert['date_new']) . "
 	IP:                 " . $_SERVER['REMOTE_ADDR'] . "
@@ -278,29 +339,36 @@ function write() {
 	---------------
 
 	С уважением,
-	http://" . $_SERVER['SERVER_NAME'];
+	https://" . $_SERVER['SERVER_NAME'];
 
 	//new PHPShopMail($this->PHPShopSystem->getValue('adminmail2'), $this->PHPShopSystem->getValue('adminmail2'), $zag, $message);
 }
-function send_to_order_hook($obj,$_PHPShopOrm) {
+function send_to_order_hook($obj,$_PHPShopOrm,$source,$orderId) {
 	//echo 'index_hook_function';
-
-	$ga_commerce="<script type=\"text/javascript\">
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		
+	if ( empty($orderId['auto_increment']) )
+		$orderId['auto_increment']=$source.time().rand ( 10,99 );
+	switch ($source){
+		case 'discount':
+					$event='/virtualPage/buy-discount-send/';
+					break;
+		case 'buy1click':
+					$event='/virtualPage/buy-fast-send/';
+					break;
+		default :
+					$event='';
+	}
+	$ga_commerce="<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
 	ga('create', 'UA-29201270-1', 'auto');
 	ga('require', 'displayfeatures');     
-	ga('send', 'pageview', '/buy-fast/success');
-	
+	ga('send', 'pageview', '".$event.$orderId['auto_increment']."/');
 	ga('require', 'ecommerce', 'ecommerce.js');
 	ga('ecommerce:addTransaction', {";
 	//$gag_commerce="_gaq.push(['_addTrans',";
 	if ( isset($obj['transact_id']) ) {
 		$ga_commerce.="'id': '".$obj['transact_id']."',";
 		//$gag_commerce.="'".$obj['tovar_info_input']."',";
+		
 	}
 	else {
 		$ga_commerce.="'id': '0',";
@@ -367,11 +435,10 @@ function send_to_order_hook($obj,$_PHPShopOrm) {
 	//$gag_commerce.="'".$cart_item[num]."',";
 	//$gag_commerce.="]);";
 
-	$ga_commerce.="ga('ecommerce:send');
-	ga('ecommerce:clear');";
+	$ga_commerce.="ga('ecommerce:send');ga('ecommerce:clear');";
 	//$gag_commerce.="_gaq.push(['_trackTrans']);";
 	//$ga_commerce.=$gag_commerce;
-	$ga_commerce.="</script>";
+	$ga_commerce.="console.log('/buy-fast/success');</script><script src='https://www.google-analytics.com/analytics.js'></script>";
 
 	//$ga_commerce=print_r($obj->PHPShopCart);
 	//$ga_commerce.=print_r($post);
@@ -380,3 +447,10 @@ function send_to_order_hook($obj,$_PHPShopOrm) {
 }
 
 ?>
+
+<title>Заказ сохранен.</title>
+</head>
+
+<body>
+</body>
+</html>

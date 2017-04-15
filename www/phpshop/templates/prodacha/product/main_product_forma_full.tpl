@@ -485,7 +485,11 @@
 			if (window.location.hash=="#tab6") {
 				$(".tabNavigation li:eq(1) a:eq(0)").click();
 				$(".tabNavigation li:eq(1) a:eq(0)").focus();
-			}					
+			}
+                        //console.log('shop/UID_255.html',document.getElementsByClassName('netref'),document.getElementsByName('se'));
+                        setTimeout( function(){
+                            discount_window(window.location,document.getElementsByClassName('netref'),document.getElementsByName('se'),1);
+                        }, 2000 );                
 		});
 		// ]]></script>	 
 </div>

@@ -4,10 +4,10 @@
 <?
 if (isset($_GET['cheap'])) {
 	echo "<script>alert('Ваш запрос принят. В ближайшее время сотрудник интернет-магазина PROДАЧА Вам ответит.');</script>";
-} elseif (isset($_REQUEST['fast_order'])) {
+} elseif (isset($_REQUEST['fast_order']) || isset($_REQUEST['discount'])) {
 	$scrmsg= "<script>
-				alert('Ваш заказ принят. В ближайшее время сотрудник интернет-магазина PROДАЧА с Вами свяжется.');
-			 </script>";
+                    alert('Ваш заказ принят. В ближайшее время сотрудник интернет-магазина PROДАЧА с Вами свяжется.');
+                    </script>";
 	echo $scrmsg;
 } else {
 	echo "<script>alert('Ваш вопрос принят. В ближайшее время сотрудник интернет-магазина PROДАЧА Вам ответит.');</script>";

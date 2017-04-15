@@ -197,7 +197,7 @@ $(document).ready(function() {
                 //console.log($("input[name='lastname_new']:eq(0)"));
                 //console.log($("input[name='name_new']:eq(0)"));
                 
-                $("input[name='lastname_new']:eq(0)").inputmask("l{28}",{placeholder: ""});
+                $("input[name='lastname_new']:eq(0)").inputmask("m{28}",{placeholder: ""});
                 $("input[name='name_new']:eq(0)").inputmask("l{28}",{placeholder: ""});
         }
     }
@@ -350,7 +350,7 @@ $(this).closest('li').addClass('empty');
                 }            
             },
             programSubmenu: function (domobj){
-                console.log(this.submenCatuNum);
+                //console.log(this.submenCatuNum);
                 for (cnt1=1;cnt1<this.submenCatuNum.length;cnt1++){
                     if ($(domobj.nextAll('li').get(this.submenuNum[cnt1])).attr("id-info") == this.submenCatuNum[cnt1]) {
                     if ($(domobj.nextAll('li').get(this.submenuNum[cnt1])).hasClass("id-info-visible")) {
@@ -791,9 +791,9 @@ if ($("#mail").length ||
                         
                     } else
                         $(this).popover('hide');
-                    var regExpr = new RegExp('^[\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5_]{3,28}$', 'ig');
-                    console.log($(this).val());
-                    console.log(regExpr.test($(this).val()));
+                    var regExpr = new RegExp('^[0-9\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5_\+]{3,28}$', 'ig');
+                    //console.log($(this).val());
+                    //console.log(regExpr.test($(this).val()));
                     if (regExpr.test($(this).val()) === true && $(this).val() !== '') {
                         $(this).css('border-color', '#abadb3');
                     } else if (regExpr.test($(this).val()) === false && $(this).val() !== '') {
@@ -804,7 +804,7 @@ if ($("#mail").length ||
                 $(this).popover({placement : 'auto right'});
                 $(this).css('border-color', '#abadb3');
             });
-            $("#lastname_person").inputmask("l{28}");
+            $("#lastname_person").inputmask("m{28}");
             $("#lastname_person").keyup(function(){
                     $("#lastname").val($(this).val());
             })
@@ -1317,7 +1317,7 @@ if ($('.alsobought:eq(0)')!==null){
                                 $("#tk_other").inputmask("mask", {mask: "k{50}"});
                                 $("#firstname").inputmask("mask", {mask: "l{28}"});//"l{28}"								
                                 $("#middlename").inputmask("l{28}");
-                                $("#lastname").inputmask("l{28}");								
+                                $("#lastname").inputmask("m{28}");								
                                 if (typeof ($.browser.android) === 'undefined'){
 									$("#tel2").inputmask("mask", {mask: "+7(999)999-99-99"}); //{mask: "+7(9##)###-##-##"}									
 								}
@@ -1406,7 +1406,7 @@ if ($('.alsobought:eq(0)')!==null){
                                 $("#lastname").focusout(function(){
 									//console.log($(this).attr('disabled'));
 									//if (typeof($(this).attr('disabled'))=== 'undefined') {
-									var regExpr = new RegExp('^[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5 -_]{2,28}$', 'ig');
+									var regExpr = new RegExp('^[0-9A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5 -_\+]{2,28}$', 'ig');
 											//console.log(regExpr.test($(this).val()));
 									if (regExpr.test($(this).val()) === true) {
 										$(this).css('border-color', '#abadb3');
@@ -1940,14 +1940,14 @@ if ($('.alsobought:eq(0)')!==null){
                                     html += '<input type="hidden" name="window_type" value="fast_order_window2" />';
                                     html += '</form></div>';
                                     //ga('send', 'event', 'buy-fast', 'click');
-                                    ga('send', 'pageview', '/buy-fast/open');
-                                    ga('send', 'pageview');
+                                    ga('send', 'pageview', '/virtualPage/buy-fast-open/');
+                                    //ga('send', 'pageview');
                                     //console.log('buy-fast.click');		
 
                                     var url = '/popup_windows/fast_order_window.php';
                                     $.fancybox
                                     ({
-                                    width : 600,
+											width : 600,
                                             height : 240,
                                             overlayOpacity:0,
                                             autoSize:false,
@@ -1956,9 +1956,15 @@ if ($('.alsobought:eq(0)')!==null){
                                             content: html,
                                             scrolling: 'no',
                                             helpers : {
-                                            overlay : {
-                                            css : { 'overflow' : 'hidden' }
-                                            }}
+														overlay : {
+														css : { 'overflow' : 'hidden' }
+													  }
+											},
+											'afterClose': function() {
+													ga('send', 'pageview');
+													//console.log('close');
+											}
+
                                     });
                             }
                             }
@@ -2149,7 +2155,7 @@ if ($('.alsobought:eq(0)')!==null){
                         }
 
                 function check_fast_order_values(caller) {
-                if (caller == 1) {
+                if (caller == 1 || caller == 3) {
                         var yo_nameRegularIssue = false;
                         var yo_phoneRegularIssue = false;
                 if ($('#yo_name').val() == '' && $('#yo_phone').val() == '') {
@@ -2189,12 +2195,19 @@ if ($('.alsobought:eq(0)')!==null){
                         alert("Возникла ошибка. Пожалуйста проверьте вводимые данные: Телефон (номер должен быть в формате +[xxx]код страны [xxx]код оператора [xxxxxxx]  номер абонента).");
                         return false;
                 } else if (yo_nameRegularIssue === false && yo_phoneRegularIssue === false) {
-                if (typeof document.getElementById("fast_order_form") != 'undefined') {
-                //ga('send', 'pageview', '/buy-fast/success'); 
-                //ga('send', 'pageview');
-                //console.log('/buy-fast/success');
-                document.getElementById("fast_order_form").submit();
+                if (caller == 1 && typeof document.getElementById("fast_order_form") != 'undefined') {
+                    //ga('send', 'pageview', '/buy-fast/success'); 
+                    //ga('send', 'pageview');
+                    //console.log('/buy-fast/success');
+                    document.getElementById("fast_order_form").submit();
                 }
+                if (caller == 3 && typeof document.getElementById("discount_form") != 'undefined') {
+                    //ga('send', 'pageview', '/buy-fast/success'); 
+                    //ga('send', 'pageview');
+                    //console.log('/buy-fast/success');
+                    document.getElementById("discount_form").submit();
+                }
+
                 //$('#light_box').remove();
                 return true;
                 }
@@ -3065,6 +3078,86 @@ function showsertificate(url){
     });
     
 }    
+//определяем функцию вывода предложения о скидке
+function discount_window(my_url, referer_info,se,redirect) {
+    $.ajax({
+    url: '/popup_windows/discount.php',
+            type: 'post',
+            data: 'url=' + my_url + '&se=' + se + '&redirect=' + redirect,
+            dataType: 'json',
+            beforeSend: function() {},
+            complete: function() {},
+            success: function(json) {
+            if (json['ok'] == '1'){
+                    html = '<div class="discount_window_iframe" style"margin:10px,5px,5px,5px;">';
+                    html += '<form id="discount_form" action="/snip_call.php" method="POST">';
+                    html += '<div id="discount_window_item1" style="position:relative;top: 25px;left: 10px;font-size:18px;width:200px;"><b>' + json['item1'] + '</b></div>';
+                    html += '<div id="discount_window_item2" style="position:relative;top: 140px;left: 10px;font-size:20px;width:150px;">' + json['item2'] + '</div>';
+                    html += '<div id="discount_window_item3" style="position:relative;top: 165px;left: 10px;font-size:20px;">' + json['item3'] + '</div>';
+                    html += '<div id="discount_window_item4" style="position:relative;top: 185px;left: 10px;font-size:20px;">' + json['item4'] + '</div>';
+                    html += '<div id="discount_window_item5" style="position:relative;margin-top: -110px;margin-left: 160px;font-size:12px;width:400px;word-wrap: break-word;">' + json['item5'] + '</div>';
+                    html += '<div class="tovar_info" name="tovar_info" style="position:relative;width:430px !Important;height:60px;left:160px;top:20px;word-wrap: break-word;">';
+                    html += '<div id="discount_window_item6" name="discount_window_item6"style="font-size:13px;position:relative;display:inline;width:430px !Important;height:70px;left:0px;top:0px;word-wrap: break-word;"><b>' + json['item6'] + ' - ' + '<span style="text-decoration:line-through">'+json['item7'] + ' ' + json['item8'] + '</span> <span style="color:red;">' + json['item12'] + ' ' + json['item8'] + '</span> Ваша экономия: ' + json['item13'] + ' ' + json['item8'] + '</b></div>';
+                    html += '</div>';
+                    html += '<div class="user_info" style="position:relative;top:-20px;left:160px;width:260px;height:80px;">';
+                    html += '<input type="text" style="position: relative;left: 0px;top: 35px;width:180px;height:25px;font-size:17px;" id="yo_name" name="yo_name" onblur="checkresult_value(this);" value="" placeholder="Имя" pattern="^[\-A-Za-z\u0410-\u044F]+$" maxlength="100"/>';
+                    html += '<input type="tel" style="position: relative;left: 0px;top: 55px;width:180px;height:25px;font-size:17px;" id="yo_phone" name="yo_phone" onblur="checkresult_value(this);" value="" placeholder="+79101234567" pattern="^[\+0-9]{7,12}$" maxlength="12"/>';
+                    html += '</div>';
+                    html += '<input id="cv3" type="hidden" name="cv3" value="nohspamcode" />';
+                    html += '<div class="in_discount_window">';
+                    html += '<input type="button" style="position: relative;left: 460px;top: -35px;border: none;width:105px;height:50px;padding: 5px 5px 10px 5px !important;" class="popup_ok" id="discount_ok" value="OK" onclick="check_fast_order_values(3);"/>'; //onclick="check_discount_values()"			
+                    html += '</div>';
+                    html += '<input type="hidden" id="referer_info" name="referer_info" value="' + referer_info[0].innerHTML.toString().trim() + '" />';
+                    html += '<input type="hidden" name="tovar_info_input" value="' + json['item6'] + ' - ' + json['item7'] + ' ' + json['item8'] + ' цена со скидкой - ' + json['item12'] + ' ' + json['item8'] + '" />';
+                    html += '<input type="hidden" name="region" value="' + json['item9'] + '" />';
+                    html += '<input type="hidden" name="zakaz_info" value="' + json['item1'].replace("<br>", " ") + '" />';
+                    html += '<input type="hidden" name="tovar_price" value="' + json['item7'] + ' ' + json['item8'] + '" />';
+                    html += '<input type="hidden" name="tovar_price_short" value="' + json['item7'] + '" />';
+                    html += '<input type="hidden" name="tovar_id" value="' + json['item10'] + '" />';
+                    html += '<input type="hidden" name="transact_id" value="' + json['item11'] + '" />';
+                    html += '<input type="hidden" name="window_type" value="discount_window2" />';
+                    html += '<input type="hidden" name="se" value="' + json['item14'] + '" />';
+                    html += '</form></div>';
+                    ga('send', 'pageview', '/virtualPage/buy-discount-open/');
+					
+                    var url = '/popup_windows/discount_window.php';
+                    $.fancybox
+                    ({
+                        width : 600,
+                        height : 350,
+                        overlayOpacity : 0,
+                        autoSize : false,
+                        type : 'iframe',
+                        href : url,
+                        content : html,
+                        scrolling : 'no',
+                        closeClick : false,
+                        helpers : {
+                            overlay : {
+                                css : { 'overflow' : 'hidden' }
+                            }},
+                        'afterClose': function() {
+                            //если отсутствует то создаем ссылку
+                            if ($('#discounttdn').length==0){
+                                if ($('.addchart_block_table_price').eq(0).length)
+                                    $('.addchart_block_table_price').eq(0).append('<span class="price_comlain discount_window" style="position:relative;" onclick="discount_window(window.location,document.getElementsByClassName(\'netref\'),document.getElementsByName(\'se\'),0);">купить со скидкой</span>');
+                            }
+							ga('send', 'pageview');
+							//console.log('afterClose');
+                        }
+                    });
+            }
+            //если такая сесия уже есть и не надо выводить окно делаем ссылку
+            if (json['ok'] == '0'){
+                    //если отсутствует то создаем ссылку
+                    if ($('#discounttdn').length==0){
+                        if ($('.addchart_block_table_price').eq(0).length)
+                            $('.addchart_block_table_price').eq(0).append('<span class="price_comlain discount_window" style="position:relative;" onclick="discount_window(window.location,document.getElementsByClassName(\'netref\'),document.getElementsByName(\'se\'),0);">купить со скидкой</span>');
+                    }
+            }
+            }
+    });
+}
     
 document.addEventListener("DOMContentLoaded", function() {
   "use strict"

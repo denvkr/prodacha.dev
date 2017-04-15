@@ -2,16 +2,16 @@
 
 
 /**
- * Элемент формы обратного звонка
+ * Элемент формы Купить со скидкой
  */
-class AddToTemplateOneclickElement extends PHPShopElements {
+class AddToTemplateDiscountElement extends PHPShopElements {
 
     var $debug = false;
 
     /**
      * Конструктор
      */
-    function AddToTemplateOneclickElement() {
+    function AddToTemplateDiscountElement() {
         parent::PHPShopElements();
         $this->option();
     }
@@ -20,7 +20,7 @@ class AddToTemplateOneclickElement extends PHPShopElements {
      * Настройки
      */
     function option() {
-        $PHPShopOrm = new PHPShopOrm($GLOBALS['SysValue']['base']['oneclick']['oneclick_system']);
+        $PHPShopOrm = new PHPShopOrm($GLOBALS['SysValue']['base']['discount']['discount_system']);
         $PHPShopOrm->debug = $this->debug;
         $this->option = $PHPShopOrm->select();
     }
@@ -29,7 +29,7 @@ class AddToTemplateOneclickElement extends PHPShopElements {
      * Вывод формы
      */
     function display() {
-        $forma = parseTemplateReturn($GLOBALS['SysValue']['templates']['oneclick']['oneclick_forma'], true);
+        $forma = parseTemplateReturn($GLOBALS['SysValue']['templates']['discount']['discount_forma'], true);
         $this->set('leftMenuContent', $forma);
         $this->set('leftMenuName', $this->option['title']);
 
@@ -38,9 +38,9 @@ class AddToTemplateOneclickElement extends PHPShopElements {
             $dis = $this->parseTemplate($this->getValue('templates.left_menu'));
         else {
             if (empty($this->option['enabled']))
-                $dis = parseTemplateReturn($GLOBALS['SysValue']['templates']['oneclick']['oneclick_window_forma'], true);
+                $dis = parseTemplateReturn($GLOBALS['SysValue']['templates']['discount']['discount_window_forma'], true);
             else {
-                $this->set('leftMenuContent', parseTemplateReturn($GLOBALS['SysValue']['templates']['oneclick']['oneclick_window_forma'], true));
+                $this->set('leftMenuContent', parseTemplateReturn($GLOBALS['SysValue']['templates']['discount']['discount_window_forma'], true));
                 $dis = $this->parseTemplate($this->getValue('templates.left_menu'));
             }
         }
@@ -59,23 +59,23 @@ class AddToTemplateOneclickElement extends PHPShopElements {
                 $this->set('rightMenu', $dis, true);
                 break;
 
-            default: $this->set('oneclick', $dis);
+            default: $this->set('discount', $dis);
         }
     }
 
 }
 
 
-function uid_mod_oneclick_hook($obj,$row,$rout) {
+function uid_mod_discount_hook($obj,$row,$rout) {
     if($rout == 'MIDDLE'){
-    $AddToTemplateOneclickElement = new AddToTemplateOneclickElement();
-    //$AddToTemplateOneclickElement->display();
+    $AddToTemplateDiscountElement = new AddToTemplateDiscountElement();
+    //$AddToTemplateDiscountElement->display();
     }
 }
 
 
 $addHandler=array
         (
-        'UID'=>'uid_mod_oneclick_hook'
+        'UID'=>'uid_mod_discount_hook'
 );
 ?>

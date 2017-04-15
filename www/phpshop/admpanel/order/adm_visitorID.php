@@ -236,7 +236,7 @@ function actionStart() {
     $PHPShopInterface = new PHPShopInterface('_pretab2_');
     $PHPShopInterface->setTab(array(__("Печатные бланки"), $Tab1_1, 70), array(__("Дополнительно"), $Tab1_2, 70));
     $Tab1.=$PHPShopGUI->setDiv('left', $PHPShopInterface->getContent(), 'float:left;padding-left:5px');
-
+    //var_dump($order);
     // Корзина
     $Tab2 = $PHPShopGUI->loadLib('tab_cart', $data);
 
