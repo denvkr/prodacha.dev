@@ -30,6 +30,10 @@ class PHPShopSystem extends PHPShopObj {
         return parent::getParam("name");
     }
 
+	function getDescription() {
+		return 'Интернет-магазин садовой техники';
+	}
+	
     /**
      * Вывод сериализованного значения [param.val]
      * @param string $param

@@ -1864,7 +1864,7 @@ class PHPShopShop extends PHPShopShopCore {
 					.'<div class="thumb">'
 					.'<table width="100%" border="0" cellspacing="0" cellpadding="0">'
 					.'<tbody><tr>'
-					.'<td height="150" align="top"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="phpshop/templates/prodacha/images/shop/no_photo.gif" onerror="NoFoto(this,\'phpshop/templates/prodacha\')" onload="EditFoto(this,)" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'// alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"
+					.'<td height="150" align="top"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="phpshop/templates/prodacha/images/shop/no_photo.gif" onerror="NoFoto(this,\'phpshop/templates/prodacha\')" onload="EditFoto(this,)" alt="" border="0"></a></td>'
 					.'</tr>'
 					.'</tbody></table>'
 					.'</div>'
@@ -1915,7 +1915,7 @@ class PHPShopShop extends PHPShopShopCore {
 							.'<div class="thumb">'
 							.'<table width="100%" border="0" cellspacing="0" cellpadding="0">'
 							.'<tr>'
-							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'// alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"
+							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="" border="0"></a></td>'
 							.'</tr>'
 							.'</table>'
 							.'</div>'
@@ -1955,7 +1955,7 @@ class PHPShopShop extends PHPShopShopCore {
 							.'<div class="thumb">'
 							.'<table width="100%" border="0" cellspacing="0" cellpadding="0">'
 							.'<tr>'
-							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'// alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"
+							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="" border="0"></a></td>'
 							.'</tr>'
 							.'</table>'
 							.'</div>'
@@ -1995,7 +1995,7 @@ class PHPShopShop extends PHPShopShopCore {
 							.'<div class="thumb">'
 							.'<table width="100%" border="0" cellspacing="0" cellpadding="0">'
 							.'<tr>'
-							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'// alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"
+							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="" border="0"></a></td>'
 							.'</tr>'
 							.'</table>'
 							.'</div>'
@@ -2035,7 +2035,7 @@ class PHPShopShop extends PHPShopShopCore {
 							.'<div class="thumb">'
 							.'<table width="100%" border="0" cellspacing="0" cellpadding="0">'
 							.'<tr>'
-							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'" border="0"></a></td>'// alt="'.$prod_row['name'].'" title="'.$prod_row['name'].'"
+							.'<td height="150" align="center"><a href="/shop/UID_'.$prod_row['id'].'.html"><img src="'.$prod_row['pic_small'].'" lowsrc="images/shop/no_photo.gif"  onerror="NoFoto(this,images/shop/no_photo.gif)" onload="EditFoto(this,'.$GLOBALS['SysValue']['System']['width_icon'].')" alt="" border="0"></a></td>'
 							.'</tr>'
 							.'</table>'
 							.'</div>'

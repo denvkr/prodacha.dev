@@ -68,7 +68,7 @@ class PHPShopGUI {
     var $cssTab = true;
 
     /**
-     * @var string путь до иконок офрмления
+     * @var string путь до иконок оформления
      */
     var $imgPath;
 

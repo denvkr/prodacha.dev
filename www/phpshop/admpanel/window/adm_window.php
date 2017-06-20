@@ -30,7 +30,7 @@ function Ras_data_content($string) {// Состав рассылки
         $kratko = strip_tags($row['kratko']);
         $podrob = $row['podrob'];
         if ($podrob != "") {
-            $link = "<a href=\"http://" . $_SERVER['SERVER_NAME'] . $SysValue['dir']['dir'] . "/news/ID_" . $id . ".html\">далее &raquo;</a>";
+            $link = "<a href=\"//" . $_SERVER['SERVER_NAME'] . $SysValue['dir']['dir'] . "/news/ID_" . $id . ".html\">далее &raquo;</a>";
         } else {
             $link = "";
         }
@@ -79,7 +79,7 @@ a{
   <td>
   <h1>Здравствуйте, представляем новости с сайта "' . $GetSystems['name'] . '"</h1>
   </td>
-  <td align="right"><a href="http://' . $_SERVER['SERVER_NAME'] . $SysValue['dir']['dir'] . '" target="_blank" title="' . $SERVER_NAME . '"><img src="http://' . $_SERVER['SERVER_NAME'] . $SysValue['dir']['dir'] . $GetSystems['logo'] . '" alt="' . $GetSystems['name'] . '"  border="0"></a></td>
+  <td align="right"><a href="//' . $_SERVER['SERVER_NAME'] . $SysValue['dir']['dir'] . '" target="_blank" title="' . $SERVER_NAME . '"><img src="//' . $_SERVER['SERVER_NAME'] . $SysValue['dir']['dir'] . $GetSystems['logo'] . '" alt="' . $GetSystems['name'] . '"  border="0"></a></td>
 </tr>
 <tr>
    <td colspan="2" style="background-color:#1982C6;" height="3"></td>

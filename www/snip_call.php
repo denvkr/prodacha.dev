@@ -45,7 +45,7 @@ if (isset($_POST['email']))
 				
 				if ($_POST['textArea_ask_question']=='Вопрос') {
 					header("HTTP/1.1 301 Moved Permanently");
-					header("Location:http://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']."");
+					header("Location:https://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']."");
 					exit();
 				}
 
@@ -158,6 +158,7 @@ if (isset($_POST['yo_name']) && (isset($_POST['yo_phone']) || isset($_POST['yo_m
 
 
 	// Отсылаем письмо администратору
+
 	if ($_COOKIE['sincity']=="sp") {
 		$mail_to=$GLOBALS['SysValue']['mail']['spb_mail'];
 	} else if ($_COOKIE['sincity']=="chb") {
@@ -265,7 +266,7 @@ if (isset($_POST['yo_name']) && (isset($_POST['yo_phone']) || isset($_POST['yo_m
 				//exit();                                
 			} else
 			if (!empty($_POST['yo_phone']) && empty($_POST['yo_mail']) && !isset($_POST['yo_start_hour']) && $_POST['window_type']=='discount_window2') {
-				$sql="SELECT auto_increment FROM information_schema.tables WHERE table_schema='".$GLOBALS['SysValue']['connect']['dbase']."' and table_name='".$GLOBALS['SysValue']['base']['discount_jurnal']."'";			
+				$sql="SELECT auto_increment FROM information_schema.tables WHERE table_schema='".$GLOBALS['SysValue']['connect']['dbase']."' and table_name='".$GLOBALS['SysValue']['base']['discount_jurnal']."'";
 				$result = $PHPShopOrm->query($sql);
 				$row=mysql_fetch_assoc($result);
 
@@ -283,6 +284,27 @@ if (isset($_POST['yo_name']) && (isset($_POST['yo_phone']) || isset($_POST['yo_m
 				//header("HTTP/1.1 301 Moved Permanently");
 				//header("Location:https://".$_SERVER['HTTP_HOST']."/redirect.php?url=".$_SERVER['HTTP_REFERER']."&discount=true");
 				//exit();
+                        } else
+                        if (!empty($_POST['yo_name']) && !empty($_POST['yo_phone']) && !empty($_POST['yo_mail']) && $_POST['window_type']=='stihl_window' || $_POST['window_type']=='viking_window' || $_POST['window_type']=='ask_product_availability'){
+                                $sql='INSERT INTO '.$GLOBALS['SysValue']['base']['oneclick_jurnal'].' (`date`,`name`,`tel`,`message`,`product_name`,`product_id`,`product_price`,`status`,`ip`) VALUES (\''.time().'\',\''.$_POST['yo_name'].'\',\''.$_POST['yo_phone'].'\',\''.$_POST['tovar_info_input'].'\',\''.$_POST['zakaz_info'].'. Email: '.trim($_POST['yo_mail']," \t\n\r\0\x0B").' Пришел с '.trim($_POST['referer_info']," \t\n\r\0\x0B").' Регион: '.trim($_POST['region']," \t\n\r\0\x0B").'\',0,\''.$_POST['tovar_price'].'\',\'1\',\''.$ip.'\')';
+				$result = $PHPShopOrm->query($sql);
+                                if ($_POST['window_type']=='ask_product_availability'){
+                                    $ga_aim="<script>
+                                            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+                                            ga('create', 'UA-29201270-1', 'auto');
+                                            ga('require', 'displayfeatures');
+                                            ga('send', 'pageview', '/virtualPage/form-utochnit/send/');
+                                            ga('send', 'pageview');
+                                            </script>";
+                                    echo $ga_aim;
+                                }
+				//$ga_aim=send_to_order_hook($_POST,$PHPShopOrm,'ask_product_availability',$result);
+				//$fh=fopen($file,"a+");
+				//fwrite ($fh,$ga_aim);
+				//fclose($fh);				
+
+				echo "<meta http-equiv='refresh' content='0; url=\"/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true\"'>";
+
 			} else
 			//echo '<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />'
 				echo "<meta http-equiv='refresh' content='0; url=\"/redirect.php?url=".$_SERVER['HTTP_REFERER']."\"'>";
@@ -354,6 +376,9 @@ function send_to_order_hook($obj,$_PHPShopOrm,$source,$orderId) {
 		case 'buy1click':
 					$event='/virtualPage/buy-fast-send/';
 					break;
+		case 'ask_product_availability':
+                                        $event='/virtualPage/form-utochnit/send/';
+                                        break;
 		default :
 					$event='';
 	}

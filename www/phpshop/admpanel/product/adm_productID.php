@@ -103,8 +103,13 @@ function actionStart() {
     // Единица измерения
     if (empty($data['ed_izm']))
         $data['ed_izm'] = 'шт.';
-    $Tab1.=$PHPShopGUI->setField('Единица изм.:', $PHPShopGUI->setInputText(false, 'ed_izm_new', $data['ed_izm'], 70), 'left');
+    $Tab1.=$PHPShopGUI->setField('Единица изм.:', $PHPShopGUI->setInputText(false, 'ed_izm_new', $data['ed_izm'], 50), 'left');
 
+    // Статус из 1С
+    if (empty($data['stockgroup']))
+        $data['stockgroup'] = '';
+    $Tab1.=$PHPShopGUI->setField('Статус из 1С:', $PHPShopGUI->setInputText(false, 'stockgroup_new', $data['stockgroup'], 50), 'left');
+    
     // Рекомендуемые товары
     $Tab1.=$PHPShopGUI->setLine() . $PHPShopGUI->setField('Рекомендуемые товары для совместной продажи:', $PHPShopGUI->setTextarea('odnotip_new', $data['odnotip'], false, '280px') .
                     $PHPShopGUI->setLine() .
@@ -262,7 +267,7 @@ function actionStart() {
     $Tab8 = $PHPShopGUI->loadLib('tab_headers', $data);
 
     // Вывод формы закладки
-    $PHPShopGUI->setTab(array(__("Основное"), $Tab1, 450), array(__("Изображение"), $Tab6, 450), array(__("Описание"), $Tab2, 450), array(__("Подробно"), $Tab3, 450), array(__("Документы"), $Tab4, 450), array(__("Характеристики"), $Tab7, 450), array(__("Заголовки"), $Tab8, 450));
+    $PHPShopGUI->setTab(array(__("Основное"), $Tab1, 520), array(__("Изображение"), $Tab6, 520), array(__("Описание"), $Tab2, 520), array(__("Подробно"), $Tab3, 520), array(__("Документы"), $Tab4, 520), array(__("Характеристики"), $Tab7, 520), array(__("Заголовки"), $Tab8, 520));
 
     // Запрос модуля на закладку
     $PHPShopModules->setAdmHandler($_SERVER["SCRIPT_NAME"], __FUNCTION__, $data);
@@ -460,7 +465,7 @@ function actionUpdate() {
         //fclose($fw);
     } else if ($product_promocode_cnt_row['cnt']>0){
 
-        //выбираем тещий id записи с промокодом
+        //выбираем текущий id записи с промокодом
         $datapromo = $PHPShopOrm->query('select promo_id from phpshop_product_promo_relation where product_id='.intval($_REQUEST['productID']));
         $datapromo_row = mysql_fetch_assoc($datapromo);
         //если забили пустое значение в промокод тогда удаляем запись

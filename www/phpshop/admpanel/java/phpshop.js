@@ -355,6 +355,7 @@ function miniWinFull(url,w,h)
 
 function Ras(w,h)
 {
+    //console.log(w,h);
     var s=window.document.data_list.data_news.value;
     var url="news/news_to_mail.php?data="+s;
     miniWin(url,w,h);

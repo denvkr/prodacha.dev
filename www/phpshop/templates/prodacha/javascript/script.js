@@ -2039,6 +2039,7 @@ if ($('.alsobought:eq(0)')!==null){
                                 html += '<input type="hidden" name="tovar_price" value="' + json['item7'] + ' ' + json['item8'] + '" />';
                                 html += '<input type="hidden" name="window_type" value="ask_product_availability" />';
                                 html += '</form></div>';
+                                ga('send', 'pageview', '/virtualPage/form-utochnit/open/');
                                 //var script = document.createElement("script");
                                 //script.type = "text/javascript";
                                 //script.text = "ga('send', 'event', 'utochnit', 'open');ga('send', 'pageview', '/utochnit/open');ga('send', 'pageview');"; // use this for inline script
@@ -2287,9 +2288,12 @@ if ($('.alsobought:eq(0)')!==null){
                 //if ($('#fast_order_window_iframe').length) $('#fast_order_window_iframe').hide();
                 
                 if (typeof document.getElementById("fast_order_form") != 'undefined') {
-                    ga('send', 'event', 'utochnit', 'open');
-                    ga('send', 'pageview', '/utochnit/open');
+                    //ga('send', 'event', 'utochnit', 'open');
+                    //ga('send', 'pageview', '/utochnit/open');
+                    //ga('send', 'pageview');
+                    ga('send', 'pageview', '/virtualPage/form-utochnit/open/');
                     ga('send', 'pageview');
+                    
                     document.getElementById("fast_order_form").submit();
                     return true;
 
