@@ -507,13 +507,14 @@ if ($city=='other'){
 			</div>	
 		</div>
 		<div class="copyright">
-			<span class="copy">&copy; 2016 PROДАЧА - интернет-магазин садовой техники</span>
+			<span class="copy">&copy; 2017 PROДАЧА - интернет-магазин садовой техники</span>
 			<div class="foot_menu">
 				<ul>
 					@topMenu@
 					<li><a href="//prodacha.ru/catalog/">КАРТА САЙТА</a></li>
 				</ul>
                 </div>
+			<a class="konfident" href="//prodacha.ru/page/politika_konfidencialnosti.html">Политика конфиденциальности</a>
 		</div>
 	</div>
 	<!-- foot center end -->

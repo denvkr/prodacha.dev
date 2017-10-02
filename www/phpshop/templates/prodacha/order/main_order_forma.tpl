@@ -115,8 +115,10 @@
     	</td>
     </tr>
     <tr>
-	    <td></td>
-    	<td> 
+        <td></td>
+        <td>
+            <span class="konfident order">Нажимая кнопку «Оформить заказ», я соглашаюсь на получение информации от интернет-магазина и уведомлений о состоянии моих заказов, а также принимаю условия <a href="//prodacha.ru/page/politika_konfidencialnosti.html" target="_blank">политики конфиденциальности</a></span>
+            <div style="clear:both;height: 10px;"></div>
 	 	<span id="bin" class="need2hide" ><a href="javascript:OrderChek();" class=link style="font-size: 18px; font-weight: bold;"><img src="images/makeorder.png"></a></span>
 		<!-- <span id="bic" class="need2hide" style="display:none;" ><a href="javascript:;" onclick='yescreditmodul([@credititems@],367328,"@orderNum@");'  class=link style="font-size: 18px; font-weight: bold;"><img src="images/buyincredit.png"></a></span>  -->
 	        <!--<span id="bic_credit" class="need2hide" style="display:none;" >@credititems@</span>	-->

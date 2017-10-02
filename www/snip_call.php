@@ -290,20 +290,22 @@ if (isset($_POST['yo_name']) && (isset($_POST['yo_phone']) || isset($_POST['yo_m
 				$result = $PHPShopOrm->query($sql);
                                 if ($_POST['window_type']=='ask_product_availability'){
                                     $ga_aim="<script>
-                                            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+                                            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};
+                                            ga.l=+new Date;
                                             ga('create', 'UA-29201270-1', 'auto');
                                             ga('require', 'displayfeatures');
                                             ga('send', 'pageview', '/virtualPage/form-utochnit/send/');
-                                            ga('send', 'pageview');
-                                            </script>";
+                                            //ga('send', 'pageview');
+                                            </script><script src='https://www.google-analytics.com/analytics.js'></script>";
                                     echo $ga_aim;
                                 }
+                //die();
 				//$ga_aim=send_to_order_hook($_POST,$PHPShopOrm,'ask_product_availability',$result);
 				//$fh=fopen($file,"a+");
 				//fwrite ($fh,$ga_aim);
 				//fclose($fh);				
 
-				echo "<meta http-equiv='refresh' content='0; url=\"/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true\"'>";
+				//echo "<meta http-equiv='refresh' content='0; url=\"/redirect.php?url=".$_SERVER['HTTP_REFERER']."&fast_order=true\"'>";
 
 			} else
 			//echo '<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />'

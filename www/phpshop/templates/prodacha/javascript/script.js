@@ -1929,6 +1929,7 @@ if ($('.alsobought:eq(0)')!==null){
                                     html += '<div class="in_fast_order_window">';
                                     html += '<input type="button" ' + popup_ok_top + ' class="popup_ok" id="fast_order_ok" value="OK" onclick="check_fast_order_values(1);"/>'; //onclick="check_fast_order_values()"			
                                     html += '</div>';
+                                    html += '<span class="konfident buy1click">Нажимая кнопку «ОК», я соглашаюсь на получение информации от интернет-магазина и принимаю условия <a href="//prodacha.ru/page/politika_konfidencialnosti.html" target="_blank">политики конфиденциальности</a></span>';
                                     html += '<input type="hidden" id="referer_info" name="referer_info" value="' + referer_info[0].innerHTML.toString().trim() + '" />';
                                     html += '<input type="hidden" name="tovar_info_input" value="' + json['item6'] + ' - ' + json['item7'] + ' ' + json['item8'] + '" />';
                                     html += '<input type="hidden" name="region" value="' + json['item9'] + '" />';
@@ -1948,7 +1949,7 @@ if ($('.alsobought:eq(0)')!==null){
                                     $.fancybox
                                     ({
 											width : 600,
-                                            height : 240,
+                                            height : 250,
                                             overlayOpacity:0,
                                             autoSize:false,
                                             type: 'iframe',
@@ -2032,6 +2033,7 @@ if ($('.alsobought:eq(0)')!==null){
                                 html += '<div class="in_fast_order_window">';
                                 html += '<input type="button" ' + popup_ok_top + ' class="popup_ok" id="fast_order_ok" value="OK" onclick="check_fast_order_values(2);"/>'; //onclick="check_fast_order_values()"
                                 html += '</div>';
+                                html += '<span class="konfident popup1">Нажимая кнопку «ОК», я соглашаюсь на получение информации от интернет-магазина и принимаю условия <a href="//prodacha.ru/page/politika_konfidencialnosti.html" target="_blank">политики конфиденциальности</a></span>';
                                 html += '<input type="hidden" id="referer_info" name="referer_info" value="' + referer_info[0].innerHTML.toString().trim() + '" />';
                                 html += '<input type="hidden" name="tovar_info_input" value="' + json['item6'] + ' - ' + json['item7'] + ' ' + json['item8'] + '" />';
                                 html += '<input type="hidden" name="region" value="' + json['item9'] + '" />';
@@ -2054,7 +2056,7 @@ if ($('.alsobought:eq(0)')!==null){
                                 $.fancybox
                                 ({
                                 width : 600,
-                                        height : 240,
+                                        height : 256,
                                         overlayOpacity:0,
                                         autoSize:false,
                                         type: 'iframe',
@@ -2129,6 +2131,7 @@ if ($('.alsobought:eq(0)')!==null){
                                 html += '<textarea form="fast_order_form" style="position: absolute; left: 180px; top: 202px; width: 280px; height: 65px; font-size: 12px;color:#a9a9ab;" id="yo_question" name="yo_question" rows="3" cols="30" value="Вопрос" onfocus="if(this.value==\'Вопрос\'){this.value=\'\';} this.style.color=\'#000000\';" onblur="if(this.value==\'\'){this.value=\'Вопрос\';this.style.color=\'#a9a9ab\';}">Вопрос</textarea>';
                                 html += '<input id="cv3" type="hidden" name="cv3" value="nohspamcode"><div class="in_fast_order_window">';
                                 html += '<input type="button" style="position: absolute; left: 485px; top: 215px; border: none; width: 105px; height: 50px; padding: 5px 5px 25px 5px !important;" class="popup_ok" id="fast_order_ok" value="OK" onclick="check_fast_order_values(1);"></div>';
+                                html += '<span class="konfident askrevcall">Нажимая кнопку «ОК», я соглашаюсь на получение информации от интернет-магазина и принимаю условия <a href="//prodacha.ru/page/politika_konfidencialnosti.html" target="_blank">политики конфиденциальности</a></span>';
                                 html += '<input type="hidden" id="referer_info" name="referer_info" value="' + referer_info[0].innerHTML.toString().trim() + '" />';
                                 html += '<input type="hidden" name="region" value="' + json['item9'] + '" />';
                                 html += '<input type="hidden" name="zakaz_info" value="' + json['item1'] + '" />';
@@ -2138,7 +2141,7 @@ if ($('.alsobought:eq(0)')!==null){
                                 $.fancybox
                                 ({
                                 width : 600,
-                                        height : 280,
+                                        height : 290,
                                         overlayOpacity:0,
                                         autoSize:false,
                                         type: 'iframe',
@@ -2432,6 +2435,8 @@ if ($('.alsobought:eq(0)')!==null){
                         html += '<div id="stihl_window_string4">' + json['item4'] + '</div>';
                         html += '<div id="stihl_window_string5">' + json['item5'] + '</div>';
                         html += '<div id="stihl_window_string6">' + json['item6'] + '</div>';
+                        html += '<span class="konfident stihl">Нажимая кнопку «ОК», я соглашаюсь на получение информации от интернет-магазина и принимаю условия <a href="//prodacha.ru/page/politika_konfidencialnosti.html" target="_blank">политики конфиденциальности</a></span>';
+
                         //html +=	'<div class="in_stihl_window">';
                         //html +=	'<input type="button" class="popup_ok" id="stihl_ok" value="OK" onclick="check_fast_order_values(2);"/>';
                         //html +=	'</div>';
@@ -2449,7 +2454,7 @@ if ($('.alsobought:eq(0)')!==null){
                                 $.fancybox
                                 ({
                                 width : 800,
-                                        height : 490,
+                                        height : 500,
                                         overlayOpacity:0,
                                         autoSize:false,
                                         type: 'iframe',
@@ -2575,6 +2580,8 @@ if ($('.alsobought:eq(0)')!==null){
                         html += '<div id="stihl_window_string4">' + json['item4'] + '</div>';
                         html += '<div id="stihl_window_string5">' + json['item5'] + '</div>';
                         html += '<div id="stihl_window_string6">' + json['item6'] + '</div>';
+                        html += '<span class="konfident stihl">Нажимая кнопку «ОК», я соглашаюсь на получение информации от интернет-магазина и принимаю условия <a href="//prodacha.ru/page/politika_konfidencialnosti.html" target="_blank">политики конфиденциальности</a></span>';
+
                         //html +=	'<div class="in_stihl_window">';
                         //html +=	'<input type="button" class="popup_ok" id="stihl_ok" value="OK" onclick="check_fast_order_values(2);"/>';
                         //html +=	'</div>';
@@ -2591,7 +2598,7 @@ if ($('.alsobought:eq(0)')!==null){
                         $.fancybox
                         ({
                         width : 800,
-                                height : 490,
+                                height : 500,
                                 overlayOpacity:0,
                                 autoSize:false,
                                 type: 'iframe',
@@ -3111,6 +3118,7 @@ function discount_window(my_url, referer_info,se,redirect) {
                     html += '<div class="in_discount_window">';
                     html += '<input type="button" style="position: relative;left: 460px;top: -35px;border: none;width:105px;height:50px;padding: 5px 5px 10px 5px !important;" class="popup_ok" id="discount_ok" value="OK" onclick="check_fast_order_values(3);"/>'; //onclick="check_discount_values()"			
                     html += '</div>';
+                    html += '<span class="konfident discount">Нажимая кнопку «ОК», я соглашаюсь на получение информации от интернет-магазина и принимаю условия <a href="//prodacha.ru/page/politika_konfidencialnosti.html" target="_blank">политики конфиденциальности</a></span>';
                     html += '<input type="hidden" id="referer_info" name="referer_info" value="' + referer_info[0].innerHTML.toString().trim() + '" />';
                     html += '<input type="hidden" name="tovar_info_input" value="' + json['item6'] + ' - ' + json['item7'] + ' ' + json['item8'] + ' цена со скидкой - ' + json['item12'] + ' ' + json['item8'] + '" />';
                     html += '<input type="hidden" name="region" value="' + json['item9'] + '" />';
@@ -3128,7 +3136,7 @@ function discount_window(my_url, referer_info,se,redirect) {
                     $.fancybox
                     ({
                         width : 600,
-                        height : 350,
+                        height : 355,
                         overlayOpacity : 0,
                         autoSize : false,
                         type : 'iframe',

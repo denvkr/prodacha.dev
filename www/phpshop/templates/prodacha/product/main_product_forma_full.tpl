@@ -122,8 +122,8 @@
 	$viking_catalog_search=false;
 	$row_sklad=false;
 	$row_outdated=false;
-        $sdvig_knopki_vlevo='left:-50px;';
-        $sdvig_knopki_vlevo_stihl='left:-25px;';
+    $sdvig_knopki_vlevo='left:-50px;';
+    $sdvig_knopki_vlevo_stihl='left:-25px;';
 	$sdvig_knopki_vlevo_buy='left:-50px;';
 	$sdvig_knopki_vlevo_ask='left:-50px;';
 	$sdvig_knopki_vlevo_old='left:-50px;'; 
@@ -133,10 +133,10 @@
     while ($catalog_id_rows=mysql_fetch_row($res)) {
 		if ($us_==$catalog_id_rows[0]) {
 			if (preg_match("/stihl/i", $catalog_id_rows[1])) {
-				$stihl_catalog_search=true;
+				$stihl_catalog_search=false;
 			}
 			if (preg_match("/viking/i", $catalog_id_rows[1])) {
-				$viking_catalog_search=true;
+				$viking_catalog_search=false;
 			}
 			if ($catalog_id_rows[2]==1) {
 				$row_sklad=true;

@@ -92,5 +92,11 @@
             <input type="hidden" value="1" name="add_user">
             <input type="button" value="Регистрация пользователя" onclick="CheckNewUserForma();"></td>
     </tr>
+    <tr>
+        <td></td>
+        <td>
+            <span class="konfident order">Нажимая кнопку «Регистрация пользователя», я соглашаюсь на получение информации от интернет-магазина и уведомлений о состоянии моих заказов, а также принимаю условия <a href="//prodacha.ru/page/politika_konfidencialnosti.html" target="_blank">политики конфиденциальности</a></span>
+        </td>
+    </tr>
 </table>
 </form>

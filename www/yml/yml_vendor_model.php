@@ -415,6 +415,9 @@ class PHPShopYml {
       $val['local_delivery_cost'].
       '<sales_notes>'.$val['sales_notes'].'</sales_notes>'.
       '<manufacturer_warranty>true</manufacturer_warranty>'.
+      '<typePrefix>'.htmlspecialchars($val[product_type],ENT_QUOTES|ENT_XML1,'cp1251').'</typePrefix>'.
+      '<vendor>'.htmlspecialchars($val[product_vendor],ENT_QUOTES|ENT_XML1,'cp1251').'</vendor>'.
+      '<model>'.htmlspecialchars($val[product_model],ENT_QUOTES|ENT_XML1,'cp1251').'</model>'.
       $val['store'].
                     $vendor . '
       ';
